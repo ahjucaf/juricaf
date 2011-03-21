@@ -50,7 +50,8 @@ function updateIndexer($id) {
 	break ;
     }
     $solrdata .= '<field name="'.$k.'">';
-      $v = preg_replace('/&/', ' ', $v.'');
+    $v = preg_replace('/&/', ' ', print_r($v, true));
+    $v = preg_replace('/\s\s\s*\)/', '', preg_replace('/\s*(stdClass Object|Array)\s*\(/i', ' ', preg_replace('/ *\[[^ \]]*\] \=\> */', ' ', $v)));
       if (preg_match('/date/', $k) && preg_match('/(\d{2})\/(\d{2})\/(\d{4})/', $v, $match))
 	$v = $match[3].'-'.$match[2].'-'.$match[1].'T12:00:00.000Z';
       $solrdata .= preg_replace('/\n/', ' ', $v);
@@ -58,7 +59,7 @@ function updateIndexer($id) {
   }
   if ($solrdata) {
     $solrdata .= '</doc></add>';
-    //    echo "$solrdata\n";
+    echo "===================\n$solrdata\n===================\n";
     do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
   }
 }
