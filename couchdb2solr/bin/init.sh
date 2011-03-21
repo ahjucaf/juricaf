@@ -12,7 +12,7 @@ fi
 
 echo "Creating map/reduce stats";
 
-curl -X DELETE $DB/_design/stats 
+curl -X DELETE $DB/_design/stats?rev=$(curl --stderr /dev/null $DB/_design/stats | sed 's/.*_rev":"//' | sed 's/",".*//' 2> /dev/null)
 
 cat <<EOF > $TMPFILE
 {
@@ -28,7 +28,7 @@ cat <<EOF > $TMPFILE
 }
 EOF
 
-curl -X PUT -d "@$TMPFILE" $DB/_design/stats 
+curl -X PUT -d "@$TMPFILE" $DB/_design/stats
 
 echo "Creating map errors";
 
@@ -48,7 +48,7 @@ cat <<EOF > $TMPFILE
 }
 EOF
 
-curl -X DELETE $DB/_design/errors 
+curl -X DELETE $DB/_design/errors?rev=$(curl --stderr /dev/null $DB/_design/errors | sed 's/.*_rev":"//' | sed 's/",".*//')
 
 curl -X PUT -d "@$TMPFILE" $DB/_design/errors
 
