@@ -94,7 +94,7 @@ while(1) {
       continue;
     }
     
-    if ($change->last_seq) {
+    if (isset($change->last_seq)) {
 	echo "last_seq\n";
       storeSeq($change->last_seq);
       break;
@@ -107,7 +107,7 @@ while(1) {
 
 
 
-    if ($change->deleted) {
+    if (isset($change->deleted)) {
       deleteIndexer($change->id);
       continue;
     }
