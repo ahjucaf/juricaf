@@ -30,10 +30,10 @@ cat <<EOF > $TMPFILE
   "views":
   {
     "pas_de_texte_arret": {
-      "map": "function(doc) { if (doc.type == "arret" && !doc.texte_arret.length)  emit(doc._id, 1); }"
+      "map": "function(doc) { if (doc.type == 'arret' && !doc.texte_arret.length)  emit(doc._id, 1); }"
     }
     "pas_de_texte_arret": {
-      "map": "function(doc) { if (doc.type == "arret" && doc.num_arret.length > 10)  emit(doc._id, 1); }"
+      "map": "function(doc) { if (doc.type == 'arret' && doc.num_arret.length > 10)  emit(doc._id, 1); }"
     }
   }
 }
