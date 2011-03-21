@@ -3,9 +3,16 @@
 TMPFILE=/tmp/$$.json
 DB=http://localhost:5984/ahjucaf
 
-
+if test "$1" ; then  
+echo "DELETING: please confirm "
+read AA;
 curl -X DELETE $DB
 curl -X PUT $DB
+fi
+
+echo "Creating map/reduce stats";
+
+curl -X DELETE $DB/_design/stats 
 
 cat <<EOF > $TMPFILE
 {
@@ -23,6 +30,8 @@ EOF
 
 curl -X PUT -d "@$TMPFILE" $DB/_design/stats 
 
+echo "Creating map errors";
+
 cat <<EOF > $TMPFILE
 {
   "_id":"_design/errors",
@@ -31,13 +40,16 @@ cat <<EOF > $TMPFILE
   {
     "pas_de_texte_arret": {
       "map": "function(doc) { if (doc.type == 'arret' && !doc.texte_arret.length)  emit(doc._id, 1); }"
-    }
-    "pas_de_texte_arret": {
+    },
+    "num_arret_trop_gros": {
       "map": "function(doc) { if (doc.type == 'arret' && doc.num_arret.length > 10)  emit(doc._id, 1); }"
     }
   }
 }
 EOF
 
+curl -X DELETE $DB/_design/errors 
+
 curl -X PUT -d "@$TMPFILE" $DB/_design/errors
 
+echo $TMPFILE
