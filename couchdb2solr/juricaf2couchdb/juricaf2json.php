@@ -8,26 +8,27 @@ function parse($obj, $n = 0)
     $obj = get_object_vars($obj);
   if (is_array($obj))
   foreach($obj as $k => $v) {
-      if (!is_a($v, 'SimpleXMLElement')) {
-	if (is_array($v)) {
-	  $i = 0;
-	  foreach ($v as $a) {
-	    $r = parse($a, $n + 1);
-	    if ($r)
-	      $res[$i++] = $r;
-	  }
-	  if ($i)
-	    $cpt++;
-	} else {
-	  $cpt++;
-	  $res[$k] = utf8_decode("$v");
+    $k = strtolower($k);
+    if (!is_a($v, 'SimpleXMLElement')) {
+      if (is_array($v)) {
+	$i = 0;
+	foreach ($v as $a) {
+	  $r = parse($a, $n + 1);
+	  if ($r)
+	    $res[$i++] = $r;
 	}
+	if ($i)
+	  $cpt++;
       } else {
-	$r = parse($obj[$k], $n + 1);
-	if ($r) 
-	  $res[$k] = $r;
+	$cpt++;
+	$res[$k] = utf8_decode("$v");
       }
+    } else {
+      $r = parse($v, $n + 1);
+      if ($r) 
+	$res[$k] = $r;
     }
+  }
   if (!$cpt)
     return ;
   return $res;
@@ -43,11 +44,11 @@ function ids($str) {
 
 $obj = simplexml_load_file("data.xml");
 $res = parse($obj);
-if (!$res['TITRE']) 
+if (!$res['titre']) 
 {
-  $res['TITRE'] = $res['PAYS'].' : Décision n°'.$res['NUM_ARRET'].' du '.$res['DATE_ARRET'].' ('.$res['JURIDICTION'].' - '.$res['FORMATION'].')';
+  $res['titre'] = $res['pays'].' : Décision n°'.$res['num_arret'].' du '.$res['date_arret'].' ('.$res['juridiction'].' - '.$res['formation'].')';
 }
-$res['_id'] = ids($res['PAYS'].'-'.$res['JURIDICTION'].'-'.$res['ID']);
-$res['JURICAF_ID'] = $res['ID'];
-unset($res['ID']);
+$res['_id'] = ids($res['pays'].'-'.$res['juridiction'].'-'.$res['id']);
+$res['juricaf_id'] = $res['id'];
+unset($res['id']);
 print json_encode($res);
