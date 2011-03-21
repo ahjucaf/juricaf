@@ -44,7 +44,7 @@ function ids($str) {
 
 $obj = simplexml_load_file("data.xml");
 $res = parse($obj);
-if (!$res['titre']) 
+if (!isset($res['titre'])) 
 {
   $res['titre'] = $res['pays'].' : Décision n°'.$res['num_arret'].' du '.$res['date_arret'].' ('.$res['juridiction'].' - '.$res['formation'].')';
 }
