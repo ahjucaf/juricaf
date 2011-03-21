@@ -50,5 +50,6 @@ if (!$res['titre'])
 }
 $res['_id'] = ids($res['pays'].'-'.$res['juridiction'].'-'.$res['id']);
 $res['juricaf_id'] = $res['id'];
+$res['type'] = 'arret';
 unset($res['id']);
 print json_encode($res);
