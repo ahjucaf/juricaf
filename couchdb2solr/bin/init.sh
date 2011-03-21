@@ -52,4 +52,4 @@ curl -X DELETE $DB/_design/errors?rev=$(curl --stderr /dev/null $DB/_design/erro
 
 curl -X PUT -d "@$TMPFILE" $DB/_design/errors
 
-echo $TMPFILE
+rm $TMPFILE
