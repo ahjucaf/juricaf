@@ -45,7 +45,9 @@ $obj = simplexml_load_file("data.xml");
 $res = parse($obj);
 if (!$res['TITRE']) 
 {
-  $res['TITRE'] = $res['PAYS'].' : Décision n°'.$res['NUM_ARRET'].' du '.$res['DATE_ARRET'].' ('.$res['FORMATION'].')';
+  $res['TITRE'] = $res['PAYS'].' : Décision n°'.$res['NUM_ARRET'].' du '.$res['DATE_ARRET'].' ('.$res['JURIDICTION'].' - '.$res['FORMATION'].')';
 }
-$res['_id'] = ids($res['PAYS'].'-'.$res['FORMATION'].'-'.$res['NUM_ARRET']);
+$res['_id'] = ids($res['PAYS'].'-'.$res['JURIDICTION'].'-'.$res['ID']);
+$res['JURICAF_ID'] = $res['ID'];
+unset($res['ID']);
 print json_encode($res);
