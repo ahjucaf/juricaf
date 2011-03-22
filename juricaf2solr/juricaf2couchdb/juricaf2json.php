@@ -53,7 +53,7 @@ $res['juricaf_id'] = $res['id'];
 $res['type'] = 'arret';
 if (preg_match('/([0-9][0-9])\/([0-9][0-9])\/([0-9][0-9][0-9][0-9])/', $res['date_arret'], $match)) 
 {
-  $res['date_arret'] = $match[3].'-'.$match[2].'-'$match[1];
+  $res['date_arret'] = $match[3].'-'.$match[2].'-'.$match[1];
 }
 unset($res['id']);
 print json_encode($res);
