@@ -43,10 +43,12 @@ cat <<EOF > $TMPFILE
   "views":
   {
     "pas_de_texte_arret": {
-      "map": "function(doc) { if (doc.type == 'arret' && (!doc.texte_arret || doc.texte_arret.length < 1))  emit(doc._id, 1); }"
+      "map": "function(doc) { if (doc.type == 'arret' && (!doc.texte_arret || doc.texte_arret.length < 1))  emit(doc._id, 1); }",
+      "reduce": "function(keys, values) { return sum(values) }"
     },
     "num_arret_trop_gros": {
-      "map": "function(doc) { if (doc.type == 'arret' && doc.num_arret.length > 20)  emit(doc._id, 1); }"
+      "map": "function(doc) { if (doc.type == 'arret' && doc.num_arret.length > 20)  emit(doc._id, 1); }",
+      "reduce": "function(keys, values) { return sum(values) }"
     }
   }
 }
