@@ -61,7 +61,7 @@ function updateIndexer($id) {
     $solrdata .= '</field>';
   }
   if ($solrdata) {
-#    $solrdata .= '</doc></add>';
+    $solrdata .= '</doc></add>';
 #    echo "===================\n$solrdata\n===================\n";
     do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
   }
