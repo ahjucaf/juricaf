@@ -51,13 +51,14 @@ function updateIndexer($id) {
     }
     $solrdata .= '<field name="'.$k.'">';
     $v = preg_replace('/&/', ' ', print_r($v, true));
-    $v = preg_replace('/\s\s\s*\)/', '', preg_replace('/\s*(stdClass Object|Array)\s*\(/i', ' ', preg_replace('/ *\[[^ \]]*\] \=\> */', ' ', $v)));
-      if (preg_match('/date/', $k) && preg_match('/(\d{4})-(\d{2})-(\d{2})/', $v, $match))
-	$v = $match[1].'-'.$match[2].'-'.$match[3].'T12:00:00.000Z';
-      else if (preg_match('/date/', $k) && preg_match('/(\d{2})\/(\d{2})\/(\d{4})/', $v, $match))
-	$v = $match[3].'-'.$match[2].'-'.$match[1].'T12:00:00.000Z';
-      $solrdata .= preg_replace('/\n/', ' ', $v);
-      $solrdata .= '</field>';
+    if (preg_match('/(stdClass Object|Array)/', $v)) 
+      $v = preg_replace('/\s\s\s*\)/', '', preg_replace('/\s*(stdClass Object|Array)\s*\(/i', ' ', preg_replace('/ *\[[^ \]]*\] \=\> */', ' ', $v)));
+    if (preg_match('/date/', $k) && preg_match('/(\d{4})-(\d{2})-(\d{2})/', $v, $match))
+      $v = $match[1].'-'.$match[2].'-'.$match[3].'T12:00:00.000Z';
+    else if (preg_match('/date/', $k) && preg_match('/(\d{2})\/(\d{2})\/(\d{4})/', $v, $match))
+      $v = $match[3].'-'.$match[2].'-'.$match[1].'T12:00:00.000Z';
+    $solrdata .= preg_replace('/\n/', ' ', $v);
+    $solrdata .= '</field>';
   }
   if ($solrdata) {
     $solrdata .= '</doc></add>';
