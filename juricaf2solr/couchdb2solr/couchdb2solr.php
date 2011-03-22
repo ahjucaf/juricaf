@@ -11,7 +11,7 @@ if (!$lock) die('error with lock file');
 fseek($lock, 0);
 $last_seq = rtrim(fgets($lock));
 
-echo "last_seq : $last_seq\n";
+#echo "last_seq : $last_seq\n";
 
 
 $cpt = 0;
@@ -61,8 +61,8 @@ function updateIndexer($id) {
     $solrdata .= '</field>';
   }
   if ($solrdata) {
-    $solrdata .= '</doc></add>';
-    echo "===================\n$solrdata\n===================\n";
+#    $solrdata .= '</doc></add>';
+#    echo "===================\n$solrdata\n===================\n";
     do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
   }
 }
@@ -87,7 +87,7 @@ while(1) {
   $url = $couchdb_url_db.'/_changes?feed=continuous';
   if ($last_seq)
     $url .= '&since='.$last_seq;
-  echo "$url\n";
+#  echo "$url\n";
   $changes = fopen($url, 'r');
   
   while($l = fgets($changes)) {
@@ -99,7 +99,7 @@ while(1) {
     }
     
     if (isset($change->last_seq)) {
-	echo "last_seq\n";
+#	echo "last_seq\n";
       storeSeq($change->last_seq);
       break;
     }
