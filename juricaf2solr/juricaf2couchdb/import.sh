@@ -3,7 +3,7 @@ cpt=0;
 pays=$1
 
 rm test.json ; 
-for i in ../../data/XML/$pays* ; do 
+for i in ../../data/juricaf/XML/$pays* ; do 
     for y in $i/*; do 
 	cat "$y" | iconv -f ISO88591 -t UTF8 | sed 's/\r/\n/g' | sed 's/<BR *\/*>/\n/gi' >  data.xml ; 
 	php juricaf2json.php >> test.json ; 

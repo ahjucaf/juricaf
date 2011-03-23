@@ -64,7 +64,7 @@ foreach ($juricaf_array as $key => $value) {
 
 $juricaf_str .= '</DOCUMENT>';
 $juricaf = simplexml_load_string($juricaf_str, 'SimpleXMLElement', LIBXML_NOENT);
-$file = "../data/XML_DILA/France/".$res[0];
+$file = "../data/juricaf/XML/France/".$res[0];
 $handler = fopen($file,"w");
 fputs($handler,$juricaf->asXML());
 }
