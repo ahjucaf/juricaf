@@ -3,5 +3,5 @@ all:
     class: sfDoctrineDatabase
     param:
       dsn: 'mysql:host=localhost;dbname=juricaf'
-      username: ahjucaf
-      password: '*********'
+      username: juricaf
+      password: '********'
