@@ -1,3 +1,4 @@
+<?php $sf_response->setTitle('Résultats de votre recherche - Juricaf.org'); ?>
 <?php use_helper('Text'); ?>
 <div>
 <a href="<?php echo url_for('@recherche'); ?>"><img src="/images/juricaf.png" alt="Juricaf" /></a>
