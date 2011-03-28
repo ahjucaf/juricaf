@@ -9,7 +9,7 @@ pre {
   font-size: 1.3em;
 }
 
-.site { width: 90%; margin: auto; font-size: 1.2em;}
+.site { width: 90%; margin: auto; margin-top: 1%; font-size: 1.2em;}
 .form_recherche { text-align: center; }
 .stats ul {margin: auto; width: 30% ;}
 .stats li { float: left; width: 30%; }
