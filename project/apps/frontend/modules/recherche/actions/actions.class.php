@@ -24,13 +24,15 @@ class rechercheActions extends sfActions
     if (!$solr->ping()) {
       throw new Exception("Solr not ready");
     }
-    $res = $solr->search($request->getParameter('query', 'Suisse'), 0, 10);
-    #$this->resultats = $res->response;
+    $this->query = $request->getParameter('query', 'Suisse');
+    $res = $solr->search($this->query, $request->getParameter('start', 0), $request->getParameter('start', 0)+10);
+    $this->resultats = $res->response;
+/*
     echo "<pre>";
     print_r($res->response);
     echo "</pre>";
-
-    exit;
+*/
+    #exit;
   }
 
 }

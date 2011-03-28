@@ -23,3 +23,8 @@ recherche_resultats:
   options:
     segment_separators: [/]
 
+#Affichage des arrets
+
+arret:
+  url: /arret/:id
+  param: {module: arret, action: index, query: ""}
