@@ -1,0 +1,5 @@
+body {
+  font-size: 62.5%; /* IE */
+  font-family: Verdana, Tahoma, Geneva, Arial, Sans-serif;
+}
+body, div, form, fieldset, ul, ol, table { margin: 0; padding: 0; } /* border box model uniforme */
