@@ -16,10 +16,12 @@ class arretActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $couchdb = new sfCouchDocument($request->getParameter('id', 'BELGIQUE-CONSEILD-ETAT-152315'));
+    $this->document = new sfCouchDocument($request->getParameter('id', 'BELGIQUE-CONSEILD-ETAT-165880'));
+    /*
     echo "<pre>";
     print_r($couchdb);
     echo "</pre>";
     exit;
+    */
   }
 }
