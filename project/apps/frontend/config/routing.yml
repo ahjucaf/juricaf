@@ -12,5 +12,14 @@ default_index:
   url:   /:module
   param: { action: index }
 
-default:
-  url:   /:module/:action/*
+#Solr Search
+recherche:
+  url: /recherche/
+  param: {module: recherche, action: index, query: ""}
+
+recherche_resultats:
+  url: /recherche/:query
+  param: {module: recherche, action: search, query: ""}
+  options:
+    segment_separators: [/]
+

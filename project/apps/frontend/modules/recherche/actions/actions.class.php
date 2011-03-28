@@ -10,21 +10,27 @@ require_once(sfConfig::get('sf_lib_dir').'/vendor/SolrClient/Service.php');
  */
 class rechercheActions extends sfActions
 {
- /**
-  * Executes index action
-  *
-  * @param sfRequest $request A request object
-  */
   public function executeIndex(sfWebRequest $request)
+  {
+    if($request->getParameter('q')) {
+      $search = strip_tags($request->getParameter('q'));
+      $this->redirect('@recherche_resultats?query='.$search);
+    }
+  }
+  
+  public function executeSearch(sfWebRequest $request)
   {
     $solr = new Apache_Solr_Service('localhost', 8080, '/solr');
     if (!$solr->ping()) {
       throw new Exception("Solr not ready");
     }
-    $res = $solr->search($request->getParameter('q', 'Suisse'), 0, 10);
+    $res = $solr->search($request->getParameter('query', 'Suisse'), 0, 10);
+    #$this->resultats = $res->response;
     echo "<pre>";
     print_r($res->response);
     echo "</pre>";
+
     exit;
   }
+
 }
