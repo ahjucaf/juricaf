@@ -11,3 +11,4 @@ img { border: none; }
 .stats ul {margin: auto; width: 30% ;}
 .stats li { float: left; width: 30%; }
 .stats li:nth-child(odd) { clear: left; width: 70%}
+pre{    white-space:pre-wrap;}
