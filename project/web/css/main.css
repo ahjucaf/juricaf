@@ -4,5 +4,5 @@ body {
 }
 body, div, form, fieldset, ul, ol, table { margin: 0; padding: 0; } /* border box model uniforme */
 
-.site { width: 90%; margin: auto;}
+.site { width: 90%; margin: auto; font-size: 1em;}
 .form_recherche { text-align: center; }
