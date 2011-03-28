@@ -5,8 +5,8 @@
 <div>
 <h2><?php echo $document->titre; ?></h2>
 <?php
-echo "<pre>";
-print_r($document->texte_arret);
-echo "</pre>";
+echo "<p>";
+echo preg_replace ('/\n/', '</p><p>', $document->texte_arret);
+echo "</p>";
 ?>
 </div>
