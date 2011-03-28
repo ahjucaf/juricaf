@@ -6,3 +6,6 @@
     <input type="submit" value="Rechercher" tabindex="20" />
   </form>
 </div>
+<div class="stats">
+    <?php include_component('arret', 'statsPays'); ?>
+</div>
