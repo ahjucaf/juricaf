@@ -7,7 +7,7 @@
   </form>
 </div>
 <div>
-<h2><?php echo $resultats->numFound; ?> résultats pour "<?php echo $query; ?>"</h2>
+<h2><?php echo $resultats->numFound; ?> résultats pour «&nbsp;<?php echo $query; ?>&nbsp;»</h2>
 <?php
 foreach ($resultats->docs as $resultat) {
   echo '<h3><a href="'.url_for('@arret?id='.$resultat->id).'">'.$resultat->titre.'</a></h3>';
