@@ -1,6 +1,6 @@
 <?php use_helper('Text'); ?>
 <div>
-<a href="<?php echo url_for('@recherche'); ?>" style="border: none;"><img src="/images/juricaf.png" alt="Juricaf" /></a>
+<a href="<?php echo url_for('@recherche'); ?>"><img src="/images/juricaf.png" alt="Juricaf" /></a>
 </div>
 <div>
 <h2><?php echo $resultats->numFound; ?> résultats pour "<?php echo $query; ?>"</h2>
