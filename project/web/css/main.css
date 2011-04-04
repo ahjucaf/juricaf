@@ -9,8 +9,15 @@ pre {
   font-size: 1.3em;
 }
 
+em {font-weight: bold;}
+
 .site { width: 90%; margin: auto; margin-top: 1%; font-size: 1.2em;}
 .form_recherche { text-align: center; }
 .stats ul {margin: auto; width: 30% ;}
 .stats li { float: left; width: 30%; }
 .stats li:nth-child(odd) { clear: left; width: 70%}
+
+.resultat {margin-bottom: 10px;}
+.resultat h3 {margin: 0px;}
+.resultat p {margin: 0px;}
+.resultat .extra {color: grey;}
