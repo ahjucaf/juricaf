@@ -1,4 +1,20 @@
 <?php
+setlocale(LC_TIME, 'fr_FR.UTF8', 'fr.UTF8', 'fr_FR.UTF-8', 'fr.UTF-8'); 
+
+$mois = array(
+	      '01'=>'janvier',
+	      '02'=>'février',
+	      '03'=>'mars',
+	      '04'=>'avril',
+	      '05'=>'mai',
+	      '06'=>'juin',
+	      '07'=>'juillet',
+	      '08'=>'août',
+	      '09'=>'septembre',
+	      '10'=>'octobre',
+	      '11'=>'novembre',
+	      '12'=>'décembre',
+	      );
 
 function parse($obj, $n = 0) 
 {
@@ -44,9 +60,27 @@ function ids($str) {
 
 $obj = simplexml_load_file("data.xml");
 $res = parse($obj);
+
+$res['juridiction'] = ucfirst(strtolower($res['juridiction']));
+$res['formation'] = ucfirst(strtolower($res['formation']));
+
+if ($res['juridiction'] == $res['formation'] || $res['formation'] == '-' || strtolower($res['juridiction'].' '.$res['pays'])  == strtolower($res['formation']))
+  unset($res['formation']);
+if ($res['juridiction'] == 'Conseil d-etat') 
+  $res['juridiction'] = 'Conseil d\'état'; 
+if ($res['juridiction'] == 'Cour d-arbitrage') 
+  $res['juridiction'] = 'Cour d\'arbitrage';
+
 if (!isset($res['titre'])) 
 {
-  $res['titre'] = $res['pays'].' : Décision n°'.$res['num_arret'].' du '.$res['date_arret'].' ('.$res['juridiction'].' - '.$res['formation'].')';
+  $formation = '';
+  if (isset($res['formation']))
+    $formation = ', '.$res['formation'];
+  $res['titre'] = $res['pays'].', '.$res['juridiction'].$formation.', '.
+    date('d ', strtotime($res['date_arret'])).
+    $mois[date('m', strtotime($res['date_arret']))].
+    date(' Y', strtotime($res['date_arret'])).
+    ', décision n°'.$res['num_arret'];
 }
 $res['_id'] = ids($res['pays'].'-'.$res['juridiction'].'-'.$res['id']);
 $res['juricaf_id'] = $res['id'];
