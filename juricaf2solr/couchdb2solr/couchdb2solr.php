@@ -4,7 +4,9 @@ include("conf/config.php");
 include("utils.php");
 
 
-global $lock, $cpt;
+global $lock, $cpt, $COMMITER;
+
+$COMMITER = 100;
 
 $lock = fopen($lock_seq_file, 'a+');
 if (!$lock) die('error with lock file');
@@ -51,6 +53,7 @@ function updateIndexer($id) {
     }
     $solrdata .= '<field name="'.$k.'">';
     $v = preg_replace('/&/', ' ', print_r($v, true));
+    $v = preg_replace('/\s*([-=_])[-=_]+\s*/', ' \1 ', $v);
     if (preg_match('/(stdClass Object|Array)/', $v)) 
       $v = preg_replace('/\s\s\s*\)/', '', preg_replace('/\s*(stdClass Object|Array)\s*\(/i', ' ', preg_replace('/ *\[[^ \]]*\] \=\> */', ' ', $v)));
     if (preg_match('/date/', $k) && preg_match('/(\d{4})-(\d{2})-(\d{2})/', $v, $match))
@@ -62,7 +65,7 @@ function updateIndexer($id) {
   }
   if ($solrdata) {
     $solrdata .= '</doc></add>';
-#    echo "===================\n$solrdata\n===================\n";
+    //    echo "===================\n$solrdata\n===================\n";
     do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
   }
 }
@@ -105,11 +108,6 @@ while(1) {
     }
 
     $last_seq = $change->seq;
-    if ($cpt > 100) {
-      storeSeq($last_seq);
-    }
-
-
 
     if (isset($change->deleted)) {
       deleteIndexer($change->id);
@@ -118,6 +116,10 @@ while(1) {
 
     updateIndexer($change->id);
     
+    if ($cpt > $COMMITER) {
+      storeSeq($last_seq);
+    }
+
   }
 
   fclose($changes);
