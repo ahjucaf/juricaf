@@ -26,7 +26,7 @@ class rechercheActions extends sfActions
       throw new Exception("Solr not ready");
     }
     $this->query = $request->getParameter('query', 'Suisse');
-    $res = $solr->search($this->query, $request->getParameter('start', 0), $request->getParameter('start', 0)+10, array('hl' => 'true', 'sort' => 'date_arret desc'));
+    $res = $solr->search($this->query, $request->getParameter('start', 0), $request->getParameter('start', 0)+10, array('hl' => 'true', 'sort' => 'date_arret desc', 'facet.field'=>'pays', 'facet.field'=>'juridiction', 'facet'=>'true'));
     $this->resultats = $res;
   }
 
