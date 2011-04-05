@@ -97,9 +97,19 @@ $res['type'] = 'arret';
 
 unset($res['id']);
 
-if (strlen($res['num_arret']) > 20 || preg_match('/ /', $res['num_arret'])) 
+if (strlen($res['num_arret']) > 20) 
 {
   $res['type'] = 'error_arret';
   $res['on_error'] = 'num_arret trop gros';
+}
+if (preg_match('/ /', $res['num_arret'])) 
+{
+  $res['type'] = 'error_arret';
+  $res['on_error'] = 'num_arret ne devrait pas contenir d\'espace';
+}
+if (!preg_match('/\n/', $res['texte_arret'])) 
+{
+  $res['type'] = 'error_arret';
+  $res['on_error'] = 'pas de saut de ligne dans l\'arret';
 }
 print json_encode($res);
