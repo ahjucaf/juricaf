@@ -14,7 +14,7 @@ foreach ($resultats->response->docs as $resultat) {
   echo '<div class="resultat"><h3><a href="'.url_for('@arret?id='.$resultat->id).'">'.$resultat->titre.'</a></h3>';
   echo '<p>';
   $exerpt = '';
-  if (isset($resultats->highlighting) && $resultats->highlighting->{$resultat->id}) {
+  if (isset($resultats->highlighting) && $resultats->highlighting->{$resultat->id} && isset($resultats->highlighting->{$resultat->id}->content)) {
     foreach ($resultats->highlighting->{$resultat->id}->content as $h)
       $exerpt .= '...'.html_entity_decode($h);
     $exerpt .= '...' ;
