@@ -23,7 +23,10 @@ foreach ($resultats->response->docs as $resultat) {
     $exerpt .= $resultat->analyses.'...';
   echo preg_replace ('/[^a-z0-9]*\.\.\.$/i', '...', truncate_text($exerpt.$resultat->texte_arret, 500, "...", true));
   echo '</p>';
-  echo '<div class="extra"><span class="pays '.preg_replace('/ /', '_', $resultat->pays).'">'.$resultat->pays.'</span> - <span class="date">'.date('d/m/Y', strtotime($resultat->date_arret)).'</span> - <span class="juridiction">'.$resultat->juridiction.', '.$resultat->formation.'</span> - <span class="num">'.$resultat->num_arret.'</span></div></div>';
+  $formation = '';
+  if ($resultat->formation)
+    $formation = ', '.$resultat->formation;
+  echo '<div class="extra"><span class="pays '.preg_replace('/ /', '_', $resultat->pays).'">'.$resultat->pays.'</span> - <span class="date">'.date('d/m/Y', strtotime($resultat->date_arret)).'</span> - <span class="juridiction">'.$resultat->juridiction.$formation.'</span> - <span class="num">'.$resultat->num_arret.'</span></div></div>';
 }
 ?>
 </div>
