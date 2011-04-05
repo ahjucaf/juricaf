@@ -97,7 +97,7 @@ $res['type'] = 'arret';
 
 unset($res['id']);
 
-if (strlen($res['num_arret'])) 
+if (strlen($res['num_arret']) > 20 || preg_match('/ /', $res['num_arret'])) 
 {
   $res['type'] = 'error_arret';
   $res['on_error'] = 'num_arret trop gros';
