@@ -71,6 +71,11 @@ if ($res['juridiction'] == 'Conseil d-etat')
 if ($res['juridiction'] == 'Cour d-arbitrage') 
   $res['juridiction'] = 'Cour d\'arbitrage';
 
+if (preg_match('/([0-9][0-9])\/([0-9][0-9])\/([0-9][0-9][0-9][0-9])/', $res['date_arret'], $match)) 
+{
+  $res['date_arret'] = $match[3].'-'.$match[2].'-'.$match[1];
+}
+
 if (!isset($res['titre'])) 
 {
   $formation = '';
@@ -82,12 +87,19 @@ if (!isset($res['titre']))
     date(' Y', strtotime($res['date_arret'])).
     ', décision n°'.$res['num_arret'];
 }
-$res['_id'] = ids($res['pays'].'-'.$res['juridiction'].'-'.$res['id']);
+
+$year = preg_replace('/\-[0-9\-]*/', '', $res['date_arret']);
+$num_arret_id = preg_replace('/[^a-z0-9]/i', '', $res['num_arret']);
+
+$res['_id'] = ids($res['pays'].'-'.$res['juridiction'].'-'.$year.'-'.$num_arret_id);
 $res['juricaf_id'] = $res['id'];
 $res['type'] = 'arret';
-if (preg_match('/([0-9][0-9])\/([0-9][0-9])\/([0-9][0-9][0-9][0-9])/', $res['date_arret'], $match)) 
-{
-  $res['date_arret'] = $match[3].'-'.$match[2].'-'.$match[1];
-}
+
 unset($res['id']);
+
+if (strlen($res['num_arret'])) 
+{
+  $res['type'] = 'error_arret';
+  $res['on_error'] = 'num_arret trop gros';
+}
 print json_encode($res);
