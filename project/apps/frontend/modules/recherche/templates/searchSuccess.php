@@ -21,7 +21,7 @@ foreach ($resultats->response->docs as $resultat) {
   }
   if ($resultat->analyses) 
     $exerpt .= $resultat->analyses.'...';
-  echo preg_replace ('/[^a-z0-9]*\.\.\.$/i', '...', truncate_text($exerpt.$resultat->texte_arret, 500, "...", true));
+  echo preg_replace ('/[^a-z0-9]*\.\.\.$/i', '...', truncate_text($exerpt.$resultat->texte_arret, 700, "...", true));
   echo '</p>';
   $formation = '';
   if ($resultat->formation)
