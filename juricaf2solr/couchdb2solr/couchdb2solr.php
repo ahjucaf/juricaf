@@ -53,7 +53,7 @@ function updateIndexer($id) {
     }
     $solrdata .= '<field name="'.$k.'">';
     $v = preg_replace('/&/', ' ', print_r($v, true));
-    $v = preg_replace('/\s*([-=_])[-=_]+\s*/', ' \1 ', $v);
+    $v = preg_replace('/\s*([-=_~])[-=_~]+\s*/', ' \1 ', $v);
     if (preg_match('/(stdClass Object|Array)/', $v)) 
       $v = preg_replace('/\s\s\s*\)/', '', preg_replace('/\s*(stdClass Object|Array)\s*\(/i', ' ', preg_replace('/ *\[[^ \]]*\] \=\> */', ' ', $v)));
     if (preg_match('/date/', $k) && preg_match('/(\d{4})-(\d{2})-(\d{2})/', $v, $match))
