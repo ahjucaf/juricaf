@@ -1,5 +1,5 @@
 <?php
-require_once(sfConfig::get('sf_lib_dir').'/vendor/SolrClient/Service.php');
+
 /**
  * recherche actions.
  *
@@ -21,10 +21,7 @@ class rechercheActions extends sfActions
   
   public function executeSearch(sfWebRequest $request)
   {
-    $solr = new Apache_Solr_Service('localhost', 8080, '/solr');
-    if (!$solr->ping()) {
-      throw new Exception("Solr not ready");
-    }
+    $solr = new sfBasicSolr();
     $this->query = $request->getParameter('query', 'Suisse');
     $solr_query = $this->query;
     if (preg_match('/_/', $solr_query))
