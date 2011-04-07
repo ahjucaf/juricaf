@@ -8,6 +8,7 @@ class ProjectConfiguration extends sfProjectConfiguration
   public function setup()
   {
     $this->enablePlugins('sfCouchPlugin');
+    $this->enablePlugins('sfBasicSolrPlugin');
     $this->enablePlugins('sfDoctrinePlugin');
   }
 }
