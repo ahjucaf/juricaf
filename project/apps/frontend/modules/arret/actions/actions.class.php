@@ -16,6 +16,7 @@ class arretActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->document = new sfCouchDocument($request->getParameter('id', 'BELGIQUE-CONSEILD-ETAT-165880'));
+    $this->document = new JuricafArret($request->getParameter('id'));
+    $this->forward404If($this->document->isNew());
   }
 }
