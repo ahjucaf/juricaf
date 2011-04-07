@@ -16,6 +16,7 @@ $mois = array(
 	      '12'=>'décembre',
 	      );
 
+//Convert xml to array (jsonisable)
 function parse($obj, $n = 0) 
 {
   $res = array();
@@ -50,7 +51,7 @@ function parse($obj, $n = 0)
   return $res;
 }
 
-
+//convert a string to juricaf ids
 function ids($str) {
   $str = strtr($str,
 	       array('è'=>'e','é'=>'e','ê'=>'e','ë'=>'e','à'=>'a','á'=>'a','â'=>'a','ã'=>'a','ä'=>'a','ç'=>'c','ì'=>'i','í'=>'i','î'=>'i','ï'=>'i','ñ'=>'n','ò'=>'o','ó'=>'o','ô'=>'o','õ'=>'o','ö'=>'o','ù'=>'u','ú'=>'u','û'=>'u','ü'=>'u','ý'=>'y','ÿ'=>'y','À'=>'A','Á'=>'A','Â'=>'A','Ã'=>'A','Ä'=>'A','Ç'=>'C','È'=>'E','É'=>'E','Ê'=>'E','Ë'=>'E','Ì'=>'I','Í'=>'I','Î'=>'I','Ï'=>'I','Ñ'=>'N','Ò'=>'O','Ó'=>'O','Ô'=>'O','Õ'=>'O','Ö'=>'O','Ù'=>'U','Ú'=>'U','Û'=>'U','Ü'=>'U','Ý'=>'Y'));
@@ -58,24 +59,28 @@ function ids($str) {
   return strtoupper($str);
 }
 
+//parse xml data
 $obj = simplexml_load_file("data.xml");
 $res = parse($obj);
 
+//clean them
 $res['juridiction'] = ucfirst(strtolower($res['juridiction']));
 $res['formation'] = ucfirst(strtolower($res['formation']));
-
-if ($res['juridiction'] == $res['formation'] || $res['formation'] == '-' || strtolower($res['juridiction'].' '.$res['pays'])  == strtolower($res['formation']))
+if ($res['juridiction'] == $res['formation'] || $res['formation'] == '-' || 
+    strtolower($res['juridiction'].' '.$res['pays'])  == strtolower($res['formation']))
   unset($res['formation']);
 if ($res['juridiction'] == 'Conseil d-etat') 
   $res['juridiction'] = 'Conseil d\'état'; 
 if ($res['juridiction'] == 'Cour d-arbitrage') 
   $res['juridiction'] = 'Cour d\'arbitrage';
+if (!$res['section'] || $res['section'] == '-')
+  unset($res['section']);
 
+//create extra fields
 if (preg_match('/([0-9][0-9])\/([0-9][0-9])\/([0-9][0-9][0-9][0-9])/', $res['date_arret'], $match)) 
 {
   $res['date_arret'] = $match[3].'-'.$match[2].'-'.$match[1];
 }
-
 if (!isset($res['titre'])) 
 {
   $formation = '';
@@ -90,13 +95,13 @@ if (!isset($res['titre']))
 
 $year = preg_replace('/\-[0-9\-]*/', '', $res['date_arret']);
 $num_arret_id = preg_replace('/[^a-z0-9]/i', '', $res['num_arret']);
-
 $res['_id'] = ids($res['pays'].'-'.$res['juridiction'].'-'.$year.'-'.$num_arret_id);
 $res['juricaf_id'] = $res['id'];
 $res['type'] = 'arret';
-
 unset($res['id']);
 
+
+//Handle errors
 if (strlen($res['num_arret']) > 20) 
 {
   $res['type'] = 'error_arret';
@@ -112,4 +117,5 @@ if (!preg_match('/\n/', $res['texte_arret']))
   $res['type'] = 'error_arret';
   $res['on_error'] = 'pas de saut de ligne dans l\'arret';
 }
+
 print json_encode($res);
