@@ -1,4 +1,23 @@
-<?php $sf_response->setTitle($document->titre.'- Juricaf.org'); ?>
+<?php $sf_response->setTitle($document->titre.'- Juricaf.org'); 
+
+function printDocument($d) {
+  if (get_class($d) != 'sfOutputEscaperArrayDecorator') {
+    return print_r($d);
+  }
+  echo "<ul>";
+  $d->rewind();
+  while ($sd = $d->current()) {
+    echo "<li>";
+    if (!is_int($d->key()))
+      echo "<b>".$d->key()."</b>&nbsp;: ";
+    printDocument($sd);
+    echo "</li>";
+    $d->next();
+  }
+  echo "</ul>";
+}
+
+?>
 <div>
 <a href="<?php echo url_for('@recherche'); ?>"><img src="/images/juricaf.png" alt="Juricaf" /></a>
 </div>
@@ -17,7 +36,7 @@ echo "</p>";
   if (in_array($f, array('titre', 'texte_arret')))
     continue;
   echo "<p><b>$f :</b>";
-  print_r($document->{$f});
+  printDocument($document->{$f});
   echo "</p>";
 } ?>
 </div>
