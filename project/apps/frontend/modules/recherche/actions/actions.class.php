@@ -29,7 +29,14 @@ class rechercheActions extends sfActions
       $solr_query = preg_replace('/([^ :]+_[^ :]+)/i', '"\1"', $this->query);
       $solr_query = preg_replace('/_/', ' ', $solr_query);
     }
-    $res = $solr->search($solr_query, $request->getParameter('start', 0), $request->getParameter('start', 0)+10, array('hl' => 'true', 'sort' => 'date_arret desc', 'facet.field'=>'pays', 'facet.field'=>'juridiction', 'facet'=>'true'));
+    $param = array('hl' => 'true');
+    if (!preg_match('/\:\*/', $solr_query)) {
+      $param['sort'] = 'date_arret desc';
+      $param['facet.field']='pays';
+      $param['facet.field']='juridiction';
+      $param['facet']='true';
+    }
+      $res = $solr->search($solr_query, $request->getParameter('start', 0), $request->getParameter('start', 0)+10, $param);
     $this->resultats = $res;
   }
 
