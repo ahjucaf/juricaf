@@ -32,7 +32,7 @@ function storeSeq($seq) {
 function updateIndexer($id) {
   global $couchdb_url_db, $solr_url_db, $last_seq;
   $couchdata = json_decode(file_get_contents($couchdb_url_db.'/'.$id));
-  if (!$couchdata)
+  if (!$couchdata || $couchdata->type != "arret")
     continue;
   unset($couchdata->_rev);
   $solrdata = '<add><doc>';
