@@ -10,9 +10,9 @@
   </head>
   <body>
     <div class="site">
-   <div>
-   <a href="<?php echo url_for('@recherche'); ?>"><img src="/images/juricaf.png" alt="Juricaf" /></a>
-   </div>
+<div class="home_logo">
+<a href="<?php echo url_for('@recherche'); ?>"><img src="/images/juricaf.png" alt="Juricaf" /></a>
+</div>
    <?php if ($sf_user->hasFlash('notice')):?>
    <div class="flash notice"><?php echo $sf_user->getFlash('notice'); ?></div>
    <?php endif; ?>
@@ -21,5 +21,6 @@
    <?php endif; ?>
     <?php echo $sf_content ?>
     </div>
+</div>
   </body>
 </html>
