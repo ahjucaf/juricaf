@@ -19,9 +19,6 @@ function printDocument($d) {
 
 ?>
 <div>
-<a href="<?php echo url_for('@recherche'); ?>"><img src="/images/juricaf.png" alt="Juricaf" /></a>
-</div>
-<div>
 <h2><?php echo $document->titre; ?></h2>
 <?php
 echo "<p>";
@@ -35,7 +32,7 @@ echo "</p>";
   foreach ($document->getFields() as $f) {
   if (in_array($f, array('titre', 'texte_arret')))
     continue;
-  echo "<p><b>$f :</b>";
+  echo "<p><b>$f : </b>";
   printDocument($document->{$f});
   echo "</p>";
 } ?>
