@@ -17,6 +17,7 @@ class rechercheActions extends sfActions
       $search = preg_replace('/[\/\{\}\[\]]/', '', $search);
       $this->redirect('@recherche_resultats?query='.$search);
     }
+    $this->setLayout('home');
   }
   
   public function executeSearch(sfWebRequest $request)
@@ -24,20 +25,42 @@ class rechercheActions extends sfActions
     $solr = new sfBasicSolr();
     $this->query = $request->getParameter('query', 'Suisse');
     $solr_query = $this->query;
-    if (preg_match('/_/', $solr_query))
-    {
-      $solr_query = preg_replace('/([^ :]+_[^ :]+)/i', '"\1"', $this->query);
-      $solr_query = preg_replace('/_/', ' ', $solr_query);
-    }
+
     $param = array('hl' => 'true');
     if (!preg_match('/\:\*/', $solr_query)) {
       $param['sort'] = 'date_arret desc';
-      $param['facet.field']='pays';
-      $param['facet.field']='juridiction';
+      $param['facet.field']= array('pays', 'juridiction');
+      //      $param['facet.field']='juridiction';
       $param['facet']='true';
     }
-      $res = $solr->search($solr_query, $request->getParameter('start', 0), $request->getParameter('start', 0)+10, $param);
+
+    $this->facetsset = array();
+    $this->facetslink = '';
+    if ($f = $request->getParameter('facets')) {
+      $this->facetsset = split(',', $f);
+      $this->facetslink = ','.$f;
+      $solr_query .= ' '.implode(' ', $this->facetsset);
+      if (preg_match('/order:pertinance/', $solr_query)) {
+	$solr_query = ' '.preg_replace('/ order:pertinance/', '', $solr_query);
+	unset($param['sort']);
+      }
+    }
+
+    if (preg_match('/_/', $solr_query))
+    {
+      $solr_query = preg_replace('/([^ :]+_[^ :]+)/i', '"\1"', $solr_query);
+      $solr_query = preg_replace('/_/', ' ', $solr_query);
+    }
+
+    $res = $solr->search($solr_query, $request->getParameter('start', 0), $request->getParameter('start', 0)+10, $param);
     $this->resultats = $res;
+    $this->facets = array();
+    foreach($res->facet_counts->facet_fields as $k => $f) {
+      foreach ($f as $n => $v) {
+	if ($v)
+	  $this->facets[$k][$n] = $v;
+      }
+    }
   }
 
 }
