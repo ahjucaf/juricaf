@@ -12,7 +12,7 @@ pre {
 em {font-weight: bold;}
 
 .site { width: 90%; margin: auto; margin-top: 1%; font-size: 1.2em;}
-.form_recherche { text-align: center; }
+.home_logo, .form_recherche { text-align: center; }
 .stats ul {margin: auto; width: 30% ;}
 .stats li { float: left; width: 30%; }
 .stats li:nth-child(odd) { clear: left; width: 70%}
@@ -21,3 +21,11 @@ em {font-weight: bold;}
 .resultat h3 {margin: 0px;}
 .resultat p {margin: 0px;}
 .resultat .extra {color: grey;}
+
+.flash {text-align: center; font-weight: bold;}
+.error {color: red;}
+.notice {color: green;}
+.error_list {color: red; list-style: none; padding: 0; }
+
+.options {padding-bottom: 15px;}
+.facets {float: right; padding-right: 20px; height: 100%}

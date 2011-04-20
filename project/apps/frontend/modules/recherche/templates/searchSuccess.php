@@ -8,12 +8,15 @@
 </div>
 <div>
 <h2><?php echo $resultats->response->numFound; ?> résultats pour «&nbsp;<?php echo $query; ?>&nbsp;»</h2>
-<?php if (count($facetsset)) : ?>
+<?php 
+//////////////////
+//  Suppression des options
+//////////////////
+if (count($facetsset)) : ?>
 <div class="options">
 <?php   
 $myfacetslink = preg_replace('/^,/', '', $facetslink);
 $noorderlink = '@recherche_resultats?query='.$query.'&facets='.preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/order:[^:,]+,?/', '', $myfacetslink)));
-
 foreach($facetsset as $f) : ?>
 <div class="option"><?php
    if (!preg_match('/order:/', $f)) {
@@ -27,8 +30,15 @@ foreach($facetsset as $f) : ?>
 ?></div>
    <?php endforeach; ?>
 </div>    
-<?php endif;  ?>
+<?php endif;
+//////////////////
+//  Gestion des facettes
+//////////////////
+?>
 <div class="facets">
+<?php 
+/////// TRI //////// 
+?>
 <p>Tri</p>
 <ul>
 <?php if (preg_match('/order:/', $facetslink)) :?>
@@ -39,26 +49,18 @@ foreach($facetsset as $f) : ?>
 <li><?php echo link_to('par pertinance', '@recherche_resultats?query='.$query.'&facets=order:pertinance'.$facetslink); ?></li>
 <?php endif; ?>
 </ul>
-<?php if (isset($facets['juridiction']) && count($facets['juridiction']) > 1) : ?>
-<p>Juridiction</p>
-<ul><?php 
-    foreach($facets['juridiction'] as $k => $v) {
-      echo "<li>".link_to($k."&nbsp;(".$v.")", '@recherche_resultats?query='.$query.'&facets=juridiction:'.preg_replace('/ /', '_', $k).$facetslink)."</li>";
-  }
+<?php
+  ////// FACETTE Pays //////////
+include_partial('recherche/facets', array('label'=>'Pays', 'id'=>'pays', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
+  ////// FACETTE Juridiction //////////
+include_partial('recherche/facets', array('label'=>'Juridiction', 'id'=>'juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
 ?>
-</ul>
-<?php endif; ?>
-<?php if (isset($facets['pays']) && count($facets['pays']) > 1) : ?>
-<p>Pays</p>
-<ul><?php 
-   foreach($facets['pays'] as $k => $v) {
-  echo "<li>".link_to($k."&nbsp;(".$v.")", '@recherche_resultats?query='.$query.'&facets=pays:'.preg_replace('/ /', '_', $k).$facetslink)."</li>";
- }
-?>
-</ul>
-<?php endif; ?>
 </div>
-<div class="resultats">
+<?php
+  //////////////////////////////////
+  /// Affichage des résultats
+  //////////////////////////////////
+?><div class="resultats">
 <?php
 foreach ($resultats->response->docs as $resultat) {
   echo '<div class="resultat"><h3><a href="'.url_for('@arret?id='.$resultat->id).'">'.$resultat->titre.'</a></h3>';
