@@ -18,8 +18,8 @@ recherche:
   param: {module: recherche, action: index, query: ""}
 
 recherche_resultats:
-  url: /recherche/:query
-  param: {module: recherche, action: search, query: ""}
+  url: /recherche/:query/:facets
+  param: {module: recherche, action: search, query: "", facets: ""}
   options:
     segment_separators: [/]
 
@@ -27,4 +27,8 @@ recherche_resultats:
 
 arret:
   url: /arret/:id
-  param: {module: arret, action: index, query: ""}
+  param: {module: arret, action: index}
+
+arretxml:
+  url: /arret/:id/xml
+  param: {module: arret, action: xml}

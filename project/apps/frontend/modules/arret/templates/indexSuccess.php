@@ -37,3 +37,6 @@ echo "</p>";
   echo "</p>";
 } ?>
 </div>
+<div class="download">
+<?php echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
+</div>
