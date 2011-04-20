@@ -1,7 +1,7 @@
 <?php $sf_response->setTitle($document->titre.'- Juricaf.org'); 
 
 function printDocument($d) {
-  if (get_class($d) != 'sfOutputEscaperArrayDecorator') {
+  if (!is_object($d) || get_class($d) != 'sfOutputEscaperArrayDecorator') {
     return print_r($d);
   }
   echo "<ul>";
