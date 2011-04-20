@@ -38,7 +38,8 @@ class rechercheActions extends sfActions
     $this->facetslink = '';
     if ($f = $request->getParameter('facets')) {
       $this->facetsset = split(',', $f);
-      $this->facetslink = ','.$f;
+      sort($this->facetsset);
+      $this->facetslink = ','.implode(',', $this->facetsset);
       $solr_query .= ' '.implode(' ', $this->facetsset);
       if (preg_match('/order:pertinance/', $solr_query)) {
 	$solr_query = ' '.preg_replace('/ order:pertinance/', '', $solr_query);
