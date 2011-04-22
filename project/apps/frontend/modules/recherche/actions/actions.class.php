@@ -56,12 +56,13 @@ class rechercheActions extends sfActions
     $res = $solr->search($solr_query, $request->getParameter('start', 0), $request->getParameter('start', 0)+10, $param);
     $this->resultats = $res;
     $this->facets = array();
-    foreach($res->facet_counts->facet_fields as $k => $f) {
-      foreach ($f as $n => $v) {
-	if ($v)
-	  $this->facets[$k][$n] = $v;
+    if (isset($res->facet_counts))
+      foreach($res->facet_counts->facet_fields as $k => $f) {
+	foreach ($f as $n => $v) {
+	  if ($v)
+	    $this->facets[$k][$n] = $v;
+	}
       }
-    }
   }
 
 }
