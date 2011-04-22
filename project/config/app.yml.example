@@ -1,0 +1,3 @@
+all:
+  juricaf:
+    xmlwebdir: "/my/directory/to/data/pool/www"
