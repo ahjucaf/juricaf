@@ -32,3 +32,7 @@ arret:
 arretxml:
   url: /arret/:id/xml
   param: {module: arret, action: xml}
+
+upload:
+   url:  /admin/upload
+   param: {module: admin, action: upload}
