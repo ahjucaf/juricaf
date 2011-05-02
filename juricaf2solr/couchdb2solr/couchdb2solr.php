@@ -32,7 +32,7 @@ function storeSeq($seq) {
 function updateIndexer($id) {
   global $couchdb_url_db, $solr_url_db, $last_seq;
   $couchdata = json_decode(file_get_contents($couchdb_url_db.'/'.$id));
-  if (!$couchdata || !isset($couchdata->type ) || $couchdata->type != "arret")
+  if (!$couchdata || !isset($couchdata->type ))
      return;
   unset($couchdata->_rev);
   $solrdata = '<add><doc>';
@@ -49,12 +49,12 @@ function updateIndexer($id) {
       continue;
     if (preg_match('/^_/', $id)) {
       $solrdata = '';
-	break ;
+  break ;
     }
     $solrdata .= '<field name="'.$k.'">';
     $v = preg_replace('/&/', ' ', print_r($v, true));
     $v = preg_replace('/\s*([-=_~])[-=_~]+\s*/', ' \1 ', $v);
-    if (preg_match('/(stdClass Object|Array)/', $v)) 
+    if (preg_match('/(stdClass Object|Array)/', $v))
       $v = preg_replace('/\s\s\s*\)/', '', preg_replace('/\s*(stdClass Object|Array)\s*\(/i', ' ', preg_replace('/ *\[[^ \]]*\] \=\> */', ' ', $v)));
     if (preg_match('/date/', $k) && preg_match('/(\d{4})-(\d{2})-(\d{2})/', $v, $match))
       $v = $match[1].'-'.$match[2].'-'.$match[3].'T12:00:00.000Z';
@@ -66,7 +66,14 @@ function updateIndexer($id) {
   if ($solrdata) {
     $solrdata .= '</doc></add>';
     //    echo "===================\n$solrdata\n===================\n";
-    do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
+    try {
+      do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
+    }
+    catch (Exception $e) {
+      echo "Erreur d'enregistrement de ".$id." (".$solrdata.")\n";
+      echo $e->getMessage()."\n";
+    }
+    echo $id;
   }
 }
 
@@ -92,7 +99,7 @@ while(1) {
     $url .= '&since='.$last_seq;
 #  echo "$url\n";
   $changes = fopen($url, 'r');
-  
+
   while($l = fgets($changes)) {
     $cpt++;
     $change = json_decode($l);
@@ -100,9 +107,9 @@ while(1) {
       echo "pb json : $l\n";
       continue;
     }
-    
+
     if (isset($change->last_seq)) {
-#	echo "last_seq\n";
+# echo "last_seq\n";
       storeSeq($change->last_seq);
       break;
     }
@@ -115,7 +122,7 @@ while(1) {
     }
 
     updateIndexer($change->id);
-    
+
     if ($cpt > $COMMITER) {
       storeSeq($last_seq);
     }
