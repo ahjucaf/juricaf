@@ -40,15 +40,15 @@ do
     php juricaf2json.php >> $JSONFILE ;
     echo -n ',' >> $JSONFILE ;
     cpt=$(expr $cpt + 1) ;
-    if test $cpt -eq 2 ; then # 100
+    if test $cpt -eq 100 ; then
   add2couch ;
     fi  ;
     #
     # Move imported files to the archive directory
     #
-    #dest_dir=$(echo $y | sed 's/pool/archive/' | sed 's/[^\/]*$//');
-    #mkdir -p "$dest_dir"
-    #mv "$y" "$dest_dir";
+    dest_dir=$(echo $y | sed 's/pool/archive/' | sed 's/[^\/]*$//');
+    mkdir -p "$dest_dir"
+    mv "$y" "$dest_dir";
 done < $LISTPOOL
 
 add2couch;
