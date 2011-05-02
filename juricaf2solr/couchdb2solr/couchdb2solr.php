@@ -32,7 +32,7 @@ function storeSeq($seq) {
 function updateIndexer($id) {
   global $couchdb_url_db, $solr_url_db, $last_seq;
   $couchdata = json_decode(file_get_contents($couchdb_url_db.'/'.$id));
-  if (!$couchdata || !isset($couchdata->type ))
+  if (!$couchdata || !isset($couchdata->type ) || $couchdata->type != "arret")
      return;
   unset($couchdata->_rev);
   $solrdata = '<add><doc>';
@@ -73,7 +73,6 @@ function updateIndexer($id) {
       echo "Erreur d'enregistrement de ".$id." (".$solrdata.")\n";
       echo $e->getMessage()."\n";
     }
-    echo $id;
   }
 }
 
