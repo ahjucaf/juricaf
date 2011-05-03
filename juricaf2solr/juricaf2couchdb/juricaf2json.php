@@ -19,7 +19,7 @@ $mois = array(
 // Date pour _id couchdb (Ex : CETATEXT000007604769 et CETATEXT000007602727 : continuité d'une affaire : même numéro, même année, deux décisions)
 function date_id($d) {
   $d = explode('-', $d);
-  $date = $d[0].'-'.$d[2].'-'.$d[1];
+  $date = $d[0].$d[2].$d[1];
   return $date;
 }
 
@@ -39,7 +39,7 @@ function cleanArray($array) {
       if(is_object($value)) { $value = (array)$value; } ;
       $array[$key] = cleanArray($value);
     }
-    else { $array[$key] = $value; }
+    else { $array[$key] = str_replace(array('<<','>>','<','>'), array('«','»','',''), $value); }
   }
   return $array;
 }
@@ -54,10 +54,19 @@ if (empty($res['num_arret']))
 {
   if (isset($res['numeros_affaires']))
   {
+    $res['num_arret'] = '';
     foreach ($res['numeros_affaires'] as $values) {
       $sep = '';
-      if (!empty($res['num_arret'])) { $sep = ','; }
-      $res['num_arret'] .= $sep.$values;
+      if (is_array($values)) {
+        foreach ($values as $vals) {
+          if (!empty($res['num_arret'])) { $sep = ';'; }
+          $res['num_arret'] .= $sep.$vals;
+        }
+      }
+      else {
+        if (!empty($res['num_arret'])) { $sep = ';'; }
+        $res['num_arret'] .= $sep.$values;
+      }
     }
   }
   elseif (isset($res['nor']))
@@ -103,6 +112,7 @@ if (!isset($res['titre']))
 }
 $date = date_id($res['date_arret']);
 $num_arret_id = preg_replace('/[^a-z0-9]/i', '', $res['num_arret']);
+$num_arret_id = str_replace(';', '-', $res['num_arret']);
 $res['_id'] = ids($res['pays'].'-'.$res['juridiction'].'-'.$date.'-'.$num_arret_id);
 $res['juricaf_id'] = $res['id'];
 $res['type'] = 'arret';

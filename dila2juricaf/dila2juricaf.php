@@ -9,7 +9,7 @@ function multiple($nom, $array_vals) {
   $multiples = '';
   foreach ($array_vals as $value) {
     if(trim($value) !== '') {
-      $multiples[$nom.' id="M'.$i.'"'] = cdata($value); $i++;
+      $multiples[$nom.' id="'.$i.'"'] = cdata($value); $i++;
     }
   }
   return $multiples;
@@ -136,7 +136,7 @@ function addRef($references, $titre, $type, $nature, $date, $numero, $nor, $url)
     $references['REFERENCE id="'.$i.'"'] =
     array(
     'TYPE' => $type,
-    'TITRE' => $titre,
+    'TITRE' => cdata($titre),
     'NATURE' => toString($nature),
     'DATE' => toString($date),
     'NUMERO' => toString($numero),
@@ -150,7 +150,8 @@ function addRef($references, $titre, $type, $nature, $date, $numero, $nor, $url)
 function toString($mixed) {
   if(is_array($mixed) || is_object($mixed)) {
     if(is_object($mixed)) { $mixed = (array)$mixed; }
-    $mixed = trim(str_replace('Array', '', @implode('', $mixed))); }
+    $mixed = trim(str_replace('Array', '', @implode('', $mixed)));
+  }
   return $mixed;
 }
 
@@ -301,10 +302,10 @@ switch ($origine) {
                            $dila->META->META_SPEC->$meta->LOI_DEF,
                            'DECISION_ATTAQUEE',
                            $natureConstit[toString($dila->META->META_COMMUN->NATURE)],
-                           implode('', $dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@date')),
-                           implode('', $dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@num')),
-                           implode('', $dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@nor')),
-                           urlNor(implode('', $dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@nor')))
+                           toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@date')),
+                           toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@num')),
+                           toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@nor')),
+                           urlNor(toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@nor')))
                           );
     }
     else {
@@ -347,7 +348,7 @@ if (empty($texte_arret)) {
   $texte_arret = clean(trim(implode("\n", $dila->xpath('/'.$meta_xpath.'/TEXTE/BLOC_TEXTUEL/CONTENU'))));
 }
 if (!empty($texte_arret)) {
-  $texte_arret = cdata(str_replace(array('<<','>>'), array('«','»'), $texte_arret));
+  $texte_arret = cdata($texte_arret);
 }
 
 // Construction du tableau avec les informations déduites et communes
