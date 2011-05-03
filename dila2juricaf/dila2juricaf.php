@@ -3,6 +3,12 @@
 if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
 
 // Fonctions
+function ids($str) {
+  $str = strtr($str,
+         array('è'=>'e','é'=>'e','ê'=>'e','ë'=>'e','à'=>'a','á'=>'a','â'=>'a','ã'=>'a','ä'=>'a','ç'=>'c','ì'=>'i','í'=>'i','î'=>'i','ï'=>'i','ñ'=>'n','ò'=>'o','ó'=>'o','ô'=>'o','õ'=>'o','ö'=>'o','ù'=>'u','ú'=>'u','û'=>'u','ü'=>'u','ý'=>'y','ÿ'=>'y','À'=>'A','Á'=>'A','Â'=>'A','Ã'=>'A','Ä'=>'A','Ç'=>'C','È'=>'E','É'=>'E','Ê'=>'E','Ë'=>'E','Ì'=>'I','Í'=>'I','Î'=>'I','Ï'=>'I','Ñ'=>'N','Ò'=>'O','Ó'=>'O','Ô'=>'O','Õ'=>'O','Ö'=>'O','Ù'=>'U','Ú'=>'U','Û'=>'U','Ü'=>'U','Ý'=>'Y'));
+  $str = preg_replace('/[^a-z0-9\-]/i', '', $str);
+  return strtolower($str);
+}
 
 function multiple($nom, $array_vals) {
   $i = 1;
@@ -427,8 +433,20 @@ catch (Exception $e) {
   echo $e->getMessage()."\n";
 }
 
+// Sous dossiers année/institution 2004-01-31
+$dir = "../data/pool/France/".substr($juricaf_array['DATE_ARRET'], 0, 4)."/".ids($juricaf_array['JURIDICTION']) ;
+if (!is_dir($dir)) {
+  try {
+    mkdir($dir, 0777, true);
+  }
+  catch (Exception $e) {
+    echo "Echec lors de la création du dossier ".$dir."\n";
+    echo $e->getMessage()."\n";
+  }
+}
+
 // Enregistrement
-$file = "../data/pool/France/".$res[0];
+$file = $dir."/".$res[0];
 $handler = fopen($file,"w");
 try {
   fputs($handler,$juricaf->asXML());
