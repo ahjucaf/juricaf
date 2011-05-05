@@ -31,6 +31,8 @@ function storeSeq($seq) {
 
 function updateIndexer($id) {
   global $couchdb_url_db, $solr_url_db, $last_seq;
+  if (!preg_match('/^[A-Z]+\-/', $id) )
+    return;
   $couchdata = json_decode(file_get_contents($couchdb_url_db.'/'.$id));
   if (!$couchdata || !isset($couchdata->type ) || $couchdata->type != "arret")
      return;
@@ -43,7 +45,7 @@ function updateIndexer($id) {
     if ($k == '_id') {
       $k = 'id';
       $id = $v;
-      echo "$last_seq : $id\n";
+      //      echo "$last_seq : $id\n";
     }
     if (preg_match('/^_/', $k))
       continue;
@@ -60,7 +62,7 @@ function updateIndexer($id) {
       $v = $match[1].'-'.$match[2].'-'.$match[3].'T12:00:00.000Z';
     else if (preg_match('/date/', $k) && preg_match('/(\d{2})\/(\d{2})\/(\d{4})/', $v, $match))
       $v = $match[3].'-'.$match[2].'-'.$match[1].'T12:00:00.000Z';
-    $solrdata .= preg_replace('/\n/', ' ', $v);
+    $solrdata .= preg_replace('/[\n\<]/', ' ', $v);
     $solrdata .= '</field>';
   }
   if ($solrdata) {
@@ -101,6 +103,7 @@ while(1) {
 
   while($l = fgets($changes)) {
     $cpt++;
+    //    echo "$l\n";
     $change = json_decode($l);
     if (!$change) {
       echo "pb json : $l\n";
