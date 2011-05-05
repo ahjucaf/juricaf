@@ -16,7 +16,7 @@ function add2couch {
     fi
     sed 's/^/{"docs":[/' $JSONFILE | sed 's/,$/]}/' > $JSONFILE.tmp;
     mv $JSONFILE.tmp $JSONFILE ;
-    curl -H"Content-Type: application/json" -s -d @$JSONFILE  -X POST "http://127.0.0.1:5984/ahjucaf/_bulk_docs" | sed 's/"},{"/\n/g' > $LOG
+    curl -H"Content-Type: application/json" -s -d @$JSONFILE  -X POST "http://127.0.0.1:5984/ahjucaf/_bulk_docs" | sed 's/"},{"/\n/g' >> $LOG
     cpt=0;
     rm $JSONFILE ;
 }
@@ -28,27 +28,32 @@ do
 #    echo importing $y
     if file -i "$y" | grep -v 'application/xml' > /dev/null;
     then
-  echo "ERROR: $y ignored : it is not an XML doc";
-  rm $y;
-  continue;
+	echo "ERROR: $y ignored : it is not an XML doc";
+	rm $y;
+	continue;
     fi
+
+    CAT='cat "$y"';
     if file -i "$y" | grep iso-8859 > /dev/null;
     then
-    cat "$y" | dos2unix | sed 's/\r/\n/g' | sed 's/<BR *\/*>/\n/gi' >  data.xml ;
-    else cat "$y" | sed 's/\r/\n/g' | sed 's/<BR *\/*>/\n/gi' >  data.xml ;
+	CAT='cat "$y" | dos2unix'
     fi
+    $CAT | sed 's/\r/\n/g' | sed 's/<BR *\/*>/\n/gi' >  data.xml ;
+
     php juricaf2json.php >> $JSONFILE ;
     echo -n ',' >> $JSONFILE ;
     cpt=$(expr $cpt + 1) ;
     if test $cpt -eq 100 ; then
   add2couch ;
     fi  ;
+
     #
     # Move imported files to the archive directory
     #
     dest_dir=$(echo $y | sed 's/pool/archive/' | sed 's/[^\/]*$//');
     mkdir -p "$dest_dir"
     mv "$y" "$dest_dir";
+
 done < $LISTPOOL
 
 add2couch;
