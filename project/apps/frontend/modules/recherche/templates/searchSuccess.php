@@ -8,45 +8,45 @@
 </div>
 <div>
 <h2><?php echo $resultats->response->numFound; ?> résultats pour «&nbsp;<?php echo $query; ?>&nbsp;»</h2>
-<?php 
+<?php
 //////////////////
 //  Suppression des options
 //////////////////
 if (count($facetsset)) : ?>
 <div class="options">
-<?php   
+<?php
 $myfacetslink = preg_replace('/^,/', '', $facetslink);
 $noorderlink = '@recherche_resultats?query='.$query.'&facets='.preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/order:[^:,]+,?/', '', $myfacetslink)));
 foreach($facetsset as $f) : ?>
 <div class="option"><?php
    if (!preg_match('/order:/', $f)) {
        $text = preg_replace('/_/', ' ', preg_replace('/[^:]+:/', '', $f));
-       echo link_to('[X] Résultats filtrés sur <em>'.$text.'</em>', 
-		    '@recherche_resultats?query='.$query.'&facets='.
-		    preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/'.$f.',?/', '', $myfacetslink))));
+       echo link_to('[X] Résultats filtrés sur <em>'.$text.'</em>',
+        '@recherche_resultats?query='.$query.'&facets='.
+        preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/'.$f.',?/', '', $myfacetslink))));
      }else {
-     echo link_to('[X] Résultats trié par pertinance', $noorderlink);
+     echo link_to('[X] Résultats trié par pertinence', $noorderlink);
      }
 ?></div>
    <?php endforeach; ?>
-</div>    
+</div>
 <?php endif;
 //////////////////
 //  Gestion des facettes
 //////////////////
 ?>
 <div class="facets">
-<?php 
-/////// TRI //////// 
+<?php
+/////// TRI ////////
 ?>
 <p>Tri</p>
 <ul>
 <?php if (preg_match('/order:/', $facetslink)) :?>
 <li><?php echo link_to('par date', $noorderlink); ?></li>
-<li>par pertinance</li>
+<li>par pertinence</li>
 <?php else : ?>
 <li>par date</li>
-<li><?php echo link_to('par pertinance', '@recherche_resultats?query='.$query.'&facets=order:pertinance'.$facetslink); ?></li>
+<li><?php echo link_to('par pertinence', '@recherche_resultats?query='.$query.'&facets=order:pertinance'.$facetslink); ?></li>
 <?php endif; ?>
 </ul>
 <?php
@@ -71,7 +71,7 @@ foreach ($resultats->response->docs as $resultat) {
       $exerpt .= '...'.html_entity_decode($h);
     $exerpt .= '...' ;
   }
-  if ($resultat->analyses) 
+  if ($resultat->analyses)
     $exerpt .= $resultat->analyses.'...';
   echo preg_replace ('/[^a-z0-9]*\.\.\.$/i', '...', truncate_text($exerpt.$resultat->texte_arret, 650, "...", true));
   echo '</p>';
