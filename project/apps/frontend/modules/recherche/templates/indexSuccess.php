@@ -6,5 +6,5 @@
   </form>
 </div>
 <div class="stats">
-    <?php include_component('arret', 'statsPays'); ?>
+    <?php //include_component('arret', 'statsPays'); ?>
 </div>
