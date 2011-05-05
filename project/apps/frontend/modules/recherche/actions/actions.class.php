@@ -19,7 +19,7 @@ class rechercheActions extends sfActions
     }
     $this->setLayout('home');
   }
-  
+
   public function executeSearch(sfWebRequest $request)
   {
     $solr = new sfBasicSolr();
@@ -37,13 +37,13 @@ class rechercheActions extends sfActions
     $this->facetsset = array();
     $this->facetslink = '';
     if ($f = $request->getParameter('facets')) {
-      $this->facetsset = split(',', $f);
+      $this->facetsset = preg_split('/,/', $f);
       sort($this->facetsset);
       $this->facetslink = ','.implode(',', $this->facetsset);
       $solr_query .= ' '.implode(' ', $this->facetsset);
       if (preg_match('/order:pertinance/', $solr_query)) {
-	$solr_query = ' '.preg_replace('/ order:pertinance/', '', $solr_query);
-	unset($param['sort']);
+  $solr_query = ' '.preg_replace('/ order:pertinance/', '', $solr_query);
+  unset($param['sort']);
       }
     }
 
@@ -58,10 +58,10 @@ class rechercheActions extends sfActions
     $this->facets = array();
     if (isset($res->facet_counts))
       foreach($res->facet_counts->facet_fields as $k => $f) {
-	foreach ($f as $n => $v) {
-	  if ($v)
-	    $this->facets[$k][$n] = $v;
-	}
+  foreach ($f as $n => $v) {
+    if ($v)
+      $this->facets[$k][$n] = $v;
+  }
       }
   }
 
