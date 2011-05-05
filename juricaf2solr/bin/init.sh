@@ -21,7 +21,7 @@ cat <<EOF > $TMPFILE
   "views":
   {
     "pays_juridiction": {
-      "map": "function(doc) { if (doc.type == 'arret' && doc.pays && doc.juridiction)  emit([doc.pays,doc.juridiction], 1);}",
+      "map": "function(doc) { if (doc.type == 'arret' && doc.pays && doc.juridiction) { date=doc.date_arret.replace(/-.*/, ''); emit([doc.pays,doc.juridiction,date], 1);}}",
       "reduce": "function(keys, values) { return sum(values) }"
     },
     "attributs": {
