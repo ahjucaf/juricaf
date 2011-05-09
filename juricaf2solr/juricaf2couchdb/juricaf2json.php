@@ -88,6 +88,7 @@ if (empty($res['num_arret']))
 }
 //clean them
 unset($res['cat_pub']);
+$res['pays'] = ucfirst(strtolower($res['pays']));
 $res['juridiction'] = ucfirst(strtolower($res['juridiction']));
 $res['formation'] = ucfirst(strtolower($res['formation']));
 if ($res['juridiction'] == $res['formation'] || $res['formation'] == '-' ||
