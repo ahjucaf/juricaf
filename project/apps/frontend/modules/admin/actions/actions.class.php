@@ -37,8 +37,9 @@ class adminActions extends sfActions
 	  chdir('pays_'.$pays);
 	}
 	if ($juri = $this->form->getValue('juridiction')) {
-	  @mkdir('juridiction_'.$juri);
-	  chdir('juridiction_'.$juri);
+	  $juridir = preg_replace('/ /', '_', $juri);
+	  @mkdir('juridiction_'.$juridir);
+	  chdir('juridiction_'.$juridir);
 	}
 	$file = $this->form->getValue('file');
 	if (preg_match('/zip$/', $file->getType() ) ) {
