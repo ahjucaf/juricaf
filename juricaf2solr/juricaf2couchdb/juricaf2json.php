@@ -49,6 +49,12 @@ $obj = simplexml_load_file("data.xml");
 $res = (array)$obj;
 $res = cleanArray($res);
 
+if (!isset($res['pays']) && isset($argv[1]))
+  $res['pays'] = $argv[1];
+
+if (!isset($res['juridiction']) && isset($argv[2]))
+  $res['juridiction'] = $argv[2];
+
 // Gestion des numéros d'arrets
 if (empty($res['num_arret']))
 {
