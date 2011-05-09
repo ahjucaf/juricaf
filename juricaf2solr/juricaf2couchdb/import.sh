@@ -38,7 +38,7 @@ do
     then
 	CAT='iconv -f ISO8859-1 -t UTF8'
     fi
-    $CAT "$y" | dos2unix | sed 's/\r/\n/g' | sed 's/<BR *\/*>/\n/gi' | sed 's/"iso-*8859[^"]*"/utf8/i' >  data.xml ;
+    $CAT "$y" | dos2unix | sed 's/\r/\n/g' | sed 's/<BR *\/*>/\n/gi' | sed 's/"iso-*8859[^"]*"/"utf8"/i' >  data.xml ;
 
     if echo $y | grep pays_ > /dev/null ; then
 	pays=$(echo $y | sed 's/.*pays_//' |  sed 's/\/.*//' | sed 's/_/ /g');
