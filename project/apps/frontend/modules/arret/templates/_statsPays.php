@@ -1,4 +1,4 @@
-<ul>
+<ul class="payscols">
 <?php
 foreach ($pays as $p) 
 {
