@@ -13,9 +13,9 @@ em {font-weight: bold;}
 
 .site { width: 90%; margin: auto; margin-top: 1%; font-size: 1.2em;}
 .home_logo, .form_recherche { text-align: center; }
-.stats ul {margin: auto; width: 30% ;}
-.stats li { float: left; width: 30%; }
-.stats li:nth-child(odd) { clear: left; width: 70%}
+.stats .payscols ul {margin: auto; width: 30% ;}
+.stats .payscols li { float: left; width: 30%; }
+.stats .payscols li:nth-child(odd) { clear: left; width: 70%}
 
 .resultat {margin-bottom: 10px;}
 .resultat h3 {margin: 0px;}
