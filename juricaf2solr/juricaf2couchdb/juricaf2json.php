@@ -18,7 +18,7 @@ $mois = array(
 
 // Date pour _id couchdb (Ex : CETATEXT000007604769 et CETATEXT000007602727 : continuité d'une affaire : même numéro, même année, deux décisions)
 function date_id($d) {
-  $d = explode('-', $d);
+  $d = preg_split('/[\-\.]/', $d);
   $date = $d[0].$d[2].$d[1];
   return $date;
 }
@@ -120,7 +120,8 @@ $date = date_id($res['date_arret']);
 $num_arret_id = preg_replace('/[^a-z0-9]/i', '', $res['num_arret']);
 $num_arret_id = str_replace(';', '-', $res['num_arret']);
 $res['_id'] = ids($res['pays'].'-'.$res['juridiction'].'-'.$date.'-'.$num_arret_id);
-$res['juricaf_id'] = $res['id'];
+if (isset($res['id'])
+    $res['juricaf_id'] = $res['id'];
 $res['type'] = 'arret';
 unset($res['id']);
 
