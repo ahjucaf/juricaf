@@ -35,9 +35,7 @@ function cleanArray($array) {
   $array = array_filter($array);
   $array = array_change_key_case($array, CASE_LOWER);
   foreach ($array as $key => $value) {
-    echo "$key\n";
     if  ($key == '@attributes') {
-      echo "unset attributes\n";
       unset($array[$key]);
       continue;
     }
