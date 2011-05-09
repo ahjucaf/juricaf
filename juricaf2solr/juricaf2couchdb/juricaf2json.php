@@ -35,17 +35,24 @@ function cleanArray($array) {
   $array = array_filter($array);
   $array = array_change_key_case($array, CASE_LOWER);
   foreach ($array as $key => $value) {
+    echo "$key\n";
+    if  ($key == '@attributes') {
+      echo "unset attributes\n";
+      unset($array[$key]);
+      continue;
+    }
     if (is_array($value) || is_object($value)) {
       if(is_object($value)) { $value = (array)$value; } ;
       $array[$key] = cleanArray($value);
     }
     else { $array[$key] = str_replace(array('<<','>>','<','>'), array('«','»','',''), $value); }
   }
+  $array = array_filter($array);
   return $array;
 }
 
 // Chargement
-$obj = simplexml_load_file("data.xml");
+$obj = simplexml_load_string(utf8_decode(file_get_contents("data.xml")));
 $res = (array)$obj;
 $res = cleanArray($res);
 
