@@ -63,7 +63,8 @@ do
     #
     # Move imported files to the archive directory
     #
-    dest_dir=$(echo $y | sed 's/pool/archive/' | sed 's/[^\/]*$//');
+    DATE=$(date +%Y-%M-%d_%H:%m)
+    dest_dir=$(echo $y | sed "s/pool/archive\/$DATE/" | sed 's/[^\/]*$//');
     mkdir -p "$dest_dir"
     mv "$y" "$dest_dir";
 
