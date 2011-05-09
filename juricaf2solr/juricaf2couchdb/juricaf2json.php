@@ -50,7 +50,7 @@ function cleanArray($array) {
 }
 
 // Chargement
-$obj = simplexml_load_string(utf8_decode(file_get_contents("data.xml")));
+$obj = simplexml_load_file("data.xml");
 $res = (array)$obj;
 $res = cleanArray($res);
 
