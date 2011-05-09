@@ -20,11 +20,18 @@ class adminActions extends sfActions
       if ($this->form->isValid())
       {
 	$cwd = getcwd();
-	chdir(sfConfig::get('app_juricaf_xmlwebdir'));
+	if (!@chdir(sfConfig::get('app_juricaf_xmlwebdir'))) {
+		$this->getUser()->setFlash('error', "Cannot access ".sfConfig::get('app_juricaf_xmlwebdir')." directory");
+		return;
+	}
+	echo sfConfig::get('app_juricaf_xmlwebdir');
 	$today = date('Ymd');
 	umask(0007);
 	@mkdir($today);
-	chdir($today);
+	if (! @chdir($today)) {
+                $this->getUser()->setFlash('error', "Cannot access ".sfConfig::get('app_juricaf_xmlwebdir')."/$today directory");
+                return;
+	}
 	if ($pays = $this->form->getValue('pays')) {
 	  @mkdir('pays_'.$pays);
 	  chdir('pays_'.$pays);
