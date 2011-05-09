@@ -5,6 +5,12 @@ DIRPOOL=../../data/pool
 JSONFILE=test.json
 LOG=/tmp/import.$$.log
 
+
+if echo $0 | grep '/' > /dev/null ;
+then
+	cd $(echo $0 | sed 's|[^/]*$||');
+fi
+
 rm -f $LISTPOOL $JSONFILE 2> /dev/null
 
 find $DIRPOOL -type f | grep -v .svn > $LISTPOOL
@@ -25,7 +31,7 @@ cpt=0;
 
 while read y
 do
-#    echo importing $y
+    echo importing $y
     if file -i "$y" | grep -v 'application/xml' > /dev/null;
     then
 	echo "ERROR: $y ignored : it is not an XML doc";
@@ -66,7 +72,12 @@ done < $LISTPOOL
 add2couch;
 
 if test -e $LOG ; then
+
+    echo
+    echo "====================================================="
+    echo
+
     sed 's/^\[."//' $LOG | awk -F '"' '{ if ( $11 != "" ) print $3" not imported ("$11")" ; else print $3" imported" ; }'
 fi
 rm $LISTPOOL $LOG 2> /dev/null
-
+cd - > /dev/null 2>&1
