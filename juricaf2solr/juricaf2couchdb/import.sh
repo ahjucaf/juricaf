@@ -33,14 +33,21 @@ do
 	continue;
     fi
 
-    CAT='cat "$y"';
+    CAT='cat';
     if file -i "$y" | grep iso-8859 > /dev/null;
     then
-	CAT='cat "$y" | dos2unix'
+	CAT='iconv -f ISO8859-1 -t UTF8'
     fi
-    $CAT | sed 's/\r/\n/g' | sed 's/<BR *\/*>/\n/gi' >  data.xml ;
+    $CAT "$y" | dos2unix | sed 's/\r/\n/g' | sed 's/<BR *\/*>/\n/gi' >  data.xml ;
 
-    php juricaf2json.php >> $JSONFILE ;
+    if echo $y | grep pays_ > /dev/null ; then
+	pays=$(echo $y | sed 's/.*pays_//' |  sed 's/\/.*//' | sed 's/_/ /g');
+    fi
+    if echo $y | grep juridiction_ > /dev/null; then
+	juridiction=$(echo $y | sed 's/.*juridiction_//' |  sed 's/\/.*//' | sed 's/_/ /g');
+    fi;
+    php juricaf2json.php "$pays" "$juridiction" >> $JSONFILE ; 
+
     echo -n ',' >> $JSONFILE ;
     cpt=$(expr $cpt + 1) ;
     if test $cpt -eq 100 ; then
