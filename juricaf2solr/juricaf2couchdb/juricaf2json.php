@@ -18,7 +18,7 @@ $mois = array(
 
 // Date pour _id couchdb (Ex : CETATEXT000007604769 et CETATEXT000007602727 : continuité d'une affaire : même numéro, même année, deux décisions)
 function date_id($d) {
-  $d = preg_split('/[\-\.]/', $d);
+  $d = explode('-', $d);
   $date = $d[0].$d[2].$d[1];
   return $date;
 }
@@ -101,7 +101,7 @@ if (!isset($res['section']) || $res['section'] == '-')
   unset($res['section']);
 
 //create extra fields
-if (preg_match('/([0-9][0-9])\/([0-9][0-9])\/([0-9][0-9][0-9][0-9])/', $res['date_arret'], $match))
+if (preg_match('/([0-9][0-9])[\/.]([0-9][0-9])[\/.]([0-9][0-9][0-9][0-9])/', $res['date_arret'], $match))
 {
   $res['date_arret'] = $match[3].'-'.$match[2].'-'.$match[1];
 }
