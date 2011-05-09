@@ -25,7 +25,7 @@ class adminActions extends sfActions
 		return;
 	}
 	echo sfConfig::get('app_juricaf_xmlwebdir');
-	$today = date('Ymd');
+	$today = date('Y-m-d');
 	umask(0007);
 	@mkdir($today);
 	if (! @chdir($today)) {
