@@ -2,10 +2,29 @@
 // Usage : $ php dila2juricaf.php fichier_dila.xml
 if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
 
+global $accents, $mois, $erreurs;
+$accents = array('è'=>'e','é'=>'e','ê'=>'e','ë'=>'e','à'=>'a','á'=>'a','â'=>'a','ã'=>'a','ä'=>'a','ç'=>'c','ì'=>'i','í'=>'i','î'=>'i','ï'=>'i','ñ'=>'n','ò'=>'o','ó'=>'o','ô'=>'o','õ'=>'o','ö'=>'o','ù'=>'u','ú'=>'u','û'=>'u','ü'=>'u','ý'=>'y','ÿ'=>'y','À'=>'A','Á'=>'A','Â'=>'A','Ã'=>'A','Ä'=>'A','Ç'=>'C','È'=>'E','É'=>'E','Ê'=>'E','Ë'=>'E','Ì'=>'I','Í'=>'I','Î'=>'I','Ï'=>'I','Ñ'=>'N','Ò'=>'O','Ó'=>'O','Ô'=>'O','Õ'=>'O','Ö'=>'O','Ù'=>'U','Ú'=>'U','Û'=>'U','Ü'=>'U','Ý'=>'Y');
+
+$mois = array('janvier'=>'01',
+              'fevrier'=>'02',
+              'mars'=>'03',
+              'avril'=>'04',
+              'mai'=>'05',
+              'juin'=>'06',
+              'juillet'=>'07',
+              'aout'=>'08',
+              'septembre'=>'09',
+              'octobre'=>'10',
+              'novembre'=>'11',
+              'decembre'=>'12'
+              );
+
+$erreurs = '';
+
 // Fonctions
 function ids($str) {
-  $str = strtr($str,
-         array('è'=>'e','é'=>'e','ê'=>'e','ë'=>'e','à'=>'a','á'=>'a','â'=>'a','ã'=>'a','ä'=>'a','ç'=>'c','ì'=>'i','í'=>'i','î'=>'i','ï'=>'i','ñ'=>'n','ò'=>'o','ó'=>'o','ô'=>'o','õ'=>'o','ö'=>'o','ù'=>'u','ú'=>'u','û'=>'u','ü'=>'u','ý'=>'y','ÿ'=>'y','À'=>'A','Á'=>'A','Â'=>'A','Ã'=>'A','Ä'=>'A','Ç'=>'C','È'=>'E','É'=>'E','Ê'=>'E','Ë'=>'E','Ì'=>'I','Í'=>'I','Î'=>'I','Ï'=>'I','Ñ'=>'N','Ò'=>'O','Ó'=>'O','Ô'=>'O','Õ'=>'O','Ö'=>'O','Ù'=>'U','Ú'=>'U','Û'=>'U','Ü'=>'U','Ý'=>'Y'));
+  global $accents;
+  $str = strtr($str, $accents);
   $str = preg_replace('/[^a-z0-9\-]/i', '', $str);
   return strtolower($str);
 }
@@ -31,6 +50,7 @@ function typeAffaire($section, $chemin) {
   $type = array('civile','commerciale','criminelle','sociale', 'mixte', 'reunie', 'réunie');
   $type_affaire = '';
   $section = toString($section);
+  $chemin = toString($chemin);
   foreach ($type as $value) {
     if(strpos(strtolower($section), $value)) { $type_affaire = $value; }
     elseif(strpos($chemin, $value)) { $type_affaire = $value; }
@@ -61,26 +81,12 @@ function urlNor($nor) {
 
 function urlPdfJO($str) {
   if(trim($str) !== '') {
-    $mois = array(
-        'janvier'=>'01',
-        'février'=>'02',
-        'fevrier'=>'02',
-        'mars'=>'03',
-        'avril'=>'04',
-        'mai'=>'05',
-        'juin'=>'06',
-        'juillet'=>'07',
-        'août'=>'08',
-        'aout'=>'08',
-        'septembre'=>'09',
-        'octobre'=>'10',
-        'novembre'=>'11',
-        'décembre'=>'12',
-        'decembre'=>'12'
-        );
-    if (preg_match('/(\d{2}) (\w{3,}) (\d{4})(.)+p(\D{0,})?(\d{0,})/', $str, $match)) {
-      if(isset($mois[$match[2]])) {
-        return cdata('http://legifrance.gouv.fr/jopdf/common/jo_pdf.jsp?numJO=0&dateJO='.$match[3].$mois[$match[2]].$match[1].'&pageDebut='.$match[6]);
+    global $mois;
+    global $accents;
+    $str = strtr($str, $accents);
+    if (preg_match('/(\d{2}) (\w{3,}) (\d{4}), p. (\d{0,})/', $str, $match)) {
+      if(isset($mois[$match[2]]) && $match[3] >= 1947) { // Fac similé du JO depuis 1947
+        return cdata('http://legifrance.gouv.fr/jopdf/common/jo_pdf.jsp?numJO=0&dateJO='.$match[3].$mois[$match[2]].$match[1].'&pageDebut='.sprintf('%05d', $match[4]));
       }
     }
   }
@@ -144,7 +150,7 @@ function addRef($references, $titre, $type, $nature, $date, $numero, $nor, $url)
     'TYPE' => $type,
     'TITRE' => cdata($titre),
     'NATURE' => toString($nature),
-    'DATE' => toString($date),
+    'DATE' => is_date(toString($date), 0),
     'NUMERO' => toString($numero),
     'NOR' => toString($nor),
     'URL' => $url
@@ -172,6 +178,66 @@ function findOrigine($filename) {
     $origine = 'CONSTIT';
   }
   return $origine;
+}
+
+function is_date($str, $about) {
+  $date_default = "0001-01-01";
+  if(preg_match('/(\d{4})-(\d{2})-(\d{2})/', $str) || preg_match('/(\d{2})\/(\d{2})\/(\d{4})/', $str) || preg_match('/(\d{2})\/(\d{2})\/(\d{2})/', $str)) {
+    if(strtotime($str) > mktime()) {
+      if($about) {
+        global $erreurs;
+        if(!empty($erreurs)) { $sep = ", "; } else { $sep = ''; }
+        $erreurs .= $sep.$about." : date dans le futur";
+        return $str;
+      }
+      else { return false; }
+    }
+    elseif (strtotime($str) < strtotime("1700-01-01")) {
+      if($about) {
+        global $erreurs;
+        if(!empty($erreurs)) { $sep = ", "; } else { $sep = ''; }
+        $erreurs .= $sep.$about." : date trop ancienne";
+        return $str;
+      }
+      else { return false; }
+    }
+    else {
+      if(preg_match('/(\d{2})\/(\d{2})\/(\d{4})/', $str, $match)) {
+        return $match[3]."-".$match[2]."-".$match[1];
+      }
+      elseif(preg_match('/(\d{2})\/(\d{2})\/(\d{2})/', $str, $match)) {
+        $year = date("Y", strtotime($str));
+        return $year."-".$match[2]."-".$match[1];
+      }
+      else {
+        return $str;
+      }
+    }
+  }
+  else {
+    if($about) {
+      global $erreurs;
+      if(!empty($erreurs)) { $sep = ", "; } else { $sep = ''; }
+      if (!empty($str)) {
+        $erreurs .= $sep.$about." : date invalide (".$str.")";
+      }
+      else {
+        $erreurs .= $sep.$about." : date non indiquée";
+      }
+      return $date_default;
+    }
+    else { return false; }
+  }
+}
+
+function not_excluded_base($url) {
+  $result = 0;
+  $excluded = array('cass','inca');
+  foreach ($excluded as $base) {
+    if(strpos($base, $url)) { $result++; };
+  }
+  if($result !== 0) { return false; }
+  else { return true; }
 }
 
 // Qualification : décision du conseil contitutionnel porte sur $
@@ -222,21 +288,26 @@ switch ($origine) {
   case 'JURI':
     $meta = 'META_JURI_JUDI';
     $meta_xpath = 'TEXTE_JURI_JUDI';
-    $type_affaire = typeAffaire($dila->META->META_SPEC->$meta->FORMATION, $argv[1]);
+    $type_affaire = typeAffaire($dila->META->META_SPEC->$meta->FORMATION, $dila->META->META_COMMUN->URL);
     $numero_affaire = multiple('NUMERO_AFFAIRE', $dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/NUMEROS_AFFAIRES/*'));
     $titre_supplementaire = '';
     $decision_attaquee = array('DECISION_ATTAQUEE' =>
                               array('TYPE' => 'DECISION',
-                                    'FORMATION' => cdata(str_replace(', '.$dila->META->META_SPEC->$meta->DATE_DEC_ATT, '', $dila->META->META_SPEC->$meta->FORM_DEC_ATT)),
-                                    'DATE' => toString($dila->META->META_SPEC->$meta->DATE_DEC_ATT),
+                                    'FORMATION' => cdata(ucfirst(rtrim(trim(str_replace($dila->META->META_SPEC->$meta->DATE_DEC_ATT, '', $dila->META->META_SPEC->$meta->FORM_DEC_ATT)), ','))),
+                                    'DATE' => is_date(toString($dila->META->META_SPEC->$meta->DATE_DEC_ATT), 0),
                                     'NUMERO' => '',
                                     'NOR' => '',
                                     'SIEGE' => cdata($dila->META->META_SPEC->$meta->SIEGE_APPEL),
                                     'JURI_PREM' => cdata($dila->META->META_SPEC->$meta->JURI_PREM),
                                     'LIEU_PREM' => cdata($dila->META->META_SPEC->$meta->LIEU_PREM)
                                    ));
-    $parties = array('DEMANDEURS' => array('DEMANDEUR' => cdata(toString($dila->META->META_SPEC->$meta->DEMANDEUR))),
-                     'DEFENDEURS' => array('DEFENDEUR' => cdata(toString($dila->META->META_SPEC->$meta->DEFENDEUR))));
+    if(not_excluded_base(toString($dila->META->META_COMMUN->URL))) {
+      $parties = array('DEMANDEURS' => array('DEMANDEUR' => cdata(toString($dila->META->META_SPEC->$meta->DEMANDEUR))),
+                       'DEFENDEURS' => array('DEFENDEUR' => cdata(toString($dila->META->META_SPEC->$meta->DEFENDEUR))));
+    }
+    else {
+      $parties = '';
+    }
     $analyses = parseAnalyse($dila, $meta_xpath);
     foreach ($dila->xpath('/'.$meta_xpath.'/TEXTE/CITATION_JP/*') as $value) {
       if(isset($value)) {
@@ -259,8 +330,10 @@ switch ($origine) {
     elseif ($publication[0]['publie'] == 'oui') {
       $pub = 'Publié au bulletin';
     }
-    else { $pub = null; }
-    $references = addRef($references, $pub, 'PUBLICATION', '', '', '', '', '');
+    else { $pub = false; }
+    if($pub !== false) {
+      $references = addRef($references, $pub, 'PUBLICATION', '', '', '', '', '');
+    }
     break;
   case 'CETAT':  // JADE
     $meta = 'META_JURI_ADMIN';
@@ -269,8 +342,13 @@ switch ($origine) {
     $numero_affaire = '';
     $titre_supplementaire = '';
     $decision_attaquee = '';
-    $parties = array('DEMANDEURS' => array('DEMANDEUR' => cdata(toString($dila->META->META_SPEC->$meta->DEMANDEUR))),
-          'DEFENDEURS' => array('DEFENDEUR' => cdata(toString($dila->META->META_SPEC->$meta->DEFENDEUR))));
+    if(not_excluded_base(toString($dila->META->META_COMMUN->URL))) {
+      $parties = array('DEMANDEURS' => array('DEMANDEUR' => cdata(toString($dila->META->META_SPEC->$meta->DEMANDEUR))),
+                       'DEFENDEURS' => array('DEFENDEUR' => cdata(toString($dila->META->META_SPEC->$meta->DEFENDEUR))));
+    }
+    else {
+      $parties = '';
+    }
     $analyses = parseAnalyse($dila, $meta_xpath);
     foreach ($dila->xpath('/'.$meta_xpath.'/TEXTE/CITATION_JP/*') as $value) {
       $references = addRef($references, $value, 'CITATION_ANALYSE', '', '', '', '', '');
@@ -281,7 +359,7 @@ switch ($origine) {
     }
     if(isset($liens)) {
       foreach ($liens as $value) {
-        if($value != '') { $references = addRef($references, $value, 'CITATION_ARRET', $value['naturetexte'], $value['datesignatexte'], $value['numtexte'], $value['nortexte'], urlNor($value['nortexte'])); }
+        if($value !== '') { $references = addRef($references, $value, 'CITATION_ARRET', $value['naturetexte'], $value['datesignatexte'], $value['numtexte'], $value['nortexte'], urlNor($value['nortexte'])); }
       }
     }
     if(pubLebon($dila->META->META_SPEC->$meta->PUBLI_RECUEIL)) { $references = addRef($references, pubLebon($dila->META->META_SPEC->$meta->PUBLI_RECUEIL), 'PUBLICATION', '', '', '', '', ''); }
@@ -297,7 +375,7 @@ switch ($origine) {
                                 array('TITRE' => cdata(toString($dila->META->META_SPEC->$meta->LOI_DEF)),
                                       'TYPE' => $natureConstit[toString($dila->META->META_COMMUN->NATURE)],
                                       'FORMATION' => '',
-                                      'DATE' => toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@date')),
+                                      'DATE' => is_date(toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@date')), 0),
                                       'NUMERO' => toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@num')),
                                       'NOR' => toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@nor')),
                                       'SIEGE' => '',
@@ -343,13 +421,12 @@ switch ($origine) {
                            urlNor($dila->META->META_SPEC->$meta->NOR)
                           );
     }
-    if($dila->META->META_SPEC->$meta->TITRE_JO) { $references = addRef($references, $dila->META->META_SPEC->$meta->TITRE_JO, 'PUBLICATION', '', '', '', '', urlPdfJO($dila->META->META_SPEC->$meta->TITRE_JO)); }
+    if(isset($dila->META->META_SPEC->$meta->TITRE_JO)) { $references = addRef($references, $dila->META->META_SPEC->$meta->TITRE_JO, 'PUBLICATION', '', '', '', '', urlPdfJO($dila->META->META_SPEC->$meta->TITRE_JO)); }
     break;
 }
 
-// Le texte peut contenir des balises html
-$texte_arret = clean(trim(implode("\n", $dila->xpath('/'.$meta_xpath.'/TEXTE/BLOC_TEXTUEL/CONTENU/*'))));
-
+// Supprimer les balises html du texte de l'arrêt
+$texte_arret = clean(trim(implode("\n", $dila->xpath('/'.$meta_xpath.'/TEXTE/BLOC_TEXTUEL/CONTENU//*'))));
 if (empty($texte_arret)) {
   $texte_arret = clean(trim(implode("\n", $dila->xpath('/'.$meta_xpath.'/TEXTE/BLOC_TEXTUEL/CONTENU'))));
 }
@@ -357,15 +434,26 @@ if (!empty($texte_arret)) {
   $texte_arret = cdata($texte_arret);
 }
 
+// Cas particuliers Juridiction
+$juridiction = str_replace(array("Caa","CAA","Conseil d'etat","Conseil d'État"), array("Cour administrative d'appel","Cour administrative d'appel","Conseil d'état","Conseil d'état"), toString($dila->META->META_SPEC->META_JURI->JURIDICTION));
+
+// Cas particuliers Numero d'arrêt
+if(!preg_match('/\n/', toString($dila->META->META_SPEC->META_JURI->NUMERO))) {
+  $num_arret = str_replace(", ", ",", toString($dila->META->META_SPEC->META_JURI->NUMERO));
+}
+else {
+  $num_arret = toString($dila->META->META_SPEC->META_JURI->NUMERO);
+}
+
 // Construction du tableau avec les informations déduites et communes
 $juricaf_array = array(
 'PAYS' => 'France',
-'JURIDICTION' => toString($dila->META->META_SPEC->META_JURI->JURIDICTION),
-'FORMATION' => toString($dila->META->META_SPEC->META_JURI->JURIDICTION).' France',
+'JURIDICTION' => $juridiction,
+'FORMATION' => $juridiction.' France',
 'SECTION' => ucwords(str_replace("_", " ", strtolower($dila->META->META_SPEC->$meta->FORMATION))),
-'NUM_ARRET' => toString($dila->META->META_SPEC->META_JURI->NUMERO),
-'DATE_ARRET' => toString($dila->META->META_SPEC->META_JURI->DATE_DEC),
-'SENS_ARRET' => toString($dila->META->META_SPEC->META_JURI->SOLUTION),
+'NUM_ARRET' => $num_arret,
+'DATE_ARRET' => is_date(toString($dila->META->META_SPEC->META_JURI->DATE_DEC), "Document"),
+'SENS_ARRET' => ucfirst(strtolower(toString($dila->META->META_SPEC->META_JURI->SOLUTION))),
 'NUMEROS_AFFAIRES' => $numero_affaire,
 'NOR' => toString($dila->META->META_SPEC->$meta->NOR),
 'ECLI' => '',
@@ -383,7 +471,9 @@ $juricaf_array = array(
 'ANALYSES' => $analyses,
 'TEXTE_ARRET' => $texte_arret,
 'REFERENCES' => $references,
+'FOND_DOCUMENTAIRE' => 'Légifrance',
 'RESEAU' => '',
+'ON_ERROR' => $erreurs,
 'ID' => toString($dila->META->META_COMMUN->ID)
 );
 
@@ -433,7 +523,7 @@ catch (Exception $e) {
   echo $e->getMessage()."\n";
 }
 
-// Sous dossiers année/institution 2004-01-31
+// Sous dossiers année/institution
 $dir = "../data/pool/France/".substr($juricaf_array['DATE_ARRET'], 0, 4)."/".ids($juricaf_array['JURIDICTION']) ;
 if (!is_dir($dir)) {
   try {
@@ -450,7 +540,7 @@ $file = $dir."/".$res[0];
 $handler = fopen($file,"w");
 try {
   fputs($handler,$juricaf->asXML());
-  echo $argv[1]." : ok\n";
+  echo $file."\n";
 }
 catch (Exception $e) {
   echo "Erreur d'enregistrement de ".$file." (".$argv[1].")\n";
