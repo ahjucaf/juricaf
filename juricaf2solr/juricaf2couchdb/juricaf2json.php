@@ -1,6 +1,9 @@
 <?php
 setlocale(LC_TIME, 'fr_FR.UTF8', 'fr.UTF8', 'fr_FR.UTF-8', 'fr.UTF-8');
 
+global $errors;
+$errors = '';
+
 $mois = array(
         '01'=>'janvier',
         '02'=>'février',
@@ -49,6 +52,11 @@ function cleanArray($array) {
   return $array;
 }
 
+function addError($str) {
+  global $errors;
+  if(!empty($errors)) { $sep = ", "; } else { $sep = ''; }
+  $errors .= $sep.$str;
+}
 // Chargement
 $obj = simplexml_load_file("data.xml");
 $res = (array)$obj;
@@ -86,9 +94,8 @@ if (empty($res['num_arret']))
   }
   else
   {
-    $res['type'] = 'error_arret';
-    $res['on_error'] = 'ni numéro d\'arret, ni numéro d\'affaire, ni NOR';
-    $res['num_arret'] = 'NUM_MANQUANT'.mt_rand();
+    addError("ni numéro d'arret, ni numéro d'affaire, ni NOR");
+    $res['num_arret'] = $res['id'];
   }
 }
 //clean them
@@ -135,25 +142,33 @@ unset($res['id']);
 if (strlen($res['num_arret']) > 30)
 {
   $res['type'] = 'error_arret';
-  $res['on_error'] = 'num_arret trop gros';
+  addError("num_arret trop gros");
 }
 if (preg_match('/ /', $res['num_arret']))
 {
   $res['type'] = 'error_arret';
-  $res['on_error'] = 'num_arret ne devrait pas contenir d\'espace';
+  addError("num_arret ne devrait pas contenir d'espace");
 }
 if (isset($res['texte_arret']))
 {
   if (!preg_match('/\n/', $res['texte_arret']))
   {
     $res['type'] = 'error_arret';
-    $res['on_error'] = 'pas de saut de ligne dans l\'arret';
+    addError("pas de saut de ligne dans l'arret");
   }
 }
 else
 {
   $res['type'] = 'error_arret';
-  $res['on_error'] = 'texte de l\'arret manquant';
+  addError("texte de l'arret manquant");
 }
-
+if(isset($res['on_error'])) {
+  if(preg_match('/^Document/', $res['on_error'])) {
+    $res['type'] = 'error_arret';
+  }
+  addError($res['on_error']);
+}
+if(!empty($errors)) {
+  $res['on_error'] = $errors;
+}
 print json_encode($res);
