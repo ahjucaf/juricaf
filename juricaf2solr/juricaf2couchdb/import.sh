@@ -4,7 +4,13 @@ LISTPOOL=files.list
 DIRPOOL=../../data/pool
 JSONFILE=test.json
 LOG=/tmp/import.$$.log
+DATE=$(date +%Y-%m-%d_%H:%M)
 
+
+if [ -e lock ]
+then
+echo "Importation lockée par un autre processus";
+else
 
 if echo $0 | grep '/' > /dev/null ;
 then
@@ -63,7 +69,6 @@ do
     #
     # Move imported files to the archive directory
     #
-    DATE=$(date +%Y-%M-%d_%H:%m)
     dest_dir=$(echo $y | sed "s/pool/archive\/$DATE/" | sed 's/[^\/]*$//');
     mkdir -p "$dest_dir"
     mv "$y" "$dest_dir";
@@ -82,3 +87,5 @@ if test -e $LOG ; then
 fi
 rm $LISTPOOL $LOG 2> /dev/null
 cd - > /dev/null 2>&1
+
+fi
