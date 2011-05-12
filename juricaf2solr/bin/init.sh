@@ -3,7 +3,7 @@
 TMPFILE=/tmp/$$.json
 DB=http://localhost:5984/ahjucaf
 
-if test "$1" ; then  
+if test "$1" ; then
 echo "DELETING: please confirm "
 read AA;
 curl -X DELETE $DB
@@ -44,6 +44,10 @@ cat <<EOF > $TMPFILE
   {
     "errors": {
       "map": "function(doc) { if (doc.type == 'error_arret')  emit([doc.on_error,doc._id], 1); }",
+      "reduce": "function(keys, values) { return sum(values) }"
+    },
+    "errors_date": {
+      "map": "function(doc) { if (doc.type == 'error_arret') { year=doc.date_arret.substring(0,4); emit([doc.on_error,year,doc.date_arret], 1); } }",
       "reduce": "function(keys, values) { return sum(values) }"
     },
   }
