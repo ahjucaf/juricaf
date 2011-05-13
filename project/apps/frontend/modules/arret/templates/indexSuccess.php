@@ -1,4 +1,4 @@
-<?php $sf_response->setTitle(html_entity_decode($document->titre).'- Juricaf.org');
+<?php $sf_response->setTitle($document->getRawValue()->titre.'- Juricaf.org');
 
 $natureConstit = array("QPC" => "Question prioritaire de constitutionnalité",
                        "DC" => "Contrôle de constitutionnalité des lois ordinaires, lois organiques, des traités, des règlements des Assemblées",
