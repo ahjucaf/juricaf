@@ -1,7 +1,3 @@
 URL=ftp2.journal-officiel.gouv.fr
 USER=xxx
 PASS=xxx
-REPOSITORY=../../ftp/dila/
-TO_UPDATE=log/to_detar_update.txt
-OLDLOG=log/old.txt
-NEWLOG=log/new.txt

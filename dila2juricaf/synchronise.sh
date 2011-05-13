@@ -1,5 +1,9 @@
 #!/bin/bash
 . ./config/conf.sh
+LOCALCOPY=../../ftp/dila/
+TO_UPDATE=log/to_detar_update.txt
+OLDLOG=log/old.txt
+NEWLOG=log/new.txt
 DATE=$(date +%Y-%m-%d-%H-%M)
 
 # Anciens fichiers
