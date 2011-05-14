@@ -46,7 +46,16 @@ if (isset($document->titre_supplementaire)) {
 }
 ?>
 <?php
-echo '<p>'.preg_replace ('/\n/', '</p><p>', $document->texte_arret).'</p>';
+if($document->pays == "Madagascar" && $document->juridiction == "Cour suprême" && trim($document->texte_arret) == "En haut a droite, cliquez sur PDF pour visualiser le fac-simile de la décision") {
+?>
+<object data="http://www.juricaf.org/Juricaf/Arrets/Madagascar/Cour%20supr%C3%AAme/<?php echo $document->juricaf_id; ?>.PDF" type="application/pdf" width="950" height="800">
+  Télécharger le fichier pdf : <a href="http://www.juricaf.org/Juricaf/Arrets/Madagascar/Cour%20supr%C3%AAme/<?php echo $document->juricaf_id; ?>.PDF"><?php echo $document->titre; ?></a>
+</object>
+<?php
+}
+else {
+  echo '<p>'.preg_replace ('/\n/', '</p><p>', $document->texte_arret).'</p>';
+}
 ?>
 </div>
 <div class="extra">
