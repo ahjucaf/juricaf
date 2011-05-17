@@ -62,11 +62,16 @@ $obj = simplexml_load_file("data.xml");
 $res = (array)$obj;
 $res = cleanArray($res);
 
-if (!isset($res['pays']) && isset($argv[1]))
-  $res['pays'] = $argv[1];
+if (!count($res)) {
+	fprintf(STDERR, 'id":"UNKNOWN","error":"XML parsing","reason":"Cannot parse '.$argv[1]."\"\n");
+	exit(33);
+}
 
-if (!isset($res['juridiction']) && isset($argv[2]))
-  $res['juridiction'] = $argv[2];
+if (!isset($res['pays']) && isset($argv[2]))
+  $res['pays'] = $argv[2];
+
+if (!isset($res['juridiction']) && isset($argv[3]))
+  $res['juridiction'] = $argv[3];
 
 // Gestion des numéros d'arrets
 if (empty($res['num_arret']))
@@ -149,7 +154,7 @@ if (preg_match('/ /', $res['num_arret']))
   $res['type'] = 'error_arret';
   addError("num_arret ne devrait pas contenir d'espace");
 }
-if (isset($res['texte_arret']))
+if (isset($res['texte_arret']) && $res['texte_arret'])
 {
   if (!preg_match('/\n/', $res['texte_arret']))
   {
