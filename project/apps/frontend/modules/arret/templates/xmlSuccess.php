@@ -1,22 +1,23 @@
 <?php echo '<?xml version="1.0" encoding="utf8"?>'; ?>
 
-<JURICAF>
+<DOCUMENT>
 <?php 
 
 function printBalise($field, $balise) 
 {
-  if (!is_object($field)) {
+  if (!is_array($field)) {
     echo $field;
     return ;
   }
-  foreach ($field as $k => $v) {
-    if (is_int($k)) {
-      $k = preg_replace('/s$/i', '', $balise);
+  if (array_keys($field))
+    foreach ($field as $k => $v) {
+      if (!is_int($k)) echo '<'.strtoupper($k).'>';
+      printBalise($v, $k);
+      if (!is_int($k)) echo '</'.strtoupper($k).'>';
     }
-    echo '<'.strtoupper($k).'>';
-    printBalise($v, $k);
-    echo '</'.strtoupper($k).'>';
-  }
+  else
+    foreach($field as $v)
+      printBalise($v, $balise);
 }
 
 foreach ($document->getFields() as $f) : 
@@ -26,4 +27,4 @@ echo '<'.strtoupper($f).'>';
 printBalise($document->{$f}, $f);
 echo '</'.strtoupper($f).'>';
 endforeach; ?>
-</JURICAF>
+</DOCUMENT>

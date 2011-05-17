@@ -1,4 +1,4 @@
-<?php $sf_response->setTitle($document->getRawValue()->titre.'- Juricaf.org');
+<?php $sf_response->setTitle($document->titre.'- Juricaf.org');
 
 $natureConstit = array("QPC" => "Question prioritaire de constitutionnalité",
                        "DC" => "Contrôle de constitutionnalité des lois ordinaires, lois organiques, des traités, des règlements des Assemblées",
@@ -308,5 +308,5 @@ if(isset($document->references)) {
   <a href="http://www.juricaf.tangui.eu.org/couchdb/_utils/document.html?ahjucaf/<?php echo $document->_id; ?>">Voir ce document dans couchdb</a>
   </div>
 <div class="download">
-<?php //echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
+<?php echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
 </div>
