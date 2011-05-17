@@ -38,11 +38,9 @@ function cleanArray($array) {
   $array = array_filter($array);
   $array = array_change_key_case($array, CASE_LOWER);
   foreach ($array as $key => $value) {
-    if  ($key == '@attributes') {
-      if (count($value) == 1) {
-        unset($array[$key]);
-        continue;
-      }
+    if  ($key === '@attributes') {
+      unset($array[$key]);
+      continue;
     }
     if (is_array($value) || is_object($value)) {
       if(is_object($value)) { $value = (array)$value; } ;
@@ -174,3 +172,5 @@ if(!empty($errors)) {
   $res['on_error'] = $errors;
 }
 print json_encode($res);
+
+
