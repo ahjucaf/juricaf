@@ -55,7 +55,7 @@ class rechercheActions extends sfActions
     }
     $pas = 10;
     $pagenum = htmlentities($request->getParameter('page', 1));
-    $start = $pagenum * $pas;
+    $start = ($pagenum - 1) * $pas;
 
     $res = $solr->search($solr_query, $start, $pas, $param);
 
