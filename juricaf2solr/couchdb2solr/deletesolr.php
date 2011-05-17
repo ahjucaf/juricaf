@@ -10,3 +10,4 @@ do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
 $solrdata = "<commit/>";
 do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
 
+@unlink('lock/seq');
