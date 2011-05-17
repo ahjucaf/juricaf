@@ -10,6 +10,21 @@
  */
 class adminActions extends sfActions
 {
+  private function createAndChangeToRelativeDir($relative_dir) {
+    if (!isset($this->dir) || !$this->dir) {
+      $this->dir = getcwd();
+      umask(0007);
+    }
+
+    $relative_dir = preg_replace('/ /', '_', $relative_dir);
+    @mkdir($relative_dir);
+    if (! @chdir($relative_dir)) {
+      $this->getUser()->setFlash('error', "Cannot access subdir ".$this->dir."/$relative_dir directory");
+      return false;
+    }
+    $this->dir .= DIRECTORY_SEPARATOR.$relative_dir;
+    return true;
+  }
   public function executeUpload(sfWebRequest $request)
   {
     $this->form = new UploadForm();
@@ -21,26 +36,25 @@ class adminActions extends sfActions
       {
 	$cwd = getcwd();
 	if (!@chdir(sfConfig::get('app_juricaf_xmlwebdir'))) {
-		$this->getUser()->setFlash('error', "Cannot access ".sfConfig::get('app_juricaf_xmlwebdir')." directory");
-		return;
+	  $this->getUser()->setFlash('error', "Cannot access xmlwebdir ".sfConfig::get('app_juricaf_xmlwebdir')." directory");
+	  return;
 	}
-	echo sfConfig::get('app_juricaf_xmlwebdir');
+
 	$today = date('Y-m-d');
-	umask(0007);
-	@mkdir($today);
-	if (! @chdir($today)) {
-                $this->getUser()->setFlash('error', "Cannot access ".sfConfig::get('app_juricaf_xmlwebdir')."/$today directory");
-                return;
+	if (! $this->createAndChangeToRelativeDir($today)) {
+	  return;
 	}
+	
 	if ($pays = $this->form->getValue('pays')) {
-	  @mkdir('pays_'.$pays);
-	  chdir('pays_'.$pays);
+	  if (! $this->createAndChangeToRelativeDir('pays_'.$pays))
+	    return;
 	}
+	
 	if ($juri = $this->form->getValue('juridiction')) {
-	  $juridir = preg_replace('/ /', '_', $juri);
-	  @mkdir('juridiction_'.$juridir);
-	  chdir('juridiction_'.$juridir);
+	  if (! $this->createAndChangeToRelativeDir('juridiction_'.$juri))
+	    return;
 	}
+	
 	$file = $this->form->getValue('file');
 	if (preg_match('/zip$/', $file->getType() ) ) {
 	  exec("unzip ".$file->getTempName());
@@ -48,7 +62,7 @@ class adminActions extends sfActions
 	  return $this->redirect('@recherche');
 	}
 	if (preg_match('/xml/', $file->getType())) {
-	  $file->save($file->getOriginalName());
+	  $file->save($this->dir.DIRECTORY_SEPARATOR.$file->getOriginalName());
 	  $this->getUser()->setFlash('notice', "Le fichier xml ".$file->getOriginalName().' a été intégré');
 	  return $this->redirect('@recherche');
 	}
