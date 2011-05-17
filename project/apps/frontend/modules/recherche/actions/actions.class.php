@@ -15,7 +15,7 @@ class rechercheActions extends sfActions
     $this->getUser()->setAttribute('query', '');
     if($request->getParameter('q')) {
       $search = strip_tags($request->getParameter('q'));
-      $search = preg_replace('/[\/\{\}\[\]]/', '', $search);
+      $search = preg_replace('/[\/\{\}\[\]\<\>]/', '', $search);
       $this->redirect('@recherche_resultats?query='.$search);
     }
   }
@@ -23,7 +23,7 @@ class rechercheActions extends sfActions
   public function executeSearch(sfWebRequest $request)
   {
     $solr = new sfBasicSolr();
-    $this->query = $request->getParameter('query', 'Suisse');
+    $this->query = preg_replace('/[<>]/', '', $request->getParameter('query', 'Suisse'));
     $this->getUser()->setAttribute('query', $this->query);
     $solr_query = $this->query;
 
@@ -37,7 +37,7 @@ class rechercheActions extends sfActions
 
     $this->facetsset = array();
     $this->facetslink = '';
-    if ($f = $request->getParameter('facets')) {
+    if ($f = htmlentities($request->getParameter('facets'))) {
       $this->facetsset = preg_split('/,/', $f);
       sort($this->facetsset);
       $this->facetslink = ','.implode(',', $this->facetsset);
@@ -53,8 +53,19 @@ class rechercheActions extends sfActions
       $solr_query = preg_replace('/([^ :]+_[^ :]+)/i', '"\1"', $solr_query);
       $solr_query = preg_replace('/_/', ' ', $solr_query);
     }
+    $pas = 10;
+    $pagenum = htmlentities($request->getParameter('page', 1));
+    $start = $pagenum * $pas;
 
-    $res = $solr->search($solr_query, $request->getParameter('start', 0), $request->getParameter('start', 0)+10, $param);
+    $res = $solr->search($solr_query, $start, $pas, $param);
+
+    $lastpage = intval($res->response->numFound / $pas);
+    $this->pager = array();
+    $this->pager['begin'] = ($pagenum != 1) ? 1 : 0;
+    $this->pager['last']  = ($pagenum != 1) ? $pagenum - 1 : 0;
+    $this->pager['end']   = ($pagenum + 1 <= $lastpage) ? $lastpage : 0;
+    $this->pager['next']  = ($pagenum + 1 <= $lastpage) ? $pagenum + 1 : 0;
+    
     $this->resultats = $res;
     $this->facets = array();
     if (isset($res->facet_counts))

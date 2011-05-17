@@ -5,8 +5,8 @@
      foreach($facets[$id] as $k => $v)
        echo "<li>".link_to($k."&nbsp;(".$v.")", '@recherche_resultats?query='.$query.'&facets='.$id.':'.preg_replace('/ /', '_', $k).$facetslink)."</li>";
    else {
-     $k = $facets[$id]->key();
-     echo "<li>".$k."&nbsp;(".$facets[$id][$k].")"."</li>";
+     $k = array_keys($facets[$id]);
+     echo "<li>".$k[0]."&nbsp;(".$facets[$id][$k[0]].")"."</li>";
    }
 ?>
 </ul>
