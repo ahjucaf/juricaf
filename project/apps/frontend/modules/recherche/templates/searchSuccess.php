@@ -7,7 +7,7 @@ function replaceBlank($str) {
 }
 ?>
 <div class="recherche">
-<h1><?php echo $resultats->response->numFound; ?> résultats pour «&nbsp;<?php echo $query; ?>&nbsp;»</h1>
+  <h1><?php $nbResultats = $resultats->response->numFound; echo $nbResultats; ?> résultats pour «&nbsp;<?php echo $query; ?>&nbsp;»</h1>
 <?php
 //////////////////
 //  Suppression des options
@@ -89,7 +89,7 @@ foreach ($resultats->response->docs as $resultat) {
 }
 ?>
 </div>
-</div>
 <div>
-<?php echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); ?>
+<?php if ($nbResultats) echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); ?>
+</div>
 </div>
