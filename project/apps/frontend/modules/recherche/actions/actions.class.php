@@ -37,7 +37,7 @@ class rechercheActions extends sfActions
 
     $this->facetsset = array();
     $this->facetslink = '';
-    if ($f = htmlentities($request->getParameter('facets'))) {
+    if ($f = $request->getParameter('facets')) {
       $this->facetsset = preg_split('/,/', $f);
       sort($this->facetsset);
       $this->facetslink = ','.implode(',', $this->facetsset);
