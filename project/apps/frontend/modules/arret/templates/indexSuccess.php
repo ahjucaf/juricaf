@@ -305,7 +305,7 @@ if(isset($document->references)) {
   echo '</p>';
   */
   ?>
-  <a href="http://127.0.0.1:5984/_utils/document.html?ahjucaf/<?php echo $document->_id; ?>">Voir ce document dans couchdb</a>
+  <a href="http://www.juricaf.tangui.eu.org/couchdb/_utils/document.html?ahjucaf/<?php echo $document->_id; ?>">Voir ce document dans couchdb</a>
   </div>
 <div class="download">
 <?php //echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
