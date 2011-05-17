@@ -20,7 +20,7 @@ fi
 
 rm -f $LISTPOOL $JSONFILE 2> /dev/null
 
-find $DIRPOOL -type f | grep -v .svn > $LISTPOOL
+find $DIRPOOL -type f  | grep -v .svn > $LISTPOOL
 
 #send json file to couchdb
 function add2couch {
@@ -60,7 +60,17 @@ do
 	juridiction=$(echo $y | sed 's/.*juridiction_//' |  sed 's/\/.*//' | sed 's/_/ /g');
     fi;
 
-    while ! php juricaf2json.php "$pays" "$juridiction" > $JSONFILE.tmp ; do true; done ;
+    while true ; do
+	php juricaf2json.php "$y" "$pays" "$juridiction" > $JSONFILE.tmp 2>> $LOG 
+	RET=$?
+	if test $RET = 0; then
+		break;
+	fi
+	if test $RET = 33; then
+		rm $JSONFILE.tmp
+		break;
+	fi
+    done ;
     cat $JSONFILE.tmp >> $JSONFILE
 
     echo -n ',' >> $JSONFILE ;
@@ -86,7 +96,7 @@ if test -e $LOG ; then
     echo "====================================================="
     echo
 
-    sed 's/^\[."//' $LOG | awk -F '"' '{ if ( $11 != "" ) print $3" not imported ("$11")" ; else print $3" imported" ; }'
+    sed 's/^\[."//' $LOG | grep 'id":"' | awk -F '"' '{ if ( $11 != "" ) print $3" not imported ("$11")" ; else print $3" imported" ; }'
 fi
 rm $LISTPOOL $LOG 2> /dev/null
 cd - > /dev/null 2>&1
