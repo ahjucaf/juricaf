@@ -53,7 +53,7 @@ function typeAffaire($section, $chemin) {
   $chemin = toString($chemin);
   foreach ($type as $value) {
     if(strpos(strtolower($section), $value)) { $type_affaire = $value; }
-    elseif(strpos($chemin, $value)) { $type_affaire = $value; }
+    elseif(strpos(strtolower($chemin), $value)) { $type_affaire = $value; }
   }
   if($type_affaire == 'mixte' || $type_affaire == 'reunie' || $type_affaire == 'réunie') {
     $type_affaire = 'chambre mixte';

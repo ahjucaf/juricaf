@@ -4,22 +4,66 @@
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/images/juricaf2.ico" />
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
   </head>
   <body>
     <div class="site">
-   <div>
-   <a href="<?php echo url_for('@recherche'); ?>"><img src="/images/juricaf.png" alt="Juricaf" /></a>
-   </div>
-   <?php if ($sf_user->hasFlash('notice')):?>
-   <div class="flash notice"><?php echo $sf_user->getFlash('notice'); ?></div>
-   <?php endif; ?>
-   <?php if ($sf_user->hasFlash('error')):?>
-   <div class="flash error"><?php echo $sf_user->getFlash('error'); ?></div>
-   <?php endif; ?>
-    <?php echo $sf_content ?>
+      <div class="head">
+        <div class="reseaux_sociaux">
+          <a href="https://www.facebook.com/pages/Juricaf/199894740035999"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook" /></a>
+          <a href="https://twitter.com/#!/juricaf"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter" /></a>
+        </div>
+        <div class="menu">
+          <ul>
+            <li><a href="#">A propos de Juricaf</a></li>
+            <li><a href="#">Aide</a></li>
+            <li><a href="#">Étendue des collections</a></li>
+            <li><a href="#">Outils</a></li>
+            <li><a href="#">Partenaires</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Mentions légales</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="main">
+        <div class="content">
+          <?php if ($sf_user->hasFlash('notice')):?><div class="flash notice"><?php echo $sf_user->getFlash('notice'); ?></div><?php endif; ?>
+          <?php if ($sf_user->hasFlash('error')):?><div class="flash error"><?php echo $sf_user->getFlash('error'); ?></div><?php endif; ?>
+          <div class="form_recherche">
+            <form method="get" action="<?php echo url_for('recherche_resultats'); ?>">
+            <table>
+              <tr>
+                <td>
+                  <a href="<?php echo url_for('@recherche'); ?>"><img id="logo" src="/images/juricaf1.png" alt="Juricaf" /></a><a title="tester les autres logos" id="changelogo" href="#">*</a><br />
+                  <input type="text" name="q" value="<?php echo $sf_user->getAttribute('query'); ?>" tabindex="10" style="width: 300px;" /><br />
+                  <input type="submit" value="Rechercher" tabindex="20" /> <a href="#">recherche avancée</a>
+                </td>
+              </tr>
+            </table>
+            </form>
+          </div>
+          <hr />
+          <?php echo $sf_content; ?>
+        </div>
+      </div>
+      <div class="bottom">
+        <p>Juricaf est un projet de l'<a href="http://www.ahjucaf.org">AHJUCAF</a>, l'association des cours suprêmes judiciaires francophones, réalisé en partenariat avec le LNLI.<br /> Il est soutenu par l'<a href="http://www.francophonie.org">Organisation internationale de la Francophonie</a>, le <a href="http://inforoutes.francophonie.org">Fonds francophone des inforoutes</a> et les réseaux institutionnels francophones.</p>
+        <img style="margin-left: 10px;" src="/images/ahjucaf.png" alt="Association des cours judiciaires suprêmes francophones" />
+        <img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
+      </div>
     </div>
+    <script type="text/javascript">
+    $('#changelogo').bind('click', function() {
+      src = $('#logo').attr('src');
+      part = src.split('.');
+      num = part[0].replace('/images/juricaf', '');
+      num++;
+      if(num == 6) { num = 1; }
+      $('#logo').attr('src', '/images/juricaf'+num+'.png');
+    });
+
+    </script>
   </body>
 </html>
