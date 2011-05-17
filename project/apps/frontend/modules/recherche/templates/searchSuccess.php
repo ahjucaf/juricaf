@@ -12,18 +12,22 @@ function replaceBlank($str) {
 //////////////////
 //  Suppression des options
 //////////////////
+$myfacetslink = preg_replace('/^,/', '', $facetslink);
+$currentlink = array('module'=>'recherche', 'action'=>'search', 'query' => $query, 'facets'=>$myfacetslink);
 if (count($facetsset)) : ?>
 <div class="options">
 <?php
 $myfacetslink = preg_replace('/^,/', '', $facetslink);
-$noorderlink = '@recherche_resultats?query='.$query.'&facets='.preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/order:[^:,]+,?/', '', $myfacetslink)));
+$noorderlink = $currentlink;
+$noorderlink['facets'] = preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/order:[^:,]+,?/', '', $myfacetslink)));
+
 foreach($facetsset as $f) : ?>
 <div class="option"><?php
    if (!preg_match('/order:/', $f)) {
        $text = preg_replace('/_/', ' ', preg_replace('/[^:]+:/', '', $f));
-       echo link_to('[X] Résultats filtrés sur <em>'.$text.'</em>',
-        '@recherche_resultats?query='.$query.'&facets='.
-        preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/'.$f.',?/', '', $myfacetslink))));
+       $tmplink = $currentlink;
+       $tmplink['facets'] = preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/'.$f.',?/', '', $myfacetslink)));
+       echo link_to('[X] Résultats filtrés sur <em>'.$text.'</em>', $tmplink);
      }else {
      echo link_to('[X] Résultats trié par pertinence', $noorderlink);
      }
@@ -46,7 +50,10 @@ foreach($facetsset as $f) : ?>
 <li>par pertinence</li>
 <?php else : ?>
 <li>par date</li>
-<li><?php echo link_to('par pertinence', '@recherche_resultats?query='.$query.'&facets=order:pertinance'.$facetslink); ?></li>
+<li><?php 
+   $tmplink = $currentlink;
+$tmplink['facets'] = 'order:pertinance'.$facetslink;
+echo link_to('par pertinence', $tmplink); ?></li>
 <?php endif; ?>
 </ul>
 <?php
@@ -82,4 +89,7 @@ foreach ($resultats->response->docs as $resultat) {
 }
 ?>
 </div>
+</div>
+<div>
+<?php echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); ?>
 </div>
