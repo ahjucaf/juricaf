@@ -39,8 +39,10 @@ function cleanArray($array) {
   $array = array_change_key_case($array, CASE_LOWER);
   foreach ($array as $key => $value) {
     if  ($key == '@attributes') {
-      unset($array[$key]);
-      continue;
+      if (trim($array[$key]) == '') {
+        unset($array[$key]);
+        continue;
+      }
     }
     if (is_array($value) || is_object($value)) {
       if(is_object($value)) { $value = (array)$value; } ;
