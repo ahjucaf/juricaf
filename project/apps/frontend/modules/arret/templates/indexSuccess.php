@@ -136,7 +136,7 @@ if(isset($document->references)) {
           if(isset($value['url'])) {
             echo '<a href="'.$value['url'].'">'.$titre.'</a><br />';
           }
-          else { echo $titre; }
+          else { echo $titre.'<br />'; }
         }
       }
         echo '</div>';
@@ -214,7 +214,7 @@ if(isset($document->references)) {
           if(isset($value['url'])) {
             echo '<a href="'.$value['url'].'">'.$titre.'</a><br />';
           }
-          else { echo $titre; }
+          else { echo $titre.'<br />'; }
         }
       }
 
@@ -227,7 +227,7 @@ if(isset($document->references)) {
           if(isset($value['url'])) {
             echo '<a href="'.$value['url'].'">'.$titre.'</a><br />';
           }
-          else { echo $titre; }
+          else { echo $titre.'<br />'; }
         }
       }
     }
@@ -265,7 +265,7 @@ if(isset($document->references)) {
           if(isset($value['url'])) {
             echo '<a href="'.$value['url'].'">'.$value['titre'].'</a><br />';
           }
-          else { echo $value['titre']; }
+          else { echo $value['titre'].'<br />'; }
         }
       }
 
