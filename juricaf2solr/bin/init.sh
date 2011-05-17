@@ -3,11 +3,18 @@
 TMPFILE=/tmp/$$.json
 DB=http://localhost:5984/ahjucaf
 
+if echo $0 | grep '/' > /dev/null; then
+	cd $(echo $0 | sed 's/[^\/]*$//')
+fi
+
 if test "$1" ; then
 echo "DELETING: please confirm "
 read AA;
 curl -X DELETE $DB
 curl -X PUT $DB
+cd ../couchdb2solr/
+php deletesolr.php
+cd -
 fi
 
 echo "Creating map/reduce stats";
@@ -21,7 +28,7 @@ cat <<EOF > $TMPFILE
   "views":
   {
     "pays_juridiction_date": {
-      "map": "function(doc) { if (doc.type == 'arret' && doc.pays && doc.juridiction) { date=doc.date_arret.replace(/-.*/, ''); emit([doc.pays,doc.juridiction,date], 1);}}",
+      "map": "function(doc) { if (doc.type == 'arret' && doc.pays && doc.juridiction) { if (doc.date_arret.match(/-.*/)) date=doc.date_arret.replace(/-.*/, ''); emit([doc.pays,doc.juridiction,date], 1);}}",
       "reduce": "function(keys, values) { return sum(values) }"
     },
     "attributs": {
