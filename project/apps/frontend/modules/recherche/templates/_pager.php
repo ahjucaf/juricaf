@@ -1,13 +1,15 @@
 <?php
-function echolinkcondition($titre, $link, $pagenum) 
-{
-  if (!$pagenum) {
-    echo $titre;
-    return;
+if (!function_exists('echolinkcondition')) {
+  function echolinkcondition($titre, $link, $pagenum) 
+  {
+    if (!$pagenum) {
+      echo $titre;
+      return;
+    }
+    $link['page'] = $pagenum;
+    echo link_to($titre, $link);
   }
-  $link['page'] = $pagenum;
-  echo link_to($titre, $link);
-}
+ }
 ?>
 <span class="begin"><?php echo echolinkcondition('<< Debut', $currentlink, $pager['begin']); ?></span>
 <span class="last"><?php echo echolinkcondition('< Précédent', $currentlink, $pager['last']); ?></span>

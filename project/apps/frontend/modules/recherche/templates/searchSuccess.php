@@ -68,6 +68,9 @@ include_partial('recherche/facets', array('label'=>'Juridiction', 'id'=>'juridic
   /// Affichage des résultats
   //////////////////////////////////
 ?><div class="resultats">
+<div class="pager">
+<?php if ($nbResultats) echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); ?>
+</div>
 <?php
 foreach ($resultats->response->docs as $resultat) {
   echo '<div class="resultat"><h3><a href="'.url_for('@arret?id='.$resultat->id).'"><img style="height: 10px;" src="/images/drapeaux/'.replaceBlank($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</a></h3>';
@@ -89,7 +92,7 @@ foreach ($resultats->response->docs as $resultat) {
 }
 ?>
 </div>
-<div>
+<div class="pager">
 <?php if ($nbResultats) echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); ?>
 </div>
 </div>

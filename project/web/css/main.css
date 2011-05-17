@@ -71,7 +71,9 @@ blockquote h2 { color: #4F4F4F; }
 .stats .payscols li { float: left; width: 30%; }
 .stats .payscols li:nth-child(odd) { clear: left; width: 70%}
 .juridcols { margin-bottom: 0; }
-.resultat { clear: left; margin-bottom: 10px; text-align: justify; }
+
+.resultats { clear: left; }
+.resultat {margin-bottom: 10px; text-align: justify; }
 .resultat h3 {margin: 0px;}
 .resultat p {margin: 0px;}
 .resultat em { font-weight: bold; }
@@ -86,3 +88,5 @@ blockquote h2 { color: #4F4F4F; }
 .facets { float: right; margin-left: 10px; margin-top: 10px; padding-left: 10px; padding-bottom: 20px; border: 1px solid #EBEBEB; border-right: none; }
 .facets ul { list-style-type: none; }
 .recherche h1 { float: left; }
+
+.pager{margin: 20px;}
