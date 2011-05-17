@@ -10,7 +10,8 @@ DATE=$(date +%Y-%m-%d_%H:%M)
 if [ -e lock ]
 then
 echo "Importation lockée par un autre processus";
-else
+exit 1;
+fi
 
 if echo $0 | grep '/' > /dev/null ;
 then
@@ -24,7 +25,7 @@ find $DIRPOOL -type f | grep -v .svn > $LISTPOOL
 #send json file to couchdb
 function add2couch {
     if ! test -s $JSONFILE ; then
-  return;
+	return;
     fi
     sed 's/^/{"docs":[/' $JSONFILE | sed 's/,$/]}/' > $JSONFILE.tmp;
     mv $JSONFILE.tmp $JSONFILE ;
@@ -58,12 +59,14 @@ do
     if echo $y | grep juridiction_ > /dev/null; then
 	juridiction=$(echo $y | sed 's/.*juridiction_//' |  sed 's/\/.*//' | sed 's/_/ /g');
     fi;
-    php juricaf2json.php "$pays" "$juridiction" >> $JSONFILE ; 
+
+    while ! php juricaf2json.php "$pays" "$juridiction" > $JSONFILE.tmp ; do true; done ;
+    cat $JSONFILE.tmp >> $JSONFILE
 
     echo -n ',' >> $JSONFILE ;
     cpt=$(expr $cpt + 1) ;
     if test $cpt -eq 100 ; then
-  add2couch ;
+	add2couch ;
     fi  ;
 
     #
@@ -88,4 +91,3 @@ fi
 rm $LISTPOOL $LOG 2> /dev/null
 cd - > /dev/null 2>&1
 
-fi
