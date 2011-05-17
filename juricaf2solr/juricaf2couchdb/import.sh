@@ -5,7 +5,7 @@ DIRPOOL=../../data/pool
 JSONFILE=test.json
 LOG=/tmp/import.$$.log
 DATE=$(date +%Y-%m-%d_%H:%M)
-
+VERBOSE=$1;
 
 if [ -e lock ]
 then
@@ -38,7 +38,7 @@ cpt=0;
 
 while read y
 do
-    echo importing $y
+    if test $VERBOSE ; then echo importing $y; fi
     if file -i "$y" | grep -v 'application/xml' > /dev/null;
     then
 	echo "ERROR: $y ignored : it is not an XML doc";
