@@ -6,7 +6,8 @@ if (!function_exists('echolinkcondition')) {
       echo $titre;
       return;
     }
-    $link['page'] = $pagenum;
+    if ($pagenum > 1)
+      $link['page'] = $pagenum;
     echo link_to($titre, $link);
   }
  }
