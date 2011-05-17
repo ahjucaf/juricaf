@@ -39,7 +39,7 @@ function cleanArray($array) {
   $array = array_change_key_case($array, CASE_LOWER);
   foreach ($array as $key => $value) {
     if  ($key == '@attributes') {
-      if (trim($array[$key]) == '') {
+      if (count($value) == 1) {
         unset($array[$key]);
         continue;
       }
