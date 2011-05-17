@@ -12,18 +12,19 @@ class rechercheActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
+    $this->getUser()->setAttribute('query', '');
     if($request->getParameter('q')) {
       $search = strip_tags($request->getParameter('q'));
       $search = preg_replace('/[\/\{\}\[\]]/', '', $search);
       $this->redirect('@recherche_resultats?query='.$search);
     }
-    $this->setLayout('home');
   }
 
   public function executeSearch(sfWebRequest $request)
   {
     $solr = new sfBasicSolr();
     $this->query = $request->getParameter('query', 'Suisse');
+    $this->getUser()->setAttribute('query', $this->query);
     $solr_query = $this->query;
 
     $param = array('hl' => 'true');

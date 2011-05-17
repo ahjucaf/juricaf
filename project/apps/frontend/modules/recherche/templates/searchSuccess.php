@@ -1,13 +1,13 @@
 <?php $sf_response->setTitle('Résultats de votre recherche - Juricaf.org'); ?>
-<?php use_helper('Text'); ?>
-<div>
-<form method="get" action="<?php echo url_for('recherche_resultats'); ?>">
-    <input type="text" name="q" value="<?php echo $query; ?>" tabindex="10" style="width: 300px;" />
-    <input type="submit" value="Rechercher" tabindex="20" />
-  </form>
-</div>
-<div>
-<h2><?php echo $resultats->response->numFound; ?> résultats pour «&nbsp;<?php echo $query; ?>&nbsp;»</h2>
+<?php
+use_helper('Text');
+
+function replaceBlank($str) {
+  return str_replace (' ', '_', $str);
+}
+?>
+<div class="recherche">
+<h1><?php echo $resultats->response->numFound; ?> résultats pour «&nbsp;<?php echo $query; ?>&nbsp;»</h1>
 <?php
 //////////////////
 //  Suppression des options
@@ -39,7 +39,7 @@ foreach($facetsset as $f) : ?>
 <?php
 /////// TRI ////////
 ?>
-<p>Tri</p>
+<p><strong>Tri</strong></p>
 <ul>
 <?php if (preg_match('/order:/', $facetslink)) :?>
 <li><?php echo link_to('par date', $noorderlink); ?></li>
@@ -63,7 +63,7 @@ include_partial('recherche/facets', array('label'=>'Juridiction', 'id'=>'juridic
 ?><div class="resultats">
 <?php
 foreach ($resultats->response->docs as $resultat) {
-  echo '<div class="resultat"><h3><a href="'.url_for('@arret?id='.$resultat->id).'">'.$resultat->titre.'</a></h3>';
+  echo '<div class="resultat"><h3><a href="'.url_for('@arret?id='.$resultat->id).'"><img style="height: 10px;" src="/images/drapeaux/'.replaceBlank($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</a></h3>';
   echo '<p>';
   $exerpt = '';
   if (isset($resultats->highlighting) && $resultats->highlighting->{$resultat->id} && isset($resultats->highlighting->{$resultat->id}->content)) {

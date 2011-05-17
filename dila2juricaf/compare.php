@@ -12,7 +12,7 @@ foreach ($new as $line) {
   }
 }
 
-if (is_array($to_process)) {
+if (isset($to_process)) {
   asort($to_process);
   foreach ($to_process as $value) {
     $to_update .= $value."\n";
@@ -28,19 +28,21 @@ if (is_array($to_process)) {
   }
 }
 else {
-  if ($stream = fopen($file_log, 'r')) {
-    $prev_update = stream_get_contents($stream);
-    $handler = fopen($prev_file_log,"w");
-    try {
-      fputs($handler,$prev_update);
+  if(is_file($file_log)) {
+    if ($stream = fopen($file_log, 'r')) {
+      $prev_update = stream_get_contents($stream);
+      $handler = fopen($prev_file_log,"w");
+      try {
+        fputs($handler,$prev_update);
+      }
+      catch (Exception $e) {
+        echo "Erreur d'enregistrement de ".$prev_file_log." contenant la liste des fichiers décompressés précédement\n";
+        echo $e->getMessage()."\n";
+        exit;
+      }
+      fclose($stream);
+      unlink ($file_log);
     }
-    catch (Exception $e) {
-      echo "Erreur d'enregistrement de ".$prev_file_log." contenant la liste des fichiers décompressés précédement\n";
-      echo $e->getMessage()."\n";
-      exit;
-    }
-    fclose($stream);
-    unlink ($file_log);
   }
 }
 ?>
