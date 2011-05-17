@@ -37,7 +37,7 @@
               <tr>
                 <td>
                   <a href="<?php echo url_for('@recherche'); ?>"><img id="logo" src="/images/juricaf1.png" alt="Juricaf" /></a><a title="tester les autres logos" id="changelogo" href="#">*</a><br />
-                  <input type="text" name="q" value="<?php echo htmlentities($sf_user->getAttribute('query')); ?>" tabindex="10" style="width: 300px;" /><br />
+                  <input type="text" name="q" value="<?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>" tabindex="10" style="width: 300px;" /><br />
                   <input type="submit" value="Rechercher" tabindex="20" /> <a href="#">recherche avancée</a>
                 </td>
               </tr>
