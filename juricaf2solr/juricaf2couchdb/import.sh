@@ -63,7 +63,9 @@ do
     fi;
 
     while true ; do
-	php juricaf2json.php "$y" "$pays" "$juridiction" > $JSONFILE.tmp 2>> $LOG 
+	php juricaf2json.php "$y" "$pays" "$juridiction" > $JSONFILE.tmp 2> $JSONFILE.err
+	cat $JSONFILE.err | grep 'id":"' >> $LOG
+	cat $JSONFILE.err | grep -v 'id":"'
 	RET=$?
 	if test $RET = 0; then
 		break;
