@@ -37,15 +37,19 @@ class rechercheActions extends sfActions
 
     $this->facetsset = array();
     $this->facetslink = '';
-    if ($f = $request->getParameter('facets')) {
+    if ($f = preg_replace('/[<>]/', '', $request->getParameter('facets'))) {
       $this->facetsset = preg_split('/,/', $f);
       sort($this->facetsset);
       $this->facetslink = ','.implode(',', $this->facetsset);
       $solr_query .= ' '.implode(' ', $this->facetsset);
       if (preg_match('/order:pertinance/', $solr_query)) {
-  $solr_query = ' '.preg_replace('/ order:pertinance/', '', $solr_query);
-  unset($param['sort']);
+	$solr_query = ' '.preg_replace('/ order:pertinance/', '', $solr_query);
+	unset($param['sort']);
       }
+    }
+
+    if (!count($this->facetsset) && !preg_match('/[a-z0-9]/', $this->query)) {
+      return $this->redirect('@recherche');
     }
 
     if (preg_match('/_/', $solr_query))
