@@ -301,13 +301,6 @@ switch ($origine) {
                                     'JURI_PREM' => cdata($dila->META->META_SPEC->$meta->JURI_PREM),
                                     'LIEU_PREM' => cdata($dila->META->META_SPEC->$meta->LIEU_PREM)
                                    ));
-    if(not_excluded_base(toString($dila->META->META_COMMUN->URL))) {
-      $parties = array('DEMANDEURS' => array('DEMANDEUR' => cdata(toString($dila->META->META_SPEC->$meta->DEMANDEUR))),
-                       'DEFENDEURS' => array('DEFENDEUR' => cdata(toString($dila->META->META_SPEC->$meta->DEFENDEUR))));
-    }
-    else {
-      $parties = '';
-    }
     $analyses = parseAnalyse($dila, $meta_xpath);
     foreach ($dila->xpath('/'.$meta_xpath.'/TEXTE/CITATION_JP/*') as $value) {
       if(isset($value)) {
@@ -342,13 +335,6 @@ switch ($origine) {
     $numero_affaire = '';
     $titre_supplementaire = '';
     $decision_attaquee = '';
-    if(not_excluded_base(toString($dila->META->META_COMMUN->URL))) {
-      $parties = array('DEMANDEURS' => array('DEMANDEUR' => cdata(toString($dila->META->META_SPEC->$meta->DEMANDEUR))),
-                       'DEFENDEURS' => array('DEFENDEUR' => cdata(toString($dila->META->META_SPEC->$meta->DEFENDEUR))));
-    }
-    else {
-      $parties = '';
-    }
     $analyses = parseAnalyse($dila, $meta_xpath);
     foreach ($dila->xpath('/'.$meta_xpath.'/TEXTE/CITATION_JP/*') as $value) {
       $references = addRef($references, $value, 'CITATION_ANALYSE', '', '', '', '', '');
@@ -397,7 +383,6 @@ switch ($origine) {
                                 array('TYPE' => $natureConstit[toString($dila->META->META_COMMUN->NATURE)]
                                      ));
     }
-    $parties = '';
     $analyses = multiple('SOMMAIRE', $dila->xpath('/'.$meta_xpath.'/TEXTE/OBSERVATIONS/*'));
     if (isset($dila->META->META_SPEC->$meta->URL_CC)) {
       $references = addRef($references,
@@ -480,7 +465,6 @@ $juricaf_array = array(
 'RAPPORTEUR' => toString($dila->META->META_SPEC->$meta->RAPPORTEUR),
 'COMMISSAIRE_GVT' => toString($dila->META->META_SPEC->$meta->COMMISSAIRE_GVT),
 'AVOCATS' => cdata($dila->META->META_SPEC->$meta->AVOCATS),
-'PARTIES' => $parties,
 'ANALYSES' => $analyses,
 'TEXTE_ARRET' => $texte_arret,
 'REFERENCES' => $references,
