@@ -161,12 +161,13 @@ if (isset($res['texte_arret']) && $res['texte_arret'])
     $res['type'] = 'error_arret';
     addError("pas de saut de ligne dans l'arret");
   }
-}
-else
-{
-  $res['type'] = 'error_arret';
-  addError("texte de l'arret manquant");
-}
+ } else if ($res['not_an_error'] == 'empty_text')
+  unset($res['not_an_error']);
+ else {
+   $res['type'] = 'error_arret';
+   addError("texte de l'arret manquant");
+ }
+
 if(isset($res['on_error'])) {
   if(preg_match('/^Document/', $res['on_error'])) {
     $res['type'] = 'error_arret';
