@@ -435,7 +435,20 @@ if (!empty($texte_arret)) {
 }
 
 // Cas particuliers Juridiction
-$juridiction = str_replace(array("Caa","CAA","Conseil d'etat","Conseil d'État"), array("Cour administrative d'appel","Cour administrative d'appel","Conseil d'état","Conseil d'état"), toString($dila->META->META_SPEC->META_JURI->JURIDICTION));
+$juridiction = ucfirst(strtolower(toString($dila->META->META_SPEC->META_JURI->JURIDICTION)));
+$juridiction = str_replace(array("Caa",
+                                 "Conseil d'etat",
+                                 "Conseil d'État",
+                                 "Tribunal administratif marseille",
+                                 "Tribunal administratif paris"
+                                 ),
+                           array("Cour administrative d'appel",
+                                 "Conseil d'état",
+                                 "Conseil d'état",
+                                 "Tribunal administratif de marseille",
+                                 "Tribunal administratif de paris"
+                                 ),
+                           $juridiction);
 
 // Cas particuliers Numero d'arrêt
 if(!preg_match('/\n/', toString($dila->META->META_SPEC->META_JURI->NUMERO))) {
@@ -479,7 +492,8 @@ $juricaf_array = array(
 
 // Suppression des valeurs vides
 $juricaf_array = unsetEmptyVals($juricaf_array);
-// Débug : var_dump($juricaf_array);
+// Débug :
+var_dump($juricaf_array);
 
 // Conversion du tableau en string xml balisé
 $juricaf_str = '<DOCUMENT>';
