@@ -161,8 +161,8 @@ if (isset($res['texte_arret']) && $res['texte_arret'])
     $res['type'] = 'error_arret';
     addError("pas de saut de ligne dans l'arret");
   }
- } else if ($res['not_an_error'] == 'empty_text')
-  unset($res['not_an_error']);
+ } else if ($res['no_error'] == 'empty_text')
+  unset($res['no_error']);
  else {
    $res['type'] = 'error_arret';
    addError("texte de l'arret manquant");
