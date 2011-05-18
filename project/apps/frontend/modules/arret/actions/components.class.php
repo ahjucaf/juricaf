@@ -5,13 +5,13 @@ class arretComponents extends sfComponents
   public function executeStatsPays() {
     $db = sfCouchConnection::getInstance();
     try{
-    $this->pays = $db->get('_design/stats/_view/pays_juridiction_date?group_level=1')->rows;
+    $this->pays = $db->get('_design/stats/_view/pays_juridiction_date?group_level=1&stale=ok')->rows;
     }catch(Exception $e) {$this->pays = null;}
   }
   public function executeStatsPaysJuridiction() {
     $db = sfCouchConnection::getInstance();
     try{
-    $pays = $db->get('_design/stats/_view/pays_juridiction_date?group_level=3')->rows;
+    $pays = $db->get('_design/stats/_view/pays_juridiction_date?group_level=3&stale=ok')->rows;
     $this->pays = array();
     foreach ($pays as $p) {
       if (!isset($this->pays[$p['key'][0]]))
