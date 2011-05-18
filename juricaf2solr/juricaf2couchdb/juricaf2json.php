@@ -128,11 +128,10 @@ if (!isset($res['titre']))
   $formation = '';
   if (isset($res['formation']))
     $formation = ', '.$res['formation'];
+  $date = new DateTime($res['date_arret']);
   $res['titre'] = $res['pays'].', '.$res['juridiction'].$formation.', '.
-    date('d ', strtotime($res['date_arret'])).
-    $mois[date('m', strtotime($res['date_arret']))].
-    date(' Y', strtotime($res['date_arret'])).
-    ', décision n°'.$res['num_arret'];
+				     $date->format('d').' '.$mois[$date->format('m')].' '.$date->format('Y').
+				     ', décision n°'.$res['num_arret'];
 }
 $date = date_id($res['date_arret']);
 $num_arret_id = preg_replace('/[^a-z0-9]/i', '', $res['num_arret']);
@@ -177,6 +176,6 @@ if(isset($res['on_error'])) {
 if(!empty($errors)) {
   $res['on_error'] = $errors;
 }
-print json_encode($res);
-
+//print json_encode($res);
+print_r($res);
 
