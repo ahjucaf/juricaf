@@ -471,6 +471,7 @@ $juricaf_array = array(
 'FONDS_DOCUMENTAIRE' => 'Légifrance',
 'RESEAU' => '',
 'ON_ERROR' => $erreurs,
+'NO_ERROR' => 'empty_text',
 'ID' => toString($dila->META->META_COMMUN->ID)
 );
 
