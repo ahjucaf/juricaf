@@ -176,6 +176,6 @@ if(isset($res['on_error'])) {
 if(!empty($errors)) {
   $res['on_error'] = $errors;
 }
-//print json_encode($res);
-print_r($res);
+print json_encode($res);
+
 
