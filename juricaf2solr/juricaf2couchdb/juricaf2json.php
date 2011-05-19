@@ -22,7 +22,7 @@ $mois = array(
 // Date pour _id couchdb (Ex : CETATEXT000007604769 et CETATEXT000007602727 : continuité d'une affaire : même numéro, même année, deux décisions)
 function date_id($d) {
   $d = explode('-', $d);
-  $date = $d[0].$d[2].$d[1];
+  $date = $d[0].$d[1].$d[2];
   return $date;
 }
 
