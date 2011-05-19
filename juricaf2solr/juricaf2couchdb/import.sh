@@ -12,6 +12,7 @@ then
 echo "Importation lockée par un autre processus";
 exit 1;
 fi
+touch lock
 
 if echo $0 | grep '/' > /dev/null ;
 then
@@ -75,7 +76,9 @@ do
 		break;
 	fi
     done ;
-    cat $JSONFILE.tmp >> $JSONFILE
+    if test -e $JSONFILE.tmp; then
+	    cat $JSONFILE.tmp >> $JSONFILE
+    fi
 
     echo -n ',' >> $JSONFILE ;
     cpt=$(expr $cpt + 1) ;
