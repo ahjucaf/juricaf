@@ -27,7 +27,7 @@ echo $$ > $LOCK
 rm -f $LISTPOOL $JSONFILE 2> /dev/null
 
 find $DIRPOOL -type f  | grep -v .svn > $LISTPOOL
-sleep 120
+
 #send json file to couchdb
 function add2couch {
     if ! test -s $JSONFILE ; then
