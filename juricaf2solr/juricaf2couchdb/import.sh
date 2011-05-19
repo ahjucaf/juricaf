@@ -9,10 +9,13 @@ VERBOSE=$1;
 
 if [ -e lock ]
 then
-echo "Importation lockée par un autre processus";
-exit 1;
+	if ! ps --pid $(cat lock) > /dev/null ; then
+		echo $(cat lock) not running, destroy the lock
+		rm lock
+	fi
+	exit 1;
 fi
-touch lock
+echo $$ > lock
 
 if echo $0 | grep '/' > /dev/null ;
 then
