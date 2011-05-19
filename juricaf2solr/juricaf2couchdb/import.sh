@@ -108,6 +108,6 @@ if test -e $LOG ; then
 
     sed 's/^\[."//' $LOG | grep 'id":"' | awk -F '"' '{ if ( $11 != "" ) print $3" not imported ("$11")" ; else print $3" imported" ; }'
 fi
-rm $LISTPOOL $LOG 2> /dev/null
+rm $LISTPOOL $LOG lock 2> /dev/null
 cd - > /dev/null 2>&1
 
