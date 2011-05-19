@@ -6,26 +6,28 @@ JSONFILE=test.json
 LOG=/tmp/import.$$.log
 DATE=$(date +%Y-%m-%d_%H:%M)
 VERBOSE=$1;
+LOCK=/tmp/$O.lock
 
-if [ -e lock ]
+#Si d'un autre chemin que le repertoire local, on se déplance dans le répertoire local
+if echo $0 | grep '/' > /dev/null ;
 then
-	if ! ps --pid $(cat lock) > /dev/null ; then
-		echo $(cat lock) not running, destroy the lock
+        cd $(echo $0 | sed 's|[^/]*$||');
+fi
+
+if [ -e $LOCK ]
+then
+	if ! ps --pid $(cat $LOCK) > /dev/null ; then
+		echo $(cat $LOCK) not running, destroy the lock
 		rm lock
 	fi
 	exit 1;
 fi
-echo $$ > lock
-
-if echo $0 | grep '/' > /dev/null ;
-then
-	cd $(echo $0 | sed 's|[^/]*$||');
-fi
+echo $$ > $LOCK
 
 rm -f $LISTPOOL $JSONFILE 2> /dev/null
 
 find $DIRPOOL -type f  | grep -v .svn > $LISTPOOL
-
+sleep 120
 #send json file to couchdb
 function add2couch {
     if ! test -s $JSONFILE ; then
@@ -108,6 +110,6 @@ if test -e $LOG ; then
 
     sed 's/^\[."//' $LOG | grep 'id":"' | awk -F '"' '{ if ( $11 != "" ) print $3" not imported ("$11")" ; else print $3" imported" ; }'
 fi
-rm $LISTPOOL $LOG lock 2> /dev/null
+rm $LISTPOOL $LOG $LOCK 2> /dev/null
 cd - > /dev/null 2>&1
 
