@@ -449,13 +449,13 @@
    -->
 
    <field name="id" type="string" indexed="true" stored="true" required="true" /> 
+   <field name="juridiction" type="string" indexed="true" stored="true" required="true" /> 
+   <field name="pays" type="string" indexed="true" stored="true" required="true" /> 
+   <field name="facet_pays_juridiction" type="string" indexed="true" stored="true" required="true" /> 
 
    <field name="titre" type="text_fr" indexed="true" stored="true"/>
    <field name="content" type="text_fr" indexed="true" stored="true" multiValued="true"/>
-
-   <field name="pays" type="string" indexed="true" stored="true"/>
    <field name="date_arret" type="date" indexed="true" stored="true"/>
-   <field name="juridiction" type="string" indexed="true" stored="true"/>
 
    <dynamicField name="*"  type="text_fr"    indexed="true"  stored="true"/>
  
@@ -472,10 +472,6 @@
  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
  <solrQueryParser defaultOperator="AND"/>
 
-   <copyField source="titre" dest="content"/>
-   <copyField source="pays" dest="content"/>
    <copyField source="*" dest="content"/>
-   <copyField source="juridiction" dest="content"/>
-   <copyField source="id" dest="content"/>
 	
 </schema>

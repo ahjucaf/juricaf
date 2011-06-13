@@ -30,7 +30,7 @@ class rechercheActions extends sfActions
     $param = array('hl' => 'true');
     if (!preg_match('/\:\*/', $solr_query)) {
       $param['sort'] = 'date_arret desc';
-      $param['facet.field']= array('pays', 'juridiction');
+      $param['facet.field']= array('pays', 'juridiction', 'facet_pays_juridiction');
       //      $param['facet.field']='juridiction';
       $param['facet']='true';
     }
@@ -41,22 +41,32 @@ class rechercheActions extends sfActions
       $this->facetsset = preg_split('/,/', $f);
       sort($this->facetsset);
       $this->facetslink = ','.implode(',', $this->facetsset);
-      $solr_query .= ' '.implode(' ', $this->facetsset);
+      foreach ($this->facetsset as $facet) {
+	$f = explode(':', $facet);
+	//On ne doit pas retirer les _ des facettes donc on les replace par = pour les conserver
+	$solr_query.= ' '.preg_replace('/_/', '=', $f[0]).':'.$f[1];
+      }
+
       if (preg_match('/order:pertinance/', $solr_query)) {
 	$solr_query = ' '.preg_replace('/ order:pertinance/', '', $solr_query);
 	unset($param['sort']);
       }
     }
 
+    /*
     if (!count($this->facetsset) && !preg_match('/[a-z0-9]/', $this->query)) {
       return $this->redirect('@recherche');
     }
+    */
 
     if (preg_match('/_/', $solr_query))
     {
       $solr_query = preg_replace('/([^ :]+_[^ :]+)/i', '"\1"', $solr_query);
       $solr_query = preg_replace('/_/', ' ', $solr_query);
     }
+    //Rétablissement des _ non retirables
+    $solr_query = preg_replace('/=/', '_', $solr_query);
+
     $pas = 10;
     $pagenum = htmlentities($request->getParameter('page', 1));
     $start = ($pagenum - 1) * $pas;

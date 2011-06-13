@@ -1,7 +1,9 @@
 <?php
 
-global $couchdb_url_db, $solr_url_db, $lock_seq_file;
+global $couchdb_url_db, $solr_url_db, $lock_seq_file, $virtualfields;
 
 $lock_seq_file = 'lock/seq';
 $couchdb_url_db = "http://localhost:5984/ahjucaf";
 $solr_url_db = "http://localhost:8080/solr";
+
+$virtualfields = array('facet_pays_juridiction' => array('pays', ' | ', 'juridiction'));
