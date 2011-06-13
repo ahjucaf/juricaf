@@ -6,15 +6,9 @@ homepage:
   url:   /
   param: { module: default, action: index }
 
-# generic rules
-# please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
-
 #Solr Search
 recherche:
-  url: /recherche/
+  url: /recherche
   param: {module: recherche, action: index, query: ""}
 
 recherche_resultats:
@@ -36,3 +30,15 @@ arretxml:
 upload:
    url:  /admin/upload
    param: {module: admin, action: upload}
+
+#Stats
+stats:
+  url: /stats
+  param: {module: arret, action: stats}
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
