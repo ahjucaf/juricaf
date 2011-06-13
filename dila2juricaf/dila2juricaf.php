@@ -86,7 +86,7 @@ function urlPdfJO($str) {
     $str = strtr($str, $accents);
     if (preg_match('/(\d{2}) (\w{3,}) (\d{4}), p. (\d{0,})/', $str, $match)) {
       if(isset($mois[$match[2]]) && $match[3] >= 1947) { // Fac similé du JO depuis 1947
-        return cdata('http://legifrance.gouv.fr/jopdf/common/jo_pdf.jsp?numJO=0&dateJO='.$match[3].$mois[$match[2]].$match[1].'&pageDebut='.sprintf('%05d', $match[4]));
+        return cdata('http://legifrance.gouv.fr/jopdf/common/jo_pdf.jsp?numJO=0&amp;dateJO='.$match[3].$mois[$match[2]].$match[1].'&amp;pageDebut='.sprintf('%05d', $match[4]));
       }
     }
   }
@@ -150,7 +150,7 @@ function addRef($references, $titre, $type, $nature, $date, $numero, $nor, $url)
     'TYPE' => $type,
     'TITRE' => cdata($titre),
     'NATURE' => toString($nature),
-    'DATE' => is_date(toString($date), 0),
+    'DATE' => toString($date),
     'NUMERO' => toString($numero),
     'NOR' => toString($nor),
     'URL' => $url
@@ -181,53 +181,48 @@ function findOrigine($filename) {
 }
 
 function is_date($str, $about) {
-  $date_default = "0001-01-01";
+
+  global $erreurs;
+
+  if(!empty($erreurs)) { $sep = ", "; } else { $sep = ''; }
+
+  // Si c'est bien une date
   if(preg_match('/(\d{4})-(\d{2})-(\d{2})/', $str) || preg_match('/(\d{2})\/(\d{2})\/(\d{4})/', $str) || preg_match('/(\d{2})\/(\d{2})\/(\d{2})/', $str)) {
     if(strtotime($str) > mktime()) {
-      if($about) {
-        global $erreurs;
-        if(!empty($erreurs)) { $sep = ", "; } else { $sep = ''; }
-        $erreurs .= $sep.$about." : date dans le futur";
-        return $str;
-      }
-      else { return false; }
+      $erreurs .= $sep.$about." : date dans le futur (".$str.")";
+      $val = false;
     }
     elseif (strtotime($str) < strtotime("1700-01-01")) {
-      if($about) {
-        global $erreurs;
-        if(!empty($erreurs)) { $sep = ", "; } else { $sep = ''; }
-        $erreurs .= $sep.$about." : date trop ancienne";
-        return $str;
-      }
-      else { return false; }
+      $erreurs .= $sep.$about." : date trop ancienne (".$str.")";
+      $val = false;
     }
     else {
       if(preg_match('/(\d{2})\/(\d{2})\/(\d{4})/', $str, $match)) {
-        return $match[3]."-".$match[2]."-".$match[1];
+        $val = $match[3]."-".$match[2]."-".$match[1];
       }
       elseif(preg_match('/(\d{2})\/(\d{2})\/(\d{2})/', $str, $match)) {
         $year = date("Y", strtotime($str));
-        return $year."-".$match[2]."-".$match[1];
+        $val = $year."-".$match[2]."-".$match[1];
       }
       else {
-        return $str;
+        $val = $str;
       }
     }
   }
+  // Si ce n'est pas une date
   else {
-    if($about) {
-      global $erreurs;
-      if(!empty($erreurs)) { $sep = ", "; } else { $sep = ''; }
-      if (!empty($str)) {
-        $erreurs .= $sep.$about." : date invalide (".$str.")";
-      }
-      else {
-        $erreurs .= $sep.$about." : date non indiquée";
-      }
-      return $date_default;
+    if (!empty($str)) {
+      $erreurs .= $sep.$about." : date invalide (".$str.")";
+      $val = false;
     }
-    else { return false; }
+    else {
+      $erreurs .= $sep.$about." : date non indiquée";
+      $val = false;
+    }
   }
+  if($about == "Document" && $val == false) { $val = "0001-01-01"; }
+
+  return $val;
 }
 
 function not_excluded_base($url) {
@@ -294,7 +289,7 @@ switch ($origine) {
     $decision_attaquee = array('DECISION_ATTAQUEE' =>
                               array('TYPE' => 'DECISION',
                                     'FORMATION' => cdata(ucfirst(rtrim(trim(str_replace($dila->META->META_SPEC->$meta->DATE_DEC_ATT, '', $dila->META->META_SPEC->$meta->FORM_DEC_ATT)), ','))),
-                                    'DATE' => is_date(toString($dila->META->META_SPEC->$meta->DATE_DEC_ATT), 0),
+                                    'DATE' => is_date(toString($dila->META->META_SPEC->$meta->DATE_DEC_ATT), 'DECISION_ATTAQUEE'),
                                     'NUMERO' => '',
                                     'NOR' => '',
                                     'SIEGE' => cdata($dila->META->META_SPEC->$meta->SIEGE_APPEL),
@@ -361,12 +356,9 @@ switch ($origine) {
                                 array('TITRE' => cdata(toString($dila->META->META_SPEC->$meta->LOI_DEF)),
                                       'TYPE' => $natureConstit[toString($dila->META->META_COMMUN->NATURE)],
                                       'FORMATION' => '',
-                                      'DATE' => is_date(toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@date')), 0),
+                                      'DATE' => is_date(toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@date')), 'DECISION_ATTAQUEE'),
                                       'NUMERO' => toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@num')),
-                                      'NOR' => toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@nor')),
-                                      'SIEGE' => '',
-                                      'JURI_PREM' => '',
-                                      'LIEU_PREM' => ''
+                                      'NOR' => toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@nor'))
                                      ));
       $references = addRef($references,
                            $dila->META->META_SPEC->$meta->LOI_DEF,
@@ -415,11 +407,12 @@ $texte_arret = clean(trim(implode("\n", $dila->xpath('/'.$meta_xpath.'/TEXTE/BLO
 if (empty($texte_arret)) {
   $texte_arret = clean(trim(implode("\n", $dila->xpath('/'.$meta_xpath.'/TEXTE/BLOC_TEXTUEL/CONTENU'))));
 }
+
 if (!empty($texte_arret)) {
   $texte_arret = cdata($texte_arret);
 }
 
-// Cas particuliers Juridiction
+// Cas particuliers : Juridiction
 $juridiction = ucfirst(strtolower(toString($dila->META->META_SPEC->META_JURI->JURIDICTION)));
 $juridiction = str_replace(array("Caa",
                                  "Conseil d'etat",
@@ -435,7 +428,7 @@ $juridiction = str_replace(array("Caa",
                                  ),
                            $juridiction);
 
-// Cas particuliers Numero d'arrêt
+// Cas particuliers : Numero d'arrêt
 if(!preg_match('/\n/', toString($dila->META->META_SPEC->META_JURI->NUMERO))) {
   $num_arret = str_replace(", ", ",", toString($dila->META->META_SPEC->META_JURI->NUMERO));
 }
@@ -477,8 +470,7 @@ $juricaf_array = array(
 
 // Suppression des valeurs vides
 $juricaf_array = unsetEmptyVals($juricaf_array);
-// Débug :
-var_dump($juricaf_array);
+// Débug : var_dump($juricaf_array);
 
 // Conversion du tableau en string xml balisé
 $juricaf_str = '<DOCUMENT>';
