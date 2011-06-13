@@ -56,7 +56,7 @@ function replaceBlank($str) {
 }
 
 if(isset($document->references)) {
-  foreach ($document->references as $values) {
+  foreach ($document->getReferences() as $values) {
     $i = 0;
     if(is_array($values) || is_object($values)) {
       foreach($values as $keys => $value) {
@@ -305,7 +305,7 @@ if(isset($document->references)) {
   echo '</p>';
   */
   ?>
-  <a href="http://www.juricaf.tangui.eu.org/couchdb/_utils/document.html?ahjucaf/<?php echo $document->_id; ?>">Voir ce document dans couchdb</a>
+  <a href="/couchdb/_utils/document.html?ahjucaf/<?php echo $document->_id; ?>">Voir ce document dans couchdb</a>
   </div>
 <div class="download">
 <?php echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>

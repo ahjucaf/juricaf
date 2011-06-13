@@ -11,4 +11,25 @@ class JuricafArret extends sfCouchDocument
     }
     return $fields;
   }
+  
+  //Champ issu du v1
+  public function getPublication() {
+    $pub = $this->publication;
+    if (preg_match('/^non$/i', $pub))
+      return ;
+    return $pub;
+  }
+
+  public function getReferences() {
+    $ref = $this->references;
+    if (is_array($ref))
+      return $ref;
+    //Gestion juricaf v1
+    $references = array();
+    if (!preg_match('/^non$/i', $ref))
+      $references[] = array('type'=>'SOURCE', 'titre' => $ref);
+    if ($p = $this->getPublication())
+      $references[] = array('type'=>'PUBLICATION', 'titre'=>$p);
+    return array('reference' => $references);
+  }
 }
