@@ -1,5 +1,7 @@
 #!/bin/bash
 find ../data/dila/ -name '*.xml' | while read fichier ;
-do 
-	php dila2juricaf.php "$fichier"; 
+do
+  sed -f ansi2html < $fichier > temp.xml ;
+  cat temp.xml > $fichier;
+  php dila2juricaf.php $fichier;
 done
