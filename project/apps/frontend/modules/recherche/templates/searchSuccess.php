@@ -30,7 +30,7 @@ foreach($facetsset as $f) : ?>
    if (!preg_match('/order:/', $f)) {
        $text = preg_replace('/_/', ' ', preg_replace('/[^:]+:/', '', $f));
        $tmplink = $currentlink;
-       $tmplink['facets'] = preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/'.$f.',?/', '', $myfacetslink)));
+       $tmplink['facets'] = preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/'.preg_replace('/\|/', '\\\|', $f).',?/', '', $myfacetslink)));
        echo link_to('[X] Résultats filtrés sur <em>'.$text.'</em>', $tmplink);
      }else {
      echo link_to('[X] Résultats trié par pertinence', $noorderlink);
@@ -62,9 +62,10 @@ echo link_to('par pertinence', $tmplink); ?></li>
 </ul>
 <?php
   ////// FACETTE Pays //////////
-include_partial('recherche/facets', array('label'=>'Pays', 'id'=>'pays', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
+  //include_component('recherche', 'facets', array('label'=>'Pays', 'id'=>'pays', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
   ////// FACETTE Juridiction //////////
-include_partial('recherche/facets', array('label'=>'Juridiction', 'id'=>'juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
+  //include_component('recherche', 'facets', array('label'=>'Juridiction', 'id'=>'juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
+include_component('recherche', 'facets', array('label'=>'Pays & Juridiction', 'id'=>'facet_pays_juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink, 'tree' => true, 'mainid' => 'pays'));
 ?>
 </div>
 <?php
