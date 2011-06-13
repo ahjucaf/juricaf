@@ -27,4 +27,8 @@ class arretActions extends sfActions
     $this->setLayout(false);
     $this->getResponse()->setContentType('text/xml');
   }
+  public function executeStats(sfWebRequest $request)
+  {
+    return ;
+  }
 }
