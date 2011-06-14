@@ -74,7 +74,7 @@ include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction'
   //////////////////////////////////
 ?><div class="resultats">
 <div class="pager">
-<?php if ($nbResultats) echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); ?>
+<?php if ($nbResultats > 10) echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); ?>
 </div>
 <?php
 foreach ($resultats->response->docs as $resultat) {
@@ -98,6 +98,6 @@ foreach ($resultats->response->docs as $resultat) {
 ?>
 </div>
 <div class="pager">
-<?php if ($nbResultats) echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); ?>
+<?php if ($nbResultats > 10) echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); ?>
 </div>
 </div>
