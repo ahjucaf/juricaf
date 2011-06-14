@@ -2,11 +2,13 @@
 
 TMPFILE=/tmp/$$.json
 
-if ! test -e ../conf/juricaf.conf; then
-    echo ../conf/juricaf.conf does not exist
+PREDIR=.
+if echo $0 | grep '/' > /dev/null; then PREDIR=$(echo $0 | sed 's/\/[^\/]*$//'); fi
+if ! test -e $PREDIR/../conf/juricaf.conf; then
+    echo $PREDIR/../conf/juricaf.conf does not exist
     exit 1;
 fi
-. ../conf/juricaf.conf
+. $PREDIR/../conf/juricaf.conf
 
 if echo $0 | grep '/' > /dev/null; then
 	cd $(echo $0 | sed 's/[^\/]*$//')
