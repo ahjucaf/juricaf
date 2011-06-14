@@ -8,7 +8,7 @@ function replaceBlank($str) {
 ?>
 <div class="recherche">
   <h1><?php $nbResultats = $resultats->response->numFound; echo $nbResultats; ?> résultats
-  <?php if (preg_match('/[a-z0-9]/', $query)) : ?>
+  <?php if (preg_match('/[a-z0-9]/i', $query)) : ?>
 pour «&nbsp;<?php echo $query; ?>&nbsp;»
   <?php endif; ?>
 </h1>
