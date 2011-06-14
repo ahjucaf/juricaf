@@ -25,7 +25,7 @@ class rechercheActions extends sfActions
     $solr = new sfBasicSolr();
     $this->query = preg_replace('/[<>]/', '', $request->getParameter('query', 'Suisse'));
     $this->getUser()->setAttribute('query', $this->query);
-    $solr_query = $this->query;
+    $solr_query = strtolower($this->query);
 
     $param = array('hl' => 'true');
     if (!preg_match('/\:\*/', $solr_query)) {
@@ -53,7 +53,7 @@ class rechercheActions extends sfActions
       }
     }
 
-    if (!count($this->facetsset) && !preg_match('/[a-z0-9]/', $this->query)) {
+    if (!count($this->facetsset) && !preg_match('/[a-z0-9]/i', $this->query)) {
       return $this->redirect('@recherche');
     }
 
