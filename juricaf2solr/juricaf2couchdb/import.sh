@@ -1,12 +1,19 @@
 #!/bin/bash
 
+#Default configuration options
 LISTPOOL=files.list
-DIRPOOL=../../data/pool
 JSONFILE=test.json
 LOG=/tmp/import.$$.log
 DATE=$(date +%Y-%m-%d_%H:%M)
-VERBOSE=$1;
 LOCK=/tmp/$O.lock
+VERBOSE=$1;
+
+#Configuration file juricaf2couchdb.conf
+if ! test -e juricaf2couchdb.conf; then
+    echo Configuration file juricaf2couchdb.conf does not exist
+    exit 1;
+fi
+. juricaf2couchdb.conf
 
 #Si d'un autre chemin que le repertoire local, on se déplance dans le répertoire local
 if echo $0 | grep '/' > /dev/null ;
@@ -35,7 +42,7 @@ function add2couch {
     fi
     sed 's/^/{"docs":[/' $JSONFILE | sed 's/,$/]}/' > $JSONFILE.tmp;
     mv $JSONFILE.tmp $JSONFILE ;
-    curl -H"Content-Type: application/json" -s -d @$JSONFILE  -X POST "http://127.0.0.1:5984/ahjucaf/_bulk_docs" | sed 's/"},{"/\n/g' >> $LOG
+    curl -H"Content-Type: application/json" -s -d @$JSONFILE  -X POST "$COUCHDBURL/_bulk_docs" | sed 's/"},{"/\n/g' >> $LOG
     cpt=0;
     rm $JSONFILE ;
 }
