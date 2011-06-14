@@ -11,7 +11,7 @@ foreach ($pays as $p)
 {
   $pays = preg_replace('/ /', '_', $p['key'][0]);
   if (++$cpt%2 && $cpt !== 1) { echo '</tr><tr>'; }
-  echo '<td><img src="/images/drapeaux/'.ucfirst($pays).'.png" alt="'.$pays.'" />&nbsp;'.link_to($p['key'][0].' ('.$p['value'].')','recherche/search?query=+&facets=pays:'.$pays).'</td>';
+  echo '<td><img src="/images/drapeaux/'.urlencode(ucfirst($pays)).'.png" alt="'.$pays.'" />&nbsp;'.link_to($p['key'][0].' ('.$p['value'].')','recherche/search?query=+&facets=pays:'.$pays).'</td>';
 }
 ?>
 </tr><tr><td colspan="2" class="plus"><?php echo link_to('Plus de statistiques', '@stats'); ?></td></tr></table>

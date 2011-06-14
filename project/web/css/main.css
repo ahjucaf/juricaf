@@ -77,7 +77,7 @@ blockquote h2 { color: #4F4F4F; }
 .resultat h3 {margin: 0px;}
 .resultat p {margin: 0px;}
 .resultat em { font-weight: bold; }
-.resultat .extra {color: grey;}
+.resultat .extra {color: gray;}
 
 .flash {text-align: center; font-weight: bold;}
 .error {color: red;}
