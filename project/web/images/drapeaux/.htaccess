@@ -1,0 +1,5 @@
+  RewriteEngine On
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  # no, so we redirect to our front web controller
+  RewriteRule ^(.*)$ unknown.png [QSA,L]
