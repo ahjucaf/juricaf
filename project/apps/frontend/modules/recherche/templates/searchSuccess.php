@@ -7,7 +7,7 @@ function replaceBlank($str) {
 }
 ?>
 <div class="recherche">
-  <h1><?php $nbResultats = $resultats->response->numFound; echo $nbResultats; ?> résultats 
+  <h1><?php $nbResultats = $resultats->response->numFound; echo $nbResultats; ?> résultats
   <?php if (preg_match('/[a-z0-9]/', $query)) : ?>
 pour «&nbsp;<?php echo $query; ?>&nbsp;»
   <?php endif; ?>
@@ -54,7 +54,7 @@ foreach($facetsset as $f) : ?>
 <li>par pertinence</li>
 <?php else : ?>
 <li>par date</li>
-<li><?php 
+<li><?php
    $tmplink = $currentlink;
 $tmplink['facets'] = 'order:pertinance'.$facetslink;
 echo link_to('par pertinence', $tmplink); ?></li>
@@ -65,7 +65,7 @@ echo link_to('par pertinence', $tmplink); ?></li>
   //include_component('recherche', 'facets', array('label'=>'Pays', 'id'=>'pays', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
   ////// FACETTE Juridiction //////////
   //include_component('recherche', 'facets', array('label'=>'Juridiction', 'id'=>'juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
-include_component('recherche', 'facets', array('label'=>'Pays & Juridiction', 'id'=>'facet_pays_juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink, 'tree' => true, 'mainid' => 'pays'));
+include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction', 'id'=>'facet_pays_juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink, 'tree' => true, 'mainid' => 'pays'));
 ?>
 </div>
 <?php
