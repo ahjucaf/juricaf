@@ -1,7 +1,12 @@
 #!/bin/bash
 
 TMPFILE=/tmp/$$.json
-DB=http://localhost:5984/ahjucaf
+
+if ! test -e ../conf/juricaf.conf; then
+    echo ../conf/juricaf.conf does not exist
+    exit 1;
+fi
+. ../conf/juricaf.conf
 
 if echo $0 | grep '/' > /dev/null; then
 	cd $(echo $0 | sed 's/[^\/]*$//')
@@ -10,8 +15,8 @@ fi
 if test "$1" ; then
 echo "DELETING: please confirm "
 read AA;
-curl -X DELETE $DB
-curl -X PUT $DB
+curl -X DELETE $COUCHDBURL
+curl -X PUT $COUCHDBURL
 cd ../couchdb2solr/
 php deletesolr.php
 cd -
@@ -19,7 +24,7 @@ fi
 
 echo "Creating map/reduce stats";
 
-curl -X DELETE $DB/_design/stats?rev=$(curl --stderr /dev/null $DB/_design/stats | sed 's/.*_rev":"//' | sed 's/",".*//' 2> /dev/null)
+curl -X DELETE $COUCHDBURL/_design/stats?rev=$(curl --stderr /dev/null $COUCHDBURL/_design/stats | sed 's/.*_rev":"//' | sed 's/",".*//' 2> /dev/null)
 
 cat <<EOF > $TMPFILE
 {
@@ -39,7 +44,7 @@ cat <<EOF > $TMPFILE
 }
 EOF
 
-curl -X PUT -d "@$TMPFILE" $DB/_design/stats
+curl -X PUT -d "@$TMPFILE" $COUCHDBURL/_design/stats
 
 echo "Creating map errors";
 
@@ -61,8 +66,8 @@ cat <<EOF > $TMPFILE
 }
 EOF
 
-curl -X DELETE $DB/_design/errors?rev=$(curl --stderr /dev/null $DB/_design/errors | sed 's/.*_rev":"//' | sed 's/",".*//')
+curl -X DELETE $COUCHDBURL/_design/errors?rev=$(curl --stderr /dev/null $COUCHDBURL/_design/errors | sed 's/.*_rev":"//' | sed 's/",".*//')
 
-curl -X PUT -d "@$TMPFILE" $DB/_design/errors
+curl -X PUT -d "@$TMPFILE" $COUCHDBURL/_design/errors
 
 rm $TMPFILE

@@ -9,11 +9,11 @@ LOCK=/tmp/$O.lock
 VERBOSE=$1;
 
 #Configuration file juricaf2couchdb.conf
-if ! test -e juricaf2couchdb.conf; then
-    echo Configuration file juricaf2couchdb.conf does not exist
+if ! test -e ../conf/juricaf.conf; then
+    echo Configuration file ../conf/juricaf.conf does not exist
     exit 1;
 fi
-. juricaf2couchdb.conf
+. ../conf/juricaf.conf
 
 #Si d'un autre chemin que le repertoire local, on se déplance dans le répertoire local
 if echo $0 | grep '/' > /dev/null ;
