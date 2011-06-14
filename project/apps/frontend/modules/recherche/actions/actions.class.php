@@ -53,11 +53,9 @@ class rechercheActions extends sfActions
       }
     }
 
-    /*
     if (!count($this->facetsset) && !preg_match('/[a-z0-9]/', $this->query)) {
       return $this->redirect('@recherche');
     }
-    */
 
     if (preg_match('/_/', $solr_query))
     {
