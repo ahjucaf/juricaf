@@ -63,8 +63,8 @@ $res = (array)$obj;
 $res = cleanArray($res);
 
 if (!count($res)) {
-	fprintf(STDERR, 'id":"UNKNOWN","error":"XML parsing","reason":"Cannot parse '.$argv[1]."\"\n");
-	exit(33);
+  fprintf(STDERR, 'id":"UNKNOWN","error":"XML parsing","reason":"Cannot parse '.$argv[1]."\"\n");
+  exit(33);
 }
 
 if (!isset($res['pays']) && isset($argv[2]))
@@ -130,8 +130,8 @@ if (!isset($res['titre']))
     $formation = ', '.$res['formation'];
   $date = new DateTime($res['date_arret']);
   $res['titre'] = $res['pays'].', '.$res['juridiction'].$formation.', '.
-				     $date->format('d').' '.$mois[$date->format('m')].' '.$date->format('Y').
-				     ', décision n°'.$res['num_arret'];
+             $date->format('d').' '.$mois[$date->format('m')].' '.$date->format('Y').
+             ', décision n°'.$res['num_arret'];
 }
 $date = date_id($res['date_arret']);
 $num_arret_id = preg_replace('/[^a-z0-9]/i', '', $res['num_arret']);
@@ -168,7 +168,7 @@ if (isset($res['texte_arret']) && $res['texte_arret'])
  }
 
 if(isset($res['on_error'])) {
-  if(preg_match('/^Document/', $res['on_error'])) {
+  if(preg_match('/Document/', $res['on_error'])) {
     $res['type'] = 'error_arret';
   }
   addError($res['on_error']);
