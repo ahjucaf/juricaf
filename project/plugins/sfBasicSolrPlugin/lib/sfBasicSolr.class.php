@@ -6,7 +6,7 @@ class sfBasicSolrConnector
 
   public static function getInstance() {
     if (!self::$solr) {
-      self::$solr = new Apache_Solr_Service('localhost', 8080, '/solr');
+      self::$solr = new Apache_Solr_Service(sfConfig::get('app_solr_host'), sfConfig::get('app_solr_port'), sfConfig::get('app_solr_path'));
       if (!self::$solr->ping()) {
 	throw new Exception("Solr not ready");
       }
