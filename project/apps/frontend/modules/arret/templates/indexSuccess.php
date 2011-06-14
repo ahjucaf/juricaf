@@ -1,4 +1,5 @@
-<?php $sf_response->setTitle($document->titre.'- Juricaf.org');
+<?php
+$sf_response->setTitle($document->titre.'- Juricaf');
 
 $natureConstit = array("QPC" => "Question prioritaire de constitutionnalité",
                        "DC" => "Contrôle de constitutionnalité des lois ordinaires, lois organiques, des traités, des règlements des Assemblées",
@@ -19,7 +20,7 @@ $natureConstit = array("QPC" => "Question prioritaire de constitutionnalité",
                        "RAPP" => "Nomination des rapporteurs-adjoints",
                        "ORGA" => "Décision d'organisation du Conseil constitutionnel",
                        "AUTR" => "Autres décisions");
-
+/*
 function decrap($key) {
   $crap = array("value", "storage", "requiredProperties", "modified", "newDocument", "newAttachments", "escapingMethod");
   foreach ($crap as $value) {
@@ -50,7 +51,7 @@ function extraSub($field) {
     echo '</ul>';
   }
 }
-
+*/
 function replaceBlank($str) {
   return str_replace (' ', '_', $str);
 }
@@ -109,14 +110,16 @@ if(isset($document->references)) {
       echo '<h3>Analyses : </h3>';
       if (isset($document->analyses['analyse'])) {
         foreach($document->analyses['analyse'] as $key => $values) {
-          echo '<div>';
+          //echo '<div>';
           if(is_array($values) || is_object($values)) {
             foreach($values as $key => $value) {
-              echo '<blockquote><p>';
+              echo '<blockquote>';
               if(strpos($key, 'titre') !== false) { echo '<h2>'; }
+              else { echo '<p>'; }
               echo $value;
               if(strpos($key, 'titre') !== false) { echo '</h2>'; }
-              echo '</p></blockquote>';
+              else { echo '</p>'; }
+              echo '</blockquote>';
             }
           }
           else {
@@ -129,6 +132,7 @@ if(isset($document->references)) {
         }
         if(isset($references['CITATION_ANALYSE'])) {
         foreach($references['CITATION_ANALYSE'] as $value) {
+          echo '<blockquote><em>Références :</em><br />';
           if(isset($value['nature'], $value['date'], $value['titre'])) {
             $titre = $value['nature'].' du '.$value['date'].' sur '.$value['titre'];
           }
@@ -137,9 +141,10 @@ if(isset($document->references)) {
             echo '<a href="'.$value['url'].'">'.$titre.'</a><br />';
           }
           else { echo $titre.'<br />'; }
+          echo '</blockquote>';
         }
       }
-        echo '</div>';
+        //echo '</div>';
       }
     }
 
@@ -263,7 +268,7 @@ if(isset($document->references)) {
       echo '<hr /><h3>Publications :</h3>';
         foreach($references['PUBLICATION'] as $value) {
           if(isset($value['url'])) {
-            echo '<a href="'.$value['url'].'">'.$value['titre'].'</a><br />';
+            echo '<a href="'.htmlentities($value['url']).'">'.$value['titre'].'</a><br />';
           }
           else { echo $value['titre'].'<br />'; }
         }
@@ -288,9 +293,6 @@ if(isset($document->references)) {
       }
     }
 
-    if (isset($document->fond_documentaire)) { // penser à supprimer ça après nouveau load
-      echo '<hr /><p>Origine : <em>'.$document->fond_documentaire.'</em></p><br />';
-    }
     if (isset($document->fonds_documentaire)) {
       echo '<hr /><p>Origine : <em>'.$document->fonds_documentaire.'</em></p><br />';
     }
@@ -305,8 +307,8 @@ if(isset($document->references)) {
   echo '</p>';
   */
   ?>
-  <a href="/couchdb/_utils/document.html?ahjucaf/<?php echo $document->_id; ?>">Voir ce document dans couchdb</a>
+  <a href="/couchdb/_utils/document.html?ahjucaf/<?php echo $document->_id; ?>">Admin</a>
   </div>
 <div class="download">
-<?php echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
+<?php // echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
 </div>
