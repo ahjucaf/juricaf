@@ -1,3 +1,7 @@
 all:
   juricaf:
     xmlwebdir: "/my/directory/to/data/pool/www"
+  solr:
+    host: "localhost"
+    path: "/solr"
+    port: 8080
