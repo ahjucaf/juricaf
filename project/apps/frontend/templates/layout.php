@@ -4,9 +4,10 @@
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
-    <link rel="shortcut icon" href="/images/juricaf2.ico" />
+    <link rel="shortcut icon" href="/images/favicon.ico" />
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
+    <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
   </head>
   <body>
     <div class="site">
