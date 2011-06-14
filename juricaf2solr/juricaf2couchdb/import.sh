@@ -8,12 +8,14 @@ DATE=$(date +%Y-%m-%d_%H:%M)
 LOCK=/tmp/$O.lock
 VERBOSE=$1;
 
+PREDIR=.
+if echo $0 | grep '/' > /dev/null; then PREDIR=$(echo $0 | sed 's/\/[^\/]*$//'); fi
 #Configuration file juricaf2couchdb.conf
-if ! test -e ../conf/juricaf.conf; then
-    echo Configuration file ../conf/juricaf.conf does not exist
+if ! test -e $PREDIR/../conf/juricaf.conf; then
+    echo Configuration file $PREDIR/../conf/juricaf.conf does not exist
     exit 1;
 fi
-. ../conf/juricaf.conf
+. $PREDIR/../conf/juricaf.conf
 
 #Si d'un autre chemin que le repertoire local, on se déplance dans le répertoire local
 if echo $0 | grep '/' > /dev/null ;
