@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="bottom">
-        <p>Juricaf est un projet de l'<a href="http://www.ahjucaf.org">AHJUCAF</a>, l'association des cours suprêmes judiciaires francophones, réalisé en partenariat avec le LNLI.<br /> Il est soutenu par l'<a href="http://www.francophonie.org">Organisation internationale de la Francophonie</a>, le <a href="http://inforoutes.francophonie.org">Fonds francophone des inforoutes</a> et les réseaux institutionnels francophones.</p>
+        <p>Juricaf est un projet de l'<a href="http://www.ahjucaf.org">AHJUCAF</a>, l'association des cours suprêmes judiciaires francophones, réalisé en partenariat avec le LNLI.<br /> Il est soutenu par l'<a href="http://www.francophonie.org">Organisation internationale de la Francophonie</a>, le <a href="http://inforoutes.francophonie.org">Fonds francophone des inforoutes</a> et les réseaux institutionnels francophones.<br /><span class="w3c"><a href="http://validator.w3.org/check?verbose=1&amp;uri=<?php echo urlencode($sf_request->getUri()); ?>">XHTML 1.0 strict</a> - <a href="http://jigsaw.w3.org/css-validator/validator?profile=css21&amp;warning=0&amp;uri=<?php echo urlencode($sf_request->getUri()); ?>">CSS 2.1</a></span></p>
         <img style="margin-left: 10px;" src="/images/ahjucaf.png" alt="Association des cours judiciaires suprêmes francophones" />
         <img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
       </div>
