@@ -1,4 +1,5 @@
 <div class="stats_pays_juridiction">
+   <p>La base juricaf recense <?php echo $nb; ?> décisions de cours supprème provenant de <?php echo count($pays); ?> pays francophones. Voici le détail juridiction par juridiction de son contenu librement accessible :</p>
 <ul class="juridcols">
 <?php
 function replaceBlank($str) {
