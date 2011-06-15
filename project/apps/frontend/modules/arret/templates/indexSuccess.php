@@ -307,7 +307,7 @@ if(isset($document->references)) {
   echo '</p>';
   */
   ?>
-  <a href="/couchdb/_utils/document.html?ahjucaf/<?php echo $document->_id; ?>">Admin</a>
+  <a href="/couchdb/_utils/document.html?<?php echo sfConfig::get('app_couchdb_database');?>/<?php echo $document->_id; ?>">Admin</a>
   </div>
 <div class="download">
 <?php // echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
