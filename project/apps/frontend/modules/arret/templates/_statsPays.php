@@ -10,7 +10,7 @@ function num($num) {
 $cpt = 0;
 ?>
 <div class="payscols">
-  <p style='text-align: center;'>Rechercher parmis <?php echo num($nb); ?> arrets provenant de <?php echo count($pays); ?> pays :</p>
+  <p style='text-align: center;'>Rechercher parmi <?php echo num($nb); ?> décisions provenant de <?php echo count($pays); ?> pays francophones :</p>
 <table><tr>
 <?php
 foreach ($pays as $p)
