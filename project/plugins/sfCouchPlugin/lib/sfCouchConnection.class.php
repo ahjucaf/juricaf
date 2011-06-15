@@ -64,9 +64,9 @@ class sfCouchConnection
    */
   protected function __construct ()
   {
-    $this->options['host'] = sfConfig::get('couchdb_host', 'localhost');
-    $this->options['port'] = (int) sfConfig::get('couchdb_port', 5984);
-    $this->options['database'] = '/' . sfConfig::get('couchdb_database', 'ahjucaf') . '/';
+    $this->options['host'] = sfConfig::get('app_couchdb_host', 'localhost');
+    $this->options['port'] = (int) sfConfig::get('app_couchdb_port', 5984);
+    $this->options['database'] = '/' . sfConfig::get('app_couchdb_database', 'couchdb') . '/';
     $this->options['ip'] = gethostbyname($this->options['host']);
   }
 
