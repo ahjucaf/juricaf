@@ -7,6 +7,10 @@ class arretComponents extends sfComponents
     try{
     $this->pays = $db->get('_design/stats/_view/pays_juridiction_date?group_level=1&stale=ok')->rows;
     }catch(Exception $e) {$this->pays = null;}
+    try{
+    $nb = $db->get('_design/stats/_view/pays_juridiction_date?group_level=0&stale=ok')->rows;
+    $this->nb = array_pop(array_values($nb[0]));
+    }catch(Exception $e) {$this->nb = 0;}
   }
   public function executeStatsPaysJuridiction() {
     $db = sfCouchConnection::getInstance();
