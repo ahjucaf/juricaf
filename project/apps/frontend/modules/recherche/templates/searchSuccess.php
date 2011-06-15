@@ -101,3 +101,15 @@ foreach ($resultats->response->docs as $resultat) {
 <?php if ($nbResultats > 10) echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); ?>
 </div>
 </div>
+<script type="text/javascript">
+<!--
+resultats = $('.resultats').css('height');
+resultats = parseInt(resultats.substring(0,(resultats).length-2));
+facets = $('.facets').css('height');
+facets = parseInt(facets.substring(0,(facets).length-2));
+if(facets > resultats) {
+  $('.facets').css('height', resultats+'px');
+  $('.facets').css('overflow', 'auto');
+}
+// -->
+</script>
