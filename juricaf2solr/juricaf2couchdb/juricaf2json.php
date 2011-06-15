@@ -53,14 +53,17 @@ function cleanArray($array) {
 }
 
 function addError($str) {
-  global $errors;
+  global $errors, $res;
   if(!empty($errors)) { $sep = ", "; } else { $sep = ''; }
   $errors .= $sep.$str;
+  $res['type'] = 'error_arret';
+  $res['on_error'] = $errors;
 }
 // Chargement
 $obj = simplexml_load_file("data.xml");
 $res = (array)$obj;
 $res = cleanArray($res);
+$res['type'] = 'arret';
 
 if (!count($res)) {
   fprintf(STDERR, 'id":"UNKNOWN","error":"XML parsing","reason":"Cannot parse '.$argv[1]."\"\n");
@@ -122,6 +125,9 @@ if (!isset($res['section']) || $res['section'] == '-')
 if (preg_match('/([0-9][0-9])[\/.]([0-9][0-9])[\/.]([0-9][0-9][0-9][0-9])/', $res['date_arret'], $match))
 {
   $res['date_arret'] = $match[3].'-'.$match[2].'-'.$match[1];
+  if ($match[3] > date('Y') || $match[3] < 1000) {
+    addError("invalid date");
+  }
 }
 if (!isset($res['titre']))
 {
@@ -139,43 +145,27 @@ $num_arret_id = str_replace(';', '-', $res['num_arret']);
 $res['_id'] = ids($res['pays'].'-'.$res['juridiction'].'-'.$date.'-'.$num_arret_id);
 if (isset($res['id']))
     $res['juricaf_id'] = $res['id'];
-$res['type'] = 'arret';
 unset($res['id']);
 
 //Handle errors
 if (strlen($res['num_arret']) > 30)
 {
-  $res['type'] = 'error_arret';
   addError("num_arret trop gros");
 }
 if (preg_match('/ /', $res['num_arret']))
 {
-  $res['type'] = 'error_arret';
   addError("num_arret ne devrait pas contenir d'espace");
 }
-if (isset($res['texte_arret']) && $res['texte_arret'])
-{
-  if (!preg_match('/\n/', $res['texte_arret']))
-  {
-    $res['type'] = 'error_arret';
+if (isset($res['texte_arret']) && $res['texte_arret'] && !is_array($res['texte_arret'])) {
+  if (!preg_match('/\n/', $res['texte_arret'])) {
     addError("pas de saut de ligne dans l'arret");
   }
- } else if (isset($res['no_error']) && $res['no_error'] == 'empty_text')
+ } else if (isset($res['no_error']) && $res['no_error'] == 'empty_text') {
   unset($res['no_error']);
- else {
-   $res['type'] = 'error_arret';
-   addError("texte de l'arret manquant");
+ } else {
+  addError("texte de l'arret manquant");
  }
-
-if(isset($res['on_error'])) {
-  if(preg_match('/Document/', $res['on_error'])) {
-    $res['type'] = 'error_arret';
-  }
-  addError($res['on_error']);
-}
-if(!empty($errors)) {
-  $res['on_error'] = $errors;
-}
+unset($res['no_error']);
 print json_encode($res);
 
 
