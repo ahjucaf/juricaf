@@ -21,10 +21,10 @@
           <ul>
             <li><a href="#">A propos</a></li>
             <li><a href="#">Aide</a></li>
-            <li><a href="#">Étendue des collections</a></li>
+            <li><a href="http://v2.juricaf.org/stats">Étendue des collections</a></li>
             <li><a href="#">Outils</a></li>
             <li><a href="#">Partenaires</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="mailto:juricaf@ahjucaf.org">Contact</a></li>
             <li><a href="#">Mentions légales</a></li>
           </ul>
         </div>
@@ -56,8 +56,8 @@
         Il est soutenu par l'<a href="http://www.francophonie.org">Organisation internationale de la Francophonie</a>,
         le <a href="http://inforoutes.francophonie.org">Fonds francophone des inforoutes</a> et les réseaux institutionnels francophones.<br />
         <span class="w3c"><a href="http://validator.w3.org/check?uri=referer">XHTML 1.0</a> - <a href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3">CSS 3</a></span></p>
-        <img style="margin-left: 10px;" src="/images/ahjucaf.png" alt="Association des cours judiciaires suprêmes francophones" />
-        <img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
+        <a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
+        <a href="http://www.francophonie.org/"><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
       </div>
     </div>
     <script type="text/javascript">

@@ -6,10 +6,10 @@ default:
     content-type: text/html
 
   metas:
-    #title:        symfony project
-    #description:  symfony project
-    #keywords:     symfony, project
-    #language:     en
+    title:        Juricaf
+    description:  La base de données de jurisprudence francophone
+    keywords:     jurisprudence, cassation, cour, suprême, francophone, francophonie, ahjucaf, arrêt, décision
+    language:     fr
     #robots:       index, follow
 
   stylesheets:    [main.css]
