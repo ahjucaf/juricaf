@@ -45,8 +45,10 @@ function updateIndexer($id) {
   if (!preg_match('/^[A-Z]+\-/', $id) )
     return;
   $couchdata = json_decode(file_get_contents($couchdb_url_db.'/'.$id));
-  if (!$couchdata || !isset($couchdata->type ) || $couchdata->type != "arret")
-     return;
+  if (!$couchdata || !isset($couchdata->type ) || $couchdata->type != "arret") {
+    deleteIndexer($id);
+    return;
+  }
   unset($couchdata->_rev);
   $solrdata = '<add><doc>';
   foreach($couchdata as $k => $v) {
