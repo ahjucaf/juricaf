@@ -547,14 +547,17 @@ class sfWebResponse extends sfResponse
   /**
    * Adds a meta header.
    *
-   * @param string  $key      Name of the header
-   * @param string  $value    Meta header value (if null, remove the meta)
-   * @param bool    $replace  true if it's replaceable
-   * @param bool    $escape   true for escaping the header
+   * @param string  $key       Name of the header
+   * @param string  $value     Meta header value (if null, remove the meta)
+   * @param bool    $replace   true if it's replaceable
+   * @param bool    $escape    true for escaping the header
+   * @param bool    $lowercase false to dont convert key to lower case
    */
-  public function addMeta($key, $value, $replace = true, $escape = true)
+  public function addMeta($key, $value, $replace = true, $escape = true, $lowercase = true)
   {
-    $key = strtolower($key);
+    if ($lowercase) {
+      $key = strtolower($key);
+    }
 
     if (null === $value)
     {
