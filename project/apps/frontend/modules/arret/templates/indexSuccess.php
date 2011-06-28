@@ -259,7 +259,7 @@ Elle serait située à deux endroits :
       echo 'Type de recours : <em>'.$document->type_recours.'</em><br />';
     }
     if (isset($ecli)) {
-      echo 'Numéro ECLI : <em>'.$ecli.'</em> (non officiel) <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="explications" /><br />';
+      echo 'Numéro ECLI : <em>'.$ecli.'</em> (non officiel) <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="Identifiant européen de la jurisprudence" /><br />';
     }
 
     if (!empty($analyses)) {
@@ -374,7 +374,7 @@ Elle serait située à deux endroits :
     }
     else {
       echo '<h3>Texte : </h3>';
-      echo simple_format_text($document->texte_arret);
+      echo simple_format_text(trim($document->texte_arret));
     }
 
     if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
