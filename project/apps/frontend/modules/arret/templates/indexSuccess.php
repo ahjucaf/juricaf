@@ -1,4 +1,5 @@
 <?php
+use_helper('Text');
 
 $natureConstit = array(
       "QPC" => "Question prioritaire de constitutionnalité",
@@ -21,38 +22,6 @@ $natureConstit = array(
       "ORGA" => "Décision d'organisation du Conseil constitutionnel",
       "AUTR" => "Autres décisions"
       );
-/*
-function decrap($key) {
-  $crap = array("value", "storage", "requiredProperties", "modified", "newDocument", "newAttachments", "escapingMethod");
-  foreach ($crap as $value) {
-    if(strpos($key, $value) !== false) { $key = $value; }
-  }
-  return $key;
-}
-
-function extraSub($field) {
-  if (isset($field)) {
-    $field = (array)$field;
-    echo '<ul>';
-    foreach ($field as $key => $value)
-    {
-      if (is_array($value) || is_object($value)) {
-        if(is_object($value)) { $value = (array)$value; } ;
-        if (!in_array($key, array('texte_arret', '_attachments', '@attributes', '_rev'))) {
-          echo '<li><strong>'.decrap($key).' : </strong>';
-          $field[$key] = extraSub($value);
-        }
-      }
-      else {
-        if (!in_array($key, array('texte_arret', '_attachments', '@attributes', '_rev'))) {
-          echo '<li><strong>'.decrap($key).' : </strong>'.$value.'</li>';
-        }
-      }
-    }
-    echo '</ul>';
-  }
-}
-*/
 
 function replaceAccents($string){
   return strtr($string, 'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ', 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
@@ -86,6 +55,185 @@ if(isset($document->references)) {
     }
   }
 }
+
+// ECLI //
+
+$code_pays_euro = array(
+      "Belgique" => "BE",
+      "Bulgarie" => "BG",
+      "République tchèque" => "CZ",
+      "Danemark" => "DK",
+      "Allemagne" => "DE",
+      "Estonie" => "EE",
+      "Irlande" => "IE",
+      "Grèce" => "EL",
+      "Espagne" => "ES",
+      "France" => "FR",
+      "Italie" => "IT",
+      "Chypre" => "CY",
+      "Lettonie" => "LV",
+      "Lituanie" => "LT",
+      "Luxembourg" => "LU",
+      "Hongrie" => "HU",
+      "Malte" => "MT",
+      "Pays-Bas" => "NL",
+      "Autriche" => "AT",
+      "Pologne" => "PL",
+      "Portugal" => "PT",
+      "Roumanie" => "RO",
+      "Slovénie" => "SI",
+      "Slovaquie" => "SK",
+      "Finlande" => "FI",
+      "Suède" => "SE",
+      "Royaume-Uni" => "UK",
+      "Union européenne" => "EU"
+      );
+// http://publications.europa.eu/code/fr/fr-370100.htm
+
+$abbr_juridiction = array(
+      "Haute cour de cassation et de justice" => "HCCJ", // Roumanie
+      "Cour supérieure de justice" => "CSJ", // Luxembourg
+      "Cour constitutionnelle" => "CC", // Luxembourg
+      "Cour suprême" => "CS", // Hongrie
+      "Tribunal des conflits" => "TC",
+      "Cour de discipline budgétaire et financière" => "CDBF",
+      "Cour de cassation" => "CASS",
+      "Conseil d'état" => "CE",
+      "Conseil constitutionnel" => "CC",
+      "Cour suprême de cassation" => "CSC", // Bulgarie
+      "Cour d'arbitrage" => "CA", // Belgique
+      "Cour de justice de l'union européenne" => "CJUE"
+      );
+
+//////////////////////
+
+$contributors = '';
+
+  if(isset($document->president) || isset($document->avocat_gl) || isset($document->rapporteur) || isset($document->commissaire_gvt) || isset($document->avocats)) {
+    if (isset($document->president)) {
+      $contributors .= 'Président : <em>'.$document->president.'</em><br />'; // replace br par ' ; '
+    }
+    if (isset($document->avocat_gl)) {
+      $contributors .= 'Avocat général : <em>'.$document->avocat_gl.'</em><br />';
+    }
+    if (isset($document->rapporteur)) {
+      $contributors .= 'Rapporteur : <em>'.$document->rapporteur.'</em><br />';
+    }
+    if (isset($document->commissaire_gvt)) {
+      $contributors .= 'Commissaire gouvernement : <em>'.$document->commissaire_gvt.'</em><br />';
+    }
+    if (isset($document->avocats)) {
+      $contributors .= 'Avocats : <em>'.$document->avocats.'</em><br />';
+    }
+    $contrib = true;
+  }
+
+//////////////////////
+
+/*
+- Description : les sommaires
+- Mots-clés: Mettre les mots clés des titres principaux et secondaires
+ * */
+
+$keywords = '';
+$analyses = '';
+
+if (isset($document->analyses)) {
+  if (isset($document->analyses['analyse'])) {
+    foreach($document->analyses['analyse'] as $key => $values) {
+      if(is_array($values) || is_object($values)) {
+        foreach($values as $key => $value) {
+          if($value !== "null") {
+            $analyses .= '<blockquote>';
+            if(strpos($key, 'titre') !== false) { $analyses .= '<h2>'; $keywords .= $value.' '; }
+            else { $analyses .= '<p>'; }
+            $analyses .=  $value;
+            if(strpos($key, 'titre') !== false) { $analyses .= '</h2>'; }
+            else { $analyses .= '</p>'; }
+            $analyses .= '</blockquote>';
+          }
+        }
+      }
+      else {
+        if($values !== "null") {
+          $analyses .= '<blockquote>';
+          if(strpos($key, 'titre') !== false) { $analyses .= '<h2>';  $keywords .= $values.' '; }
+          $analyses .= $values;
+          if(strpos($key, 'titre') !== false) { $analyses .= '</h2>'; }
+          $analyses .= '</blockquote>';
+        }
+      }
+    }
+    if(isset($references['CITATION_ANALYSE'])) {
+      foreach($references['CITATION_ANALYSE'] as $value) {
+        $citation_analyse = '<blockquote><p><em>Références :</em><br />';
+        if(isset($value['nature'], $value['date'], $value['titre'])) {
+          $titre = $value['nature'].' du '.$value['date'].' sur '.$value['titre'];
+        }
+        else { $titre = $value['titre']; }
+        if(isset($value['url'])) {
+          $citation_analyse .= '<a href="'.$value['url'].'">'.$titre.'</a><br />';
+        }
+        else { $citation_analyse .= $titre.'<br />'; }
+        $citation_analyse .= '</p></blockquote>';
+      }
+    }
+  }
+}
+
+if (array_key_exists($document->pays, $code_pays_euro) && array_key_exists($document->juridiction, $abbr_juridiction)) {
+
+  $ecli = 'ECLI:'.$code_pays_euro[$document->pays].':'.$abbr_juridiction[$document->juridiction].':'.substr($document->date_arret, 0, 4).':'.$document->num_arret;
+
+  $creator = $document->juridiction;
+  if(isset($document->section)) { $creator .= ' '.$document->section; }
+
+  //$sf_response->auto_discovery_link_tag(false, 'http://purl.org/dc/elements/1.1/', 'rel="schema.DC"');
+  //<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+  //<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
+
+  // Obligatoire
+  $sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
+  $sf_response->addMeta('DC.identifier', $sf_request->getUri(), false, false, false);
+  $sf_response->addMeta('DC.isVersionOf', $ecli, false, false, false);
+  $sf_response->addMeta('DC.creator', $creator, false, false, false);
+  $sf_response->addMeta('DC.coverage', $document->pays, false, false, false);
+  $sf_response->addMeta('DC.date', $document->date_arret, false, false, false);
+  $sf_response->addMeta('DC.language', 'FR', false, false, false);
+  $sf_response->addMeta('DC.publisher', 'AHJUCAF', false, false, false);
+  $sf_response->addMeta('DC.accessRights', 'public', false, false, false);
+  $sf_response->addMeta('DC.type', 'judicial decision', false, false, false);
+
+  // Facultatif
+  // $sf_response->addMeta('DC.title', 'Noms des parties', false, false, false);
+  if(isset($document->type_affaire)) {
+    $sf_response->addMeta('DC.subject', 'Affaire '.strtolower($document->type_affaire), false, false, false);
+  }
+  if(!empty($analyses)) {
+    $sf_response->addMeta('DC.abstract', "Analyses : \n".strip_tags(str_replace('</blockquote>', " \n", $analyses)), false, false, false);
+  }
+  if(!empty($keywords)) {
+    $sf_response->addMeta('DC.description', strip_tags(str_replace('</blockquote>', " ", $keywords)), false, false, false);
+  }
+  if(isset($contrib)) {
+    $sf_response->addMeta('DC.contributor', strip_tags(str_replace('<br />', " ;\n", $contributors)), false, false, false);
+  }
+  //$sf_response->addMeta('DC.issued', 'Date de publication', false, false, false);
+  $sf_response->addMeta('DC.references', 'Références à d’autres documents juridiques + urls', false, false, false);
+  //«dcterms: references» : tu peux mettre les champs références (pas la publication)
+
+  // $sf_response->addMeta('DC.isReplacedBy', 'En cas de renumérotation', false, false, false);
+
+  /*
+
+Afin de valoriser ce numéro, il faudrait aussi mettre un mention comme celle-ci :
+Numéro ECLI : ECLI-XX-XXXX-XXXX (non officiel) puis mettre un fichier image en forme de point d'interrogation (avec quelques lignes d'explication). Cette mention serait en dessous par exemple de "§ France, Cour de cassation, 09 juin 1848, décision n°JURITEXT000007056216"
+
+Elle serait située à deux endroits :
+- dans l'affichage des termes de la recherche,
+- dans l'affichage de l'arrêt
+  */
+}
 ?>
   <div class="arret">
     <h1><?php echo '<img class="drapeau" src="/images/drapeaux/'.replaceBlank($document->pays).'.png" alt="§" /> '.$document->titre; ?></h1>
@@ -110,7 +258,18 @@ if(isset($document->references)) {
     if (isset($document->type_recours)) {
       echo 'Type de recours : <em>'.$document->type_recours.'</em><br />';
     }
+    if (isset($ecli)) {
+      echo 'Numéro ECLI : <em>'.$ecli.'</em> (non officiel) <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="explications" /><br />';
+    }
 
+    if (!empty($analyses)) {
+      echo '<hr /><h3>Analyses : </h3>';
+      echo $analyses;
+    }
+    if (!empty($citation_analyses)) {
+      echo $citation_analyses;
+    }
+/*
     $description = '';
     $keywords = '';
 
@@ -156,10 +315,11 @@ if(isset($document->references)) {
         //echo '</div>';
       }
     }
+    */
 
     if (isset($document->saisines)) {
       echo '<hr />';
-      echo '<h3>Analyses : </h3>';
+      echo '<h3>Saisine : </h3>';
       if (isset($document->saisines['saisine'])) {
         foreach($document->saisines['saisine'] as $key => $values) {
           echo '<div>';
@@ -214,7 +374,7 @@ if(isset($document->references)) {
     }
     else {
       echo '<h3>Texte : </h3>';
-      echo '<p>'.preg_replace('/\n/', '<br />', preg_replace ('/\n\n/', '</p><p>', $document->texte_arret)).'</p>';
+      echo simple_format_text($document->texte_arret);
     }
 
     if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
@@ -282,25 +442,10 @@ if(isset($document->references)) {
           }
           else { echo $value['titre'].'<br />'; }
         }
-      }
+    }
 
-    if(isset($document->president) || isset($document->avocat_gl) || isset($document->rapporteur) || isset($document->commissaire_gvt) || isset($document->avocats)) {
-      echo '<hr /><h3>Composition du Tribunal :</h3>';
-      if (isset($document->president)) {
-        echo 'Président : <em>'.$document->president.'</em><br />';
-      }
-      if (isset($document->avocat_gl)) {
-        echo 'Avocat général : <em>'.$document->avocat_gl.'</em><br />';
-      }
-      if (isset($document->rapporteur)) {
-        echo 'Rapporteur : <em>'.$document->rapporteur.'</em><br />';
-      }
-      if (isset($document->commissaire_gvt)) {
-        echo 'Commissaire gouvernement : <em>'.$document->commissaire_gvt.'</em><br />';
-      }
-      if (isset($document->avocats)) {
-        echo 'Avocats : <em>'.$document->avocats.'</em><br />';
-      }
+    if(isset($contrib)) {
+      echo '<hr /><h3>Composition du Tribunal :</h3>'.$contributors;
     }
 
     if (isset($document->fonds_documentaire)) {
@@ -309,131 +454,22 @@ if(isset($document->references)) {
     ?>
   </div>
   <div class="extra">
-  <?php
-  /*
-  echo '<h3>Extras (affichage brut des champs disponibles)</h3>';
-  echo '<p>';
-  echo extraSub($document);
-  echo '</p>';
-  */
-  ?>
-  <a href="/couchdb/_utils/document.html?<?php echo sfConfig::get('app_couchdb_database');?>/<?php echo $document->_id; ?>">Admin</a>
+    <a href="/couchdb/_utils/document.html?<?php echo sfConfig::get('app_couchdb_database');?>/<?php echo $document->_id; ?>">Admin</a>
   </div>
-<div class="download">
-<?php // echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
-</div>
-<?php
+  <div class="download">
+  <?php // echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
+  </div>
+  <?php
 ///// METAS /////
 // CLASSIQUES //
-/*
-- Description : les sommaires
-- Mots-clés: Mettre les mots clés des titres principaux et secondaires
- * */
-$sf_response->setTitle($document->titre.'- Juricaf');
-$sf_response->addMeta('Description', $description);
+$sf_response->setTitle($document->titre.' - Juricaf');
+if(!empty($analyses)) {
+  $sf_response->addMeta('Description', strip_tags(str_replace('</blockquote>', " ", $analyses)));
+}
+elseif (!empty($document->texte_arret)) {
+  $sf_response->addMeta('Description', truncate_text(strip_tags(str_replace("\n", " ", trim($document->texte_arret))), 260));
+}
+if(!empty($keywords)) {
 $sf_response->addMeta('Keywords', $keywords);
-
-// ECLI //
-
-$code_pays_euro = array(
-      "Belgique" => "BE",
-      "Bulgarie" => "BG",
-      "République tchèque" => "CZ",
-      "Danemark" => "DK",
-      "Allemagne" => "DE",
-      "Estonie" => "EE",
-      "Irlande" => "IE",
-      "Grèce" => "EL",
-      "Espagne" => "ES",
-      "France" => "FR",
-      "Italie" => "IT",
-      "Chypre" => "CY",
-      "Lettonie" => "LV",
-      "Lituanie" => "LT",
-      "Luxembourg" => "LU",
-      "Hongrie" => "HU",
-      "Malte" => "MT",
-      "Pays-Bas" => "NL",
-      "Autriche" => "AT",
-      "Pologne" => "PL",
-      "Portugal" => "PT",
-      "Roumanie" => "RO",
-      "Slovénie" => "SI",
-      "Slovaquie" => "SK",
-      "Finlande" => "FI",
-      "Suède" => "SE",
-      "Royaume-Uni" => "UK"
-      );
-// http://publications.europa.eu/code/fr/fr-370100.htm
-
-$abbr_juridiction = array(
-      "Haute cour de cassation et de justice" => "HCCJ", // Roumanie
-      "Cour supérieure de justice" => "CSJ", // Luxembourg
-      "Cour constitutionnelle" => "CC", // Luxembourg
-      "Cour suprême" => "CS", // Hongrie
-      "Tribunal des conflits" => "TC",
-      "Cour de discipline budgétaire et financière" => "CDBF",
-      "Cour de cassation" => "CASS",
-      "Conseil d'état" => "CE",
-      "Conseil constitutionnel" => "CC",
-      "Cour suprême de cassation" => "CSC", // Bulgarie
-      "Cour d'arbitrage" => "CA", // Belgique
-      "Cour de justice de l'union européenne" => "CJUE"
-      );
-
-if (array_key_exists($document->pays, $code_pays_euro) && array_key_exists($document->juridiction, $abbr_juridiction)) {
-  $creator = $document->juridiction;
-  if(isset($document->section)) { $creator .= ' '.$document->section; }
-
-  $contributors = '';
-
-  if(isset($document->president) || isset($document->avocat_gl) || isset($document->rapporteur) || isset($document->commissaire_gvt) || isset($document->avocats)) {
-    if (isset($document->president)) {
-      $contributors .= 'Président : '.$document->president.' ; ';
-    }
-    if (isset($document->avocat_gl)) {
-      $contributors .= 'Avocat général : '.$document->avocat_gl.' ; ';
-    }
-    if (isset($document->rapporteur)) {
-      $contributors .= 'Rapporteur : '.$document->rapporteur.' ; ';
-    }
-    if (isset($document->commissaire_gvt)) {
-      $contributors .= 'Commissaire gouvernement : '.$document->commissaire_gvt.' ; ';
-    }
-    if (isset($document->avocats)) {
-      $contributors .= 'Avocats : '.$document->avocats.'.';
-    }
-    $contrib = true;
-  }
-
-  //$sf_response->auto_discovery_link_tag(false, 'http://purl.org/dc/elements/1.1/', 'rel="schema.DC"');
-  //<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
-  //<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
-
-  // Obligatoire
-  $sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
-  $sf_response->addMeta('DC.identifier', $sf_request->getUri(), false, false, false);
-  $sf_response->addMeta('DC.isVersionOf', 'ECLI:'.$code_pays_euro[$document->pays].':'.$abbr_juridiction[$document->juridiction].':'.substr($document->date_arret, 0, 4).':'.$document->num_arret, false, false, false);
-  $sf_response->addMeta('DC.creator', $creator, false, false, false);
-  $sf_response->addMeta('DC.coverage', $document->pays.' '.$creator, false, false, false);
-  $sf_response->addMeta('DC.date', $document->date_arret, false, false, false);
-  $sf_response->addMeta('DC.language', 'FR', false, false, false);
-  $sf_response->addMeta('DC.publisher', 'AHJUCAF', false, false, false);
-  $sf_response->addMeta('DC.accessRights', 'public', false, false, false);
-  $sf_response->addMeta('DC.type', 'judicial decision', false, false, false);
-
-  // Facultatif
-  // $sf_response->addMeta('DC.title', 'Noms des parties', false, false, false);
-  if(isset($document->type_affaire)) {
-  $sf_response->addMeta('DC.subject', 'Affaire '.strtolower($document->type_affaire), false, false, false);
-  }
-  //$sf_response->addMeta('DC.abstract', 'Présentation, résumé de l’affaire', false, false, false);
-  $sf_response->addMeta('DC.description', 'Mots-clés', false, false, false);
-  if(isset($contrib)) {
-  $sf_response->addMeta('DC.contributor', $contributors, false, false, false);
-  }
-  //$sf_response->addMeta('DC.issued', 'Date de publication', false, false, false);
-  $sf_response->addMeta('DC.references', 'Références à d’autres documents juridiques + urls', false, false, false);
-  // $sf_response->addMeta('DC.isReplacedBy', 'En cas de renumérotation', false, false, false);
 }
 ?>
