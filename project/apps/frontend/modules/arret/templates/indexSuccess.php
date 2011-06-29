@@ -137,6 +137,7 @@ $contributors = '';
 
 $keywords = '';
 $analyses = '';
+$citations_analyses = '';
 
 if (isset($document->analyses)) {
   if (isset($document->analyses['analyse'])) {
@@ -166,17 +167,48 @@ if (isset($document->analyses)) {
     }
     if(isset($references['CITATION_ANALYSE'])) {
       foreach($references['CITATION_ANALYSE'] as $value) {
-        $citation_analyse = '<blockquote><p><em>Références :</em><br />';
         if(isset($value['nature'], $value['date'], $value['titre'])) {
           $titre = $value['nature'].' du '.$value['date'].' sur '.$value['titre'];
         }
         else { $titre = $value['titre']; }
         if(isset($value['url'])) {
-          $citation_analyse .= '<a href="'.$value['url'].'">'.$titre.'</a><br />';
+          $citations_analyses .= '<a href="'.$value['url'].'">'.$titre.'</a><br />';
         }
-        else { $citation_analyse .= $titre.'<br />'; }
-        $citation_analyse .= '</p></blockquote>';
+        else { $citations_analyses .= $titre.'<br />'; }
       }
+    }
+  }
+}
+
+//////////////////////
+
+$citations_arret = '';
+$sources = '';
+
+if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
+  if(isset($references['CITATION_ARRET'])) {
+    foreach($references['CITATION_ARRET'] as $value) {
+      if(isset($value['nature'], $value['date'], $value['titre'])) {
+        $titre = $value['nature'].' du '.$value['date'].' sur '.$value['titre'];
+      }
+      else { $titre = $value['titre']; }
+      if(isset($value['url'])) {
+        $citations_arret .= '<a href="'.$value['url'].'">'.$titre.'</a><br />';
+      }
+      else { $citations_arret .=  $titre.'<br />'; }
+    }
+  }
+
+  if(isset($references['SOURCE'])) {
+    foreach($references['SOURCE'] as $value) {
+      if(isset($value['nature'], $value['date'], $value['titre'])) {
+        $titre = $value['nature'].' du '.$value['date'].' sur '.$value['titre'];
+      }
+      else { $titre = $value['titre']; }
+      if(isset($value['url'])) {
+        $sources .= '<a href="'.$value['url'].'">'.$titre.'</a><br />';
+      }
+      else { $sources .= $titre.'<br />'; }
     }
   }
 }
@@ -187,6 +219,13 @@ if (array_key_exists($document->pays, $code_pays_euro) && array_key_exists($docu
 
   $creator = $document->juridiction;
   if(isset($document->section)) { $creator .= ' '.$document->section; }
+
+  $citations = '';
+
+  if (!empty($citations_analyses)) { $citations .= $citations_analyses; }
+  if (!empty($citations_arret)) { $citations .= $citations_arret; }
+  if (!empty($sources)) { $citations .= $sources; }
+
 
   //$sf_response->auto_discovery_link_tag(false, 'http://purl.org/dc/elements/1.1/', 'rel="schema.DC"');
   //<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
@@ -219,20 +258,10 @@ if (array_key_exists($document->pays, $code_pays_euro) && array_key_exists($docu
     $sf_response->addMeta('DC.contributor', strip_tags(str_replace('<br />', " ;\n", $contributors)), false, false, false);
   }
   //$sf_response->addMeta('DC.issued', 'Date de publication', false, false, false);
-  $sf_response->addMeta('DC.references', 'Références à d’autres documents juridiques + urls', false, false, false);
-  //«dcterms: references» : tu peux mettre les champs références (pas la publication)
-
+  if (!empty($citations)) {
+    $sf_response->addMeta('DC.references', strip_tags(str_replace('<br />', " ;\n", $citations)), false, false, false);
+  }
   // $sf_response->addMeta('DC.isReplacedBy', 'En cas de renumérotation', false, false, false);
-
-  /*
-
-Afin de valoriser ce numéro, il faudrait aussi mettre un mention comme celle-ci :
-Numéro ECLI : ECLI-XX-XXXX-XXXX (non officiel) puis mettre un fichier image en forme de point d'interrogation (avec quelques lignes d'explication). Cette mention serait en dessous par exemple de "§ France, Cour de cassation, 09 juin 1848, décision n°JURITEXT000007056216"
-
-Elle serait située à deux endroits :
-- dans l'affichage des termes de la recherche,
-- dans l'affichage de l'arrêt
-  */
 }
 ?>
   <div class="arret">
@@ -266,56 +295,9 @@ Elle serait située à deux endroits :
       echo '<hr /><h3>Analyses : </h3>';
       echo $analyses;
     }
-    if (!empty($citation_analyses)) {
-      echo $citation_analyses;
+    if (!empty($citations_analyses)) {
+      echo '<blockquote><p><em>Références :</em><br />'.$citations_analyses.'</p></blockquote>';
     }
-/*
-    $description = '';
-    $keywords = '';
-
-    if (isset($document->analyses)) {
-      echo '<hr />';
-      echo '<h3>Analyses : </h3>';
-      if (isset($document->analyses['analyse'])) {
-        foreach($document->analyses['analyse'] as $key => $values) {
-          //echo '<div>';
-          if(is_array($values) || is_object($values)) {
-            foreach($values as $key => $value) {
-              echo '<blockquote>';
-              if(strpos($key, 'titre') !== false) { echo '<h2>'; $description .= ' '.$value; $keywords .= ' '.$value;}
-              else { echo '<p>'; $description .= ' '.$value; }
-              echo $value;
-              if(strpos($key, 'titre') !== false) { echo '</h2>'; }
-              else { echo '</p>'; }
-              echo '</blockquote>';
-            }
-          }
-          else {
-            echo '<blockquote><p>';
-              if(strpos($key, 'titre') !== false) { echo '<h2>'; }
-              echo $values;
-              if(strpos($key, 'titre') !== false) { echo '</h2>'; }
-              echo '</p></blockquote>';
-          }
-        }
-        if(isset($references['CITATION_ANALYSE'])) {
-        foreach($references['CITATION_ANALYSE'] as $value) {
-          echo '<blockquote><p><em>Références :</em><br />';
-          if(isset($value['nature'], $value['date'], $value['titre'])) {
-            $titre = $value['nature'].' du '.$value['date'].' sur '.$value['titre'];
-          }
-          else { $titre = $value['titre']; }
-          if(isset($value['url'])) {
-            echo '<a href="'.$value['url'].'">'.$titre.'</a><br />';
-          }
-          else { echo $titre.'<br />'; }
-          echo '</p></blockquote>';
-        }
-      }
-        //echo '</div>';
-      }
-    }
-    */
 
     if (isset($document->saisines)) {
       echo '<hr />';
@@ -376,7 +358,13 @@ Elle serait située à deux endroits :
       echo '<h3>Texte : </h3>';
       echo simple_format_text(trim($document->texte_arret));
     }
-
+    if (!empty($citations_arret) || !empty($sources)) {
+      echo '<p><em>Références : </em><br />';
+      if (!empty($citations_arret)) { echo $citations_arret; }
+      if (!empty($sources)) { echo $sources; }
+      echo '</p>';
+    }
+/*
     if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
       echo '<p><em>Références : </em><br />';
       if(isset($references['CITATION_ARRET'])) {
@@ -406,7 +394,7 @@ Elle serait située à deux endroits :
       }
       echo '</p>';
     }
-
+*/
     if(isset($document->nor) || isset($document->ecli) || isset($document->numeros_affaires)) {
       echo '<hr />';
       if (isset($document->nor)) {
