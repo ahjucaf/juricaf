@@ -15,7 +15,7 @@
         <div class="reseaux_sociaux">
           <a href="https://www.facebook.com/pages/Juricaf/199894740035999"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook" /></a>
           <a href="https://twitter.com/#!/juricaf"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter" /></a>
-          <a href="#"><img src="/images/rss.png" alt="RSS" title="Flux RSS" /></a>
+          <a href="http://search.twitter.com/search.atom?q=+from%3Ajuricaf"><img src="/images/rss.png" alt="RSS" title="Flux RSS" /></a>
         </div>
         <div class="menu">
           <ul>
