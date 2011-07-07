@@ -1,4 +1,8 @@
-<?php if (count($facets) > 0) : ?>
+<?php 
+function facet_link_to($t, $l) {
+  return link_to($t, preg_replace("/\'/", '’', $l));
+}
+if (count($facets) > 0) : ?>
 <p><strong><?php echo $label; ?></strong></p>
 <ul><?php
 foreach($facets as $k => $v) {
@@ -9,7 +13,7 @@ foreach($facets as $k => $v) {
     if (preg_match('/'.$facet.'/', $facetslink))
       echo $k."&nbsp;(".$v['count'].")";
     else
-      echo link_to($k."&nbsp;(".$v['count'].")", '@recherche_resultats?query='.$query.'&facets='.$facet.$facetslink);
+      echo facet_link_to($k."&nbsp;(".$v['count'].")", '@recherche_resultats?query='.$query.'&facets='.$facet.$facetslink);
     if (count($v['sub'])) {
       echo '<ul>';
       foreach ($v['sub'] as $f => $o) {
@@ -18,7 +22,7 @@ foreach($facets as $k => $v) {
 	if (preg_match('/'.$facet.'/', $facetslink) || $o['count'] == $v['count'])
 	  echo $f."&nbsp;(".$o['count'].")";
 	else
-	  echo link_to($f."&nbsp;(".$o['count'].")", '@recherche_resultats?query='.$query.'&facets='.$facet.$facetslink);
+	  echo facet_link_to($f."&nbsp;(".$o['count'].")", '@recherche_resultats?query='.$query.'&facets='.$facet.$facetslink);
 	echo '</li>';
       }
       echo '</ul>';
