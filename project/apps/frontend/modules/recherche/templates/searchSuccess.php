@@ -1,5 +1,8 @@
-<?php $sf_response->setTitle('Résultats de votre recherche - Juricaf.org'); ?>
-<?php
+<?php 
+$nbResultats = $resultats->response->numFound; 
+$sf_response->setTitle('Résultats pour « '.$query.'» - Juricaf');
+$sf_response->addMeta('description', $nbResultats.' arrêts correspondant à la recherche « '.$query.' »');
+$sf_response->addMeta('keywords', $query);
 use_helper('Text');
 
 function replaceBlank($str) {
@@ -7,7 +10,7 @@ function replaceBlank($str) {
 }
 ?>
 <div class="recherche">
-  <h1><?php $nbResultats = $resultats->response->numFound; echo $nbResultats; ?> résultats
+  <h1><?php echo $nbResultats; ?> résultats
   <?php if (preg_match('/[a-z0-9]/i', $query)) : ?>
 pour «&nbsp;<?php echo $query; ?>&nbsp;»
   <?php endif; ?>
