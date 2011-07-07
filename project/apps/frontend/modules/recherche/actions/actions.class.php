@@ -16,6 +16,7 @@ class rechercheActions extends sfActions
     if($request->getParameter('q')) {
       $search = strip_tags($request->getParameter('q'));
       $search = preg_replace('/[\/\{\}\[\]\<\>]/', '', $search);
+      $search = preg_replace("/\'/", '’', $search);
       $this->redirect('@recherche_resultats?query='.$search);
     }
   }
@@ -23,7 +24,7 @@ class rechercheActions extends sfActions
   public function executeSearch(sfWebRequest $request)
   {
     $solr = new sfBasicSolr();
-    $this->query = preg_replace('/[<>]/', '', $request->getParameter('query', 'Suisse'));
+    $this->query = preg_replace('/’/', "'", preg_replace('/[<>]/', '', $request->getParameter('query', 'Suisse')));
     $this->getUser()->setAttribute('query', $this->query);
     $solr_query = strtolower($this->query);
 
@@ -37,7 +38,7 @@ class rechercheActions extends sfActions
 
     $this->facetsset = array();
     $this->facetslink = '';
-    if ($f = preg_replace('/[<>]/', '', $request->getParameter('facets'))) {
+    if ($f = preg_replace('/’/', "'", preg_replace('/[<>]/', '', $request->getParameter('facets')))) {
       $this->facetsset = preg_split('/,/', $f);
       sort($this->facetsset);
       $this->facetslink = ','.implode(',', $this->facetsset);
