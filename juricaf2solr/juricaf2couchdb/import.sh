@@ -5,11 +5,15 @@ LISTPOOL=files.list
 JSONFILE=test.json
 LOG=/tmp/import.$$.log
 DATE=$(date +%Y-%m-%d_%H:%M)
-LOCK=/tmp/$O.lock
+LOCK=/tmp/$0.lock
 VERBOSE=$1;
 
 PREDIR=.
-if echo $0 | grep '/' > /dev/null; then PREDIR=$(echo $0 | sed 's/\/[^\/]*$//'); fi
+if echo $0 | grep '/' > /dev/null; then 
+    PREDIR=$(echo $0 | sed 's/\/[^\/]*$//'); 
+    LOCK=/tmp/$(echo $0 | sed "s|$PREDIR||").lock
+fi
+
 #Configuration file juricaf2couchdb.conf
 if ! test -e $PREDIR/../conf/juricaf.conf; then
     echo Configuration file $PREDIR/../conf/juricaf.conf does not exist
@@ -33,9 +37,14 @@ then
 fi
 echo $$ > $LOCK
 
-rm -f $LISTPOOL $JSONFILE 2> /dev/null
+rm -f $JSONFILE 2> /dev/null
 
 find $DIRPOOL -type f  | grep -v .svn > $LISTPOOL
+
+function update2couch {
+	REV=$(curl -H"Content-Type: application/json" -s "$COUCHDBURL/$CONFLICTID"  | sed 's/.*"_rev":"//' | sed 's/".*//')
+	php updatejson4couchdb.php $JSONFILE $CONFLICTID $REV | curl -H"Content-Type: application/json" -s -d @/dev/stdin  -X POST "$COUCHDBURL/_bulk_docs" | sed 's/$/"updated"/' >> $LOG 
+}
 
 #send json file to couchdb
 function add2couch {
@@ -44,9 +53,13 @@ function add2couch {
     fi
     sed 's/^/{"docs":[/' $JSONFILE | sed 's/,$/]}/' > $JSONFILE.tmp;
     mv $JSONFILE.tmp $JSONFILE ;
-    curl -H"Content-Type: application/json" -s -d @$JSONFILE  -X POST "$COUCHDBURL/_bulk_docs" | sed 's/"},{"/\n/g' >> $LOG
+    curl -H"Content-Type: application/json" -s -d @$JSONFILE  -X POST "$COUCHDBURL/_bulk_docs" | sed 's/"},{"/\n/g' >> $LOG.tmp
+    grep -v '"conflict"' $LOG.tmp >> $LOG
+    for CONFLICTID in $(grep '"conflict"' $LOG.tmp | sed 's/.*id":"//' | sed 's/".*//') ; do
+	update2couch
+    done
     cpt=0;
-    rm $JSONFILE ;
+    rm $JSONFILE $LOG.tmp;
 }
 
 cpt=0;
@@ -117,8 +130,7 @@ if test -e $LOG ; then
     echo "====================================================="
     echo
 
-    sed 's/^\[."//' $LOG | grep 'id":"' | awk -F '"' '{ if ( $11 != "" ) print $3" not imported ("$11")" ; else print $3" imported" ; }'
+    sed 's/^\[."//' $LOG | grep 'id":"' | awk -F '"' '{ if ( $11 != "" ) print $3" not imported ("$11")" ; else if ( $9 == "updated" ) print $3" updated"; else print $3" imported" ; }'
 fi
 rm $LISTPOOL $LOG $LOCK 2> /dev/null
 cd - > /dev/null 2>&1
-
