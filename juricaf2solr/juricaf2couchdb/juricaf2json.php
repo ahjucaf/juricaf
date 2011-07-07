@@ -165,6 +165,10 @@ if (isset($res['texte_arret']) && $res['texte_arret'] && !is_array($res['texte_a
  } else {
   addError("texte de l'arret manquant");
  }
+if (preg_match('/\-\-/', $res['_id'])) {
+  fprintf(STDERR, 'id":"UNKNOWN","error":"wrong_id","reason":"Empty id is invalid '.preg_replace('/\n/', '', print_r($res, true))."\"\n");
+  exit(32);
+}
 unset($res['no_error']);
 print json_encode($res);
 
