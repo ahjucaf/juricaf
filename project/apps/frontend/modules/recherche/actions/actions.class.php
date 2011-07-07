@@ -17,6 +17,10 @@ class rechercheActions extends sfActions
       $search = strip_tags($request->getParameter('q'));
       $search = preg_replace('/[\/\{\}\[\]\<\>]/', '', $search);
       $search = preg_replace("/\'/", '’', $search);
+      $count = count_chars($search, 1);
+      if ($count[ord('"')] % 2) {
+	$search = preg_replace ('/"/', '', $search);
+      }
       $this->redirect('@recherche_resultats?query='.$search);
     }
   }
