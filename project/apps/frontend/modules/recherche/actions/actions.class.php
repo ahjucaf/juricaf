@@ -56,6 +56,10 @@ class rechercheActions extends sfActions
 	$solr_query = ' '.preg_replace('/ order:pertinance/', '', $solr_query);
 	unset($param['sort']);
       }
+      if (preg_match('/order:chrono/', $solr_query)) {
+	$solr_query = ' '.preg_replace('/ order:chrono/', '', $solr_query);
+	$param['sort'] = 'date_arret asc';
+      }
     }
 
     if (!count($this->facetsset) && !preg_match('/[a-z0-9]/i', $this->query)) {
