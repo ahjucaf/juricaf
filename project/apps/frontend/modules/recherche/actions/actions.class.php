@@ -31,6 +31,7 @@ class rechercheActions extends sfActions
     $this->query = preg_replace('/’/', "'", preg_replace('/[<>]/', '', $request->getParameter('query', 'Suisse')));
     $this->getUser()->setAttribute('query', $this->query);
     $solr_query = strtolower($this->query);
+    $solr_query = preg_replace('/_([^ :]*):/', '=\1:', $solr_query);
 
     $param = array('hl' => 'true');
     if (!preg_match('/\:\*/', $solr_query)) {
