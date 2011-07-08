@@ -36,7 +36,10 @@ foreach($facetsset as $f) : ?>
        $tmplink['facets'] = preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/'.preg_replace('/\|/', '\\\|', $f).',?/', '', $myfacetslink)));
        echo link_to('[X] Résultats filtrés sur <em>'.$text.'</em>', $tmplink);
      }else {
-     echo link_to('[X] Résultats trié par pertinence', $noorderlink);
+     if (preg_match('/order:perti/', $f))
+       echo link_to('[X] Résultats trié par pertinence', $noorderlink);
+     else if (preg_match('/order:chrono/', $f))
+       echo link_to('[X] Résultats trié dans l\'ordre chronologique', $noorderlink);       
      }
 ?></div>
    <?php endforeach; ?>
@@ -52,16 +55,27 @@ foreach($facetsset as $f) : ?>
 ?>
 <p><strong>Tri</strong></p>
 <ul>
-<?php if (preg_match('/order:/', $facetslink)) :?>
-<li><?php echo link_to('par date', $noorderlink); ?></li>
-<li>par pertinence</li>
-<?php else : ?>
-<li>par date</li>
+<?php if (!preg_match('/order:/', $facetslink)) :?>
+<li>antéchronologique</li>
+<? else : ?>
+<li><?php echo link_to('antéchronologique', $noorderlink); ?></li>
+<? endif; ?>
+<?php if (preg_match('/order:chrono/', $facetslink)) :?>
+<li>chronologique</li>
+<? else : ?>
 <li><?php
-   $tmplink = $currentlink;
-$tmplink['facets'] = 'order:pertinance'.$facetslink;
+$tmplink = $currentlink;
+$tmplink['facets'] = 'order:chrono'.preg_replace('/order:[a-z]*,/', '', $facetslink);
+echo link_to('chronologique', $tmplink); ?></li>
+<? endif; ?>
+<?php if (preg_match('/order:pertinance/', $facetslink)) :?>
+<li>par pertinance</li>
+<? else : ?>
+<li><?php
+$tmplink = $currentlink;
+$tmplink['facets'] = 'order:pertinance'.preg_replace('/order:[a-z]*,/', '', $facetslink);
 echo link_to('par pertinence', $tmplink); ?></li>
-<?php endif; ?>
+<? endif; ?>
 </ul>
 <?php
   ////// FACETTE Pays //////////
