@@ -23,8 +23,18 @@ $natureConstit = array(
       "AUTR" => "Autres décisions"
       );
 
-function replaceAccents($string){
-  return strtr($string, 'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ', 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+function replaceAccents($string) {
+    $table = array(
+        'Š'=>'S', 'š'=>'s', 'Đ'=>'Dj', 'đ'=>'dj', 'Ž'=>'Z', 'ž'=>'z', 'Č'=>'C', 'č'=>'c', 'Ć'=>'C', 'ć'=>'c',
+        'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
+        'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O',
+        'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss',
+        'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e',
+        'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o',
+        'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b',
+        'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r',
+    );
+    return strtr($string, $table);
 }
 
 function replaceBlank($str) {
@@ -97,7 +107,7 @@ $abbr_juridiction = array(
       "Cour suprême" => "CS", // Hongrie
       "Tribunal des conflits" => "TC",
       "Cour de discipline budgétaire et financière" => "CDBF",
-      "Cour de cassation" => "CASS",
+      "Cour de cassation" => "CCASS",
       "Conseil d'état" => "CE",
       "Conseil constitutionnel" => "CC",
       "Cour suprême de cassation" => "CSC", // Bulgarie
@@ -263,9 +273,56 @@ if (array_key_exists($document->pays, $code_pays_euro) && array_key_exists($docu
   }
   // $sf_response->addMeta('DC.isReplacedBy', 'En cas de renumérotation', false, false, false);
 }
+////////////////
+// urn:lex
+////////////////
+
+$urnlex_reserved = array(
+      "%",
+      "/",
+      "?",
+      "#",
+      "@",
+      "$",
+      ":",
+      ";",
+      "+",
+      ",",
+      "~",
+      "*",
+      "!"
+      );
+
+$urnlex_unauthorized = array( // remplacé par un espace
+      " de la ",
+      " et de ",
+      " de l'",
+      " des ",
+      " de ",
+      " d'",
+      " et "
+      );
+
+if (array_key_exists($document->pays, $code_pays_euro)) {
+
+  $juridiction = str_replace($urnlex_unauthorized, " ", $document->juridiction);
+  $juridiction = str_replace(" ", ".", $juridiction);
+  $juridiction = replaceAccents($juridiction);
+
+  if(in_array($document->type_affaire, $natureConstit)) {
+    $type = $document->type_affaire;
+  }
+  else {
+    $type = $document->type;
+  }
+
+  $num = str_replace($urnlex_reserved, "", $document->num_arret);
+
+  $urnlex = strtolower('urn:lex;'.$code_pays_euro[$document->pays].';'.$juridiction.';'.$type.';'.$document->date_arret.';'.$num);
+}
 ?>
   <div class="arret">
-    <h1><?php echo '<img class="drapeau" src="/images/drapeaux/'.replaceBlank($document->pays).'.png" alt="§" /> '.$document->titre; ?></h1>
+    <h1><?php echo '<img class="drapeau" src="/images/drapeaux/'.urlencode(replaceBlank($document->pays)).'.png" alt="§" /> '.$document->titre; ?></h1>
     <?php
     if (isset($document->titre_supplementaire)) {
       echo '<h2>'.$document->titre_supplementaire.'</h2>';
@@ -287,8 +344,13 @@ if (array_key_exists($document->pays, $code_pays_euro) && array_key_exists($docu
     if (isset($document->type_recours)) {
       echo 'Type de recours : <em>'.$document->type_recours.'</em><br />';
     }
+    echo '<br />';
     if (isset($ecli)) {
-      echo 'Numéro ECLI : <em>'.$ecli.'</em> (non officiel) <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="Identifiant européen de la jurisprudence" /><br />';
+      echo 'Identifiant ECLI : <em>'.$ecli.'</em> (non officiel) <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="Identifiant européen de la jurisprudence" /><br />';
+    }
+
+    if (isset($urnlex)) {
+      echo 'Identifiant URN:LEX : <em>'.$urnlex.'</em> <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="A Uniform Resource Name (URN) Namespace for Sources of Law (LEX)" /><br />';
     }
 
     if (!empty($analyses)) {
