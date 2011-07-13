@@ -16,6 +16,7 @@
           <a href="https://www.facebook.com/pages/Juricaf/199894740035999"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook" /></a>
           <a href="https://twitter.com/#!/juricaf"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter" /></a>
           <a href="http://search.twitter.com/search.atom?q=+from%3Ajuricaf"><img src="/images/rss.png" alt="RSS" title="Flux RSS" /></a>
+          <a href="javascript:juricafSearch();"><img src="/images/juricaf_search.png" alt="J" title="Ajouter Juricaf aux moteurs de recherches de votre navigateur" /></a>
         </div>
         <div class="menu">
           <ul>
@@ -49,10 +50,11 @@
           </div>
           <hr />
           <?php echo $sf_content; ?>
+          <div style="text-align: right;"><a id="top" href="#">Haut de page</a></div>
         </div>
       </div>
       <div class="bottom">
-        <p>Juricaf est un projet de l'<a href="http://www.ahjucaf.org">AHJUCAF</a>, l'association des cours suprêmes judiciaires francophones, réalisé en partenariat avec le LNLI.<br />
+        <p>Juricaf est un projet de l'<a href="http://www.ahjucaf.org">AHJUCAF</a>, l'association des cours suprêmes judiciaires francophones, réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;II).
         Il est soutenu par l'<a href="http://www.francophonie.org">Organisation internationale de la Francophonie</a>,
         le <a href="http://inforoutes.francophonie.org">Fonds francophone des inforoutes</a> et les réseaux institutionnels francophones.<br />
         <span class="w3c"><a href="http://validator.w3.org/check?uri=referer">XHTML 1.0</a> - <a href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3">CSS 3</a></span></p>
@@ -62,6 +64,17 @@
     </div>
     <script type="text/javascript">
     <!--
+    function juricafSearch() {
+      if (window.external && ("AddSearchProvider" in window.external)) {
+        window.external.AddSearchProvider("http://v2.juricaf.org/juricaf.xml");
+      }
+      else {
+         alert("Votre navigateur ne supporte pas cette fonctionnalité");
+      }
+    }
+
+    $('#top').attr('href', 'javascript:$.scrollTo("body", 500);');
+
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-8802834-4']);
     _gaq.push(['_trackPageview']);
