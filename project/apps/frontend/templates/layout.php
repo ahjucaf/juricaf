@@ -54,7 +54,7 @@
         </div>
       </div>
       <div class="bottom">
-        <p>Juricaf est un projet de l'<a href="http://www.ahjucaf.org">AHJUCAF</a>, l'association des cours suprêmes judiciaires francophones, réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;II).
+        <p>Juricaf est un projet de l'<a href="http://www.ahjucaf.org">AHJUCAF</a>, l'association des cours suprêmes judiciaires francophones, réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;II).<br />
         Il est soutenu par l'<a href="http://www.francophonie.org">Organisation internationale de la Francophonie</a>,
         le <a href="http://inforoutes.francophonie.org">Fonds francophone des inforoutes</a> et les réseaux institutionnels francophones.<br />
         <span class="w3c"><a href="http://validator.w3.org/check?uri=referer">XHTML 1.0</a> - <a href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3">CSS 3</a></span></p>
