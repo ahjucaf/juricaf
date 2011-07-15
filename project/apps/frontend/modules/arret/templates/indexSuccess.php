@@ -86,7 +86,7 @@ $code_pays_euro = array(
       "Luxembourg" => "LU",
       "Hongrie" => "HU",
       "Malte" => "MT",
-      "Pays-Bas" => "NL",
+      "Pays-bas" => "NL",
       "Autriche" => "AT",
       "Pologne" => "PL",
       "Portugal" => "PT",
@@ -95,7 +95,7 @@ $code_pays_euro = array(
       "Slovaquie" => "SK",
       "Finlande" => "FI",
       "Suède" => "SE",
-      "Royaume-Uni" => "UK",
+      "Royaume-uni" => "UK",
       "Union européenne" => "EU"
       );
 // http://publications.europa.eu/code/fr/fr-370100.htm
@@ -293,7 +293,7 @@ $urnlex_reserved = array(
       "!"
       );
 
-$urnlex_unauthorized = array( // remplacé par un espace
+$urnlex_unauthorized = array(
       " de la ",
       " et de ",
       " de l'",
@@ -303,13 +303,271 @@ $urnlex_unauthorized = array( // remplacé par un espace
       " et "
       );
 
-if (array_key_exists($document->pays, $code_pays_euro)) {
+$pays_iso3166 = array(
+      "Afghanistan" => "AF",
+      "Afrique du sud" => "ZA",
+      //"Aland, îles" => "AX",
+      "Albanie" => "AL",
+      "Algérie" => "DZ",
+      "Allemagne" => "DE",
+      "Andorre" => "AD",
+      "Angola" => "AO",
+      "Anguilla" => "AI",
+      "Antarctique" => "AQ",
+      "Antigua-et-barbuda" => "AG",
+      "Arabie saoudite" => "SA",
+      "Argentine" => "AR",
+      "Arménie" => "AM",
+      "Aruba" => "AW",
+      "Australie" => "AU",
+      "Autriche" => "AT",
+      "Azerbaïdjan" => "AZ",
+      "Bahamas" => "BS",
+      "Bahreïn" => "BH",
+      "Bangladesh" => "BD",
+      "Barbade" => "BB",
+      "Bélarus" => "BY",
+      "Belgique" => "BE",
+      "Belize" => "BZ",
+      "Bénin" => "BJ",
+      "Bermudes" => "BM",
+      "Bhoutan" => "BT",
+      "Bolivie" => "BO",
+      //"bonaire, saint-eustache et saba" => "BQ",
+      "Bosnie-herzégovine" => "BA",
+      "Botswana" => "BW",
+      //"bouvet, île" => "BV",
+      "Brésil" => "BR",
+      "Brunéi-darussalam" => "BN",
+      "Bulgarie" => "BG",
+      "Burkina faso" => "BF",
+      "Burundi" => "BI",
+      //"Caïmanes, îles" => "KY",
+      "Cambodge" => "KH",
+      "Cameroun" => "CM",
+      "Canada" => "CA",
+      "Cap-vert" => "CV",
+      //"centrafricaine, république" => "CF",
+      "Centrafrique" => "CF",
+      "Chili" => "CL",
+      "Chine" => "CN",
+      //"christmas, île" => "CX",
+      "Chypre" => "CY",
+      //"cocos (keeling), îles" => "CC",
+      "Colombie" => "CO",
+      "Comores" => "KM",
+      "Congo" => "CG",
+      "Congo démocratique" => "CD",
+      //"Cook, îles" => "CK",
+      //"Corée, république de" => "KR",
+      //"Corée, république populaire démocratique de" => "KP",
+      "Costa rica" => "CR",
+      "Côte d-ivoire" => "CI",
+      "Croatie" => "HR",
+      "Cuba" => "CU",
+      "Curaçao" => "CW",
+      "Danemark" => "DK",
+      "Djibouti" => "DJ",
+      //"dominicaine, république" => "DO",
+      "Dominique" => "DM",
+      "Égypte" => "EG",
+      //"el Salvador" => "SV",
+      "Émirats arabes unis" => "AE",
+      "Équateur" => "EC",
+      "Érythrée" => "ER",
+      "Espagne" => "ES",
+      "Estonie" => "EE",
+      "États-unis" => "US",
+      "Éthiopie" => "ET",
+      //"Falkland, îles (mal vinas)" => "FK",
+      //"féroé, îles" => "FO",
+      "Fidji" => "FJ",
+      "Finlande" => "FI",
+      "France" => "FR",
+      "Gabon" => "GA",
+      "Gambie" => "GM",
+      "Géorgie" => "GE",
+      //"Géorgie du sud et les îles sandwich du sud" => "GS",
+      "Ghana" => "GH",
+      "Gibraltar" => "GI",
+      "Grèce" => "GR",
+      "Grenade" => "GD",
+      "Groenland" => "GL",
+      "Guadeloupe" => "GP",
+      "Guam" => "GU",
+      "Guatemala" => "GT",
+      "Guernesey" => "GG",
+      "Guinée" => "GN",
+      "Guinée-bissau" => "GW",
+      "Guinée équatoriale" => "GQ",
+      "Guyane" => "GY",
+      "Guyane française" => "GF",
+      "Haïti" => "HT",
+      //"heard, île et mcdonald, îles" => "HM",
+      "Honduras" => "HN",
+      "Hong-kong" => "HK",
+      "Hongrie" => "HU",
+      "Île de man" => "IM",
+      //"îles mineures éloignées des états-unis" => "UM",
+      //"îles vierges britanniques" => "VG",
+      //"îles vierges des états-unis" => "VI",
+      "Inde" => "IN",
+      "Indonésie" => "ID",
+      "Iran" => "IR",
+      "Iraq" => "IQ",
+      "Irlande" => "IE",
+      "Islande" => "IS",
+      "Israël" => "IL",
+      "Italie" => "IT",
+      "Jamaïque" => "JM",
+      "Japon" => "JP",
+      "Jersey" => "JE",
+      "Jordanie" => "JO",
+      "Kazakhstan" => "KZ",
+      "Kenya" => "KE",
+      "Kirghizistan" => "KG",
+      "Kiribati" => "KI",
+      "Koweït" => "KW",
+      //"Lao, république démocratique populaire" => "LA",
+      "Lesotho" => "LS",
+      "Lettonie" => "LV",
+      "Liban" => "LB",
+      "Libéria" => "LR",
+      "libye" => "LY",
+      "Liechtenstein" => "LI",
+      "Lituanie" => "LT",
+      "Luxembourg" => "LU",
+      "Macao" => "MO",
+      "Macédoine" => "MK",
+      "Madagascar" => "MG",
+      "Malaisie" => "MY",
+      "Malawi" => "MW",
+      "Maldives" => "MV",
+      "Mali" => "ML",
+      "Malte" => "MT",
+      //"Mariannes du nord, îles" => "MP",
+      "Maroc" => "MA",
+      "Marshall, îles" => "MH",
+      "Martinique" => "MQ",
+      "Maurice" => "MU",
+      "Mauritanie" => "MR",
+      "Mayotte" => "YT",
+      "Mexique" => "MX",
+      //"Micronésie, états fédérés de" => "FM",
+      //"moldova, république de" => "MD",
+      "Monaco" => "MC",
+      "Mongolie" => "MN",
+      "Monténégro" => "ME",
+      "Montserrat" => "MS",
+      "Mozambique" => "MZ",
+      "Myanmar" => "MM",
+      "Namibie" => "NA",
+      "Nauru" => "NR",
+      "Népal" => "NP",
+      "Nicaragua" => "NI",
+      "Niger" => "NE",
+      "Nigeria" => "NG",
+      "Niué" => "NU",
+      //"norfolk, île" => "NF",
+      "Norvège" => "NO",
+      "Nouvelle-Calédonie" => "NC",
+      "Nouvelle-Zélande" => "NZ",
+      //"océan indien, territoire britannique de l'" => "IO",
+      "Oman" => "OM",
+      "Ouganda" => "UG",
+      "Ouzbékistan" => "UZ",
+      "Pakistan" => "PK",
+      "Palaos" => "PW",
+      //"palestinien occupé, territoire" => "PS",
+      "Panama" => "PA",
+      "Papouasie-nouvelle-guinée" => "PG",
+      "Paraguay" => "PY",
+      "Pays-bas" => "NL",
+      "Pérou" => "PE",
+      "Philippines" => "PH",
+      "Pitcairn" => "PN",
+      "Pologne" => "PL",
+      "Polynésie française" => "PF",
+      "Porto rico" => "PR",
+      "Portugal" => "PT",
+      "Qatar" => "QA",
+      "Réunion" => "RE",
+      "Roumanie" => "RO",
+      "Royaume-uni" => "GB",
+      //"Russie, fédération de" => "RU",
+      "Russie" => "RU",
+      "Rwanda" => "RW",
+      "Sahara occidental" => "EH",
+      "Saint-barthélemy" => "BL",
+      //"sainte-hélène, ascension et tristan da cunha" => "SH",
+      "Sainte-lucie" => "LC",
+      "Saint-kitts-et-nevis" => "KN",
+      "Saint-marin" => "SM",
+      //"Saint-martin (partie française)" => "MF",
+      //"Saint-martin (partie néerlandaise)" => "SX",
+      "Saint-pierre-et-miquelon" => "PM",
+      //"Saint-siège (état de la cité du vatican)" => "VA",
+      //"Saint-vincent-et-les grenadines" => "VC",
+      //"Salomon, îles" => "SB",
+      "Samoa" => "WS",
+      //"Samoa américaines" => "AS",
+      "Sao tomé et principe" => "ST",
+      "Sénégal" => "SN",
+      "Serbie" => "RS",
+      "Seychelles" => "SC",
+      "Sierra leone" => "SL",
+      "Singapour" => "SG",
+      "Slovaquie" => "SK",
+      "Slovénie" => "SI",
+      "Somalie" => "SO",
+      "Soudan" => "SD",
+      "Sri Lanka" => "LK",
+      "Suède" => "SE",
+      "Suisse" => "CH",
+      "Suriname" => "SR",
+      //"Svalbard et île jan mayen" => "SJ",
+      "Swaziland" => "SZ",
+      //"Syrienne, république arabe" => "SY",
+      "Syrie" => "SY",
+      "Tadjikistan" => "TJ",
+      //"Taïwan, province de chine" => "TW",
+      "Taïwan" => "TW",
+      //"Tanzanie, république-unie de" => "TZ",
+      "Tanzanie" => "TZ",
+      "Tchad" => "TD",
+      //"tchèque, république" => "CZ",
+      "Terres australes françaises" => "TF",
+      "Thaïlande" => "TH",
+      "Timor-leste" => "TL",
+      "Togo" => "TG",
+      "Tokelau" => "TK",
+      "Tonga" => "TO",
+      "Trinité-et-Tobago" => "TT",
+      "Tunisie" => "TN",
+      "Turkménistan" => "TM",
+      //"turks et caïques, îles" => "TC",
+      "Turquie" => "TR",
+      "Tuvalu" => "TV",
+      "Ukraine" => "UA",
+      "Uruguay" => "UY",
+      "Vanuatu" => "VU",
+      "Venezuela, république bolivarienne du" => "VE",
+      "Venezuela" => "VE",
+      "Viet nam" => "VN",
+      "Wallis et Futuna" => "WF",
+      "Yémen" => "YE",
+      "Zambie" => "ZM",
+      "Zimbabwe" => "ZW"
+      );
+// ISO 3166-1 : http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm
+
+if (array_key_exists($document->pays, $pays_iso3166)) {
 
   $juridiction = str_replace($urnlex_unauthorized, " ", $document->juridiction);
   $juridiction = str_replace(" ", ".", $juridiction);
   $juridiction = replaceAccents($juridiction);
 
-  if(in_array($document->type_affaire, $natureConstit)) {
+  if(array_key_exists($document->type_affaire, $natureConstit)) {
     $type = $document->type_affaire;
   }
   else {
@@ -426,37 +684,7 @@ if (array_key_exists($document->pays, $code_pays_euro)) {
       if (!empty($sources)) { echo $sources; }
       echo '</p>';
     }
-/*
-    if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
-      echo '<p><em>Références : </em><br />';
-      if(isset($references['CITATION_ARRET'])) {
-        foreach($references['CITATION_ARRET'] as $value) {
-          if(isset($value['nature'], $value['date'], $value['titre'])) {
-            $titre = $value['nature'].' du '.$value['date'].' sur '.$value['titre'];
-          }
-          else { $titre = $value['titre']; }
-          if(isset($value['url'])) {
-            echo '<a href="'.$value['url'].'">'.$titre.'</a><br />';
-          }
-          else { echo $titre.'<br />'; }
-        }
-      }
 
-      if(isset($references['SOURCE'])) {
-        foreach($references['SOURCE'] as $value) {
-          if(isset($value['nature'], $value['date'], $value['titre'])) {
-            $titre = $value['nature'].' du '.$value['date'].' sur '.$value['titre'];
-          }
-          else { $titre = $value['titre']; }
-          if(isset($value['url'])) {
-            echo '<a href="'.$value['url'].'">'.$titre.'</a><br />';
-          }
-          else { echo $titre.'<br />'; }
-        }
-      }
-      echo '</p>';
-    }
-*/
     if(isset($document->nor) || isset($document->ecli) || isset($document->numeros_affaires)) {
       echo '<hr />';
       if (isset($document->nor)) {
