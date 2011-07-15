@@ -1,7 +1,7 @@
 <?php
 use_helper('Text');
 
-$nbResultats = $resultats->response->numFound;
+$nbResultats = number_format($resultats->response->numFound, 0, ',', ' ');
 
 function replaceBlank($str) {
   return str_replace (' ', '_', $str);
