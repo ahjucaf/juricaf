@@ -576,7 +576,7 @@ if (array_key_exists($document->pays, $pays_iso3166)) {
 
   $num = str_replace($urnlex_reserved, "", $document->num_arret);
 
-  $urnlex = strtolower('urn:lex;'.$code_pays_euro[$document->pays].';'.$juridiction.';'.$type.';'.$document->date_arret.';'.$num);
+  $urnlex = strtolower('urn:lex;'.$pays_iso3166[$document->pays].';'.$juridiction.';'.$type.';'.$document->date_arret.';'.$num);
 }
 ?>
   <div class="arret">
