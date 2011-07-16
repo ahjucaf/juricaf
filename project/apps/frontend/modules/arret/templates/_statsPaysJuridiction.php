@@ -1,5 +1,5 @@
 <div class="stats_pays_juridiction">
-   <p>Juricaf publie <?php echo $nb; ?> décisions de cours suprême provenant de <?php echo count($pays); ?> pays francophones.</p>
+   <p>Juricaf publie <?php echo number_format($nb, 0, ',', ' '); ?> décisions de cours suprême provenant de <?php echo count($pays); ?> pays francophones.</p>
 <ul class="juridcols">
 <?php
 function replaceBlank($str) {
@@ -16,7 +16,7 @@ foreach ($pays as $p => $juridictions)
       $pluriel = 's';
     if($v['deb'] == $v['fin']) { $periode = "décision$pluriel de ".$v['deb']; }
     else { $periode = "décisions de ".$v['deb'].' à '.$v['fin']; }
-    echo '<li>'.link_to($j.' ('.$v['value'].' '.$periode.')', 'recherche/search?query=+&facets=pays:'.$no_blank_p.',juridiction:'.replaceBlank($j)).'</li>';
+    echo '<li>'.link_to($j.' ('.number_format($v['value'], 0, ',', ' ').' '.$periode.')', 'recherche/search?query=+&facets=pays:'.$no_blank_p.',juridiction:'.replaceBlank($j)).'</li>';
   }
   echo "</ul></li>";
 }?></ul>
