@@ -11,7 +11,7 @@ fi
 . $PREDIR/../conf/juricaf.conf
 
 if echo $0 | grep '/' > /dev/null; then
-	cd $(echo $0 | sed 's/[^\/]*$//')
+  cd $(echo $0 | sed 's/[^\/]*$//')
 fi
 
 if test "$1" ; then
@@ -35,11 +35,19 @@ cat <<EOF > $TMPFILE
   "views":
   {
     "pays_juridiction_date": {
-      "map": "function(doc) { if (doc.type == 'arret' && doc.pays && doc.juridiction) { if (doc.date_arret.match(/-.*/)) date=doc.date_arret.replace(/-.*/, ''); emit([doc.pays,doc.juridiction,date], 1);}}",
+      "map": "function(doc) { if (doc.type == 'arret') { date=doc.date_arret.substring(0,4); emit([doc.pays,doc.juridiction,date], 1);}}",
       "reduce": "function(keys, values) { return sum(values) }"
     },
-    "attributs": {
+    "pays_juridiction_date_all": {
+      "map": "function(doc) { date=doc.date_arret.substring(0,4); emit([doc.pays,doc.juridiction,date], 1);}",
+      "reduce": "function(keys, values) { return sum(values) }"
+    },
+    "Attributs": {
       "map": "function(doc) {if (doc.type == 'arret') for (var attr in doc) if (attr != 'unnamed') emit(attr, 1); }",
+      "reduce": "function(keys, values) { return sum(values) }"
+    },
+    "Documents_mis_a_jour": {
+      "map": "function(doc) { revision=doc._rev.substring(0,1); date=doc.date_arret.substring(0,4); if (revision !== '1') emit([revision,doc.pays,doc.juridiction,doc.type,date], 1); }",
       "reduce": "function(keys, values) { return sum(values) }"
     }
   }
@@ -57,11 +65,11 @@ cat <<EOF > $TMPFILE
   "views":
   {
     "errors": {
-      "map": "function(doc) { if (doc.type == 'error_arret')  emit([doc.on_error,doc._id], 1); }",
+      "map": "function(doc) { if (doc.type == 'error_arret')  emit([doc.pays,doc.on_error,doc._id], 1); }",
       "reduce": "function(keys, values) { return sum(values) }"
     },
     "errors_date": {
-      "map": "function(doc) { if (doc.type == 'error_arret') { year=doc.date_arret.substring(0,4); emit([doc.on_error,year,doc.date_arret], 1); } }",
+      "map": "function(doc) { if (doc.type == 'error_arret') { year=doc.date_arret.substring(0,4); emit([doc.pays,doc.on_error,year,doc.date_arret], 1); } }",
       "reduce": "function(keys, values) { return sum(values) }"
     },
   }
