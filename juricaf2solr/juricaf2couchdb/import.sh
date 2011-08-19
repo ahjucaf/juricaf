@@ -9,31 +9,31 @@ LOCK=/tmp/$0.lock
 VERBOSE=$1;
 
 PREDIR=.
-if echo $0 | grep '/' > /dev/null; then 
-    PREDIR=$(echo $0 | sed 's/\/[^\/]*$//'); 
-    LOCK=/tmp/$(echo $0 | sed "s|$PREDIR||").lock
+if echo $0 | grep '/' > /dev/null; then
+  PREDIR=$(echo $0 | sed 's/\/[^\/]*$//');
+  LOCK=/tmp/$(echo $0 | sed "s|$PREDIR||").lock
 fi
 
 #Configuration file juricaf2couchdb.conf
 if ! test -e $PREDIR/../conf/juricaf.conf; then
-    echo Configuration file $PREDIR/../conf/juricaf.conf does not exist
-    exit 1;
+  echo Configuration file $PREDIR/../conf/juricaf.conf does not exist
+  exit 1;
 fi
 . $PREDIR/../conf/juricaf.conf
 
-#Si d'un autre chemin que le repertoire local, on se déplance dans le répertoire local
+#Si d'un autre chemin que le repertoire local, on se déplace dans le répertoire local
 if echo $0 | grep '/' > /dev/null ;
 then
-        cd $(echo $0 | sed 's|[^/]*$||');
+  cd $(echo $0 | sed 's|[^/]*$||');
 fi
 
 if [ -e $LOCK ]
 then
-	if ! ps --pid $(cat $LOCK) > /dev/null ; then
-		echo $(cat $LOCK) not running, destroy the lock
-		rm lock
-	fi
-	exit 1;
+  if ! ps --pid $(cat $LOCK) > /dev/null ; then
+    echo $(cat $LOCK) not running, destroy the lock
+    rm lock
+  fi
+  exit 1;
 fi
 echo $$ > $LOCK
 
@@ -42,75 +42,84 @@ rm -f $JSONFILE 2> /dev/null
 find $DIRPOOL -type f  | grep -v .svn > $LISTPOOL
 
 function update2couch {
-	REV=$(curl -H"Content-Type: application/json" -s "$COUCHDBURL/$CONFLICTID"  | sed 's/.*"_rev":"//' | sed 's/".*//')
-	php updatejson4couchdb.php $JSONFILE $CONFLICTID $REV | curl -H"Content-Type: application/json" -s -d @/dev/stdin  -X POST "$COUCHDBURL/_bulk_docs" | sed 's/$/"updated"/' >> $LOG 
+  REV=$(curl -H"Content-Type: application/json" -s "$COUCHDBURL/$CONFLICTID"  | sed 's/.*"_rev":"//' | sed 's/".*//')
+  php updatejson4couchdb.php $JSONFILE $CONFLICTID $REV | curl -H"Content-Type: application/json" -s -d @/dev/stdin  -X POST "$COUCHDBURL/_bulk_docs" | sed 's/$/"updated"/' >> $LOG
 }
 
 #send json file to couchdb
 function add2couch {
-    if ! test -s $JSONFILE ; then
-	return;
-    fi
-    sed 's/^/{"docs":[/' $JSONFILE | sed 's/,$/]}/' > $JSONFILE.tmp;
-    mv $JSONFILE.tmp $JSONFILE ;
-    curl -H"Content-Type: application/json" -s -d @$JSONFILE  -X POST "$COUCHDBURL/_bulk_docs" | sed 's/"},{"/\n/g' >> $LOG.tmp
-    grep -v '"conflict"' $LOG.tmp >> $LOG
-    for CONFLICTID in $(grep '"conflict"' $LOG.tmp | sed 's/.*id":"//' | sed 's/".*//') ; do
-	update2couch
-    done
-    cpt=0;
-    rm $JSONFILE $LOG.tmp;
+  if ! test -s $JSONFILE ; then
+  return;
+  fi
+  sed 's/^/{"docs":[/' $JSONFILE | sed 's/,$/]}/' > $JSONFILE.tmp;
+  mv $JSONFILE.tmp $JSONFILE ;
+  curl -H"Content-Type: application/json" -s -d @$JSONFILE  -X POST "$COUCHDBURL/_bulk_docs" | sed 's/"},{"/\n/g' >> $LOG.tmp
+  grep -v '"conflict"' $LOG.tmp >> $LOG
+  for CONFLICTID in $(grep '"conflict"' $LOG.tmp | sed 's/.*id":"//' | sed 's/".*//') ; do
+  update2couch
+  done
+  cpt=0;
+  rm $JSONFILE $LOG.tmp;
 }
 
 cpt=0;
+
+if test -s $LISTPOOL ; then
+  php create_mysql_log.php
+fi
 
 while read y
 do
     if test $VERBOSE ; then echo importing $y; fi
     if file -i "$y" | grep -v 'application/xml' > /dev/null;
     then
-	echo "ERROR: $y ignored : it is not an XML doc (empty ?)";
-	dest_error_dir=$(echo $y | sed "s/pool/archive\/$DATE\/error/" | sed 's/[^\/]*$//');
-	mkdir -p "$dest_error_dir"
-	mv "$y" "$dest_error_dir";
-	continue;
+    echo "ERROR: $y ignored : it is not an XML doc (empty ?)";
+    dest_error_dir=$(echo $y | sed "s/pool/archive\/$DATE\/error/" | sed 's/[^\/]*$//');
+    mkdir -p "$dest_error_dir"
+    mv "$y" "$dest_error_dir";
+    continue;
     fi
 
-    CAT='cat';
     if file -i "$y" | grep -v utf-8 > /dev/null;
     then
-	CAT='iconv -f ISO8859-1 -t UTF8'
+      if file -i "$y" | grep -v iso-8859-1 > /dev/null;
+      then
+        iconv -c -f windows-1252 -t iso-8859-1//TRANSLIT "$y" | iconv -f ISO8859-1 -t UTF8 | sed 's/^M$//' | sed 's/\&\#x1;//g' | sed 's/\&\([^; ]* \)/\&amp;\1/g' | sed 's/<BR *\/*>/\n/gi' | sed 's/"iso-*8859[^"]*"/"utf8"/i' > data.xml ;
+      else
+        iconv -f ISO8859-1 -t UTF8 "$y" | sed 's/^M$//' | sed 's/\&\#x1;//g' | sed 's/\&\([^; ]* \)/\&amp;\1/g' | sed 's/<BR *\/*>/\n/gi' | sed 's/"iso-*8859[^"]*"/"utf8"/i' > data.xml ;
+      fi
+    else
+      cat "$y" | sed 's/^M$//' | sed 's/\&\#x1;//g' | sed 's/\&\([^; ]* \)/\&amp;\1/g' | sed 's/<BR *\/*>/\n/gi' > data.xml ;
     fi
-    $CAT "$y" | dos2unix | sed 's/\r/\n/g' | sed "s//'/g" | sed 's/\&\([^; ]* \)/\&amp;\1/g' | sed 's/<BR *\/*>/\n/gi' | sed 's/"iso-*8859[^"]*"/"utf8"/i' > data.xml ;
 
     if echo $y | grep pays_ > /dev/null ; then
-	pays=$(echo $y | sed 's/.*pays_//' |  sed 's/\/.*//' | sed 's/_/ /g');
+    pays=$(echo $y | sed 's/.*pays_//' |  sed 's/\/.*//' | sed 's/_/ /g');
     fi
     if echo $y | grep juridiction_ > /dev/null; then
-	juridiction=$(echo $y | sed 's/.*juridiction_//' |  sed 's/\/.*//' | sed 's/_/ /g');
+    juridiction=$(echo $y | sed 's/.*juridiction_//' |  sed 's/\/.*//' | sed 's/_/ /g');
     fi;
 
     while true ; do
-	php juricaf2json.php "$y" "$pays" "$juridiction" > $JSONFILE.tmp 2> $JSONFILE.err
-	RET=$?
-	cat $JSONFILE.err | grep 'id":"' >> $LOG
-	cat $JSONFILE.err | grep -v 'id":"'
-	if test $RET = 0; then
-		break;
-	fi
-	if test $RET = 33; then
-		rm $JSONFILE.tmp
-		break;
-	fi
+    php juricaf2json.php "$y" "$pays" "$juridiction" > $JSONFILE.tmp 2> $JSONFILE.err
+    RET=$?
+    cat $JSONFILE.err | grep 'id":"' >> $LOG
+    cat $JSONFILE.err | grep -v 'id":"'
+    if test $RET = 0; then
+      break;
+    fi
+    if test $RET = 33; then
+      rm $JSONFILE.tmp
+      break;
+    fi
     done ;
     if test -e $JSONFILE.tmp; then
-	    cat $JSONFILE.tmp >> $JSONFILE
+      cat $JSONFILE.tmp >> $JSONFILE
     fi
 
     echo -n ',' >> $JSONFILE ;
     cpt=$(expr $cpt + 1) ;
     if test $cpt -eq 100 ; then
-	add2couch ;
+    add2couch ;
     fi  ;
 
     #
