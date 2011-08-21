@@ -78,6 +78,7 @@ blockquote h2 { color: #4F4F4F; }
 .resultat p {margin: 0px;}
 .resultat em { font-weight: bold; }
 .resultat .extra {color: gray;}
+.extra { margin-top: 10px; }
 
 .flash {text-align: center; font-weight: bold;}
 .error {color: red;}
