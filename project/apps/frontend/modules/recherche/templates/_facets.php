@@ -2,13 +2,14 @@
 function facet_link_to($t, $l) {
   return link_to($t, preg_replace("/\'/", '’', $l));
 }
+
 if (count($facets) > 0) : ?>
 <p><strong><?php echo $label; ?></strong></p>
 <ul><?php
 foreach($facets as $k => $v) {
     echo '<li style="margin-top: 5px;">';
     if($mainid === 'pays')
-  echo '<img style="height: 10px;" src="/images/drapeaux/'.urlencode(replaceBlank($v['fname'])).'.png" alt="" />&nbsp;';
+  echo '<img style="height: 10px;" src="/images/drapeaux/'.pathToFlag($v['fname']).'.png" alt="" />&nbsp;';
     $facet = $v['fid'].':'.preg_replace('/ /', '_', $v['fname']);
     if (preg_match('/'.$facet.'/', $facetslink))
       echo $k."&nbsp;(".number_format($v['count'], 0, ',', ' ').")";
