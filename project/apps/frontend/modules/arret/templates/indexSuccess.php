@@ -341,9 +341,6 @@ if (isset($document->ecli)) {
       if (isset($document->nor)) {
         echo 'Numéro NOR : <em>'.$document->nor.'</em><br />';
       }
-      if (isset($document->ecli)) {
-        echo 'Numéro ECLI : <em>'.$document->ecli.'</em><br />';
-      }
       if (isset($document->numeros_affaires)) {
         $sep = ''; $i = 0;
         foreach($document->numeros_affaires as $values) {
