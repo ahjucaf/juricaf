@@ -104,7 +104,62 @@ function toString($mixed) {
   return $mixed;
 }
 
-// Chargement
+// Pour sens_arret
+function correctWrongSpelling($string) {
+  $fautes = array(
+    "anullation" => "annulation",
+    " l acour" => " la cour",
+    "l'arrete" => "l'arrêté",
+    "l'arret" => "l'arrêt",
+    "attaquee" => "attaquée",
+    "casstion" => "cassation",
+    "competence" => "compétence",
+    "compérence" => "compétence",
+    "condamantion" => "condamnation",
+    "decheance" => "déchéance",
+    "decision" => "décision",
+    "defaut" => "défaut",
+    "etait" => "était",
+    "l'etat" => "l'état",
+    "evocation" => "évocation",
+    "execution" => "exécution",
+    "executioin" => "exécution",
+    "interprètation" => "interprétation",
+    "interpretation" => "interprétation",
+    "irrecevabilite" => "irrecevabilité",
+    "irrecevebilite" => "irrecevabilité",
+    "irrevabilité" => "irrecevabilité",
+    "irecevabilité" => "irrecevabilité",
+    "irrrecevabilité" => "irrecevabilité",
+    "irrececevabilité" => "irrecevabilité",
+    "irrecvabilité" => "irrecevabilité",
+    "irrecevabilté" => "irrecevabilité",
+    "irrecevabilit2" => "irrecevabilité",
+    "levee" => "levée",
+    "lévée" => "levée",
+    "legale" => "légale",
+    "prejudice" => "préjudice",
+    "prevenu" => "prévenu",
+    "ministere" => "ministère",
+    "qualite" => "qualité",
+    "rcevabilité" => "recevabilité",
+    "recevabilite" => "recevabilité",
+    "rexecevabilité" => "recevabilité",
+    "refere " => "référé ",
+    "rejt" => "rejet",
+    "reouverture" => "réouverture",
+    "revision" => "révision",
+    "requerant" => "requérant",
+    "requete" => "requête",
+    "startuer" => "statuer"
+  );
+  if(strlen($string) < 120) {
+    $string = strtolower($string);
+  }
+  return rtrim(ucfirst(strtr($string, $fautes)), '.,;');
+}
+
+// Chargement du fichier xml
 $obj = simplexml_load_file("data.xml", 'SimpleXMLElement', LIBXML_COMPACT | LIBXML_NOCDATA | LIBXML_NOENT | LIBXML_NOBLANKS);
 $res = (array)$obj;
 $res = cleanArray($res);
@@ -223,7 +278,7 @@ if($res['pays'] == 'France') {
       "poitiers" => "Poitiers",
       "rennes" => "Rennes",
       "rouen" => "Rouen",
-      "saint-denis de la réunion" => "Saint-Denis de la Réunion",
+      "saint-denis de la réunion" => "Saint-Denis-de-la-Réunion",
       "strasbourg" => "Strasbourg",
       "toulouse" => "Toulouse",
       "versailles" => "Versailles"
@@ -235,11 +290,11 @@ if($res['pays'] == 'Niger') { $res['num_arret'] = str_replace('--', '-', $res['n
 
 if($res['pays'] == 'Luxembourg') {
   $to_replace = array(
-    ' pénal' => '',
-    ' Vac' => '',
+    'pénal' => '',
+    'Vac' => '',
     ' ' => ''
   );
-  $num_tmp = strtr($res['num_arret'], $to_replace);
+  $num_tmp = trim(strtr($res['num_arret'], $to_replace));
   if(preg_match('/^[0-9]{2}\/[0-9]{2,4}$/', $num_tmp)) { // 10/2004
     $res['num_arret'] = $num_tmp;
   }
@@ -278,7 +333,7 @@ if($res['pays'] == 'Pologne') { // III_SPZP_3/05
 }
 
 if($res['pays'] == 'Bénin') { // 43/CJ-CT
-  if(preg_match('/^[0-9]{1,5} [a-zA-Z]{1,3}-[a-zA-Z]{1,3}$/', $res['num_arret'])) { // à vérif
+  if(preg_match('/^[0-9]{1,5} [a-zA-Z]{1,3}-[a-zA-Z]{1,3}$/', $res['num_arret'])) {
     $res['num_arret'] = strtoupper(str_replace(' ', '/', $res['num_arret']));
   }
 }
@@ -304,27 +359,27 @@ if($res['pays'] == 'Burundi') { // R.C.C.10.322
 }
 
 if($res['pays'] == 'Hongrie') { // Kfv.III.35.215/1999
-  if(preg_match('/^[a-zA-Z]{2,5}[.]{1} [a-zA-Z]{1,5}[.]{1} [0-9.\/]{2,}$/', $res['num_arret'])) { // à vérif
+  if(preg_match('/^[a-zA-Z]{2,5}[.]{1} [a-zA-Z]{1,5}[.]{1} [0-9.\/]{2,}$/', $res['num_arret'])) {
     $res['num_arret'] = str_replace(' ', '', $res['num_arret']);
   }
 }
 
 if($res['pays'] == 'Congo démocratique') { // RP.1695
   $num_tmp = strtr($res['num_arret'], array('.' => '', ' ' => ''));
-  if(preg_match('/^([a-zA-Z]{2})([0-9]{2,})$/', $num_tmp, $match)) { // à vérif
+  if(preg_match('/^([a-zA-Z]{2})([0-9]{2,})$/', $num_tmp, $match)) {
     $res['num_arret'] = strtoupper($match[1].'.'.$match[2]);
   }
 }
 
 if($res['pays'] == 'Rwanda') { // RPA.A.0022/05/CS
   $num_tmp = strtr($res['num_arret'], array('.' => '', ' ' => ''));
-  if(preg_match('/^([a-zA-Z]{3})([a-zA-Z]{1})([a-zA-Z0-9\/]+)$/', $num_tmp, $match)) { // à vérif
+  if(preg_match('/^([a-zA-Z]{3})([a-zA-Z]{1})([a-zA-Z0-9\/]+)$/', $num_tmp, $match)) {
     $res['num_arret'] = strtoupper($match[1].'.'.$match[2].'.'.$match[3]);
   }
 }
 
 if($res['pays'] == 'République tchèque') {
-  if(preg_match('/^([0-9]{1,3}) ([a-zA-Z]{2,4}) ([0-9\/]+)$/', $res['num_arret'], $match)) { // à vérif
+  if(preg_match('/^([0-9]{1,3}) ([a-zA-Z]{2,4}) ([0-9\/]+)$/', $res['num_arret'], $match)) {
     $res['num_arret'] = $match[1].'_'.ucfirst($match[2]).'_'.$match[3]; // 29_Odo_1216/2005
   }
   $res['pays'] = 'République Tchèque';
@@ -368,7 +423,7 @@ if($res['pays'] == 'Cedeao' || $res['pays'] == "Communauté économique des éta
   $res['pays'] = 'CEDEAO';
 }
 
-if($res['pays'] == 'Cemac') {
+if($res['pays'] == 'Cemac' || $res['pays'] == "Communauté économique et monétaire de l'afrique centrale") {
   $res['pays'] = 'CEMAC';
 }
 
@@ -376,7 +431,7 @@ if($res['pays'] == 'Nations-unies') {
   $res['pays'] = 'Nations Unies';
 }
 
-if($res['pays'] == 'Ohada') {
+if($res['pays'] == 'Ohada' || $res['pays'] == "Organisation pour l'harmonisation en afrique du droit des affaires") {
   $res['pays'] = 'OHADA';
 }
 
@@ -386,6 +441,10 @@ if($res['pays'] == 'Union africaine') {
 
 if($res['pays'] == 'Union européenne') {
   $res['pays'] = 'Union Européenne';
+}
+
+if($res['pays'] == 'Uemoa' || $res['pays'] == "Union économique et monétaire ouest africaine") {
+  $res['pays'] = 'UEMOA';
 }
 
 
@@ -432,7 +491,9 @@ elseif(!empty($res['texte_arret'])) {
   }
 }
 else {
-  addError("texte de l'arret manquant");
+  if(!isset($res['analyses']) && !isset($res['references'])) {
+    addError("texte de l'arret manquant");
+  }
 }
 
 unset($res['no_error']);
@@ -449,10 +510,20 @@ if(isset($res['formation'])) {
 if ($res['juridiction'] == "Conseil d-etat" || $res['juridiction'] == "Conseil d'état" || strtolower($res['juridiction']) == "conseil d'etat") {
   $res['juridiction'] = "Conseil d'État";
 }
-if ($res['juridiction'] == 'Cour d-arbitrage')
-  $res['juridiction'] = 'Cour d\'arbitrage';
-if (!isset($res['section']) || $res['section'] == '-')
+if ($res['juridiction'] == 'Cour d-arbitrage') {
+  $res['juridiction'] = "Cour d'arbitrage";
+}
+
+if (!isset($res['section']) || $res['section'] == '-') {
   unset($res['section']);
+}
+else {
+  $res['section'] = ucfirst(strtolower($res['section']));
+}
+
+if (isset($res['sens_arret'])) {
+  $res['sens_arret'] = correctWrongSpelling($res['sens_arret']);
+}
 
 //create extra fields
 if (!isset($res['titre']))
@@ -578,20 +649,33 @@ $abbr_juridiction = array(
       "Cour de justice de l'union européenne" => "CJUE"
       );
 
-$ecli_unauthorised = array(
-      "/",
-      "_",
-      "-",
-      ";",
-      ","
-      );
+$abbr_juridiction_test_fr = array(
+    "Cour administrative d'appel" => "CAA",
+    "Cour d'appel" => "CA",
+    "Tribunal administratif" => "TA",
+    "Tribunal d'instance" => "TI",
+    "Tribunal de commerce" => "TCOM",
+    "Tribunal de grande instance" => "TGI"
+    );
 
-$num_arret = str_replace($ecli_unauthorised, ".", $res['num_arret']);
+$num_arret = preg_replace('/[^A-Z0-9]/', '.', strtoupper(replaceAccents($res['num_arret'])));
 
 // ajouter @original
 
 if(array_key_exists($res['pays'], $code_pays_euro) && array_key_exists($res['juridiction'], $abbr_juridiction)) {
   $res['ecli'] = 'ECLI:'.$code_pays_euro[$res['pays']].':'.$abbr_juridiction[$res['juridiction']].':'.substr($res['date_arret'], 0, 4).':'.$num_arret;
+}
+
+// Test ECLI autres institutions fr (pour log uniquement)
+if($res['pays'] == 'France' && !array_key_exists($res['juridiction'], $abbr_juridiction)) {
+  foreach ($abbr_juridiction_test_fr as $key => $value) {
+    if(strpos($res['juridiction'], $key) !== false) {
+      $ville = str_replace(array($key, " de ", " d'"), '', $res['juridiction']);
+      $ville = preg_replace('/[^A-Z]/', '.', strtoupper(replaceAccents($ville)));
+      $abbr_ville = $value.'.'.$ville;
+    }
+  }
+  $ecli = 'ECLI:FR:'.$abbr_ville.':'.substr($res['date_arret'], 0, 4).':'.$num_arret;
 }
 
 // URN:LEX
@@ -693,9 +777,7 @@ $pays_iso3166 = array(
 
 $organisations = array(
       "UEMOA" => "UEMOA",
-      "Union économique et monétaire ouest africaine" => "UEMOA",
       "CEDEAO" => "CEDEAO",
-      "Communauté économique des états de l'afrique de l'ouest" => "CEDEAO",
       "Union Africaine" => "UA",
       "Union Européenne" => "EU",
       "CEMAC" => "CEMAC",
@@ -719,7 +801,7 @@ if (array_key_exists($res['pays'], $codes_pays_orgas)) {
       $type = $res['type_affaire'];
     }
   }
-  $num = str_replace($urnlex_reserved, "", $res['num_arret']);
+  $num = preg_replace('/[^a-z0-9]/', '.', strtolower(replaceAccents($res['num_arret'])));
 
   $res['urnlex'] = strtolower('urn:lex;'.$codes_pays_orgas[$res['pays']].';'.$juridiction.';'.$type.';'.$res['date_arret'].';'.$num);
 }
@@ -738,7 +820,7 @@ if(isset($res['sens_arret'])) { $sens_arret = $res['sens_arret']; } else { $sens
 if(isset($res['numeros_affaires'])) { $numeros_affaires = count($res['numeros_affaires']); } else { $numeros_affaires = 0; }
 if(isset($res['nor'])) { $nor = $res['nor']; } else { $nor = 0; }
 if(isset($res['urnlex'])) { $urnlex = $res['urnlex']; } else { $urnlex = 0; }
-if(isset($res['ecli'])) { $ecli = $res['ecli']; } else { $ecli = 0; }
+if(isset($res['ecli'])) { $ecli = $res['ecli']; } elseif(!isset($ecli)) { $ecli = 0; }
 if(isset($res['titre'])) { $titre = 1; } else { $titre = 0; }
 if(isset($res['titre_supplementaire'])) { $titre_supplementaire = $res['titre_supplementaire']; } else { $titre_supplementaire = 0; }
 if(isset($res['type_affaire'])) { $type_affaire = $res['type_affaire']; } else { $type_affaire = 0; }
