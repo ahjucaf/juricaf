@@ -24,21 +24,29 @@ $natureConstit = array(
       );
 
 function replaceAccents($string) {
-    $table = array(
-        'Š'=>'S', 'š'=>'s', 'Đ'=>'Dj', 'đ'=>'dj', 'Ž'=>'Z', 'ž'=>'z', 'Č'=>'C', 'č'=>'c', 'Ć'=>'C', 'ć'=>'c',
-        'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
-        'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O',
-        'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss',
-        'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e',
-        'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o',
-        'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b',
-        'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r',
-    );
-    return strtr($string, $table);
+  $table = array(
+      'Å' => 'A', 'Ä' => 'A', 'Ã' => 'A', 'Â' => 'A', 'å' => 'a', 'ä' => 'a', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'Á' => 'A', 'Æ' => 'A', 'æ' => 'a', 'À' => 'A',
+      'Þ' => 'B', 'þ' => 'b',
+      'ç' => 'c', 'Č' => 'C', 'č' => 'c', 'ć' => 'c', 'Ç' => 'C', 'Ć' => 'C', 'đ' => 'dj', 'Đ' => 'Dj',
+      'ê' => 'e', 'É' => 'E', 'ë' => 'e', 'é' => 'e', 'è' => 'e', 'Ë' => 'E', 'È' => 'E', 'Ê' => 'E',
+      'í' => 'i', 'ì' => 'i', 'Î' => 'I', 'Ì' => 'I', 'î' => 'i', 'Í' => 'I', 'ï' => 'i', 'Ï' => 'I',
+      'ñ' => 'n', 'Ñ' => 'N',
+      'ö' => 'o', 'ø' => 'o', 'õ' => 'o', 'ô' => 'o', 'ð' => 'o', 'ò' => 'o', 'ó' => 'o', 'Ö' => 'O', 'Ô' => 'O', 'Ó' => 'O', 'Ò' => 'O', 'Õ' => 'O', 'Ø' => 'O',
+      'ŕ' => 'r', 'Ŕ' => 'R',
+      'š' => 's', 'Š' => 'S', 'ß' => 'Ss',
+      'ü' => 'u', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'Ü' => 'U', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U',
+      'ý' => 'y', 'ÿ' => 'y', 'Ý' => 'Y',
+      'Ž' => 'Z', 'ž' => 'z'
+  );
+  return strtr($string, $table);
 }
 
 function replaceBlank($str) {
   return str_replace (' ', '_', $str);
+}
+
+function pathToFlag($str) {
+  return urlencode(str_replace("'", '_', replaceBlank($str)));
 }
 
 if(isset($document->references)) {
@@ -66,44 +74,6 @@ if(isset($document->references)) {
   }
 }
 
-// ECLI //
-
-$code_pays_euro = array(
-      "Belgique" => "BE",
-      "Bulgarie" => "BG",
-      "République tchèque" => "CZ",
-      "Grèce" => "EL",
-      "France" => "FR",
-      "Lituanie" => "LT",
-      "Luxembourg" => "LU",
-      "Hongrie" => "HU",
-      "Autriche" => "AT",
-      "Pologne" => "PL",
-      "Portugal" => "PT",
-      "Roumanie" => "RO",
-      "Slovaquie" => "SK",
-      "Union européenne" => "EU"
-      );
-
-// http://publications.europa.eu/code/fr/fr-370100.htm
-
-$abbr_juridiction = array(
-      "Haute cour de cassation et de justice" => "HCCJ", // Roumanie
-      "Cour supérieure de justice" => "CSJ", // Luxembourg
-      "Cour constitutionnelle" => "CC", // Luxembourg
-      "Cour suprême" => "CS", // Hongrie
-      "Tribunal des conflits" => "TC",
-      "Cour de discipline budgétaire et financière" => "CDBF",
-      "Cour de cassation" => "CCASS",
-      "Conseil d'état" => "CE",
-      "Conseil constitutionnel" => "CC",
-      "Cour suprême de cassation" => "CSC", // Bulgarie
-      "Cour d'arbitrage" => "CA", // Belgique
-      "Cour de justice de l'union européenne" => "CJUE"
-      );
-
-//////////////////////
-
 $contributors = '';
 
   if(isset($document->president) || isset($document->avocat_gl) || isset($document->rapporteur) || isset($document->commissaire_gvt) || isset($document->avocats)) {
@@ -124,13 +94,6 @@ $contributors = '';
     }
     $contrib = true;
   }
-
-//////////////////////
-
-/*
-- Description : les sommaires
-- Mots-clés: Mettre les mots clés des titres principaux et secondaires
- * */
 
 $keywords = '';
 $analyses = '';
@@ -177,8 +140,6 @@ if (isset($document->analyses)) {
   }
 }
 
-//////////////////////
-
 $citations_arret = '';
 $sources = '';
 
@@ -210,10 +171,8 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
   }
 }
 
-if (array_key_exists($document->pays, $code_pays_euro) && array_key_exists($document->juridiction, $abbr_juridiction)) {
-
-  $ecli = 'ECLI:'.$code_pays_euro[$document->pays].':'.$abbr_juridiction[$document->juridiction].':'.substr($document->date_arret, 0, 4).':'.$document->num_arret;
-
+// ECLI //
+if (isset($document->ecli)) {
   $creator = $document->juridiction;
   if(isset($document->section)) { $creator .= ' '.$document->section; }
 
@@ -223,7 +182,6 @@ if (array_key_exists($document->pays, $code_pays_euro) && array_key_exists($docu
   if (!empty($citations_arret)) { $citations .= $citations_arret; }
   if (!empty($sources)) { $citations .= $sources; }
 
-
   //$sf_response->auto_discovery_link_tag(false, 'http://purl.org/dc/elements/1.1/', 'rel="schema.DC"');
   //<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
   //<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
@@ -231,7 +189,7 @@ if (array_key_exists($document->pays, $code_pays_euro) && array_key_exists($docu
   // Obligatoire
   $sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
   $sf_response->addMeta('DC.identifier', $sf_request->getUri(), false, false, false);
-  $sf_response->addMeta('DC.isVersionOf', $ecli, false, false, false);
+  $sf_response->addMeta('DC.isVersionOf', $document->ecli, false, false, false);
   $sf_response->addMeta('DC.creator', $creator, false, false, false);
   $sf_response->addMeta('DC.coverage', $document->pays, false, false, false);
   $sf_response->addMeta('DC.date', $document->date_arret, false, false, false);
@@ -260,140 +218,9 @@ if (array_key_exists($document->pays, $code_pays_euro) && array_key_exists($docu
   }
   // $sf_response->addMeta('DC.isReplacedBy', 'En cas de renumérotation', false, false, false);
 }
-////////////////
-// urn:lex
-////////////////
-
-$urnlex_reserved = array(
-      "%",
-      "/",
-      "?",
-      "#",
-      "@",
-      "$",
-      ":",
-      ";",
-      "+",
-      ",",
-      "~",
-      "*",
-      "!"
-      );
-
-$urnlex_unauthorized = array(
-      " de la ",
-      " et de ",
-      " de l'",
-      " des ",
-      " de ",
-      " d'",
-      " et "
-      );
-
-$pays_iso3166 = array(
-      "Albanie" => "AL",
-      "Algérie" => "DZ",
-      "Andorre" => "AD",
-      "Autriche" => "AT",
-      "Belgique" => "BE",
-      "Bénin" => "BJ",
-      "Bulgarie" => "BG",
-      "Burkina faso" => "BF",
-      "Burundi" => "BI",
-      "Cambodge" => "KH",
-      "Cameroun" => "CM",
-      "Canada" => "CA",
-      "Cap-vert" => "CV",
-      "Centrafrique" => "CF",
-      "Comores" => "KM",
-      "Congo" => "CG",
-      "Congo démocratique" => "CD",
-      "Côte d-ivoire" => "CI",
-      "Croatie" => "HR",
-      "Djibouti" => "DJ",
-      //"dominicaine, république" => "DO",
-      "Dominique" => "DM",
-      "Égypte" => "EG",
-      "Estonie" => "EE",
-      "États-unis" => "US",
-      "France" => "FR",
-      "Gabon" => "GA",
-      "Grèce" => "GR",
-      "Guinée" => "GN",
-      "Guinée-bissau" => "GW",
-      "Guinée équatoriale" => "GQ",
-      "Haïti" => "HT",
-      "Hongrie" => "HU",
-      //"Lao, république démocratique populaire" => "LA",
-      "Liban" => "LB",
-      "Lituanie" => "LT",
-      "Luxembourg" => "LU",
-      "Macédoine" => "MK",
-      "Madagascar" => "MG",
-      "Mali" => "ML",
-      "Maroc" => "MA",
-      "Maurice" => "MU",
-      "Mauritanie" => "MR",
-      "Monaco" => "MC",
-      "Mozambique" => "MZ",
-      "Niger" => "NE",
-      "Nouvelle-Zélande" => "NZ",
-      "Pologne" => "PL",
-      "Roumanie" => "RO",
-      "Royaume-uni" => "GB",
-      "Rwanda" => "RW",
-      "Sainte-lucie" => "LC",
-      "Sao tomé et principe" => "ST",
-      "Sénégal" => "SN",
-      "Serbie" => "RS",
-      "Seychelles" => "SC",
-      "Slovaquie" => "SK",
-      "Suisse" => "CH",
-      "Tchad" => "TD",
-      //"tchèque, république" => "CZ",
-      "Togo" => "TG",
-      "Tunisie" => "TN",
-      "Ukraine" => "UA",
-      "Vanuatu" => "VU",
-      "Viet nam" => "VN"
-      );
-// ISO 3166-1 : http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm
-
-$organisations = array(
-      "UEMOA" => "UEMOA", // Visiblement, cette orga a changé de nom depuis ("Communauté économique des etats de l'afrique de l'ouest" en 2000 et maintenant "Union Economique et Monétaire Ouest Africaine"). D'une manière générale, il faudra gèrer ces changements de nom d'orgas au fil des années comme des cas particuliers à l'import.
-      "Union économique et monétaire ouest africaine" => "UEMOA",
-      "Communauté économique des états de l'afrique de l'ouest" => "UEMOA",
-      "Union africaine" => "UA",
-      "Union européenne" => "EU",
-      "Cemac" => "CEMAC",
-      "Conseil de l'europe" => "COE",
-      "Nations-unies" => "UN",
-      "OHADA" => "OHADA",
-      "Ohada" => "OHADA" // à vérifier suivant futurs imports
-);
-
-$codes_pays_orgas = array_merge($pays_iso3166, $organisations);
-
-if (array_key_exists($document->pays, $codes_pays_orgas)) {
-
-  $juridiction = str_replace($urnlex_unauthorized, " ", $document->juridiction);
-  $juridiction = str_replace(" ", ".", $juridiction);
-  $juridiction = replaceAccents($juridiction);
-
-  if(array_key_exists($document->type_affaire, $natureConstit)) {
-    $type = $document->type_affaire;
-  }
-  else {
-    $type = $document->type;
-  }
-
-  $num = str_replace($urnlex_reserved, "", $document->num_arret);
-
-  $urnlex = strtolower('urn:lex;'.$codes_pays_orgas[$document->pays].';'.$juridiction.';'.$type.';'.$document->date_arret.';'.$num);
-}
 ?>
   <div class="arret">
-    <h1><?php echo '<img class="drapeau" src="/images/drapeaux/'.urlencode(replaceBlank($document->pays)).'.png" alt="§" /> '.$document->titre; ?></h1>
+    <h1><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre; ?></h1>
     <?php
     if (isset($document->titre_supplementaire)) {
       echo '<h2>'.$document->titre_supplementaire.'</h2>';
@@ -416,12 +243,11 @@ if (array_key_exists($document->pays, $codes_pays_orgas)) {
       echo 'Type de recours : <em>'.$document->type_recours.'</em><br />';
     }
     echo '<br />';
-    if (isset($ecli)) {
-      echo 'Identifiant ECLI : <em>'.$ecli.'</em> (non officiel) <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="Identifiant européen de la jurisprudence" /><br />';
+    if (isset($document->ecli)) {
+      echo 'Identifiant ECLI : <em>'.$document->ecli.'</em> (non officiel) <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="Identifiant européen de la jurisprudence" /><br />';
     }
-
-    if (isset($urnlex)) {
-      echo 'Identifiant URN:LEX : <em>'.$urnlex.'</em> <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="A Uniform Resource Name (URN) Namespace for Sources of Law (LEX)" /><br />';
+    if (isset($document->urnlex)) {
+      echo 'Identifiant URN:LEX : <em>'.$document->urnlex.'</em> <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="A Uniform Resource Name (URN) Namespace for Sources of Law (LEX)" /><br />';
     }
 
     if (!empty($analyses)) {
@@ -482,8 +308,8 @@ if (array_key_exists($document->pays, $codes_pays_orgas)) {
 
     if($document->pays == "Madagascar" && $document->juridiction == "Cour suprême" && trim($document->texte_arret) == "En haut a droite, cliquez sur PDF pour visualiser le fac-simile de la décision") {
     ?>
-    <object data="http://www.juricaf.org/Juricaf/Arrets/Madagascar/Cour%20supr%C3%AAme/<?php echo $document->juricaf_id; ?>.PDF" type="application/pdf" width="100%" height="1000" navpanes="0" statusbar="0" messages="0">
-    Cette décision est disponible au format pdf : <a href="http://www.juricaf.org/Juricaf/Arrets/Madagascar/Cour%20supr%C3%AAme/<?php echo $document->juricaf_id; ?>.PDF"><?php echo $document->titre; ?></a>
+    <object data="http://www.juricaf.org/Juricaf/Arrets/Madagascar/Cour%20supr%C3%AAme/<?php echo $document->id_source; ?>.PDF" type="application/pdf" width="100%" height="1000" navpanes="0" statusbar="0" messages="0">
+    Cette décision est disponible au format pdf : <a href="http://www.juricaf.org/Juricaf/Arrets/Madagascar/Cour%20supr%C3%AAme/<?php echo $document->id_source; ?>.PDF"><?php echo $document->titre; ?></a>
     </object>
     <?php
     }
@@ -496,6 +322,18 @@ if (array_key_exists($document->pays, $codes_pays_orgas)) {
       if (!empty($citations_arret)) { echo $citations_arret; }
       if (!empty($sources)) { echo $sources; }
       echo '</p>';
+    }
+
+    if(isset($references['ARRET'])) {
+      echo '<hr /><h3>Référence :</h3>';
+        foreach($references['ARRET'] as $value) {
+          if(isset($value['titre'])) {
+            echo $value['titre'].'<br />';
+          }
+          if(isset($value['contenu'])) {
+            echo $value['contenu'].'<br />';
+          }
+        }
     }
 
     if(isset($document->nor) || isset($document->ecli) || isset($document->numeros_affaires)) {
@@ -548,7 +386,7 @@ if (array_key_exists($document->pays, $codes_pays_orgas)) {
     <a href="/couchdb/_utils/document.html?<?php echo sfConfig::get('app_couchdb_database');?>/<?php echo $document->_id; ?>">Admin</a>
   </div>
   <div class="download">
-  <?php // echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
+  <?php //echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
   </div>
   <?php
 ///// METAS /////

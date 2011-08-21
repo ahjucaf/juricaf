@@ -10,6 +10,11 @@ function replaceBlank($str) {
 function replaceUnderscore($str) {
   return str_replace ('_', ' ', $str);
 }
+
+function pathToFlag($str) {
+  return urlencode(str_replace("'", '_', replaceBlank($str)));
+}
+
 ?>
 <div class="recherche">
   <h1><?php echo $nbResultats; ?> résultats
@@ -163,7 +168,7 @@ include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction'
 </div>
 <?php
 foreach ($resultats->response->docs as $resultat) {
-  echo '<div class="resultat"><h3><a href="'.url_for('@arret?id='.$resultat->id).'"><img style="height: 10px;" src="/images/drapeaux/'.urlencode(replaceBlank($resultat->pays)).'.png" alt="§" /> '.$resultat->titre.'</a></h3>';
+  echo '<div class="resultat"><h3><a href="'.url_for('@arret?id='.$resultat->id).'"><img style="height: 10px;" src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</a></h3>';
   echo '<p>';
   $exerpt = '';
   if (isset($resultats->highlighting) && $resultats->highlighting->{$resultat->id} && isset($resultats->highlighting->{$resultat->id}->content)) {
@@ -183,7 +188,7 @@ foreach ($resultats->response->docs as $resultat) {
   }
   echo '<div class="extra"><span class="pays '.preg_replace('/ /', '_', $resultat->pays).'">'.$resultat->pays.'</span> - <span class="date">'.date('d/m/Y', strtotime($resultat->date_arret)).'</span> - <span class="juridiction">'.$resultat->juridiction.$formation.'</span> - <span class="num">'.$resultat->num_arret.'</span>';
   if(isset($resultat->ecli)) {
-    echo '- <span class="num">'.$resultat->ecli.'</span>';
+    echo ' - <span class="num">'.$resultat->ecli.'</span>';
   }
   echo '</div></div>';
 }

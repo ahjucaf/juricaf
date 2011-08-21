@@ -6,10 +6,14 @@ function replaceBlank($str) {
   return str_replace (' ', '_', $str);
 }
 
+function pathToFlag($str) {
+  return urlencode(str_replace("'", '_', replaceBlank($str)));
+}
+
 foreach ($pays as $p => $juridictions)
 {
   $no_blank_p = replaceBlank($p);
-  echo '<li style="list-style-image: url(/images/drapeaux/'.ucfirst($no_blank_p).'.png)"><strong>'.link_to($p,'recherche/search?query=+&facets=pays:'.$no_blank_p).'</strong><ul class="subul">';
+  echo '<li style="list-style-image: url(/images/drapeaux/'.pathToFlag(ucfirst($no_blank_p)).'.png)"><strong>'.link_to($p,'recherche/search?query=+&facets=pays:'.$no_blank_p).'</strong><ul class="subul">';
   foreach ($juridictions as $j => $v) {
     $pluriel = '';
     if ($v['value'] > 1)
