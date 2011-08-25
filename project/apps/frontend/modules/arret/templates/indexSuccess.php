@@ -148,7 +148,7 @@ function linkifyAnalyses($titrage) {
   usort($values,'sortLength');
 
   foreach ($values as $value) {
-    $titrage = preg_replace('/'.$value.'/', link_to($value, '@recherche_resultats?query=analyses:"'.$value.'"'), $titrage, 1);
+    $titrage = preg_replace('/'.$value.'/', link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents($value).'"'), $titrage, 1);
   }
   return rtrim($titrage, '- ').'.';
 }
