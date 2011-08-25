@@ -56,6 +56,7 @@ function sortLength($a,$b){
 
 function linkifyAnalyses($titrage) {
   $specifiques = array();
+  if(is_array($titrage)) { $titrage = str_replace('Array', '', implode(' ', $titrage)); }
   // identifiants
   if(preg_match('/(([0-9]{1,3}-)*([0-9]{1,3}){1})/', $titrage, $match)) {
     $identifiants[0] = $match[1]; $specifiques = $identifiants;
@@ -218,7 +219,7 @@ if (isset($document->analyses)) {
       else {
         if($values !== "null") {
           $analyses .= '<blockquote>';
-            if(strpos($key, 'titre') !== false) { if($document->pays == 'France') { $titrage = linkifyAnalyses($value); } else { $titrage = $value; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $value.' '; }
+            if(strpos($key, 'titre') !== false) { if($document->pays == 'France') { $titrage = linkifyAnalyses($values); } else { $titrage = $values; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $values.' '; }
             else { $analyses .= '<p>'.$values.'</p>'; }
           $analyses .= '</blockquote>';
         }
