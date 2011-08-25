@@ -56,7 +56,6 @@ function sortLength($a,$b){
 
 function linkifyAnalyses($titrage) {
   $specifiques = array();
-
   // identifiants
   if(preg_match('/(([0-9]{1,3}-)*([0-9]{1,3}){1})/', $titrage, $match)) {
     $identifiants[0] = $match[1]; $specifiques = $identifiants;
@@ -70,7 +69,7 @@ function linkifyAnalyses($titrage) {
     $references = $match[0];
   }
   // unusables
-  $unusables = array('1°','2°','3°','1)','2)','3)');
+  $unusables = array('1°','2°','3°','1)','2)','3)','(non)');
 
   if(isset($references)) {
     foreach($references as $reference) {
@@ -148,7 +147,7 @@ function linkifyAnalyses($titrage) {
   usort($values,'sortLength');
 
   foreach ($values as $value) {
-    $titrage = preg_replace('/'.$value.'/', link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents($value).'"'), $titrage, 1);
+    $titrage = preg_replace('/'.str_replace("'", "\'", $value).'/', link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents($value).'"'), $titrage, 1);
   }
   return rtrim($titrage, '- ').'.';
 }
