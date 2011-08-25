@@ -49,6 +49,110 @@ function pathToFlag($str) {
   return urlencode(str_replace("'", '_', replaceBlank($str)));
 }
 
+function sortLength($a,$b){
+  return strlen($b)-strlen($a);
+}
+
+
+function linkifyAnalyses($titrage) {
+  $specifiques = array();
+
+  // identifiants
+  if(preg_match('/(([0-9]{1,3}-)*([0-9]{1,3}){1})/', $titrage, $match)) {
+    $identifiants[0] = $match[1]; $specifiques = $identifiants;
+  }
+  // parenthèses
+  if(preg_match_all('/\([^()]*\)/', $titrage, $match)) {
+    $parentheses = $match[0];
+  }
+  // references
+  if(preg_match_all('/(\[RJ[0-9]{1}\])/', $titrage, $match)) {
+    $references = $match[0];
+  }
+  // unusables
+  $unusables = array('1°','2°','3°','1)','2)','3)');
+
+  if(isset($references)) {
+    foreach($references as $reference) {
+      $titrage = str_replace($reference, ' - '.$reference.' - ', $titrage);
+    }
+  }
+
+  $separators = array(' -','- ',';','.',',');
+
+  $titrage = str_replace($separators, ' - ', $titrage);
+  $titrage = str_replace('  ', ' ', $titrage);
+  $titrage = str_replace(' -  - ', ' - ', $titrage);
+
+  if(isset($parentheses)) {
+    foreach($parentheses as $parenthese) {
+      if(strpos($titrage, str_replace('. ', ' - ', $parenthese)) !== false) {
+        $titrage = str_replace(str_replace('. ', ' - ', $parenthese), $parenthese, $titrage);
+      }
+    }
+  }
+
+  $values = explode(' - ', $titrage);
+  $values = array_filter($values);
+
+  foreach ($values as $key => $value) {
+    if(isset($references)) {
+      foreach($references as $reference) {
+        if(strpos($value, $reference) !== false) {
+          unset($values[$key]);
+        }
+      }
+    }
+    if(isset($unusables)) {
+      foreach($unusables as $unusable) {
+        if(strpos($value, $unusable) !== false) {
+          $values[$key] = trim(str_replace($unusable, '', $value));
+        }
+      }
+    }
+    if(isset($identifiants)) {
+      foreach($identifiants as $identifiant) {
+        if(strpos($value, $identifiant) !== false) {
+          $values[$key] = trim(str_replace($identifiant, '', $value));
+        }
+      }
+    }
+    if(isset($parentheses)) {
+      foreach($parentheses as $parenthese) {
+        if(strpos($value, $parenthese) !== false) {
+          $values[$key] = trim(str_replace($parenthese, '', $value));
+        }
+      }
+    }
+    $values[$key] = @trim($values[$key]);
+  }
+
+  if(isset($parentheses)) {
+    foreach($parentheses as $key => $parenthese) {
+      $parentheses[$key] = trim($parenthese, '()');
+    }
+    $specifiques = array_merge($specifiques, $parentheses);
+  }
+
+  if(isset($references)) {
+    foreach($references as $reference) {
+      if(strpos($titrage, ' - '.$reference.' - ') !== false) {
+        $titrage = str_replace(' - '.$reference.' - ', $reference, $titrage);
+      }
+    }
+  }
+
+  $values = array_merge($values, $specifiques);
+  $values = array_filter($values);
+  $values = array_unique($values);
+  usort($values,'sortLength');
+
+  foreach ($values as $value) {
+    $titrage = preg_replace('/'.$value.'/', link_to($value, '@recherche_resultats?query=analyses:"'.$value.'"'), $titrage, 1);
+  }
+  return rtrim($titrage, '- ').'.';
+}
+
 if(isset($document->references)) {
   foreach ($document->getReferences() as $values) {
     $i = 0;
@@ -106,11 +210,8 @@ if (isset($document->analyses)) {
         foreach($values as $key => $value) {
           if($value !== "null") {
             $analyses .= '<blockquote>';
-            if(strpos($key, 'titre') !== false) { $analyses .= '<h2>'; $keywords .= $value.' '; }
-            else { $analyses .= '<p>'; }
-            $analyses .=  $value;
-            if(strpos($key, 'titre') !== false) { $analyses .= '</h2>'; }
-            else { $analyses .= '</p>'; }
+            if(strpos($key, 'titre') !== false) { if($document->pays == 'France') { $titrage = linkifyAnalyses($value); } else { $titrage = $value; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $value.' '; }
+            else { $analyses .= '<p>'.$value.'</p>'; }
             $analyses .= '</blockquote>';
           }
         }
@@ -118,9 +219,8 @@ if (isset($document->analyses)) {
       else {
         if($values !== "null") {
           $analyses .= '<blockquote>';
-          if(strpos($key, 'titre') !== false) { $analyses .= '<h2>';  $keywords .= $values.' '; }
-          $analyses .= $values;
-          if(strpos($key, 'titre') !== false) { $analyses .= '</h2>'; }
+            if(strpos($key, 'titre') !== false) { if($document->pays == 'France') { $titrage = linkifyAnalyses($value); } else { $titrage = $value; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $value.' '; }
+            else { $analyses .= '<p>'.$values.'</p>'; }
           $analyses .= '</blockquote>';
         }
       }
