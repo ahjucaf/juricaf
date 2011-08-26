@@ -55,8 +55,6 @@ function sortLength($a,$b){
 
 
 function linkifyAnalyses($titrage) {
-  //echo "<pre>".$titrage."</pre>\n\n\n";
-  //if(is_array($titrage)) { $titrage = str_replace('Array', '', implode(' ', $titrage)); }
   // identifiants
   if(preg_match('/(([0-9]{1,3}-)*([0-9]{1,3}){1})/', $titrage, $match)) {
     $identifiants[0] = $match[1]; $specifiques = $identifiants;
@@ -85,7 +83,6 @@ function linkifyAnalyses($titrage) {
 
   $values = array_filter($values);
   $values = array_unique($values);
-  //usort($values,'sortLength');
 
   $i = 0;
   $titrage = '';
@@ -93,11 +90,8 @@ function linkifyAnalyses($titrage) {
   foreach ($values as $value) {
     if($i == 0) { $link[$i] = $value; }
       else { $link[$i] = $link[$i-1].' - '.$value; }
-      $titrage .= '<a href="http://www.juricaf.tangui.eu.org/recherche/analyses%3A%22'.replaceAccents($link[$i]).'%22">'.$value.'</a> - ';
+      $titrage .= link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents($link[$i]).'"&facets=order:pertinance').' - ';
       $i++;
-    //$clean_value = str_replace(' -', '', $value);
-    //$titrage = preg_replace('/'.$value.'/', link_to($clean_value, '@recherche_resultats?query=analyses:"'.replaceAccents($clean_value).'"').' -', $titrage, 1);
-    //$titrage = preg_replace('/'.str_replace("'", "\'", $value).'/', link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents($value).'"'), $titrage, 1);
   }
   return rtrim($titrage, '- ').'.';
 }
