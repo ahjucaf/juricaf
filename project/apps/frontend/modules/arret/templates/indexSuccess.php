@@ -93,7 +93,7 @@ function linkifyAnalyses($titrage) {
   foreach ($values as $value) {
     if($i == 0) { $link[$i] = $value; }
       else { $link[$i] = $link[$i-1].' - '.$value; }
-      $titrage .= '<a href="http://my.juricaf.tangui.eu.org/recherche/analyses%3A%22'.$link[$i].'%22">'.$value.'</a> - ';
+      $titrage .= '<a href="http://www.juricaf.tangui.eu.org/recherche/analyses%3A%22'.replaceAccents($link[$i]).'%22">'.$value.'</a> - ';
       $i++;
     //$clean_value = str_replace(' -', '', $value);
     //$titrage = preg_replace('/'.$value.'/', link_to($clean_value, '@recherche_resultats?query=analyses:"'.replaceAccents($clean_value).'"').' -', $titrage, 1);
