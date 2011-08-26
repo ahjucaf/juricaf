@@ -49,14 +49,22 @@ function pathToFlag($str) {
   return urlencode(str_replace("'", '_', replaceBlank($str)));
 }
 
-function sortLength($a,$b){
+function sortLength($a,$b) {
   return strlen($b)-strlen($a);
 }
 
+function dateFr($date) {
+  if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $date)) {
+    $d = explode('-', $date);
+    $date = $d[3].'/'.$d[2].'/'.$d[1];
+  }
+  return $date;
+}
 
 function linkifyAnalyses($titrage) {
+  if(is_array($titrage)) { $titrage = trim(str_replace('Array', '', implode(' ', $titrage))); }
   // identifiants
-  if(preg_match('/(([0-9]{1,3}-)*([0-9]{1,3}){1})/', $titrage, $match)) {
+  if(preg_match('/(([0-9]{1,3}-)+([0-9]{1,3}){1})/', $titrage, $match)) {
     $identifiants[0] = $match[1]; $specifiques = $identifiants;
   }
 
@@ -78,7 +86,7 @@ function linkifyAnalyses($titrage) {
         }
       }
     }
-    $values[$key] = @trim($values[$key]);
+    $values[$key] = @trim($values[$key], '* ');
   }
 
   $values = array_filter($values);
