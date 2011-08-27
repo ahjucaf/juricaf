@@ -133,19 +133,19 @@ $contributors = '';
 
   if(isset($document->president) || isset($document->avocat_gl) || isset($document->rapporteur) || isset($document->commissaire_gvt) || isset($document->avocats)) {
     if (isset($document->president)) {
-      $contributors .= 'Président : <em>'.$document->president.'</em><br />'; // replace br par ' ; '
+      $contributors .= 'Président : <em>'.link_to($document->president, '@recherche_resultats?query=president:"'.replaceAccents($document->president).'"').'</em><br />'; // replace br par ' ; '
     }
     if (isset($document->avocat_gl)) {
-      $contributors .= 'Avocat général : <em>'.$document->avocat_gl.'</em><br />';
+      $contributors .= 'Avocat général : <em>'.link_to($document->avocat_gl, '@recherche_resultats?query=avocat_gl:"'.replaceAccents($document->avocat_gl).'"').'</em><br />';
     }
     if (isset($document->rapporteur)) {
-      $contributors .= 'Rapporteur : <em>'.$document->rapporteur.'</em><br />';
+      $contributors .= 'Rapporteur : <em>'.link_to($document->rapporteur, '@recherche_resultats?query=rapporteur:"'.replaceAccents($document->rapporteur).'"').'</em><br />';
     }
     if (isset($document->commissaire_gvt)) {
-      $contributors .= 'Commissaire gouvernement : <em>'.$document->commissaire_gvt.'</em><br />';
+      $contributors .= 'Commissaire gouvernement : <em>'.link_to($document->commissaire_gvt, '@recherche_resultats?query=commissaire_gvt:"'.replaceAccents($document->commissaire_gvt).'"').'</em><br />';
     }
     if (isset($document->avocats)) {
-      $contributors .= 'Avocats : <em>'.$document->avocats.'</em><br />';
+      $contributors .= 'Avocats : <em>'.link_to($document->avocats, '@recherche_resultats?query=avocats:"'.replaceAccents($document->avocats).'"').'</em><br />';
     }
     $contrib = true;
   }
@@ -280,18 +280,18 @@ if (isset($document->ecli)) {
       echo '<h3>'.$document->section.'</h3>';
     }
     if (isset($document->sens_arret)) {
-      echo 'Sens de l\'arrêt : <em>'.$document->sens_arret.'</em><br />';
+      echo 'Sens de l\'arrêt : <em>'.link_to($document->sens_arret, '@recherche_resultats?query=sens_arret:"'.replaceAccents($document->sens_arret).'"').'</em><br />';
     }
     if (isset($document->type_affaire)) {
       if(isset($natureConstit[$document->type_affaire])) {
-        echo 'Type d\'affaire : <em>'.$natureConstit[$document->type_affaire].'</em><br />';
+        echo 'Type d\'affaire : <em>'.link_to($natureConstit[$document->type_affaire], '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</em><br />';
       }
       else {
-        echo 'Type d\'affaire : <em>'.$document->type_affaire.'</em><br />';
+        echo 'Type d\'affaire : <em>'.link_to($document->type_affaire, '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</em><br />';
       }
     }
     if (isset($document->type_recours)) {
-      echo 'Type de recours : <em>'.$document->type_recours.'</em><br />';
+      echo 'Type de recours : <em>'.link_to($document->type_recours, '@recherche_resultats?query=type_recours:"'.replaceAccents($document->type_recours).'"').'</em><br />';
     }
     echo '<br />';
     if (isset($document->ecli)) {
@@ -340,7 +340,7 @@ if (isset($document->ecli)) {
         $sep = ''; $i = 1;
         foreach($document->parties['demandeurs'] as $value) {
           if($i > 1) { $sep = ', '; }
-          echo '<em>'.$sep.$value.'</em>'; $i++;
+          echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:"'.replaceAccents($value).'"').'</em>'; $i++;
         }
         echo '<br />';
       }
@@ -349,7 +349,7 @@ if (isset($document->ecli)) {
         $sep = ''; $i = 1;
         foreach($document->parties['defendeurs'] as $value) {
           if($i > 1) { $sep = ', '; }
-          echo '<em>'.$sep.$value.'</em>'; $i++;
+          echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:"'.replaceAccents($value).'"').'</em>'; $i++;
         }
         echo '<br />';
       }
