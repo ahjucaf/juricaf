@@ -387,7 +387,7 @@ if (isset($document->ecli)) {
         }
     }
 
-    if(isset($document->nor) || isset($document->ecli) || isset($document->numeros_affaires)) {
+    if(isset($document->nor) || isset($document->numeros_affaires)) {
       echo '<hr />';
       if (isset($document->nor)) {
         echo 'Numéro NOR : <em>'.$document->nor.'</em><br />';
@@ -416,6 +416,9 @@ if (isset($document->ecli)) {
         foreach($references['PUBLICATION'] as $value) {
           if(isset($value['url'])) {
             echo '<a href="'.htmlentities($value['url']).'">'.$value['titre'].'</a><br />';
+          }
+          elseif(strpos(strtolower($value['titre']), 'lebon') !== false) {
+            echo link_to($value['titre'], '@recherche_resultats?query=references:"'.$value['titre'].'"').'<br />';
           }
           else { echo $value['titre'].'<br />'; }
         }
