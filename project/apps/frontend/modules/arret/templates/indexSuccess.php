@@ -426,7 +426,7 @@ if (isset($document->ecli)) {
     }
 
     if (isset($document->fonds_documentaire)) {
-      echo '<hr /><p>Origine : <em>'.$document->fonds_documentaire.'</em></p><br />';
+      echo '<hr /><p>Origine : <em>'.link_to($document->fonds_documentaire, '@recherche_resultats?query=fonds_documentaire:"'.replaceAccents($document->fonds_documentaire).'"').'</em></p><br />';
     }
     ?>
   </div>
