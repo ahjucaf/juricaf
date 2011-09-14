@@ -13,20 +13,19 @@
     <div class="site">
       <div class="head">
         <div class="reseaux_sociaux">
-          <a href="https://www.facebook.com/pages/Juricaf/199894740035999"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook" /></a>
+          <a href="https://www.facebook.com/Juricaf"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook" /></a>
           <a href="https://twitter.com/#!/juricaf"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter" /></a>
-          <a href="http://search.twitter.com/search.atom?q=+from%3Ajuricaf"><img src="/images/rss.png" alt="RSS" title="Flux RSS" /></a>
+          <a href="http://www.parcesmotifs.net/spip.php?page=backend"><img src="/images/rss.png" alt="RSS" title="Flux RSS" /></a>
           <a href="javascript:juricafSearch();"><img src="/images/juricaf_search.png" alt="J" title="Ajouter Juricaf aux moteurs de recherches de votre navigateur" /></a>
         </div>
         <div class="menu">
           <ul>
-            <li><a href="#">A propos</a></li>
-            <li><a href="#">Aide</a></li>
-            <li><a href="http://v2.juricaf.org/stats">Étendue des collections</a></li>
-            <li><a href="#">Outils</a></li>
-            <li><a href="#">Partenaires</a></li>
-            <li><a href="mailto:juricaf@ahjucaf.org">Contact</a></li>
-            <li><a href="#">Mentions légales</a></li>
+            <li><a href="/documentation/a_propos.html">A propos</a></li>
+            <li><a href="/stats">Étendue des collections</a></li>
+<!---            <li><a href="#">Outils</a></li> -->
+            <li><a href="/documentation/partenaires.html">Partenaires</a></li>
+            <li><a href="/documentation/contact.html">Contact</a></li>
+            <li><a href="/documentation/mentions_legales.html">Mentions légales</a></li>
           </ul>
         </div>
       </div>
