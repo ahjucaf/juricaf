@@ -6,9 +6,11 @@
 DATA=../data/dila/temp/
 ARCHIVE=../data/dila/archive/
 FTP=../../ftp/dila/
+CONVERTED=../data/dila/converted/
+POOL=../data/pool/
 TOPROCESS=log/to_detar_update.txt
 TOERASE=log/to_erase.txt
-# lock à revoir
+LOCK=/tmp/import.sh.lock
 
 if test "$1" ; then
   echo "Extraire TOUS les documents dila ? : veuillez confirmer (y/n)"
@@ -18,8 +20,7 @@ if test "$1" ; then
   php sort.php
 fi
 
-echo "Début : " ;
-date '+%d-%m-%Y-%H:%M:%S' ;
+START=$(date '+%d-%m-%Y-%H:%M:%S') ;
 
 for fichier in $(cat $TOPROCESS);
   do
@@ -33,5 +34,27 @@ for fichier in $(cat $TOPROCESS);
   mv $DATA* $ARCHIVE ;
 done
 
-echo "Fin : " ;
-date '+%d-%m-%Y-%H:%M:%S' ;
+# Vérif indexation en cours
+if [ -e $LOCK ]
+then
+  if ! ps --pid $(cat $LOCK) > /dev/null ; then
+    if [ -e $POOL/France ] ; then
+      rm -r $POOL/France
+    fi
+    mv $CONVERTED* $POOL
+    echo "Les fichiers convertis ont été placés dans le pool, le lock a été supprimé" ;
+    rm lock
+  else
+    echo "Import tiers en cours : les fichiers convertis restent dans $CONVERTED" ;
+  fi
+else
+  if [ -e $POOL/France ] ; then
+    rm -r $POOL/France
+  fi
+  echo "Les fichiers convertis ont été placés dans le pool" ;
+  mv $CONVERTED* $POOL
+fi
+
+END=$(date '+%d-%m-%Y-%H:%M:%S') ;
+
+echo "Début : $START , Fin : $END" ;
