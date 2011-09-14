@@ -2,9 +2,10 @@
 . ./config/conf.sh
 LOCALCOPY=../../ftp/dila/
 TO_UPDATE=log/to_detar_update.txt
-OLDLOG=log/old.txt
-NEWLOG=log/new.txt
+OLDLOG=log/old.log
+NEWLOG=log/new.log
 DATE=$(date +%Y-%m-%d-%H-%M)
+LOG=log/updates.log
 
 # Anciens fichiers
 find $LOCALCOPY -name "*.tar.gz" | xargs stat -c "%Y#%n" > $OLDLOG
@@ -19,11 +20,17 @@ find $LOCALCOPY -name "*.tar.gz" | xargs stat -c "%Y#%n" > $NEWLOG
 php compare.php
 
 # Lance l'importation
+echo $DATE >> $LOG
 if [ -e $TO_UPDATE ]
 then
 ./detar.sh
 mv $OLDLOG log/$DATE-old.log
 mv $NEWLOG log/$DATE-new.log
+echo $DATE >> $LOG
+cat $TO_UPDATE >> $LOG
+echo "--------------------------------------" >> $LOG
+rm $TO_UPDATE
 else
-echo "Il n'y a pas de mise à jour";
+echo "pas de mise à jour" >> $LOG
+echo "--------------------------------------" >> $LOG
 fi

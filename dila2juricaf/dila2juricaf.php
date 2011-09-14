@@ -506,7 +506,7 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
 
   // Sous dossiers année/institution
   if(empty($juricaf_array['DATE_ARRET'])) { $date_rec = "date_manquante"; } else { $date_rec = substr($juricaf_array['DATE_ARRET'], 0, 4); }
-  $dir = "../data/juricaf/France/".$date_rec."/".ids($juricaf_array['JURIDICTION']) ;
+  $dir = "../data/dila/converted/France/".$date_rec."/".ids($juricaf_array['JURIDICTION']) ;
   if (!is_dir($dir)) {
     try {
       mkdir($dir, 0777, true);
