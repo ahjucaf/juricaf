@@ -8,7 +8,7 @@ foreach ($to_detar_all as $line) {
 }
 
 if (is_array($to_process)) {
-  asort($to_process);
+  ksort($to_process);
   $to_update = '';
   foreach ($to_process as $value) {
     $to_update .= $value."\n";
