@@ -1,4 +1,11 @@
 #!/bin/bash
+
+# Répertoire de travail
+if [ "$(echo $0 | sed 's|[^/]*$||')" != "./" ] ; then
+  cd $(echo $0 | sed 's|[^/]*$||');
+fi
+
+# Configuration
 . ./config/conf.sh
 LOCALCOPY=../../ftp/dila/
 TO_UPDATE=log/to_detar_update.txt
@@ -26,7 +33,6 @@ then
 ./detar.sh
 mv $OLDLOG log/$DATE-old.log
 mv $NEWLOG log/$DATE-new.log
-echo $DATE >> $LOG
 cat $TO_UPDATE >> $LOG
 echo "--------------------------------------" >> $LOG
 rm $TO_UPDATE
