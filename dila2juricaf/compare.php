@@ -12,7 +12,7 @@ foreach ($new as $line) {
 }
 
 if (isset($to_process)) {
-  asort($to_process);
+  ksort($to_process);
   foreach ($to_process as $value) {
     $to_update .= $value."\n";
   }
