@@ -393,21 +393,28 @@ if (isset($document->ecli)) {
         echo 'Numéro NOR : <em>'.$document->nor.'</em><br />';
       }
       if (isset($document->numeros_affaires)) {
-        $sep = ''; $i = 0;
+        $numeros = '';
         foreach($document->numeros_affaires as $values) {
           if(is_array($values) || is_object($values)) {
+            $nb_num_affaires = count($values);
             foreach($values as $value) {
-              if($i > 0) { $sep = ', '; }
-              $numeros = $sep.$value; $i++;
+              $sep = '';
+              if (!empty($numeros)) { $sep = ', '; }
+              $numeros .= $sep.$value;
             }
           }
           else {
-            if($i > 0) { $sep = ', '; }
-            $numeros = $sep.$values; $i++;
+            $nb_num_affaires = count($document->numeros_affaires);
+            $sep = '';
+            if (!empty($numeros)) { $sep = ', '; }
+            $numeros .= $sep.$values;
           }
         }
-        if($i > 1) { $s = 's'; } else { $s = ''; }
+        if($nb_num_affaires > 1) { $s = 's'; } else { $s = ''; }
         echo 'Numéro d\'affaire'.$s.' : <em>'.$numeros.'</em><br />';
+      }
+      if (isset($document->num_decision)) {
+        echo 'Numéro de décision : <em>'.$document->num_decision.'</em><br />';
       }
     }
 
