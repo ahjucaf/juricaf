@@ -108,7 +108,9 @@ function toString($mixed) {
 function correctWrongSpelling($string) {
   $fautes = array(
     "anullation" => "annulation",
-    " l acour" => " la cour",
+    " arrete de " => " arrêté de ",
+    "attaquee" => "attaquée",
+    "d'arret" => "d'arrêt",
     "l'arrete" => "l'arrêté",
     "l'arret" => "l'arrêt",
     "attaquee" => "attaquée",
@@ -118,6 +120,7 @@ function correctWrongSpelling($string) {
     "condamantion" => "condamnation",
     "decheance" => "déchéance",
     "decision" => "décision",
+    "declaration" => "déclaration",
     "defaut" => "défaut",
     "etait" => "était",
     "l'etat" => "l'état",
@@ -146,6 +149,7 @@ function correctWrongSpelling($string) {
     "recevabilite" => "recevabilité",
     "rexecevabilité" => "recevabilité",
     "refere " => "référé ",
+    "reglement" => "règlement",
     "rejt" => "rejet",
     "reouverture" => "réouverture",
     "revision" => "révision",
@@ -815,6 +819,7 @@ if(isset($res['juridiction'])) { $juridiction = $res['juridiction']; } else { $j
 if(isset($res['formation'])) { $formation = $res['formation']; } else { $formation = 0; }
 if(isset($res['section'])) { $section = $res['section']; } else { $section = 0; }
 if(isset($res['num_arret'])) { $num_arret = $res['num_arret']; } else { $num_arret = 0; }
+if(isset($res['num_decision'])) { $num_decision = $res['num_decision']; } else { $num_decision = 0; }
 if(isset($res['date_arret'])) { $date_arret = $res['date_arret']; } else { $date_arret = 0; }
 if(isset($res['sens_arret'])) { $sens_arret = $res['sens_arret']; } else { $sens_arret = 0; }
 if(isset($res['numeros_affaires'])) { $numeros_affaires = count($res['numeros_affaires']); } else { $numeros_affaires = 0; }
@@ -864,7 +869,7 @@ if(!isset($no_connexion)) {
 // Log l'arrêt
 if(!isset($no_connexion)) {
   try {
-    $insert = 'INSERT INTO `'.$DBTABLE.'` VALUES("", :id_base, :erreurs, :pays, :juridiction, :formation, :section, :num_arret, :date_arret, :sens_arret, :numeros_affaires, :nor, :urnlex, :ecli, :titre, :titre_supplementaire, :type_affaire, :type_recours, :decisions_attaquees, :president, :avocat_gl, :rapporteur, :commissaire_gvt, :avocats, :parties, :analyses, :saisines, :texte_arret, :references, :fonds_documentaire, :reseau, :id_source, :type, NOW())';
+    $insert = 'INSERT INTO `'.$DBTABLE.'` VALUES("", :id_base, :erreurs, :pays, :juridiction, :formation, :section, :num_arret, :num_decision, :date_arret, :sens_arret, :numeros_affaires, :nor, :urnlex, :ecli, :titre, :titre_supplementaire, :type_affaire, :type_recours, :decisions_attaquees, :president, :avocat_gl, :rapporteur, :commissaire_gvt, :avocats, :parties, :analyses, :saisines, :texte_arret, :references, :fonds_documentaire, :reseau, :id_source, :type, NOW())';
 
     $req = $bdd->prepare($insert);
 
@@ -876,6 +881,7 @@ if(!isset($no_connexion)) {
       'formation' => $formation,
       'section' => $section,
       'num_arret' => $num_arret,
+      'num_decision' => $num_decision,
       'date_arret' => $date_arret,
       'sens_arret' => $sens_arret,
       'numeros_affaires' => $numeros_affaires,
