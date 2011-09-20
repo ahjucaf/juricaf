@@ -462,6 +462,20 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
   $juricaf_array = unsetEmptyVals($juricaf_array);
   // Débug : var_dump($juricaf_array);
 
+  // Numéros d'affaires en tant que num_arret en priorité pour la cour de cassation
+  if($juricaf_array['JURIDICTION'] == 'Cour de cassation' && isset($juricaf_array['NUMEROS_AFFAIRES'])) {
+    $num_affaire = '';
+    foreach ($juricaf_array['NUMEROS_AFFAIRES'] as $values) {
+      $sep = '';
+      if (!empty($num_affaire)) { $sep = ';'; }
+      $num_affaire .= $sep.str_replace(array("<![CDATA[", "]]>"), '', $values);
+    }
+    if(!empty($juricaf_array['NUM_ARRET'])) {
+      $juricaf_array['NUM_DECISION'] = $juricaf_array['NUM_ARRET'];
+    }
+    $juricaf_array['NUM_ARRET'] = '<![CDATA['.$num_affaire.']]>';
+  }
+
   // Conversion du tableau en string xml balisé
   $juricaf_str = '<?xml version="1.0" encoding="UTF-8"?><DOCUMENT>';
 
@@ -555,7 +569,7 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
       $num_rec = 'RANDOM'.mt_rand();
     }
   }
-  else { $num_rec = $juricaf_array['NUM_ARRET']; }
+  else { $num_rec = str_replace(';', '-', $juricaf_array['NUM_ARRET']); }
 
   $num_rec = str_replace(array("<![CDATA[", "]]>"), '', $num_rec);
 
