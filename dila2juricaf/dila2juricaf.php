@@ -520,7 +520,8 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
   // Id prédictible
   $juri_rec = strtoupper(ids($juricaf_array['JURIDICTION']));
 
-  if($date_rec == 'date_manquante') { $date_rec = date('Y-m-d'); }
+  if($date_rec == 'date_manquante') { $date_rec = date('Ymd'); }
+  else { $date_rec = str_replace('-', '', $juricaf_array['DATE_ARRET']); }
 
   if (empty($juricaf_array['NUM_ARRET']))
   {
@@ -540,7 +541,7 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
           $num_rec .= $sep.$values;
         }
       }
-      $num_rec = str_replace(';', '', $num_rec);
+      $num_rec = str_replace(';', '-', $num_rec);
     }
     elseif (isset($juricaf_array['NOR']))
     {
