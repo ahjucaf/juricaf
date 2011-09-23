@@ -6,15 +6,18 @@ include("utils.php");
 
 global $lock, $cpt, $COMMITER;
 
-$COMMITER = 100;
+$INITCOMMITER = 100;
+$COMMITER = $INITCOMMITER;
 
-$lock = fopen($lock_seq_file, 'a+');
-if (!$lock) die('error with lock file');
-fseek($lock, 0);
-$last_seq = rtrim(fgets($lock));
-
+function readLockFile() {
+  global $last_seq, $lock_seq_file, $lock;
+  $lock = fopen($lock_seq_file, 'a+');
+  if (!$lock) die('error with lock file');
+  fseek($lock, 0);
+  $last_seq = rtrim(fgets($lock));
+}
 #echo "last_seq : $last_seq\n";
-
+readLockFile();
 
 $cpt = 0;
 
@@ -104,21 +107,45 @@ function updateIndexer($id) {
 function deleteIndexer($id) {
   global $solr_url_db, $last_seq;
   $solrdata = "<delete><id>$id</id></delete>";
+  try {
+    do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
+  }
+  catch (Exception $e) {
+    echo "Erreur de suppression de ".$id." (".$solrdata.")\n-------- INTERNAL MSG --------\n";
+    echo $e->getMessage()."\n------------------------------\n";
+    return ;
+  }
   echo "$last_seq : $id (DELETED)\n";
-  do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
 }
 
 //Ne pas appeler directement, passer par storeSeq
 function commitIndexer() {
-  global $solr_url_db, $last_seq;
+  global $solr_url_db, $last_seq, $COMMITER, $INITCOMMITER;
   $solrdata = "<commit/>";
   try {
     do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
   }catch (Exception $e) {
-      echo "Erreur de commit (".$solrdata.")\n-------- INTERNAL MSG --------\n";
-      echo $e->getMessage()."\n------------------------------\n";
+    echo "Erreur de commit (".$solrdata.")\n-------- INTERNAL MSG --------\n";
+    echo $e->getMessage()."\n------------------------------\n";
+    // En cas d'erreur de commit : on retourne au dernier lock/seq qui a fonctionné 
+    //et on commite deux fois plus tot pour identifier si le pb vient d'un document erronné
+    // Si la variable COMMITER est à 1 c'est qu'on a identifié l'enregistrement erronné
+    //donc on passe à autre chose
+    if ($COMMITER < 2) {
+      echo "$last_seq : COMMIT ERROR due the previous document\n";
+      $COMMITER = $INITCOMMITER;
       return false;
+    }
+    echo "$last_seq : BACK TO COMMIT SEQ #";
+    readLockFile();
+    echo "$last_seq\n";
+    $COMMITER = $COMMITER / 2;
+    //Au cas où le problème viendrait d'une surcharge de Solr, on attend un peu
+    sleep(1);
+    return false;
   }
+  $COMMITER = $INITCOMMITER;
+  echo "$last_seq : COMMIT\n";
   return true;
 }
 
@@ -129,18 +156,21 @@ while(1) {
   $url = $couchdb_url_db.'/_changes?feed=continuous';
   if ($last_seq)
     $url .= '&since='.$last_seq;
-#  echo "$url\n";
+  //Récupère les derniers changements
   $changes = fopen($url, 'r');
 
+  //Pour chaque changement, on récupére le document couchdb
   while($l = fgets($changes)) {
     $cpt++;
-    //    echo "$l\n";
+
+    //Decode le json fourni par couchdb
     $change = json_decode($l);
     if (!$change) {
       echo "pb json : $l\n";
       continue;
     }
 
+    //On commit et sauve le dernier seq si on perd la connexion avec couchdb
     if (isset($change->last_seq)) {
 # echo "last_seq\n";
       storeSeq($change->last_seq);
@@ -148,20 +178,20 @@ while(1) {
     }
 
     $last_seq = $change->seq;
-
+    //Suppression si le doc a été supprimé par couchdb
     if (isset($change->deleted)) {
       deleteIndexer($change->id);
       continue;
     }
-
+    //Sinon insère ou met à jour le document
     updateIndexer($change->id);
 
+    //Si on n'a inséré $COMMITER docs, on commit et sauve cette valeur
     if ($cpt > $COMMITER) {
       storeSeq($last_seq);
     }
 
   }
-
   fclose($changes);
  }
 fclose($lock);
