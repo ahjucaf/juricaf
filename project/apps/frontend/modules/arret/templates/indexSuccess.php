@@ -340,7 +340,7 @@ if (isset($document->ecli)) {
         $sep = ''; $i = 1;
         foreach($document->parties['demandeurs'] as $value) {
           if($i > 1) { $sep = ', '; }
-          echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:"'.urlencode(replaceAccents($value)).'"').'</em>'; $i++;
+          echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:"'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'"').'</em>'; $i++;
         }
         echo '<br />';
       }
@@ -349,7 +349,7 @@ if (isset($document->ecli)) {
         $sep = ''; $i = 1;
         foreach($document->parties['defendeurs'] as $value) {
           if($i > 1) { $sep = ', '; }
-          echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:"'.urlencode(replaceAccents($value)).'"').'</em>'; $i++;
+          echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:"'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'"').'</em>'; $i++;
         }
         echo '<br />';
       }
