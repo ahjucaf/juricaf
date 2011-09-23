@@ -19,15 +19,18 @@ $last_seq = rtrim(fgets($lock));
 $cpt = 0;
 
 
+//Commit les données puis sauve
 function storeSeq($seq) {
   global $lock, $cpt, $lock_seq_file;
-  fclose($lock);
-  $lock = fopen($lock_seq_file, 'w+');
-  fwrite($lock, $seq."\n");
-  $cpt = 0;
-  commitIndexer();
+  if (commitIndexer()) {
+    fclose($lock);
+    $lock = fopen($lock_seq_file, 'w+');
+    fwrite($lock, $seq."\n");
+    $cpt = 0;
+  }
 }
 
+//Convertit un champ couchdb en solr
 function getSolrValueFromField($k, $v) {
     $v = preg_replace('/&/', ' ', print_r($v, true));
     $v = preg_replace('/\s*([-=_~])[-=_~]+\s*/', ' \1 ', $v);
@@ -51,6 +54,7 @@ function updateIndexer($id) {
   }
   unset($couchdata->_rev);
   $solrdata = '<add><doc>';
+  //Conversion des données couchdb vers l'XML solr
   foreach($couchdata as $k => $v) {
     $k = strtolower($k);
     if ($k == 'id')
@@ -64,12 +68,13 @@ function updateIndexer($id) {
       continue;
     if (preg_match('/^_/', $id)) {
       $solrdata = '';
-  break ;
+      break ;
     }
     $solrdata .= '<field name="'.$k.'">';
     $solrdata .= getSolrValueFromField($k, $v);
     $solrdata .= '</field>';
   }
+  //Ajout des champs virtuels construits à partir des champs couchdb existant (utilisé pour les facettes)
   if (isset($virtualfields) && $virtualfields) {
     foreach($virtualfields as $k => $values) {
       $solrdata .= '<field name="'.$k.'">';
@@ -82,6 +87,7 @@ function updateIndexer($id) {
       $solrdata .= '</field>';
     }
   }
+  //Publication dans Solr des données.
   if ($solrdata) {
     $solrdata .= '</doc></add>';
     //    echo "===================\n$solrdata\n===================\n";
@@ -102,10 +108,18 @@ function deleteIndexer($id) {
   do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
 }
 
+//Ne pas appeler directement, passer par storeSeq
 function commitIndexer() {
   global $solr_url_db, $last_seq;
   $solrdata = "<commit/>";
-  do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
+  try {
+    do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
+  }catch (Exception $e) {
+      echo "Erreur de commit (".$solrdata.")\n-------- INTERNAL MSG --------\n";
+      echo $e->getMessage()."\n------------------------------\n";
+      return false;
+  }
+  return true;
 }
 
 
