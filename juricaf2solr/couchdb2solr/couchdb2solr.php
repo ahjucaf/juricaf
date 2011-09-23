@@ -183,6 +183,13 @@ while(1) {
     }
 
     $last_seq = $change->seq;
+
+    //On peut forcer un commit (pour interface d'admin)
+    if ($change->id == "COMMITNOW") {
+      storeSeq($last_seq);
+      continue;
+    }
+
     //Suppression si le doc a été supprimé par couchdb
     if (isset($change->deleted)) {
       deleteIndexer($change->id);
