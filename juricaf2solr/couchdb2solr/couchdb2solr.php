@@ -4,11 +4,10 @@ include("conf/config.php");
 include("utils.php");
 
 
-global $lock, $cpt, $COMMITER;
+global $lock, $cpt, $COMMITER, $DBERROR;
 
-$INITCOMMITER = 100;
 $COMMITER = $INITCOMMITER;
-
+$DBERROR = 0;
 function readLockFile() {
   global $last_seq, $lock_seq_file, $lock;
   $lock = fopen($lock_seq_file, 'a+');
@@ -120,7 +119,7 @@ function deleteIndexer($id) {
 
 //Ne pas appeler directement, passer par storeSeq
 function commitIndexer() {
-  global $solr_url_db, $last_seq, $COMMITER, $INITCOMMITER;
+  global $solr_url_db, $last_seq, $COMMITER, $INITCOMMITER, $DBERROR, $MAXDBERROR;
   $solrdata = "<commit/>";
   try {
     do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
@@ -132,18 +131,24 @@ function commitIndexer() {
     // Si la variable COMMITER est à 1 c'est qu'on a identifié l'enregistrement erronné
     //donc on passe à autre chose
     if ($COMMITER < 2) {
-      echo "$last_seq : COMMIT ERROR due the previous document\n";
+      echo "$last_seq : COMMIT ERROR due the previous document ?\n";
       $COMMITER = $INITCOMMITER;
+      $DBERROR++;
       return false;
+    }
+    if ($DBERROR >= $MAXDBERROR) {
+      echo "$last_seq : FATAL: DB ERROR DETECTED (probably not due to document error)\n";
+      exit(1);
     }
     echo "$last_seq : BACK TO COMMIT SEQ #";
     readLockFile();
     echo "$last_seq\n";
-    $COMMITER = $COMMITER / 2;
+    $COMMITER = floor($COMMITER / 2);
     //Au cas où le problème viendrait d'une surcharge de Solr, on attend un peu
     sleep(1);
     return false;
   }
+  $DBERROR = 0;
   $COMMITER = $INITCOMMITER;
   echo "$last_seq : COMMIT\n";
   return true;
