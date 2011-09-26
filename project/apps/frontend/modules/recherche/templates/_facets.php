@@ -8,7 +8,7 @@ if (count($facets) > 0) : ?>
 <ul><?php
 foreach($facets as $k => $v) {
     echo '<li style="margin-top: 5px;">';
-    if($mainid === 'pays')
+    if($mainid === 'facet_pays')
   echo '<img style="height: 10px;" src="/images/drapeaux/'.pathToFlag($v['fname']).'.png" alt="" />&nbsp;';
     $facet = $v['fid'].':'.preg_replace('/ /', '_', $v['fname']);
     if (preg_match('/'.$facet.'/', $facetslink))
