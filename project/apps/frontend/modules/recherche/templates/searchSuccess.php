@@ -170,17 +170,10 @@ include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction'
 foreach ($resultats->response->docs as $resultat) {
   echo '<div class="resultat"><h3><a href="'.url_for('@arret?id='.$resultat->id).'"><img style="height: 10px;" src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</a></h3>';
   echo '<p>';
-  $exerpt = '';
-  if (isset($resultats->highlighting) && $resultats->highlighting->{$resultat->id} && isset($resultats->highlighting->{$resultat->id}->content)) {
-    foreach ($resultats->highlighting->{$resultat->id}->content as $h) {
-      $exerpt .= '...'.html_entity_decode($h);
-    }
-    $exerpt .= '...' ;
-  }
-  if ($resultat->analyses) {
-    $exerpt .= $resultat->analyses.'...';
-  }
-  echo preg_replace ('/[^a-z0-9]*\.\.\.$/i', '...', truncate_text($exerpt.$resultat->texte_arret, 650, "...", true));
+  if (isset($resultats->highlighting))
+    echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});
+  else
+    echo JuricafArret::getExcerpt($resultat);
   echo '</p>';
   $formation = '';
   if ($resultat->formation) {
