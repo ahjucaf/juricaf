@@ -97,8 +97,8 @@ class adminActions extends sfActions
     }
 
     if (!$solr_query)
-      $solr_query = '*';
-
+      $solr_query = '(type:arret OR type:error_arret)';
+    
     $solr = new sfBasicSolr();
 
     $this->resultats = $solr->search($solr_query, $start + ($this->page - 1)*$pas, $pas*$this->page, $param);
