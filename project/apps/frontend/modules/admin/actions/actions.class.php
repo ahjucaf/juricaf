@@ -74,6 +74,11 @@ class adminActions extends sfActions
     $start = 0;
     $pas = 30;
     $param = array();//'hl' => 'true');
+
+    $this->page = $request->getParameter('page', 1);
+    if ($request->getParameter('changed'))
+      $this->page = 1;
+
     $param['sort'] = 'date_arret desc';
     $param['facet.field']= array('type', 'facet_pays', 'facet_juridiction', 'facet_formation', 'facet_section', 'facet_sens_arret', 'facet_type_affaire', 'facet_type_recours', 'facet_fonds_documentaire', 'facet_reseau');
     $param['facet']='true';
@@ -83,7 +88,6 @@ class adminActions extends sfActions
     $this->qa = $request->getParameter('qa');
     $solr_query = $this->qa;
     $this->options = array();
-    $this->page = $request->getParameter('page', 1);
     if ($request->getParameter('page_suivante'))
 	$this->page++;
     if ($request->getParameter('page_precedente'))

@@ -17,7 +17,7 @@ table {border-spacing: 0px;
 $publi = array('error_arret' => 'Non publié', 'arret' => 'Publié');
 foreach ($colums as $key => $label) {
    echo '<th>'.$label.'<br>';
-   echo '<select onchange="$(\'#editor\').submit();" name="'.$key.'"><option></option>';
+   echo '<select onchange="$(\'#changed\').val(1);$(\'#editor\').submit();" name="'.$key.'"><option></option>';
    foreach ($facets[$key] as $f => $nb) {
      $libel = preg_replace('/^(.{15}).+(.{15})$/', '\1 ... \2', $f);
      if ($key == 'type') {
@@ -77,6 +77,7 @@ foreach ($resultats->response->docs as $resultat) {
 </div>
 <div class="even">
 <input type="hidden" name="page" value="<?php echo $page; ?>"/>
+<input type="hidden" name="changed" id="changed" value="false"/>
    <?php if ($page > 1) : ?>
 <input type="submit" name="page_precedente" value="< Page precedente"/>
    <?php endif ; if ($page < $maxpage): ?>
