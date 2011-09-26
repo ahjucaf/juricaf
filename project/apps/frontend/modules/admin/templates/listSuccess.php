@@ -9,7 +9,7 @@ table {border-spacing: 0px;
 </style>
 <form name='editor' id='editor'>
 <p>
-      Filtrer par mots cles : <input name="qa" value="<?php echo $qa; ?>"/>
+      Filtrer par mots cles : <input name="qa" value="<?php echo $qa; ?>" onChange="$('#changed').val(1);"/>
 </p>
 <table>
     <tr><th>&nbsp;</th><th>&nbsp;</th><th>Id</th>
