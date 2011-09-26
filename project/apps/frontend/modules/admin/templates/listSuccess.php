@@ -76,7 +76,7 @@ foreach ($resultats->response->docs as $resultat) {
 </select> : <input name="modif"/><input name="action" type="submit" value="Modifier"/></p>
 </div>
 <div class="even">
-      <input type="hidden" name="page" value="<?php echo $page; ?>"/>
+<input type="hidden" name="page" value="<?php echo $page; ?>"/>
    <?php if ($page > 1) : ?>
 <input type="submit" name="page_precedente" value="< Page precedente"/>
    <?php endif ; if ($page < $maxpage): ?>
