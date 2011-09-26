@@ -4,16 +4,23 @@ include("conf/config.php");
 include("utils.php");
 
 
-global $lock, $cpt, $COMMITER, $DBERROR;
+global $lock, $cpt, $COMMITER, $DBERROR, $changes;
 
 $COMMITER = $INITCOMMITER;
 $DBERROR = 0;
+$changes = null;
+
 function readLockFile() {
-  global $last_seq, $lock_seq_file, $lock;
+  global $last_seq, $lock_seq_file, $lock, $changes;
   $lock = fopen($lock_seq_file, 'a+');
   if (!$lock) die('error with lock file');
   fseek($lock, 0);
   $last_seq = rtrim(fgets($lock));
+  //On s'assure qu'on revient au last_seq sauvé
+  if ($changes) {
+    fclose($changes);
+    $changes = null;
+  }
 }
 #echo "last_seq : $last_seq\n";
 readLockFile();
@@ -50,7 +57,7 @@ function updateIndexer($id) {
   if (!preg_match('/^[A-Z]+\-/', $id) )
     return;
   $couchdata = json_decode(file_get_contents($couchdb_url_db.'/'.$id));
-  if (!$couchdata || !isset($couchdata->type ) || $couchdata->type != "arret") {
+  if (!$couchdata || !isset($couchdata->type )) {
     deleteIndexer($id);
     return;
   }
@@ -144,6 +151,7 @@ function commitIndexer() {
     readLockFile();
     echo "$last_seq\n";
     $COMMITER = floor($COMMITER / 2);
+
     //Au cas où le problème viendrait d'une surcharge de Solr, on attend un peu
     sleep(1);
     return false;
@@ -154,8 +162,6 @@ function commitIndexer() {
   return true;
 }
 
-
-
 while(1) {
 
   $url = $couchdb_url_db.'/_changes?feed=continuous';
@@ -165,7 +171,7 @@ while(1) {
   $changes = fopen($url, 'r');
 
   //Pour chaque changement, on récupére le document couchdb
-  while($l = fgets($changes)) {
+  while($changes && ($l = fgets($changes))) {
     $cpt++;
 
     //Decode le json fourni par couchdb
@@ -204,6 +210,9 @@ while(1) {
     }
 
   }
-  fclose($changes);
+  if ($changes) {
+    fclose($changes);
+    $changes = null;
+  }
  }
 fclose($lock);
