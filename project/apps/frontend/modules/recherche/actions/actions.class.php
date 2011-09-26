@@ -18,7 +18,8 @@ class rechercheActions extends sfActions
       $search = preg_replace('/[\/\{\}\[\]\<\>]/', '', $search);
       $search = preg_replace("/\'/", '’', $search);
       $count = count_chars($search, 1);
-      if ($count[ord('"')] % 2) {
+      
+      if (isset($count[ord('"')]) && $count[ord('"')] % 2) {
 	$search = preg_replace ('/"/', '', $search);
       }
       $this->redirect('@recherche_resultats?query='.$search);
@@ -35,9 +36,8 @@ class rechercheActions extends sfActions
 
     $param = array('hl' => 'true');
     if (!preg_match('/\:\*/', $solr_query)) {
-      $param['sort'] = 'date_arret desc';
-      $param['facet.field']= array('pays', 'juridiction', 'facet_pays_juridiction');
-      //      $param['facet.field']='juridiction';
+      $param['sort'] = 'date_arret desc, id asc';
+      $param['facet.field']= array('facet_pays', 'facet_juridiction', 'facet_pays_juridiction');
       $param['facet']='true';
     }
 
@@ -52,17 +52,18 @@ class rechercheActions extends sfActions
 	//On ne doit pas retirer les _ des facettes donc on les replace par = pour les conserver
 	$solr_query.= ' '.preg_replace('/_/', '=', $f[0]).':'.$f[1];
       }
-
-      if (preg_match('/order:pertinance/', $solr_query)) {
-	$solr_query = ' '.preg_replace('/ order:pertinance/', '', $solr_query);
-	unset($param['sort']);
-      }
-      if (preg_match('/order:chrono/', $solr_query)) {
-	$solr_query = ' '.preg_replace('/ order:chrono/', '', $solr_query);
-	$param['sort'] = 'date_arret asc';
-      }
     }
+    $solr_query .= ' type:arret';
 
+    if (preg_match('/order:pertinance/', $solr_query)) {
+      $solr_query = ' '.preg_replace('/ order:pertinance/', '', $solr_query);
+      unset($param['sort']);
+    }
+    if (preg_match('/order:chrono/', $solr_query)) {
+      $solr_query = ' '.preg_replace('/ order:chrono/', '', $solr_query);
+      $param['sort'] = 'date_arret asc, id asc';
+    }
+    
     if (!count($this->facetsset) && !preg_match('/[a-z0-9]/i', $this->query)) {
       return $this->redirect('@recherche');
     }
@@ -92,10 +93,10 @@ class rechercheActions extends sfActions
     $this->facets = array();
     if (isset($res->facet_counts))
       foreach($res->facet_counts->facet_fields as $k => $f) {
-  foreach ($f as $n => $v) {
-    if ($v)
-      $this->facets[$k][$n] = $v;
-  }
+	foreach ($f as $n => $v) {
+	  if ($v)
+	    $this->facets[$k][$n] = $v;
+	}
       }
   }
 

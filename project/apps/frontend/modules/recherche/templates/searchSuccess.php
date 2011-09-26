@@ -71,11 +71,11 @@ foreach($facetsset as $facet) {
   if (preg_match('/^facet_pays_juridiction:/', $facet)) {
     $title_facet['pays_juri'] = replaceUnderscore(str_replace('facet_pays_juridiction:', '', $facet));
   }
-  if (preg_match('/^pays:/', $facet)) {
-    $title_facet['pays'] = replaceUnderscore(str_replace('pays:', '', $facet));
+  if (preg_match('/^facet_pays:/', $facet)) {
+    $title_facet['pays'] = replaceUnderscore(str_replace('facet_pays:', '', $facet));
   }
-  if(preg_match('/^juridiction:/', $facet)) {
-    $title_facet['juri'] = replaceUnderscore(str_replace('juridiction:', '', $facet));
+  if(preg_match('/^facet_juridiction:/', $facet)) {
+    $title_facet['juri'] = replaceUnderscore(str_replace('facet_juridiction:', '', $facet));
   }
 }
 
@@ -155,7 +155,7 @@ if (trim($query) !== '' || isset($title_facet)) {
   //include_component('recherche', 'facets', array('label'=>'Pays', 'id'=>'pays', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
   ////// FACETTE Juridiction //////////
   //include_component('recherche', 'facets', array('label'=>'Juridiction', 'id'=>'juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
-include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction', 'id'=>'facet_pays_juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink, 'tree' => true, 'mainid' => 'pays'));
+include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction', 'id'=>'facet_pays_juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink, 'tree' => true, 'mainid' => 'facet_pays'));
 ?>
 </div>
 <?php

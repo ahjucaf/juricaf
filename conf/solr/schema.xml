@@ -449,9 +449,22 @@
    -->
 
    <field name="id" type="string" indexed="true" stored="true" required="true" /> 
-   <field name="juridiction" type="string" indexed="true" stored="true" required="true" /> 
-   <field name="pays" type="string" indexed="true" stored="true" required="true" /> 
+   <field name="type" type="string" indexed="true" stored="true" required="true" /> 
+   <field name="juridiction" type="text_fr" indexed="true" stored="true" required="true" /> 
+   <field name="facet_juridiction" type="string" indexed="true" stored="true" required="true" /> 
+   <field name="pays" type="text_fr" indexed="true" stored="true" required="true" /> 
+   <field name="facet_pays" type="string" indexed="true" stored="true" required="true" /> 
    <field name="facet_pays_juridiction" type="string" indexed="true" stored="true" required="true" /> 
+   <field name="formation" type="text_fr" indexed="true" stored="true" /> 
+   <field name="facet_formation" type="string" indexed="true" stored="true" /> 
+   <field name="section" type="text_fr" indexed="true" stored="true"  /> 
+   <field name="facet_section" type="string" indexed="true" stored="true"  /> 
+   <field name="sens_arret" type="text_fr" indexed="true" stored="true" /> 
+   <field name="facet_sens_arret" type="string" indexed="true" stored="true" /> 
+   <field name="type_affaire" type="text_fr" indexed="true" stored="true"  /> 
+   <field name="facet_type_affaire" type="string" indexed="true" stored="true"  /> 
+   <field name="type_recours" type="text_fr" indexed="true" stored="true"  /> 
+   <field name="facet_type_recours" type="string" indexed="true" stored="true"  /> 
 
    <field name="titre" type="text_fr" indexed="true" stored="true"/>
    <field name="content" type="text_fr" indexed="true" stored="true" multiValued="true"/>
@@ -472,6 +485,13 @@
  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
  <solrQueryParser defaultOperator="AND"/>
 
-   <copyField source="*" dest="content"/>
+ <copyField source="pays" dest="facet_pays"/>
+ <copyField source="juridiction" dest="facet_juridiction"/>
+ <copyField source="formation" dest="facet_formation"/>
+ <copyField source="section" dest="facet_section"/>
+ <copyField source="sens_arret" dest="facet_sens_arret"/>
+ <copyField source="type_affaire" dest="facet_type_affaire"/>
+ <copyField source="type_recours" dest="facet_type_recours"/>
+ <copyField source="*" dest="content"/>
 	
 </schema>
