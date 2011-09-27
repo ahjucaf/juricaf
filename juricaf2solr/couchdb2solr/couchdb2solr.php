@@ -9,6 +9,7 @@ global $lock, $cpt, $COMMITER, $DBERROR, $changes;
 $COMMITER = $INITCOMMITER;
 $DBERROR = 0;
 $changes = null;
+$oldseq = 0;
 
 function readLockFile() {
   global $last_seq, $lock_seq_file, $lock, $changes;
@@ -53,7 +54,7 @@ function getSolrValueFromField($k, $v) {
 }
 
 function updateIndexer($id) {
-  global $couchdb_url_db, $solr_url_db, $last_seq, $virtualfields;
+  global $couchdb_url_db, $solr_url_db, $last_seq, $virtualfields, $oldseq;
   if (!preg_match('/^[A-Z]+\-/', $id) )
     return;
   $couchdata = json_decode(file_get_contents($couchdb_url_db.'/'.$id));
@@ -106,7 +107,9 @@ function updateIndexer($id) {
     catch (Exception $e) {
       echo "Erreur d'enregistrement de ".$id." (".$solrdata.")\n-------- INTERNAL MSG --------\n";
       echo $e->getMessage()."\n------------------------------\n";
+      return ;
     }
+    echo "$last_seq : $id (SAVED)\n";
   }
 }
 
@@ -158,7 +161,9 @@ function commitIndexer() {
   }
   $DBERROR = 0;
   $COMMITER = $INITCOMMITER;
-  echo "$last_seq : COMMIT\n";
+  if ($last_seq != $oldseq)
+    echo "$last_seq : COMMIT\n";
+  $oldseq = $last_seq;
   return true;
 }
 
