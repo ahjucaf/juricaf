@@ -12,7 +12,7 @@ table {border-spacing: 0px;
       Filtrer par mots cles : <input name="qa" value="<?php echo $qa; ?>" onChange="$('#changed').val(1);"/>
 </p>
 <table>
-    <tr><th>&nbsp;</th><th>&nbsp;</th><th>Id</th>
+    <tr><th>&nbsp;</th><th>&nbsp;</th>
 <?php
 $publi = array('error_arret' => 'Non publié', 'arret' => 'Publié');
 foreach ($colums as $key => $label) {
