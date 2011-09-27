@@ -4,7 +4,7 @@ include("conf/config.php");
 include("utils.php");
 
 
-global $lock, $cpt, $COMMITER, $DBERROR, $changes;
+global $lock, $cpt, $COMMITER, $DBERROR, $changes, $oldseq;
 
 $COMMITER = $INITCOMMITER;
 $DBERROR = 0;
@@ -54,7 +54,7 @@ function getSolrValueFromField($k, $v) {
 }
 
 function updateIndexer($id) {
-  global $couchdb_url_db, $solr_url_db, $last_seq, $virtualfields, $oldseq;
+  global $couchdb_url_db, $solr_url_db, $last_seq, $virtualfields;
   if (!preg_match('/^[A-Z]+\-/', $id) )
     return;
   $couchdata = json_decode(file_get_contents($couchdb_url_db.'/'.$id));
@@ -129,7 +129,7 @@ function deleteIndexer($id) {
 
 //Ne pas appeler directement, passer par storeSeq
 function commitIndexer() {
-  global $solr_url_db, $last_seq, $COMMITER, $INITCOMMITER, $DBERROR, $MAXDBERROR;
+  global $solr_url_db, $last_seq, $COMMITER, $INITCOMMITER, $DBERROR, $MAXDBERROR, $oldseq;
   $solrdata = "<commit/>";
   try {
     do_post_request($solr_url_db.'/update', $solrdata, "content-type: text/xml");
