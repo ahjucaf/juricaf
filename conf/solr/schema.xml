@@ -465,10 +465,15 @@
    <field name="facet_type_affaire" type="string" indexed="true" stored="true"  /> 
    <field name="type_recours" type="text_fr" indexed="true" stored="true"  /> 
    <field name="facet_type_recours" type="string" indexed="true" stored="true"  /> 
-
+   <field name="fonds_documentaire" type="text_fr" indexed="true" stored="true"  /> 
+   <field name="facet_fonds_documentaire" type="string" indexed="true" stored="true"  /> 
+   <field name="reseau" type="text_fr" indexed="true" stored="true"  /> 
+   <field name="facet_reseau" type="string" indexed="true" stored="true"  /> 
    <field name="titre" type="text_fr" indexed="true" stored="true"/>
    <field name="content" type="text_fr" indexed="true" stored="true" multiValued="true"/>
    <field name="date_arret" type="date" indexed="true" stored="true"/>
+   <field name="date_import" type="date" indexed="true" stored="true"/>
+   <field name="on_error" type="string" indexed="true" stored="true"/>
 
    <dynamicField name="*"  type="text_fr"    indexed="true"  stored="true"/>
  
@@ -492,6 +497,8 @@
  <copyField source="sens_arret" dest="facet_sens_arret"/>
  <copyField source="type_affaire" dest="facet_type_affaire"/>
  <copyField source="type_recours" dest="facet_type_recours"/>
+ <copyField source="fonds_documentaire" dest="facet_fonds_documentaire"/>
+ <copyField source="reseau" dest="facet_reseau"/>
  <copyField source="*" dest="content"/>
 	
 </schema>
