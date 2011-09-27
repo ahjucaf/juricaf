@@ -92,6 +92,7 @@ class adminActions extends sfActions
     }else if ($request->getParameter('action_delete'))
       $newType = 'delete';
     if (!$newType) return false;
+    $document = null;
     foreach ($this->getIdDocs($request) as $id) {
       $document = new JuricafArret($id);
       if ($newType == 'delete') {
@@ -106,62 +107,101 @@ class adminActions extends sfActions
       }
       $document->save();
     }
+    $this->iscommited = array('champ' => 'type', 'id' => $document->_id, 'valeur'=>$newType);
     return true;
   }
 
   private function modificationChamps(sfWebRequest $request) {
+    if (!$request->getParameter('action_modif'))
+      return false;
+    $champ = $request->getParameter('champ');
+    $valeur = $request->getParameter('modif');
+    if (!$champ)
+      return false;
+    $doc = null;
+    foreach ($this->getIdDocs($request) as $id) {
+      $doc = new JuricafArret($id);
+      $doc->{$champ} = $valeur;
+      $doc->save();
+    }
+    $this->iscommited = array('champ' => $champ, 'id' => $doc->_id, 'valeur'=>$valeur);
+    return true;
   }
 
-  private function commitNow() {
+  private function commitNow(sfWebrequest $request) {
     $document = new JuricafArret('COMMITNOW');
     $document->date = date('c');
     $document->save();
-    usleep(500000);
+    $solr = new sfBasicSolr();
+    $res = null;
+    
+    //Vérification que le commit est bien pris en compte (au moins sur la requete courrante
+    $continue = 1;
+    for ($i = 0 ; count($this->iscommited) && $continue && $i < 10 ; $i++) {
+      $res = $this->querySolr($request);
+      $continue = 0;
+      foreach ($res->response->docs as $resultat) {
+	if ($resultat->id == $this->iscommited['id']) {
+	  if( $resultat->{$this->iscommited['champ']} != $this->iscommited['valeur']) {
+	    $continue = 1;
+	  }
+	  break;
+	}
+      }
+      if (!$continue)
+	break;
+      usleep(250000);
+    }
   }
 
-  public function executeList(sfWebRequest $request) {
+  private function querySolr(sfWebrequest $request) {
     $start = 0;
-    $pas = 30;
-    $param = array();//'hl' => 'true');
-
-    if($this->modificationType($request) || $this->modificationChamps($request)) {
-      $this->commitNow();
-      return $this->redirect(preg_replace('/action[^&]*/', '', $_SERVER["REQUEST_URI"]));
-    }
+    $param = array();
 
     $this->page = $request->getParameter('page', 1);
     if ($request->getParameter('changed'))
       $this->page = 1;
-
+    
     $param['sort'] = 'date_import desc, id asc';
     $param['facet.field']= array('type', 'facet_pays', 'facet_juridiction', 'facet_formation', 'facet_section', 'facet_sens_arret', 'facet_type_affaire', 'facet_type_recours', 'facet_fonds_documentaire', 'facet_reseau', 'on_error');
     $param['facet.sort']='index';
     $param['facet']='true';
-
+    
     $this->colums = array('on_error' => 'Id / Erreur', 'type'=>'Publication', 'facet_pays' => 'Pays', 'facet_juridiction' => 'Juridiction', 'facet_formation' => 'Formation', 'facet_section' => 'Section', 'facet_sens_arret' => 'Sens Arret', 'facet_type_affaire' => 'Type affaire', 'facet_type_recours' => 'Type recours', 'facet_fonds_documentaire' => 'Fonds documentaire', 'facet_reseau' => 'Réseau');
     
     $this->qa = $request->getParameter('qa');
     $solr_query = $this->qa;
     $this->options = array();
     if ($request->getParameter('page_suivante'))
-	$this->page++;
+      $this->page++;
     if ($request->getParameter('page_precedente'))
-	$this->page--;
-
+      $this->page--;
+    
     foreach ($this->colums as $k => $l) {
       if ($p = $request->getParameter($k)) {
 	$solr_query .= ' '.$k.':"'.$p.'"';
 	$this->options[$k] = 1;
       }
     }
-
+    
     if (!$solr_query)
       $solr_query = '(type:arret OR type:error_arret)';
     
     $solr = new sfBasicSolr();
+    
+    return $solr->search($solr_query, $start + ($this->page - 1)*$this->pas, $this->pas*$this->page, $param);
+  }
 
-    $this->resultats = $solr->search($solr_query, $start + ($this->page - 1)*$pas, $pas*$this->page, $param);
-    $this->maxpage = floor($this->resultats->response->numFound / $pas);
+  public function executeList(sfWebRequest $request) {
+    $this->pas = 30;
+
+    if($this->modificationType($request) || $this->modificationChamps($request)) {
+      $this->commitNow($request);
+      return $this->redirect(preg_replace('/action[^&]*/', '', $_SERVER["REQUEST_URI"]));
+    }
+    $this->commitNow($request);
+    $this->resultats = $this->querySolr($request);
+    $this->maxpage = floor($this->resultats->response->numFound / $this->pas);
     $this->facets = array();
     if (isset($this->resultats->facet_counts))
       foreach($this->resultats->facet_counts->facet_fields as $k => $f) {
