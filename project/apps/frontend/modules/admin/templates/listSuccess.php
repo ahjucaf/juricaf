@@ -9,7 +9,7 @@ table {border-spacing: 0px;
 </style>
 <form name='editor' id='editor'>
 <p>
-      Filtrer par mots cles : <input name="qa" value="<?php echo $qa; ?>" onChange="$('#changed').val(1);"/> <input type="submit" name="filter" value="Filter"/>
+      Filtrer par mots cles : <input name="qa" value="<?php echo $qa; ?>" onChange="$('#modif_champ').val('');$('#changed').val(1);"/> <input type="submit" name="filter" value="Filtrer"/>
 </p>
 <table>
     <tr><th>&nbsp;</th><th>&nbsp;</th>
@@ -65,7 +65,7 @@ foreach ($resultats->response->docs as $resultat) {
       <p><input type="checkbox" id="tout" onChange="if ($('#tout:checked').val() != undefined) $('.select').attr('checked', 'checked'); else {$('.select').removeAttr('checked');}">Tout selectionner</p>
       <p>Changer la publication de tous les éléments sélectionnés : <input name="action_publish" type="submit" value="Publier"/> <input name="action_error" type="submit" value="Mettre en erreur"/>  <input name="action_delete" type="submit" value="Supprimer"/>
       <p>Modifier pour tous les éléments sélectionnés : 
-<select name="champ">
+<select id="modif_champ" name="modif_champ">
 <option></option>
 <option value="pays">Pays</option>
 <option value="juridiction">Juridiction</option>
@@ -76,8 +76,8 @@ foreach ($resultats->response->docs as $resultat) {
 <option value="type_recours">Type recours</option>
 <option value="fonds_documentaire">Fonds documentaire</option>
 <option value="reseau">Reseau</option>
-<option value="date_arret">Date arret</option>
-</select> pour <input name="modif"/><input name="action_modif" type="submit" value="Modifier"/></p>
+<option value="date_arret">Date arret (Format AAAA-MM-JJ)</option>
+</select> pour <input name="modif_valeur"/><input name="action_modif" type="submit" value="Modifier"/></p>
 </div>
 <div class="even">
 <input type="hidden" name="page" value="<?php echo $page; ?>"/>

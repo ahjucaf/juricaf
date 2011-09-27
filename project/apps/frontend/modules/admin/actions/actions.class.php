@@ -108,23 +108,36 @@ class adminActions extends sfActions
       $document->save();
     }
     $this->iscommited = array('champ' => 'type', 'id' => $document->_id, 'valeur'=>$newType);
+    if ($newType == 'delete') {
+      $this->iscommited['oldid'] = $document->_id;
+      unset($this->iscommited['id']);
+    }
     return true;
   }
 
+  private static $changeid = array('pays' => 1, 'juridiction' => 1, 'date_arret' => 1, 'arret_num' => 1);
+
   private function modificationChamps(sfWebRequest $request) {
-    if (!$request->getParameter('action_modif'))
-      return false;
-    $champ = $request->getParameter('champ');
-    $valeur = $request->getParameter('modif');
+    $champ = $request->getParameter('modif_champ');
     if (!$champ)
       return false;
-    $doc = null;
+    $valeur = $request->getParameter('modif_valeur');
+    if (!$champ)
+      return false;
+    $doc = null; $id = null;
     foreach ($this->getIdDocs($request) as $id) {
       $doc = new JuricafArret($id);
       $doc->{$champ} = $valeur;
+      if (isset(self::$changeid[$champ])) {
+	$doc = $doc->rename($doc->getTheoriticalId());
+      }
       $doc->save();
     }
-    $this->iscommited = array('champ' => $champ, 'id' => $doc->_id, 'valeur'=>$valeur);
+    if ($doc) {
+      $this->iscommited = array('champ' => $champ, 'id' => $doc->_id, 'valeur'=>$valeur);
+      if (isset(self::$changeid[$champ]))
+	$this->iscommited['oldid'] = $id;
+    }
     return true;
   }
 
@@ -141,10 +154,14 @@ class adminActions extends sfActions
       $res = $this->querySolr($request);
       $continue = 0;
       foreach ($res->response->docs as $resultat) {
-	if ($resultat->id == $this->iscommited['id']) {
+	if (isset($this->iscommited['id']) && $resultat->id == $this->iscommited['id']) {
 	  if( $resultat->{$this->iscommited['champ']} != $this->iscommited['valeur']) {
 	    $continue = 1;
 	  }
+	  break;
+	}
+	if (isset($this->iscommited['oldid']) && $resultat->id == $this->iscommited['oldid']) {
+	  $continue = 1;
 	  break;
 	}
       }
@@ -197,7 +214,7 @@ class adminActions extends sfActions
 
     if($this->modificationType($request) || $this->modificationChamps($request)) {
       $this->commitNow($request);
-      return $this->redirect(preg_replace('/action[^&]*/', '', $_SERVER["REQUEST_URI"]));
+      return $this->redirect(preg_replace('/(action|modif)[^&]*/', '', $_SERVER["REQUEST_URI"]));
     }
     $this->commitNow($request);
     $this->resultats = $this->querySolr($request);
