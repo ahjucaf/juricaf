@@ -60,7 +60,7 @@ foreach ($resultats->response->docs as $resultat) {
 <div class="even">
       <input type="hidden" name="nb_resultats" value="<?php echo $cpt; ?>"/>
       <p><input type="checkbox" id="tout" onChange="if ($('#tout:checked').val() != undefined) $('.select').attr('checked', 'checked'); else {$('.select').removeAttr('checked');}">Tout selectionner</p>
-      <p>Changer la publication de tous les éléments sélectionnés : <input name="action" type="submit" value="Publier"/> <input name="action" type="submit" value="Mettre en erreur"/>
+      <p>Changer la publication de tous les éléments sélectionnés : <input name="action_publish" type="submit" value="Publier"/> <input name="action_error" type="submit" value="Mettre en erreur"/>  <input name="action_delete" type="submit" value="Supprimer"/>
       <p>Modifier pour tous les éléments sélectionnés : 
 <select name="champ">
 <option></option>
@@ -74,7 +74,7 @@ foreach ($resultats->response->docs as $resultat) {
 <option>Fonds documentaire</option>
 <option>Reseau</option>
 <option>Date arret</option>
-</select> pour <input name="modif"/><input name="action" type="submit" value="Modifier"/></p>
+</select> pour <input name="modif"/><input name="action_modif" type="submit" value="Modifier"/></p>
 </div>
 <div class="even">
 <input type="hidden" name="page" value="<?php echo $page; ?>"/>
