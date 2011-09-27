@@ -9,7 +9,7 @@ table {border-spacing: 0px;
 </style>
 <form name='editor' id='editor'>
 <p>
-      Filtrer par mots cles : <input name="qa" value="<?php echo $qa; ?>" onChange="$('#changed').val(1);"/>
+      Filtrer par mots cles : <input name="qa" value="<?php echo $qa; ?>" onChange="$('#changed').val(1);"/> <input type="submit" name="filter" value="Filter"/>
 </p>
 <table>
     <tr><th>&nbsp;</th><th>&nbsp;</th>
@@ -67,16 +67,16 @@ foreach ($resultats->response->docs as $resultat) {
       <p>Modifier pour tous les éléments sélectionnés : 
 <select name="champ">
 <option></option>
-<option>Pays</option>
-<option>Juridiction</option>
-<option>Formation</option>
-<option>Section</option>
-<option>Sens arret</option>
-<option>Type affaire</option>
-<option>Type recours</option>
-<option>Fonds documentaire</option>
-<option>Reseau</option>
-<option>Date arret</option>
+<option value="pays">Pays</option>
+<option value="juridiction">Juridiction</option>
+<option value="formation">Formation</option>
+<option value="section">Section</option>
+<option value="sens_arret">Sens arret</option>
+<option value="type_affaire">Type affaire</option>
+<option value="type_recours">Type recours</option>
+<option value="fonds_documentaire">Fonds documentaire</option>
+<option value="reseau">Reseau</option>
+<option value="date_arret">Date arret</option>
 </select> pour <input name="modif"/><input name="action_modif" type="submit" value="Modifier"/></p>
 </div>
 <div class="even">
