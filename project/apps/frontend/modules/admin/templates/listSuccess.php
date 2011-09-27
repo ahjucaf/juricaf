@@ -48,7 +48,10 @@ foreach ($resultats->response->docs as $resultat) {
   if (isset($resultat->on_error) )
       echo '<tr id="tr3_'.$cpt.'" class="error clickable'.$class.'"><td colspan=11>'.$resultat->on_error.'</td></tr>';
   echo '<tr id="tr3_'.$cpt.'" class="clickable'.$class.'">';
-  echo '<td colspan=11 class="light">'.$resultat->titre.' ... ';
+  echo '<td colspan=11 class="light">';
+  echo $resultat->titre;
+  if (isset($resultat->date_import)) echo ' (importée le '.preg_replace('/T.*/', '', $resultat->date_import).')';
+  echo ' : ';
   if (isset($resultats->highlighting))
     echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});
   else
