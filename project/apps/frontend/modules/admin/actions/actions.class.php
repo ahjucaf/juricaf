@@ -98,7 +98,6 @@ class adminActions extends sfActions
 	$document->delete();
 	continue;
       }
-      echo "$id : $newType ($onerror)<br/>";
       $document->type = $newType;
       if ($onerror) {
 	$document->on_error = $onerror;
@@ -108,6 +107,9 @@ class adminActions extends sfActions
       $document->save();
     }
     return true;
+  }
+
+  private function modificationChamps(sfWebRequest $request) {
   }
 
   private function commitNow() {
@@ -122,7 +124,7 @@ class adminActions extends sfActions
     $pas = 30;
     $param = array();//'hl' => 'true');
 
-    if($this->modificationType($request)) {
+    if($this->modificationType($request) || $this->modificationChamps($request)) {
       $this->commitNow();
       return $this->redirect(preg_replace('/action[^&]*/', '', $_SERVER["REQUEST_URI"]));
     }
