@@ -73,6 +73,7 @@ foreach ($resultats->response->docs as $resultat) {
 <option>Type recours</option>
 <option>Fonds documentaire</option>
 <option>Reseau</option>
+<option>Date arret</option>
 </select> pour <input name="modif"/><input name="action" type="submit" value="Modifier"/></p>
 </div>
 <div class="even">
