@@ -70,16 +70,68 @@ class adminActions extends sfActions
       }
     }
   }
+
+  private function getIdDocs(sfWebRequest $request) {
+    $ids = array();
+    $nblines = $request->getParameter('nb_resultats');
+    for($i = 1 ; $i <= $nblines ; $i++) {
+      if ($id = $request->getParameter('resultat'.$i))
+	$ids[] = $id;
+    }
+    return $ids;
+  }
+
+  private function modificationType(sfWebRequest $request) {
+    $newType = '';
+    $onerror = '';
+    if ($request->getParameter('action_publish'))
+      $newType = 'arret';
+    else if ($request->getParameter('action_error')) {
+      $newType = 'error_arret';
+      $onerror = 'Mise en erreur manuelle';
+    }else if ($request->getParameter('action_delete'))
+      $newType = 'delete';
+    if (!$newType) return false;
+    foreach ($this->getIdDocs($request) as $id) {
+      $document = new JuricafArret($id);
+      if ($newType == 'delete') {
+	$document->delete();
+	continue;
+      }
+      echo "$id : $newType ($onerror)<br/>";
+      $document->type = $newType;
+      if ($onerror) {
+	$document->on_error = $onerror;
+      }else{
+	$document->on_error = null;
+      }
+      $document->save();
+    }
+    return true;
+  }
+
+  private function commitNow() {
+    $document = new JuricafArret('COMMITNOW');
+    $document->date = date('c');
+    $document->save();
+    usleep(500000);
+  }
+
   public function executeList(sfWebRequest $request) {
     $start = 0;
     $pas = 30;
     $param = array();//'hl' => 'true');
 
+    if($this->modificationType($request)) {
+      $this->commitNow();
+      return $this->redirect(preg_replace('/action[^&]*/', '', $_SERVER["REQUEST_URI"]));
+    }
+
     $this->page = $request->getParameter('page', 1);
     if ($request->getParameter('changed'))
       $this->page = 1;
 
-    $param['sort'] = 'date_import desc, date_arret desc';
+    $param['sort'] = 'date_import desc, id asc';
     $param['facet.field']= array('type', 'facet_pays', 'facet_juridiction', 'facet_formation', 'facet_section', 'facet_sens_arret', 'facet_type_affaire', 'facet_type_recours', 'facet_fonds_documentaire', 'facet_reseau', 'on_error');
     $param['facet.sort']='index';
     $param['facet']='true';
