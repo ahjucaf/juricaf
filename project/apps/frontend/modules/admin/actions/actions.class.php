@@ -79,7 +79,7 @@ class adminActions extends sfActions
     if ($request->getParameter('changed'))
       $this->page = 1;
 
-    $param['sort'] = 'date_arret desc';
+    $param['sort'] = 'date_import desc, date_arret desc';
     $param['facet.field']= array('type', 'facet_pays', 'facet_juridiction', 'facet_formation', 'facet_section', 'facet_sens_arret', 'facet_type_affaire', 'facet_type_recours', 'facet_fonds_documentaire', 'facet_reseau', 'on_error');
     $param['facet.sort']='index';
     $param['facet']='true';
