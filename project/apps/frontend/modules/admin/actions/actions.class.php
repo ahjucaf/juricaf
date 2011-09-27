@@ -80,10 +80,10 @@ class adminActions extends sfActions
       $this->page = 1;
 
     $param['sort'] = 'date_arret desc';
-    $param['facet.field']= array('type', 'facet_pays', 'facet_juridiction', 'facet_formation', 'facet_section', 'facet_sens_arret', 'facet_type_affaire', 'facet_type_recours', 'facet_fonds_documentaire', 'facet_reseau');
+    $param['facet.field']= array('type', 'facet_pays', 'facet_juridiction', 'facet_formation', 'facet_section', 'facet_sens_arret', 'facet_type_affaire', 'facet_type_recours', 'facet_fonds_documentaire', 'facet_reseau', 'on_error');
     $param['facet']='true';
 
-    $this->colums = array('type'=>'Publication', 'facet_pays' => 'Pays', 'facet_juridiction' => 'Juridiction', 'facet_formation' => 'Formation', 'facet_section' => 'Section', 'facet_sens_arret' => 'Sens Arret', 'facet_type_affaire' => 'Type affaire', 'facet_type_recours' => 'Type recours', 'facet_fonds_documentaire' => 'Fonds documentaire', 'facet_reseau' => 'Réseau');
+    $this->colums = array('on_error' => 'Id', 'type'=>'Publication', 'facet_pays' => 'Pays', 'facet_juridiction' => 'Juridiction', 'facet_formation' => 'Formation', 'facet_section' => 'Section', 'facet_sens_arret' => 'Sens Arret', 'facet_type_affaire' => 'Type affaire', 'facet_type_recours' => 'Type recours', 'facet_fonds_documentaire' => 'Fonds documentaire', 'facet_reseau' => 'Réseau');
     
     $this->qa = $request->getParameter('qa');
     $solr_query = $this->qa;
