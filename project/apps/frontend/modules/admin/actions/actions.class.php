@@ -115,7 +115,7 @@ class adminActions extends sfActions
 	unset($this->iscommited['id']);
 	$this->getUser()->setFlash('admin_notice', count($ids).' document(s) supprimé(s)');
       }else{
-	$msgaction = ($newType == 'delete') ? 'mis en erreur' : 'publié(s)';
+	$msgaction = ($newType == 'error_arret') ? 'mis en erreur' : 'publié(s)';
 	$this->getUser()->setFlash('admin_notice', count($ids).' document(s) '.$msgaction);
       }
     }
