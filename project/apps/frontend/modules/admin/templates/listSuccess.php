@@ -11,6 +11,12 @@ table {border-spacing: 0px;
 <p>
       Filtrer par mots cles : <input name="qa" value="<?php echo $qa; ?>" onChange="$('#modif_champ').val('');$('#changed').val(1);"/> <input type="submit" name="filter" value="Filtrer"/>
 </p>
+<?php if ($sf_user->hasFlash('admin_notice')) : ?>
+<p class="even notice"><?php echo $sf_user->getFlash('admin_notice'); ?></p>
+<?php endif; ?>
+<?php if ($sf_user->hasFlash('admin_error')) : ?>
+<p class="even error"><?php echo $sf_user->getFlash('admin_error'); ?></p>
+<?php endif; ?>
 <table>
     <tr><th>&nbsp;</th><th>&nbsp;</th>
 <?php
