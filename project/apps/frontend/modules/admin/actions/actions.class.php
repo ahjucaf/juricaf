@@ -93,7 +93,8 @@ class adminActions extends sfActions
       $newType = 'delete';
     if (!$newType) return false;
     $document = null;
-    foreach ($this->getIdDocs($request) as $id) {
+    $ids = $this->getIdDocs($request);
+    foreach ($ids as $id) {
       $document = new JuricafArret($id);
       if ($newType == 'delete') {
 	$document->delete();
@@ -107,10 +108,16 @@ class adminActions extends sfActions
       }
       $document->save();
     }
-    $this->iscommited = array('champ' => 'type', 'id' => $document->_id, 'valeur'=>$newType);
-    if ($newType == 'delete') {
-      $this->iscommited['oldid'] = $document->_id;
-      unset($this->iscommited['id']);
+    if ($document) {
+      $this->iscommited = array('champ' => 'type', 'id' => $document->_id, 'valeur'=>$newType);
+      if ($newType == 'delete') {
+	$this->iscommited['oldid'] = $document->_id;
+	unset($this->iscommited['id']);
+	$this->getUser()->setFlash('admin_notice', count($ids).' document(s) supprimé(s)');
+      }else{
+	$msgaction = ($newType == 'delete') ? 'mis en erreur' : 'publié(s)';
+	$this->getUser()->setFlash('admin_notice', count($ids).' document(s) '.$msgaction);
+      }
     }
     return true;
   }
@@ -125,7 +132,8 @@ class adminActions extends sfActions
     if (!$champ)
       return false;
     $doc = null; $id = null;
-    foreach ($this->getIdDocs($request) as $id) {
+    $ids = $this->getIdDocs($request);
+    foreach ($ids as $id) {
       $doc = new JuricafArret($id);
       $doc->{$champ} = $valeur;
       if (isset(self::$changeid[$champ])) {
@@ -137,6 +145,7 @@ class adminActions extends sfActions
       $this->iscommited = array('champ' => $champ, 'id' => $doc->_id, 'valeur'=>$valeur);
       if (isset(self::$changeid[$champ]))
 	$this->iscommited['oldid'] = $id;
+      $this->getUser()->setFlash('admin_notice', count($ids).' document(s) modifié(s)');
     }
     return true;
   }
@@ -168,6 +177,9 @@ class adminActions extends sfActions
       if (!$continue)
 	break;
       usleep(250000);
+    }
+    if (count($this->iscommited) && $continue) {
+	$this->getUser()->setFlash('admin_error', 'Les modifications effectuées ne sont pas encore visibles : l\'indexer est soit surchargé soit indisponible.');
     }
   }
 
