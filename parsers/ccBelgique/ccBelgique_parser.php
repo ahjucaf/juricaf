@@ -22,9 +22,9 @@ if (!$num && preg_match('/([A-Z]\.[\d\.]+\.[A-Z])\/\d+\s+$/', $content, $match))
   $num = preg_replace('/ /', '', $match[1]);
  }
 
-$num = preg_replace('/[^A-Z\d]/', '', $num);
+$num = preg_replace('/[^A-Z\d]/i', '', $num);
 
-if ($num && preg_match('/([A-Z])(\d{2})(\d+)([A-Z])/', $num, $match)) {
+if ($num && preg_match('/([A-Z])(\d{2})(\d+)([A-Z])/i', $num, $match)) {
   $num = $match[1].'.'.sprintf('%02d', $match[2]).'.'.sprintf('%04d', $match[3]).'.'.$match[4];
  }else{
   error_log("ERROR: Numéro non trouvé $num");
