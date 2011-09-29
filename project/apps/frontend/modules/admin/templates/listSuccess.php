@@ -48,8 +48,8 @@ foreach ($resultats->response->docs as $resultat) {
   $nbspan = 2;
   if (isset($resultat->on_error) )
     $nbspan = 3;
-  echo '<tr id="tr1_'.$cpt.'" class="clickable '.$class.'"><td rowspan='.$nbspan.'><input class="select" name="resultat'.$cpt.'" id="resultat'.$cpt.'" type="checkbox" value="'.$resultat->id.'"/></td><td rowspan='.$nbspan.'><a href="/couchdb/_utils/document.html?ahjucaf/'.$resultat->id.'">Modifier</a></td>';
-  echo '<td>'.$resultat->num_arret.'</td><td>'.$publi[$resultat->type].'</td><td>'.$resultat->pays.'</td><td>'.$resultat->juridiction.'</td><td>'.$resultat->formation.'</td><td>'.$resultat->section.'</td><td>'.$resultat->sens_arret.'</td><td>'.$resultat->type_affaire.'</td><td>'.$resultat->type_recours.'</td><td>'.$resultat->fonds_documentaire.'</td><td>'.$resultat->reseau.'</td>';
+  echo '<tr id="tr1_'.$cpt.'" class="'.$class.'"><td rowspan='.$nbspan.'><input class="select" name="resultat'.$cpt.'" id="resultat'.$cpt.'" type="checkbox" value="'.$resultat->id.'"/></td><td rowspan='.$nbspan.'><a href="/couchdb/_utils/document.html?ahjucaf/'.$resultat->id.'">Modifier</a></td>';
+  echo '<td class="clickable">'.$resultat->num_arret.'</td><td class="clickable">'.$publi[$resultat->type].'</td><td class="clickable">'.$resultat->pays.'</td><td class="clickable">'.$resultat->juridiction.'</td><td class="clickable">'.$resultat->formation.'</td><td class="clickable">'.$resultat->section.'</td><td class="clickable">'.$resultat->sens_arret.'</td><td class="clickable">'.$resultat->type_affaire.'</td><td class="clickable">'.$resultat->type_recours.'</td><td class="clickable">'.$resultat->fonds_documentaire.'</td><td class="clickable">'.$resultat->reseau.'</td>';
   echo '</tr>';
   if (isset($resultat->on_error) )
       echo '<tr id="tr3_'.$cpt.'" class="error clickable'.$class.'"><td colspan=11>'.$resultat->on_error.'</td></tr>';
@@ -68,7 +68,7 @@ foreach ($resultats->response->docs as $resultat) {
 ?></table>
 <div class="even">
       <input type="hidden" name="nb_resultats" value="<?php echo $cpt; ?>"/>
-      <p><input type="checkbox" id="tout" onChange="if ($('#tout:checked').val() != undefined) $('.select').attr('checked', 'checked'); else {$('.select').removeAttr('checked');}">Tout selectionner</p>
+      <p><input type="checkbox" id="tout" onChange="if ($('#tout:checked').val() != undefined) $('.select').attr('checked', 'checked'); else {$('.select').removeAttr('checked');}"><label for="tout">Tout selectionner</label></p>
       <p>Changer la publication de tous les éléments sélectionnés : <input name="action_publish" type="submit" value="Publier"/> <input name="action_error" type="submit" value="Mettre en erreur"/>  <input name="action_delete" type="submit" value="Supprimer"/>
       <p>Modifier pour tous les éléments sélectionnés : 
 <select id="modif_champ" name="modif_champ">
@@ -95,6 +95,6 @@ foreach ($resultats->response->docs as $resultat) {
    <?php endif; ?>
 </div>
 <script><!--
-      $('.clickable').click(function() {id = $(this).attr('id').replace(/.*_/, ''); if (!$('#resultat'+id+':checked').val()) $('#resultat'+id).attr('checked', 'checked'); else $('#resultat'+id).removeAttr('checked');});
+    $('.clickable').click(function() {try{id = $(this).attr('id').replace(/.*_/, '');}catch(err){ id = $(this).parent().attr('id').replace(/.*_/, ''); } if (!$('#resultat'+id+':checked').val()) $('#resultat'+id).attr('checked', 'checked'); else $('#resultat'+id).removeAttr('checked');});
 --></script>
 </form>
