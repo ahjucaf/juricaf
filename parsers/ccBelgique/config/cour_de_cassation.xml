@@ -1,0 +1,2757 @@
+<node>
+  <node ID="0" label="A">
+    <node ID="021" label="ABANDON DE BIENS" />
+    <node ID="468" label="ABANDON DE FAMILLE" />
+    <node ID="469" label="ABANDON DE POSTE" />
+    <node ID="022" label="ABSENCE" />
+    <node ID="274" label="ABUS DE CONFIANCE" />
+    <node ID="576" label="ABUS DE DROIT" />
+    <node ID="030" label="ACCIDENT DU TRAVAIL">
+      <node ID="03000" label="GENERALITES" />
+      <node ID="03002" label="CHAMP D'APPLICATION. PERSONNES" />
+      <node ID="03003" label="NOTION. EXISTENCE. PREUVE" />
+      <node ID="03004" label="CHEMIN DU TRAVAIL (NOTION, EXISTENCE, PREUVE)" />
+      <node ID="03005" label="DOMMAGE" />
+      <node ID="03006" label="RESPONSABILITE">
+        <node ID="0300600" label="Généralités" />
+        <node ID="0300601" label="Travailleur. Employeur" />
+        <node ID="0300602" label="Tiers" />
+        <node ID="0300699" label="Divers" />
+      </node>
+      <node ID="03007" label="REPARATION">
+        <node ID="0300700" label="Généralités" />
+        <node ID="0300701" label="Rémunération de base" />
+        <node ID="0300702" label="Incapacité de travail et remise au travail" />
+        <node ID="0300703" label="Accident mortel" />
+        <node ID="0300704" label="Cumul et interdiction" />
+        <node ID="0300799" label="Divers" />
+      </node>
+      <node ID="03008" label="ASSURANCE" />
+      <node ID="03009" label="SECTEUR PUBLIC. REGLES PARTICULIERES" />
+      <node ID="03010" label="PROCEDURE">
+        <node ID="0301000" label="Généralités" />
+        <node ID="0301001" label="Révision" />
+        <node ID="0301002" label="Dépens" />
+        <node ID="0301003" label="Prescription" />
+        <node ID="0301099" label="Divers" />
+      </node>
+      <node ID="03099" label="DIVERS" />
+    </node>
+    <node ID="060" label="ACQUIESCEMENT" />
+    <node ID="039" label="ACTE AUTHENTIQUE" />
+    <node ID="110" label="ACTE DE COMMERCE" />
+    <node ID="023" label="ACTE DE L'ETAT CIVIL" />
+    <node ID="171" label="ACTE SIMULE" />
+    <node ID="296" label="ACTE SOUS SEING PRIVE" />
+    <node ID="094" label="ACTION CIVILE" />
+    <node ID="498" label="ACTION DE IN REM VERSO" />
+    <node ID="558" label="ACTION EN JUSTICE" />
+    <node ID="373" label="ACTION EN RECLAMATION D'ETAT" />
+    <node ID="345" label="ACTION PAULIENNE" />
+    <node ID="080" label="ACTION POSSESSOIRE" />
+    <node ID="420" label="ACTION PUBLIQUE" />
+    <node ID="012" label="ADOPTION" />
+    <node ID="339" label="ADULTERE" />
+    <node ID="006" label="AFFICHES" />
+    <node ID="528" label="AGENT DE CHANGE" />
+    <node ID="236" label="AGRICULTURE" />
+    <node ID="542" label="AIDE SOCIALE (CENTRES PUBLICS D')" />
+    <node ID="246" label="ALIMENTS" />
+    <node ID="222" label="ALLOCATIONS FAMILIALES" />
+    <node ID="401" label="AMENAGEMENT DU TERRITOIRE" />
+    <node ID="702" label="AMENDE ADMINISTRATIVE EN MATIERE FISCALE" />
+    <node ID="011" label="AMENDES ADMINISTRATIVES (EN MATIERE SOCIALE)" />
+    <node ID="025" label="AMNISTIE" />
+    <node ID="026" label="ANATOCISME" />
+    <node ID="120" label="ANIMAUX" />
+    <node ID="191" label="APPEL">
+      <node ID="19100" label="GENERALITES" />
+      <node ID="19102" label="MATIERE FISCALE">
+        <node ID="1910201" label="Taxes communales. Taxes provinciales. Taxes locales" />
+        <node ID="1910202" label="Autres impôts" />
+        <node ID="1910203" label="Impôts sur les revenus" />
+      </node>
+      <node ID="19103" label="MATIERE CIVILE (Y COMPRIS LES MATIERES COMMERCIALE ET SOCIALE)">
+        <node ID="1910300" label="Généralités" />
+        <node ID="1910301" label="Décisions et parties" />
+        <node ID="1910302" label="Appel principal. Forme. Délai. Litige indivisible" />
+        <node ID="1910303" label="Appel incident" />
+        <node ID="1910304" label="Effets. Compétence du juge" />
+        <node ID="1910305" label="Procédure en degré d'appel" />
+        <node ID="1910306" label="Extension de la demande et demande nouvelle" />
+        <node ID="1910307" label="Procédure en matière sociale (règles particulières)" />
+        <node ID="1910399" label="Divers" />
+      </node>
+      <node ID="19104" label="MATIERE DE MILICE" />
+      <node ID="19105" label="MATIERE REPRESSIVE (Y COMPRIS DOUANES ET ACCISES)">
+        <node ID="1910500" label="Généralités" />
+        <node ID="1910501" label="Décisions et parties" />
+        <node ID="1910502" label="Appel principal. Forme. Délai" />
+        <node ID="1910503" label="Appel incident" />
+        <node ID="1910504" label="Effets. Compétence du juge" />
+        <node ID="1910505" label="Procédure en degré d'appel" />
+        <node ID="1910506" label="Action civile (règles particulières)" />
+        <node ID="1910599" label="Divers" />
+      </node>
+      <node ID="19106" label="MATIERE DISCIPLINAIRE" />
+      <node ID="19107" label="MATIERE ELECTORALE" />
+      <node ID="19199" label="DIVERS" />
+    </node>
+    <node ID="055" label="APPELLATION D'ORIGINE" />
+    <node ID="822" label="APPLICATION DES PEINES" />
+    <node ID="293" label="APPRECIATION SOUVERAINE PAR LE JUGE DU FOND" />
+    <node ID="034" label="ARBITRAGE" />
+    <node ID="036" label="ARCHITECTE (DISCIPLINE ET PROTECTION DU TITRE)" />
+    <node ID="035" label="ARCHITECTE (RESPONSABILITE)" />
+    <node ID="244" label="ARMEE" />
+    <node ID="510" label="ARMES" />
+    <node ID="560" label="ARPENTEUR" />
+    <node ID="305" label="ARRESTATION IMMEDIATE" />
+    <node ID="067" label="ARRETES" />
+    <node ID="163" label="ART DE GUERIR">
+      <node ID="16300" label="GENERALITES" />
+      <node ID="16301" label="MEDICAMENTS (Y COMPRIS STUPEFIANTS)" />
+      <node ID="16302" label="EXERCICE DE L'ART DE GUERIR" />
+      <node ID="16303" label="ORDRES PROFESSIONNELS" />
+      <node ID="16399" label="DIVERS" />
+    </node>
+    <node ID="561" label="ASSASSINAT" />
+    <node ID="371" label="ASSISTANCE JUDICIAIRE" />
+    <node ID="325" label="ASSISTANCE PUBLIQUE" />
+    <node ID="458" label="ASSOCIATION DE MALFAITEURS" />
+    <node ID="459" label="ASSOCIATION SANS BUT LUCRATIF" />
+    <node ID="523" label="ASSURANCE CHOMAGE" />
+    <node ID="539" label="ASSURANCE MALADIE-INVALIDITE">
+      <node ID="53900" label="GENERALITES" />
+      <node ID="53902" label="ASSURANCE INDEMNITES" />
+      <node ID="53903" label="ASSURANCE SOINS DE SANTE" />
+      <node ID="53999" label="DIVERS" />
+    </node>
+    <node ID="486" label="ASSURANCE VIEILLESSE ET DECES PREMATURE" />
+    <node ID="485" label="ASSURANCES">
+      <node ID="48500" label="GENERALITES" />
+      <node ID="48502" label="ASSURANCES TERRESTRES" />
+      <node ID="48503" label="ASSURANCES MARITIMES" />
+      <node ID="48504" label="ASSURANCE AUTOMOBILE OBLIGATOIRE" />
+      <node ID="48505" label="ASSURANCE VIE" />
+      <node ID="48599" label="DIVERS" />
+    </node>
+    <node ID="130" label="ASTREINTE" />
+    <node ID="007" label="ATTENTAT A LA PUDEUR ET VIOL" />
+    <node ID="040" label="AUTOMOBILES. AUTOBUS. AUTOCARS. TAXIS" />
+    <node ID="255" label="AUTORISATION MARITALE" />
+    <node ID="412" label="AUTORITE PARENTALE" />
+    <node ID="041" label="AVARIE" />
+    <node ID="047" label="AVEU" />
+    <node ID="253" label="AVIATION" />
+    <node ID="013" label="AVOCAT" />
+    <node ID="014" label="AVOCAT A LA COUR DE CASSATION" />
+    <node ID="507" label="AVORTEMENT" />
+  </node>
+  <node ID="1" label="B">
+    <node ID="195" label="BAIL" />
+    <node ID="448" label="BAIL A CHEPTEL" />
+    <node ID="341" label="BAIL A FERME" />
+    <node ID="545" label="BANQUE. CREDIT. EPARGNE">
+      <node ID="54500" label="GENERALITES" />
+      <node ID="54502" label="INSTITUTIONS BANCAIRES" />
+      <node ID="54503" label="OPERATIONS BANCAIRES" />
+      <node ID="54504" label="INSTITUTIONS D'EPARGNE" />
+      <node ID="54505" label="OPERATIONS D'EPARGNE" />
+      <node ID="54506" label="INSTITUTIONS DE CREDIT" />
+      <node ID="54507" label="OPERATIONS DE CREDIT" />
+      <node ID="54599" label="DIVERS" />
+    </node>
+    <node ID="043" label="BANQUEROUTE ET INSOLVABILITE FRAUDULEUSE" />
+    <node ID="544" label="BENELUX">
+      <node ID="54400" label="GENERALITES" />
+      <node ID="54401" label="QUESTIONS PREJUDICIELLES" />
+      <node ID="54402" label="DROIT MATERIEL" />
+      <node ID="54499" label="DIVERS" />
+    </node>
+    <node ID="175" label="BIENS" />
+    <node ID="307" label="BLESSURES ET HOMICIDE INVOLONTAIRES" />
+    <node ID="333" label="BLESSURES ET HOMICIDE VOLONTAIRES" />
+    <node ID="084" label="BOIS ET FORETS" />
+    <node ID="156" label="BOISSONS SPIRITUEUSES" />
+    <node ID="015" label="BORNAGE" />
+    <node ID="703" label="BOURSE" />
+    <node ID="179" label="BOURSE DE COMMERCE" />
+    <node ID="438" label="BREVET D'INVENTION">
+      <node ID="43800" label="GENERALITES" />
+      <node ID="43801" label="BREVET NATIONAL" />
+      <node ID="43802" label="BREVET EUROPEEN" />
+      <node ID="43803" label="COOPERATION EN MATIERE DE BREVET" />
+      <node ID="43899" label="DIVERS" />
+    </node>
+    <node ID="471" label="BRIS DE CLOTURE" />
+    <node ID="538" label="BRIS DE SCELLES" />
+    <node ID="281" label="BRUITS OU TAPAGES NOCTURNES" />
+  </node>
+  <node ID="2" label="C">
+    <node ID="218" label="CADASTRE" />
+    <node ID="405" label="CAISSE D'EPARGNE" />
+    <node ID="554" label="CALAMITES NATURELLES" />
+    <node ID="239" label="CALOMNIE ET DIFFAMATION" />
+    <node ID="220" label="CANAL" />
+    <node ID="204" label="CARTE D'IDENTITE" />
+    <node ID="800" label="CASSATION">
+      <node ID="80000" label="GENERALITES. MISSION ET RAISON D'ETRE DE LA COUR DE CASSATION. NATURE DE L'INSTANCE EN CASSATION" />
+      <node ID="80002" label="DE LA COMPETENCE DE LA COUR DE CASSATION">
+        <node ID="8000200" label="Généralités" />
+        <node ID="8000202" label="Des moyens d'office" />
+        <node ID="8000203" label="Chambres. Chambres réunies. Audience plénière. Assemblée générale" />
+        <node ID="8000299" label="Divers" />
+      </node>
+      <node ID="80003" label="DES DEMANDES EN ANNULATION. DES POURVOIS DANS L'INTERET DE LA LOI" />
+      <node ID="80004" label="ARRETS. FORME">
+        <node ID="8000400" label="Généralités" />
+        <node ID="8000401" label="Forme" />
+        <node ID="8000402" label="Procédure. Jonction" />
+        <node ID="8000499" label="Divers" />
+      </node>
+      <node ID="80005" label="ETENDUE">
+        <node ID="8000500" label="Généralités" />
+        <node ID="8000502" label="Matière civile" />
+        <node ID="8000503" label="Matière répressive">
+          <node ID="800050301" label="Action publique">
+            <node ID="80005030101" label="Prévenu et inculpé" />
+            <node ID="80005030102" label="Ministère public et partie poursuivante" />
+            <node ID="80005030103" label="Partie civilement responsable" />
+            <node ID="80005030104" label="Partie civile" />
+            <node ID="80005030105" label="Partie intervenante" />
+            <node ID="80005030106" label="Autres parties" />
+          </node>
+          <node ID="800050302" label="Action civile">
+            <node ID="80005030201" label="Prévenu" />
+            <node ID="80005030202" label="Ministère public" />
+            <node ID="80005030203" label="Partie civilement responsable" />
+            <node ID="80005030204" label="Partie civile" />
+            <node ID="80005030205" label="Partie intervenante" />
+            <node ID="80005030206" label="Autres parties" />
+          </node>
+        </node>
+        <node ID="8000504" label="Matière fiscale" />
+        <node ID="8000505" label="Matière de milice" />
+        <node ID="8000506" label="Matière disciplinaire" />
+        <node ID="8000507" label="Matière électorale" />
+        <node ID="8000599" label="Divers" />
+      </node>
+      <node ID="80006" label="APPEL EN DECLARATION D'ARRET COMMUN" />
+      <node ID="80099" label="DIVERS" />
+    </node>
+    <node ID="704" label="CAUSE D'EXCUSE" />
+    <node ID="374" label="CAUSE DE JUSTIFICATION" />
+    <node ID="318" label="CAUSE DE LA DEMANDE EN JUSTICE" />
+    <node ID="100" label="CAUTIO JUDICATUM SOLVI" />
+    <node ID="083" label="CAUTIONNEMENT" />
+    <node ID="454" label="CEL" />
+    <node ID="219" label="CHAMBRE DES MISES EN ACCUSATION" />
+    <node ID="362" label="CHAMBRE DU CONSEIL" />
+    <node ID="216" label="CHASSE" />
+    <node ID="411" label="CHEMINS DE FER" />
+    <node ID="097" label="CHEMINS DE FER VICINAUX" />
+    <node ID="101" label="CHEQUE" />
+    <node ID="192" label="CHIEN" />
+    <node ID="522" label="CHOMAGE">
+      <node ID="52200" label="GENERALITES" />
+      <node ID="52201" label="BENEFICIAIRES DES ALLOCATIONS DE CHOMAGE" />
+      <node ID="52202" label="DROIT AUX ALLOCATIONS DE CHOMAGE" />
+      <node ID="52203" label="MONTANT DES ALLOCATIONS DE CHOMAGE" />
+      <node ID="52299" label="DIVERS" />
+    </node>
+    <node ID="366" label="CHOSE JUGEE">
+      <node ID="36600" label="GENERALITES" />
+      <node ID="36601" label="AUTORITE DE CHOSE JUGEE">
+        <node ID="3660100" label="Généralités" />
+        <node ID="3660102" label="Matière civile" />
+        <node ID="3660103" label="Matière répressive" />
+        <node ID="3660104" label="Matière fiscale" />
+        <node ID="3660105" label="Matière de milice" />
+        <node ID="3660106" label="Matière disciplinaire" />
+        <node ID="3660107" label="Matière électorale" />
+        <node ID="3660108" label="Matière sociale" />
+        <node ID="3660109" label="Matière commerciale" />
+        <node ID="3660199" label="Divers" />
+      </node>
+      <node ID="36602" label="FORCE DE CHOSE JUGEE">
+        <node ID="3660200" label="Généralités" />
+        <node ID="3660202" label="Matière civile" />
+        <node ID="3660203" label="Matière répressive" />
+        <node ID="3660204" label="Matière fiscale" />
+        <node ID="3660205" label="Matière de milice" />
+        <node ID="3660206" label="Matière disciplinaire" />
+        <node ID="3660207" label="Matière électorale" />
+        <node ID="3660208" label="Matière sociale" />
+        <node ID="3660209" label="Matière commerciale" />
+        <node ID="3660299" label="Divers" />
+      </node>
+      <node ID="36699" label="DIVERS" />
+    </node>
+    <node ID="081" label="CINEMA" />
+    <node ID="484" label="CIRCONSTANCES ATTENUANTES ET AGGRAVANTES" />
+    <node ID="562" label="CITATION" />
+    <node ID="017" label="CLOTURE" />
+    <node ID="085" label="CODE FORESTIER" />
+    <node ID="450" label="CODE RURAL" />
+    <node ID="825" label="COHABITATION LEGALE" />
+    <node ID="351" label="COLIS POSTAUX" />
+    <node ID="157" label="COLLECTES SUR LA VOIE PUBLIQUE" />
+    <node ID="183" label="COMBATS DE COQS" />
+    <node ID="449" label="COMITE DE SECURITE ET D'HYGIENE" />
+    <node ID="230" label="COMMERCE. COMMERCANT" />
+    <node ID="103" label="COMMISSION" />
+    <node ID="343" label="COMMISSION PARITAIRE" />
+    <node ID="202" label="COMMUNAUTE CONJUGALE" />
+    <node ID="149" label="COMMUNAUTE DE FAIT" />
+    <node ID="541" label="COMMUNAUTE ET REGION" />
+    <node ID="159" label="COMMUNE" />
+    <node ID="398" label="COMPENSATION" />
+    <node ID="074" label="COMPETENCE ET RESSORT">
+      <node ID="07400" label="GENERALITES" />
+      <node ID="07402" label="MATIERE FISCALE">
+        <node ID="0740200" label="Généralités" />
+        <node ID="0740201" label="Taxes communales. Taxes provinciales. Taxes locales" />
+        <node ID="0740202" label="Impôts sur les revenus" />
+        <node ID="0740203" label="Autres impôts" />
+        <node ID="0740299" label="Divers" />
+      </node>
+      <node ID="07403" label="MATIERE CIVILE">
+        <node ID="0740300" label="Généralités" />
+        <node ID="0740301" label="Ressort" />
+        <node ID="0740302" label="Compétence">
+          <node ID="074030200" label="Généralités" />
+          <node ID="074030201" label="Compétence d'attribution" />
+          <node ID="074030202" label="Compétence territoriale" />
+          <node ID="074030299" label="Divers" />
+        </node>
+        <node ID="0740303" label="Contestations relatives à la compétence" />
+        <node ID="0740304" label="Droit social (règles particulières)" />
+        <node ID="0740399" label="Divers" />
+      </node>
+      <node ID="07404" label="MATIERE DE MILICE" />
+      <node ID="07405" label="MATIERE REPRESSIVE">
+        <node ID="0740500" label="Généralités" />
+        <node ID="0740501" label="Ressort" />
+        <node ID="0740502" label="Compétence" />
+        <node ID="0740503" label="Contestations relatives à la compétence" />
+        <node ID="0740504" label="Action civile (règles particulières)" />
+        <node ID="0740599" label="Divers" />
+      </node>
+      <node ID="07406" label="MATIERE DISCIPLINAIRE" />
+      <node ID="07407" label="MATIERE ELECTORALE" />
+      <node ID="07408" label="COMPETENCE INTERNATIONALE" />
+      <node ID="07499" label="DIVERS" />
+    </node>
+    <node ID="414" label="COMPETITIONS SPORTIVES" />
+    <node ID="262" label="COMPLICITE" />
+    <node ID="706" label="COMPTABILITE" />
+    <node ID="714" label="COMPTABLE" />
+    <node ID="380" label="COMPTE COURANT" />
+    <node ID="381" label="COMPTES (REDDITION DE)" />
+    <node ID="164" label="CONCORDAT" />
+    <node ID="390" label="CONCOURS D'INFRACTIONS" />
+    <node ID="304" label="CONCURRENCE ILLICITE" />
+    <node ID="226" label="CONCUSSION" />
+    <node ID="476" label="CONDAMNATION AVEC SURSIS ET SUSPENSION DU PRONONCE DE LA CONDAMNATION">
+      <node ID="47600" label="GENERALITES" />
+      <node ID="47601" label="SURSIS SIMPLE" />
+      <node ID="47602" label="SURSIS PROBATOIRE" />
+      <node ID="47603" label="SUSPENSION SIMPLE" />
+      <node ID="47604" label="SUSPENSION PROBATOIRE" />
+      <node ID="47699" label="DIVERS" />
+    </node>
+    <node ID="104" label="CONFLIT D'ATTRIBUTION" />
+    <node ID="105" label="CONGREGATION RELIGIEUSE" />
+    <node ID="389" label="CONNEXITE" />
+    <node ID="301" label="CONSEIL D'ENQUETE MARITIME" />
+    <node ID="297" label="CONSEIL D'ENTREPRISE ET COMITE DE SECURITE ET D'HYGIENE">
+      <node ID="29700" label="GENERALITES" />
+      <node ID="29701" label="TRAVAILLEURS PROTEGES" />
+      <node ID="29702" label="ELECTIONS" />
+      <node ID="29703" label="CONSTITUTION" />
+      <node ID="29799" label="DIVERS" />
+    </node>
+    <node ID="361" label="CONSEIL D'ETAT" />
+    <node ID="167" label="CONSEIL JUDICIAIRE" />
+    <node ID="178" label="CONSTITUTION">
+      <node ID="17800" label="GENERALITES" />
+      <node ID="17801" label="CONSTITUTION 1831 (ART. 1 A 99)">
+        <node ID="1780101" label="Article 1" />
+        <node ID="1780102" label="Article 2" />
+        <node ID="1780103" label="Article 3">
+          <node ID="178010320" label="Article 3bis" />
+          <node ID="178010330" label="Article 3ter" />
+        </node>
+        <node ID="1780104" label="Article 4" />
+        <node ID="1780105" label="Article 5" />
+        <node ID="1780106" label="Article 6">
+          <node ID="178010620" label="Article 6bis" />
+        </node>
+        <node ID="1780107" label="Article 7" />
+        <node ID="1780108" label="Article 8" />
+        <node ID="1780109" label="Article 9" />
+        <node ID="1780110" label="Article 10" />
+        <node ID="1780111" label="Article 11" />
+        <node ID="1780112" label="Article 12" />
+        <node ID="1780113" label="Article 13" />
+        <node ID="1780114" label="Article 14" />
+        <node ID="1780115" label="Article 15" />
+        <node ID="1780116" label="Article 16" />
+        <node ID="1780117" label="Article 17" />
+        <node ID="1780118" label="Article 18" />
+        <node ID="1780119" label="Article 19" />
+        <node ID="1780120" label="Article 20" />
+        <node ID="1780121" label="Article 21" />
+        <node ID="1780122" label="Article 22" />
+        <node ID="1780123" label="Article 23" />
+        <node ID="1780124" label="Article 24" />
+        <node ID="1780125" label="Article 25">
+          <node ID="178012520" label="Article 25bis" />
+        </node>
+        <node ID="1780126" label="Article 26">
+          <node ID="178012620" label="Article 26bis" />
+        </node>
+        <node ID="1780127" label="Article 27" />
+        <node ID="1780128" label="Article 28" />
+        <node ID="1780129" label="Article 29" />
+        <node ID="1780130" label="Article 30" />
+        <node ID="1780131" label="Article 31" />
+        <node ID="1780132" label="Article 32">
+          <node ID="178013220" label="Article 32bis" />
+        </node>
+        <node ID="1780133" label="Article 33" />
+        <node ID="1780134" label="Article 34" />
+        <node ID="1780135" label="Article 35" />
+        <node ID="1780136" label="Article 36" />
+        <node ID="1780137" label="Article 37" />
+        <node ID="1780138" label="Article 38">
+          <node ID="178013820" label="Article 38bis" />
+        </node>
+        <node ID="1780139" label="Article 39" />
+        <node ID="1780140" label="Article 40" />
+        <node ID="1780141" label="Article 41" />
+        <node ID="1780142" label="Article 42" />
+        <node ID="1780143" label="Article 43" />
+        <node ID="1780144" label="Article 44" />
+        <node ID="1780145" label="Article 45" />
+        <node ID="1780146" label="Article 46" />
+        <node ID="1780147" label="Article 47" />
+        <node ID="1780148" label="Article 48" />
+        <node ID="1780149" label="Article 49" />
+        <node ID="1780150" label="Article 50" />
+        <node ID="1780151" label="Article 51" />
+        <node ID="1780152" label="Article 52" />
+        <node ID="1780153" label="Article 53" />
+        <node ID="1780154" label="Article 54" />
+        <node ID="1780155" label="Article 55" />
+        <node ID="1780156" label="Article 56">
+          <node ID="178015630" label="Article 56ter" />
+          <node ID="178015640" label="Article 56quater" />
+        </node>
+        <node ID="1780157" label="Article 57" />
+        <node ID="1780158" label="Article 58" />
+        <node ID="1780159" label="Article 59">
+          <node ID="178015920" label="Article 59bis" />
+          <node ID="178015930" label="Article 59ter" />
+          <node ID="178015960" label="Article 59sexies" />
+        </node>
+        <node ID="1780160" label="Article 60" />
+        <node ID="1780161" label="Article 61" />
+        <node ID="1780162" label="Article 62" />
+        <node ID="1780163" label="Article 63" />
+        <node ID="1780164" label="Article 64" />
+        <node ID="1780165" label="Article 65" />
+        <node ID="1780166" label="Article 66" />
+        <node ID="1780167" label="Article 67" />
+        <node ID="1780168" label="Article 68" />
+        <node ID="1780169" label="Article 69" />
+        <node ID="1780170" label="Article 70" />
+        <node ID="1780171" label="Article 71" />
+        <node ID="1780172" label="Article 72" />
+        <node ID="1780173" label="Article 73" />
+        <node ID="1780174" label="Article 74" />
+        <node ID="1780175" label="Article 75" />
+        <node ID="1780176" label="Article 76" />
+        <node ID="1780177" label="Article 77" />
+        <node ID="1780178" label="Article 78" />
+        <node ID="1780179" label="Article 79" />
+        <node ID="1780180" label="Article 80" />
+        <node ID="1780181" label="Article 81" />
+        <node ID="1780182" label="Article 82" />
+        <node ID="1780183" label="Article 83" />
+        <node ID="1780184" label="Article 84" />
+        <node ID="1780185" label="Article 85" />
+        <node ID="1780186" label="Article 86">
+          <node ID="178018620" label="Article 86bis" />
+        </node>
+        <node ID="1780187" label="Article 87" />
+        <node ID="1780188" label="Article 88" />
+        <node ID="1780189" label="Article 89" />
+        <node ID="1780190" label="Article 90" />
+        <node ID="1780191" label="Article 91">
+          <node ID="178019120" label="Article 91bis" />
+        </node>
+        <node ID="1780192" label="Article 92" />
+        <node ID="1780193" label="Article 93" />
+        <node ID="1780194" label="Article 94" />
+        <node ID="1780195" label="Article 95" />
+        <node ID="1780196" label="Article 96" />
+        <node ID="1780197" label="Article 97" />
+        <node ID="1780198" label="Article 98" />
+        <node ID="1780199" label="Article 99" />
+      </node>
+      <node ID="17802" label="CONSTITUTION 1831 (ART. 100 A FIN)">
+        <node ID="1780201" label="Article 100" />
+        <node ID="1780202" label="Article 101" />
+        <node ID="1780203" label="Article 102" />
+        <node ID="1780204" label="Article 103" />
+        <node ID="1780205" label="Article 104" />
+        <node ID="1780206" label="Article 105" />
+        <node ID="1780207" label="Article 106" />
+        <node ID="1780208" label="Article 107">
+          <node ID="178020830" label="Article 107ter" />
+          <node ID="178020840" label="Article 107quater" />
+        </node>
+        <node ID="1780209" label="Article 108" />
+        <node ID="1780210" label="Article 109" />
+        <node ID="1780211" label="Article 110" />
+        <node ID="1780212" label="Article 111" />
+        <node ID="1780213" label="Article 112" />
+        <node ID="1780214" label="Article 113" />
+        <node ID="1780215" label="Article 114" />
+        <node ID="1780216" label="Article 115" />
+        <node ID="1780217" label="Article 116" />
+        <node ID="1780218" label="Article 117" />
+        <node ID="1780219" label="Article 118" />
+        <node ID="1780220" label="Article 119" />
+        <node ID="1780221" label="Article 120" />
+        <node ID="1780222" label="Article 121" />
+        <node ID="1780223" label="Article 122" />
+        <node ID="1780224" label="Article 123" />
+        <node ID="1780225" label="Article 124" />
+        <node ID="1780226" label="Article 125" />
+        <node ID="1780227" label="Article 126" />
+        <node ID="1780228" label="Article 127" />
+        <node ID="1780229" label="Article 128" />
+        <node ID="1780230" label="Article 129" />
+        <node ID="1780231" label="Article 130" />
+        <node ID="1780232" label="Article 131">
+          <node ID="178023220" label="Article 131bis" />
+        </node>
+        <node ID="1780233" label="Article 132" />
+        <node ID="1780234" label="Article 133" />
+        <node ID="1780235" label="Article 134" />
+        <node ID="1780236" label="Article 135" />
+        <node ID="1780237" label="Article 136" />
+        <node ID="1780238" label="Article 137" />
+        <node ID="1780239" label="Article 138" />
+        <node ID="1780240" label="Article 139" />
+        <node ID="1780241" label="Article 140" />
+      </node>
+      <node ID="17810" label="CONSTITUTION 1994 (ART. 1 A 99)">
+        <node ID="1781001" label="Article 1" />
+        <node ID="1781002" label="Article 2" />
+        <node ID="1781003" label="Article 3" />
+        <node ID="1781004" label="Article 4" />
+        <node ID="1781005" label="Article 5" />
+        <node ID="1781006" label="Article 6" />
+        <node ID="1781007" label="Article 7" />
+        <node ID="1781008" label="Article 8" />
+        <node ID="1781009" label="Article 9" />
+        <node ID="1781010" label="Article 10" />
+        <node ID="1781011" label="Article 11" />
+        <node ID="1781012" label="Article 12" />
+        <node ID="1781013" label="Article 13" />
+        <node ID="1781014" label="Article 14" />
+        <node ID="1781015" label="Article 15" />
+        <node ID="1781016" label="Article 16" />
+        <node ID="1781017" label="Article 17" />
+        <node ID="1781018" label="Article 18" />
+        <node ID="1781019" label="Article 19" />
+        <node ID="1781020" label="Article 20" />
+        <node ID="1781021" label="Article 21" />
+        <node ID="1781022" label="Article 22" />
+        <node ID="1781023" label="Article 23" />
+        <node ID="1781024" label="Article 24" />
+        <node ID="1781025" label="Article 25" />
+        <node ID="1781026" label="Article 26" />
+        <node ID="1781027" label="Article 27" />
+        <node ID="1781028" label="Article 28" />
+        <node ID="1781029" label="Article 29" />
+        <node ID="1781030" label="Article 30" />
+        <node ID="1781031" label="Article 31" />
+        <node ID="1781032" label="Article 32" />
+        <node ID="1781033" label="Article 33" />
+        <node ID="1781034" label="Article 34" />
+        <node ID="1781035" label="Article 35" />
+        <node ID="1781036" label="Article 36" />
+        <node ID="1781037" label="Article 37" />
+        <node ID="1781038" label="Article 38" />
+        <node ID="1781039" label="Article 39" />
+        <node ID="1781040" label="Article 40" />
+        <node ID="1781041" label="Article 41" />
+        <node ID="1781042" label="Article 42" />
+        <node ID="1781043" label="Article 43" />
+        <node ID="1781044" label="Article 44" />
+        <node ID="1781045" label="Article 45" />
+        <node ID="1781046" label="Article 46" />
+        <node ID="1781047" label="Article 47" />
+        <node ID="1781048" label="Article 48" />
+        <node ID="1781049" label="Article 49" />
+        <node ID="1781050" label="Article 50" />
+        <node ID="1781051" label="Article 51" />
+        <node ID="1781052" label="Article 52" />
+        <node ID="1781053" label="Article 53" />
+        <node ID="1781054" label="Article 54" />
+        <node ID="1781055" label="Article 55" />
+        <node ID="1781056" label="Article 56" />
+        <node ID="1781057" label="Article 57" />
+        <node ID="1781058" label="Article 58" />
+        <node ID="1781059" label="Article 59" />
+        <node ID="1781060" label="Article 60" />
+        <node ID="1781061" label="Article 61" />
+        <node ID="1781062" label="Article 62" />
+        <node ID="1781063" label="Article 63" />
+        <node ID="1781064" label="Article 64" />
+        <node ID="1781065" label="Article 65" />
+        <node ID="1781066" label="Article 66" />
+        <node ID="1781067" label="Article 67" />
+        <node ID="1781068" label="Article 68" />
+        <node ID="1781069" label="Article 69" />
+        <node ID="1781070" label="Article 70" />
+        <node ID="1781071" label="Article 71" />
+        <node ID="1781072" label="Article 72" />
+        <node ID="1781073" label="Article 73" />
+        <node ID="1781074" label="Article 74" />
+        <node ID="1781075" label="Article 75" />
+        <node ID="1781076" label="Article 76" />
+        <node ID="1781077" label="Article 77" />
+        <node ID="1781078" label="Article 78" />
+        <node ID="1781079" label="Article 79" />
+        <node ID="1781080" label="Article 80" />
+        <node ID="1781081" label="Article 81" />
+        <node ID="1781082" label="Article 82" />
+        <node ID="1781083" label="Article 83" />
+        <node ID="1781084" label="Article 84" />
+        <node ID="1781085" label="Article 85" />
+        <node ID="1781086" label="Article 86" />
+        <node ID="1781087" label="Article 87" />
+        <node ID="1781088" label="Article 88" />
+        <node ID="1781089" label="Article 89" />
+        <node ID="1781090" label="Article 90" />
+        <node ID="1781091" label="Article 91" />
+        <node ID="1781092" label="Article 92" />
+        <node ID="1781093" label="Article 93" />
+        <node ID="1781094" label="Article 94" />
+        <node ID="1781095" label="Article 95" />
+        <node ID="1781096" label="Article 96" />
+        <node ID="1781097" label="Article 97" />
+        <node ID="1781098" label="Article 98" />
+        <node ID="1781099" label="Article 99" />
+      </node>
+      <node ID="17811" label="CONSTITUTION 1994 (ART. 100 A FIN)">
+        <node ID="1781100" label="Article 100" />
+        <node ID="1781101" label="Article 101" />
+        <node ID="1781102" label="Article 102" />
+        <node ID="1781103" label="Article 103" />
+        <node ID="1781104" label="Article 104" />
+        <node ID="1781105" label="Article 105" />
+        <node ID="1781106" label="Article 106" />
+        <node ID="1781107" label="Article 107" />
+        <node ID="1781108" label="Article 108" />
+        <node ID="1781109" label="Article 109" />
+        <node ID="1781110" label="Article 110" />
+        <node ID="1781111" label="Article 111" />
+        <node ID="1781112" label="Article 112" />
+        <node ID="1781113" label="Article 113" />
+        <node ID="1781114" label="Article 114" />
+        <node ID="1781115" label="Article 115" />
+        <node ID="1781116" label="Article 116" />
+        <node ID="1781117" label="Article 117" />
+        <node ID="1781118" label="Article 118" />
+        <node ID="1781119" label="Article 119" />
+        <node ID="1781120" label="Article 120" />
+        <node ID="1781121" label="Article 121" />
+        <node ID="1781122" label="Article 122" />
+        <node ID="1781123" label="Article 123" />
+        <node ID="1781124" label="Article 124" />
+        <node ID="1781125" label="Article 125" />
+        <node ID="1781126" label="Article 126" />
+        <node ID="1781127" label="Article 127" />
+        <node ID="1781128" label="Article 128" />
+        <node ID="1781129" label="Article 129" />
+        <node ID="1781130" label="Article 130" />
+        <node ID="1781131" label="Article 131" />
+        <node ID="1781132" label="Article 132" />
+        <node ID="1781133" label="Article 133" />
+        <node ID="1781134" label="Article 134" />
+        <node ID="1781135" label="Article 135" />
+        <node ID="1781136" label="Article 136" />
+        <node ID="1781137" label="Article 137" />
+        <node ID="1781138" label="Article 138" />
+        <node ID="1781139" label="Article 139" />
+        <node ID="1781140" label="Article 140" />
+        <node ID="1781141" label="Article 141" />
+        <node ID="1781142" label="Article 142" />
+        <node ID="1781143" label="Article 143" />
+        <node ID="1781144" label="Article 144" />
+        <node ID="1781145" label="Article 145" />
+        <node ID="1781146" label="Article 146" />
+        <node ID="1781147" label="Article 147" />
+        <node ID="1781148" label="Article 148" />
+        <node ID="1781149" label="Article 149" />
+        <node ID="1781150" label="Article 150" />
+        <node ID="1781151" label="Article 151" />
+        <node ID="1781152" label="Article 152" />
+        <node ID="1781153" label="Article 153" />
+        <node ID="1781154" label="Article 154" />
+        <node ID="1781155" label="Article 155" />
+        <node ID="1781156" label="Article 156" />
+        <node ID="1781157" label="Article 157" />
+        <node ID="1781158" label="Article 158" />
+        <node ID="1781159" label="Article 159" />
+        <node ID="1781160" label="Article 160" />
+        <node ID="1781161" label="Article 161" />
+        <node ID="1781162" label="Article 162" />
+        <node ID="1781163" label="Article 163" />
+        <node ID="1781164" label="Article 164" />
+        <node ID="1781165" label="Article 165" />
+        <node ID="1781166" label="Article 166" />
+        <node ID="1781167" label="Article 167" />
+        <node ID="1781168" label="Article 168" />
+        <node ID="1781169" label="Article 169" />
+        <node ID="1781170" label="Article 170" />
+        <node ID="1781171" label="Article 171" />
+        <node ID="1781172" label="Article 172" />
+        <node ID="1781173" label="Article 173" />
+        <node ID="1781174" label="Article 174" />
+        <node ID="1781175" label="Article 175" />
+        <node ID="1781176" label="Article 176" />
+        <node ID="1781177" label="Article 177" />
+        <node ID="1781178" label="Article 178" />
+        <node ID="1781179" label="Article 179" />
+        <node ID="1781180" label="Article 180" />
+        <node ID="1781181" label="Article 181" />
+        <node ID="1781182" label="Article 182" />
+        <node ID="1781183" label="Article 183" />
+        <node ID="1781184" label="Article 184" />
+        <node ID="1781185" label="Article 185" />
+        <node ID="1781186" label="Article 186" />
+        <node ID="1781187" label="Article 187" />
+        <node ID="1781188" label="Article 188" />
+        <node ID="1781189" label="Article 189" />
+        <node ID="1781190" label="Article 190" />
+        <node ID="1781191" label="Article 191" />
+        <node ID="1781192" label="Article 192" />
+        <node ID="1781193" label="Article 193" />
+        <node ID="1781194" label="Article 194" />
+        <node ID="1781195" label="Article 195" />
+        <node ID="1781196" label="Article 196" />
+        <node ID="1781197" label="Article 197" />
+        <node ID="1781198" label="Article 198" />
+      </node>
+      <node ID="17899" label="DIVERS" />
+    </node>
+    <node ID="129" label="CONTRAINTE" />
+    <node ID="249" label="CONTRAINTE PAR CORPS" />
+    <node ID="242" label="CONTRAT D'APPRENTISSAGE" />
+    <node ID="201" label="CONTRAT DE MARIAGE" />
+    <node ID="481" label="CONTRAT DE TRANSPORT" />
+    <node ID="031" label="CONTRAT DE TRAVAIL">
+      <node ID="03100" label="GENERALITES" />
+      <node ID="03101" label="NATURE DE LA LOI. CHAMP D'APPLICATION" />
+      <node ID="03102" label="NOTION. ELEMENTS CONSTITUTIFS. FORME">
+        <node ID="0310200" label="Généralités" />
+        <node ID="0310201" label="Notion et conditions d'existence" />
+        <node ID="0310202" label="Forme" />
+        <node ID="0310299" label="Divers" />
+      </node>
+      <node ID="03103" label="OBLIGATIONS" />
+      <node ID="03104" label="SUSPENSION" />
+      <node ID="03105" label="FIN">
+        <node ID="0310500" label="Généralités" />
+        <node ID="0310501" label="Modification unilatérale" />
+        <node ID="0310502" label="Licenciement abusif" />
+        <node ID="0310503" label="Préavis" />
+        <node ID="0310504" label="Indemnité de congé" />
+        <node ID="0310505" label="Indemnité d'éviction" />
+        <node ID="0310506" label="Motif grave" />
+        <node ID="0310507" label="Autres modalités de rupture" />
+        <node ID="0310508" label="Quittance de solde" />
+        <node ID="0310599" label="Divers" />
+      </node>
+      <node ID="03106" label="PRESCRIPTION" />
+      <node ID="03107" label="CLAUSE D'ESSAI" />
+      <node ID="03199" label="DIVERS" />
+    </node>
+    <node ID="340" label="CONTRAVENTION" />
+    <node ID="107" label="CONTRAVENTIONNALISATION" />
+    <node ID="283" label="CONTREFACON DE DESSINS" />
+    <node ID="282" label="CONTREFACON DE MARQUES" />
+    <node ID="530" label="CONTROLE DES CHANGES" />
+    <node ID="336" label="CONVENTION">
+      <node ID="33600" label="GENERALITES" />
+      <node ID="33602" label="ELEMENTS CONSTITUTIFS">
+        <node ID="3360200" label="Généralités" />
+        <node ID="3360201" label="Consentement" />
+        <node ID="3360202" label="Cause" />
+        <node ID="3360203" label="Objet" />
+        <node ID="3360299" label="Divers" />
+      </node>
+      <node ID="33603" label="FORME" />
+      <node ID="33604" label="DROITS ET OBLIGATIONS DES PARTIES">
+        <node ID="3360400" label="Généralités" />
+        <node ID="3360401" label="Entre parties" />
+        <node ID="3360402" label="Envers les tiers" />
+        <node ID="3360499" label="Divers" />
+      </node>
+      <node ID="33605" label="INTERPRETATION" />
+      <node ID="33606" label="FORCE OBLIGATOIRE (INEXECUTION)" />
+      <node ID="33607" label="FIN" />
+      <node ID="33608" label="DROIT INTERNATIONAL" />
+      <node ID="33699" label="DIVERS" />
+    </node>
+    <node ID="102" label="CONVENTION COLLECTIVE DE TRAVAIL" />
+    <node ID="109" label="CORRECTIONNALISATION" />
+    <node ID="292" label="CORRUPTION DE FONCTIONNAIRES" />
+    <node ID="570" label="CORRUPTION DE LA JEUNESSE" />
+    <node ID="402" label="COUPS ET BLESSURES. HOMICIDE">
+      <node ID="40201" label="INVOLONTAIRES" />
+      <node ID="40202" label="VOLONTAIRES" />
+    </node>
+    <node ID="555" label="COUR CONSTITUTIONNELLE" />
+    <node ID="190" label="COUR D'ASSISES">
+      <node ID="19000" label="GENERALITES" />
+      <node ID="19001" label="RENVOI A LA COUR" />
+      <node ID="19002" label="COMPOSITION DE LA COUR ET DU JURY" />
+      <node ID="19003" label="PROCEDURE A L'AUDIENCE. ARRETS INTERLOCUTOIRES. DECLARATION DU JURY" />
+      <node ID="19004" label="ARRET DEFINITIF" />
+      <node ID="19005" label="ACTION CIVILE" />
+      <node ID="19099" label="DIVERS" />
+    </node>
+    <node ID="379" label="COUR DES COMPTES" />
+    <node ID="269" label="COUR MILITAIRE" />
+    <node ID="513" label="COURS D'EAU" />
+    <node ID="155" label="COURS FORCE" />
+    <node ID="259" label="COURTIER" />
+    <node ID="546" label="CREDIT" />
+    <node ID="707" label="CREDIT A LA CONSOMMATION" />
+    <node ID="057" label="CREDIT PROFESSIONNEL" />
+    <node ID="234" label="CREDITS D'HEURES" />
+    <node ID="275" label="CRIMES ET DELITS CONTRE LA SURETE EXTERIEURE DE L'ETAT" />
+    <node ID="140" label="CULTE" />
+  </node>
+  <node ID="3" label="D">
+    <node ID="205" label="DATION EN PAYEMENT" />
+    <node ID="312" label="DEBAUCHE ET PROSTITUTION" />
+    <node ID="708" label="DECRETS" />
+    <node ID="064" label="DEFENSE DES INSTITUTIONS NATIONALES" />
+    <node ID="063" label="DEFENSE SOCIALE">
+      <node ID="06300" label="GENERALITES" />
+      <node ID="06302" label="MISE EN OBSERVATION" />
+      <node ID="06303" label="INTERNEMENT" />
+      <node ID="06304" label="COMMISSION DE DEFENSE SOCIALE">
+        <node ID="0630400" label="Généralités" />
+        <node ID="0630401" label="Composition" />
+        <node ID="0630402" label="Compétence" />
+        <node ID="0630403" label="Procédure" />
+        <node ID="0630499" label="Divers" />
+      </node>
+      <node ID="06305" label="COMMISSION SUPERIEURE" />
+      <node ID="06306" label="MISE A LA DISPOSITION DU GOUVERNEMENT" />
+      <node ID="06399" label="DIVERS" />
+    </node>
+    <node ID="062" label="DEGRADATION D'UN CHEMIN PUBLIC" />
+    <node ID="061" label="DEGRADATION DE CLOTURES" />
+    <node ID="257" label="DELEGATION DE POUVOIRS EN TEMPS DE GUERRE" />
+    <node ID="256" label="DELEGATION OU ATTRIBUTION DE POUVOIRS" />
+    <node ID="443" label="DELEGATION SYNDICALE" />
+    <node ID="426" label="DELIT D'AUDIENCE" />
+    <node ID="127" label="DELIT DE PRESSE" />
+    <node ID="291" label="DELIT INSTANTANE. DELIT CONTINU" />
+    <node ID="350" label="DELIT POLITIQUE" />
+    <node ID="497" label="DEMANDE EN JUSTICE" />
+    <node ID="287" label="DEMANDE NOUVELLE" />
+    <node ID="550" label="DENI DE JUSTICE" />
+    <node ID="240" label="DENONCIATION CALOMNIEUSE" />
+    <node ID="489" label="DENREES ALIMENTAIRES" />
+    <node ID="511" label="DENREES ET MARCHANDISES" />
+    <node ID="314" label="DEPOSSESSION DE TITRES AU PORTEUR" />
+    <node ID="076" label="DEPOT" />
+    <node ID="069" label="DEPUTATION PERMANENTE" />
+    <node ID="116" label="DESERTION" />
+    <node ID="019" label="DESISTEMENT (PROCEDURE)">
+      <node ID="01900" label="GENERALITES" />
+      <node ID="01901" label="DESISTEMENT D'ACTION" />
+      <node ID="01902" label="DESISTEMENT D'INSTANCE" />
+      <node ID="01903" label="DESISTEMENT D'UN ACTE DE PROCEDURE" />
+      <node ID="01999" label="DIVERS" />
+    </node>
+    <node ID="709" label="DESSINS ET MODELES" />
+    <node ID="288" label="DESSINS ET MODELES INDUSTRIELS" />
+    <node ID="475" label="DESTRUCTION D'OBJETS DESTINES A L'UTILITE PUBLIQUE OU A LA DECORATION PUBLIQUE" />
+    <node ID="569" label="DESTRUCTION DE CLOTURES" />
+    <node ID="473" label="DESTRUCTION DE DOSSIERS" />
+    <node ID="472" label="DESTRUCTION DE PROPRIETES MOBILIERES D'AUTRUI" />
+    <node ID="474" label="DESTRUCTION DE TITRES" />
+    <node ID="493" label="DETENTION PREVENTIVE">
+      <node ID="49300" label="GENERALITES" />
+      <node ID="49301" label="ARRESTATION" />
+      <node ID="49302" label="MANDAT D'ARRET" />
+      <node ID="49303" label="MAINTIEN" />
+      <node ID="49304" label="MAINLEVEE" />
+      <node ID="49305" label="(MISE EN) LIBERTE SOUS CONDITIONS" />
+      <node ID="49306" label="DOUANES ET ACCISES" />
+      <node ID="49307" label="DETENTION ILLEGALE ET INOPERANTE">
+        <node ID="4930700" label="Généralités" />
+        <node ID="4930701" label="Illégale" />
+        <node ID="4930702" label="Inopérante" />
+        <node ID="4930703" label="Indemnisation" />
+        <node ID="4930799" label="Divers" />
+      </node>
+      <node ID="49308" label="PROCEDURE MILITAIRE" />
+      <node ID="49320" label="MANDAT D'AMENER" />
+      <node ID="49321" label="REGLEMENT DE LA PROCEDURE" />
+      <node ID="49322" label="APPEL" />
+      <node ID="49323" label="POURVOI EN CASSATION" />
+      <node ID="49324" label="PROLONGATION DES DELAIS" />
+      <node ID="49325" label="MISE EN LIBERTE PROVISOIRE" />
+      <node ID="49326" label="ARRESTATION IMMEDIATE" />
+      <node ID="49327" label="MANDAT D'ARRET PAR DEFAUT" />
+      <node ID="49328" label="INTERROGATOIRE RECAPITULATIF" />
+      <node ID="49329" label="COMMUNICATION DU DOSSIER" />
+      <node ID="49330" label="PRISE DE CORPS" />
+      <node ID="49331" label="JURIDICTION DE JUGEMENT" />
+      <node ID="49332" label="DEFENSE SOCIALE" />
+      <node ID="49399" label="DIVERS" />
+    </node>
+    <node ID="509" label="DEVIN" />
+    <node ID="133" label="DIFFAMATION" />
+    <node ID="106" label="DIPLOMATES ET CONSULS" />
+    <node ID="369" label="DISCIPLINE JUDICIAIRE" />
+    <node ID="385" label="DIVAGATION D'ANIMAL MALFAISANT" />
+    <node ID="131" label="DIVORCE ET SEPARATION DE CORPS">
+      <node ID="13100" label="GENERALITES" />
+      <node ID="13101" label="CAUSES" />
+      <node ID="13102" label="PROCEDURE EN DIVORCE">
+        <node ID="1310200" label="Généralités" />
+        <node ID="1310201" label="Divorce pour cause déterminée" />
+        <node ID="1310202" label="Divorce par consentement mutuel" />
+        <node ID="1310203" label="Séparation de fait (d'une certaine durée)" />
+        <node ID="1310204" label="Mesures provisoires" />
+        <node ID="1310299" label="Divers" />
+      </node>
+      <node ID="13103" label="EFFETS DU DIVORCE QUANT AUX PERSONNES">
+        <node ID="1310300" label="Généralités" />
+        <node ID="1310301" label="Epoux" />
+        <node ID="1310302" label="Enfants" />
+        <node ID="1310399" label="Divers" />
+      </node>
+      <node ID="13104" label="EFFETS DU DIVORCE QUANT AUX BIENS" />
+      <node ID="13105" label="SEPARATION DE CORPS ET DE BIENS. REGLES PARTICULIERES" />
+      <node ID="13199" label="DIVERS" />
+    </node>
+    <node ID="407" label="DOCUMENTS SOCIAUX" />
+    <node ID="322" label="DOMAINE PUBLIC" />
+    <node ID="532" label="DOMICILE" />
+    <node ID="317" label="DOMMAGES DE GUERRE" />
+    <node ID="395" label="DONATIONS ET TESTAMENTS" />
+    <node ID="122" label="DOUANES ET ACCISES" />
+    <node ID="093" label="DROITS CIVILS. DROITS POLITIQUES" />
+    <node ID="038" label="DROITS D'AUTEUR" />
+    <node ID="364" label="DROITS DE L'HOMME">
+      <node ID="36400" label="GENERALITES" />
+      <node ID="36401" label="CONVENTION DE SAUVEGARDE DES DROITS DE L'HOMME ET DES LIBERTES FONDAMENTALES">
+        <node ID="3640100" label="Généralités" />
+        <node ID="3640102" label="Article 2" />
+        <node ID="3640103" label="Article 3" />
+        <node ID="3640104" label="Article 4" />
+        <node ID="3640105" label="Article 5">
+          <node ID="364010501" label="Article 5, § 1er" />
+          <node ID="364010502" label="Article 5, § 2" />
+          <node ID="364010503" label="Article 5, § 3" />
+          <node ID="364010504" label="Article 5, § 4" />
+          <node ID="364010505" label="Article 5, § 5" />
+        </node>
+        <node ID="3640106" label="Article 6">
+          <node ID="364010601" label="Article 6, § 1er" />
+          <node ID="364010602" label="Article 6, § 2" />
+          <node ID="364010603" label="Article 6, § 3" />
+        </node>
+        <node ID="3640107" label="Article 7" />
+        <node ID="3640108" label="Article 8" />
+        <node ID="3640109" label="Article 9" />
+        <node ID="3640110" label="Article 10" />
+        <node ID="3640111" label="Article 11" />
+        <node ID="3640112" label="Article 12" />
+        <node ID="3640113" label="Article 13" />
+        <node ID="3640114" label="Article 14" />
+        <node ID="3640115" label="Article 15" />
+        <node ID="3640116" label="Article 16" />
+        <node ID="3640117" label="Article 17" />
+        <node ID="3640118" label="Article 18" />
+        <node ID="3640199" label="Divers" />
+      </node>
+      <node ID="36402" label="PACTE INTERNATIONAL RELATIF AUX DROITS ECONOMIQUES SOCIAUX ET CULTURELS" />
+      <node ID="36403" label="PACTE INTERNATIONAL RELATIF AUX DROITS CIVILS ET POLITIQUES" />
+      <node ID="36499" label="DIVERS" />
+    </node>
+    <node ID="365" label="DROITS DE LA DEFENSE">
+      <node ID="36500" label="GENERALITES" />
+      <node ID="36502" label="MATIERE CIVILE" />
+      <node ID="36503" label="MATIERE REPRESSIVE" />
+      <node ID="36504" label="MATIERE FISCALE" />
+      <node ID="36505" label="MATIERE DE MILICE" />
+      <node ID="36506" label="MATIERE DISCIPLINAIRE" />
+      <node ID="36507" label="MATIERE ELECTORALE" />
+      <node ID="36599" label="DIVERS" />
+    </node>
+    <node ID="421" label="DROITS DE SUCCESSION" />
+  </node>
+  <node ID="4" label="E">
+    <node ID="514" label="EAUX" />
+    <node ID="139" label="ECONOMIE" />
+    <node ID="180" label="EFFETS DE COMMERCE" />
+    <node ID="158" label="EGALITE DES BELGES DEVANT LA LOI" />
+    <node ID="540" label="ELECTIONS" />
+    <node ID="054" label="EMBARRAS DE LA VOIE PUBLIQUE" />
+    <node ID="138" label="EMPHYTEOSE (DROIT D')" />
+    <node ID="033" label="EMPLOI">
+      <node ID="03300" label="GENERALITES" />
+      <node ID="03301" label="PLACEMENT" />
+      <node ID="03302" label="MARCHE DE L'EMPLOI" />
+      <node ID="03303" label="FORMATION PROFESSIONNELLE" />
+      <node ID="03304" label="PREPENSION" />
+      <node ID="03305" label="INTERVENTIONS FINANCIERES" />
+      <node ID="03306" label="APPRENTISSAGE" />
+      <node ID="03307" label="FERMETURE D'ENTREPRISES" />
+      <node ID="03399" label="DIVERS" />
+    </node>
+    <node ID="460" label="EMPOISONNEMENT" />
+    <node ID="137" label="ENERGIE" />
+    <node ID="710" label="ENERGIE NUCLEAIRE" />
+    <node ID="711" label="ENFANT" />
+    <node ID="286" label="ENFANT NATUREL" />
+    <node ID="313" label="ENLEVEMENT D'ENFANT" />
+    <node ID="377" label="ENREGISTREMENT (DROIT D')" />
+    <node ID="478" label="ENRICHISSEMENT SANS CAUSE" />
+    <node ID="298" label="ENSEIGNEMENT" />
+    <node ID="466" label="ENTRAVE A LA CIRCULATION" />
+    <node ID="712" label="ENTREPRISE DE TRAVAUX" />
+    <node ID="267" label="ENVIRONNEMENT (DROIT DE L')" />
+    <node ID="549" label="EPARGNE" />
+    <node ID="329" label="ESCROQUERIE" />
+    <node ID="323" label="ETABLISSEMENT PUBLIC" />
+    <node ID="571" label="ETABLISSEMENTS DANGEREUX ET INSALUBRES" />
+    <node ID="416" label="ETAT" />
+    <node ID="095" label="ETAT CIVIL" />
+    <node ID="501" label="ETRANGERS" />
+    <node ID="258" label="EXCES DE POUVOIR" />
+    <node ID="713" label="EXCUSE (CAUSE D')" />
+    <node ID="440" label="EXEQUATUR" />
+    <node ID="701" label="EXPERT-COMPTABLE" />
+    <node ID="117" label="EXPERTISE" />
+    <node ID="144" label="EXPLOIT D'HUISSIER DE JUSTICE" />
+    <node ID="415" label="EXPLOSIFS" />
+    <node ID="439" label="EXPORTATION DE TITRES ET MONNAIES" />
+    <node ID="168" label="EXPROPRIATION FORCEE" />
+    <node ID="311" label="EXPROPRIATION POUR CAUSE D'UTILITE PUBLIQUE" />
+    <node ID="145" label="EXTERRITORIALITE" />
+    <node ID="016" label="EXTORSION" />
+    <node ID="437" label="EXTRADITION" />
+  </node>
+  <node ID="5" label="F">
+    <node ID="221" label="FABRIQUE D'EGLISE" />
+    <node ID="148" label="FAILLITE ET CONCORDATS">
+      <node ID="14800" label="GENERALITES" />
+      <node ID="14801" label="NOTIONS. CONDITIONS DE LA FAILLITE" />
+      <node ID="14802" label="COMPETENCE" />
+      <node ID="14803" label="PROCEDURE" />
+      <node ID="14804" label="EFFETS (PERSONNES, BIENS, OBLIGATIONS)" />
+      <node ID="14805" label="CREANCIERS PRIVILEGIES ET HYPOTHECAIRES" />
+      <node ID="14806" label="CONCORDATS" />
+      <node ID="14807" label="INFRACTIONS EN RELATION AVEC LA FAILLITE. INSOLVABILITE FRAUDULEUSE" />
+      <node ID="14899" label="DIVERS" />
+    </node>
+    <node ID="446" label="FAUX ET USAGE DE FAUX" />
+    <node ID="445" label="FAUX NOM" />
+    <node ID="264" label="FAUX SERMENT" />
+    <node ID="444" label="FAUX TEMOIGNAGE" />
+    <node ID="403" label="FERMETURE D'ENTREPRISE" />
+    <node ID="018" label="FILIATION" />
+    <node ID="078" label="FOI DUE AUX ACTES" />
+    <node ID="024" label="FONCTIONNAIRE">
+      <node ID="02400" label="GENERALITES" />
+      <node ID="02401" label="FONCTIONNAIRES NATIONAUX" />
+      <node ID="02402" label="FONCTIONNAIRES DES COMMUNAUTES ET DES REGIONS" />
+      <node ID="02403" label="FONCTIONNAIRES DES COMMUNES ET DES PROVINCES" />
+      <node ID="02499" label="DIVERS" />
+    </node>
+    <node ID="182" label="FONDS DE COMMERCE" />
+    <node ID="151" label="FONDS DE SECURITE D'EXISTENCE" />
+    <node ID="170" label="FRAIS ET DEPENS">
+      <node ID="17000" label="GENERALITES" />
+      <node ID="17002" label="MATIERE FISCALE">
+        <node ID="1700200" label="Généralités" />
+        <node ID="1700201" label="Procédure devant le juge du fond" />
+        <node ID="1700202" label="Procédure en cassation" />
+        <node ID="1700299" label="Divers" />
+      </node>
+      <node ID="17003" label="MATIERE CIVILE">
+        <node ID="1700300" label="Généralités" />
+        <node ID="1700301" label="Procédure devant le juge du fond" />
+        <node ID="1700302" label="Procédure en cassation" />
+        <node ID="1700303" label="Procédure en matière sociale (règles particulières)" />
+        <node ID="1700399" label="Divers" />
+      </node>
+      <node ID="17005" label="MATIERE REPRESSIVE">
+        <node ID="1700500" label="Généralités" />
+        <node ID="1700501" label="Procédure devant le juge du fond" />
+        <node ID="1700502" label="Procédure en cassation" />
+        <node ID="1700599" label="Divers" />
+      </node>
+      <node ID="17006" label="MATIERE DISCIPLINAIRE">
+        <node ID="1700600" label="Généralités" />
+        <node ID="1700601" label="Procédure devant le juge du fond" />
+        <node ID="1700602" label="Procédure en cassation" />
+        <node ID="1700699" label="Divers" />
+      </node>
+      <node ID="17007" label="MATIERE ELECTORALE">
+        <node ID="1700700" label="Généralités" />
+        <node ID="1700701" label="Procédure devant le juge du fond" />
+        <node ID="1700702" label="Procédure en cassation" />
+        <node ID="1700799" label="Divers" />
+      </node>
+      <node ID="17099" label="DIVERS" />
+    </node>
+    <node ID="574" label="FUNERAILLES ET SEPULTURES" />
+  </node>
+  <node ID="6" label="G">
+    <node ID="342" label="GAGE" />
+    <node ID="715" label="GAZ" />
+    <node ID="534" label="GESTION D'AFFAIRES" />
+    <node ID="162" label="GRACE" />
+    <node ID="177" label="GREFFE. GREFFIER" />
+    <node ID="524" label="GREVE ET LOCK-OUT" />
+    <node ID="150" label="GRIVELERIE" />
+    <node ID="316" label="GUERRE" />
+  </node>
+  <node ID="7" label="H">
+    <node ID="553" label="HABITATION" />
+    <node ID="273" label="HANDICAPES" />
+    <node ID="306" label="HOMICIDE INVOLONTAIRE" />
+    <node ID="332" label="HOMICIDE VOLONTAIRE" />
+    <node ID="194" label="HOTELIER" />
+    <node ID="169" label="HUISSIER DE JUSTICE" />
+    <node ID="203" label="HYPOTHEQUE" />
+  </node>
+  <node ID="8" label="I">
+    <node ID="309" label="IMMEUBLE ET MEUBLE" />
+    <node ID="210" label="IMMIXTION DANS LES FONCTIONS PUBLIQUES" />
+    <node ID="559" label="IMMUNITE" />
+    <node ID="344" label="IMMUNITE PARLEMENTAIRE" />
+    <node ID="048" label="IMPOT" />
+    <node ID="717" label="IMPOT SUR LE CAPITAL" />
+    <node ID="718" label="IMPOTS COMMUNAUTAIRES ET REGIONAUX" />
+    <node ID="209" label="IMPOTS SUR LES REVENUS">
+      <node ID="20900" label="GENERALITES" />
+      <node ID="20902" label="IMPOT DES PERSONNES PHYSIQUES">
+        <node ID="2090200" label="Généralités" />
+        <node ID="2090201" label="Redevable. Habitant du royaume" />
+        <node ID="2090202" label="Revenus de biens immeubles" />
+        <node ID="2090203" label="Revenus de biens meubles" />
+        <node ID="2090204" label="Revenus professionnels">
+          <node ID="209020400" label="Généralités" />
+          <node ID="209020401" label="Bénéfices" />
+          <node ID="209020402" label="Rémunérations" />
+          <node ID="209020403" label="Profits des professions libérales et profits d'occupations lucratives" />
+          <node ID="209020404" label="Pensions" />
+          <node ID="209020405" label="Indemnités du chef de cessation d'activité professionnelle" />
+          <node ID="209020406" label="Plus-values" />
+          <node ID="209020407" label="Charges professionnelles" />
+          <node ID="209020408" label="Autres charges déductibles" />
+          <node ID="209020409" label="Pertes professionnelles" />
+          <node ID="209020410" label="Revenus provenant de sociétés de personnes ayant opté pour l'imposition à l'impôt des personnes physiques" />
+          <node ID="209020411" label="Revenus de remplacement" />
+          <node ID="209020499" label="Divers" />
+        </node>
+        <node ID="2090205" label="Revenus divers" />
+        <node ID="2090206" label="Charges déductibles du revenu global net imposable" />
+        <node ID="2090207" label="Imposition des revenus cumulés des époux et de leurs enfants" />
+        <node ID="2090208" label="Calcul de l'impôt">
+          <node ID="209020800" label="Généralités" />
+          <node ID="209020801" label="Système général du calcul de l'impôt" />
+          <node ID="209020802" label="Paiements anticipatifs" />
+          <node ID="209020803" label="Impositions distinctes" />
+          <node ID="209020804" label="Réduction pour charge de famille" />
+          <node ID="209020899" label="Divers" />
+        </node>
+        <node ID="2090299" label="Divers" />
+      </node>
+      <node ID="20903" label="IMPOT DES SOCIETES">
+        <node ID="2090300" label="Généralités" />
+        <node ID="2090302" label="Détermination du revenu global net imposable">
+          <node ID="209030200" label="Généralités" />
+          <node ID="209030201" label="Bénéfices" />
+          <node ID="209030202" label="Plus-values" />
+          <node ID="209030203" label="Charges professionnelles" />
+          <node ID="209030204" label="Pertes professionnelles" />
+          <node ID="209030205" label="Revenus définitivement taxés" />
+          <node ID="209030299" label="Divers" />
+        </node>
+        <node ID="2090303" label="Détermination du revenu net imposable dans le chef des sociétés de personnes soumises à l'impôt des sociétés" />
+        <node ID="2090304" label="Impositions distinctes">
+          <node ID="209030401" label="Achat des actions propres" />
+          <node ID="209030402" label="Plus-values" />
+          <node ID="209030403" label="Fusion. Scission. Absorption" />
+          <node ID="209030404" label="Partage de l'actif" />
+          <node ID="209030499" label="Divers" />
+        </node>
+      </node>
+      <node ID="20904" label="IMPOT DES PERSONNES MORALES" />
+      <node ID="20905" label="IMPOT DES NON-RESIDENTS" />
+      <node ID="20906" label="PRECOMPTES ET CREDIT D'IMPOTS">
+        <node ID="2090600" label="Généralités" />
+        <node ID="2090601" label="Précompte immobilier" />
+        <node ID="2090602" label="Précompte mobilier" />
+        <node ID="2090603" label="Précompte professionnel" />
+        <node ID="2090604" label="Imputation et restitution des précomptes" />
+        <node ID="2090605" label="Crédit d'impôt" />
+        <node ID="2090699" label="Divers" />
+      </node>
+      <node ID="20907" label="ETABLISSEMENT DE L'IMPOT">
+        <node ID="2090700" label="Généralités" />
+        <node ID="2090701" label="Délais" />
+        <node ID="2090702" label="Déclaration" />
+        <node ID="2090703" label="Cotisation et enrôlement" />
+        <node ID="2090704" label="Avertissement-extrait de rôle" />
+        <node ID="2090705" label="Rectification de la déclaration par l'administration" />
+        <node ID="2090706" label="Commission fiscale" />
+        <node ID="2090707" label="Taxation d'office ou forfaitaire" />
+        <node ID="2090708" label="Preuve">
+          <node ID="209070800" label="Généralités" />
+          <node ID="209070801" label="Ecrits" />
+          <node ID="209070802" label="Présomptions" />
+          <node ID="209070803" label="Signes et indices d'aisance" />
+          <node ID="209070804" label="Comparaison avec des redevables similaires" />
+          <node ID="209070899" label="Divers" />
+        </node>
+        <node ID="2090709" label="Sanctions. Accroissement d'impôt. Amendes administratives. Peines" />
+        <node ID="2090710" label="Réclamations" />
+        <node ID="2090711" label="Décision du directeur" />
+        <node ID="2090712" label="Dégrèvement" />
+        <node ID="2090799" label="Divers" />
+      </node>
+      <node ID="20908" label="RECOURS DEVANT LA COUR D'APPEL" />
+      <node ID="20909" label="POURVOI EN CASSATION" />
+      <node ID="20910" label="DROITS, EXECUTION ET PRIVILEGES DU TRESOR PUBLIC" />
+      <node ID="20911" label="REVENU CADASTRAL" />
+      <node ID="20912" label="CONVENTIONS INTERNATIONALES" />
+      <node ID="20913" label="REGIME ANTERIEUR AU CODE DES IMPOTS SUR LES REVENUS" />
+      <node ID="20999" label="DIVERS" />
+    </node>
+    <node ID="086" label="INCENDIE" />
+    <node ID="310" label="INDIVISIBILITE (AVEU)" />
+    <node ID="719" label="INDIVISIBILITE (LITIGE)" />
+    <node ID="295" label="INDIVISIBILITE (OBLIGATIONS)" />
+    <node ID="315" label="INDIVISION" />
+    <node ID="276" label="INFRACTION">
+      <node ID="27600" label="GENERALITES. NOTION. ELEMENT MATERIEL. ELEMENT MORAL. UNITE D'INTENTION" />
+      <node ID="27602" label="ESPECES">
+        <node ID="2760200" label="Généralités" />
+        <node ID="2760201" label="Infraction instantanée. Infraction continuée. Infraction continue" />
+        <node ID="2760202" label="Délit d'habitude" />
+        <node ID="2760299" label="Divers" />
+      </node>
+      <node ID="27603" label="IMPUTABILITE">
+        <node ID="2760300" label="Généralités" />
+        <node ID="2760301" label="Personnes physiques" />
+        <node ID="2760302" label="Personnes morales" />
+        <node ID="2760399" label="Divers" />
+      </node>
+      <node ID="27604" label="INFRACTION COMMISE A L'ETRANGER" />
+      <node ID="27605" label="JUSTIFICATION ET EXCUSE">
+        <node ID="2760500" label="Généralités" />
+        <node ID="2760501" label="Justification" />
+        <node ID="2760502" label="Excuse" />
+        <node ID="2760599" label="Divers" />
+      </node>
+      <node ID="27606" label="CIRCONSTANCES AGGRAVANTES" />
+      <node ID="27607" label="TENTATIVE" />
+      <node ID="27608" label="PARTICIPATION" />
+      <node ID="27699" label="DIVERS" />
+    </node>
+    <node ID="053" label="INJURE ET OUTRAGE" />
+    <node ID="073" label="INSCRIPTION DE FAUX" />
+    <node ID="044" label="INSOLVABILITE FRAUDULEUSE" />
+    <node ID="299" label="INSTRUCTION EN MATIERE REPRESSIVE" />
+    <node ID="397" label="INSTRUCTION OBLIGATOIRE" />
+    <node ID="294" label="INTERDICTION ET CONSEIL JUDICIAIRE" />
+    <node ID="461" label="INTERETS">
+      <node ID="46100" label="GENERALITES" />
+      <node ID="46101" label="INTERETS JUDICIAIRES" />
+      <node ID="46102" label="INTERETS MORATOIRES" />
+      <node ID="46103" label="INTERETS COMPENSATOIRES" />
+      <node ID="46199" label="DIVERS" />
+    </node>
+    <node ID="720" label="INTERRUPTION DE GROSSESSE" />
+    <node ID="435" label="INTERVENTION" />
+    <node ID="721" label="INVESTISSEMENTS" />
+    <node ID="125" label="IVRESSE" />
+  </node>
+  <node ID="9" label="J">
+    <node ID="410" label="JEUX ET PARIS" />
+    <node ID="391" label="JONCTION DE CAUSES" />
+    <node ID="009" label="JOURNEE DE HUIT HEURES" />
+    <node ID="070" label="JOURS FERIES PAYES" />
+    <node ID="302" label="JUGE D'INSTRUCTION" />
+    <node ID="499" label="JUGE DE PAIX" />
+    <node ID="491" label="JUGEMENTS ET ARRETS">
+      <node ID="49100" label="GENERALITES" />
+      <node ID="49102" label="MATIERE FISCALE" />
+      <node ID="49103" label="MATIERE CIVILE">
+        <node ID="4910300" label="Généralités" />
+        <node ID="4910302" label="Procédure en matière sociale" />
+        <node ID="4910399" label="Divers" />
+      </node>
+      <node ID="49105" label="MATIERE REPRESSIVE">
+        <node ID="4910500" label="Généralités" />
+        <node ID="4910501" label="Action publique" />
+        <node ID="4910502" label="Action civile" />
+        <node ID="4910599" label="Divers" />
+      </node>
+      <node ID="49106" label="MATIERE DISCIPLINAIRE" />
+      <node ID="49107" label="MATIERE ELECTORALE" />
+      <node ID="49108" label="MATIERE DE MILICE" />
+      <node ID="49199" label="DIVERS" />
+    </node>
+    <node ID="136" label="JURIDICTION CONTENTIEUSE" />
+    <node ID="300" label="JURIDICTIONS D'INSTRUCTION" />
+  </node>
+  <node ID="11" label="L">
+    <node ID="422" label="LANGUES (EMPLOI DES)">
+      <node ID="42200" label="GENERALITES" />
+      <node ID="42201" label="MATIERE JUDICIAIRE (LOI DU 15 JUIN 1935)">
+        <node ID="4220101" label="En première instance">
+          <node ID="422010100" label="Généralités" />
+          <node ID="422010101" label="Matière civile" />
+          <node ID="422010102" label="Matière répressive" />
+          <node ID="422010103" label="Autres matières" />
+        </node>
+        <node ID="4220102" label="En appel">
+          <node ID="422010200" label="Généralités" />
+          <node ID="422010201" label="Matière civile" />
+          <node ID="422010202" label="Matière répressive" />
+          <node ID="422010203" label="Autres matières" />
+        </node>
+        <node ID="4220103" label="En cassation">
+          <node ID="422010300" label="Généralités" />
+          <node ID="422010301" label="Matière civile" />
+          <node ID="422010302" label="Matière répressive" />
+          <node ID="422010303" label="Autres matières" />
+        </node>
+        <node ID="4220104" label="Signification et exécution">
+          <node ID="422010400" label="Généralités" />
+          <node ID="422010401" label="Matière civile" />
+          <node ID="422010402" label="Matière répressive" />
+          <node ID="422010403" label="Autres matières" />
+        </node>
+        <node ID="4220105" label="Jugements et arrêts. Nullités">
+          <node ID="422010500" label="Généralités" />
+          <node ID="422010501" label="Matière civile" />
+          <node ID="422010502" label="Matière répressive" />
+          <node ID="422010503" label="Autres matières" />
+        </node>
+      </node>
+      <node ID="42202" label="MATIERE JUDICIAIRE NON REGLEE PAR LA LOI DU 15 JUIN 1935" />
+      <node ID="42203" label="MATIERE ADMINISTRATIVE" />
+      <node ID="42204" label="RELATIONS SOCIALES" />
+      <node ID="42205" label="ENSEIGNEMENT" />
+      <node ID="42299" label="DIVERS" />
+    </node>
+    <node ID="228" label="LAPIN (DEGATS)" />
+    <node ID="243" label="LEGALISATION" />
+    <node ID="566" label="LESIONS CORPORELLES" />
+    <node ID="088" label="LETTRE" />
+    <node ID="529" label="LETTRE DE CHANGE" />
+    <node ID="495" label="LIBERATION CONDITIONNELLE" />
+    <node ID="505" label="LIBERTE D'ASSOCIATION" />
+    <node ID="504" label="LIBERTE DE PENSEE" />
+    <node ID="502" label="LIBERTE DES CULTES" />
+    <node ID="503" label="LIBERTE DU COMMERCE ET DE L'INDUSTRIE" />
+    <node ID="003" label="LITISPENDANCE" />
+    <node ID="722" label="LOCK-OUT" />
+    <node ID="196" label="LOGEMENT" />
+    <node ID="500" label="LOI ETRANGERE" />
+    <node ID="527" label="LOIS. DECRETS. ORDONNANCES. ARRETES">
+      <node ID="52700" label="GENERALITES" />
+      <node ID="52702" label="INTERPRETATION" />
+      <node ID="52703" label="APPLICATION DANS LE TEMPS ET DANS L'ESPACE" />
+      <node ID="52704" label="LEGALITE DES ARRETES ET REGLEMENTS" />
+      <node ID="52705" label="EFFETS DES NORMES INTERNATIONALES" />
+      <node ID="52799" label="DIVERS" />
+    </node>
+    <node ID="252" label="LOTERIE" />
+    <node ID="198" label="LOUAGE D'INDUSTRIE" />
+    <node ID="199" label="LOUAGE DE CHOSES">
+      <node ID="19900" label="GENERALITES" />
+      <node ID="19902" label="BAIL A LOYER">
+        <node ID="1990200" label="Généralités" />
+        <node ID="1990201" label="Notion. Nature de la législation" />
+        <node ID="1990202" label="Obligations entre parties" />
+        <node ID="1990203" label="Sous-location et cession du bail" />
+        <node ID="1990204" label="Rapports avec les tiers" />
+        <node ID="1990205" label="Fin (congé. Prolongation. Etc)" />
+        <node ID="1990299" label="Divers" />
+      </node>
+      <node ID="19903" label="BAIL A FERME">
+        <node ID="1990300" label="Généralités" />
+        <node ID="1990301" label="Notion. Nature de la législation" />
+        <node ID="1990302" label="Obligations entre parties" />
+        <node ID="1990303" label="Sous-location et cession du bail" />
+        <node ID="1990304" label="Rapports avec les tiers" />
+        <node ID="1990305" label="Fin (congé. Prolongation. Réintégration. Etc)" />
+        <node ID="1990306" label="Droit de préemption" />
+        <node ID="1990399" label="Divers" />
+      </node>
+      <node ID="19904" label="BAIL COMMERCIAL">
+        <node ID="1990400" label="Généralités" />
+        <node ID="1990401" label="Notion. Nature de la législation" />
+        <node ID="1990402" label="Obligations entre parties" />
+        <node ID="1990403" label="Sous-location et cession du bail" />
+        <node ID="1990404" label="Rapports avec les tiers" />
+        <node ID="1990405" label="Fin (congé. Renouvellement. Etc)" />
+        <node ID="1990499" label="Divers" />
+      </node>
+      <node ID="19905" label="AUTRES CONTRATS DE LOCATION" />
+      <node ID="19999" label="DIVERS" />
+    </node>
+    <node ID="567" label="LOUAGE DE TRAVAIL" />
+  </node>
+  <node ID="12" label="M">
+    <node ID="250" label="MAISONS D'HEBERGEMENT" />
+    <node ID="233" label="MALADE MENTAL" />
+    <node ID="059" label="MALADIE PROFESSIONNELLE" />
+    <node ID="241" label="MANDAT" />
+    <node ID="823" label="MANDAT D'ARRET EUROPEEN" />
+    <node ID="338" label="MARCHES PUBLICS (TRAVAUX. FOURNITURES. SERVICES)" />
+    <node ID="200" label="MARIAGE" />
+    <node ID="146" label="MARQUES">
+      <node ID="14600" label="GENERALITES" />
+      <node ID="14601" label="MARQUE BENELUX" />
+      <node ID="14602" label="LOI DU 1ER AVRIL 1879" />
+      <node ID="14603" label="TRAITES INTERNATIONAUX" />
+      <node ID="14604" label="MARQUE COMMUNAUTAIRE" />
+      <node ID="14699" label="DIVERS" />
+    </node>
+    <node ID="723" label="MEDECIN" />
+    <node ID="556" label="MENACES" />
+    <node ID="384" label="MEUBLE" />
+    <node ID="121" label="MEURTRE" />
+    <node ID="119" label="MILICE">
+      <node ID="11900" label="GENERALITES" />
+      <node ID="11901" label="SURSIS ET DISPENSE DU SERVICE POUR CAUSE MORALE" />
+      <node ID="11902" label="EXEMPTION ET AJOURNEMENT POUR CAUSE PHYSIQUE" />
+      <node ID="11903" label="JURIDICTIONS DE MILICE">
+        <node ID="1190300" label="Généralités" />
+        <node ID="1190301" label="Composition. Compétence. Procédures" />
+        <node ID="1190302" label="Forme des décisions" />
+        <node ID="1190399" label="Divers" />
+      </node>
+      <node ID="11904" label="OBJECTION DE CONSCIENCE" />
+      <node ID="11999" label="DIVERS" />
+    </node>
+    <node ID="268" label="MILITAIRE" />
+    <node ID="266" label="MINES. MINIERES. CARRIERES" />
+    <node ID="324" label="MINISTERE PUBLIC" />
+    <node ID="272" label="MINORITE" />
+    <node ID="207" label="MISE EN DEMEURE" />
+    <node ID="260" label="MITOYENNETE" />
+    <node ID="278" label="MONNAIE ET BILLETS DE BANQUE" />
+    <node ID="277" label="MONUMENTS ET SITES (CONSERVATION DES)" />
+    <node ID="375" label="MOTIFS DES JUGEMENTS ET ARRETS">
+      <node ID="37500" label="GENERALITES" />
+      <node ID="37502" label="PAS DE CONCLUSIONS">
+        <node ID="3750200" label="Généralités" />
+        <node ID="3750202" label="Matière fiscale" />
+        <node ID="3750203" label="Matière civile (y compris les matières commerciale et sociale)" />
+        <node ID="3750204" label="Matière de milice" />
+        <node ID="3750205" label="Matière répressive (y compris les boissons spiritueuses et les douanes et accises)" />
+        <node ID="3750206" label="Matière disciplinaire" />
+        <node ID="3750207" label="Matière électorale" />
+        <node ID="3750299" label="Divers" />
+      </node>
+      <node ID="37503" label="EN CAS DE DEPOT DE CONCLUSIONS">
+        <node ID="3750300" label="Généralités" />
+        <node ID="3750302" label="Matière fiscale" />
+        <node ID="3750303" label="Matière civile (y compris les matières commerciale et sociale)" />
+        <node ID="3750304" label="Matière de milice" />
+        <node ID="3750305" label="Matière répressive (y compris les boissons spiritueuses et les douanes et accises)" />
+        <node ID="3750306" label="Matière disciplinaire" />
+        <node ID="3750307" label="Matière électorale" />
+        <node ID="3750399" label="Divers" />
+      </node>
+      <node ID="37599" label="DIVERS" />
+    </node>
+    <node ID="810" label="MOYEN DE CASSATION">
+      <node ID="81000" label="GENERALITES" />
+      <node ID="81002" label="MATIERE CIVILE">
+        <node ID="8100200" label="Généralités" />
+        <node ID="8100201" label="Intérêt" />
+        <node ID="8100202" label="Moyen manquant en fait" />
+        <node ID="8100203" label="Moyen nouveau" />
+        <node ID="8100204" label="Moyen imprécis" />
+        <node ID="8100205" label="Lien avec la décision attaquée" />
+        <node ID="8100206" label="Appréciation souveraine par le juge du fond" />
+        <node ID="8100207" label="Indications requises" />
+        <node ID="8100208" label="Pièces à joindre" />
+        <node ID="8100299" label="Divers" />
+      </node>
+      <node ID="81003" label="MATIERE REPRESSIVE">
+        <node ID="8100300" label="Généralités" />
+        <node ID="8100301" label="Intérêt" />
+        <node ID="8100302" label="Moyen manquant en fait" />
+        <node ID="8100303" label="Moyen nouveau" />
+        <node ID="8100304" label="Moyen imprécis" />
+        <node ID="8100305" label="Lien avec la décision attaquée" />
+        <node ID="8100306" label="Appréciation souveraine par le juge du fond" />
+        <node ID="8100307" label="Indications requises" />
+        <node ID="8100308" label="Pièces à joindre" />
+        <node ID="8100309" label="Moyen d'office" />
+        <node ID="8100399" label="Divers" />
+      </node>
+      <node ID="81004" label="MATIERE FISCALE">
+        <node ID="8100400" label="Généralités" />
+        <node ID="8100401" label="Intérêt" />
+        <node ID="8100402" label="Moyen manquant en fait" />
+        <node ID="8100403" label="Moyen nouveau" />
+        <node ID="8100404" label="Moyen imprécis" />
+        <node ID="8100405" label="Lien avec la décision attaquée" />
+        <node ID="8100406" label="Appréciation souveraine par le juge du fond" />
+        <node ID="8100407" label="Indications requises" />
+        <node ID="8100408" label="Pièces à joindre" />
+        <node ID="8100409" label="Moyen d'office" />
+        <node ID="8100499" label="Divers" />
+      </node>
+      <node ID="81005" label="MATIERE DE MILICE">
+        <node ID="8100500" label="Généralités" />
+        <node ID="8100501" label="Intérêt" />
+        <node ID="8100502" label="Moyen manquant en fait" />
+        <node ID="8100503" label="Moyen nouveau" />
+        <node ID="8100504" label="Moyen imprécis" />
+        <node ID="8100505" label="Lien avec la décision attaquée" />
+        <node ID="8100506" label="Appréciation souveraine par le juge du fond" />
+        <node ID="8100507" label="Indications requises" />
+        <node ID="8100508" label="Pièces à joindre" />
+        <node ID="8100599" label="Divers" />
+      </node>
+      <node ID="81006" label="MATIERE DISCIPLINAIRE">
+        <node ID="8100600" label="Généralités" />
+        <node ID="8100601" label="Intérêt" />
+        <node ID="8100602" label="Moyen manquant en fait" />
+        <node ID="8100603" label="Moyen nouveau" />
+        <node ID="8100604" label="Moyen imprécis" />
+        <node ID="8100605" label="Lien avec la décision attaquée" />
+        <node ID="8100606" label="Appréciation souveraine par le juge du fond" />
+        <node ID="8100607" label="Indications requises" />
+        <node ID="8100608" label="Pièces à joindre" />
+        <node ID="8100699" label="Divers" />
+      </node>
+      <node ID="81007" label="MATIERE ELECTORALE">
+        <node ID="8100700" label="Généralités" />
+        <node ID="8100701" label="Intérêt" />
+        <node ID="8100702" label="Moyen manquant en fait" />
+        <node ID="8100703" label="Moyen nouveau" />
+        <node ID="8100704" label="Moyen imprécis" />
+        <node ID="8100705" label="Lien avec la décision attaquée" />
+        <node ID="8100706" label="Appréciation souveraine par le juge du fond" />
+        <node ID="8100707" label="Indications requises" />
+        <node ID="8100708" label="Pièces à joindre" />
+        <node ID="8100799" label="Divers" />
+      </node>
+      <node ID="81099" label="DIVERS" />
+    </node>
+    <node ID="068" label="MOYENS D'EXISTENCE (MINIMUM DE)" />
+  </node>
+  <node ID="13" label="N">
+    <node ID="285" label="NATIONALITE" />
+    <node ID="396" label="NAVIRE. NAVIGATION" />
+    <node ID="010" label="NOBLESSE" />
+    <node ID="279" label="NOM" />
+    <node ID="289" label="NOTAIRE" />
+    <node ID="399" label="NOVATION" />
+  </node>
+  <node ID="14" label="O">
+    <node ID="455" label="OBLIGATION" />
+    <node ID="477" label="OBLIGATION ALIMENTAIRE" />
+    <node ID="290" label="OFFICIER DE POLICE JUDICIAIRE" />
+    <node ID="001" label="OFFRES REELLES" />
+    <node ID="487" label="OPPOSITION" />
+    <node ID="724" label="ORDONNANCES" />
+    <node ID="326" label="ORDRE PUBLIC" />
+    <node ID="368" label="ORGANISATION JUDICIAIRE">
+      <node ID="36800" label="GENERALITES" />
+      <node ID="36802" label="MATIERE FISCALE" />
+      <node ID="36803" label="MATIERE CIVILE" />
+      <node ID="36804" label="MATIERE DE MILICE" />
+      <node ID="36805" label="MATIERE REPRESSIVE" />
+      <node ID="36806" label="MATIERE DISCIPLINAIRE" />
+      <node ID="36807" label="MATIERE ELECTORALE" />
+      <node ID="36899" label="DIVERS" />
+    </node>
+    <node ID="548" label="OTAGE (PRISE D')" />
+    <node ID="404" label="OUTRAGE" />
+    <node ID="327" label="OUTRAGE PUBLIC AUX MOEURS" />
+  </node>
+  <node ID="15" label="P">
+    <node ID="223" label="PARCOURS ET VAINE PATURE" />
+    <node ID="456" label="PARTAGE" />
+    <node ID="457" label="PARTAGE D'ASCENDANTS" />
+    <node ID="113" label="PARTICIPATION" />
+    <node ID="091" label="PARTIE CIVILE" />
+    <node ID="096" label="PARTIE CIVILEMENT RESPONSABLE" />
+    <node ID="337" label="PASSAGE SUR UN CHEMIN PRIVE" />
+    <node ID="378" label="PASSEPORT" />
+    <node ID="071" label="PAYEMENT" />
+    <node ID="488" label="PECHE">
+      <node ID="48800" label="GENERALITES" />
+      <node ID="48801" label="PECHE FLUVIALE" />
+      <node ID="48802" label="PECHE MARITIME" />
+      <node ID="48899" label="DIVERS" />
+    </node>
+    <node ID="383" label="PECHE FLUVIALE" />
+    <node ID="419" label="PEINE">
+      <node ID="41900" label="GENERALITES. PEINES ET MESURES. LEGALITE" />
+      <node ID="41902" label="PEINES PRIVATIVES DE LIBERTE" />
+      <node ID="41903" label="AMENDE ET DECIMES ADDITIONNELS" />
+      <node ID="41904" label="EMPRISONNEMENT SUBSIDIAIRE" />
+      <node ID="41905" label="AUTRES PEINES" />
+      <node ID="41906" label="PEINE LA PLUS FORTE" />
+      <node ID="41907" label="CONCOURS">
+        <node ID="4190700" label="Généralités" />
+        <node ID="4190701" label="Concours matériel" />
+        <node ID="4190702" label="Concours idéal" />
+        <node ID="4190703" label="Jugement distinct" />
+        <node ID="4190799" label="Divers" />
+      </node>
+      <node ID="41908" label="CIRCONSTANCES ATTENUANTES. CAUSES D'EXCUSE" />
+      <node ID="41909" label="CIRCONSTANCES AGGRAVANTES" />
+      <node ID="41999" label="DIVERS" />
+    </node>
+    <node ID="387" label="PENSION">
+      <node ID="38700" label="GENERALITES" />
+      <node ID="38701" label="TRAVAILLEURS SALARIES" />
+      <node ID="38702" label="TRAVAILLEURS INDEPENDANTS" />
+      <node ID="38703" label="ASSURES LIBRES" />
+      <node ID="38704" label="REVENU GARANTI AUX PERSONNES AGEES" />
+      <node ID="38705" label="PENSION D'INVALIDITE DES OUVRIERS MINEURS" />
+      <node ID="38706" label="PENSION CIVILE" />
+      <node ID="38707" label="PENSION MILITAIRE" />
+      <node ID="38708" label="PENSION DE REPARATION" />
+      <node ID="38709" label="PENSION DE DEDOMMAGEMENT" />
+      <node ID="38799" label="DIVERS" />
+    </node>
+    <node ID="436" label="PENSION ALIMENTAIRE" />
+    <node ID="092" label="PENSION CIVILE" />
+    <node ID="214" label="PENSION D'INVALIDITE DES OUVRIERS MINEURS" />
+    <node ID="462" label="PENSION DE REPARATION ET PENSION DE DEDOMMAGEMENT" />
+    <node ID="746" label="PENSION DE RETRAITE ET DE SURVIE" />
+    <node ID="270" label="PENSION MILITAIRE" />
+    <node ID="480" label="PEREMPTION" />
+    <node ID="372" label="PERSONNALITE CIVILE" />
+    <node ID="518" label="PESEURS. MESUREURS. JAUGEURS" />
+    <node ID="225" label="PETITE PROPRIETE TERRIENNE" />
+    <node ID="224" label="PETITS HERITAGES" />
+    <node ID="725" label="PHARMACIEN" />
+    <node ID="128" label="PIGEONS" />
+    <node ID="261" label="POIDS ET MESURES" />
+    <node ID="347" label="POLDERS ET WATERINGUES" />
+    <node ID="726" label="POLICE" />
+    <node ID="349" label="POLICE DES DENREES ALIMENTAIRES" />
+    <node ID="348" label="POLICE DU COMMERCE" />
+    <node ID="166" label="POLICE JUDICIAIRE" />
+    <node ID="174" label="POLICE SANITAIRE">
+      <node ID="17400" label="GENERALITES" />
+      <node ID="17402" label="POLICE SANITAIRE DE L'HOMME" />
+      <node ID="17403" label="POLICE SANITAIRE DES ANIMAUX" />
+      <node ID="17499" label="DIVERS" />
+    </node>
+    <node ID="124" label="PORT D'ARME PROHIBEE" />
+    <node ID="123" label="PORT DE FAUX NOM" />
+    <node ID="079" label="POSSESSION" />
+    <node ID="352" label="POSTES" />
+    <node ID="820" label="POURVOI EN CASSATION">
+      <node ID="82000" label="GENERALITES - DES POURVOIS DANS L'INTERET DE LA LOI -" />
+      <node ID="82002" label="MATIERE CIVILE">
+        <node ID="8200200" label="Généralités" />
+        <node ID="8200201" label="Personnes ayant qualité pour se pourvoir ou contre lesquelles on peut ou on doit se pourvoir">
+          <node ID="820020100" label="Généralités" />
+          <node ID="820020101" label="Demandeurs et défendeurs" />
+          <node ID="820020102" label="Conséquences de l'irrecevabilité du pourvoi à l'égard de l'une des parties" />
+          <node ID="820020199" label="Divers" />
+        </node>
+        <node ID="8200202" label="Délais dans lesquels il faut se pourvoir ou signifier le pourvoi">
+          <node ID="820020200" label="Généralités" />
+          <node ID="820020201" label="Durée, point de départ et fin" />
+          <node ID="820020202" label="Pourvoi prématuré" />
+          <node ID="820020203" label="Décisions contre lesquelles on peut se pourvoir immédiatement" />
+          <node ID="820020299" label="Divers" />
+        </node>
+        <node ID="8200203" label="Formes">
+          <node ID="820020300" label="Généralités" />
+          <node ID="820020301" label="Forme du pourvoi et indications" />
+          <node ID="820020302" label="Forme et délai de signification et-ou de dépôt" />
+          <node ID="820020303" label="Forme et délai prévus pour le dépôt des mémoires et des pièces" />
+          <node ID="820020304" label="Pièces à joindre (au pourvoi ou au mémoire)" />
+          <node ID="820020305" label="Causes indivisibles" />
+          <node ID="820020399" label="Divers" />
+        </node>
+        <node ID="8200204" label="Décisions contre lesquelles on peut se pourvoir">
+          <node ID="820020400" label="Généralités" />
+          <node ID="820020401" label="Décisions contre lesquelles on ne peut pas se pourvoir en raison de leur nature" />
+          <node ID="820020402" label="Décisions en fait et décisions en droit" />
+          <node ID="820020403" label="Décisions ayant déjà fait l'objet d'un pourvoi" />
+          <node ID="820020404" label="Défaut d'intérêt ou défaut d'objet" />
+          <node ID="820020499" label="Divers" />
+        </node>
+        <node ID="8200205" label="Désistement" />
+        <node ID="8200206" label="Enregistrement et timbre" />
+        <node ID="8200299" label="Divers" />
+      </node>
+      <node ID="82003" label="MATIERE REPRESSIVE">
+        <node ID="8200300" label="Généralités" />
+        <node ID="8200301" label="Personnes ayant qualité pour se pourvoir ou contre lesquelles on peut ou on doit se pourvoir">
+          <node ID="820030100" label="Généralités" />
+          <node ID="820030101" label="Action publique">
+            <node ID="82003010100" label="Généralités" />
+            <node ID="82003010101" label="Prévenu et inculpé" />
+            <node ID="82003010102" label="Ministère public et partie poursuivante" />
+            <node ID="82003010103" label="Partie civilement responsable" />
+            <node ID="82003010104" label="Partie civile" />
+            <node ID="82003010105" label="Partie intervenante" />
+            <node ID="82003010106" label="Autres parties" />
+            <node ID="82003010199" label="Divers" />
+          </node>
+          <node ID="820030102" label="Action civile">
+            <node ID="82003010200" label="Généralités" />
+            <node ID="82003010201" label="Prévenu" />
+            <node ID="82003010202" label="Ministère public" />
+            <node ID="82003010203" label="Partie civilement responsable" />
+            <node ID="82003010204" label="Partie civile" />
+            <node ID="82003010205" label="Partie intervenante" />
+            <node ID="82003010206" label="Autres parties" />
+            <node ID="82003010299" label="Divers" />
+          </node>
+          <node ID="820030199" label="Divers" />
+        </node>
+        <node ID="8200302" label="Délais dans lesquels il faut se pourvoir ou signifier le pourvoi">
+          <node ID="820030200" label="Généralités" />
+          <node ID="820030201" label="Action publique">
+            <node ID="82003020100" label="Généralités" />
+            <node ID="82003020101" label="Durée, point de départ et fin" />
+            <node ID="82003020102" label="Pourvoi prématuré (pas de décision définitive)" />
+            <node ID="82003020103" label="Décision définitive" />
+            <node ID="82003020104" label="Décision non définitive, mais contre laquelle on peut se pourvoir immédiatement" />
+            <node ID="82003020105" label="Litige en matière de compétence" />
+            <node ID="82003020199" label="Divers" />
+          </node>
+          <node ID="820030202" label="Action civile">
+            <node ID="82003020200" label="Généralités" />
+            <node ID="82003020201" label="Durée, point de départ et fin" />
+            <node ID="82003020202" label="Pourvoi prématuré (pas de décision définitive)" />
+            <node ID="82003020203" label="Décision définitive" />
+            <node ID="82003020204" label="Décision non définitive, mais contre laquelle on peut se pourvoir immédiatement" />
+            <node ID="82003020205" label="Litige en matière de compétence" />
+            <node ID="82003020299" label="Divers" />
+          </node>
+          <node ID="820030299" label="Divers" />
+        </node>
+        <node ID="8200303" label="Formes">
+          <node ID="820030300" label="Généralités" />
+          <node ID="820030301" label="Forme du pourvoi en cassation et indications" />
+          <node ID="820030302" label="Forme et délai de signification et-ou de dépôt" />
+          <node ID="820030303" label="Forme et délai prévus pour le dépôt des mémoires et des pièces" />
+          <node ID="820030304" label="Pièces à joindre (au pourvoi ou au mémoire)" />
+          <node ID="820030305" label="Causes indivisibles" />
+          <node ID="820030399" label="Divers" />
+        </node>
+        <node ID="8200304" label="Décisions contre lesquelles on peut se pourvoir">
+          <node ID="820030400" label="Généralités" />
+          <node ID="820030401" label="Action publique">
+            <node ID="82003040100" label="Généralités" />
+            <node ID="82003040101" label="Décisions contre lesquelles on ne peut pas se pourvoir en raison de leur nature" />
+            <node ID="82003040102" label="Décisions en fait, décisions en droit" />
+            <node ID="82003040103" label="Décisions ayant déjà fait l'objet d'un pourvoi" />
+            <node ID="82003040104" label="Défaut d'intérêt. Défaut d'objet" />
+            <node ID="82003040199" label="Divers" />
+          </node>
+          <node ID="820030402" label="Action civile">
+            <node ID="82003040200" label="Généralités" />
+            <node ID="82003040202" label="Prévenu" />
+            <node ID="82003040203" label="Ministère public" />
+            <node ID="82003040204" label="Partie civile" />
+            <node ID="82003040205" label="Partie intervenante" />
+            <node ID="82003040206" label="Autres parties" />
+            <node ID="82003040299" label="Divers" />
+          </node>
+        </node>
+        <node ID="8200305" label="Désistement">
+          <node ID="820030500" label="Généralités" />
+          <node ID="820030501" label="Action publique" />
+          <node ID="820030502" label="Action civile" />
+          <node ID="820030599" label="Divers" />
+        </node>
+        <node ID="8200306" label="Enregistrement et timbre" />
+        <node ID="8200399" label="Divers" />
+      </node>
+      <node ID="82004" label="MATIERE FISCALE">
+        <node ID="8200400" label="Généralités" />
+        <node ID="8200401" label="Personnes ayant qualité pour se pourvoir ou contre lesquelles on peut ou on doit se pourvoir">
+          <node ID="820040100" label="Généralités" />
+          <node ID="820040101" label="Demandeurs et défendeurs" />
+          <node ID="820040102" label="Conséquences de l'irrecevabilité du pourvoi à l'égard d'une des parties" />
+          <node ID="820040199" label="Divers" />
+        </node>
+        <node ID="8200402" label="Délais dans lesquels il faut se pourvoir ou signifier le pourvoi">
+          <node ID="820040200" label="Généralités" />
+          <node ID="820040201" label="Durée, point de départ et fin" />
+          <node ID="820040202" label="Pourvoi prématuré" />
+          <node ID="820040203" label="Décisions contre lesquelles on peut se pourvoir immédiatement" />
+          <node ID="820040299" label="Divers" />
+        </node>
+        <node ID="8200403" label="Formes">
+          <node ID="820040300" label="Généralités" />
+          <node ID="820040301" label="Formes du pourvoi et indications" />
+          <node ID="820040302" label="Forme et délai de signification et-ou de dépôt" />
+          <node ID="820040303" label="Forme et délai prévus pour le dépôt des mémoires et pièces" />
+          <node ID="820040304" label="Pièces à joindre (au pourvoi ou au mémoire)" />
+          <node ID="820040305" label="Causes indivisibles" />
+          <node ID="820040399" label="Divers" />
+        </node>
+        <node ID="8200404" label="Décisions contre lesquelles on peut se pourvoir">
+          <node ID="820040400" label="Généralités" />
+          <node ID="820040401" label="Décisions contre lesquelles on ne peut se pourvoir en raison de leur nature" />
+          <node ID="820040402" label="Décisions en fait, décisions en droit" />
+          <node ID="820040403" label="Décisions ayant déjà fait l'objet d'un pourvoi" />
+          <node ID="820040404" label="Défaut d'intérêt ou défaut d'objet" />
+          <node ID="820040499" label="Divers" />
+        </node>
+        <node ID="8200405" label="Désistement" />
+        <node ID="8200406" label="Enregistrement et timbre" />
+        <node ID="8200499" label="Divers" />
+      </node>
+      <node ID="82005" label="MATIERE DE MILICE">
+        <node ID="8200500" label="Généralités" />
+        <node ID="8200501" label="Personnes ayant qualité pour se pourvoir ou contre lesquelles on peut ou on doit se pourvoir" />
+        <node ID="8200502" label="Délais dans lesquels il faut se pourvoir ou signifier le pourvoi" />
+        <node ID="8200503" label="Formes" />
+        <node ID="8200504" label="Décisions contre lesquelles on peut se pourvoir" />
+        <node ID="8200505" label="Désistement" />
+        <node ID="8200506" label="Enregistrement et timbre" />
+        <node ID="8200599" label="Divers" />
+      </node>
+      <node ID="82006" label="MATIERE DISCIPLINAIRE">
+        <node ID="8200600" label="Généralités" />
+        <node ID="8200601" label="Personnes ayant qualité pour se pourvoir ou contre lesquelles on peut ou on doit se pourvoir" />
+        <node ID="8200602" label="Délais dans lesquels il faut se pourvoir ou signifier le pourvoi" />
+        <node ID="8200603" label="Formes" />
+        <node ID="8200604" label="Décisions contre lesquelles on peut se pourvoir" />
+        <node ID="8200605" label="Désistement" />
+        <node ID="8200606" label="Enregistrement et timbre" />
+        <node ID="8200699" label="Divers" />
+      </node>
+      <node ID="82007" label="MATIERE ELECTORALE">
+        <node ID="8200700" label="Généralités" />
+        <node ID="8200701" label="Personnes ayant qualité pour se pourvoir ou contre lesquelles on peut ou on doit se pourvoir" />
+        <node ID="8200702" label="Délais dans lesquels il faut se pourvoir ou signifier le pourvoi" />
+        <node ID="8200703" label="Formes" />
+        <node ID="8200704" label="Décisions contre lesquelles on peut se pourvoir" />
+        <node ID="8200705" label="Désistement" />
+        <node ID="8200706" label="Enregistrement et timbre" />
+        <node ID="8200799" label="Divers" />
+      </node>
+      <node ID="82008" label="ARRETS DU CONSEIL D'ETAT" />
+      <node ID="82099" label="DIVERS" />
+    </node>
+    <node ID="441" label="POUVOIR EXECUTIF" />
+    <node ID="367" label="POUVOIR JUDICIAIRE" />
+    <node ID="526" label="POUVOIR LEGISLATIF" />
+    <node ID="727" label="POUVOIRS">
+      <node ID="72700" label="GENERALITES" />
+      <node ID="72702" label="POUVOIR LEGISLATIF" />
+      <node ID="72703" label="POUVOIR EXECUTIF" />
+      <node ID="72704" label="POUVOIR JUDICIAIRE" />
+      <node ID="72705" label="SEPARATION DES POUVOIRS" />
+      <node ID="72706" label="DELEGATION DE POUVOIRS" />
+      <node ID="72799" label="DIVERS" />
+    </node>
+    <node ID="728" label="PRATIQUES DU COMMERCE" />
+    <node ID="082" label="PRELEVEMENT SANGUIN" />
+    <node ID="729" label="PREPENSION" />
+    <node ID="464" label="PRESCRIPTION">
+      <node ID="46400" label="GENERALITES" />
+      <node ID="46402" label="MATIERE FISCALE">
+        <node ID="4640200" label="Généralités" />
+        <node ID="4640201" label="Délais (Nature. Durée. Point de départ. Fin)" />
+        <node ID="4640202" label="Suspension" />
+        <node ID="4640203" label="Interruption" />
+        <node ID="4640299" label="Divers" />
+      </node>
+      <node ID="46403" label="MATIERE CIVILE">
+        <node ID="4640300" label="Généralités" />
+        <node ID="4640301" label="Délais (Nature. Durée. Point de départ. Fin)" />
+        <node ID="4640302" label="Suspension" />
+        <node ID="4640303" label="Interruption" />
+        <node ID="4640399" label="Divers" />
+      </node>
+      <node ID="46404" label="MATIERE REPRESSIVE">
+        <node ID="4640400" label="Généralités" />
+        <node ID="4640401" label="Action publique">
+          <node ID="464040100" label="Généralités" />
+          <node ID="464040101" label="Délais" />
+          <node ID="464040102" label="Suspension" />
+          <node ID="464040103" label="Interruption" />
+          <node ID="464040104" label="Action civile intentée devant le juge répressif" />
+          <node ID="464040199" label="Divers" />
+        </node>
+        <node ID="4640402" label="Peine">
+          <node ID="464040200" label="Généralités" />
+          <node ID="464040201" label="Délais" />
+          <node ID="464040202" label="Suspension" />
+          <node ID="464040203" label="Interruption" />
+          <node ID="464040299" label="Divers" />
+        </node>
+        <node ID="4640499" label="Divers" />
+      </node>
+      <node ID="46405" label="MATIERE DE MILICE">
+        <node ID="4640500" label="Généralités" />
+        <node ID="4640501" label="Délais (nature. Durée. Point de départ. Fin)" />
+        <node ID="4640502" label="Suspension" />
+        <node ID="4640503" label="Interruption" />
+        <node ID="4640599" label="Divers" />
+      </node>
+      <node ID="46406" label="MATIERE DISCIPLINAIRE">
+        <node ID="4640600" label="Généralités" />
+        <node ID="4640601" label="Délais (nature. durée. Point de départ. Fin)" />
+        <node ID="4640602" label="Suspension" />
+        <node ID="4640603" label="Interruption" />
+        <node ID="4640699" label="Divers" />
+      </node>
+      <node ID="46407" label="MATIERE ELECTORALE">
+        <node ID="4640700" label="Généralités" />
+        <node ID="4640701" label="Délais (nature. Durée. Point de départ. Fin)" />
+        <node ID="4640702" label="Suspension" />
+        <node ID="4640703" label="Interruption" />
+        <node ID="4640799" label="Divers" />
+      </node>
+      <node ID="46499" label="DIVERS" />
+    </node>
+    <node ID="470" label="PRESOMPTIONS" />
+    <node ID="126" label="PRESSE" />
+    <node ID="354" label="PRESTATIONS D'INTERET PUBLIC" />
+    <node ID="173" label="PRESTATIONS FAMILIALES">
+      <node ID="17300" label="GENERALITES" />
+      <node ID="17301" label="TRAVAILLEURS SALARIES" />
+      <node ID="17302" label="TRAVAILLEURS INDEPENDANTS" />
+      <node ID="17303" label="PRESTATIONS FAMILIALES GARANTIES" />
+      <node ID="17399" label="DIVERS" />
+    </node>
+    <node ID="245" label="PRET" />
+    <node ID="077" label="PREUVE">
+      <node ID="07700" label="GENERALITES" />
+      <node ID="07702" label="MATIERE FISCALE">
+        <node ID="0770200" label="Généralités" />
+        <node ID="0770201" label="Charge de la preuve. Liberté d'appréciation" />
+        <node ID="0770202" label="Preuve littérale">
+          <node ID="077020200" label="Généralités" />
+          <node ID="077020201" label="Valeur probante" />
+          <node ID="077020202" label="Foi due aux actes" />
+          <node ID="077020299" label="Divers" />
+        </node>
+        <node ID="0770203" label="Preuve testimoniale" />
+        <node ID="0770204" label="Présomptions" />
+        <node ID="0770205" label="Aveu" />
+        <node ID="0770206" label="Serment" />
+        <node ID="0770207" label="Administration de la preuve" />
+        <node ID="0770299" label="Divers" />
+      </node>
+      <node ID="07703" label="MATIERE CIVILE">
+        <node ID="0770300" label="Généralités" />
+        <node ID="0770301" label="Charge de la preuve. Liberté d'appréciation" />
+        <node ID="0770302" label="Preuve littérale">
+          <node ID="077030200" label="Généralités" />
+          <node ID="077030201" label="Valeur probante" />
+          <node ID="077030202" label="Foi due aux actes" />
+          <node ID="077030299" label="Divers" />
+        </node>
+        <node ID="0770303" label="Preuve testimoniale" />
+        <node ID="0770304" label="Présomptions" />
+        <node ID="0770305" label="Aveu" />
+        <node ID="0770306" label="Serment" />
+        <node ID="0770307" label="Administration de la preuve" />
+        <node ID="0770399" label="Divers" />
+      </node>
+      <node ID="07704" label="MATIERE DE MILICE">
+        <node ID="0770400" label="Généralités" />
+        <node ID="0770401" label="Charge de la preuve. Liberté d'appréciation" />
+        <node ID="0770402" label="Preuve littérale">
+          <node ID="077040200" label="Généralités" />
+          <node ID="077040201" label="Valeur probante" />
+          <node ID="077040202" label="Foi due aux actes" />
+          <node ID="077040299" label="Divers" />
+        </node>
+        <node ID="0770403" label="Preuve testimoniale" />
+        <node ID="0770404" label="Présomptions" />
+        <node ID="0770405" label="Aveu" />
+        <node ID="0770406" label="Serment" />
+        <node ID="0770407" label="Administration de la preuve" />
+        <node ID="0770499" label="Divers" />
+      </node>
+      <node ID="07705" label="MATIERE REPRESSIVE">
+        <node ID="0770500" label="Généralités" />
+        <node ID="0770501" label="Charge de la preuve. Liberté d'appréciation" />
+        <node ID="0770502" label="Preuve littérale">
+          <node ID="077050200" label="Généralités" />
+          <node ID="077050201" label="Valeur probante" />
+          <node ID="077050202" label="Foi due aux actes" />
+          <node ID="077050299" label="Divers" />
+        </node>
+        <node ID="0770503" label="Preuve testimoniale" />
+        <node ID="0770504" label="Présomptions" />
+        <node ID="0770505" label="Aveu" />
+        <node ID="0770506" label="Serment" />
+        <node ID="0770507" label="Administration de la preuve" />
+        <node ID="0770599" label="Divers" />
+      </node>
+      <node ID="07706" label="MATIERE DISCIPLINAIRE">
+        <node ID="0770600" label="Généralités" />
+        <node ID="0770601" label="Charge de la preuve. Liberté d'appréciation" />
+        <node ID="0770602" label="Preuve littérale">
+          <node ID="077060200" label="Généralités" />
+          <node ID="077060201" label="Valeur probante" />
+          <node ID="077060202" label="Foi due aux actes" />
+          <node ID="077060299" label="Divers" />
+        </node>
+        <node ID="0770603" label="Preuve testimoniale" />
+        <node ID="0770604" label="Présomptions" />
+        <node ID="0770605" label="Aveu" />
+        <node ID="0770606" label="Serment" />
+        <node ID="0770607" label="Administration de la preuve" />
+        <node ID="0770699" label="Divers" />
+      </node>
+      <node ID="07707" label="MATIERE ELECTORALE">
+        <node ID="0770700" label="Généralités" />
+        <node ID="0770701" label="Charge de la preuve. Liberté d'appréciation" />
+        <node ID="0770702" label="Preuve littérale">
+          <node ID="077070200" label="Généralités" />
+          <node ID="077070201" label="Valeur probante" />
+          <node ID="077070202" label="Foi due aux actes" />
+          <node ID="077070299" label="Divers" />
+        </node>
+        <node ID="0770703" label="Preuve testimoniale" />
+        <node ID="0770704" label="Présomptions" />
+        <node ID="0770705" label="Aveu" />
+        <node ID="0770706" label="Serment" />
+        <node ID="0770707" label="Administration de la preuve" />
+        <node ID="0770799" label="Divers" />
+      </node>
+      <node ID="07799" label="DIVERS" />
+    </node>
+    <node ID="370" label="PRINCIPES GENERAUX DU DROIT" />
+    <node ID="463" label="PRISE A PARTIE" />
+    <node ID="355" label="PRISES MARITIMES" />
+    <node ID="730" label="PRIVILEGE DE JURIDICTION" />
+    <node ID="494" label="PRIVILEGES ET HYPOTHEQUES">
+      <node ID="49400" label="GENERALITES" />
+      <node ID="49402" label="PRIVILEGES GENERAUX" />
+      <node ID="49403" label="PRIVILEGES PARTICULIERS" />
+      <node ID="49404" label="HYPOTHEQUES" />
+      <node ID="49499" label="DIVERS" />
+    </node>
+    <node ID="356" label="PROBATION" />
+    <node ID="232" label="PROCEDURE GRATUITE" />
+    <node ID="408" label="PROMOTION SOCIALE" />
+    <node ID="135" label="PROPRIETE" />
+    <node ID="237" label="PROPRIETE TERRIENNE" />
+    <node ID="357" label="PROSTITUTION" />
+    <node ID="217" label="PROTECTION DE LA JEUNESSE" />
+    <node ID="029" label="PROTECTION DU TRAVAIL" />
+    <node ID="359" label="PROVINCE" />
+    <node ID="334" label="PUISSANCE PATERNELLE" />
+  </node>
+  <node ID="16" label="Q">
+    <node ID="303" label="QUASI-DELIT" />
+    <node ID="353" label="QUESTION PREJUDICIELLE" />
+  </node>
+  <node ID="17" label="R">
+    <node ID="552" label="RADIODIFFUSION ET TELEVISION" />
+    <node ID="515" label="REBELLION" />
+    <node ID="184" label="RECEL" />
+    <node ID="547" label="RECEL DE CRIMINELS" />
+    <node ID="490" label="RECENSEMENT" />
+    <node ID="185" label="RECIDIVE" />
+    <node ID="211" label="RECLAMATION D'ETAT" />
+    <node ID="447" label="RECONNAISSANCE DE L'IDENTITE D'UNE PERSONNE ANTERIEUREMENT CONDAMNEE" />
+    <node ID="525" label="RECRUTEMENT D'HOMMES AU PROFIT DE TROUPES ETRANGERES" />
+    <node ID="533" label="RECUSATION" />
+    <node ID="731" label="REDEVANCE" />
+    <node ID="231" label="REFERE" />
+    <node ID="413" label="REGIMES MATRIMONIAUX">
+      <node ID="41300" label="GENERALITES" />
+      <node ID="41302" label="REGIME PRIMAIRE (DROITS ET DEVOIRS RESPECTIFS DES EPOUX)" />
+      <node ID="41303" label="REGIME LEGAL" />
+      <node ID="41304" label="REGIMES CONVENTIONNELS" />
+      <node ID="41305" label="MODIFICATION DU REGIME MATRIMONIAL" />
+      <node ID="41306" label="SEPARATION DE BIENS" />
+      <node ID="41399" label="DIVERS" />
+    </node>
+    <node ID="181" label="REGISTRE DE COMMERCE" />
+    <node ID="075" label="REGISTRE DE LA POPULATION ET REGISTRE NATIONAL" />
+    <node ID="732" label="REGISTRE NATIONAL" />
+    <node ID="826" label="REGLEMENT COLLECTIF DE DETTES" />
+    <node ID="376" label="REGLEMENT DE JUGES">
+      <node ID="37600" label="GENERALITES" />
+      <node ID="37603" label="MATIERE CIVILE" />
+      <node ID="37605" label="MATIERE REPRESSIVE">
+        <node ID="3760500" label="Généralités" />
+        <node ID="3760502" label="Entre juridictions de jugement" />
+        <node ID="3760503" label="Entre juge d'instruction et juridiction d'instruction" />
+        <node ID="3760505" label="Entre juridictions d'instruction et juridictions de jugement">
+          <node ID="376050500" label="Généralités" />
+          <node ID="376050501" label="Nature de l'infraction" />
+          <node ID="376050502" label="Différentes infractions. Connexité" />
+          <node ID="376050503" label="Circonstances atténuantes" />
+          <node ID="376050504" label="Militaire" />
+          <node ID="376050505" label="Mineur" />
+          <node ID="376050506" label="Circonstances après renvoi" />
+          <node ID="376050599" label="Divers" />
+        </node>
+        <node ID="3760599" label="Divers" />
+      </node>
+      <node ID="37699" label="DIVERS" />
+    </node>
+    <node ID="032" label="REGLEMENT DE TRAVAIL" />
+    <node ID="187" label="REHABILITATION" />
+    <node ID="386" label="REMEMBREMENT DES BIENS RURAUX" />
+    <node ID="251" label="REMUNERATION">
+      <node ID="25100" label="GENERALITES" />
+      <node ID="25102" label="DROIT A LA REMUNERATION" />
+      <node ID="25103" label="PROTECTION" />
+      <node ID="25104" label="EGALITE" />
+      <node ID="25199" label="DIVERS" />
+    </node>
+    <node ID="020" label="RENONCIATION" />
+    <node ID="575" label="RENONCIATION A LA COMMUNAUTE" />
+    <node ID="248" label="RENTE VIAGERE" />
+    <node ID="482" label="RENVOI APRES CASSATION">
+      <node ID="48200" label="GENERALITES" />
+      <node ID="48202" label="MATIERE FISCALE" />
+      <node ID="48203" label="MATIERE CIVILE" />
+      <node ID="48204" label="MATIERE DE MILICE" />
+      <node ID="48205" label="MATIERE REPRESSIVE" />
+      <node ID="48206" label="MATIERE DISCIPLINAIRE" />
+      <node ID="48207" label="MATIERE ELECTORALE" />
+      <node ID="48299" label="DIVERS" />
+    </node>
+    <node ID="483" label="RENVOI D'UN TRIBUNAL A UN AUTRE">
+      <node ID="48300" label="GENERALITES" />
+      <node ID="48302" label="MATIERE FISCALE" />
+      <node ID="48303" label="MATIERE CIVILE" />
+      <node ID="48304" label="MATIERE DE MILICE" />
+      <node ID="48305" label="MATIERE REPRESSIVE" />
+      <node ID="48306" label="MATIERE DISCIPLINAIRE" />
+      <node ID="48307" label="MATIERE ELECTORALE" />
+      <node ID="48399" label="DIVERS" />
+    </node>
+    <node ID="824" label="REOUVERTURE DE LA PROCEDURE" />
+    <node ID="429" label="REPETITION DE L'INDU" />
+    <node ID="521" label="REPOS HEBDOMADAIRE" />
+    <node ID="186" label="REQUETE CIVILE" />
+    <node ID="028" label="REQUISITIONS" />
+    <node ID="090" label="REQUISITIONS CIVILES" />
+    <node ID="271" label="REQUISITIONS MILITAIRES" />
+    <node ID="008" label="RESPONSABILITE HORS CONTRAT">
+      <node ID="00800" label="GENERALITES" />
+      <node ID="00801" label="FAIT">
+        <node ID="0080100" label="Généralités" />
+        <node ID="0080101" label="Faute" />
+        <node ID="0080102" label="Négligence. Imprudence" />
+        <node ID="0080103" label="Dol" />
+        <node ID="0080104" label="Infraction" />
+        <node ID="0080199" label="Divers" />
+      </node>
+      <node ID="00802" label="CAUSE">
+        <node ID="0080200" label="Généralités" />
+        <node ID="0080201" label="Notion. Appréciation par le juge" />
+        <node ID="0080202" label="Cause (directe ou indirecte)" />
+        <node ID="0080203" label="Force majeure" />
+        <node ID="0080299" label="Divers" />
+      </node>
+      <node ID="00803" label="OBLIGATION DE REPARER">
+        <node ID="0080300" label="Généralités" />
+        <node ID="0080301" label="Auteur (fait propre)" />
+        <node ID="0080302" label="Victime coresponsable" />
+        <node ID="0080303" label="Pluralité d'auteurs. Solidarité" />
+        <node ID="0080304" label="Parents" />
+        <node ID="0080305" label="Maîtres. Préposés" />
+        <node ID="0080306" label="Instituteurs" />
+        <node ID="0080307" label="Malades mentaux" />
+        <node ID="0080308" label="Personnes morales" />
+        <node ID="0080309" label="Etat. Pouvoirs publics" />
+        <node ID="0080310" label="Choses" />
+        <node ID="0080311" label="Bâtiments" />
+        <node ID="0080312" label="Animaux" />
+        <node ID="0080399" label="Divers" />
+      </node>
+      <node ID="00804" label="DOMMAGE">
+        <node ID="0080400" label="Généralités" />
+        <node ID="0080401" label="Notion. Formes" />
+        <node ID="0080402" label="Pouvoir d'appréciation. Evaluation. Date à considérer" />
+        <node ID="0080403" label="Dommage matériel. Eléments et étendue" />
+        <node ID="0080404" label="Dommage moral. Eléments. Etendue" />
+        <node ID="0080405" label="Equité (malades mentaux)" />
+        <node ID="0080406" label="Intérêts" />
+        <node ID="0080499" label="Divers" />
+      </node>
+      <node ID="00805" label="CONVENTIONS. RECOURS">
+        <node ID="0080500" label="Généralités" />
+        <node ID="0080501" label="Assurances. Subrogation" />
+        <node ID="0080502" label="Clauses d'exclusions" />
+        <node ID="0080503" label="Action récursoire" />
+        <node ID="0080599" label="Divers" />
+      </node>
+      <node ID="00806" label="RESPONSABILITES PARTICULIERES">
+        <node ID="0080600" label="Généralités" />
+        <node ID="0080604" label="Troubles de voisinage" />
+        <node ID="0080699" label="Divers" />
+      </node>
+      <node ID="00807" label="CONCOURS DE RESPONSABILITES">
+        <node ID="0080700" label="Généralités" />
+        <node ID="0080701" label="Responsabilités simple et complexe" />
+        <node ID="0080702" label="Responsabilités contractuelle et extra-contractuelle" />
+        <node ID="0080799" label="Divers" />
+      </node>
+      <node ID="00899" label="DIVERS (DROIT INTERNATIONAL PRIVE. NATURE DE LA LOI. ETC)" />
+    </node>
+    <node ID="004" label="RESSORT" />
+    <node ID="427" label="RESTITUTION DE PIECES A CONVICTION" />
+    <node ID="428" label="REVENDICATION" />
+    <node ID="045" label="REVISEUR D'ENTREPRISE" />
+    <node ID="188" label="REVISION">
+      <node ID="18800" label="GENERALITES" />
+      <node ID="18801" label="REQUETE ET RENVOI POUR AVIS" />
+      <node ID="18802" label="AVIS ET RENVOI POUR REVISION" />
+      <node ID="18899" label="DIVERS" />
+    </node>
+    <node ID="382" label="RIVIERES" />
+    <node ID="519" label="ROULAGE">
+      <node ID="51901" label="LOI RELATIVE A LA POLICE DE LA CIRCULATION ROUTIERE">
+        <node ID="5190100" label="GENERALITES" />
+        <node ID="5190102" label="DISPOSITIONS LEGALES">
+          <node ID="519010201" label="Article 1" />
+          <node ID="519010202" label="Article 2">
+            <node ID="51901020220" label="Article 2bis" />
+          </node>
+          <node ID="519010203" label="Article 3" />
+          <node ID="519010204" label="Article 4" />
+          <node ID="519010205" label="Article 5" />
+          <node ID="519010206" label="Article 6" />
+          <node ID="519010207" label="Article 7" />
+          <node ID="519010208" label="Article 8" />
+          <node ID="519010209" label="Article 9" />
+          <node ID="519010210" label="Article 10" />
+          <node ID="519010211" label="Article 11" />
+          <node ID="519010212" label="Article 12" />
+          <node ID="519010213" label="Article 13" />
+          <node ID="519010214" label="Article 14" />
+          <node ID="519010215" label="Article 15" />
+          <node ID="519010216" label="Article 16" />
+          <node ID="519010217" label="Article 17" />
+          <node ID="519010218" label="Article 18" />
+          <node ID="519010219" label="Article 19" />
+          <node ID="519010220" label="Article 20" />
+          <node ID="519010221" label="Article 21" />
+          <node ID="519010222" label="Article 22" />
+          <node ID="519010223" label="Article 23" />
+          <node ID="519010224" label="Article 24" />
+          <node ID="519010225" label="Article 25" />
+          <node ID="519010226" label="Article 26" />
+          <node ID="519010227" label="Article 27" />
+          <node ID="519010228" label="Article 28" />
+          <node ID="519010229" label="Article 29" />
+          <node ID="519010230" label="Article 30" />
+          <node ID="519010231" label="Article 31" />
+          <node ID="519010232" label="Article 32" />
+          <node ID="519010233" label="Article 33">
+            <node ID="51901023301" label="Article 33, § 1er" />
+            <node ID="51901023302" label="Article 33, § 2" />
+          </node>
+          <node ID="519010234" label="Article 34" />
+          <node ID="519010235" label="Article 35" />
+          <node ID="519010236" label="Article 36" />
+          <node ID="519010237" label="Article 37" />
+          <node ID="519010238" label="Article 38" />
+          <node ID="519010239" label="Article 39" />
+          <node ID="519010240" label="Article 40" />
+          <node ID="519010241" label="Article 41" />
+          <node ID="519010242" label="Article 42" />
+          <node ID="519010243" label="Article 43" />
+          <node ID="519010244" label="Article 44" />
+          <node ID="519010245" label="Article 45" />
+          <node ID="519010246" label="Article 46" />
+          <node ID="519010247" label="Article 47" />
+          <node ID="519010248" label="Article 48" />
+          <node ID="519010249" label="Article 49" />
+          <node ID="519010250" label="Article 50" />
+          <node ID="519010251" label="Article 51" />
+          <node ID="519010252" label="Article 52" />
+          <node ID="519010253" label="Article 53" />
+          <node ID="519010254" label="Article 54" />
+          <node ID="519010255" label="Article 55" />
+          <node ID="519010256" label="Article 56" />
+          <node ID="519010257" label="Article 57" />
+          <node ID="519010258" label="Article 58" />
+          <node ID="519010259" label="Article 59" />
+          <node ID="519010260" label="Article 60" />
+          <node ID="519010261" label="Article 61" />
+          <node ID="519010262" label="Article 62" />
+          <node ID="519010263" label="Article 63" />
+          <node ID="519010264" label="Article 64" />
+          <node ID="519010265" label="Article 65" />
+          <node ID="519010266" label="Article 66" />
+          <node ID="519010267" label="Article 67">
+            <node ID="51901026720" label="Article 67bis" />
+            <node ID="51901026730" label="Article 67ter" />
+          </node>
+          <node ID="519010268" label="Article 68">
+            <node ID="51901026820" label="Article 68bis" />
+            <node ID="51901026830" label="Article 68ter" />
+            <node ID="51901026840" label="Article 68quater" />
+            <node ID="51901026850" label="Article 68quinquies" />
+          </node>
+          <node ID="519010269" label="Article 69">
+            <node ID="51901026920" label="Article 69bis" />
+          </node>
+          <node ID="519010270" label="Article 70" />
+        </node>
+      </node>
+      <node ID="51902" label="CODE DE LA ROUTE DU 01-12-1975">
+        <node ID="5190200" label="GENERALITES" />
+        <node ID="5190202" label="DISPOSITIONS REGLEMENTAIRES">
+          <node ID="519020201" label="Article 1er" />
+          <node ID="519020202" label="Article 2">
+            <node ID="51902020201" label="Article 2, § 1er" />
+            <node ID="51902020202" label="Article 2, § 2" />
+            <node ID="51902020203" label="Article 2, § 3" />
+            <node ID="51902020204" label="Article 2, § 4" />
+            <node ID="51902020205" label="Article 2, § 5" />
+            <node ID="51902020206" label="Article 2, § 6" />
+            <node ID="51902020207" label="Article 2, § 7" />
+            <node ID="51902020208" label="Article 2, § 8" />
+            <node ID="51902020209" label="Article 2, § 9" />
+            <node ID="51902020210" label="Article 2, § 10" />
+            <node ID="51902020211" label="Article 2, § 11" />
+            <node ID="51902020212" label="Article 2, § 12" />
+            <node ID="51902020213" label="Article 2, § 13" />
+            <node ID="51902020214" label="Article 2, § 14" />
+            <node ID="51902020215" label="Article 2, § 15" />
+            <node ID="51902020216" label="Article 2, § 16" />
+            <node ID="51902020217" label="Article 2, § 17" />
+            <node ID="51902020218" label="Article 2, § 18" />
+            <node ID="51902020219" label="Article 2, § 19" />
+            <node ID="51902020220" label="Article 2, § 20" />
+            <node ID="51902020221" label="Article 2, § 21" />
+            <node ID="51902020222" label="Article 2, § 22" />
+            <node ID="51902020223" label="Article 2, § 23" />
+            <node ID="51902020224" label="Article 2, § 24" />
+            <node ID="51902020225" label="Article 2, § 25" />
+            <node ID="51902020226" label="Article 2, § 26" />
+            <node ID="51902020227" label="Article 2, § 27" />
+            <node ID="51902020228" label="Article 2, § 28" />
+            <node ID="51902020229" label="Article 2, § 29" />
+            <node ID="51902020230" label="Article 2, § 30" />
+            <node ID="51902020231" label="Article 2, § 31" />
+            <node ID="51902020232" label="Article 2, § 32" />
+            <node ID="51902020233" label="Article 2, § 33" />
+            <node ID="51902020234" label="Article 2, § 34" />
+            <node ID="51902020235" label="Article 2, § 35" />
+            <node ID="51902020236" label="Article 2, § 36" />
+            <node ID="51902020237" label="Article 2, § 37" />
+            <node ID="51902020238" label="Article 2, § 38" />
+            <node ID="51902020239" label="Article 2, § 39" />
+            <node ID="51902020240" label="Article 2, § 40" />
+            <node ID="51902020241" label="Article 2, § 41" />
+            <node ID="51902020242" label="Article 2, § 42" />
+            <node ID="51902020243" label="Article 2, § 43" />
+            <node ID="51902020244" label="Article 2, § 44" />
+            <node ID="51902020245" label="Article 2, § 45" />
+            <node ID="51902020246" label="Article 2, § 46" />
+            <node ID="51902020247" label="Article 2, § 47" />
+            <node ID="51902020248" label="Article 2, § 48" />
+            <node ID="51902020249" label="Article 2, § 49" />
+          </node>
+          <node ID="519020203" label="Article 3" />
+          <node ID="519020204" label="Article 4" />
+          <node ID="519020205" label="Article 5" />
+          <node ID="519020206" label="Article 6" />
+          <node ID="519020207" label="Article 7" />
+          <node ID="519020208" label="Article 8" />
+          <node ID="519020209" label="Article 9" />
+          <node ID="519020210" label="Article 10" />
+          <node ID="519020211" label="Article 11" />
+          <node ID="519020212" label="Article 12">
+            <node ID="51902021201" label="Article 12, § 1er" />
+            <node ID="51902021202" label="Article 12, § 2" />
+            <node ID="51902021203" label="Article 12, § 3" />
+            <node ID="51902021204" label="Article 12, § 4" />
+            <node ID="51902021205" label="Article 12, § 5" />
+          </node>
+          <node ID="519020213" label="Article 13" />
+          <node ID="519020214" label="Article 14" />
+          <node ID="519020215" label="Article 15" />
+          <node ID="519020216" label="Article 16">
+            <node ID="51902021601" label="Article 16, § 1er" />
+            <node ID="51902021602" label="Article 16, § 2" />
+            <node ID="51902021603" label="Article 16, § 3" />
+            <node ID="51902021604" label="Article 16, § 4" />
+            <node ID="51902021605" label="Article 16, § 5" />
+            <node ID="51902021606" label="Article 16, § 6" />
+            <node ID="51902021607" label="Article 16, § 7" />
+            <node ID="51902021608" label="Article 16, § 8" />
+            <node ID="51902021609" label="Article 16, § 9" />
+          </node>
+          <node ID="519020217" label="Article 17">
+            <node ID="51902021701" label="Article 17, § 1er" />
+            <node ID="51902021702" label="Article 17, § 2" />
+            <node ID="51902021703" label="Article 17, § 3" />
+            <node ID="51902021704" label="Article 17, § 4" />
+            <node ID="51902021705" label="Article 17, § 5" />
+          </node>
+          <node ID="519020218" label="Article 18" />
+          <node ID="519020219" label="Article 19">
+            <node ID="51902021901" label="Article 19, § 1er" />
+            <node ID="51902021902" label="Article 19, § 2" />
+            <node ID="51902021903" label="Article 19, § 3" />
+            <node ID="51902021904" label="Article 19, § 4" />
+            <node ID="51902021905" label="Article 19, § 5" />
+            <node ID="51902021906" label="Article 19, § 6" />
+          </node>
+          <node ID="519020220" label="Article 20" />
+          <node ID="519020221" label="Article 21" />
+          <node ID="519020222" label="Article 22">
+            <node ID="51902022220" label="Article 22bis" />
+            <node ID="51902022230" label="Article 22ter" />
+            <node ID="51902022240" label="Article 22quater" />
+          </node>
+          <node ID="519020223" label="Article 23" />
+          <node ID="519020224" label="Article 24" />
+          <node ID="519020225" label="Article 25" />
+          <node ID="519020226" label="Article 26" />
+          <node ID="519020227" label="Article 27">
+            <node ID="51902022720" label="Article 27bis" />
+            <node ID="51902022730" label="Article 27ter" />
+          </node>
+          <node ID="519020228" label="Article 28" />
+          <node ID="519020229" label="Article 29" />
+          <node ID="519020230" label="Article 30">
+            <node ID="51902023020" label="Article 30bis" />
+          </node>
+          <node ID="519020231" label="Article 31" />
+          <node ID="519020232" label="Article 32">
+            <node ID="51902023220" label="Article 32bis" />
+          </node>
+          <node ID="519020233" label="Article 33" />
+          <node ID="519020235" label="Article 35" />
+          <node ID="519020236" label="Article 36" />
+          <node ID="519020237" label="Article 37" />
+          <node ID="519020238" label="Article 38" />
+          <node ID="519020239" label="Article 39" />
+          <node ID="519020240" label="Article 40">
+            <node ID="51902024001" label="Article 40, § 1er" />
+            <node ID="51902024002" label="Article 40, § 2" />
+            <node ID="51902024003" label="Article 40, § 3" />
+            <node ID="51902024004" label="Article 40, § 4" />
+            <node ID="51902024005" label="Article 40, § 5" />
+            <node ID="51902024006" label="Article 40, § 6" />
+            <node ID="51902024020" label="Article 40bis" />
+            <node ID="51902024030" label="Article 40ter" />
+          </node>
+          <node ID="519020241" label="Article 41" />
+          <node ID="519020242" label="Article 42" />
+          <node ID="519020243" label="Article 43">
+            <node ID="51902024320" label="Article 43bis" />
+          </node>
+          <node ID="519020244" label="Article 44" />
+          <node ID="519020245" label="Article 45" />
+          <node ID="519020246" label="Article 46" />
+          <node ID="519020247" label="Article 47" />
+          <node ID="519020248" label="Article 48">
+            <node ID="51902024820" label="Article 48bis" />
+          </node>
+          <node ID="519020249" label="Article 49" />
+          <node ID="519020250" label="Article 50" />
+          <node ID="519020251" label="Article 51" />
+          <node ID="519020252" label="Article 52" />
+          <node ID="519020253" label="Article 53" />
+          <node ID="519020254" label="Article 54" />
+          <node ID="519020255" label="Article 55">
+            <node ID="51902025520" label="Article 55bis" />
+          </node>
+          <node ID="519020256" label="Article 56" />
+          <node ID="519020257" label="Article 57" />
+          <node ID="519020258" label="Article 58" />
+          <node ID="519020259" label="Article 59" />
+          <node ID="519020260" label="Article 60" />
+          <node ID="519020261" label="Article 61" />
+          <node ID="519020262" label="Article 62">
+            <node ID="51902026220" label="Article 62bis" />
+          </node>
+          <node ID="519020263" label="Article 63" />
+          <node ID="519020264" label="Article 64" />
+          <node ID="519020265" label="Article 65" />
+          <node ID="519020266" label="Article 66" />
+          <node ID="519020267" label="Article 67" />
+          <node ID="519020268" label="Article 68" />
+          <node ID="519020269" label="Article 69" />
+          <node ID="519020270" label="Article 70" />
+          <node ID="519020271" label="Article 71" />
+          <node ID="519020272" label="Article 72" />
+          <node ID="519020273" label="Article 73" />
+          <node ID="519020274" label="Article 74" />
+          <node ID="519020275" label="Article 75" />
+          <node ID="519020276" label="Article 76" />
+          <node ID="519020277" label="Article 77" />
+          <node ID="519020278" label="Article 78" />
+          <node ID="519020279" label="Article 79" />
+          <node ID="519020280" label="Article 80" />
+          <node ID="519020281" label="Article 81" />
+          <node ID="519020282" label="Article 82" />
+          <node ID="519020283" label="Article 83" />
+          <node ID="519020284" label="Article 84" />
+          <node ID="519020285" label="Article 85" />
+          <node ID="519020286" label="Article 86" />
+          <node ID="519020287" label="Article 87" />
+        </node>
+      </node>
+      <node ID="51903" label="CODE DE LA ROUTE DU 14-03-1968" />
+      <node ID="51904" label="IMMATRICULATION DES VEHICULES" />
+      <node ID="51999" label="DIVERS" />
+    </node>
+    <node ID="042" label="RUPTURE DE BAN D'EXPULSION" />
+  </node>
+  <node ID="18" label="S">
+    <node ID="388" label="SACCHARINE" />
+    <node ID="065" label="SAISIE">
+      <node ID="06500" label="GENERALITES" />
+      <node ID="06502" label="SAISIE CONSERVATOIRE" />
+      <node ID="06503" label="SAISIE-EXECUTION" />
+      <node ID="06599" label="DIVERS" />
+    </node>
+    <node ID="066" label="SAISIE IMMOBILIERE" />
+    <node ID="114" label="SAISIE-ARRET" />
+    <node ID="147" label="SECRET DE FABRIQUE" />
+    <node ID="087" label="SECRET DES LETTRES" />
+    <node ID="056" label="SECRET PROFESSIONNEL" />
+    <node ID="409" label="SECURITE SOCIALE">
+      <node ID="40900" label="GENERALITES" />
+      <node ID="40901" label="TRAVAILLEURS SALARIES" />
+      <node ID="40902" label="OUVRIERS MINEURS" />
+      <node ID="40903" label="MARINS" />
+      <node ID="40904" label="INDEPENDANTS" />
+      <node ID="40905" label="SECURITE SOCIALE D'OUTRE-MER" />
+      <node ID="40999" label="DIVERS" />
+    </node>
+    <node ID="392" label="SEPARATION DE BIENS" />
+    <node ID="394" label="SEPARATION DE CORPS" />
+    <node ID="393" label="SEPARATION DES POUVOIRS" />
+    <node ID="400" label="SEQUESTRE" />
+    <node ID="132" label="SERMENT" />
+    <node ID="321" label="SERVICE PUBLIC" />
+    <node ID="320" label="SERVICE PUBLIC D'AUTOBUS ET D'AUTOCARS" />
+    <node ID="141" label="SERVITUDE" />
+    <node ID="072" label="SIGNIFICATIONS ET NOTIFICATIONS">
+      <node ID="07200" label="GENERALITES" />
+      <node ID="07202" label="EXPLOIT" />
+      <node ID="07203" label="PLI JUDICIAIRE" />
+      <node ID="07204" label="ETRANGER" />
+      <node ID="07299" label="DIVERS" />
+    </node>
+    <node ID="280" label="SOCIETE ANONYME" />
+    <node ID="108" label="SOCIETE COOPERATIVE" />
+    <node ID="821" label="SOCIETE DE L'INFORMATION" />
+    <node ID="452" label="SOCIETE EN LIQUIDATION" />
+    <node ID="451" label="SOCIETE EN NOM COLLECTIF" />
+    <node ID="453" label="SOCIETES">
+      <node ID="45300" label="GENERALITES. REGLES COMMUNES" />
+      <node ID="45302" label="SOCIETES COMMERCIALES">
+        <node ID="4530200" label="Généralités" />
+        <node ID="4530201" label="Sociétés en nom collectif" />
+        <node ID="4530202" label="Sociétés anonymes" />
+        <node ID="4530203" label="Sociétés privées à responsabilité limitée" />
+        <node ID="4530204" label="Sociétés en commandite" />
+        <node ID="4530205" label="Sociétés coopératives" />
+        <node ID="4530206" label="Société d'une personne" />
+        <node ID="4530299" label="Divers" />
+      </node>
+      <node ID="45303" label="SOCIETES CIVILES (REGLES PARTICULIERES)" />
+      <node ID="45304" label="SOCIETES AGRICOLES" />
+      <node ID="45305" label="SOCIETES DE DROIT ETRANGER" />
+      <node ID="45306" label="SOCIETES SANS PERSONNALITE JURIDIQUE" />
+      <node ID="45307" label="GROUPEMENT D'INTERET ECONOMIQUE" />
+      <node ID="45399" label="DIVERS" />
+    </node>
+    <node ID="193" label="SOLIDARITE" />
+    <node ID="284" label="SOUVERAINETE NATIONALE" />
+    <node ID="479" label="SPECTACLES" />
+    <node ID="733" label="SPORT" />
+    <node ID="406" label="STATUT SOCIAL DES INDEPENDANTS" />
+    <node ID="002" label="STUPEFIANTS" />
+    <node ID="206" label="SUBROGATION" />
+    <node ID="142" label="SUCCESSION" />
+    <node ID="331" label="SUPERFICIE (DROIT DE)" />
+    <node ID="734" label="SURETE DE L'ETAT" />
+    <node ID="735" label="SURSIS DE PAIEMENT" />
+    <node ID="330" label="SUSPENSION DU PRONONCE DE LA CONDAMNATION PENALE" />
+    <node ID="551" label="SUSPICION LEGITIME" />
+  </node>
+  <node ID="19" label="T">
+    <node ID="235" label="TAUDIS" />
+    <node ID="423" label="TAXE" />
+    <node ID="465" label="TAXE DE CIRCULATION SUR LES VEHICULES AUTOMOBILES" />
+    <node ID="517" label="TAXE DE VOIRIE" />
+    <node ID="052" label="TAXE SUR LA VALEUR AJOUTEE" />
+    <node ID="049" label="TAXE SUR LES APPAREILS AUTOMATIQUES DE DIVERTISSEMENT" />
+    <node ID="051" label="TAXE SUR LES DEBITS DE BOISSONS FERMENTEES" />
+    <node ID="050" label="TAXE SUR LES JEUX ET PARIS" />
+    <node ID="265" label="TAXES ASSIMILEES AU TIMBRE" />
+    <node ID="736" label="TAXES ASSIMILEES AUX IMPOTS SUR LES REVENUS" />
+    <node ID="160" label="TAXES COMMUNALES, PROVINCIALES ET LOCALES">
+      <node ID="16000" label="GENERALITES" />
+      <node ID="16002" label="PROCEDURE" />
+      <node ID="16003" label="TAXES COMMUNALES" />
+      <node ID="16004" label="TAXES PROVINCIALES" />
+      <node ID="16005" label="TAXES D'AGGLOMERATION" />
+      <node ID="16009" label="AUTRES TAXES LOCALES" />
+      <node ID="16099" label="DIVERS" />
+    </node>
+    <node ID="424" label="TAXIS" />
+    <node ID="425" label="TELEGRAPHES ET TELEPHONES" />
+    <node ID="172" label="TEMOIN" />
+    <node ID="431" label="TERRITOIRES ANNEXES" />
+    <node ID="430" label="TESTAMENT" />
+    <node ID="432" label="THEATRE" />
+    <node ID="115" label="TIERCE OPPOSITION" />
+    <node ID="537" label="TIMBRE (DROIT DE)" />
+    <node ID="738" label="TIMBRE (TAXES ASSIMILEES AU TIMBRE)" />
+    <node ID="134" label="TITRES" />
+    <node ID="739" label="TOURISME" />
+    <node ID="213" label="TRAITES ET ENGAGEMENTS INTERNATIONAUX" />
+    <node ID="433" label="TRAMWAYS" />
+    <node ID="111" label="TRANSACTION" />
+    <node ID="573" label="TRANSPORT">
+      <node ID="57300" label="GENERALITES" />
+      <node ID="57302" label="TRANSPORT DE PERSONNES" />
+      <node ID="57303" label="TRANSPORT DE BIENS">
+        <node ID="5730300" label="Généralités" />
+        <node ID="5730301" label="Transport par terre. Transport par route" />
+        <node ID="5730302" label="Transport par air" />
+        <node ID="5730303" label="Transport par chemin de fer" />
+        <node ID="5730304" label="Transport combiné" />
+        <node ID="5730305" label="Transport fluvial et maritime" />
+        <node ID="5730399" label="Divers" />
+      </node>
+      <node ID="57399" label="DIVERS" />
+    </node>
+    <node ID="740" label="TRANSPORT EN COMMUN" />
+    <node ID="535" label="TRANSPORT MARITIME" />
+    <node ID="254" label="TRANSPORT PAR AIR" />
+    <node ID="741" label="TRANSPORT PAR CHEMIN DE FER" />
+    <node ID="520" label="TRANSPORT SUR ROUTE PAR AUTOMOBILE" />
+    <node ID="027" label="TRAVAIL">
+      <node ID="02700" label="GENERALITES" />
+      <node ID="02702" label="DUREE DU TRAVAIL ET REPOS" />
+      <node ID="02703" label="FEMMES" />
+      <node ID="02704" label="JEUNES TRAVAILLEURS" />
+      <node ID="02705" label="PROTECTION DU TRAVAIL" />
+      <node ID="02706" label="REGLEMENTS PARTICULIERS (CONSTRUCTION. DIAMANT. PORTS. METIERS. NEGOCES)" />
+      <node ID="02707" label="DOCUMENTS SOCIAUX" />
+      <node ID="02708" label="TRAVAIL TEMPORAIRE" />
+      <node ID="02799" label="DIVERS" />
+    </node>
+    <node ID="742" label="TRAVAIL DES FEMMES ET DES ENFANTS" />
+    <node ID="328" label="TRAVAUX PUBLICS" />
+    <node ID="417" label="TRESOR PUBLIC" />
+    <node ID="363" label="TRIBUNAUX">
+      <node ID="36300" label="GENERALITES" />
+      <node ID="36302" label="MATIERE FISCALE" />
+      <node ID="36303" label="MATIERE CIVILE">
+        <node ID="3630300" label="Généralités" />
+        <node ID="3630302" label="Matière sociale (règles particulières)" />
+        <node ID="3630399" label="Divers" />
+      </node>
+      <node ID="36304" label="MATIERE DE MILICE" />
+      <node ID="36305" label="MATIERE REPRESSIVE">
+        <node ID="3630500" label="Généralités" />
+        <node ID="3630501" label="Action publique" />
+        <node ID="3630502" label="Action civile" />
+        <node ID="3630599" label="Divers" />
+      </node>
+      <node ID="36306" label="MATIERE DISCIPLINAIRE" />
+      <node ID="36307" label="MATIERE ELECTORALE" />
+      <node ID="36399" label="DIVERS" />
+    </node>
+    <node ID="434" label="TROLLEYBUS" />
+    <node ID="046" label="TROMPERIE SUR LA CHOSE VENDUE" />
+    <node ID="492" label="TUTELLE" />
+  </node>
+  <node ID="20" label="U">
+    <node ID="143" label="UNION EUROPEENNE">
+      <node ID="14300" label="GENERALITES" />
+      <node ID="14301" label="QUESTIONS PREJUDICIELLES" />
+      <node ID="14302" label="DROIT MATERIEL">
+        <node ID="1430200" label="Généralités" />
+        <node ID="1430201" label="Principes" />
+        <node ID="1430202" label="Fondements" />
+        <node ID="1430203" label="Politique" />
+        <node ID="1430204" label="Institutions" />
+        <node ID="1430299" label="Divers" />
+      </node>
+      <node ID="14399" label="DIVERS" />
+    </node>
+    <node ID="058" label="UNION PROFESSIONNELLE" />
+    <node ID="418" label="URBANISME">
+      <node ID="41800" label="GENERALITES" />
+      <node ID="41801" label="PERMIS DE LOTIR" />
+      <node ID="41802" label="PERMIS DE BATIR" />
+      <node ID="41803" label="EXPROPRIATION" />
+      <node ID="41804" label="SANCTIONS" />
+      <node ID="41805" label="REMISE EN ETAT DES LIEUX. PAIEMENT D'UNE PLUS-VALUE" />
+      <node ID="41806" label="AMENAGEMENT DU TERRITOIRE. PLAN D'AMENAGEMENT" />
+      <node ID="41899" label="DIVERS" />
+    </node>
+    <node ID="153" label="USAGE DE FAUX" />
+    <node ID="743" label="USAGE ET HABITATION" />
+    <node ID="508" label="USUFRUIT. USAGE ET HABITATION" />
+    <node ID="531" label="USURE" />
+    <node ID="005" label="USURPATION DE FONCTIONS, DE TITRES OU DE NOM" />
+  </node>
+  <node ID="21" label="V">
+    <node ID="215" label="VACANCES ANNUELLES" />
+    <node ID="238" label="VAGABONDAGE" />
+    <node ID="229" label="VENTE" />
+    <node ID="744" label="VETERINAIRE" />
+    <node ID="152" label="VICE DE LA CHOSE" />
+    <node ID="827" label="VIE PRIVEE (PROTECTION DE LA)" />
+    <node ID="467" label="VIOL" />
+    <node ID="176" label="VIOLATION DE SEPULTURE" />
+    <node ID="745" label="VIOLENCES LEGERES" />
+    <node ID="247" label="VOIES DE FAIT ET VIOLENCES LEGERES" />
+    <node ID="516" label="VOIRIE" />
+    <node ID="557" label="VOISINAGE (TROUBLES DE)" />
+    <node ID="118" label="VOL ET EXTORSION" />
+  </node>
+  <node ID="22" label="W">
+    <node ID="512" label="WATERINGUES" />
+  </node>
+</node>
