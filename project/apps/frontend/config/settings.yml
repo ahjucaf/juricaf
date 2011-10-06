@@ -26,7 +26,7 @@ test:
 all:
   .settings:
     # Form security secret (CSRF protection)
-    csrf_secret:            1b3b3cc1a504e3ee977badaac918293dd0d93946
+    csrf_secret:            <?php echo sha1(mt_rand()); ?>
 
     # Output escaping settings
     escaping_strategy:      false
@@ -34,3 +34,7 @@ all:
 
     # Enable the database manager
     use_database:           false
+  .actions:
+    error_404_module:       recherche
+    error_404_action:       page404
+
