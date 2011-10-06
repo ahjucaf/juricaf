@@ -18,9 +18,9 @@ class rechercheActions extends sfActions
       $search = preg_replace('/[\/\{\}\[\]\<\>]/', '', $search);
       $search = preg_replace("/\'/", '’', $search);
       $count = count_chars($search, 1);
-      
+
       if (isset($count[ord('"')]) && $count[ord('"')] % 2) {
-	$search = preg_replace ('/"/', '', $search);
+        $search = preg_replace ('/"/', '', $search);
       }
       $this->redirect('@recherche_resultats?query='.$search);
     }
@@ -48,9 +48,9 @@ class rechercheActions extends sfActions
       sort($this->facetsset);
       $this->facetslink = ','.implode(',', $this->facetsset);
       foreach ($this->facetsset as $facet) {
-	$f = explode(':', $facet);
-	//On ne doit pas retirer les _ des facettes donc on les replace par = pour les conserver
-	$solr_query.= ' '.preg_replace('/_/', '=', $f[0]).':'.$f[1];
+        $f = explode(':', $facet);
+        //On ne doit pas retirer les _ des facettes donc on les replace par = pour les conserver
+        $solr_query.= ' '.preg_replace('/_/', '=', $f[0]).':'.$f[1];
       }
     }
     $solr_query .= ' type:arret';
@@ -63,7 +63,7 @@ class rechercheActions extends sfActions
       $solr_query = ' '.preg_replace('/ order:chrono/', '', $solr_query);
       $param['sort'] = 'date_arret asc, id asc';
     }
-    
+
     if (!count($this->facetsset) && !preg_match('/[a-z0-9]/i', $this->query)) {
       return $this->redirect('@recherche');
     }
@@ -88,16 +88,18 @@ class rechercheActions extends sfActions
     $this->pager['last']  = ($pagenum != 1) ? $pagenum - 1 : 0;
     $this->pager['end']   = ($pagenum + 1 <= $lastpage) ? $lastpage : 0;
     $this->pager['next']  = ($pagenum + 1 <= $lastpage) ? $pagenum + 1 : 0;
-    
+
     $this->resultats = $res;
     $this->facets = array();
     if (isset($res->facet_counts))
       foreach($res->facet_counts->facet_fields as $k => $f) {
-	foreach ($f as $n => $v) {
-	  if ($v)
-	    $this->facets[$k][$n] = $v;
-	}
+        foreach ($f as $n => $v) {
+          if ($v)
+          $this->facets[$k][$n] = $v;
+        }
       }
   }
+
+  public function executePage404() { }
 
 }
