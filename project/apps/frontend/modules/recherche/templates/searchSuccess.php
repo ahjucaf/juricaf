@@ -168,7 +168,7 @@ include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction'
 </div>
 <?php
 foreach ($resultats->response->docs as $resultat) {
-  echo '<div class="resultat"><h3><a href="'.url_for('@arret?id='.$resultat->id).'"><img style="height: 10px;" src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</a></h3>';
+  echo '<div class="resultat"><h3><a href="'.url_for('@arret?id='.$resultat->id).'"><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</a></h3>';
   echo '<p>';
   if (isset($resultats->highlighting))
     echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});

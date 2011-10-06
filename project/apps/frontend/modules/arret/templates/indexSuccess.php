@@ -13,7 +13,6 @@ $natureConstit = array(
       "PDR" => "Élection présidentielle",
       "REF" => "Référendums",
       "ELEC" => "Divers élections : observations",
-      "ELECT" => "Divers élections : observations",
       "D" => "Déchéance de parlementaires",
       "I" => "Incompatibilité des parlementaires",
       "AR16" => "Article 16 de la Constitution (pouvoirs exceptionnels du Président de la République)",
@@ -211,7 +210,7 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
   if(isset($references['SOURCE'])) {
     foreach($references['SOURCE'] as $value) {
       if(isset($value['nature'], $value['date'], $value['titre'])) {
-        $titre = $value['nature'].' du '.$value['date'].' sur '.$value['titre'];
+        $titre = $value['nature'].' du '.$value['date'].' sur le '.$value['titre'];
       }
       else { $titre = $value['titre']; }
       if(isset($value['url'])) {
@@ -222,53 +221,56 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
   }
 }
 
-// ECLI //
-if (isset($document->ecli)) {
-  $creator = $document->juridiction;
-  if(isset($document->section)) { $creator .= ' '.$document->section; }
+// METADONNEES //
 
-  $citations = '';
+$creator = $document->juridiction;
+if(isset($document->section)) { $creator .= ' '.$document->section; }
 
-  if (!empty($citations_analyses)) { $citations .= $citations_analyses; }
-  if (!empty($citations_arret)) { $citations .= $citations_arret; }
-  if (!empty($sources)) { $citations .= $sources; }
+$citations = '';
 
-  //$sf_response->auto_discovery_link_tag(false, 'http://purl.org/dc/elements/1.1/', 'rel="schema.DC"');
-  //<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
-  //<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
+if (!empty($citations_analyses)) { $citations .= $citations_analyses; }
+if (!empty($citations_arret)) { $citations .= $citations_arret; }
+if (!empty($sources)) { $citations .= $sources; }
 
-  // Obligatoire
-  $sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
-  $sf_response->addMeta('DC.identifier', $sf_request->getUri(), false, false, false);
-  $sf_response->addMeta('DC.isVersionOf', $document->ecli, false, false, false);
-  $sf_response->addMeta('DC.creator', $creator, false, false, false);
-  $sf_response->addMeta('DC.coverage', $document->pays, false, false, false);
-  $sf_response->addMeta('DC.date', $document->date_arret, false, false, false);
-  $sf_response->addMeta('DC.language', 'FR', false, false, false);
-  $sf_response->addMeta('DC.publisher', 'AHJUCAF', false, false, false);
-  $sf_response->addMeta('DC.accessRights', 'public', false, false, false);
-  $sf_response->addMeta('DC.type', 'judicial decision', false, false, false);
+//$sf_response->auto_discovery_link_tag(false, 'http://purl.org/dc/elements/1.1/', 'rel="schema.DC"');
+//$sf_response->auto_discovery_link_tag(false, false, array('rel' => 'schema.DC', 'href' => 'http://purl.org/dc/elements/1.1/'));
+//$sf_response->auto_discovery_link_tag(false, false, array('rel' => 'schema.DCTERMS', 'href' => 'http://purl.org/dc/terms/'));
+//<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+//<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
 
-  // Facultatif
-  // $sf_response->addMeta('DC.title', 'Noms des parties', false, false, false);
-  if(isset($document->type_affaire)) {
-    $sf_response->addMeta('DC.subject', 'Affaire '.strtolower($document->type_affaire), false, false, false);
-  }
-  if(!empty($analyses)) {
-    $sf_response->addMeta('DC.abstract', "Analyses : \n".strip_tags(str_replace('</blockquote>', " \n", $analyses)), false, false, false);
-  }
-  if(!empty($keywords)) {
-    $sf_response->addMeta('DC.description', strip_tags(str_replace('</blockquote>', " ", $keywords)), false, false, false);
-  }
-  if(isset($contrib)) {
-    $sf_response->addMeta('DC.contributor', strip_tags(str_replace('<br />', " ;\n", $contributors)), false, false, false);
-  }
-  //$sf_response->addMeta('DC.issued', 'Date de publication', false, false, false);
-  if (!empty($citations)) {
-    $sf_response->addMeta('DC.references', strip_tags(str_replace('<br />', " ;\n", $citations)), false, false, false);
-  }
-  // $sf_response->addMeta('DC.isReplacedBy', 'En cas de renumérotation', false, false, false);
+// Obligatoire pour ECLI
+$sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
+$sf_response->addMeta('DC.identifier', $sf_request->getUri(), false, false, false);
+// Identifiant ECLI
+if (isset($document->ecli)) { $sf_response->addMeta('DC.isVersionOf', $document->ecli, false, false, false); }
+$sf_response->addMeta('DC.creator', $creator, false, false, false);
+$sf_response->addMeta('DC.coverage', $document->pays, false, false, false);
+$sf_response->addMeta('DC.date', $document->date_arret, false, false, false);
+$sf_response->addMeta('DC.language', 'FR', false, false, false);
+$sf_response->addMeta('DC.publisher', 'AHJUCAF', false, false, false);
+$sf_response->addMeta('DC.accessRights', 'public', false, false, false);
+$sf_response->addMeta('DC.type', 'judicial decision', false, false, false);
+
+// Facultatif pour ECLI
+// $sf_response->addMeta('DC.title', 'Noms des parties', false, false, false);
+if(isset($document->type_affaire)) {
+  $sf_response->addMeta('DC.subject', 'Affaire '.strtolower($document->type_affaire), false, false, false);
 }
+if(!empty($analyses)) {
+  $sf_response->addMeta('DC.abstract', "Analyses : \n".strip_tags(str_replace('</blockquote>', " \n", $analyses)), false, false, false);
+}
+if(!empty($keywords)) {
+  $sf_response->addMeta('DC.description', strip_tags(str_replace('</blockquote>', " ", $keywords)), false, false, false);
+}
+if(isset($contrib)) {
+  $sf_response->addMeta('DC.contributor', strip_tags(str_replace('<br />', " ;\n", $contributors)), false, false, false);
+}
+//$sf_response->addMeta('DC.issued', 'Date de publication', false, false, false);
+if (!empty($citations)) {
+  $sf_response->addMeta('DC.references', strip_tags(str_replace('<br />', " ;\n", $citations)), false, false, false);
+}
+// $sf_response->addMeta('DC.isReplacedBy', 'En cas de renumérotation', false, false, false);
+
 ?>
   <div class="arret">
     <h1><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre; ?></h1>
@@ -359,14 +361,16 @@ if (isset($document->ecli)) {
 
     if($document->pays == "Madagascar" && $document->juridiction == "Cour suprême" && trim($document->texte_arret) == "En haut a droite, cliquez sur PDF pour visualiser le fac-simile de la décision") {
     ?>
-    <object data="http://<?php echo $_SERVER['HTTP_HOST']; ?>/pdf/madagascar/cour_supreme/<?php echo $document->id_source; ?>.pdf" type="application/pdf" width="100%" height="1000" navpanes="0" statusbar="0" messages="0">
+    <object data="http://<?php echo $sf_request->getHost(); ?>/pdf/madagascar/cour_supreme/<?php echo $document->id_source; ?>.pdf" type="application/pdf" width="100%" height="1000" navpanes="0" statusbar="0" messages="0">
     Fac-similé disponible au format PDF : <a href="/pdf/madagascar/cour_supreme/<?php echo $document->id_source; ?>.pdf"><?php echo $document->titre; ?></a>
     </object>
     <?php
-    }
+    } // $_SERVER['HTTP_HOST']
     else {
-      echo '<h3>Texte : </h3>';
-      echo simple_format_text(trim($document->texte_arret));
+      if(isset($document->texte_arret)) {
+        echo '<h3>Texte : </h3>';
+        echo simple_format_text(trim($document->texte_arret));
+      }
     }
     if (!empty($citations_arret) || !empty($sources)) {
       echo '<p><em>Références : </em><br />';
