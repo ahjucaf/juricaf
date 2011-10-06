@@ -248,7 +248,6 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
                          "SEN" => "Élection au Sénat",
                          "PDR" => "Élection présidentielle",
                          "REF" => "Référendum",
-                         "ELECT" => "Élection divers",
                          "ELEC" => "Élection divers",
                          "D" => "Élection d'un parlementaire",
                          "I" => "Élection d'un parlementaire",
@@ -350,12 +349,13 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
       $meta = 'META_JURI_CONSTIT';
       $meta_xpath = 'TEXTE_JURI_CONSTIT';
       $type_affaire = toString($dila->META->META_COMMUN->NATURE);
+      if($type_affaire == 'ELECT') { $type_affaire = 'ELEC'; }
       $numero_affaire = '';
       $titre_supplementaire = cdata(toString($dila->META->META_SPEC->META_JURI->TITRE));
       if (toString($dila->META->META_SPEC->$meta->LOI_DEF) !== '') {
         $decision_attaquee = array('DECISION_ATTAQUEE' =>
                                   array('TITRE' => cdata(toString($dila->META->META_SPEC->$meta->LOI_DEF)),
-                                        'TYPE' => $natureConstit[toString($dila->META->META_COMMUN->NATURE)],
+                                        'TYPE' => $natureConstit[$type_affaire],
                                         'FORMATION' => '',
                                         'DATE' => is_date(toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@date'))),
                                         'NUMERO' => toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@num')),
@@ -364,7 +364,7 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
         $references = addRef($references,
                              $dila->META->META_SPEC->$meta->LOI_DEF,
                              'DECISION_ATTAQUEE',
-                             $natureConstit[toString($dila->META->META_COMMUN->NATURE)],
+                             $natureConstit[$type_affaire],
                              toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@date')),
                              toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@num')),
                              toString($dila->xpath('/'.$meta_xpath.'/META/META_SPEC/'.$meta.'/LOI_DEF/@nor')),
@@ -373,15 +373,15 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
       }
       else {
         $decision_attaquee = array('DECISION_ATTAQUEE' =>
-                                  array('TYPE' => $natureConstit[toString($dila->META->META_COMMUN->NATURE)]
+                                  array('TYPE' => $natureConstit[$type_affaire]
                                        ));
       }
       $analyses = multiple('SOMMAIRE', $dila->xpath('/'.$meta_xpath.'/TEXTE/OBSERVATIONS/*'));
       if (isset($dila->META->META_SPEC->$meta->URL_CC)) {
         $references = addRef($references,
-                             'conseil constitutionnel',
+                             'site internet du Conseil constitutionnel',
                              'SOURCE',
-                             $dila->META->META_COMMUN->NATURE,
+                             $type_affaire,
                              $dila->META->META_SPEC->META_JURI->DATE_DEC,
                              $dila->META->META_SPEC->META_JURI->NUMERO,
                              $dila->META->META_SPEC->$meta->NOR,
@@ -390,9 +390,9 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
       }
       if (urlNor($dila->META->META_SPEC->$meta->NOR)) {
         $references = addRef($references,
-                             'légifrance',
+                             'site internet Légifrance',
                              'SOURCE',
-                             $dila->META->META_COMMUN->NATURE,
+                             $type_affaire,
                              $dila->META->META_SPEC->META_JURI->DATE_DEC,
                              $dila->META->META_SPEC->META_JURI->NUMERO,
                              $dila->META->META_SPEC->$meta->NOR,
