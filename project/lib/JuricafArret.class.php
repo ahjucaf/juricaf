@@ -2,6 +2,10 @@
 
 class JuricafArret extends sfCouchDocument 
 {
+  public function isError() {
+    return ($this->type != 'arret');
+  }
+
   public static function getExcerpt($resultat, $highlighting = null) {
     $exerpt = '';
     if ($highlighting && isset($highlighting->content)) {
