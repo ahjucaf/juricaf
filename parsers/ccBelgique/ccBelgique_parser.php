@@ -64,7 +64,9 @@ foreach (split("\n", $content) as $ligne) {
     continue;
   $header = 0;
   $text .= preg_replace(array('/\`a/', '/<</', '/>>/', '/^ */'), array('à', '«', '»', ''), $ligne);
-  if (!preg_match('/[a-z]/i', $ligne))
+  if (preg_match('/\|\W*$/', $ligne))
+    $text .= "\n";
+  else if (!preg_match('/[a-z]/i', $ligne))
     $text .= "\n\n";
 }
 
