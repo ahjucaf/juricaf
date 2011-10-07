@@ -39,6 +39,7 @@ class rechercheActions extends sfActions
       $param['sort'] = 'date_arret desc, id asc';
       $param['facet.field']= array('facet_pays', 'facet_juridiction', 'facet_pays_juridiction');
       $param['facet']='true';
+      $param['fq'] = 'type:arret';
     }
 
     $this->facetsset = array();
@@ -53,7 +54,6 @@ class rechercheActions extends sfActions
         $solr_query.= ' '.preg_replace('/_/', '=', $f[0]).':'.$f[1];
       }
     }
-    $solr_query .= ' type:arret';
 
     if (preg_match('/order:pertinance/', $solr_query)) {
       $solr_query = ' '.preg_replace('/ order:pertinance/', '', $solr_query);
