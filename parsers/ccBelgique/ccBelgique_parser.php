@@ -78,7 +78,7 @@ if (count($analyses)) {
   echo "  <ANALYSES>\n";
   foreach ($analyses as $a) {
     echo "    <ANALYSE>
-      <SOMMAIRE>".$a."</SOMMAIRE>
+      <TITRE_PRINCIPAL>".$a."</TITRE_PRINCIPAL>
     </ANALYSE>\n";
   }
   echo "  </ANALYSES>\n";
