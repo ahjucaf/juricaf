@@ -586,7 +586,7 @@ if (!isset($res['titre']))
     $i = 1;
     $human_num_arret = '';
     foreach ($num_arret as $num) {
-      if($i == 1) { $sep = ''; } elseif($i = $nb) { $sep = ' et '; } else { $sep = ', '; }
+      if($i == 1) { $sep = ''; } elseif($i == $nb) { $sep = ' et '; } else { $sep = ', '; }
       $human_num_arret .= $sep.$num; $i++;
     }
   }
