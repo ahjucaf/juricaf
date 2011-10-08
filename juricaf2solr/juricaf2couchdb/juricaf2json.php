@@ -583,22 +583,31 @@ if (!isset($res['titre']))
   if (preg_match('/;/', $res['num_arret'])) {
     $num_arret = explode(';', $res['num_arret']);
     $nb = count($num_arret);
-    $i = 1;
-    $human_num_arret = '';
-    foreach ($num_arret as $num) {
-      if($i == 1) { $sep = ''; } elseif($i == $nb) { $sep = ' et '; } else { $sep = ', '; }
-      $human_num_arret .= $sep.$num; $i++;
+    if($res['pays'] == 'France' && $res['juridiction'] == 'Cour de cassation') {
+      $human_num_arret = $num_arret[0];
+      $num_arret_id = $num_arret[0];
+      if($nb > 2) { $human_num_arret .= ' et suivants'; }
+      else { $human_num_arret .= ' et suivant'; }
+    }
+    else {
+      $i = 1;
+      $human_num_arret = '';
+      $num_arret_id = $res['num_arret'];
+      foreach ($num_arret as $num) {
+        if($i == 1) { $sep = ''; } elseif($i == $nb) { $sep = ' et '; } else { $sep = ', '; }
+        $human_num_arret .= $sep.$num; $i++;
+      }
     }
   }
-  else { $human_num_arret = $res['num_arret']; }
+  else { $human_num_arret = $res['num_arret']; $num_arret_id = $res['num_arret']; }
 
   $human_num_arret = str_replace(array('_', 'à'), array(' ', ' à '), $human_num_arret);
 
   $res['titre'] = $res['pays'].', '.$res['juridiction'].$formation.', '.$date->format('d').' '.$mois[$date->format('m')].' '.$date->format('Y').', '.$human_num_arret;
 }
 $date = date_id($res['date_arret']);
-$num_arret_id = preg_replace('/[^a-z0-9]/i', '', $res['num_arret']);
-$num_arret_id = str_replace(';', '-', $res['num_arret']);
+$num_arret_id = preg_replace('/[^a-z0-9;à]/i', '', $num_arret_id);
+$num_arret_id = str_replace(';', '-', $num_arret_id);
 $res['_id'] = ids($res['pays'].'-'.str_replace('-', '', $res['juridiction']).'-'.$date.'-'.$num_arret_id);
 
 if (isset($res['id'])) {
