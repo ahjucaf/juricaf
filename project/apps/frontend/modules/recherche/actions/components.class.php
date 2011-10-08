@@ -27,4 +27,7 @@ class rechercheComponents extends sfComponents
     }
     $this->facets = $facetTree;
  }
+
+ public function executeFullsearch() { }
+
 }

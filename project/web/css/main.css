@@ -96,3 +96,10 @@ blockquote a:hover { color: #4F4F4F; text-decoration: underline; }
 .w3c a { color: #777677; }
 
 .search_out img { margin-bottom: -2px; }
+
+.text_input { width: 70%; }
+
+.calendars {
+  float: left;
+  margin-right: 5%;
+}
