@@ -100,6 +100,11 @@ class rechercheActions extends sfActions
       }
   }
 
+  public function executeFullsearch(sfWebRequest $request)
+  {
+    
+  }
+
   public function executePage404() { }
 
 }

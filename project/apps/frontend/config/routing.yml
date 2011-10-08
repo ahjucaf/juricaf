@@ -17,6 +17,11 @@ recherche_resultats:
   options:
     segment_separators: [/]
 
+# Recherche avancée
+recherche_avancee:
+  url: /recherche_avancee
+  param: {module: recherche, action: fullsearch, query: ""}
+
 #Affichage des arrets
 
 arret:
@@ -27,7 +32,7 @@ arretxml:
   url: /arret/:id/xml
   param: {module: arret, action: xml}
 
-admin_list: 
+admin_list:
    url: /admin/list
    param: {module: admin, action: list}
 
