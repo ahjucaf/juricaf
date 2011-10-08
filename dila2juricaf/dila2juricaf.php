@@ -473,6 +473,9 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
     if(!empty($juricaf_array['NUM_ARRET'])) {
       $juricaf_array['NUM_DECISION'] = $juricaf_array['NUM_ARRET'];
     }
+    // num_arret predictible
+    $num_predictible = explode(';', $num_affaire);
+    $num_predictible = $num_predictible[0];
     $juricaf_array['NUM_ARRET'] = '<![CDATA['.$num_affaire.']]>';
   }
 
@@ -532,7 +535,7 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
   }
 
   // Id prédictible
-  $juri_rec = strtoupper(ids($juricaf_array['JURIDICTION']));
+  $juri_rec = str_replace('-', '', strtoupper(ids($juricaf_array['JURIDICTION'])));
 
   if($date_rec == 'date_manquante') { $date_rec = date('Ymd'); }
   else { $date_rec = str_replace('-', '', $juricaf_array['DATE_ARRET']); }
@@ -569,9 +572,12 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
       $num_rec = 'RANDOM'.mt_rand();
     }
   }
-  else { $num_rec = str_replace(';', '-', $juricaf_array['NUM_ARRET']); }
+  else { $num_rec = $juricaf_array['NUM_ARRET']; }
 
   $num_rec = str_replace(array("<![CDATA[", "]]>"), '', $num_rec);
+  if(!empty($num_predictible)) { $num_rec = $num_predictible; }
+  $num_rec = preg_replace('/[^a-z0-9;à]/i', '', $num_rec);
+  $num_arret_id = str_replace(';', '-', $num_rec);
 
   $id_predictible = "FRANCE-".$juri_rec."-".$date_rec."-".$num_rec;
 
