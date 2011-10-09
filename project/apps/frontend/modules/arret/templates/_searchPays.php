@@ -1,3 +1,4 @@
+<h2>Limiter aux pays</h2>
 <?php
 function replaceBlank($str) {
   return str_replace (' ', '_', $str);
@@ -18,4 +19,7 @@ foreach ($pays as $p)
 }
 echo '<input type="hidden" value="pays[total]['.count($pays).']" />';
 ?>
-<div style="clear: both;"></div>
+<div style="clear: both; padding-top: 1em; padding-bottom: 0.7em;">
+  <input type="button" onclick="javascript:$('input[name^=\'pays\']:checked').prop('checked', '');" value="Tout décocher" />
+  <input type="button" onclick="javascript:$('input[name^=\'pays\']').prop('checked', 'checked');" value="Tout cocher" />
+</div>

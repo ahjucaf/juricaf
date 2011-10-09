@@ -12,9 +12,9 @@ default:
     language:     fr
     #robots:       index, follow
 
-  stylesheets:    [main.css]
+  stylesheets:    [main.css, jquery-ui-1.8.16.custom.css]
 
-  javascripts:    [jquery-1.6.1.min.js, jquery.scrollTo-min.js]
+  javascripts:    [jquery-1.6.1.min.js, jquery.scrollTo-min.js, jquery-ui-1.8.16.custom.min.js]
 
   has_layout:     true
   layout:         layout
