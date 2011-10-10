@@ -242,6 +242,7 @@ $cas_num_arret = array(
     );
 
 $res['num_arret'] = trim(rtrim(strtr($res['num_arret'], $cas_num_arret), '-'));
+$res['num_arret'] = preg_replace('/ +/', ' ', $res['num_arret']); // supprime les espaces redondants
 
 $max_length_without_lf = 200; // si texte_arret ne comporte pas de retours à la ligne et excède cette limite de nombre de caractères = erreur
 
@@ -604,6 +605,9 @@ if (!isset($res['titre']))
   $human_num_arret = str_replace(array('_', 'à'), array(' ', ' à '), $human_num_arret);
 
   $res['titre'] = $res['pays'].', '.$res['juridiction'].$formation.', '.$date->format('d').' '.$mois[$date->format('m')].' '.$date->format('Y').', '.$human_num_arret;
+}
+else {
+  $num_arret_id = $res['num_arret'];
 }
 $date = date_id($res['date_arret']);
 $num_arret_id = preg_replace('/[^a-z0-9;à]/i', '', $num_arret_id);
