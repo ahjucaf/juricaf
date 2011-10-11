@@ -10,10 +10,15 @@ function pathToFlag($str) {
   return urlencode(str_replace("'", '_', replaceBlank($str)));
 }
 
+function sortInstitutions($a, $b) {
+  return $b['value'] - $a['value'];
+}
+
 foreach ($pays as $p => $juridictions)
 {
   $no_blank_p = replaceBlank($p);
   echo '<li style="list-style-image: url(/images/drapeaux/'.pathToFlag(ucfirst($no_blank_p)).'.png)"><strong>'.link_to($p,'recherche/search?query=+&facet_facets=pays:'.$no_blank_p).'</strong><ul class="subul">';
+  uasort($juridictions, 'sortInstitutions');
   foreach ($juridictions as $j => $v) {
     $pluriel = '';
     if ($v['value'] > 1)
