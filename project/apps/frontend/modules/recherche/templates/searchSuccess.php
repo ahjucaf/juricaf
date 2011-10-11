@@ -188,7 +188,7 @@ foreach ($resultats->response->docs as $resultat) {
 ?>
 </div>
 <div class="pager">
-<?php if ($nbResultats > 10) { echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); } ?>
+<?php if ($resultats->response->numFound > 10) { echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); } ?>
 </div>
 </div>
 <script type="text/javascript">
