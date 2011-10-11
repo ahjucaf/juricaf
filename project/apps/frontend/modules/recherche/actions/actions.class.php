@@ -82,6 +82,10 @@ class rechercheActions extends sfActions
 
     $res = $solr->search($solr_query, $start, $pas, $param);
 
+    if ($res->response->numFound == 1) {
+      return $this->redirect('@arret?id='.$res->response->docs[0]->id);
+    }
+
     $lastpage = intval($res->response->numFound / $pas) + 1;
     $this->pager = array();
     $this->pager['begin'] = ($pagenum != 1) ? 1 : 0;
