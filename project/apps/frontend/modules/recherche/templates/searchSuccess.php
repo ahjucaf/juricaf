@@ -141,12 +141,12 @@ if (trim($query) !== '' || isset($title_facet)) {
     echo '<li>'.link_to('chronologique', $tmplink).'</li>';
   }
 
-  if (preg_match('/order:pertinance/', $facetslink)) {
+  if (preg_match('/order:pertinence/', $facetslink)) {
     echo '<li>par pertinence</li>';
   }
   else {
     $tmplink = $currentlink;
-    $tmplink['facets'] = 'order:pertinance'.preg_replace('/order:[a-z]*,/', '', $facetslink);
+    $tmplink['facets'] = 'order:pertinence'.preg_replace('/order:[a-z]*,/', '', $facetslink);
     echo '<li>'.link_to('par pertinence', $tmplink).'</li>';
   } ?>
 </ul>
@@ -164,7 +164,7 @@ include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction'
   //////////////////////////////////
 ?><div class="resultats">
 <div class="pager">
-<?php if ($nbResultats > 10) { echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); } ?>
+<?php if ($resultats->response->numFound > 10) { echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); } ?>
 </div>
 <?php
 foreach ($resultats->response->docs as $resultat) {

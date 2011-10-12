@@ -42,7 +42,7 @@
                   <a href="<?php echo url_for('@recherche'); ?>"><img id="logo" src="/images/juricaf.png" alt="Juricaf" /></a><br />
                   <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des cours suprêmes</span><br />
                   <input type="text" style="width: 300px; margin-top: 5px;" name="q" value="<?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>" tabindex="10" /><br />
-                  <input type="submit" value="Rechercher" tabindex="20" /> <a href="#">recherche avancée</a>
+                  <input type="submit" value="Rechercher" tabindex="20" /> <a href="<?php echo url_for('@recherche_avancee'); ?>">recherche avancée</a>
                 </td>
               </tr>
             </table>

@@ -12,8 +12,8 @@ recherche:
   param: {module: recherche, action: index, query: ""}
 
 recherche_resultats:
-  url: /recherche/:query/:facets
-  param: {module: recherche, action: search, query: "", facets: ""}
+  url: /recherche/:query/:facets/:filter
+  param: {module: recherche, action: search, query: "", facets: "", filter: ""}
   options:
     segment_separators: [/]
 

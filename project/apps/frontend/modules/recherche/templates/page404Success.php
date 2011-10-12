@@ -5,7 +5,8 @@
 <script type="text/javascript">
 <!--
 url = '<?php echo url_for('@recherche'); ?>';
-suggested_search = document.location.pathname.replace(RegExp('[^a-z0-9]','gi'),' ');
+suggested_search = document.location.pathname+document.location.search;
+suggested_search = suggested_search.replace(RegExp('[^a-z0-9]','gi'),' ');
 
 terms = suggested_search.split(' ');
 links = '';
