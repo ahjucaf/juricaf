@@ -42,9 +42,10 @@ jQuery(function($){
 </script>
 
 <h1>Recherche avancée</h1>
+<h2>Critères</h2>
 <p>
 <select name="cr[1]">
-  <option value="q">Recherche plein texte</option>
+  <option value="content">Plein texte</option>
   <option value="num_arret">Numéro d’affaire</option>
   <option value="sens_arret">Sens</option>
   <option value="nor">NOR</option>
@@ -58,8 +59,7 @@ jQuery(function($){
   <option value="commissaire_gvt">Commissaire du gouvernement</option>
   <option value="avocats">Avocat</option>
   <option value="parties">Parties</option>
-  <option value="titre_principal">Titre</option>
-  <option value="analyses">Sommaire</option>
+  <option value="analyses">Analyses</option>
   <option value="saisines">Saisine</option>
   <option value="fonds_documentaire">Fonds documentaire</option>
 </select>
@@ -72,7 +72,7 @@ jQuery(function($){
 </select>
 <br />
 <select name="cr[2]">
-  <option value="q">Recherche plein texte</option>
+  <option value="content">Plein texte</option>
   <option value="num_arret">Numéro d’affaire</option>
   <option value="sens_arret">Sens</option>
   <option value="nor">NOR</option>
@@ -99,7 +99,7 @@ jQuery(function($){
 </select>
 <br />
 <select name="cr[3]">
-  <option value="q">Recherche plein texte</option>
+  <option value="content">Plein texte</option>
   <option value="num_arret">Numéro d’affaire</option>
   <option value="sens_arret">Sens</option>
   <option value="nor">NOR</option>
@@ -126,7 +126,7 @@ jQuery(function($){
 </select>
 <br />
 <select name="cr[4]">
-  <option value="q">Recherche plein texte</option>
+  <option value="content">Plein texte</option>
   <option value="num_arret">Numéro d’affaire</option>
   <option value="sens_arret">Sens</option>
   <option value="nor">NOR</option>
@@ -150,7 +150,7 @@ jQuery(function($){
 <div class="calendars">
 <h2>Date de la décision</h2>
 <p>
-<input type="text" name="date[1]" id="date_1" size="10" /><label for="date_1"><img src="/images/calendar.png" alt="" /></label>
+<input type="text" name="date[arret]" id="date_arret" size="10" /><label for="date_arret"><img src="/images/calendar.png" alt="" /></label>
 </p>
 </div>
 <div class="calendars">
@@ -159,11 +159,11 @@ jQuery(function($){
 <div class="calendars">
 <h2>Période</h2>
 <p>
-du <input type="text" name="date[2]" id="date_2" size="10" /><label for="date_2"><img src="/images/calendar.png" alt="" /></label>
-au <input type="text" name="date[3]" id="date_3" size="10" /><label for="date_3"><img src="/images/calendar.png" alt="" /></label>
+du <input type="text" name="date[debut]" id="date_debut" size="10" /><label for="date_debut"><img src="/images/calendar.png" alt="" /></label>
+au <input type="text" name="date[fin]" id="date_fin" size="10" /><label for="date_fin"><img src="/images/calendar.png" alt="" /></label>
 </p>
 </div>
 <hr style="clear: both;" />
 <h2>Références</h2>
-<p><input type="text" name="references" style="width:90%" /></p>
+<p><input type="text" name="references" style="width:90.5%" /></p>
 <hr />
