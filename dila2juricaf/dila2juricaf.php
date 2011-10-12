@@ -399,7 +399,13 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
                              urlNor($dila->META->META_SPEC->$meta->NOR)
                             );
       }
-      if(isset($dila->META->META_SPEC->$meta->TITRE_JO)) { $references = addRef($references, $dila->META->META_SPEC->$meta->TITRE_JO, 'PUBLICATION', '', '', '', '', urlPdfJO($dila->META->META_SPEC->$meta->TITRE_JO)); }
+      if(isset($dila->META->META_SPEC->$meta->TITRE_JO)) { $references = addRef($references, $dila->META->META_SPEC->$meta->TITRE_JO, 'PUBLICATION', '', '', '', '', ''); }
+
+      $saisine = '';
+      if($saisine_auteur = toString($dila->xpath('/'.$meta_xpath.'/TEXTE/SAISINES/SAISINE/@AUTEUR'))) { $saisine .= $saisine_auteur."\n\n" ;}
+      $saisine .= clean(trim(implode("\n", $dila->xpath('/'.$meta_xpath.'/TEXTE/SAISINES//*'))));
+      if(strlen($saisine) < 30) { $saisine = ''; }
+
       break;
   }
 
@@ -440,7 +446,7 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
   'TITRE_SUPPLEMENTAIRE' => $titre_supplementaire,
   'TYPE_AFFAIRE' => $type_affaire,
   'TYPE_RECOURS' => ucfirst(toString($dila->META->META_SPEC->$meta->TYPE_REC)),
-  'SAISINES' => multiple('SAISINE', $dila->xpath('/'.$meta_xpath.'/TEXTE/SAISINES/*')),
+  'SAISINES' => $saisine,
   'DECISIONS_ATTAQUEES' => $decision_attaquee,
   'PRESIDENT' => toString($dila->META->META_SPEC->$meta->PRESIDENT),
   'AVOCAT_GL' => toString($dila->META->META_SPEC->$meta->AVOCAT_GL),
