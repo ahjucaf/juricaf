@@ -277,6 +277,7 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
   }
 
   $references = '';
+  $saisine = '';
 
   // Suivant la DTD
   switch ($origine) {
@@ -401,7 +402,6 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
       }
       if(isset($dila->META->META_SPEC->$meta->TITRE_JO)) { $references = addRef($references, $dila->META->META_SPEC->$meta->TITRE_JO, 'PUBLICATION', '', '', '', '', ''); }
 
-      $saisine = '';
       if($saisine_auteur = toString($dila->xpath('/'.$meta_xpath.'/TEXTE/SAISINES/SAISINE/@AUTEUR'))) { $saisine .= $saisine_auteur."\n\n" ;}
       $saisine .= clean(trim(implode("\n", $dila->xpath('/'.$meta_xpath.'/TEXTE/SAISINES//*'))));
       if(strlen($saisine) < 30) { $saisine = ''; }
@@ -586,18 +586,21 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
   $num_arret_id = str_replace(';', '-', $num_rec);
 
   $id_predictible = "FRANCE-".$juri_rec."-".$date_rec."-".$num_rec;
-
-  // Enregistrement
-  try {
-    $file = $dir."/".$res[0];
-    $handler = fopen($file,"w");
-    fputs($handler,$juricaf->asXML());
-    echo $id_predictible." : ".$res[0]." : ".$instant."\n";
+  if(!isset($argv[2])) {
+    // Enregistrement
+    try {
+      $file = $dir."/".$res[0];
+      $handler = fopen($file,"w");
+      fputs($handler,$juricaf->asXML());
+      echo $id_predictible." : ".$res[0]." : ".$instant."\n";
+    }
+    catch (Exception $e) {
+      echo "Erreur : enregistrement de ".$file." a échoué (".$argv[1].") : ".$instant."\n";
+      echo $e->getMessage()."\n";
+    }
   }
-  catch (Exception $e) {
-    echo "Erreur : enregistrement de ".$file." a échoué (".$argv[1].") : ".$instant."\n";
-    echo $e->getMessage()."\n";
-  }
+  // Ordre de suppression Dila
+  else { echo $id_predictible; }
 }
 else {
   $erreur = "chemin incorrect : ";
