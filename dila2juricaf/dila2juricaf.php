@@ -483,6 +483,7 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
     $num_predictible = explode(';', $num_affaire);
     $num_predictible = $num_predictible[0];
     $juricaf_array['NUM_ARRET'] = '<![CDATA['.$num_affaire.']]>';
+    if(strlen($num_affaire) > 30) { $juricaf_array['NUM_TROS_GROS'] = 'ok'; }
   }
 
   // Conversion du tableau en string xml balisé

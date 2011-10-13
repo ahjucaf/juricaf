@@ -3,6 +3,8 @@
 # ./detar.sh 1 pour tout extraire
 # ./detar.sh pour extraire uniquement les nouveaux documents
 
+START=$(date '+%d-%m-%Y-%H:%M:%S') ;
+
 # Répertoire de travail
 if [ "$(echo $0 | sed 's|[^/]*$||')" != "./" ] ; then
   cd $(echo $0 | sed 's|[^/]*$||');
@@ -20,17 +22,35 @@ TOPROCESS=log/to_detar_update.txt
 LOCK=/tmp/import.sh.lock
 DIRLOGSUPP=log/suppression
 GLOBALDELETELOG=log/suppression/global.log
+FULLIMPORT=log/full_import.lock
+TORESUME=log/to_resume.txt
+
+if [ -e $LOCK ]
+then
+  if ! ps --pid $(cat $LOCK) > /dev/null ; then
+    echo "L'import est locké mais n'est pas en cours" ;
+  else
+    echo "Import tiers en cours" ;
+  fi
+  echo "Extraction annulée : aucune opération effectuée" ;
+  exit 1
+fi
 
 if test "$1" ; then
-  echo "Extraire TOUS les documents dila ? : veuillez confirmer (y/n)"
+  echo "Extraire TOUS les documents dila ? (les crons doivent être désactivés et les bdd vidées) : veuillez confirmer (y/n)"
   read AA;
   TOPROCESS=log/to_detar_all.txt
   > $GLOBALDELETELOG
+  > $FULLIMPORT
   find $FTP/ -name "*.tar.gz" | xargs stat -c "%Y#%n" > $TOPROCESS
   php sort.php
 fi
 
-START=$(date '+%d-%m-%Y-%H:%M:%S') ;
+if [ -e $TORESUME ]
+then
+  echo "Le fichier de reprise de la précédante opération est utilisé"
+  TOPROCESS=$TORESUME ;
+fi
 
 for fichier in $(cat $TOPROCESS);
   do
@@ -75,7 +95,7 @@ for fichier in $(cat $TOPROCESS);
         fi
       done
       if cat $GLOBALDELETELOG | grep "$NOTGZ Erreur" > /dev/null ; then
-        echo "Des vérifications manuelles sont nécessaires :"
+        echo "Certains ordres de suppression requièrent des vérifications manuelles :"
         cat $GLOBALDELETELOG | grep "$NOTGZ Erreur" ;
       else
         echo "Avec succès"
@@ -97,27 +117,50 @@ for fichier in $(cat $TOPROCESS);
     cp -R -f $DATA/* $ARCHIVE/
     rm -R $DATA/*
   fi
+
+  # Vérif indexation en cours
+  if [ -e $LOCK ]
+  then
+    if ! ps --pid $(cat $LOCK) > /dev/null ; then
+      echo "Erreur : L'import est locké mais ne semble pas être en cours" ;
+    else
+      echo "Erreur : Import tiers en cours" ;
+    fi
+    echo "Les fichiers de $fichier sont restés dans $CONVERTED" ;
+    echo "Tentative de création d'un fichier de reprise" ;
+    RESUME=$(echo $fichier | sed 's:\/:\\/:g' | sed 's:\.:\\.:g') ;
+    declare -i NUM_LIGNE=$(cat $TOPROCESS | grep -n "$fichier" | sed "s:\:$RESUME::") ;
+    echo "Si la prochaine ligne est $fichier : le processus reprendra automatiquement au prochain lancement"
+    if (($NUM_LIGNE != 1)) && let $NUM_LIGNE 2>/dev/null ;
+      then
+        declare -i AV_DER_LIGNE=$NUM_LIGNE-1 ;
+        cat $TOPROCESS | sed "1,$AV_DER_LIGNE d" > $TORESUME ;
+        cat $TORESUME ;
+      else
+        cat $TOPROCESS
+    fi
+    if [ -e $DIRLOGSUPP/$NOTGZ.dat ]
+      then
+      echo "Sauvegarde du log de suppression en $DIRLOGSUPP/$NOTGZ.$START.bak à comparer à $DIRLOGSUPP/$NOTGZ.dat lors de la reprise"
+      cp $GLOBALDELETELOG $GLOBALDELETELOG.$START.bak
+    fi
+    echo "Extraction stoppée suite à l'erreur précédante" ;
+    exit 1
+  else
+    cp -R -f $CONVERTED/* $POOL/
+    rm -R $CONVERTED/*
+    echo "Les fichiers convertis ont été placés dans le pool" ;
+    if [ -e $FULLIMPORT ] ; then
+      echo "Lancement de l'import des fichiers de $fichier" ;
+      ../juricaf2solr/juricaf2couchdb/import.sh ;
+    fi
+  fi
 done
 
-# Vérif indexation en cours
-if [ -e $LOCK ]
-then
-  if ! ps --pid $(cat $LOCK) > /dev/null ; then
-    if [ -e $POOL/France ] ; then
-      rm -r $POOL/France
-    fi
-    mv $CONVERTED* $POOL/
-    echo "Les fichiers convertis ont été placés dans le pool, le lock a été supprimé" ;
-    rm lock
-  else
-    echo "Import tiers en cours : les fichiers convertis restent dans $CONVERTED" ;
-  fi
-else
-  if [ -e $POOL/France ] ; then
-    rm -r $POOL/France
-  fi
-  mv $CONVERTED* $POOL/
-  echo "Les fichiers convertis ont été placés dans le pool" ;
+cp -f $GLOBALDELETELOG $GLOBALDELETELOG.$START.log
+
+if [ -e $FULLIMPORT ] ; then
+  rm $FULLIMPORT;
 fi
 
 END=$(date '+%d-%m-%Y-%H:%M:%S') ;
