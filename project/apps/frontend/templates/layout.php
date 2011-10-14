@@ -36,12 +36,12 @@
           <?php if ($sf_user->hasFlash('error')):?><div class="flash error"><?php echo $sf_user->getFlash('error'); ?></div><?php endif; ?>
           <div class="form_recherche">
             <form method="get" action="<?php echo url_for('recherche_resultats'); ?>">
-            <table>
+            <table summary="Rechercher">
               <tr>
                 <td>
-                  <a href="<?php echo url_for('@recherche'); ?>"><img id="logo" src="/images/juricaf.png" alt="Juricaf" /></a><br />
-                  <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des cours suprêmes</span><br />
-                  <input type="text" style="width: 300px; margin-top: 5px;" name="q" value="<?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>" tabindex="10" /><br />
+                  <a href="<?php echo url_for('@recherche'); ?>"><img id="logo" style="width: 100px; height: 100px;" src="/images/juricaf.png" alt="Juricaf" /></a><br />
+                  <img src="/images/slogan.png" style="width: 276px; height: 12px;" alt="La jurisprudence francophone des cours suprêmes" style="margin-top: 4px;" /><br />
+                  <input type="text" style="width: 300px; margin-top: 2px;" name="q" value="<?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>" tabindex="10" /><br />
                   <input type="submit" value="Rechercher" tabindex="20" /> <a href="<?php echo url_for('@recherche_avancee'); ?>">recherche avancée</a>
                 </td>
               </tr>
