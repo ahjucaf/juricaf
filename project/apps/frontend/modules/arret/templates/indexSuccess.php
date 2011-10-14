@@ -223,6 +223,22 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
 
 // METADONNEES //
 
+// Pays que les moteurs tiers ne doivent pas indexer
+$pays_noindex = array(
+  "Bénin",
+  "Mali",
+  "Madagascar",
+  "Luxembourg",
+  "Guinée",
+  "Haïti",
+  "Sénégal",
+  "Tchad"
+  );
+
+if(in_array($document->pays, $pays_noindex)) {
+  $sf_response->addMeta('robots', 'noindex', false, false, false);
+}
+
 $creator = $document->juridiction;
 if(isset($document->section)) { $creator .= ' '.$document->section; }
 
@@ -365,7 +381,7 @@ if (!empty($citations)) {
     Fac-similé disponible au format PDF : <a href="/pdf/madagascar/cour_supreme/<?php echo $document->id_source; ?>.pdf"><?php echo $document->titre; ?></a>
     </object>
     <?php
-    } // $_SERVER['HTTP_HOST']
+    }
     else {
       if(isset($document->texte_arret)) {
         echo '<h3>Texte : </h3>';
@@ -433,6 +449,16 @@ if (!empty($citations)) {
           }
           else { echo $value['titre'].'<br />'; }
         }
+    }
+    
+    // Lien télécharger le document
+    if($document->pays == 'France') {
+      if(strpos($document->id_source, "CONSTEXT") !== false || strpos($document->id_source, "JURITEXT") !== false || strpos($document->id_source, "CETATEXT") !== false) {
+        if(!isset($references['PUBLICATION'])) { echo '<hr /><h3>Publications :</h3>'; }
+        if(strpos($document->id_source, "CONSTEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&origine=juriConstit">Télécharger le document</a>'; }
+        if(strpos($document->id_source, "JURITEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&origine=juriJudi">Télécharger le document</a>'; }
+        if(strpos($document->id_source, "CETATEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&origine=juriAdmin">Télécharger le document</a>'; }
+      }
     }
 
     if(isset($contrib)) {
