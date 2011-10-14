@@ -15,11 +15,11 @@ function pathToFlag($str) {
 foreach ($pays as $p)
 {
   $nom_pays = preg_replace('/ /', '_', $p['key'][0]);
-  echo '<div style="float: left;width: 24%;"><input type="checkbox" name="pays['.$nom_pays.']" id="pays_'.$nom_pays.'" checked="checked" /> <label for="pays_'.$nom_pays.'"><img src="/images/drapeaux/'.pathToFlag(ucfirst($nom_pays)).'.png" alt="'.$nom_pays.'" />&nbsp;'.$p['key'][0].' ('.num($p['value']).')</label></div>'."\n";
+  echo '<div style="float: left;width: 24%;"><input type="checkbox" name="pays['.$nom_pays.']" id="pays_'.$nom_pays.'"  /> <label for="pays_'.$nom_pays.'"><img src="/images/drapeaux/'.pathToFlag(ucfirst($nom_pays)).'.png" alt="'.$nom_pays.'" />&nbsp;'.$p['key'][0].' ('.num($p['value']).')</label></div>'."\n";
 }
 echo '<input type="hidden" name="total" value="'.count($pays).'" />';
 ?>
 <div style="clear: both; padding-top: 1em; padding-bottom: 0.7em;">
-  <input type="button" onclick="javascript:$('input[name^=\'pays\']:checked').prop('checked', '');" value="Tout décocher" />
-  <input type="button" onclick="javascript:$('input[name^=\'pays\']').prop('checked', 'checked');" value="Tout cocher" />
+  <a href="#" onclick="javascript:$('input[name^=\'pays\']').prop('checked', 'checked');return false">Tout cocher</a> / 
+  <a href="#" onclick="javascript:$('input[name^=\'pays\']:checked').prop('checked', '');return false;">Tout décocher</a>
 </div>

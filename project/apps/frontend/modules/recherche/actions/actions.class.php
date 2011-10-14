@@ -15,7 +15,7 @@ class rechercheActions extends sfActions
     $this->getUser()->setAttribute('query', '');
     if($request->getParameter('q')) {
       $search = strip_tags($request->getParameter('q'));
-      $search = preg_replace('/[\/\{\}\[\]\<\>]/', '', $search);
+      $search = preg_replace('/[\/\{\}\<\>]/', '', $search);
       $search = preg_replace("/\'/", '’', $search);
       $count = count_chars($search, 1);
 
@@ -29,12 +29,20 @@ class rechercheActions extends sfActions
   public function executeSearch(sfWebRequest $request)
   {
     $solr = new sfBasicSolr();
-    $this->query = preg_replace('/’/', "'", preg_replace('/[<>]/', '', $request->getParameter('query', 'Suisse')));
+    $this->query = $request->getParameter('query', '');
+    $this->query = preg_replace('/’/', "'", preg_replace('/[<>]/', '', $this->query));
     $this->getUser()->setAttribute('query', $this->query);
-    $this->getUser()->setAttribute('facets', self::cleanValue($request->getParameter('facets')));
-    $this->getUser()->setAttribute('filter', self::cleanValue($request->getParameter('filter')));
+    $this->getUser()->setAttribute('facets', $this->cleanValue($request->getParameter('facets')));
+    $this->getUser()->setAttribute('filter', $this->cleanValue($request->getParameter('filter')));
     $solr_query = strtolower($this->query);
+    $solr_query = preg_replace('/ or /', ' OR ', $this->query);
+    $solr_query = preg_replace('/ to /', ' TO ', $this->query);
     $solr_query = preg_replace('/_([^ :]*):/', '=\1:', $solr_query);
+    if(preg_match('/\[\d{4}\-\d{2}\-\d{2} TO \d{4}\-\d{2}\-\d{2}\]/', $solr_query)) {
+      $solr_query = preg_replace('/\[(\d{4}\-\d{2}\-\d{2}) TO (\d{4}\-\d{2}\-\d{2})\]/', ' [\1T00:00:00Z TO \2T23:59:59Z]', $solr_query);
+    }else if (preg_match('/\d{4}\-\d{2}\-\d{2}/', $solr_query)) {
+      $solr_query = preg_replace('/(\d{4}\-\d{2}\-\d{2})/', ' [\1T00:00:00Z TO \1T23:59:59Z]', $solr_query);
+    }
 
     // Paramètres par défaut
     $param['hl'] = 'true';
@@ -43,33 +51,6 @@ class rechercheActions extends sfActions
       $param['facet.field'] = array('facet_pays', 'facet_juridiction', 'facet_pays_juridiction');
       $param['facet'] = 'true';
       $param['fq'] = 'type:arret';
-    }
-
-    if($this->filter = self::cleanValue($request->getParameter('filter'))) {
-      // Gestion des dates
-      if(strpos($this->filter, 'date_arret:') !== false) {
-        if(preg_match('/date_arret:([0-9]{2})([0-9]{2})([0-9]{4})to([0-9]{2})([0-9]{2})([0-9]{4})/i', $this->filter, $match)) {
-          $param['facet.date'] = 'date_arret';
-          $param['facet.date.start'] = $match[3].'-'.$match[2].'-'.$match[1].'T00:00:00.000Z';
-          $param['facet.date.end'] = $match[6].'-'.$match[5].'-'.$match[4].'T00:00:00.000Z';
-          $param['facet.date.gap'] = '+1DAY';
-          $param['facet.date.include'] = 'edge';
-          $this->filter = preg_replace('/(( OR )|( AND )| )*date_arret:[0-9]{8}to[0-9]{8}/i', '', $this->filter);
-          $this->filter = preg_replace('/(( OR )|( AND )| )*date_arret:[0-9]{8}/i', '', $this->filter);
-        }
-        elseif(preg_match('/date_arret:([0-9]{2})([0-9]{2})([0-9]{4})/', $this->filter, $match)) {
-          $date_originale = '/date_arret:'.$match[1].$match[2].$match[3].'/i';
-          $date_transformee = 'date_arret:"'.$match[3].'-'.$match[2].'-'.$match[1].'T00:00:00.000Z"';
-          $this->filter = preg_replace($date_originale, $date_transformee, $this->filter);
-          $this->filter = preg_replace('/(( OR )|( AND )| )*date_arret:[0-9]{8}/i', '', $this->filter);
-        }
-      }
-
-      // gérer content:
-      //$this->filter = preg_replace('/ (OR|AND|NOT) /', ',$1 ', $this->filter);
-
-      // Ajout au filtre
-      $param['fq'] .= ' '.$this->filter;
     }
 
     $this->facetsset = array();
@@ -113,6 +94,7 @@ class rechercheActions extends sfActions
     $pagenum = htmlentities($request->getParameter('page', 1));
     $start = ($pagenum - 1) * $pas;
 
+
     // Interroge Solr
     $res = $solr->search($solr_query, $start, $pas, $param);
 
@@ -142,6 +124,17 @@ class rechercheActions extends sfActions
       }
   }
 
+  private function convertDate($date) {
+    $dates = split('/', $date);
+    return $dates[2].'-'.$dates[1].'-'.$dates[0];
+  }
+
+  private function quotize($string) {
+    if (preg_match('/ /', $string))
+      return '"'.$string.'"';
+    return $string;
+  }
+
   private function cleanValue($string, $lowercase = false)
   {
     $string = strip_tags($string);
@@ -165,55 +158,55 @@ class rechercheActions extends sfActions
     if($request->getParameter('cr')) {
       $i = 0;
       foreach ($request->getParameter('cr') as $cr) {
-        $criteres[$i] = self::cleanValue($cr); $i++;
+        $criteres[$i] = $this->cleanValue($cr); $i++;
       }
     }
 
     if($request->getParameter('val')) {
       $i = 0;
       foreach ($request->getParameter('val') as $val) {
-        $saisies[$i] = self::cleanValue($val); $i++;
+        $saisies[$i] = $this->cleanValue($val); $i++;
       }
     }
 
     if($request->getParameter('cond')) {
       $i = 0;
       foreach ($request->getParameter('cond') as $cond) {
-        $conditions[$i] = self::cleanValue($cond); $i++;
+        $conditions[$i] = $this->cleanValue($cond); $i++;
       }
     }
 
     if($request->getParameter('date')) {
       foreach ($request->getParameter('date') as $key => $date) {
         if(!empty($date)) {
-          $dates[self::cleanValue($key)] = self::cleanValue($date);
+          $dates[$this->cleanValue($key)] = $this->convertDate($date);
         }
       }
     }
 
     if($request->getParameter('references')) {
-      $references = self::cleanValue($request->getParameter('references'));
+      $references = $this->cleanValue($request->getParameter('references'));
     }
 
     if($request->getParameter('pays')) {
       $i = 0;
       foreach ($request->getParameter('pays') as $key => $p) {
-        $pays[$i] = str_replace('_', ' ', self::cleanValue($key)); $i++;
+        $pays[$i] = str_replace('_', ' ', $this->cleanValue($key)); $i++;
       }
     }
 
     if($request->getParameter('total')) {
-      $total = self::cleanValue($request->getParameter('total'));
+      $total = $this->cleanValue($request->getParameter('total'));
     }
 
     //// Construction du filtre
     $filter = '';
 
     // Critères et conditions
-    if(!empty($saisies[0])) { $filter .= $criteres[0].':'.$saisies[0]; } if(!empty($filter) && !empty($saisies[1])) { $filter .= ' '.$conditions[0].' '; }
-    if(!empty($saisies[1])) { $filter .= $criteres[1].':'.$saisies[1]; } if(!empty($filter) && !empty($saisies[2])) { $filter .= ' '.$conditions[1].' '; }
-    if(!empty($saisies[2])) { $filter .= $criteres[2].':'.$saisies[2]; } if(!empty($filter) && !empty($saisies[3])) { $filter .= ' '.$conditions[2].' '; }
-    if(!empty($saisies[3])) { $filter .= $criteres[3].':'.$saisies[3]; }
+    if(!empty($saisies[0])) { $filter .= $criteres[0].':'.$this->quotize($saisies[0]); } if(!empty($filter) && !empty($saisies[1])) { $filter .= ' '.$conditions[0].' '; }
+    if(!empty($saisies[1])) { $filter .= $criteres[1].':'.$this->quotize($saisies[1]); } if(!empty($filter) && !empty($saisies[2])) { $filter .= ' '.$conditions[1].' '; }
+      if(!empty($saisies[2])) { $filter .= $criteres[2].':'.$this->quotize($saisies[2]); } if(!empty($filter) && !empty($saisies[3])) { $filter .= ' '.$conditions[2].' '; }
+      if(!empty($saisies[3])) { $filter .= $criteres[3].':'.$this->quotize($saisies[3]); }
 
     // Dates
     if(!empty($filter) && !empty($dates)) {
@@ -223,34 +216,42 @@ class rechercheActions extends sfActions
     if(!empty($dates['arret'])) { $filter .= 'date_arret:'.$dates['arret']; }
     if(!empty($dates['debut']) && !empty($dates['fin'])) {
       if(!empty($dates['arret'])) { $filter .= ' OR '; }
-      $filter .= 'date_arret:'.$dates['debut'].'TO'.$dates['fin'];
+      $filter .= 'date_arret:['.$dates['debut'].' TO '.$dates['fin'].']';
     }
 
     // Références
-    if(!empty($filter) && !empty($references)) { $filter .= ' AND references:'.$references; }
+    if(!empty($filter) && !empty($references)) { $filter .= ' references:'.$references; }
     elseif(!empty($references)) { $filter .= 'references:'.$references; }
 
     // Pays
     if(!empty($total) && !empty($pays)) {
       if(intval($total) !== count($pays)) {
         if(!empty($filter)) {
-          $filter .= ' AND ';
+          $filter .= ' ';
         }
         $nb = count($pays); $i = 1;
-        foreach ($pays as $p) {
-          $filter .= 'pays:"'.$p.'"';
-          if($i < $nb) { $filter .= ' OR '; }
-          $i++;
-        }
+	if ($nb) {
+	  $filter .= '( ';
+	  foreach ($pays as $p) {
+	    $quote = '';
+	    if (preg_match('/ /', $p))
+	      $quote = '"';
+	    $filter .= 'pays:'.$quote.$p.$quote;
+	    if($i < $nb) { $filter .= ' OR '; }
+	    $i++;
+	  }
+	  $filter .= ' ) ';
+	}
 
       }
     }
 
-    if(!empty($query) || !empty($filter)) {
-      if(!empty($query)) { $query = urlencode($query); } else { $query = '+'; }
-      //$this->redirect('@recherche_resultats?query='.$query.'&filter='.urlencode($filter));
-      $this->query = $query;
-      $this->filter = $filter;
+    $filter = preg_replace('/content:/', '', $filter);
+    $filter = preg_replace('/ AND /', ' ', $filter);
+    $filter = preg_replace('/ NOT /', ' !', $filter);
+
+    if(!empty($filter)) {
+      return $this->redirect('@recherche_resultats?query='.urlencode($filter));
     }
 
   }
