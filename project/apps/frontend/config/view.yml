@@ -7,7 +7,7 @@ default:
 
   metas:
     title:        Juricaf
-    description:  La base de données de jurisprudence francophone
+    description:  La jurisprudence francophone des cours suprêmes
     keywords:     jurisprudence, cassation, cour, suprême, francophone, francophonie, ahjucaf, arrêt, décision
     language:     fr
     #robots:       index, follow
