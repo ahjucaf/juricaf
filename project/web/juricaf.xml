@@ -4,10 +4,10 @@
  <Description>La jurisprudence francophone des cours suprêmes</Description>
  <Tags>juricaf jurisprudence jurisprudences francophone</Tags>
  <Contact>contact@juricaf.org</Contact>
- <Url type="text/html" template="http://v2.juricaf.org/recherche?q={searchTerms}"/>
+ <Url type="text/html" template="http://www.juricaf.org/recherche?q={searchTerms}"/>
  <LongName>Rechercher sur Juricaf.org</LongName>
- <Image height="64" width="64" type="image/png">http://v2.juricaf.org/images/search.png</Image>
- <Image height="16" width="16" type="image/vnd.microsoft.icon">http://v2.juricaf.org/favicon.ico</Image>
+ <Image height="64" width="64" type="image/png">http://www.juricaf.org/images/search.png</Image>
+ <Image height="16" width="16" type="image/vnd.microsoft.icon">http://www.juricaf.org/favicon.ico</Image>
  <Query role="example" searchTerms="france"/>
  <Developer>Juricaf Development Team</Developer>
  <Attribution>
