@@ -179,9 +179,12 @@ foreach ($resultats->response->docs as $resultat) {
   if ($resultat->formation) {
     $formation = ', '.$resultat->formation;
   }
-  echo '<div class="extra"><span class="pays '.preg_replace('/ /', '_', $resultat->pays).'">'.$resultat->pays.'</span> - <span class="date">'.date('d/m/Y', strtotime($resultat->date_arret)).'</span> - <span class="juridiction">'.$resultat->juridiction.$formation.'</span> - <span class="num">'.$resultat->num_arret.'</span>';
+  echo '<div class="extra"><span class="pays '.preg_replace('/ /', '_', $resultat->pays).'">'.$resultat->pays.'</span> - <span class="date">'.date('d/m/Y', strtotime($resultat->date_arret)).'</span> - <span class="juridiction">'.$resultat->juridiction.$formation.'</span>';
   if(isset($resultat->ecli)) {
     echo ' - <span class="num">'.$resultat->ecli.'</span>';
+  }
+  if(isset($resultat->urnlex)) {
+    echo ' - <span class="num">'.$resultat->urnlex.'</span>';
   }
   echo '</div></div>';
 }
