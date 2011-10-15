@@ -97,7 +97,7 @@ function linkifyAnalyses($titrage) {
   foreach ($values as $value) {
     if($i == 0) { $link[$i] = $value; }
       else { $link[$i] = $link[$i-1].' - '.$value; }
-      $titrage .= link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents($link[$i]).'"').' - '; // &facets=order:pertinance
+      $titrage .= link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents(str_replace("\n", " ", $link[$i])).'"').' - '; // &facets=order:pertinance
       $i++;
   }
   return rtrim($titrage, '- ').'.';
@@ -144,7 +144,7 @@ $contributors = '';
       $contributors .= 'Commissaire gouvernement : <em>'.link_to($document->commissaire_gvt, '@recherche_resultats?query=commissaire_gvt:"'.replaceAccents($document->commissaire_gvt).'"').'</em><br />';
     }
     if (isset($document->avocats)) {
-      $contributors .= 'Avocats : <em>'.link_to($document->avocats, '@recherche_resultats?query=avocats:"'.replaceAccents($document->avocats).'"').'</em><br />';
+      $contributors .= 'Avocat(s) : <em>'.link_to($document->avocats, '@recherche_resultats?query=avocats:"'.replaceAccents($document->avocats).'"').'</em><br />';
     }
     $contrib = true;
   }
@@ -449,9 +449,9 @@ if (!empty($citations)) {
       echo '<hr /><h3>Publications :</h3>';
         foreach($references['PUBLICATION'] as $value) {
           if(isset($value['url'])) {
-            echo '<a href="'.htmlentities($value['url']).'">'.$value['titre'].'</a><br />';
+            echo '<a href="'.urlencode($value['url']).'">'.$value['titre'].'</a><br />';
           }
-          elseif(strpos(strtolower($value['titre']), 'lebon') !== false) {
+          elseif(strpos(strtolower($value['titre']), 'lebon') !== false || strpos(strtolower($value['titre']), 'Publié au bulletin') !== false) {
             echo link_to($value['titre'], '@recherche_resultats?query=references:"'.$value['titre'].'"').'<br />';
           }
           else { echo $value['titre'].'<br />'; }
