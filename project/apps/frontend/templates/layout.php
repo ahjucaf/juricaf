@@ -66,7 +66,7 @@
     <!--
     function juricafSearch() {
       if (window.external && ("AddSearchProvider" in window.external)) {
-        window.external.AddSearchProvider("http://v2.juricaf.org/juricaf.xml");
+        window.external.AddSearchProvider("http://www.juricaf.org/juricaf.xml");
       }
       else {
          alert("Votre navigateur ne supporte pas cette fonctionnalité");
