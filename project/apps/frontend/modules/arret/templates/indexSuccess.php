@@ -330,23 +330,30 @@ if (!empty($citations)) {
     if (isset($document->saisines)) {
       echo '<hr />';
       echo '<h3>Saisine : </h3>';
-      if (isset($document->saisines['saisine'])) {
-        foreach($document->saisines['saisine'] as $key => $values) {
-          echo '<div>';
-          if(is_array($values) || is_object($values)) {
-            foreach($values as $key => $value) {
+      if (isset($document->saisines)) {
+        if(is_array($document->saisines)) {
+          foreach($document->saisines as $key => $values) {
+            echo '<div>';
+            if(is_array($values) || is_object($values)) {
+              foreach($values as $key => $value) {
+                echo '<blockquote><p>';
+                echo simple_format_text($value);
+                echo '</p></blockquote>';
+              }
+            }
+            else {
               echo '<blockquote><p>';
-              echo $value;
-              echo '</p></blockquote>';
+                echo simple_format_text($values);
+                echo '</p></blockquote>';
             }
           }
-          else {
-            echo '<blockquote><p>';
-              echo $values;
-              echo '</p></blockquote>';
-          }
+          echo '</div>';
         }
-        echo '</div>';
+        else {
+          echo '<div><blockquote><p>';
+          echo simple_format_text($document->saisines);
+          echo '</p></blockquote></div>';
+        }
       }
     }
 
@@ -450,7 +457,7 @@ if (!empty($citations)) {
           else { echo $value['titre'].'<br />'; }
         }
     }
-    
+
     // Lien télécharger le document
     if($document->pays == 'France') {
       if(strpos($document->id_source, "CONSTEXT") !== false || strpos($document->id_source, "JURITEXT") !== false || strpos($document->id_source, "CETATEXT") !== false) {
@@ -469,9 +476,6 @@ if (!empty($citations)) {
       echo '<hr /><p>Origine : <em>'.link_to($document->fonds_documentaire, '@recherche_resultats?query=fonds_documentaire:"'.replaceAccents($document->fonds_documentaire).'"').'</em></p><br />';
     }
     ?>
-  </div>
-  <div class="extra">
-    <a href="/couchdb/_utils/document.html?<?php echo sfConfig::get('app_couchdb_database');?>/<?php echo $document->_id; ?>">Admin</a>
   </div>
   <div class="download">
   <?php //echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
