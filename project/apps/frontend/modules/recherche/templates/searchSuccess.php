@@ -95,6 +95,17 @@ else {
 }
 
 if (trim($query) !== '' || isset($title_facet)) {
+  $pays_noindex = array(
+  "Bénin",
+  "Mali",
+  "Madagascar",
+  "Luxembourg",
+  "Guinée",
+  "Haïti",
+  "Sénégal",
+  "Tchad"
+  );
+
   if(isset($title_facet) && trim($query) == '') {
     $title = 'Collection : '.$title_facet.' - Juricaf';
     $description = $resultats->response->numFound.' arrêts dans la collection "'.$title_facet.'"';
@@ -104,6 +115,11 @@ if (trim($query) !== '' || isset($title_facet)) {
     $title = 'Résultats de votre recherche "'.trim($query).'" sur la collection : "'.$title_facet.'" - Juricaf';
     $description = $resultats->response->numFound.' arrêts correspondants à la recherche '.trim($query).' dans la collection "'.$title_facet.'"';
     $keywords = 'jurisprudences francophones '.$title_facet.' pour '.trim($query).' juricaf';
+  }
+  if(isset($title_facet)) {
+    foreach ($pays_noindex as $noindex) {
+      if(strpos($title_facet, $noindex) !== false) { $sf_response->addMeta('robots', 'noindex', false, false, false); }
+    }
   }
   if(!isset($title_facet) && trim($query) !== '') {
     $title = 'Résultats de votre recherche "'.trim($query).'" - Juricaf';
@@ -183,9 +199,11 @@ foreach ($resultats->response->docs as $resultat) {
   if(isset($resultat->ecli)) {
     echo ' - <span class="num">'.$resultat->ecli.'</span>';
   }
+  /* en attente
   if(isset($resultat->urnlex)) {
     echo ' - <span class="num">'.$resultat->urnlex.'</span>';
   }
+  */
   echo '</div></div>';
 }
 ?>
