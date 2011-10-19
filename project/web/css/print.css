@@ -1,0 +1,8 @@
+body { font-size: 0.8em; text-align: justify; background: url('images/juricaf.png') ; }
+h1 { font-size: 1em; }
+h2, h3 { font-size: 0.9em; color: #21409A; }
+hr { border: 1px dashed #EBEBEB; }
+a { color: #21409A; }
+.head, .bottom img, .form_recherche, #top { display: none; }
+#logo { display: block; }
+img { border: none; }
