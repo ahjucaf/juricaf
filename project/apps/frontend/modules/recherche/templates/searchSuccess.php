@@ -133,6 +133,7 @@ if (trim($query) !== '' || isset($title_facet)) {
 //////////////////
 //  Gestion des facettes
 //////////////////
+if ($resultats->response->numFound !== 0) {
 ?>
 <div class="facets">
 <?php
@@ -175,6 +176,7 @@ include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction'
 ?>
 </div>
 <?php
+}
   //////////////////////////////////
   /// Affichage des résultats
   //////////////////////////////////
