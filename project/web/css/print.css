@@ -1,9 +1,9 @@
-body { font-size: 0.8em; text-align: justify; background: url('images/juricaf.png') ; }
+body { font-size: 0.8em; text-align: justify; }
 h1 { font-size: 1em; }
 h2, h3 { font-size: 0.9em; color: #21409A; }
-blockquote a { color: #4F4F4F; text-decoration: none;}
+blockquote a { color: #4F4F4F; }
 hr { border: 1px dashed #EBEBEB; }
-a { color: #21409A; }
-.head, .bottom img, .form_recherche, #top { display: none; }
+a { color: #21409A; text-decoration: none; }
+.head, .bottom img, .form_recherche, #top, #print { display: none; }
 #logo { display: block; }
 img { border: none; }

@@ -103,3 +103,4 @@ blockquote a:hover { color: #4F4F4F; text-decoration: underline; }
   float: left;
   margin-right: 5%;
 }
+#print { float: right; }

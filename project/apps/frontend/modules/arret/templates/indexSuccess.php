@@ -289,7 +289,7 @@ if (!empty($citations)) {
 
 ?>
   <div class="arret">
-    <h1><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre; ?></h1>
+    <h1 id="titre"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre; ?></h1>
     <?php
     if (isset($document->titre_supplementaire)) {
       echo '<h2>'.$document->titre_supplementaire.'</h2>';
@@ -494,3 +494,8 @@ if(!empty($keywords)) {
 $sf_response->addMeta('Keywords', $keywords);
 }
 ?>
+<script type="text/javascript">
+<!--
+$('#titre').append('<span id="print"><a href="javascript:print();"><img src="/images/printer.png" alt="Imprimer" title="Imprimer" /></a></span>');
+// -->
+</script>
