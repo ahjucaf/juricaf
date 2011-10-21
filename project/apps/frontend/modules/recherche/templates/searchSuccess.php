@@ -28,6 +28,12 @@ function pathToFlag($str) {
     </span>
     <?php
   }
+  else { ?>
+    <span class="search_out">
+      <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="S'abonner au flux RSS des résultats les plus récents pour cette recherche" /></a>
+    </span>
+    <?php
+  }
   ?>
 </h1>
 <?php
