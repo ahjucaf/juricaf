@@ -92,16 +92,24 @@ class rechercheActions extends sfActions
     // Début pager
     $pas = 10; // Nb de résultats par page
     $pagenum = htmlentities($request->getParameter('page', 1));
-    $start = ($pagenum - 1) * $pas;
 
+    if($request->getParameter('format') === 'rss') {
+      $this->setTemplate('rss');
+      $pas = 15;
+      $param['sort'] = 'date_arret desc, id asc';
+      $start = 0;
+    }
+    else { $start = ($pagenum - 1) * $pas; }
 
     // Interroge Solr
     $res = $solr->search($solr_query, $start, $pas, $param);
 
     // Un seul résultat = renvoi à l'arrêt en question
-    if ($res->response->numFound == 1) {
+    if ($res->response->numFound == 1 && $request->getParameter('format') !== 'rss') {
       return $this->redirect('@arret?id='.$res->response->docs[0]->id);
     }
+
+    $this->resultats = $res;
 
     // Suite pager
     $lastpage = intval($res->response->numFound / $pas) + 1;
@@ -110,8 +118,6 @@ class rechercheActions extends sfActions
     $this->pager['last']  = ($pagenum != 1) ? $pagenum - 1 : 0;
     $this->pager['end']   = ($pagenum + 1 <= $lastpage) ? $lastpage : 0;
     $this->pager['next']  = ($pagenum + 1 <= $lastpage) ? $pagenum + 1 : 0;
-
-    $this->resultats = $res;
 
     // Facettes et liens pays et juridiction
     $this->facets = array();
@@ -230,18 +236,18 @@ class rechercheActions extends sfActions
           $filter .= ' ';
         }
         $nb = count($pays); $i = 1;
-	if ($nb) {
-	  $filter .= '( ';
-	  foreach ($pays as $p) {
-	    $quote = '';
-	    if (preg_match('/ /', $p))
-	      $quote = '"';
-	    $filter .= 'pays:'.$quote.$p.$quote;
-	    if($i < $nb) { $filter .= ' OR '; }
-	    $i++;
-	  }
-	  $filter .= ' ) ';
-	}
+  if ($nb) {
+    $filter .= '( ';
+    foreach ($pays as $p) {
+      $quote = '';
+      if (preg_match('/ /', $p))
+        $quote = '"';
+      $filter .= 'pays:'.$quote.$p.$quote;
+      if($i < $nb) { $filter .= ' OR '; }
+      $i++;
+    }
+    $filter .= ' ) ';
+  }
 
       }
     }
