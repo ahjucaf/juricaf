@@ -113,6 +113,8 @@ class rechercheActions extends sfActions
 
     // Suite pager
     $lastpage = intval($res->response->numFound / $pas) + 1;
+
+
     $this->pager = array();
     $this->pager['begin'] = ($pagenum != 1) ? 1 : 0;
     $this->pager['last']  = ($pagenum != 1) ? $pagenum - 1 : 0;
