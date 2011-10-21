@@ -44,8 +44,8 @@ if (trim($query) !== '' || isset($title_facet)) {
     $description = 'Les 15 arrêts les plus récents correspondants à cette recherche dans toutes les collections (sur un total de '.$resultats->response->numFound.' résultats)';
   }
 }
+echo '<?xml version="1.0" encoding="UTF-8" ?>';
 ?>
-<?xml version="1.0" encoding="UTF-8" ?>
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
     <title><![CDATA[<?php echo $title; ?>]]></title>
