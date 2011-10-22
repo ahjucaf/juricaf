@@ -222,6 +222,7 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
 }
 
 // METADONNEES //
+if(!empty($document->urnlex)) { $urnlex = $document->urnlex; } else { $urnlex = ''; }
 
 // Pays que les moteurs tiers ne doivent pas indexer
 $pays_noindex = array(
@@ -239,6 +240,10 @@ if(in_array($document->pays, $pays_noindex)) {
   $sf_response->addMeta('robots', 'noindex', false, false, false);
 }
 
+slot("metadata");
+include_partial("metadata", array('dc_identifier_urnlex' => $urnlex, 'dc_identifier_uri' => $sf_request->getUri(), 'pays' => $document->pays,'juridiction' => $document->juridiction,));
+end_slot();
+
 $creator = $document->juridiction;
 if(isset($document->section)) { $creator .= ' '.$document->section; }
 
@@ -248,15 +253,8 @@ if (!empty($citations_analyses)) { $citations .= $citations_analyses; }
 if (!empty($citations_arret)) { $citations .= $citations_arret; }
 if (!empty($sources)) { $citations .= $sources; }
 
-//$sf_response->auto_discovery_link_tag(false, 'http://purl.org/dc/elements/1.1/', 'rel="schema.DC"');
-//$sf_response->auto_discovery_link_tag(false, false, array('rel' => 'schema.DC', 'href' => 'http://purl.org/dc/elements/1.1/'));
-//$sf_response->auto_discovery_link_tag(false, false, array('rel' => 'schema.DCTERMS', 'href' => 'http://purl.org/dc/terms/'));
-//<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
-//<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
-
 // Obligatoire pour ECLI
 $sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
-$sf_response->addMeta('DC.identifier', $sf_request->getUri(), false, false, false);
 // Identifiant ECLI
 if (isset($document->ecli)) { $sf_response->addMeta('DC.isVersionOf', $document->ecli, false, false, false); }
 $sf_response->addMeta('DC.creator', $creator, false, false, false);
@@ -462,9 +460,9 @@ if (!empty($citations)) {
     if($document->pays == 'France') {
       if(strpos($document->id_source, "CONSTEXT") !== false || strpos($document->id_source, "JURITEXT") !== false || strpos($document->id_source, "CETATEXT") !== false) {
         if(!isset($references['PUBLICATION'])) { echo '<hr /><h3>Publications :</h3>'; }
-        if(strpos($document->id_source, "CONSTEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&origine=juriConstit">Télécharger le document</a>'; }
-        if(strpos($document->id_source, "JURITEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&origine=juriJudi">Télécharger le document</a>'; }
-        if(strpos($document->id_source, "CETATEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&origine=juriAdmin">Télécharger le document</a>'; }
+        if(strpos($document->id_source, "CONSTEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriConstit">Télécharger le document</a>'; }
+        if(strpos($document->id_source, "JURITEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriJudi">Télécharger le document</a>'; }
+        if(strpos($document->id_source, "CETATEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriAdmin">Télécharger le document</a>'; }
       }
     }
 
@@ -485,7 +483,7 @@ if (!empty($citations)) {
 // CLASSIQUES //
 $sf_response->setTitle($document->titre.' - Juricaf');
 if(!empty($analyses)) {
-  $sf_response->addMeta('Description', strip_tags(str_replace('</blockquote>', " ", $analyses)));
+  $sf_response->addMeta('Description', truncate_text(strip_tags(str_replace('</blockquote>', " ", $analyses)), 260));
 }
 elseif (!empty($document->texte_arret)) {
   $sf_response->addMeta('Description', truncate_text(strip_tags(str_replace("\n", " ", trim($document->texte_arret))), 260));
@@ -496,6 +494,6 @@ $sf_response->addMeta('Keywords', $keywords);
 ?>
 <script type="text/javascript">
 <!--
-$('#titre').append('<span id="print"><a href="javascript:print();"><img src="/images/printer.png" alt="Imprimer" title="Imprimer" /></a></span>');
+$('#titre').append('<span id="print"><a href="javascript:print();"><img src="/images/printer.png" alt="Imprimer" title="Imprimer" /><\/a><\/span>');
 // -->
 </script>

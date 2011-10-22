@@ -133,6 +133,9 @@ if (trim($query) !== '' || isset($title_facet)) {
     $description = $resultats->response->numFound.' arrêts correspondants à la recherche '.trim($query);
     $keywords = 'Jurisprudences francophones '.trim($query).' juricaf';
   }
+  slot("metadata");
+  include_partial("metadata", array('url_flux' => $sf_request->getUri().'?format=rss', 'titre_flux' => "S'abonner à cette recherche"));
+  end_slot();
   $sf_response->setTitle($title);
   $sf_response->addMeta('description', $description);
   $sf_response->addMeta('keywords', $keywords);
