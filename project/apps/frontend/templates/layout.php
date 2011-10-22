@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
   <head>
     <?php include_http_metas() ?>
+    <?php if(has_slot("metadata")) { include_slot("metadata"); } ?>
     <?php include_metas() ?>
     <?php include_title() ?>
     <link rel="shortcut icon" href="/images/favicon.ico" />
