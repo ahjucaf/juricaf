@@ -255,10 +255,9 @@ if (!empty($sources)) { $citations .= $sources; }
 
 // Obligatoire pour ECLI
 $sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
-// Identifiant ECLI
-if (isset($document->ecli)) { $sf_response->addMeta('DC.isVersionOf', $document->ecli, false, false, false); }
-$sf_response->addMeta('DC.creator', $creator, false, false, false);
-$sf_response->addMeta('DC.coverage', $document->pays, false, false, false);
+if (isset($document->ecli)) { $sf_response->addMeta('DC.isVersionOf', $document->ecli, false, false, false); } // Identifiant ECLI
+$sf_response->addMeta('DC.creator', htmlspecialchars($creator, ENT_QUOTES), false, false, false);
+$sf_response->addMeta('DC.coverage', htmlspecialchars($document->pays, ENT_QUOTES), false, false, false);
 $sf_response->addMeta('DC.date', $document->date_arret, false, false, false);
 $sf_response->addMeta('DC.language', 'FR', false, false, false);
 $sf_response->addMeta('DC.publisher', 'AHJUCAF', false, false, false);
@@ -266,22 +265,22 @@ $sf_response->addMeta('DC.accessRights', 'public', false, false, false);
 $sf_response->addMeta('DC.type', 'judicial decision', false, false, false);
 
 // Facultatif pour ECLI
-// $sf_response->addMeta('DC.title', 'Noms des parties', false, false, false);
+$sf_response->addMeta('DC.title', htmlspecialchars($document->titre, ENT_QUOTES), false, false, false); // Obligatoire pour Zotero ; pour ECLI celle ci devrait accueillir les noms des parties (donc pas possible pour la France)
 if(isset($document->type_affaire)) {
-  $sf_response->addMeta('DC.subject', 'Affaire '.strtolower($document->type_affaire), false, false, false);
+  $sf_response->addMeta('DC.subject', 'Affaire '.htmlspecialchars(strtolower($document->type_affaire), ENT_QUOTES), false, false, false);
 }
 if(!empty($analyses)) {
-  $sf_response->addMeta('DC.abstract', "Analyses : \n".strip_tags(str_replace('</blockquote>', " \n", $analyses)), false, false, false);
+  $sf_response->addMeta('DC.abstract', "Analyses : \n".htmlspecialchars(strip_tags(str_replace('</blockquote>', " \n", $analyses)), ENT_QUOTES), false, false, false);
 }
 if(!empty($keywords)) {
-  $sf_response->addMeta('DC.description', strip_tags(str_replace('</blockquote>', " ", $keywords)), false, false, false);
+  $sf_response->addMeta('DC.description', htmlspecialchars(strip_tags(str_replace('</blockquote>', " ", $keywords)), ENT_QUOTES), false, false, false);
 }
 if(isset($contrib)) {
-  $sf_response->addMeta('DC.contributor', strip_tags(str_replace('<br />', " ;\n", $contributors)), false, false, false);
+  $sf_response->addMeta('DC.contributor', htmlspecialchars(strip_tags(str_replace('<br />', " ;\n", $contributors)), ENT_QUOTES), false, false, false);
 }
 //$sf_response->addMeta('DC.issued', 'Date de publication', false, false, false);
 if (!empty($citations)) {
-  $sf_response->addMeta('DC.references', strip_tags(str_replace('<br />', " ;\n", $citations)), false, false, false);
+  $sf_response->addMeta('DC.references', htmlspecialchars(strip_tags(str_replace('<br />', " ;\n", $citations)), ENT_QUOTES), false, false, false);
 }
 // $sf_response->addMeta('DC.isReplacedBy', 'En cas de renumérotation', false, false, false);
 
