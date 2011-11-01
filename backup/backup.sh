@@ -32,7 +32,7 @@ if [ ! -d $DATA/data ] ; then
   mkdir -p $DATA/data ;
 fi
 
-cd "/var/lib/couchdb/1.0.1/"
+cd "/var/lib/couchdb/0.11.0/"
 echo "=====================================================";
 echo "Sauvegarde de la base couchdb";
 echo "=====================================================";
