@@ -8,6 +8,7 @@ NUMJOUR=$(date '+%u') ;
 JOUR_SAUV_SEM=6 ;
 DER_SEMAINE_TXT=semaine.txt;
 DER_MOIS_TXT=mois.txt;
+VCDB=$(couchdb -V | grep CouchDB | sed 's:[^0-9\.]::g');
 
 echo "=====================================================";
 echo "Désactivation des sites";
@@ -17,9 +18,11 @@ echo $START;
 echo "Version de développement :";
 cd ../project/
 php symfony project:disable prod
-echo "Version de production :";
-cd ../../v2_preprod/project/
-php symfony project:disable prod
+if [ -d ../../v2_preprod/project/ ] ; then
+  echo "Version de production :";
+  cd ../../v2_preprod/project/
+  php symfony project:disable prod
+fi
 echo "Arrêt de Tomcat :"
 /etc/init.d/tomcat6 stop
 
@@ -32,7 +35,7 @@ if [ ! -d $DATA/data ] ; then
   mkdir -p $DATA/data ;
 fi
 
-cd "/var/lib/couchdb/0.11.0/"
+cd "/var/lib/couchdb/$VCDB/"
 echo "=====================================================";
 echo "Sauvegarde de la base couchdb";
 echo "=====================================================";
@@ -61,9 +64,11 @@ echo "Lancement de Tomcat :"
 echo "Version de développement :";
 cd ../project/
 php symfony project:enable prod
-echo "Version de production :";
-cd ../../v2_preprod/project/
-php symfony project:enable prod
+if [ -d ../../v2_preprod/project/ ] ; then
+  echo "Version de production :";
+  cd ../../v2_preprod/project/
+  php symfony project:enable prod
+fi
 DISPO=$(date '+%H:%M:%S') ;
 echo $DISPO;
 
