@@ -104,3 +104,15 @@ blockquote a:hover { color: #4F4F4F; text-decoration: underline; }
   margin-right: 5%;
 }
 #print { float: right; margin-left: 8px; }
+
+#searchbox {
+  background-color: #fff;
+  border-top: 1px solid #EBEBEB;
+  border-bottom: 1px solid #EBEBEB;
+  padding: 2px;
+  display: none;
+}
+
+#collection { font-weight: bold; }
+
+.highlighted { background-color: #EBEBEB; }
