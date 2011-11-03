@@ -112,6 +112,9 @@ function printDecisionAttaquee($ref_or_da) {
     }
     elseif(!empty($decision_attaquee['formation'])) {
       $temp[$i] = $decision_attaquee['formation'];
+      if(empty($decision_attaquee['url'])) {
+        $temp[$i] = link_to($decision_attaquee['formation'], '@recherche_resultats?query=decisions_attaquees:"'.$decision_attaquee['formation'].'"');
+      }
       if(!empty($decision_attaquee['date'])) {
         $temp[$i] .= ', '.dateFr($decision_attaquee['date']);
       }
@@ -139,7 +142,6 @@ function printDecisionAttaquee($ref_or_da) {
     return $html_da;
   }
 }
-
 
 if(isset($document->references)) {
   foreach ($document->getReferences() as $values) {
@@ -259,6 +261,11 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
   }
 }
 
+$decisions_attaquees = '';
+
+if(isset($references['DECISION_ATTAQUEE'])) { $decisions_attaquees = printDecisionAttaquee($references['DECISION_ATTAQUEE']);}
+elseif(isset($document->decisions_attaquees)) { $decisions_attaquees = printDecisionAttaquee($document->decisions_attaquees);}
+
 // METADONNEES //
 if(!empty($document->urnlex)) { $urnlex = $document->urnlex; } else { $urnlex = ''; }
 
@@ -290,6 +297,7 @@ $citations = '';
 if (!empty($citations_analyses)) { $citations .= $citations_analyses; }
 if (!empty($citations_arret)) { $citations .= $citations_arret; }
 if (!empty($sources)) { $citations .= $sources; }
+if (!empty($decisions_attaquees)) { $citations .= $decisions_attaquees; }
 
 // Obligatoire pour ECLI
 $sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
@@ -346,9 +354,6 @@ if (!empty($citations)) {
     if (isset($document->type_recours)) {
       echo 'Type de recours : <em>'.link_to($document->type_recours, '@recherche_resultats?query=type_recours:"'.replaceAccents($document->type_recours).'"').'</em><br />';
     }
-
-    if (isset($references['DECISION_ATTAQUEE'])) { echo printDecisionAttaquee($references['DECISION_ATTAQUEE']);}
-    elseif (isset($document->decisions_attaquees)) { echo printDecisionAttaquee($document->decisions_attaquees);}
 
     echo '<br />';
     if (isset($document->ecli)) {
@@ -434,10 +439,11 @@ if (!empty($citations)) {
         echo simple_format_text(trim($document->texte_arret));
       }
     }
-    if (!empty($citations_arret) || !empty($sources)) {
+    if (!empty($citations_arret) || !empty($sources) || !empty($decisions_attaquees)) {
       echo '<p><em>Références : </em><br />';
       if (!empty($citations_arret)) { echo $citations_arret; }
       if (!empty($sources)) { echo $sources; }
+      if (!empty($decisions_attaquees)) { echo $decisions_attaquees; }
       echo '</p>';
     }
 
@@ -536,81 +542,5 @@ $sf_response->addMeta('Keywords', $keywords);
 <script type="text/javascript">
 <!--
 $('#titre').append('<span id="print"><a href="javascript:print();"><img src="/images/printer.png" alt="Imprimer" title="Imprimer" /><\/a><\/span>');
-
-// Highlighted search box
-previous_terms = '<?php echo str_replace("'", "\'", htmlspecialchars($sf_user->getAttribute('query'), ENT_NOQUOTES)); ?>';
-previous_facets = '<?php echo str_replace("'", "\'", htmlspecialchars($sf_user->getAttribute('facets'), ENT_NOQUOTES)); ?>';
-terms='';
-
-$(".content").append('<div id="searchbox"><input type="text" style="width: 30%; margin-top: 2px;" name="q" id="q" value="" /><select name="critere" id="critere"><option value="content">Plein texte</option><option value="references">Références</option><option value="num_arret">Numéro d’affaire</option><option value="sens_arret">Sens</option><option value="nor">NOR</option><option value="urnlex">URN:LEX</option><option value="ecli">ECLI</option><option value="type_affaire">Type affaire</option><option value="type_recours">Type recours</option><option value="president">Président</option><option value="avocat_gl">Avocat général</option><option value="rapporteur">Rapporteur</option><option value="commissaire_gvt">Commissaire du gouvernement</option><option value="avocats">Avocat</option><option value="parties">Parties</option><option value="analyses">Analyses</option><option value="saisines">Saisine</option><option value="fonds_documentaire">Fonds documentaire</option></select> <input type="checkbox" id="previous" onclick="javascript:updateReq()" title="Inclure les termes de votre dernière recherche" /> <input type="checkbox" id="facets" onclick="javascript:updateReq()" title="Rechercher dans la dernière collection interrogée" /> <input type="button" id="rechercher" onclick="javascript:searchHighlighted()" value="Rechercher dans toutes les collections" /> <span title="Vous pouvez utiliser * pour les troncatures, ! devant un terme ou un nom de champ pour l\'exclure et l\'opérateur OR"><img src="/images/aide.png" alt="?" /></span></div>');
-
-$("#critere").bind("change", function() { updateReq(); });
-
-$(".arret").bind("mouseup", function(e) {
-  e.stopPropagation();
-  terms=window.getSelection();
-  if(terms != '' && terms != ' '){
-    terms=addQuotes(terms);
-    if($('#critere').val() !== 'content') { $("#q").val($('#critere').val()+':'+terms); }
-    else { $("#q").val(terms); }
-    if(previous_terms == '' || previous_terms == ' ') { $('#previous').prop({disabled: 'disabled', title: 'Aucun terme recherché précédemment'}); }
-    if(previous_facets == '') { $('#facets').prop({disabled: 'disabled', title: 'Aucun collection recherchée précédemment'}); }
-    $("#searchbox").css("display", "block");
-    $("#searchbox").offset({ top: e.pageY+12 });
-  }
-  else {
-    $("#searchbox").fadeOut("fast", function () { terms = '';  });
-  }
-});
-
-function searchHighlighted() {
-  req = $('#q').val();
-  if($('#facets').prop('checked')) { req = req+'/'+previous_facets; }
-  lien = '<?php echo url_for('recherche_resultats'); ?>/'+req;
-  window.open(lien);
-  return false;
-}
-
-function addCritere(str) {
-  critere = $('#critere').val();
-  if(critere == 'content') { req = str; }
-  else { req = critere+':'+str; }
-  return req;
-}
-
-function addQuotes(str) {
-  reg_car_spe = new RegExp("[^a-z0-9]", "gi");
-  if (reg_car_spe.test(str)) { str = '\"'+str+'\"'; }
-  return str;
-}
-
-function facetToCollection(str) {
-  // facet_pays_juridiction:France_|_Cour_de_cassation,facet_pays:France
-  var fp=new RegExp("(facet_pays:)", "g");
-  var fpj=new RegExp("(facet_pays_juridiction:)", "g");
-  var virg=new RegExp("(,)", "g");
-  var esp=new RegExp("(_)", "g");
-  collection = str.replace(fp,'');
-  collection = collection.replace(fpj,'');
-  if (collection.match(virg)) { collection = collection.split(virg); collection = collection[0]; }
-  collection = collection.replace(esp,' ');
-  return collection;
-}
-
-function updateReq() {
-  if($('#previous').prop('checked')) {
-    new_req = previous_terms+' '+addCritere(terms);
-  }
-  else {
-    new_req = addCritere(terms);
-  }
-  if($('#facets').prop('checked')) {
-    $('#rechercher').val('Rechercher dans la collection '+facetToCollection(previous_facets));
-  }
-  else {
-    $('#rechercher').val('Rechercher dans toutes les collections');
-  }
-  $('#q').val(new_req);
-}
 // -->
 </script>
