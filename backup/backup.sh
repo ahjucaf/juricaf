@@ -23,8 +23,6 @@ if [ -d ../../v2_preprod/project/ ] ; then
   cd ../../v2_preprod/project/
   php symfony project:disable prod
 fi
-echo "Arrêt de Tomcat :"
-/etc/init.d/tomcat6 stop
 
 echo "=====================================================";
 echo "Utilisation de l'espace disque avant sauvegarde";
@@ -59,8 +57,7 @@ cd $DATA
 echo "=====================================================";
 echo "Réactivation des sites";
 echo "=====================================================";
-echo "Lancement de Tomcat :"
-/etc/init.d/tomcat6 start
+
 echo "Version de développement :";
 cd ../project/
 php symfony project:enable prod
