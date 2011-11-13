@@ -30,6 +30,9 @@ php compare.php
 echo $DATE >> $LOG
 if [ -e $TO_UPDATE ]
 then
+echo -e "\n=====================================================";
+echo "|                 Mise à jour Dila                  |" ;
+echo "=====================================================";
 ./detar.sh
 mv $OLDLOG log/$DATE-old.log
 mv $NEWLOG log/$DATE-new.log

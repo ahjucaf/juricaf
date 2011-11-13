@@ -21,26 +21,25 @@ POOL=../data/pool
 TOPROCESS=log/to_detar_update.txt
 LOCK=/tmp/import.sh.lock
 DIRLOGSUPP=log/suppression
-GLOBALDELETELOG=log/suppression/global.log
 FULLIMPORT=log/full_import.lock
 TORESUME=log/to_resume.txt
+WAIT=60
 
 if [ -e $LOCK ]
 then
   if ! ps --pid $(cat $LOCK) > /dev/null ; then
-    echo "L'import est locké mais n'est pas en cours" ;
-  else
-    echo "Import tiers en cours" ;
+    echo -e "\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+    echo "Erreur : juricaf2couchdb est vérouillé mais n'est pas en cours de fonctionnement : L'extraction a été annulée." ;
+    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+    exit 1
   fi
-  echo "Extraction annulée : aucune opération effectuée" ;
-  exit 1
 fi
 
 if test "$1" ; then
   echo "Extraire TOUS les documents dila ? (les crons doivent être désactivés et les bdd vidées) : veuillez confirmer (y/n)"
   read AA;
   TOPROCESS=log/to_detar_all.txt
-  > $GLOBALDELETELOG
+  > $DIRLOGSUPP/global.log
   > $FULLIMPORT
   find $FTP/ -name "*.tar.gz" | xargs stat -c "%Y#%n" > $TOPROCESS
   php sort.php
@@ -48,121 +47,169 @@ fi
 
 if [ -e $TORESUME ]
 then
-  echo "Le fichier de reprise de la précédante opération est utilisé"
+  echo "Ok : Le fichier de reprise de la précédante opération est utilisé"
   TOPROCESS=$TORESUME ;
 fi
 
 for fichier in $(cat $TOPROCESS);
   do
+  echo -e "\n=====================================================";
   echo "Décompression de $fichier" ;
+  echo "=====================================================";
   tar -zxvf "$FTP/$fichier" -C "$DATA" ;
 
-  echo "Conversion des fichiers de $fichier" ;
+  echo -e "\n=====================================================";
+  echo "Conversion des fichiers" ;
+  echo "=====================================================";
   ./extract.sh ;
 
   if find $DATA/ -name "*.dat" > /dev/null; then
-    echo "Sauvegarde des ordres de suppression de $fichier" ;
+    echo -e "\n=====================================================";
+    echo "Traitement des ordres de suppression"
+    echo "=====================================================";
+    echo "* Sauvegarde des ordres de suppression :" ;
     NOTGZ=$(echo $fichier | sed "s/\(.*\)\(ahjucaf_.*\).tar.gz/\2/gi");
     find $DATA/ -name "*.dat" | xargs cat >> $DIRLOGSUPP/$NOTGZ.dat ;
+    if [ $? -eq 0 ] ; then
+      echo "Ok : $DIRLOGSUPP/$NOTGZ.dat créé";
+    fi
+
     if test -s $DIRLOGSUPP/$NOTGZ.dat ; then
-      echo "Application des ordres de suppression de $fichier" ;
-      for fichier_suppr in $(cat $DIRLOGSUPP/$NOTGZ.dat);
+      if [ -e $DIRLOGSUPP/$NOTGZ.log ] ; then rm $DIRLOGSUPP/$NOTGZ.log ; fi
+      echo -e "\n* Application des ordres de suppression :" ;
+      for fichier_suppr in $(php unique_sup_order.php $DIRLOGSUPP/$NOTGZ.dat);
       do
-        if [ -e $ARCHIVE/$fichier_suppr.xml ] ; then
-          DOC_ID=$(php dila2juricaf.php $ARCHIVE/$fichier_suppr.xml 1)
-          # évolution : interroger solr directement
-          if echo $DOC_ID | grep " "  > /dev/null; then
-            echo "$NOTGZ Erreur : L'identifiant de $ARCHIVE/$fichier_suppr.xml n'a pas pu être déterminé correctement ($DOC_ID)" >> $GLOBALDELETELOG
+        # Identifiant Juricaf récupéré depuis solr
+        ID_DILA=$(echo "$fichier_suppr" | sed 's:.*/::')
+        ID_JURICAF=$(php getIdFromSolr.php $ID_DILA)
+        # Si le résultat de l'interrogation solr contient un espace c'est une erreur donc on l'affiche
+        if echo $ID_JURICAF | grep " "  > /dev/null; then
+          echo "$NOTGZ : $ID_JURICAF" >> $DIRLOGSUPP/$NOTGZ.log
+        else
+          # Le document existe dans solr, on interroge couchdb
+          DOC_COUCHDB=$(curl -s GET $COUCHDBURL/$ID_JURICAF) ;
+          # Si le document n'existe pas dans couchdb
+          if echo $DOC_COUCHDB | grep "not_found" > /dev/null; then
+            echo "$NOTGZ : Erreur : $ID_JURICAF ($ID_DILA) existe dans solr mais pas dans couchdb" >> $DIRLOGSUPP/$NOTGZ.log
+          # S'il existe
           else
-            if [ ! -d $DELETED/$NOTGZ ] ; then
-              mkdir $DELETED/$NOTGZ ;
-            fi
-            cp -f $ARCHIVE/$fichier_suppr.xml $DELETED/$NOTGZ/
-            rm $ARCHIVE/$fichier_suppr.xml
-            echo "$DOC_ID a été sauvegardé dans $DELETED/$NOTGZ et supprimé des archives Dila avec succès ($ARCHIVE/$fichier_suppr.xml)" >> $GLOBALDELETELOG
-            if echo $(curl -s GET $COUCHDBURL/$DOC_ID | grep "not_found") > /dev/null; then
-              echo "$NOTGZ Erreur : $DOC_ID existait dans les archives mais non trouvé dans couchdb ($ARCHIVE/$fichier_suppr.xml)" >> $GLOBALDELETELOG
+          # Suppression
+            REV=$(curl --stderr /dev/null $COUCHDBURL/$ID_JURICAF | sed 's/.*_rev":"//' | sed 's/",".*//' 2> /dev/null)
+            if curl -X DELETE $COUCHDBURL/$ID_JURICAF?rev=$REV | grep -v $ID_JURICAF > /dev/null; then
+              echo "$NOTGZ : Erreur : $ID_JURICAF ($ID_DILA) existe dans solr et couchdb mais n'a pas pu en être supprimé" >> $DIRLOGSUPP/$NOTGZ.log
             else
-              if echo $(curl -s DELETE $COUCHDBURL/$DOC_ID?rev=$(curl --stderr /dev/null $COUCHDBURL/$DOC_ID | sed 's/.*_rev":"//' | sed 's/",".*//' 2> /dev/null) | grep -v $DOC_ID) > /dev/null; then
-                echo "$NOTGZ Erreur : $DOC_ID existe dans couchdb mais n'a pas pu en être supprimé" >> $GLOBALDELETELOG
+              echo "$NOTGZ : $ID_JURICAF ($ID_DILA) a été supprimé de couchdb avec succès" >> $DIRLOGSUPP/$NOTGZ.log
+              # Archivage du xml dila
+              if [ -e $ARCHIVE/$fichier_suppr.xml ] ; then
+                if [ ! -d $DELETED/$NOTGZ ] ; then
+                  mkdir $DELETED/$NOTGZ ;
+                fi
+                cp -f $ARCHIVE/$fichier_suppr.xml $DELETED/$NOTGZ/
+                rm $ARCHIVE/$fichier_suppr.xml
+                echo "$NOTGZ : $ID_JURICAF ($ID_DILA) a été sauvegardé dans $DELETED/$NOTGZ" >> $DIRLOGSUPP/$NOTGZ.log
               else
-                echo "$DOC_ID a été supprimé de couchdb avec succès" >> $GLOBALDELETELOG
+                echo "$NOTGZ : $ID_JURICAF ($ID_DILA) n'a pas été sauvegardé" >> $DIRLOGSUPP/$NOTGZ.log
               fi
             fi
           fi
-        else
-          echo "$NOTGZ Erreur : $ARCHIVE/$fichier_suppr.xml n'existe pas" >> $GLOBALDELETELOG
         fi
       done
-      if cat $GLOBALDELETELOG | grep "$NOTGZ Erreur" > /dev/null ; then
-        echo "Certains ordres de suppression requièrent des vérifications manuelles :"
-        cat $GLOBALDELETELOG | grep "$NOTGZ Erreur" ;
+      # Vérifie si des erreurs sont loguées
+      if cat $DIRLOGSUPP/$NOTGZ.log | grep "Erreur" > /dev/null ; then
+        echo -e "\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+        echo "Certains ordres de suppression requièrent des vérifications manuelles"
+        echo -e "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
       else
-        echo "Avec succès"
+        echo -e "Ok : Tous les ordres de suppression ont été appliqués avec succès\n"
       fi
+      echo -e "* Rapport :"
+      cat $DIRLOGSUPP/$NOTGZ.log ;
     else
-      echo "Le fichier d'ordres de suppression de $fichier est vide"
+      echo "Ok : Le fichier d'ordres de suppression de $fichier est vide"
     fi
   else
-    echo "Aucun ordre de suppression dans $fichier"
+    echo "Ok : Aucun ordre de suppression dans $fichier"
   fi
 
-  echo "Archivage des fichiers originaux de $fichier" ;
+  echo -e "\n=====================================================";
+  echo "Archivage des fichiers originaux" ;
+  echo "=====================================================";
   EXTRACTEDDIR=$(echo $fichier | sed "s/\(.*\)ahjucaf_\(.*\).tar.gz/\2/g");
   if [ -e $DATA/$EXTRACTEDDIR ]
     then
     cp -R -f $DATA/$EXTRACTEDDIR/* $ARCHIVE/
+    if [ $? -eq 0 ] ; then
+      echo "Ok : Archivés";
+    fi
     rm -R $DATA/*
   else
     cp -R -f $DATA/* $ARCHIVE/
+    if [ $? -eq 0 ] ; then
+      echo "Ok : Archivés";
+    fi
     rm -R $DATA/*
   fi
 
-  # Vérif indexation en cours
-  if [ -e $LOCK ]
-  then
-    if ! ps --pid $(cat $LOCK) > /dev/null ; then
-      echo "Erreur : L'import est locké mais ne semble pas être en cours" ;
-    else
-      echo "Erreur : Import tiers en cours" ;
-    fi
-    echo "Les fichiers de $fichier sont restés dans $CONVERTED" ;
-    echo "Tentative de création d'un fichier de reprise" ;
-    RESUME=$(echo $fichier | sed 's:\/:\\/:g' | sed 's:\.:\\.:g') ;
-    declare -i NUM_LIGNE=$(cat $TOPROCESS | grep -n "$fichier" | sed "s:\:$RESUME::") ;
-    echo "Si la prochaine ligne est $fichier : le processus reprendra automatiquement au prochain lancement"
-    if (($NUM_LIGNE != 1)) && let $NUM_LIGNE 2>/dev/null ;
-      then
-        declare -i AV_DER_LIGNE=$NUM_LIGNE-1 ;
-        cat $TOPROCESS | sed "1,$AV_DER_LIGNE d" > $TORESUME ;
-        cat $TORESUME ;
+  echo -e "\n=====================================================";
+  echo "Transmission des fichiers convertis à juricaf2couchdb" ;
+  echo "=====================================================";
+
+  # Vérifie l'état de juricaf2couchdb avant de transmettre les fichiers, diffère la transmission ou génère un fichier de reprise suivant la situation
+  function transmitFilesToImport()
+  {
+    if [ -e $LOCK ]
+    then
+      if ! ps --pid $(cat $LOCK) > /dev/null ; then
+        echo -e "\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+        echo "Erreur : juricaf2couchdb est vérouillé mais n'est pas en cours de fonctionnement" ;
+        echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+        echo "Les fichiers convertis sont restés dans $CONVERTED" ;
+        echo "Tentative de création d'un fichier de reprise" ;
+        RESUME=$(echo $fichier | sed 's:\/:\\/:g' | sed 's:\.:\\.:g') ;
+        declare -i NUM_LIGNE=$(cat $TOPROCESS | grep -n "$fichier" | sed "s:\:$RESUME::") ;
+        echo "Si la ligne suivante est égale à $fichier : le processus pourra reprendre automatiquement au lancement manuel de detar.sh"
+        if (($NUM_LIGNE != 1)) && let $NUM_LIGNE 2>/dev/null ;
+          then
+            declare -i AV_DER_LIGNE=$NUM_LIGNE-1 ;
+            cat $TOPROCESS | sed "1,$AV_DER_LIGNE d" > $TORESUME ;
+            cat $TORESUME ;
+          else
+            cat $TOPROCESS
+        fi
+        if [ -e $DIRLOGSUPP/$NOTGZ.dat ]
+          then
+          echo "Le log de suppression sauvegardé en $DIRLOGSUPP/$NOTGZ.log.bak doit être comparé à $DIRLOGSUPP/$NOTGZ.dat lors de la reprise"
+          cp $DIRLOGSUPP/$NOTGZ.log $DIRLOGSUPP/$NOTGZ.log.bak
+        fi
+        exit 1
       else
-        cat $TOPROCESS
+        echo "Import tiers en cours attente de $WAIT secondes" ;
+        sleep $WAIT ;
+        transmitFilesToImport ;
+      fi
+    else
+      if [ -e $CONVERTED/France ] ; then
+        cp -R -f $CONVERTED/France $POOL/
+        rm -R $CONVERTED/France
+        echo "Ok : Les fichiers convertis ont été placés dans le pool" ;
+        if [ -e $FULLIMPORT ] ; then
+          echo "Lancement de l'import des fichiers de $fichier" ;
+          ../juricaf2solr/juricaf2couchdb/import.sh ;
+        fi
+      else
+        echo "Ok : La mise à jour ne contenait pas de fichiers à convertir" ;
+      fi
     fi
-    if [ -e $DIRLOGSUPP/$NOTGZ.dat ]
-      then
-      echo "Sauvegarde du log de suppression en $DIRLOGSUPP/$NOTGZ.$START.bak à comparer à $DIRLOGSUPP/$NOTGZ.dat lors de la reprise"
-      cp $GLOBALDELETELOG $GLOBALDELETELOG.$START.bak
-    fi
-    echo "Extraction stoppée suite à l'erreur précédante" ;
-    exit 1
-  else
-    cp -R -f $CONVERTED/* $POOL/
-    rm -R $CONVERTED/*
-    echo "Les fichiers convertis ont été placés dans le pool" ;
-    if [ -e $FULLIMPORT ] ; then
-      echo "Lancement de l'import des fichiers de $fichier" ;
-      ../juricaf2solr/juricaf2couchdb/import.sh ;
-    fi
-  fi
+  }
+  transmitFilesToImport ;
 done
 
-cp -f $GLOBALDELETELOG $GLOBALDELETELOG.$START.log
+cat $DIRLOGSUPP/$NOTGZ.log >> $DIRLOGSUPP/global.log ;
 
-if [ -e $FULLIMPORT ] ; then
-  rm $FULLIMPORT;
-fi
+if [ -e $TORESUME ] ; then rm $TORESUME ; fi
+if [ -e $FULLIMPORT ] ; then rm $FULLIMPORT ; fi
 
 END=$(date '+%d-%m-%Y-%H:%M:%S') ;
 
+echo -e "\n=====================================================";
 echo "Début : $START , Fin : $END" ;
