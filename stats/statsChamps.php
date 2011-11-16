@@ -35,9 +35,9 @@ catch (Exception $error) { die('Erreur : '.$error->getMessage()); }
 
 $req = $bdd->query('SELECT * FROM '.$DBTABLE);
 
-$csv = '"Pays";"Institution";"Nb"';
+$csv = '"Pays";"Institution";"Nombre"';
 $tableau = "<table class=\"statsbase\">\n";
-$tableau .= '<tr><th>Pays</th><th>Institution</th><th>Nb</th>';
+$tableau .= '<tr><th>Pays</th><th>Institution</th><th>Nombre</th>';
 
 foreach ($criteres as $value) {
   $csv .= ';'.$value;
