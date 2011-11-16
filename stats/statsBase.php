@@ -36,6 +36,9 @@ function returnLicenceLink($value) {
   if(strpos($value, 'AHJUCAF') !== false) {
     $value = str_replace('AHJUCAF', '<a href="http://www.juricaf.org/documentation/licence_ahjucaf.php">AHJUCAF</a>', $value);
   }
+  if(strpos($value, 'Légifrance') !== false) {
+    $value = str_replace('Légifrance', '<a href="http://www.legifrance.gouv.fr/Informations/Licences">Légifrance</a>', $value);
+  }
   return $value;
 }
 
@@ -73,11 +76,11 @@ catch (Exception $error) { die('Erreur : '.$error->getMessage()); }
 
 $req = $bdd->query('SELECT * FROM '.$DBTABLE);
 
-$csv = '"Pays";"Institution";Nb;"Etat";"Mise à jour";"Selection";"Traduction";"Plus ancien";"Plus récent";"Licence"';
+$csv = '"Pays";"Institution";Nombre;"Etat";"Mise à jour";"Selection";"Traduction";"Plus ancien";"Plus récent";"Licence"';
 $csv .= "\n";
 
 $tableau = "<table class=\"statsbase\">\n";
-$tableau .= "<tr><th>Pays</th><th>Institution</th><th>Nb</th><th>Etat</th><th>Mise à jour</th><th>Selection</th><th>Traduction</th><th>Plus ancien</th><th>Plus récent</th><th>Licence</th></tr>\n";
+$tableau .= "<tr><th>Pays</th><th>Institution</th><th>Nombre</th><th>Etat</th><th>Mise à jour</th><th>Selection</th><th>Traduction</th><th>Plus ancien</th><th>Plus récent</th><th>Licence</th></tr>\n";
 $classe = "color2";
 
 while ($donnees = $req->fetch())

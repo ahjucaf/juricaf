@@ -23,7 +23,7 @@
         <div class="menu">
           <ul>
             <li><a href="/documentation/a_propos.php">A propos</a></li>
-            <li><a href="/stats">Étendue des collections</a></li>
+            <li><a href="/documentation/stats/statuts.php">Étendue des collections</a></li>
 <!---            <li><a href="#">Outils</a></li> -->
             <li><a href="/documentation/partenaires.php">Partenaires</a></li>
             <li><a href="/documentation/contact.php">Contact</a></li>
