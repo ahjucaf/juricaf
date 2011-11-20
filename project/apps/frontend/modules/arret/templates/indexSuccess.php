@@ -103,9 +103,9 @@ function linkifyAnalyses($titrage) {
   return rtrim($titrage, '- ').'.';
 }
 
-
-function printDecisionAttaquee($ref_or_da) {
+function printDecisionAttaquee($ref_or_da, $is_text = 0) {
   $i = 0; $temp = array();
+  if(isset($ref_or_da['decision_attaquee'][0])) { $ref_or_da = $ref_or_da['decision_attaquee']; }
   foreach ($ref_or_da as $decision_attaquee) {
     if(!empty($decision_attaquee['titre'])) {
       $temp[$i] = $decision_attaquee['titre'];
@@ -132,13 +132,17 @@ function printDecisionAttaquee($ref_or_da) {
   }
   if(count($temp) > 0) {
     if(count($temp) > 1) {
-      $html_da = 'Décisions attaquées : <ul>';
+      if($is_text > 0) { $type_da = 'Textes attaqués'; } else { $type_da = 'Décisions attaquées'; }
+      $html_da = '<ul style="list-style-type: none;">'.$type_da.' : ';
       foreach ($temp as $value) {
         $html_da .= '<li><em>'.$value.'</em></li>';
       }
       $html_da .= '</ul>';
     }
-    else { $html_da = 'Décision attaquée : <em>'.$temp[0].'</em><br />'; }
+    else {
+      if($is_text > 0) { $type_da = 'Texte attaqué'; } else { $type_da = 'Décision attaquée'; }
+      $html_da = $type_da.' : <em>'.$temp[0].'</em><br />';
+    }
     return $html_da;
   }
 }
@@ -218,7 +222,7 @@ if (isset($document->analyses)) {
     if(isset($references['CITATION_ANALYSE'])) {
       foreach($references['CITATION_ANALYSE'] as $value) {
         if(isset($value['nature'], $value['date'], $value['titre'])) {
-          $titre = $value['nature'].' du '.$value['date'].' sur '.$value['titre'];
+          $titre = $value['nature'].' du '.dateFr($value['date']).' sur '.$value['titre'];
         }
         else { $titre = $value['titre']; }
         if(isset($value['url'])) {
@@ -237,7 +241,7 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
   if(isset($references['CITATION_ARRET'])) {
     foreach($references['CITATION_ARRET'] as $value) {
       if(isset($value['nature'], $value['date'], $value['titre'])) {
-        $titre = $value['nature'].' du '.$value['date'].' sur '.$value['titre'];
+        $titre = $value['nature'].' du '.dateFr($value['date']).' sur '.$value['titre'];
       }
       else { $titre = $value['titre']; }
       if(isset($value['url'])) {
@@ -250,7 +254,7 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
   if(isset($references['SOURCE'])) {
     foreach($references['SOURCE'] as $value) {
       if(isset($value['nature'], $value['date'], $value['titre'])) {
-        $titre = $value['nature'].' du '.$value['date'].' sur le '.$value['titre'];
+        $titre = $value['nature'].' du '.dateFr($value['date']).' sur le '.$value['titre'];
       }
       else { $titre = $value['titre']; }
       if(isset($value['url'])) {
@@ -262,9 +266,19 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
 }
 
 $decisions_attaquees = '';
+$is_text = 0;
 
-if(isset($references['DECISION_ATTAQUEE'])) { $decisions_attaquees = printDecisionAttaquee($references['DECISION_ATTAQUEE']);}
-elseif(isset($document->decisions_attaquees)) { $decisions_attaquees = printDecisionAttaquee($document->decisions_attaquees);}
+if(isset($document->decisions_attaquees)) {
+  if(isset($document->decisions_attaquees['decision_attaquee'][0])) { $decisions_attaquees = $document->decisions_attaquees['decision_attaquee']; } else { $decisions_attaquees = $document->decisions_attaquees; }
+  foreach($decisions_attaquees as $decision_attaquee) {
+    if(isset($decision_attaquee["type"])) {
+      if($decision_attaquee["type"] !== 'DECISION') { $is_text++; }
+    }
+  }
+}
+
+if(isset($references['DECISION_ATTAQUEE'])) { $decisions_attaquees = printDecisionAttaquee($references['DECISION_ATTAQUEE'], $is_text);}
+elseif(isset($document->decisions_attaquees)) { $decisions_attaquees = printDecisionAttaquee($document->decisions_attaquees, $is_text);}
 
 // METADONNEES //
 if(!empty($document->urnlex)) { $urnlex = $document->urnlex; } else { $urnlex = ''; }
