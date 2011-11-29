@@ -544,7 +544,7 @@ if (!empty($citations)) {
 // CLASSIQUES //
 $sf_response->setTitle($document->titre.' - Juricaf');
 if(!empty($analyses)) {
-  $sf_response->addMeta('Description', truncate_text(strip_tags(str_replace('</blockquote>', " ", $analyses)), 260));
+  $sf_response->addMeta('Description', truncate_text(strip_tags(str_replace('</blockquote>', " ", $analyses)), 260)."\n ".$document->num_arret);
 }
 elseif (!empty($document->texte_arret)) {
   $sf_response->addMeta('Description', truncate_text(strip_tags(str_replace("\n", " ", trim($document->texte_arret))), 260));
