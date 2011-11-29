@@ -164,8 +164,8 @@ if ($resultats->response->numFound !== 0) {
   }
   else {
     $tmplink = $currentlink;
-    $tmplink['facets'] = 'order:chrono'.preg_replace('/order:[a-z]*,/', '', $facetslink);
-    echo '<li>'.link_to('chronologique', $tmplink).'</li>';
+    $tmplink['facets'] = 'order:chrono'.preg_replace('/,?order:[a-z]*,?/', '', $facetslink);
+    echo '<li>'.link_to('chronologique', $tmplink, array('rel'  => 'nofollow')).'</li>';
   }
 
   if (preg_match('/order:pertinence/', $facetslink)) {
@@ -173,11 +173,13 @@ if ($resultats->response->numFound !== 0) {
   }
   else {
     $tmplink = $currentlink;
-    $tmplink['facets'] = 'order:pertinence'.preg_replace('/order:[a-z]*,/', '', $facetslink);
-    echo '<li>'.link_to('par pertinence', $tmplink).'</li>';
+    $tmplink['facets'] = 'order:pertinence'.preg_replace('/,?order:[a-z]*,?/', '', $facetslink);
+    echo '<li>'.link_to('par pertinence', $tmplink, array('rel'  => 'nofollow')).'</li>';
   } ?>
 </ul>
 <?php
+// Eviter le duplicate content
+if(isset($nobots)) { $sf_response->addMeta('robots', 'noindex, nofollow', false, false, false); }
   ////// FACETTE Pays //////////
   //include_component('recherche', 'facets', array('label'=>'Pays', 'id'=>'pays', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
   ////// FACETTE Juridiction //////////

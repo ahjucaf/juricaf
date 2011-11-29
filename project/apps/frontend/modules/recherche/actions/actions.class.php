@@ -70,10 +70,12 @@ class rechercheActions extends sfActions
     if (preg_match('/order:pertinence/', $solr_query)) {
       $solr_query = ' '.preg_replace('/ order:pertinence/', '', $solr_query);
       unset($param['sort']);
+      $this->nobots = 1;
     }
     if (preg_match('/order:chrono/', $solr_query)) {
       $solr_query = ' '.preg_replace('/ order:chrono/', '', $solr_query);
       $param['sort'] = 'date_arret asc, id asc';
+      $this->nobots = 1;
     }
 
     // Si la requète est vide
