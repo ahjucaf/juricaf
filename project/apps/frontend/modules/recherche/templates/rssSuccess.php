@@ -52,14 +52,14 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
     <link><?php echo $sf_request->getUri(); ?></link>
     <description><![CDATA[<?php echo $description; ?>]]></description>
     <image>
-      <title>Juricaf</title>
       <url><?php echo 'http://'.$sf_request->getHost().'/images/juricaf.png'; ?></url>
+      <title><![CDATA[<?php echo $title; ?>]]></title>
+      <link><?php echo $sf_request->getUri(); ?></link>
     </image>
 <?php
 foreach ($resultats->response->docs as $resultat) { ?>
     <item>
       <title><![CDATA[<?php echo $resultat->titre; ?>]]></title>
-      <!-- <pubDate>Mon, 17 Oct 2011 07:58:12 GMT</pubDate> -->
       <pubDate><?php echo gmdate('D, j M Y G:i:s T', strtotime($resultat->date_arret)); ?></pubDate>
       <dc:creator><![CDATA[<?php echo $resultat->formation; ?>]]></dc:creator>
       <link><?php echo 'http://'.$sf_request->getHost().url_for('@arret?id='.$resultat->id); ?></link>
