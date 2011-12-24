@@ -20,11 +20,11 @@ echo "Désactivation des sites";
 echo "=====================================================";
 START=$(date '+%H:%M:%S') ;
 echo $START;
-echo "Version de développement :";
+echo "Version de production :";
 cd ../project/
 php symfony project:disable prod
 if [ -d ../../dev/project/ ] ; then
-  echo "Version de production :";
+  echo "Version de développement :";
   cd ../../dev/project/
   php symfony project:disable prod
 fi
@@ -63,11 +63,11 @@ echo "=====================================================";
 echo "Réactivation des sites";
 echo "=====================================================";
 
-echo "Version de développement :";
+echo "Version de production :";
 cd ../project/
 php symfony project:enable prod
 if [ -d ../../dev/project/ ] ; then
-  echo "Version de production :";
+  echo "Version de développement :";
   cd ../../dev/project/
   php symfony project:enable prod
 fi
