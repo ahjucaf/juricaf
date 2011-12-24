@@ -94,7 +94,7 @@ while ($donnees = $req->fetch())
   if($classe == "color1") { $classe = "color2"; } else { $classe = "color1"; }
   $fpjlink = str_replace(' ', '_', 'http://www.juricaf.org/recherche/+/facet_pays:'.$donnees['pays'].',facet_juridiction:'.$donnees['juridiction']);
   $tableau .= '<tr class="'.$classe.'">
-  <td><a href="http://www.juricaf.org/recherche/recherche/+/facet_pays:'.$donnees['pays'].'">'.$donnees['pays'].'</a></td>
+  <td><a href="http://www.juricaf.org/recherche/+/facet_pays:'.$donnees['pays'].'">'.$donnees['pays'].'</a></td>
   <td><a href="'.$fpjlink.'">'.$donnees['juridiction'].'</a></td>
   <td class="num">'.$results['nb'].'</td><td style="text-align: center;">'.addLegend($donnees['etat'], 'etat').'</td>
   <td style="text-align: center;">'.addLegend($donnees['maj'], 'maj').'</td>
