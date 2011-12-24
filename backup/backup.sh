@@ -23,9 +23,9 @@ echo $START;
 echo "Version de développement :";
 cd ../project/
 php symfony project:disable prod
-if [ -d ../../v2_preprod/project/ ] ; then
+if [ -d ../../dev/project/ ] ; then
   echo "Version de production :";
-  cd ../../v2_preprod/project/
+  cd ../../dev/project/
   php symfony project:disable prod
 fi
 
@@ -66,9 +66,9 @@ echo "=====================================================";
 echo "Version de développement :";
 cd ../project/
 php symfony project:enable prod
-if [ -d ../../v2_preprod/project/ ] ; then
+if [ -d ../../dev/project/ ] ; then
   echo "Version de production :";
-  cd ../../v2_preprod/project/
+  cd ../../dev/project/
   php symfony project:enable prod
 fi
 DISPO=$(date '+%H:%M:%S') ;
