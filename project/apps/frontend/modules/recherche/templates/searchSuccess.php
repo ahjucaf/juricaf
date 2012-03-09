@@ -108,25 +108,22 @@ if (trim($query) !== '' || isset($title_facet)) {
   );
 
   if(isset($title_facet) && trim($query) == '') {
-    $title = 'Collection : '.$title_facet.' - Juricaf';
-    $description = $resultats->response->numFound.' arrêts dans la collection "'.$title_facet.'"';
-    $keywords = 'jurisprudences francophones '.$title_facet.' juricaf';
-  }
+    $title = $title_facet.' - Juricaf';
+    $description = $resultats->response->numFound.' arrêts publiés';
+      }
   if(isset($title_facet) && trim($query) !== '') {
-    $title = 'Résultats de votre recherche "'.trim($query).'" sur la collection : "'.$title_facet.'" - Juricaf';
-    $description = $resultats->response->numFound.' arrêts correspondants à la recherche '.trim($query).' dans la collection "'.$title_facet.'"';
-    $keywords = 'jurisprudences francophones '.$title_facet.' pour '.trim($query).' juricaf';
-  }
+    $title = ''.trim($query).' - '.$title_facet.' - Juricaf';
+    $description = $resultats->response->numFound.' arrêts publiés ';
+      }
   if(isset($title_facet)) {
     foreach ($pays_noindex as $noindex) {
       if(strpos($title_facet, $noindex) !== false) { $sf_response->addMeta('robots', 'noindex', false, false, false); }
     }
   }
   if(!isset($title_facet) && trim($query) !== '') {
-    $title = 'Résultats de votre recherche "'.trim($query).'" - Juricaf';
-    $description = $resultats->response->numFound.' arrêts correspondants à la recherche '.trim($query);
-    $keywords = 'Jurisprudences francophones '.trim($query).' juricaf';
-  }
+    $title = ''.trim($query).' - Juricaf';
+    $description = $resultats->response->numFound.' arrêts publiés';
+      }
   slot("metadata");
   include_partial("metadata", array('url_flux' => $sf_request->getUri().'?format=rss', 'titre_flux' => "S'abonner à cette recherche"));
   end_slot();
