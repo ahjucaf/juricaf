@@ -283,16 +283,9 @@ elseif(isset($document->decisions_attaquees)) { $decisions_attaquees = printDeci
 // METADONNEES //
 if(!empty($document->urnlex)) { $urnlex = $document->urnlex; } else { $urnlex = ''; }
 
-// Pays que les moteurs tiers ne doivent pas indexer
+// 
 $pays_noindex = array(
-  "Bénin",
-  "Mali",
-  "Madagascar",
-  "Luxembourg",
-  "Guinée",
-  "Haïti",
-  "Sénégal",
-  "Tchad"
+  // Pays que les moteurs tiers ne doivent pas indexer
   );
 
 if(in_array($document->pays, $pays_noindex)) {
