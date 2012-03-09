@@ -103,14 +103,7 @@ else {
 
 if (trim($query) !== '' || isset($title_facet)) {
   $pays_noindex = array(
-  "Bénin",
-  "Mali",
-  "Madagascar",
-  "Luxembourg",
-  "Guinée",
-  "Haïti",
-  "Sénégal",
-  "Tchad"
+    // "Guinée", Pays non indexés
   );
 
   if(isset($title_facet) && trim($query) == '') {
