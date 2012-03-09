@@ -548,6 +548,6 @@ $sf_response->addMeta('Keywords', $keywords);
 ?>
 <script type="text/javascript">
 <!--
-$('#titre').append('<span id="print"><a href="javascript:print();"><img src="/images/printer.png" alt="Imprimer" title="Imprimer" /><\/a><\/span>');
+$('#titre').append('<span id="print"><div class="addthis_toolbox addthis_default_style "><a href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=ra-4f0fffc35925f215" class="addthis_button_compact">Partager</a></div><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f0fffc35925f215"></script><\/span>');
 // -->
 </script>
