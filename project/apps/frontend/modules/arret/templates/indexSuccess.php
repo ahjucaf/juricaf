@@ -176,19 +176,19 @@ $contributors = '';
 
   if(isset($document->president) || isset($document->avocat_gl) || isset($document->rapporteur) || isset($document->commissaire_gvt) || isset($document->avocats)) {
     if (isset($document->president)) {
-      $contributors .= 'Président : <em>'.link_to($document->president, '@recherche_resultats?query=president:"'.replaceAccents($document->president).'"').'</em><br />'; // replace br par ' ; '
+      $contributors .= '<span itemprop="jobTitle">Président</span> : <em><span itemprop="name">'.link_to($document->president, '@recherche_resultats?query=president:"'.replaceAccents($document->president).'"').'</span></em><br />'; // replace br par ' ; '
     }
     if (isset($document->avocat_gl)) {
-      $contributors .= 'Avocat général : <em>'.link_to($document->avocat_gl, '@recherche_resultats?query=avocat_gl:"'.replaceAccents($document->avocat_gl).'"').'</em><br />';
+      $contributors .= '<span itemprop="jobTitle">Avocat général</span> : <em><span itemprop="name">'.link_to($document->avocat_gl, '@recherche_resultats?query=avocat_gl:"'.replaceAccents($document->avocat_gl).'"').'</span></em><br />';
     }
     if (isset($document->rapporteur)) {
-      $contributors .= 'Rapporteur : <em>'.link_to($document->rapporteur, '@recherche_resultats?query=rapporteur:"'.replaceAccents($document->rapporteur).'"').'</em><br />';
+      $contributors .= '<span itemprop="jobTitle">Rapporteur</span> : <em><span itemprop="name">'.link_to($document->rapporteur, '@recherche_resultats?query=rapporteur:"'.replaceAccents($document->rapporteur).'"').'</span></em><br />';
     }
     if (isset($document->commissaire_gvt)) {
-      $contributors .= 'Commissaire gouvernement : <em>'.link_to($document->commissaire_gvt, '@recherche_resultats?query=commissaire_gvt:"'.replaceAccents($document->commissaire_gvt).'"').'</em><br />';
+      $contributors .= '<span itemprop="jobTitle">Commissaire gouvernement</span> : <em><span itemprop="name">'.link_to($document->commissaire_gvt, '@recherche_resultats?query=commissaire_gvt:"'.replaceAccents($document->commissaire_gvt).'"').'</span></em><br />';
     }
     if (isset($document->avocats)) {
-      $contributors .= 'Avocat(s) : <em>'.link_to($document->avocats, '@recherche_resultats?query=avocats:"'.replaceAccents($document->avocats).'"').'</em><br />';
+      $contributors .= '<span itemprop="jobTitle">Avocat(s)</span> : <em><span itemprop="name">'.link_to($document->avocats, '@recherche_resultats?query=avocats:"'.replaceAccents($document->avocats).'"').'</span></em></div><br />';
     }
     $contrib = true;
   }
@@ -374,6 +374,19 @@ if (!empty($citations)) {
       echo '<hr /><h3>Analyses : </h3>';
       echo $analyses;
     }
+	
+	//bdd CNIL
+	  if (isset($document->protection_donnees)) { //bdd CNIL
+      echo '<hr /><h3>Analyses protection des données personnelles : </h3>';
+      echo ''.$document->protection_donnees.'';
+    }
+	
+		  if (isset($document->cote_donnees)) {
+      echo '<hr /><h3>Intérêt pour la protection des données personnelles : '.$document->cote_donnees.'</h3>';
+      
+    }
+	
+		
     if (!empty($citations_analyses)) {
       echo '<blockquote><p><em>Références :</em><br />'.$citations_analyses.'</p></blockquote>';
     }
@@ -440,6 +453,21 @@ if (!empty($citations)) {
     </object>
     <?php
     }
+	
+	
+	 if($document->pays == "CEMAC" && trim($document->texte_arret) == "Le fac-simile de l'arrêt n'est disponible qu'au format PDF") {
+    ?>
+    <object data="http://<?php echo $sf_request->getHost(); ?>/pdf/CEMAC/cour_de_justice/<?php echo $document->id_source; ?>.pdf" type="application/pdf" width="100%" height="1000" navpanes="0" statusbar="0" messages="0">
+    Fac-similé disponible au format PDF : <a href="/pdf/CEMAC/cour_de_justice/<?php echo $document->id_source; ?>.pdf"><?php echo $document->titre; ?></a>
+    </object>
+    <?php
+    }
+	
+	
+	
+	
+	
+	
     else {
       if(isset($document->texte_arret)) {
         echo '<h3>Texte : </h3>';
@@ -521,7 +549,7 @@ if (!empty($citations)) {
     }
 
     if(isset($contrib)) {
-      echo '<hr /><h3>Composition du Tribunal :</h3>'.$contributors;
+      echo '<hr /><h3>Composition du Tribunal :</h3><div itemscope itemtype="http://schema.org/Person">'.$contributors;
     }
 
     if (isset($document->fonds_documentaire)) {
