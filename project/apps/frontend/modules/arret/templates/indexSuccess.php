@@ -362,10 +362,10 @@ if (!empty($citations)) {
       echo 'Type de recours : <em>'.link_to($document->type_recours, '@recherche_resultats?query=type_recours:"'.replaceAccents($document->type_recours).'"').'</em><br />';
     }
 
-    echo '<br />';
-    if (isset($document->ecli)) {
-      echo 'Identifiant ECLI : <em>'.$document->ecli.'</em> (non officiel) <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="Identifiant européen de la jurisprudence" /><br />';
-    }
+    //echo '<br />';
+ //   if (isset($document->ecli)) {
+ //     echo 'Identifiant ECLI : <em>'.$document->ecli.'</em> (non officiel) <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="Identifiant européen de la jurisprudence" /><br />';
+   // }  désactivation temporaire : pb arrêt Cour de cassation de France
     if (isset($document->urnlex)) {
       echo 'Identifiant URN:LEX : <em>'.$document->urnlex.'</em> <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="A Uniform Resource Name (URN) Namespace for Sources of Law (LEX)" /><br />';
     }
