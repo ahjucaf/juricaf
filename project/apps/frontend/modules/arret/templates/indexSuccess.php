@@ -308,7 +308,7 @@ if (!empty($decisions_attaquees)) { $citations .= $decisions_attaquees; }
 
 // Obligatoire pour ECLI
 $sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
-if (isset($document->ecli)) { $sf_response->addMeta('DC.isVersionOf', $document->ecli, false, false, false); } // Identifiant ECLI
+//if (isset($document->ecli)) { $sf_response->addMeta('DC.isVersionOf', $document->ecli, false, false, false); } // Identifiant ECLI
 $sf_response->addMeta('DC.creator', htmlspecialchars($creator, ENT_QUOTES), false, false, false);
 $sf_response->addMeta('DC.coverage', htmlspecialchars($document->pays, ENT_QUOTES), false, false, false);
 $sf_response->addMeta('DC.date', $document->date_arret, false, false, false);
