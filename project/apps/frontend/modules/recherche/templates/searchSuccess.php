@@ -201,9 +201,10 @@ foreach ($resultats->response->docs as $resultat) {
     $formation = ', '.$resultat->formation;
   }
   echo '<div class="extra"><span class="pays '.preg_replace('/ /', '_', $resultat->pays).'">'.$resultat->pays.'</span> - <span class="date">'.date('d/m/Y', strtotime($resultat->date_arret)).'</span> - <span class="juridiction">'.$resultat->juridiction.$formation.'</span>';
-  if(isset($resultat->ecli)) {
-    echo ' - <span class="num">'.$resultat->ecli.'</span>';
-  }
+  // if(isset($resultat->ecli)) {
+  //   echo ' - <span class="num">'.$resultat->ecli.'</span>';
+ // } Désactivation temporaire ECLI
+
   /* en attente
   if(isset($resultat->urnlex)) {
     echo ' - <span class="num">'.$resultat->urnlex.'</span>';
