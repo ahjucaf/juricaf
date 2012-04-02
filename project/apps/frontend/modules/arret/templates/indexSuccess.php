@@ -35,7 +35,7 @@ function replaceAccents($string) {
       'š' => 's', 'Š' => 'S', 'ß' => 'Ss',
       'ü' => 'u', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'Ü' => 'U', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U',
       'ý' => 'y', 'ÿ' => 'y', 'Ý' => 'Y',
-      'Ž' => 'Z', 'ž' => 'z', '"' => ' ',
+      'Ž' => 'Z', 'ž' => 'z'
   );
   return strtr($string, $table);
 }
@@ -60,21 +60,27 @@ function dateFr($date) {
   return $date;
 }
 
-function linkifyAnalyses($titrage) {
+function linkifyAnalyses($titrage, $pays) {
   if(is_array($titrage)) { $titrage = trim(str_replace('Array', '', implode(' ', $titrage))); }
   // identifiants
   if(preg_match('/(([0-9]{1,3}-)+([0-9]{1,3}){1})/', $titrage, $match)) {
     $identifiants[0] = $match[1]; $specifiques = $identifiants;
   }
 
-  $separators = array(' -','- ',';','.',',','—');
+  // les séparateurs ne sont pas harmonisés en base
+  if($pays == 'France') {
+    $separators = array(' -','- ',';','.',',');
+    $titrage = str_replace($separators, ' - ', $titrage);
+    $titrage = str_replace('  ', ' ', $titrage);
+    $titrage = str_replace(' -  - ', ' - ', $titrage);
+    $titrage = rtrim($titrage, '- ');
+    $values = explode(' - ', $titrage);
+  }
+  // Canada : séparateurs harmonisés
+  if($pays == 'Canada') {
+    $values = explode(' — ', $titrage);
+  }
 
-  $titrage = str_replace($separators, ' - ', $titrage);
-  $titrage = str_replace('  ', ' ', $titrage);
-  $titrage = str_replace(' -  - ', ' - ', $titrage);
-  $titrage = rtrim($titrage, '- ');
-
-  $values = explode(' - ', $titrage);
   $values = array_filter($values);
 
   foreach ($values as $key => $value) {
@@ -97,7 +103,7 @@ function linkifyAnalyses($titrage) {
   foreach ($values as $value) {
     if($i == 0) { $link[$i] = $value; }
       else { $link[$i] = $link[$i-1].' - '.$value; }
-      $titrage .= link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents(str_replace(array("\n", "/"), " ", $link[$i])).'"').' - '; // &facets=order:pertinance
+      $titrage .= link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents(str_replace(array("\n", "/",'"','»','«',"'","’","?"), " ", $link[$i])).'"').' - '; // &facets=order:pertinance
       $i++;
   }
   return rtrim($titrage, '- ').'.';
@@ -204,7 +210,7 @@ if (isset($document->analyses)) {
         foreach($values as $key => $value) {
           if($value !== "null") {
             $analyses .= '<blockquote>';
-            if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($value); } else { $titrage = $value; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $value.' '; }
+            if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($value, $document->pays); } else { $titrage = $value; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $value.' '; }
             else { $analyses .= '<p>'.$value.'</p>'; }
             $analyses .= '</blockquote>';
           }
@@ -213,7 +219,7 @@ if (isset($document->analyses)) {
       else {
         if($values !== "null") {
           $analyses .= '<blockquote>';
-            if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($values); } else { $titrage = $values; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $values.' '; }
+            if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($values, $document->pays); } else { $titrage = $values; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $values.' '; }
             else { $analyses .= '<p>'.$values.'</p>'; }
           $analyses .= '</blockquote>';
         }
