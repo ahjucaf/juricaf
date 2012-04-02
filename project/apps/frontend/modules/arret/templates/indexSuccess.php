@@ -67,7 +67,7 @@ function linkifyAnalyses($titrage) {
     $identifiants[0] = $match[1]; $specifiques = $identifiants;
   }
 
-  $separators = array(' -','- ',';','.',',');
+  $separators = array(' -','- ',';','.',',','—');
 
   $titrage = str_replace($separators, ' - ', $titrage);
   $titrage = str_replace('  ', ' ', $titrage);
@@ -204,7 +204,7 @@ if (isset($document->analyses)) {
         foreach($values as $key => $value) {
           if($value !== "null") {
             $analyses .= '<blockquote>';
-            if(strpos($key, 'titre') !== false) { if($document->pays == 'France') { $titrage = linkifyAnalyses($value); } else { $titrage = $value; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $value.' '; }
+            if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($value); } else { $titrage = $value; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $value.' '; }
             else { $analyses .= '<p>'.$value.'</p>'; }
             $analyses .= '</blockquote>';
           }
@@ -213,7 +213,7 @@ if (isset($document->analyses)) {
       else {
         if($values !== "null") {
           $analyses .= '<blockquote>';
-            if(strpos($key, 'titre') !== false) { if($document->pays == 'France') { $titrage = linkifyAnalyses($values); } else { $titrage = $values; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $values.' '; }
+            if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($values); } else { $titrage = $values; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $values.' '; }
             else { $analyses .= '<p>'.$values.'</p>'; }
           $analyses .= '</blockquote>';
         }
@@ -283,7 +283,7 @@ elseif(isset($document->decisions_attaquees)) { $decisions_attaquees = printDeci
 // METADONNEES //
 if(!empty($document->urnlex)) { $urnlex = $document->urnlex; } else { $urnlex = ''; }
 
-// 
+//
 $pays_noindex = array(
   // Pays que les moteurs tiers ne doivent pas indexer
   );
@@ -374,19 +374,19 @@ if (!empty($citations)) {
       echo '<hr /><h3>Analyses : </h3>';
       echo $analyses;
     }
-	
-	//bdd CNIL
-	  if (isset($document->protection_donnees)) { //bdd CNIL
+
+  //bdd CNIL
+    if (isset($document->protection_donnees)) { //bdd CNIL
       echo '<hr /><h3>Analyses protection des données personnelles : </h3>';
       echo ''.$document->protection_donnees.'';
     }
-	
-		  if (isset($document->cote_donnees)) {
+
+      if (isset($document->cote_donnees)) {
       echo '<hr /><h3>Intérêt pour la protection des données personnelles : '.$document->cote_donnees.'</h3>';
-      
+
     }
-	
-		
+
+
     if (!empty($citations_analyses)) {
       echo '<blockquote><p><em>Références :</em><br />'.$citations_analyses.'</p></blockquote>';
     }
@@ -453,21 +453,21 @@ if (!empty($citations)) {
     </object>
     <?php
     }
-	
-	
-	 if($document->pays == "CEMAC" && trim($document->texte_arret) == "Le fac-simile de l'arrêt n'est disponible qu'au format PDF") {
+
+
+   if($document->pays == "CEMAC" && trim($document->texte_arret) == "Le fac-simile de l'arrêt n'est disponible qu'au format PDF") {
     ?>
     <object data="http://<?php echo $sf_request->getHost(); ?>/pdf/CEMAC/cour_de_justice/<?php echo $document->id_source; ?>.pdf" type="application/pdf" width="100%" height="1000" navpanes="0" statusbar="0" messages="0">
     Fac-similé disponible au format PDF : <a href="/pdf/CEMAC/cour_de_justice/<?php echo $document->id_source; ?>.pdf"><?php echo $document->titre; ?></a>
     </object>
     <?php
     }
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
     else {
       if(isset($document->texte_arret)) {
         echo '<h3>Texte : </h3>';
