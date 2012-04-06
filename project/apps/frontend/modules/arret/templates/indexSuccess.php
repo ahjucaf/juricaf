@@ -78,6 +78,7 @@ function linkifyAnalyses($titrage, $pays) {
   }
   // Canada : séparateurs harmonisés
   if($pays == 'Canada') {
+    $titrage = rtrim($titrage, '. ');
     $values = explode(' — ', $titrage);
   }
 
@@ -374,6 +375,15 @@ if (!empty($citations)) {
    // }  désactivation temporaire : pb arrêt Cour de cassation de France
     if (isset($document->urnlex)) {
       echo 'Identifiant URN:LEX : <em>'.$document->urnlex.'</em> <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="A Uniform Resource Name (URN) Namespace for Sources of Law (LEX)" /><br />';
+    }
+
+    if(isset($references['SOURCE_TOP'])) {
+      foreach($references['SOURCE_TOP'] as $value) {
+        if(isset($value['url'])) {
+          echo '<a href="'.$value['url'].'">'.$value['titre'].'</a><br />';
+        }
+        else { echo $value['titre'].'<br />'; }
+      }
     }
 
     if (!empty($analyses)) {
