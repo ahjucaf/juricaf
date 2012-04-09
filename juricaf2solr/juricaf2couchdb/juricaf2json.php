@@ -914,6 +914,7 @@ if (array_key_exists($res['pays'], $codes_pays_orgas)) {
     }
   }
   $num_arret_urnlex = preg_replace('/[^a-z0-9]/', '.', strtolower(replaceAccents($num_arret)));
+  $num_arret_urnlex = preg_replace('/[\.]{2,}/', '.', trim($num_arret_urnlex, '.'));
 
   $res['urnlex'] = strtolower('urn:lex;'.$codes_pays_orgas[$res['pays']].';'.$juridiction.';'.$type.';'.$res['date_arret'].';'.$num_arret_urnlex);
 }
