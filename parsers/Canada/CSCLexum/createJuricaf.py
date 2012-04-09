@@ -9,7 +9,7 @@ def str_replace(to_replace, text):
 
 mois = {'janvier' : '01', 'février' : '02', 'mars' : '03', 'avril' : '04', 'mai' : '05', 'juin' : '06', 'juillet' : '07', 'août' : '08', 'septembre' : '09', 'octobre' : '10', 'novembre' : '11', 'décembre' : '12'}
 
-special_chars = { u"<" : u" ", u">" : u" ", u"\u2012" : u'—', u"\u2013" : u'—', u"\u2014" : u'—', u"\u2015" : u'—', u"\u0097" : u'—', u"‑‑" : u'—', u"—" : u' — ', u"\u0094" : u"\"", u"\u0093" : u"\"", u"\u0092" : u"'", u"\u00A0" : u" ", u"\u00C2" : u"Â", u"\u00C3" : "Â", u"\u0009" : u" ", u"\u000B" : u" " }
+special_chars = { u"<" : u" ", u">" : u" ", u"\u2012" : u'—', u"\u2013" : u'—', u"\u2014" : u'—', u"\u2015" : u'—', u"\u0097" : u'—', u"‑‑" : u'—', u"--" : u'—', u"—" : u' — ', u"\u0094" : u"\"", u"\u0093" : u"\"", u"\u0092" : u"'", u"\u00A0" : u" ", u"\u00C2" : u"Â", u"\u00C3" : "Â", u"\u0009" : u" ", u"\u000B" : u" " }
 
 titre_complet = string.join(sys.argv[2:]).replace('\xc2\xa0', ' ')
 
@@ -82,7 +82,12 @@ for line in texte_temp:
       is_analyse = 0
       is_reference = 1
       not_done = 0
-    elif re.match('APPEL', line) is not None: # Ajouter EN APPEL ????
+    elif re.match('APPEL', line) is not None:
+      texte += line+'\n\n'
+      is_analyse = 0
+      is_reference = 0
+      not_done = 0
+    elif re.match('POURVOI', line) is not None:
       texte += line+'\n\n'
       is_analyse = 0
       is_reference = 0
