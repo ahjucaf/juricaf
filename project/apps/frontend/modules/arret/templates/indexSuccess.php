@@ -36,7 +36,9 @@ function replaceAccents($string) {
       'ü' => 'u', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'Ü' => 'U', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U',
       'ý' => 'y', 'ÿ' => 'y', 'Ý' => 'Y',
       'Ž' => 'Z', 'ž' => 'z',
-	  '1) ' => '', '2) ' => '', '3) ' => '', '4) ' => '', '5) ' => ''
+	  '1) ' => '', '2) ' => '', '3) ' => '', '4) ' => '', '5) ' => '',
+	  '\n' => ' ', '/' => ' ', '"' => ' ', '»' => ' ', '«' => ' ', '’' => ' ', '?' => ' '
+	  
 	  
   );
   return strtr($string, $table);
@@ -106,7 +108,7 @@ function linkifyAnalyses($titrage, $pays) {
   foreach ($values as $value) {
     if($i == 0) { $link[$i] = $value; }
       else { $link[$i] = $link[$i-1].' - '.$value; }
-      $titrage .= link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents(str_replace(array("\n", "/",'"','»','«',"'","’","?"), " ", $link[$i])).'"').' - '; // &facets=order:pertinance
+      $titrage .= link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents(str_replace(array(), " ", $link[$i])).'"').' - '; // &facets=order:pertinence + enlever fonction replaceAccents proprement
       $i++;
   }
   return rtrim($titrage, '- ').'.';
