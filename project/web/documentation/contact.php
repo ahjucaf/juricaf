@@ -61,6 +61,21 @@ $_SESSION['token'] = $token;
             </form>
           </div>
           <div class="arret">
+		  
+		  
+		   <h1>Formulaire de contact</h1>
+
+            <form action="form2mail.php" method="post">
+            <p>
+            Entrez votre adresse mail: <input type="text" name="email" /><br />
+            Message:<br />
+            <textarea name="message" rows="8" cols="50"></textarea><br />
+            <input name="token" type="hidden" value="<?php echo $token; ?>" />
+            <input type="submit" value="Envoyer le mail" />
+            </p>
+            </form>
+			
+			
             <h1>Réalisation du projet </h1>
             <p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones, réalisé en partenariat avec le laboratoire de normologie, Linguistique et Informatique juridique (LNLI).</p>
             <p>Il est soutenu par l'Organisation internationale de la Francophonie et le Fonds francophone des inforoutes.</p>
@@ -77,7 +92,13 @@ $_SESSION['token'] = $token;
               <tr>
                 <td>M. Jean-Louis Gillet<br />Secrétaire général de l’AHJUCAF<br />Président de chambre honoraire <br />de la Cour de cassation </td>
                 <td>M. Bernard Corboz<br />Juge au Tribunal fédéral suisse<br />Responsable de la diffusion du droit<br /> à l’AHJUCAF</td>
-                <td>M. Guillaume Adreani<br />Greffier à la Cour de cassation française<br />Chargé de mission de l'AHJUCAF<br />Responsable du projet Juricaf</td>
+                <td>M. Guillaume Adreani<br />Greffier à la Cour de cassation française<br />Chargé de mission de l'AHJUCAF<br />Responsable du projet Juricaf<br />
+				<br /><a href="http://fr.linkedin.com/in/guillaumeadreani">          
+                        
+            <img src="http://www.linkedin.com/img/webpromo/btn_liprofile_blue_80x15_fr_FR.png?locale=" width="80" height="15" border="0" alt="Voir le profil de Guillaume Adreani sur LinkedIn">
+
+    </a>
+				</td>
               </tr>
             </table>
 
@@ -92,8 +113,23 @@ $_SESSION['token'] = $token;
                 <td><img src="img/j_gasnault.jpg" height="141" alt="Jean Gasnault" /></td>
               </tr>
               <tr>
-                <td>M. Stéphane Cottin</td>
-                <td>M. Jean Gasnault</td>
+                <td>M. Stéphane Cottin
+				
+					<br /><a href="http://fr.linkedin.com/in/cottin">          
+                        
+            <img src="http://www.linkedin.com/img/webpromo/btn_liprofile_blue_80x15_fr_FR.png?locale=" width="80" height="15" border="0" alt="Voir le profil de Stéphane Cottin sur LinkedIn">
+
+    </a>
+				</td>
+                <td>M. Jean Gasnault
+				
+					<br /><a href="http://fr.linkedin.com/pub/jean-gasnault/1/a22/606">          
+                        
+            <img src="http://www.linkedin.com/img/webpromo/btn_liprofile_blue_80x15_fr_FR.png?locale=" width="80" height="15" border="0" alt="Voir le profil de Jean Gasnault sur LinkedIn">
+
+    </a>
+				
+				</td>
               </tr>
             </table>
             <br />
@@ -107,40 +143,41 @@ $_SESSION['token'] = $token;
               </tr>
               <tr>
                 <td>M. Brice Person <br /><a id="mail" href="#">email</a></td>
-                <td>M. Tangui Morlier <br /><a href="http://tangui.eu.org">http://tangui.eu.org</a> </td>
+
+				
+				</td>
+                <td>M. Tangui Morlier <br />
+				
+					<a href='http://tangui.eu.org'>http://tangui.eu.org</a>
+
+    </a>
+				</td>
               </tr>
             </table>
 
-            <h1>Formulaire de contact</h1>
-
-            <form action="form2mail.php" method="post">
-            <p>
-            Entrez votre adresse mail: <input type="text" name="email" /><br />
-            Message:<br />
-            <textarea name="message" rows="8" cols="50"></textarea><br />
-            <input name="token" type="hidden" value="<?php echo $token; ?>" />
-            <input type="submit" value="Envoyer le mail" />
-            </p>
-            </form>
+           
           </div>
         </div>
       </div>
-      <div class="bottom">
-        <p>Juricaf est un projet de l'<a href="http://www.ahjucaf.org">AHJUCAF</a>, l'association des cours judiciaires suprêmes francophones,<br />
-        réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I).<br />
-        Il est soutenu par l'<a href="http://www.francophonie.org">Organisation internationale de la Francophonie</a>,
-        le <a href="http://inforoutes.francophonie.org">Fonds francophone des inforoutes</a> et les réseaux institutionnels francophones.</p>
-        <a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
-        <a href="http://www.francophonie.org/"><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
+    <div class="bottom">
+        <p>Juricaf est un projet de l'<a href="/documentation/partenaires.php#ahjucaf">AHJUCAF</a>, l'association des cours judiciaires suprêmes francophones,<br />
+        réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;I).<br />
+        Il est soutenu par l'<a href="/documentation/partenaires.php#francophonie">Organisation internationale de la Francophonie</a>,
+        le <a href="/documentation/partenaires.php#inforoutes">Fonds francophone des inforoutes</a>.</p>
+        <a href="/documentation/partenaires.php#ahjucaf"><img style="margin-left: 10px;" src="/images/ahjucaf.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
+        <a href="/documentation/partenaires.php#francophonie"><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
       </div>
     </div>
     <script type="text/javascript">
     <!--
-    $(document).ready(function() {
+
+	    $(document).ready(function() {
       adresse = 'brice.persong@htzenordi.fr';
       $('#mail').attr('href', 'mailto:'+adresse.replace(RegExp('(g@ht)','g'),'@'));
     });
 
+
+	
     function juricafSearch() {
       if (window.external && ("AddSearchProvider" in window.external)) {
         window.external.AddSearchProvider("http://www.juricaf.org/juricaf.xml");
