@@ -90,13 +90,13 @@
           </div>
         </div>
       </div>
-      <div class="bottom">
-        <p>Juricaf est un projet de l'<a href="http://www.ahjucaf.org">AHJUCAF</a>, l'association des cours judiciaires suprêmes francophones,<br />
-        réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I).<br />
-        Il est soutenu par l'<a href="http://www.francophonie.org">Organisation internationale de la Francophonie</a>,
-        le <a href="http://inforoutes.francophonie.org">Fonds francophone des inforoutes</a> et les réseaux institutionnels francophones.</p>
-        <a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
-        <a href="http://www.francophonie.org/"><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
+       <div class="bottom">
+        <p>Juricaf est un projet de l'<a href="/documentation/partenaires.php#ahjucaf">AHJUCAF</a>, l'association des cours judiciaires suprêmes francophones,<br />
+        réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;I).<br />
+        Il est soutenu par l'<a href="/documentation/partenaires.php#francophonie">Organisation internationale de la Francophonie</a>,
+        le <a href="/documentation/partenaires.php#inforoutes">Fonds francophone des inforoutes</a>.</p>
+        <a href="/documentation/partenaires.php#ahjucaf"><img style="margin-left: 10px;" src="/images/ahjucaf.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
+        <a href="/documentation/partenaires.php#francophonie"><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
       </div>
     </div>
     <script type="text/javascript">
