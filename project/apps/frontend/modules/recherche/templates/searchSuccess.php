@@ -56,14 +56,14 @@ if (count($facetsset)) { ?>
       $text = preg_replace('/_/', ' ', preg_replace('/[^:]+:/', '', $f));
       $tmplink = $currentlink;
       $tmplink['facets'] = preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/'.preg_replace('/\|/', '\\\|', $f).',?/', '', $myfacetslink)));
-      echo link_to('[X] Résultats filtrés sur <em>'.$text.'</em>', $tmplink);
+      echo link_to('<img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats filtrés sur <em>'.$text.'</em>', $tmplink);
     }
     else {
       if (preg_match('/order:perti/', $f)) {
-        echo link_to('[X] Résultats trié par pertinence', $noorderlink);
+        echo link_to('<img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats trié par pertinence', $noorderlink);
       }
       else if (preg_match('/order:chrono/', $f)) {
-        echo link_to('[X] Résultats trié dans l\'ordre chronologique', $noorderlink);
+        echo link_to('<img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats trié dans l\'ordre chronologique', $noorderlink);
       }
     }
   ?>
