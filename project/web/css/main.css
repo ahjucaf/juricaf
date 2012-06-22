@@ -16,7 +16,7 @@ h4 { font-size: 1em; color: #21409A; }
 blockquote h2 { color: #4F4F4F; }
 blockquote a { color: #4F4F4F; text-decoration: none; }
 blockquote a:hover { color: #4F4F4F; text-decoration: underline; }
-
+img { vertical-align:top; }
 .site { width: 90%; margin: auto; font-size: 1.2em;}
 .head { width: 100%; margin-top: 2%; border: 1px solid #EBEBEB; }
 .main { clear: both; width: 100%; border-left: 1px solid #EBEBEB; border-right: 1px solid #EBEBEB; }
