@@ -10,5 +10,5 @@
 <link rel="alternate" type="application/rss+xml" href="/recherche/+/facet_pays%3A<?php echo replaceBlank($pays); ?>?format=rss" title="Collection <?php echo $pays; ?>" />
 <?php } ?>
     <?php if(!empty($pays) && !empty($juridiction)) { ?>
-<link rel="alternate" type="application/rss+xml" href="/recherche/+/facet_pays_juridiction%3A<?php echo replaceBlank($pays); ?>_%7C_<?php echo replaceBlank($juridiction); ?>%2Cfacet_pays%3A<?php echo replaceBlank($pays); ?>?format=rss" title="Collection <?php echo $pays.' | '.$juridiction; ?>" />
+<link rel="alternate" type="application/rss+xml" href="/recherche/+/facet_pays_juridiction%3A<?php echo replaceBlank($pays); ?>_%7C_<?php echo replaceBlank($juridiction); ?>%2Cfacet_pays%3A<?php echo replaceBlank($pays); ?>?format=rss" title="Collection <?php echo $pays.' - '.$juridiction; ?>" />
 <?php } ?>
