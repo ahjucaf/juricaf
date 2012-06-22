@@ -49,6 +49,13 @@ function replaceBlank($str) {
   return str_replace (' ', '_', $str);
 }
 
+function replacekey($string) {
+  $table = array(
+      ' - ' => ', ', ' — ' => ', '	  
+  );
+  return strtr($string, $table);
+}
+
 function pathToFlag($str) {
   return urlencode(str_replace("'", '_', replaceBlank($str)));
 }
@@ -293,20 +300,19 @@ if(isset($references['DECISION_ATTAQUEE'])) { $decisions_attaquees = printDecisi
 elseif(isset($document->decisions_attaquees)) { $decisions_attaquees = printDecisionAttaquee($document->decisions_attaquees, $is_text);}
 
 // METADONNEES //
-if(!empty($document->urnlex)) { $urnlex = $document->urnlex; } else { $urnlex = ''; }
 
-//
-$pays_noindex = array(
-  // Pays que les moteurs tiers ne doivent pas indexer
-  );
 
-if(in_array($document->pays, $pays_noindex)) {
-  $sf_response->addMeta('robots', 'noindex', false, false, false);
+if(!empty($analyses)) {
+  $sf_response->addMeta('Description', '');
+}
+elseif (!empty($document->texte_arret)) {
+  $sf_response->addMeta('Description', '');
+}
+if(!empty($keywords)) {
+$sf_response->addMeta('Keywords', '');
 }
 
-slot("metadata");
-include_partial("metadata", array('dc_identifier_urnlex' => $urnlex, 'dc_identifier_uri' => $sf_request->getUri(), 'pays' => $document->pays,'juridiction' => $document->juridiction,));
-end_slot();
+if(!empty($document->urnlex)) { $urnlex = $document->urnlex; } else { $urnlex = ''; }
 
 $creator = $document->juridiction;
 if(isset($document->section)) { $creator .= ' '.$document->section; }
@@ -319,27 +325,30 @@ if (!empty($sources)) { $citations .= $sources; }
 if (!empty($decisions_attaquees)) { $citations .= $decisions_attaquees; }
 
 // Obligatoire pour ECLI
-$sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
 //if (isset($document->ecli)) { $sf_response->addMeta('DC.isVersionOf', $document->ecli, false, false, false); } // Identifiant ECLI
-$sf_response->addMeta('DC.creator', htmlspecialchars($creator, ENT_QUOTES), false, false, false);
+$sf_response->setTitle($document->titre);
+$sf_response->addMeta('DC.accessRights', 'public', false, false, false);
+$sf_response->addMeta('DC.creator', $creator, false, false, false);
 $sf_response->addMeta('DC.coverage', htmlspecialchars($document->pays, ENT_QUOTES), false, false, false);
 $sf_response->addMeta('DC.date', $document->date_arret, false, false, false);
+$sf_response->addMeta('DC.description', $document->type_affaire, false, false, false);
+$sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
 $sf_response->addMeta('DC.language', 'FR', false, false, false);
 $sf_response->addMeta('DC.publisher', 'AHJUCAF', false, false, false);
-$sf_response->addMeta('DC.accessRights', 'public', false, false, false);
-$sf_response->addMeta('DC.type', 'judicial decision', false, false, false);
+$sf_response->addMeta('DC.subject', replacekey($keywords), false, false, false);
+$sf_response->addMeta('DC.type', 'case', false, false, false);
+
 
 // Facultatif pour ECLI
-$sf_response->addMeta('DC.title', htmlspecialchars($document->titre, ENT_QUOTES), false, false, false); // Obligatoire pour Zotero ; pour ECLI celle ci devrait accueillir les noms des parties (donc pas possible pour la France)
-if(isset($document->type_affaire)) {
-  $sf_response->addMeta('DC.subject', 'Affaire '.htmlspecialchars(strtolower($document->type_affaire), ENT_QUOTES), false, false, false);
-}
-if(!empty($analyses)) {
-  $sf_response->addMeta('DC.abstract', "Analyses : \n".htmlspecialchars(strip_tags(str_replace('</blockquote>', " \n", $analyses)), ENT_QUOTES), false, false, false);
-}
-if(!empty($keywords)) {
-  $sf_response->addMeta('DC.description', htmlspecialchars(strip_tags(str_replace('</blockquote>', " ", $keywords)), ENT_QUOTES), false, false, false);
-}
+//$sf_response->addMeta('DC.title', htmlspecialchars($document->titre, ENT_QUOTES), false, false, false); // Obligatoire pour Zotero ; pour ECLI celle ci devrait accueillir les noms des parties (donc pas possible pour la France)
+
+//if(!empty($analyses)) {
+//  $sf_response->addMeta('DC.abstract', .htmlspecialchars(strip_tags(str_replace('</blockquote>', " \n", $analyses)), ENT_QUOTES), false, false, false);
+//}
+//if(!empty($keywords)) {
+  //$sf_response->addMeta('DC.subject', htmlspecialchars(strip_tags(str_replace('</blockquote>', " ", $keywords)),ENT_QUOTES), false, false, false);
+//}
+
 if(isset($contrib)) {
   $sf_response->addMeta('DC.contributor', htmlspecialchars(strip_tags(str_replace('<br />', " ;\n", $contributors)), ENT_QUOTES), false, false, false);
 }
@@ -580,21 +589,9 @@ if (!empty($citations)) {
   </div>
   <div class="download">
   <?php //echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
-  </div>
-  <?php
-///// METAS /////
-// CLASSIQUES //
-$sf_response->setTitle($document->titre.' - Juricaf');
-if(!empty($analyses)) {
-  $sf_response->addMeta('Description', truncate_text(strip_tags(str_replace('</blockquote>', " ", $analyses)), 260)."\n ".$document->num_arret);
-}
-elseif (!empty($document->texte_arret)) {
-  $sf_response->addMeta('Description', truncate_text(strip_tags(str_replace("\n", " ", trim($document->texte_arret))), 260));
-}
-if(!empty($keywords)) {
-$sf_response->addMeta('Keywords', $keywords);
-}
-?>
+  </div> 
+  
+  
 <script type="text/javascript">
 <!--
 $('#titre').append('<span id="print"><div class="addthis_toolbox addthis_default_style "><a href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=ra-4f0fffc35925f215" class="addthis_button_compact">Partager</a></div><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f0fffc35925f215"></script><\/span>');
