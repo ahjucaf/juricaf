@@ -15,12 +15,62 @@ function pathToFlag($str) {
   return urlencode(str_replace("'", '_', replaceBlank($str)));
 }
 
+function remplacequery($string) {
+  $table = array(
+   'analyses:' => '<br>et l\'analyse ', 
+   'type_recours:' => '<br>et le type de recours ', 
+   'references:' => '<br>et les références ', 
+   'president:' => '<br>dont les audiences ont été présidées par ', 
+   'rapporteur:' => '<br>rendues par le rapporteur ', 
+   'commissaire_gvt:' => '<br>avec pour commissaire du gouvernement ', 
+   'avocat_gl:' => '<br>avec pour l\'avocat général ', 
+   'fonds_documentaire:' => '<br>issues du fonds documentaire ', 
+   'avocats:' => '<br>avec pour avocat ', 
+   'decisions_attaquees:' => '<br>et la juridiction faisant l\'objet d\'un pouvoi en cassation ', 
+   'sens_arret:' => '<br>ayant pour sens ', 
+   'saisines:' => '<br>ayant été saisis par ', 
+   'ecli:' => '<br>qui ont comme numéro ECLI ', 
+   'nor:' => '<br>qui ont comme numéro NOR ', 
+   'type_affaire:' => '<br>et le type d\'affaire ',
+   '(premier avocat general)' => '',
+   '(president)' => '',
+      '"' => ''   
+   );
+  return strtr($string, $table);
+}
+
+function remplacequerytitre($string) {
+  $table = array(
+   'analyses:' => 'avec l\'analyse ', 
+   'type_recours:' => 'avec pour type de recours ', 
+   'references:' => 'avec les références ', 
+   'president:' => 'dont les audiences ont été présidées par ', 
+   'rapporteur:' => 'qui ont été rapportées par ', 
+   'commissaire_gvt:' => ' avec pour le commissaire du gouvernement ', 
+   'avocat_gl:' => 'avec pour l\'avocat général ', 
+   'fonds_documentaire:' => 'issues du fonds documentaire ', 
+   'avocats:' => 'avec pour avocat ', 
+   'decisions_attaquees:' => 'ayant fait l\'objet d\'un pouvoi en cassation ', 
+   'sens_arret:' => 'ayant pour sens ', 
+   'saisines:' => 'ayant été saisis par ', 
+   'ecli:' => 'ayant comme numéro ECLI ', 
+   'nor:' => 'ayant comme numéro NOR ', 
+   'type_affaire:' => 'ayant pour type d\'affaire ',
+	'(president)' => '',
+	'(premier avocat general)' => '',
+		'"' => ''   
+   
+   );
+  return strtr($string, $table);
+}
+
 ?>
 <div class="recherche">
+
   <h1><?php echo $nbResultats; ?> résultats
   <?php
   if (preg_match('/[a-z0-9]/i', $query)) { ?>
-    pour «&nbsp;<?php echo $query; ?>&nbsp;»
+    sur la recherche  <?php echo remplacequery($query); ?>
     <span class="search_out">
       <a onclick="window.open(this.href); return false;" href="http://www.jurispedia.org/index2.php?lr=lang_fr&amp;cof=FORID%3A11&amp;ie=UTF-8&amp;q=<?php echo urlencode($query); ?>&amp;sa=++%E2%86%92++&amp;cx=010401543614658542221%3A3iznlxhkw1q&amp;siteurl=www.juricaf.org%252F#905"><img src="/images/jurispedia.png" alt="Jurispedia" title="Rechercher sur Jurispedia" /></a>
       <a onclick="window.open(this.href); return false;" href="http://www.savoirsenpartage.auf.org/discipline/9/recherche/?q=<?php echo urlencode($query); ?>"><img src="/images/savoirs_en_partage.png" alt="Savoirs en partage" title="Rechercher sur Savoirs en partage" /></a>
@@ -108,12 +158,12 @@ if (trim($query) !== '' || isset($title_facet)) {
   );
 
   if(isset($title_facet) && trim($query) == '') {
-    $title = $title_facet.' - Juricaf';
-    $description = $resultats->response->numFound.' arrêts publiés';
+    $title = 'Jurisprudences '.$title_facet.'';
+    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
       }
   if(isset($title_facet) && trim($query) !== '') {
-    $title = ''.trim($query).' - '.$title_facet.' - Juricaf';
-    $description = $resultats->response->numFound.' arrêts publiés ';
+    $title = 'Jurisprudences '.remplacequerytitre($query).' - '.$title_facet.'';
+    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
       }
   if(isset($title_facet)) {
     foreach ($pays_noindex as $noindex) {
@@ -121,8 +171,8 @@ if (trim($query) !== '' || isset($title_facet)) {
     }
   }
   if(!isset($title_facet) && trim($query) !== '') {
-    $title = ''.trim($query).' - Juricaf';
-    $description = $resultats->response->numFound.' arrêts publiés';
+    $title = 'Jurisprudences '.remplacequerytitre($query).'';
+    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
       }
   slot("metadata");
   include_partial("metadata", array('url_flux' => $sf_request->getUri().'?format=rss', 'titre_flux' => "S'abonner à cette recherche"));
