@@ -146,7 +146,10 @@ jQuery(function($){
 </select>
 <input type="text" name="val[4]" class="text_input" /><br />
 </p>
-<hr />
+
+<div style="float: right; padding-top: 0.6em; padding-bottom: 1em;"> <input type="reset" value="Effacer" /> <input type="submit" value="Valider" /></div>
+
+<hr style="clear: both;" />
 <div class="calendars">
 <h2>Date de la décision</h2>
 <p>
