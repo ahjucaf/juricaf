@@ -72,6 +72,22 @@ function dateFr($date) {
   return $date;
 }
 
+function replaceDate($string) {
+  $table = array(
+  '_' => '','CSC' => 'csc'
+    );
+	
+return strtr($string, $table);
+}
+
+function replaceDateCa($string) {
+  $table = array(
+  '_' => '','CSC' => 'scc'
+    );
+	
+return strtr($string, $table);
+}
+
 function linkifyAnalyses($titrage, $pays) {
   if(is_array($titrage)) { $titrage = trim(str_replace('Array', '', implode(' ', $titrage))); }
   // identifiants
@@ -391,15 +407,6 @@ if (!empty($citations)) {
       echo 'Identifiant URN:LEX : <em>'.$document->urnlex.'</em> <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="A Uniform Resource Name (URN) Namespace for Sources of Law (LEX)" /><br />';
     }
 
-    if(isset($references['SOURCE_TOP'])) {
-      foreach($references['SOURCE_TOP'] as $value) {
-        if(isset($value['url'])) {
-          echo '<a href="'.$value['url'].'">'.$value['titre'].'</a><br />';
-        }
-        else { echo $value['titre'].'<br />'; }
-      }
-    }
-
     if (!empty($analyses)) {
       echo '<hr /><h3>Analyses : </h3>';
       echo $analyses;
@@ -572,11 +579,23 @@ if (!empty($citations)) {
     if($document->pays == 'France') {
       if(strpos($document->id_source, "CONSTEXT") !== false || strpos($document->id_source, "JURITEXT") !== false || strpos($document->id_source, "CETATEXT") !== false) {
         if(!isset($references['PUBLICATION'])) { echo '<hr /><h3>Publications :</h3>'; }
-        if(strpos($document->id_source, "CONSTEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriConstit">Télécharger le document</a>'; }
-        if(strpos($document->id_source, "JURITEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriJudi">Télécharger le document</a>'; }
-        if(strpos($document->id_source, "CETATEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriAdmin">Télécharger le document</a>'; }
+       if(strpos($document->id_source, "CONSTEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriConstit" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
+        if(strpos($document->id_source, "JURITEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriJudi" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
+        if(strpos($document->id_source, "CETATEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriAdmin" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
       }
     }
+	
+	if($document->pays == 'Canada') {
+        echo '<p><a href="http://csc.lexum.org/fr/'.date('Y', strtotime($document->date_arret)).'/'.replaceDate($document->num_arret).'/'.replaceDate($document->num_arret).'.pdf" target="_blank"><img src="/images/pdf.png" alt="PDF" title="Télécharger au format PDF" />Télécharger au format PDF</a>				
+		<br><a href="http://csc.lexum.org/fr/'.date('Y', strtotime($document->date_arret)).'/'.replaceDate($document->num_arret).'/'.replaceDate($document->num_arret).'.docx" target="_blank"><img src="/images/rtf.png" alt="DOCX" title="Télécharger au format DOCX" />Télécharger au format DOCX</a>	
+		<br><a href="http://csc.lexum.org/fr/'.date('Y', strtotime($document->date_arret)).'/'.replaceDate($document->num_arret).'/'.replaceDate($document->num_arret).'.html" target="_blank"><img src="/images/web.png" alt="Web" title="Lien vers le site des jugements de la Cour suprême" />Version d\'origine</a>	
+		<br><a href="http://csc.lexum.org/en/'.date('Y', strtotime($document->date_arret)).'/'.replaceDateCa($document->num_arret).'/'.replaceDateCa($document->num_arret).'.html" target="_blank"><img src="/images/web.png" alt="Web" title="Lien vers le site des jugements de la Cour suprême" />Version en anglais</a><p/>	
+				
+		';
+     
+
+	}
+	
 
     if(isset($contrib)) {
       echo '<hr /><h3>Composition du Tribunal :</h3><div itemscope itemtype="http://schema.org/Person">'.$contributors;
