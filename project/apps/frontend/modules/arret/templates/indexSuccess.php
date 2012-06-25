@@ -51,6 +51,7 @@ function replaceAccents($string) {
   return strtr($string, $table);
 }
 
+
 function replaceBlank($str) {
   return str_replace (' ', '_', $str);
 }
@@ -269,7 +270,10 @@ if (isset($document->analyses)) {
         if(isset($value['url'])) {
           $citations_analyses .= '<a href="'.$value['url'].'">'.$titre.'</a><br />';
         }
-        else { $citations_analyses .= $titre.'<br />'; }
+        else { 
+		$citations_analyses .= $titre.'<br />'; }
+		$citations_analyses = preg_replace('#pourvoi[\x20-\x7E]n°[\x20-\x7E]([0-9]{2}[-][0-9]{2})[.]([0-9]{3})#', '<a href="http://www.juricaf.org/recherche/num_arret:$1$2$3">pourvoi n° $1$2$3</a>', $titre);
+
       }
     }
   }
@@ -431,7 +435,7 @@ if (!empty($citations)) {
 
 
     if (!empty($citations_analyses)) {
-      echo '<blockquote><p><em>Références :</em><br />'.$citations_analyses.'</p></blockquote>';
+      echo '<p><em>Références :</em><br />'.$citations_analyses.'</p>';
     }
 
     if (isset($document->saisines)) {
@@ -512,11 +516,16 @@ if (!empty($citations)) {
 
 
     else {
-      if(isset($document->texte_arret)) {
-        echo '<h3>Texte : </h3>';
-        echo simple_format_text(trim($document->texte_arret));
-      }
-    }
+	
+	if(!empty($document->texte_arret)) { $texte_arret = $document->texte_arret; } else { $texte_arret = ''; }
+     
+$texte_arret = preg_replace('#État[\x20-\x7E][(]décision[\x20-\x7E]n°[\x20-\x7E]([0-9]{6})#', 'État (<a href="http://www.juricaf.org/recherche/num_arret:$1">décision n° $1</a>', $texte_arret);
+	  
+	  echo simple_format_text(trim($texte_arret));
+     }
+	  
+	
+
     if (!empty($citations_arret) || !empty($sources) || !empty($decisions_attaquees)) {
       echo '<p><em>Références : </em><br />';
       if (!empty($citations_arret)) { echo $citations_arret; }
