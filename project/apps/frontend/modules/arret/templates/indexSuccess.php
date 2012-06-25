@@ -38,8 +38,14 @@ function replaceAccents($string) {
       'Ž' => 'Z', 'ž' => 'z',
 	  '1) ' => '', '2) ' => '', '3) ' => '', '4) ' => '', '5) ' => '',
 	  '1° ' => '', '2° ' => '', '3° ' => '', '4° ' => '', '5° ' => '',
-	  '\n' => ' ', '/' => ' ', '"' => ' ', '»' => ' ', '«' => ' ', '’' => ' ', '?' => ' '
-	  
+	  '1°  ' => '', '3°  ' => '',
+	  '(Sur le premier moyen)' => '', '(Sur le deuxième moyen)' => '', '(Sur le troisième moyen)' => '', '(Sur le second moyen)' => '',	'(Sur le moyen relevé d\'office)' => '', '(Sur le 1er moyen)' => '', '(Sur le 2e moyen)' => '', 
+	  '(sur le premier moyen)' => '', '(sur le deuxième moyen)' => '', '(sur le troisième moyen)' => '', '(sur le second moyen)' => '',	'(sur le moyen relevé d\'office)' => '', '(sur le 1er moyen)' => '', '(sur le 2e moyen)' => '', 
+	  '(Sur le deuxieme moyen)' => '', '(Sur le troisieme moyen)' => '', '(Sur le moyen releve d\'office)' => '',
+	  '(sur le deuxieme moyen)' => '', '(sur le troisieme moyen)' => '', '(sur le moyen releve d\'office)' => '',
+	  '(Sur le deuxieme moyen)' => '', '(Sur le troisieme moyen)' => '', '(Sur le moyen releve d\'office)' => '',
+		  '\n' => ' ', '/' => ' ', '"' => ' ', '»' => ' ', '«' => ' ', '’' => ' ', '?' => ' '
+	
 	  
   );
   return strtr($string, $table);
