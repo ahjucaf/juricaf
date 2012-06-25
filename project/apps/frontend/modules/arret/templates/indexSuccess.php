@@ -287,12 +287,20 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
     foreach($references['CITATION_ARRET'] as $value) {
       if(isset($value['nature'], $value['date'], $value['titre'], $value['numero'])) {
         $titre = '<a href="http://www.juricaf.org/recherche/num_decision:'.$value['numero'].'">'.$value['nature'].' du '.dateFr($value['date']).' sur '.$value['titre'].'</a>';
+			
       }
+	  
       else { $titre = $value['titre']; }
       if(isset($value['url'])) {
         $citations_arret .= '<a href="'.$value['url'].'">'.$titre.'</a><br />';
       }
-      else { $citations_arret .=  $titre.'<br />'; }
+      else { 
+	  
+	 $citations_arret = preg_replace('#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i', '<a href="$0" target="_blank">$0</a>', $citations_arret);
+	  $citations_arret = preg_replace('#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#', '<a href="http://www.juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>', $citations_arret); 
+	   
+	   
+	  $citations_arret .=  $titre.'<br />'; }
     }
   }
 
@@ -519,8 +527,14 @@ if (!empty($citations)) {
 	
 	if(!empty($document->texte_arret)) { $texte_arret = $document->texte_arret; } else { $texte_arret = ''; }
      
-$texte_arret = preg_replace('#État[\x20-\x7E][(]décision[\x20-\x7E]n°[\x20-\x7E]([0-9]{6})#', 'État (<a href="http://www.juricaf.org/recherche/num_arret:$1">décision n° $1</a>', $texte_arret);
-	  
+$texte_arret = preg_replace('#État[\x20-\x7E][(]décision[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})#', 'État (<a href="http://www.juricaf.org/recherche/num_arret:$1">décision n° $1</a>', $texte_arret);
+$texte_arret = preg_replace('#État[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})#', 'État <a href="http://www.juricaf.org/recherche/num_arret:$1">n° $1</a>', $texte_arret);
+$texte_arret = preg_replace('#arrêt[\x20-\x7E]n°[\x20-\x7E]([0-9]{2}[A-Z]{2}[0-9]{5})#', 'arrêt <a href="http://www.juricaf.org/recherche/num_arret:$1">n° $1</a>', $texte_arret);
+$texte_arret = preg_replace('#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i', '<a href="$0" target="_blank">$0</a>', $texte_arret);
+$texte_arret = preg_replace('#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#', '<a href="http://www.juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>', $texte_arret);
+
+
+
 	  echo simple_format_text(trim($texte_arret));
      }
 	  
