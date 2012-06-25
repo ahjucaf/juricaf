@@ -281,8 +281,8 @@ $sources = '';
 if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
   if(isset($references['CITATION_ARRET'])) {
     foreach($references['CITATION_ARRET'] as $value) {
-      if(isset($value['nature'], $value['date'], $value['titre'])) {
-        $titre = $value['nature'].' du '.dateFr($value['date']).' sur '.$value['titre'];
+      if(isset($value['nature'], $value['date'], $value['titre'], $value['numero'])) {
+        $titre = '<a href="http://www.juricaf.org/recherche/num_decision:'.$value['numero'].'">'.$value['nature'].' du '.dateFr($value['date']).' sur '.$value['titre'].'</a>';
       }
       else { $titre = $value['titre']; }
       if(isset($value['url'])) {
