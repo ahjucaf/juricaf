@@ -335,7 +335,6 @@ elseif(isset($document->decisions_attaquees)) { $decisions_attaquees = printDeci
 
 // METADONNEES //
 
-
 if(!empty($analyses)) {
   $sf_response->addMeta('Description', '');
 }
@@ -351,6 +350,8 @@ if(!empty($document->urnlex)) { $urnlex = $document->urnlex; } else { $urnlex = 
 $creator = $document->juridiction;
 if(isset($document->section)) { $creator .= ' '.$document->section; }
 
+$docketNumber = $document->numeros_affaires['numero_affaire'];
+$docketNumber = $document->num_arret;
 $citations = '';
 
 if (!empty($citations_analyses)) { $citations .= $citations_analyses; }
@@ -358,8 +359,6 @@ if (!empty($citations_arret)) { $citations .= $citations_arret; }
 if (!empty($sources)) { $citations .= $sources; }
 if (!empty($decisions_attaquees)) { $citations .= $decisions_attaquees; }
 
-// Obligatoire pour ECLI
-//if (isset($document->ecli)) { $sf_response->addMeta('DC.isVersionOf', $document->ecli, false, false, false); } // Identifiant ECLI
 $sf_response->setTitle($document->titre);
 $sf_response->addMeta('DC.accessRights', 'public', false, false, false);
 $sf_response->addMeta('DC.creator', $creator, false, false, false);
@@ -371,26 +370,24 @@ $sf_response->addMeta('DC.language', 'FR', false, false, false);
 $sf_response->addMeta('DC.publisher', 'AHJUCAF', false, false, false);
 $sf_response->addMeta('DC.subject', replacekey($keywords), false, false, false);
 $sf_response->addMeta('DC.type', 'case', false, false, false);
-
-
-// Facultatif pour ECLI
-//$sf_response->addMeta('DC.title', htmlspecialchars($document->titre, ENT_QUOTES), false, false, false); // Obligatoire pour Zotero ; pour ECLI celle ci devrait accueillir les noms des parties (donc pas possible pour la France)
-
-//if(!empty($analyses)) {
-//  $sf_response->addMeta('DC.abstract', .htmlspecialchars(strip_tags(str_replace('</blockquote>', " \n", $analyses)), ENT_QUOTES), false, false, false);
-//}
-//if(!empty($keywords)) {
-  //$sf_response->addMeta('DC.subject', htmlspecialchars(strip_tags(str_replace('</blockquote>', " ", $keywords)),ENT_QUOTES), false, false, false);
-//}
+$sf_response->addMeta('docketNumber', $docketNumber, false, false, false);
 
 if(isset($contrib)) {
   $sf_response->addMeta('DC.contributor', htmlspecialchars(strip_tags(str_replace('<br />', " ;\n", $contributors)), ENT_QUOTES), false, false, false);
 }
-//$sf_response->addMeta('DC.issued', 'Date de publication', false, false, false);
 if (!empty($citations)) {
   $sf_response->addMeta('DC.references', htmlspecialchars(strip_tags(str_replace('<br />', " ;\n", $citations)), ENT_QUOTES), false, false, false);
 }
-// $sf_response->addMeta('DC.isReplacedBy', 'En cas de renumérotation', false, false, false);
+
+
+    if(isset($references['PUBLICATION'])) {
+         foreach($references['PUBLICATION'] as $value) {
+          if(strpos(strtolower($value['titre']), 'lebon') !== false || strpos(strtolower($value['titre']), 'Publié au bulletin') !== false) {
+			$sf_response->addMeta('reporter', $value['titre'], false, false, false);
+          }
+  $sf_response->addMeta('reporter', $value['titre'], false, false, false);
+        }
+    }
 
 ?>
   <div class="arret">
@@ -416,11 +413,6 @@ if (!empty($citations)) {
     if (isset($document->type_recours)) {
       echo 'Type de recours : <em>'.link_to($document->type_recours, '@recherche_resultats?query=type_recours:"'.replaceAccents($document->type_recours).'"').'</em><br />';
     }
-
-    //echo '<br />';
- //   if (isset($document->ecli)) {
- //     echo 'Identifiant ECLI : <em>'.$document->ecli.'</em> (non officiel) <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="Identifiant européen de la jurisprudence" /><br />';
-   // }  désactivation temporaire : pb arrêt Cour de cassation de France
     if (isset($document->urnlex)) {
       echo 'Identifiant URN:LEX : <em>'.$document->urnlex.'</em> <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="A Uniform Resource Name (URN) Namespace for Sources of Law (LEX)" /><br />';
     }
@@ -440,7 +432,6 @@ if (!empty($citations)) {
       echo '<hr /><h3>Intérêt pour la protection des données personnelles : '.$document->cote_donnees.'</h3>';
 
     }
-
 
     if (!empty($citations_analyses)) {
       echo '<p><em>Références :</em><br />'.$citations_analyses.'</p>';
@@ -518,11 +509,6 @@ if (!empty($citations)) {
     <?php
     }
 
-
-
-
-
-
     else {
 	
 	if(!empty($document->texte_arret)) { $texte_arret = $document->texte_arret; } else { $texte_arret = ''; }
@@ -532,14 +518,10 @@ $texte_arret = preg_replace('#État[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})#', 'Ét
 $texte_arret = preg_replace('#arrêt[\x20-\x7E]n°[\x20-\x7E]([0-9]{2}[A-Z]{2}[0-9]{5})#', 'arrêt <a href="http://www.juricaf.org/recherche/num_arret:$1">n° $1</a>', $texte_arret);
 $texte_arret = preg_replace('#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i', '<a href="$0" target="_blank">$0</a>', $texte_arret);
 $texte_arret = preg_replace('#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#', '<a href="http://www.juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>', $texte_arret);
-
-
-
+$texte_arret = preg_replace('#(loi[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#', '<a href="http://www.juricaf.org/recherche/$1">$1</a>', $texte_arret);
+$texte_arret = preg_replace('#(décret[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#', '<a href="http://www.juricaf.org/recherche/$1">$1</a>', $texte_arret);
 	  echo simple_format_text(trim($texte_arret));
      }
-	  
-	
-
     if (!empty($citations_arret) || !empty($sources) || !empty($decisions_attaquees)) {
       echo '<p><em>Références : </em><br />';
       if (!empty($citations_arret)) { echo $citations_arret; }
@@ -547,7 +529,6 @@ $texte_arret = preg_replace('#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#',
       if (!empty($decisions_attaquees)) { echo $decisions_attaquees; }
       echo '</p>';
     }
-
     if(isset($references['ARRET'])) {
       echo '<hr /><h3>Référence :</h3>';
         foreach($references['ARRET'] as $value) {
@@ -598,7 +579,8 @@ $texte_arret = preg_replace('#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#',
             echo '<a href="'.urlencode($value['url']).'">'.$value['titre'].'</a><br />';
           }
           elseif(strpos(strtolower($value['titre']), 'lebon') !== false || strpos(strtolower($value['titre']), 'Publié au bulletin') !== false) {
-            echo link_to($value['titre'], '@recherche_resultats?query=references:"'.$value['titre'].'"').'<br />';
+			echo $publication;
+			echo link_to($value['titre'], '@recherche_resultats?query=references:"'.$value['titre'].'"').'<br />';
           }
           else { echo $value['titre'].'<br />'; }
         }
@@ -621,11 +603,8 @@ $texte_arret = preg_replace('#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#',
 		<br><a href="http://csc.lexum.org/en/'.date('Y', strtotime($document->date_arret)).'/'.replaceDateCa($document->num_arret).'/'.replaceDateCa($document->num_arret).'.html" target="_blank"><img src="/images/web.png" alt="Web" title="Lien vers le site des jugements de la Cour suprême" />Version en anglais</a><p/>	
 				
 		';
-     
-
-	}
+   	}
 	
-
     if(isset($contrib)) {
       echo '<hr /><h3>Composition du Tribunal :</h3><div itemscope itemtype="http://schema.org/Person">'.$contributors;
     }
@@ -638,7 +617,6 @@ $texte_arret = preg_replace('#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#',
   <div class="download">
   <?php //echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
   </div> 
-  
   
 <script type="text/javascript">
 <!--
