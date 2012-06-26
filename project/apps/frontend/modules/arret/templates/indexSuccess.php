@@ -463,6 +463,11 @@ if (!empty($citations)) {
           echo '<div><blockquote><p>';
 		  
 		  $document->saisines = preg_replace('#(article[\x20-\x7E][a-z0-9._-]{1,})([\x20-\x7E]de[\x20-\x7E]la[\x20-\x7E])(Constitution)#', '<a href="http://www.juricaf.org/recherche/$1 $3">$1$2$3</a>', $document->saisines);
+		$document->saisines = preg_replace('#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i', '<a href="$0" target="_blank">$0</a>', $document->saisines);
+		  
+		  $document->saisines = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#', '<a href="http://www.juricaf.org/recherche/num_arret:$1">$1$2</a>', $document->saisines);
+		  
+		  
 		  
           echo simple_format_text($document->saisines);
           echo '</p></blockquote></div>';
@@ -525,7 +530,7 @@ $texte_arret = preg_replace('#(loi[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#', '
 $texte_arret = preg_replace('#(décret[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#', '<a href="http://www.juricaf.org/recherche/$1">$1</a>', $texte_arret);
 //$texte_arret = preg_replace('#(article[\x20-\x7E][a-z0-9._-]{1,}[\x20-\x7E]du[\x20-\x7E][c,C]ode[\x20-\x7E].{1,})([,.])#', '<a href="http://www.juricaf.org/recherche/$1">$1$2</a>', $texte_arret);
 $texte_arret = preg_replace('#(article[\x20-\x7E][a-z0-9._-]{1,})([\x20-\x7E]de[\x20-\x7E]la[\x20-\x7E])(Constitution)#', '<a href="http://www.juricaf.org/recherche/$1 $3">$1$2$3</a>', $texte_arret);
-
+$texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#', '<a href="http://www.juricaf.org/recherche/num_arret:$1">$1$2</a>', $texte_arret);
 
 
 	  echo simple_format_text(trim($texte_arret));
