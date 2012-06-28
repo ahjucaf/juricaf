@@ -598,10 +598,10 @@ $texte_arret = preg_replace('#État[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})#', 'Ét
 $texte_arret = preg_replace('#arrêt[\x20-\x7E]n°[\x20-\x7E]([0-9]{2}[A-Z]{2}[0-9]{5})#', 'arrêt <a href="http://www.juricaf.org/recherche/num_arret:$1">n° $1</a>', $texte_arret);
 $texte_arret = preg_replace('#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i', '<a href="$0" target="_blank">$0</a>', $texte_arret);
 $texte_arret = preg_replace('#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#', '<a href="http://www.juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>', $texte_arret);
-$texte_arret = preg_replace('#(loi[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#', '<a href="http://www.juricaf.org/recherche/$1">$1</a>', $texte_arret);
-$texte_arret = preg_replace('#(décret[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#', '<a href="http://www.juricaf.org/recherche/$1">$1</a>', $texte_arret);
+$texte_arret = preg_replace('#(loi[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#', '<a href="http://www.juricaf.org/recherche/texte_arret:$1">$1</a>', $texte_arret);
+$texte_arret = preg_replace('#(décret[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#', '<a href="http://www.juricaf.org/recherche/texte_arret:$1">$1</a>', $texte_arret);
 //$texte_arret = preg_replace('#(article[\x20-\x7E][a-z0-9._-]{1,}[\x20-\x7E]du[\x20-\x7E][c,C]ode[\x20-\x7E].{1,})([,.])#', '<a href="http://www.juricaf.org/recherche/$1">$1$2</a>', $texte_arret);
-$texte_arret = preg_replace('#(article[\x20-\x7E][a-z0-9._-]{1,})([\x20-\x7E]de[\x20-\x7E]la[\x20-\x7E])(Constitution)#', '<a href="http://www.juricaf.org/recherche/$1 $3">$1$2$3</a>', $texte_arret);
+//$texte_arret = preg_replace('#(article[\x20-\x7E][a-z0-9._-]{1,})([\x20-\x7E]de[\x20-\x7E]la[\x20-\x7E])(Constitution)#', '<a href="http://www.juricaf.org/recherche/texte_arret:"\$1 de la $3\"">$1$2$3</a>', $texte_arret); Pertinence mauvaise
 $texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#', '<a href="http://www.juricaf.org/recherche/num_arret:$1">$1$2</a>', $texte_arret);
 
 	echo '<h3>Texte : </h3>';
@@ -663,7 +663,8 @@ $texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#
       echo '<hr /><h3>Composition du Tribunal :</h3><div itemscope itemtype="http://schema.org/Person">'.$contributors;
     }
 
-	
+
+
     if (isset($document->fonds_documentaire)) {
 	      echo '<p>Origine : <em>'.link_to($document->fonds_documentaire, '@recherche_resultats?query=fonds_documentaire:"'.replaceAccents($document->fonds_documentaire).'"').'</em></p><br />';
     }
