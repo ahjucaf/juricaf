@@ -62,7 +62,8 @@ function replacekey($string) {
 
 function citation($string) {
   $table = array(
-      'Cour de cassation' => 'Cass.', 'Chambre civile 1' => 'Civ. 1ère', 'Chambre civile 2' => 'Civ. 2e', 'Chambre civile 3' => 'Civ. 3e', 'Chambre criminelle' => 'Crim.', 'Chambre sociale' => 'Soc.', 'Chambre commerciale' => 'Com.', 'Chambres reunies' =>'ch. réun.', 'Chambre commerciale' => 'Com.', 'Assemblee pleniere' => 'Ass. Plén.','Chambre mixte' => 'ch. mixte.', 'Bulletin' => '', 'Publié au bulletin' => ''
+      'Cour de cassation' => 'Cass.', 'Chambre civile 1' => 'Civ. 1ère', 'Chambre civile 2' => 'Civ. 2e', 'Chambre civile 3' => 'Civ. 3e', 'Chambre criminelle' => 'Crim.', 'Chambre sociale' => 'Soc.', 'Chambre commerciale' => 'Com.', 'Chambres reunies' =>'ch. réun.', 'Chambre commerciale' => 'Com.', 'Assemblee pleniere' => 'Ass. Plén.','Chambre mixte' => 'ch. mixte.', 'Bulletin' => '', 'Publié au bulletin' => '', 'Bulletin Criminel  Cour de Cassation Chambre criminelle' => '', 'ARRETS Cour de Cassation Chambre civile' => ''
+	  
   );
   return strtr($string, $table);
 }
@@ -352,9 +353,8 @@ if(isset($references['PUBLICATION'])) {
 		  }
 		  elseif(strpos(strtolower($value['titre']), 'Bulletin') == false)  {
 			$bulletins = $value['titre'];
-			          }
-		 
-        }
+		}
+		 }
     } 
       $citation = ''.citation($document->juridiction).' '.citation($document->formation).', '.dateFr($document->date_arret).', pourvoi n°'.$document->num_arret.''.$civcrim.''.citation($bulletins).'';
 
