@@ -62,7 +62,7 @@ function replacekey($string) {
 
 function citation($string) {
   $table = array(
-      'Cour de cassation' => 'Cass.', 'Chambre civile 1' => 'Civ. 1ère', 'Chambre civile 2' => 'Civ. 2e', 'Chambre civile 3' => 'Civ. 3e', 'Chambre criminelle' => 'Crim.', 'Chambre sociale' => 'Soc.', 'Chambre commerciale' => 'Com.', 'Chambres reunies' =>'ch. réun.', 'Chambre commerciale' => 'Com.', 'Assemblee pleniere' => 'Ass. Plén.','Chambre mixte' => 'ch. mixte.', 'Bulletin' => ', bull.', 'Publié au bulletin' => ', bull.'
+      'Cour de cassation' => 'Cass.', 'Chambre civile 1' => 'Civ. 1ère', 'Chambre civile 2' => 'Civ. 2e', 'Chambre civile 3' => 'Civ. 3e', 'Chambre criminelle' => 'Crim.', 'Chambre sociale' => 'Soc.', 'Chambre commerciale' => 'Com.', 'Chambres reunies' =>'ch. réun.', 'Chambre commerciale' => 'Com.', 'Assemblee pleniere' => 'Ass. Plén.','Chambre mixte' => 'ch. mixte.', 'Bulletin' => '', 'Publié au bulletin' => ''
 	  	  
 	  //, 'Conseil d\'État' => 'CE','Conseil constitutionnel' => 'Cons. Const.'
   
@@ -598,6 +598,9 @@ $texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#
 	
     if(isset($references['PUBLICATION'])) {
        foreach($references['PUBLICATION'] as $value) {
+	if($document->formation == 'Chambre criminelle')  { $civcrim = ', Bull. crim.' ;  }
+	if($document->formation !== 'Chambre criminelle')  { $civcrim = ', Bull. civ.' ;  }
+	   
           if(isset($value['url'])) {
             	echo $value['titre'];
           }
@@ -636,12 +639,15 @@ $texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#
     }
 
 	
-		if (isset($document->num_arret)and ($document->pays == 'France')and ($document->juridiction == 'Cour de cassation')){
-       echo '<p>Citation de la décision: '.citation($document->juridiction).' '.citation($document->formation).', '.dateFr($document->date_arret).', pourvoi n°'.$document->num_arret.''.citation($bulletins).'';
+
+	if (isset($document->num_arret)and ($document->pays == 'France')and ($document->juridiction == 'Cour de cassation')){
+		
+		
+       echo '<p>Citation de la décision: '.citation($document->juridiction).' '.citation($document->formation).', '.dateFr($document->date_arret).', pourvoi n°'.$document->num_arret.''.$civcrim.''.citation($bulletins).'';
       }
 	
     if (isset($document->fonds_documentaire)) {
-      echo '<hr /><p>Origine : <em>'.link_to($document->fonds_documentaire, '@recherche_resultats?query=fonds_documentaire:"'.replaceAccents($document->fonds_documentaire).'"').'</em></p><br />';
+	      echo '<hr /><p>Origine : <em>'.link_to($document->fonds_documentaire, '@recherche_resultats?query=fonds_documentaire:"'.replaceAccents($document->fonds_documentaire).'"').'</em></p><br />';
     }
 	
 
