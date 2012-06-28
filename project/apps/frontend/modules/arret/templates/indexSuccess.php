@@ -44,13 +44,10 @@ function replaceAccents($string) {
 	  '(Sur le deuxieme moyen)' => '', '(Sur le troisieme moyen)' => '', '(Sur le moyen releve d\'office)' => '',
 	  '(sur le deuxieme moyen)' => '', '(sur le troisieme moyen)' => '', '(sur le moyen releve d\'office)' => '',
 	  '(Sur le deuxieme moyen)' => '', '(Sur le troisieme moyen)' => '', '(Sur le moyen releve d\'office)' => '',
-		  '\n' => ' ', '/' => ' ', '"' => ' ', '»' => ' ', '«' => ' ', '’' => ' ', '?' => ' '
-	
-	  
-  );
+		  '\n' => ' ', '/' => ' ', '"' => ' ', '»' => ' ', '«' => ' ', '’' => ' ', '?' =>' '
+ );
   return strtr($string, $table);
 }
-
 
 function replaceBlank($str) {
   return str_replace (' ', '_', $str);
@@ -63,20 +60,32 @@ function replacekey($string) {
   return strtr($string, $table);
 }
 
+function citation($string) {
+  $table = array(
+      'Cour de cassation' => 'Cass.', 'Chambre civile 1' => 'Civ. 1ère', 'Chambre civile 2' => 'Civ. 2e', 'Chambre civile 3' => 'Civ. 3e', 'Chambre criminelle' => 'Crim.', 'Chambre sociale' => 'Soc.', 'Chambre commerciale' => 'Com.', 'Chambres reunies' =>'ch. réun.', 'Chambre commerciale' => 'Com.', 'Assemblee pleniere' => 'Ass. Plén.','Chambre mixte' => 'ch. mixte.', 'Bulletin' => ', bull.', 'Publié au bulletin' => ', bull.'
+	  	  
+	  //, 'Conseil d\'État' => 'CE','Conseil constitutionnel' => 'Cons. Const.'
+  
+  );
+  return strtr($string, $table);
+}
+
+
+function dateFr($date) {
+  if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $date)) {
+$Mois = array("janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre");
+  $d = explode('-', $date);
+    $date = $d[2].' '.$Mois[date('n')].' '.$d[0];
+  }
+  return $date;
+}
+
 function pathToFlag($str) {
   return urlencode(str_replace("'", '_', replaceBlank($str)));
 }
 
 function sortLength($a,$b) {
   return strlen($b)-strlen($a);
-}
-
-function dateFr($date) {
-  if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $date)) {
-    $d = explode('-', $date);
-    $date = $d[2].'/'.$d[1].'/'.$d[0];
-  }
-  return $date;
 }
 
 function replaceDate($string) {
@@ -264,7 +273,7 @@ if (isset($document->analyses)) {
     if(isset($references['CITATION_ANALYSE'])) {
       foreach($references['CITATION_ANALYSE'] as $value) {
         if(isset($value['nature'], $value['date'], $value['titre'])) {
-          $titre = $value['nature'].' du '.dateFr($value['date']).' sur '.$value['titre'];
+          $titre = $value['nature'].' du '.dateFr($value['date']).', '.$value['titre'];
         }
         else { $titre = $value['titre']; }
         if(isset($value['url'])) {
@@ -286,7 +295,7 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
   if(isset($references['CITATION_ARRET'])) {
     foreach($references['CITATION_ARRET'] as $value) {
       if(isset($value['nature'], $value['date'], $value['titre'], $value['numero'])) {
-        $titre = '<a href="http://www.juricaf.org/recherche/num_decision:'.$value['numero'].'">'.$value['nature'].' du '.dateFr($value['date']).' sur '.$value['titre'].'</a>';
+        $titre = '<a href="http://www.juricaf.org/recherche/num_decision:'.$value['numero'].'">'.$value['nature'].' du '.dateFr($value['date']).', '.$value['titre'].'</a>';
 			
       }
 	  
@@ -379,16 +388,17 @@ if (!empty($citations)) {
   $sf_response->addMeta('DC.references', htmlspecialchars(strip_tags(str_replace('<br />', " ;\n", $citations)), ENT_QUOTES), false, false, false);
 }
 
-
     if(isset($references['PUBLICATION'])) {
          foreach($references['PUBLICATION'] as $value) {
-          if(strpos(strtolower($value['titre']), 'lebon') !== false || strpos(strtolower($value['titre']), 'Publié au bulletin') !== false) {
-			$sf_response->addMeta('reporter', $value['titre'], false, false, false);
+          if(strpos(strtolower($value['titre']), 'lebon') !== false || strpos(strtolower($value['titre']), 'Publié au bulletin') !== false) 
+		  $reporter = $value['titre'];
+		  {
+			$sf_response->addMeta('reporter', $reporter, false, false, false);
           }
-  $sf_response->addMeta('reporter', $value['titre'], false, false, false);
+		  $reporter = $value['titre'];
+  $sf_response->addMeta('reporter', $reporter, false, false, false);
         }
     }
-
 ?>
   <div class="arret">
     <h1 id="titre"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre; ?></h1>
@@ -585,27 +595,30 @@ $texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#
       }
     }
 
+	
     if(isset($references['PUBLICATION'])) {
-      echo '<hr /><h3>Publications :</h3>';
-        foreach($references['PUBLICATION'] as $value) {
+       foreach($references['PUBLICATION'] as $value) {
           if(isset($value['url'])) {
-            echo '<a href="'.urlencode($value['url']).'">'.$value['titre'].'</a><br />';
+            	echo $value['titre'];
           }
-          elseif(strpos(strtolower($value['titre']), 'lebon') !== false || strpos(strtolower($value['titre']), 'Publié au bulletin') !== false) {
-			echo $publication;
-			echo link_to($value['titre'], '@recherche_resultats?query=references:"'.$value['titre'].'"').'<br />';
+          elseif(strpos(strtolower($value['titre']), 'lebon') !== false) {
+		echo $value['titre'];
+		  }
+		  elseif(strpos(strtolower($value['titre']), 'Bulletin') == false)  {
+			$bulletins = $value['titre'];
+			 echo $bulletins; 
           }
-          else { echo $value['titre'].'<br />'; }
+		 
         }
-    }
+    } // fonction qui doit être mutualisée avec les métadonnées
 
     // Lien télécharger le document
     if($document->pays == 'France') {
       if(strpos($document->id_source, "CONSTEXT") !== false || strpos($document->id_source, "JURITEXT") !== false || strpos($document->id_source, "CETATEXT") !== false) {
         if(!isset($references['PUBLICATION'])) { echo '<hr /><h3>Publications :</h3>'; }
-       if(strpos($document->id_source, "CONSTEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriConstit" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
-        if(strpos($document->id_source, "JURITEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriJudi" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
-        if(strpos($document->id_source, "CETATEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriAdmin" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
+       if(strpos($document->id_source, "CONSTEXT") !== false) { echo '<br><a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriConstit" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
+        if(strpos($document->id_source, "JURITEXT") !== false) { echo '<br><a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriJudi" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
+        if(strpos($document->id_source, "CETATEXT") !== false) { echo '<br><a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriAdmin" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
       }
     }
 	
@@ -622,10 +635,18 @@ $texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#
       echo '<hr /><h3>Composition du Tribunal :</h3><div itemscope itemtype="http://schema.org/Person">'.$contributors;
     }
 
+	
+		if (isset($document->num_arret)and ($document->pays == 'France')and ($document->juridiction == 'Cour de cassation')){
+       echo '<p>Citation de la décision: '.citation($document->juridiction).' '.citation($document->formation).', '.dateFr($document->date_arret).', pourvoi n°'.$document->num_arret.''.citation($bulletins).'';
+      }
+	
     if (isset($document->fonds_documentaire)) {
       echo '<hr /><p>Origine : <em>'.link_to($document->fonds_documentaire, '@recherche_resultats?query=fonds_documentaire:"'.replaceAccents($document->fonds_documentaire).'"').'</em></p><br />';
     }
+	
+
     ?>
+	
   </div>
   <div class="download">
   <?php //echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
