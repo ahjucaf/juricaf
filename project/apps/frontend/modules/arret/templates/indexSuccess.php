@@ -342,6 +342,35 @@ if(isset($document->decisions_attaquees)) {
 if(isset($references['DECISION_ATTAQUEE'])) { $decisions_attaquees = printDecisionAttaquee($references['DECISION_ATTAQUEE'], $is_text);}
 elseif(isset($document->decisions_attaquees)) { $decisions_attaquees = printDecisionAttaquee($document->decisions_attaquees, $is_text);}
 
+if(isset($references['PUBLICATION'])) {
+       foreach($references['PUBLICATION'] as $value) {
+	if($document->formation == 'Chambre criminelle')  { 
+	$civcrim = ', Bull. crim.' ; 
+	$civcrimlong ='Publié au bulletin des arrêts de la chambre criminelle';
+	}
+	if($document->formation !== 'Chambre criminelle')  { 
+	$civcrim = ', Bull. civ.' ; 
+	$civcrimlong ='Publié au bulletin des arrêts des chambres civiles';
+	}
+	   
+          if(isset($value['url'])) {
+            	$bulletins = $value['titre'];
+			
+          }
+          elseif(strpos(strtolower($value['titre']), 'lebon') !== false) {
+		$lebon = $value['titre'];
+		  }
+		  elseif(strpos(strtolower($value['titre']), 'Bulletin') == false)  {
+			$bulletins = $value['titre'];
+			          }
+		 
+        }
+    } 
+
+			
+       $citation = ''.citation($document->juridiction).' '.citation($document->formation).', '.dateFr($document->date_arret).', pourvoi n°'.$document->num_arret.''.$civcrim.''.citation($bulletins).'';
+        
+
 // METADONNEES //
 
 if(!empty($analyses)) {
@@ -380,6 +409,7 @@ $sf_response->addMeta('DC.publisher', 'AHJUCAF', false, false, false);
 $sf_response->addMeta('DC.subject', replacekey($keywords), false, false, false);
 $sf_response->addMeta('DC.type', 'case', false, false, false);
 $sf_response->addMeta('docketNumber', $docketNumber, false, false, false);
+$sf_response->addMeta('shortTitle', $citation, false, false, false);
 
 if(isset($contrib)) {
   $sf_response->addMeta('DC.contributor', htmlspecialchars(strip_tags(str_replace('<br />', " ;\n", $contributors)), ENT_QUOTES), false, false, false);
@@ -476,8 +506,6 @@ if (!empty($citations)) {
 		$document->saisines = preg_replace('#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i', '<a href="$0" target="_blank">$0</a>', $document->saisines);
 		  
 		  $document->saisines = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#', '<a href="http://www.juricaf.org/recherche/num_arret:$1">$1$2</a>', $document->saisines);
-		  
-		  
 		  
           echo simple_format_text($document->saisines);
           echo '</p></blockquote></div>';
@@ -595,26 +623,8 @@ $texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#
       }
     }
 
-	
-    if(isset($references['PUBLICATION'])) {
-       foreach($references['PUBLICATION'] as $value) {
-	if($document->formation == 'Chambre criminelle')  { $civcrim = ', Bull. crim.' ;  }
-	if($document->formation !== 'Chambre criminelle')  { $civcrim = ', Bull. civ.' ;  }
-	   
-          if(isset($value['url'])) {
-            	echo $value['titre'];
-          }
-          elseif(strpos(strtolower($value['titre']), 'lebon') !== false) {
-		echo $value['titre'];
-		  }
-		  elseif(strpos(strtolower($value['titre']), 'Bulletin') == false)  {
-			$bulletins = $value['titre'];
-			 echo $bulletins; 
-          }
-		 
-        }
-    } // fonction qui doit être mutualisée avec les métadonnées
 
+	
     // Lien télécharger le document
     if($document->pays == 'France') {
       if(strpos($document->id_source, "CONSTEXT") !== false || strpos($document->id_source, "JURITEXT") !== false || strpos($document->id_source, "CETATEXT") !== false) {
@@ -638,19 +648,17 @@ $texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#
       echo '<hr /><h3>Composition du Tribunal :</h3><div itemscope itemtype="http://schema.org/Person">'.$contributors;
     }
 
+		if (isset($document->num_arret)and ($document->pays == 'France')and ($document->juridiction == 'Cour de cassation')){
+	 echo '<p>Citation de la décision: '.$citation.'';
+	 	echo '<br>'.$civcrimlong.' '.citation($bulletins).''; 
+	 
+	}
 	
-
-	if (isset($document->num_arret)and ($document->pays == 'France')and ($document->juridiction == 'Cour de cassation')){
-		
-		
-       echo '<p>Citation de la décision: '.citation($document->juridiction).' '.citation($document->formation).', '.dateFr($document->date_arret).', pourvoi n°'.$document->num_arret.''.$civcrim.''.citation($bulletins).'';
-      }
+	echo '<br>'.$lebon.''; 
 	
     if (isset($document->fonds_documentaire)) {
 	      echo '<hr /><p>Origine : <em>'.link_to($document->fonds_documentaire, '@recherche_resultats?query=fonds_documentaire:"'.replaceAccents($document->fonds_documentaire).'"').'</em></p><br />';
     }
-	
-
     ?>
 	
   </div>
