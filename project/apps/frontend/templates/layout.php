@@ -7,7 +7,16 @@
     <?php include_title() ?>
     <link rel="shortcut icon" href="/images/favicon.ico" />
     <?php include_stylesheets() ?>
+	<link type="text/css" rel="stylesheet" href="/css/jquery.qtip.css" />
     <?php include_javascripts() ?>
+	<script type="text/javascript" src="/js/jquery.qtip.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function()
+{
+	// Match all <A/> links with a title tag and use it as the content (default).
+	$('a[title]').qtip();
+});
+	</script>
 	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f0fffc35925f215"></script>
     <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
   </head>
