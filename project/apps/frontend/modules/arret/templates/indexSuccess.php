@@ -603,6 +603,11 @@ $texte_arret = preg_replace('#(décret[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#
 //$texte_arret = preg_replace('#(article[\x20-\x7E][a-z0-9._-]{1,})([\x20-\x7E]de[\x20-\x7E]la[\x20-\x7E])(Constitution)#', '<a href="http://www.juricaf.org/recherche/texte_arret:"\$1 de la $3\"">$1$2$3</a>', $texte_arret); Pertinence mauvaise
 $texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#', '<a href="http://www.juricaf.org/recherche/num_arret:$1">$1$2</a>', $texte_arret);
 
+$texte_arret = preg_replace('#(perquisition)#', '<a class="info" href="#">$1<span>Mesure d’enquête qui consiste à rechercher des éléments de preuve d’une infraction, au domicile d’une personne ou dans tous lieux où ils peuvent se trouver.</span></a>', $texte_arret); //Testinfobulle définition
+
+$texte_arret = preg_replace('#(abus[\x20-\x7E]de[\x20-\x7E]pouvoir)#', '<a class="info" href="#">$1<span>RT corruption<br>
+RT recours en annulation</span></a>', $texte_arret); //Test infobulle thésaurus
+
 	echo '<h3>Texte : </h3>';
 	  echo '<span itemprop="articleBody">'.simple_format_text(trim($texte_arret)).'</span>';
      }
