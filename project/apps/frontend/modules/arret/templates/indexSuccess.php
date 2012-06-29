@@ -122,7 +122,6 @@ function linkifyAnalyses($titrage, $pays) {
     $titrage = rtrim($titrage, '. ');
     $values = explode(' — ', $titrage);
   }
-
   $values = array_filter($values);
 
   foreach ($values as $key => $value) {
@@ -224,19 +223,19 @@ $contributors = '';
 
   if(isset($document->president) || isset($document->avocat_gl) || isset($document->rapporteur) || isset($document->commissaire_gvt) || isset($document->avocats)) {
     if (isset($document->president)) {
-      $contributors .= '<span itemprop="jobTitle">Président</span> : <em><span itemprop="name">'.link_to($document->president, '@recherche_resultats?query=president:"'.replaceAccents($document->president).'"').'</span></em><br />'; // replace br par ' ; '
+      $contributors .= '<div itemscope itemtype="http://schema.org/Person" itemprop="contributor"><span itemprop="jobTitle">Président</span> : <em itemprop="name">'.link_to($document->president, '@recherche_resultats?query=president:"'.replaceAccents($document->president).'"').'</div></em>'; // replace br par ' ; '
     }
     if (isset($document->avocat_gl)) {
-      $contributors .= '<span itemprop="jobTitle">Avocat général</span> : <em><span itemprop="name">'.link_to($document->avocat_gl, '@recherche_resultats?query=avocat_gl:"'.replaceAccents($document->avocat_gl).'"').'</span></em><br />';
+      $contributors .= '<div itemscope itemtype="http://schema.org/Person" itemprop="contributor"><span itemprop="jobTitle">Avocat général</span> : <em itemprop="name">'.link_to($document->avocat_gl, '@recherche_resultats?query=avocat_gl:"'.replaceAccents($document->avocat_gl).'"').'</div></em>';
     }
     if (isset($document->rapporteur)) {
-      $contributors .= '<span itemprop="jobTitle">Rapporteur</span> : <em><span itemprop="name">'.link_to($document->rapporteur, '@recherche_resultats?query=rapporteur:"'.replaceAccents($document->rapporteur).'"').'</span></em><br />';
+      $contributors .= '<div itemscope itemtype="http://schema.org/Person" itemprop="contributor"><span itemprop="jobTitle">Rapporteur</span> : <em itemprop="name">'.link_to($document->rapporteur, '@recherche_resultats?query=rapporteur:"'.replaceAccents($document->rapporteur).'"').'</div></em>';
     }
     if (isset($document->commissaire_gvt)) {
-      $contributors .= '<span itemprop="jobTitle">Commissaire gouvernement</span> : <em><span itemprop="name">'.link_to($document->commissaire_gvt, '@recherche_resultats?query=commissaire_gvt:"'.replaceAccents($document->commissaire_gvt).'"').'</span></em><br />';
+      $contributors .= '<div itemscope itemtype="http://schema.org/Person" itemprop="contributor"><span itemprop="jobTitle">Commissaire gouvernement</span> : <em itemprop="name">'.link_to($document->commissaire_gvt, '@recherche_resultats?query=commissaire_gvt:"'.replaceAccents($document->commissaire_gvt).'"').'</div></em>';
     }
     if (isset($document->avocats)) {
-      $contributors .= '<span itemprop="jobTitle">Avocat(s)</span> : <em><span itemprop="name">'.link_to($document->avocats, '@recherche_resultats?query=avocats:"'.replaceAccents($document->avocats).'"').'</span></em></div><br />';
+      $contributors .= '<div itemscope itemtype="http://schema.org/Person" itemprop="contributor"><span itemprop="jobTitle">Avocat(s)</span> : <em itemprop="name">'.link_to($document->avocats, '@recherche_resultats?query=avocats:"'.replaceAccents($document->avocats).'"').'</em></div>';
     }
     $contrib = true;
   }
@@ -252,8 +251,8 @@ if (isset($document->analyses)) {
         foreach($values as $key => $value) {
           if($value !== "null") {
             $analyses .= '<blockquote>';
-            if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($value, $document->pays); } else { $titrage = $value; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $value.' '; }
-            else { $analyses .= '<p>'.$value.'</p>'; }
+            if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($value, $document->pays); } else { $titrage = $value; } $analyses .= '<h2 itemprop="keywords">'.$titrage.'</span></h2>'; $keywords .= $value.' '; }
+            else { $analyses .= '<p><span itemprop="description">'.$value.'</span></p>'; }
             $analyses .= '</blockquote>';
           }
         }
@@ -261,8 +260,8 @@ if (isset($document->analyses)) {
       else {
         if($values !== "null") {
           $analyses .= '<blockquote>';
-            if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($values, $document->pays); } else { $titrage = $values; } $analyses .= '<h2>'.$titrage.'</h2>'; $keywords .= $values.' '; }
-            else { $analyses .= '<p>'.$values.'</p>'; }
+            if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($values, $document->pays); } else { $titrage = $values; } $analyses .= '<h2 itemprop="keywords">'.$titrage.'</span></h2>'; $keywords .= $values.' '; }
+            else { $analyses .= '<p><span itemprop="description">'.$values.'</span></p>'; }
           $analyses .= '</blockquote>';
         }
       }
@@ -417,11 +416,11 @@ if (!empty($citations)) {
         }
     }
 ?>
-  <div class="arret">
-    <h1 id="titre"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre; ?></h1>
+  <div class="arret" itemscope itemtype="http://schema.org/Article">
+    <h1 id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre.'' ?></h1>
     <?php
     if (isset($document->titre_supplementaire)) {
-      echo '<h2>'.$document->titre_supplementaire.'</h2>';
+      echo '<h2 itemprop="alternativeHeadline">'.$document->titre_supplementaire.'</span></h2>';
     }
     if (isset($document->section)) {
       echo '<h3>'.$document->section.'</h3>';
@@ -431,10 +430,10 @@ if (!empty($citations)) {
     }
     if (isset($document->type_affaire)) {
       if(isset($natureConstit[$document->type_affaire])) {
-        echo 'Type d\'affaire : <em>'.link_to($natureConstit[$document->type_affaire], '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</em><br />';
+        echo 'Type d\'affaire : <em><span itemprop="about">'.link_to($natureConstit[$document->type_affaire], '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</span></em><br />';
       }
       else {
-        echo 'Type d\'affaire : <em>'.link_to($document->type_affaire, '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</em><br />';
+        echo 'Type d\'affaire : <em><span itemprop="about">'.link_to($document->type_affaire, '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</span></em><br />';
       }
     }
     if (isset($document->type_recours)) {
@@ -605,7 +604,7 @@ $texte_arret = preg_replace('#(décret[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#
 $texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#', '<a href="http://www.juricaf.org/recherche/num_arret:$1">$1$2</a>', $texte_arret);
 
 	echo '<h3>Texte : </h3>';
-	  echo simple_format_text(trim($texte_arret));
+	  echo '<span itemprop="articleBody">'.simple_format_text(trim($texte_arret)).'</span>';
      }
     if (!empty($citations_arret) || !empty($sources) || !empty($decisions_attaquees)) {
       echo '<p><h3>Références : </h3>';
@@ -645,9 +644,6 @@ $texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#
         if(strpos($document->id_source, "JURITEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriJudi" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
         if(strpos($document->id_source, "CETATEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriAdmin" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
       }
-	  
-
-	  
     }
 	
 	if($document->pays == 'Canada') {
@@ -660,20 +656,34 @@ $texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#
    	}
 	
     if(isset($contrib)) {
-      echo '<hr /><h3>Composition du Tribunal :</h3><div itemscope itemtype="http://schema.org/Person">'.$contributors;
+      echo '<hr /><h3>Composition du Tribunal :</h3>'.$contributors;
     }
-
-
+	echo '<h3>Origine de la décision</h3>';
+	
+  if (isset($document->pays)) {
+        echo '<div itemprop="author" itemscope itemtype="http://schema.org/Organization"> <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Pays : <em itemprop="addressCountry">'.replaceAccents($document->pays).'</span></em>';
+		}
+		
+ if (isset($document->juridiction)) {
+        echo 'Juridiction : <em><span itemprop="name">'.replaceAccents($document->juridiction).'</span></em></span></div>';
+      }
+ if (isset($document->formation)) {
+        echo 'Formation : <em>'.replaceAccents($document->formation).'</em><br />';
+      }
+	  
+ if (isset($document->date_arret)) {
+        echo 'Date de la décision : <span itemprop="dateCreated">'.date('d/m/Y', strtotime($document->date_arret)).'</span>' ;
+      }
 
     if (isset($document->fonds_documentaire)) {
-	      echo '<p>Origine : <em>'.link_to($document->fonds_documentaire, '@recherche_resultats?query=fonds_documentaire:"'.replaceAccents($document->fonds_documentaire).'"').'</em></p><br />';
+	      echo '<p>Fonds documentaire : <em itemprop="publisher">'.replaceAccents($document->fonds_documentaire).'</em></p>';
     }
     ?>
 	
   </div>
   <div class="download">
   <?php //echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
-  </div> 
+  </div> </div> 
   
 <script type="text/javascript">
 <!--
