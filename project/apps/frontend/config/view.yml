@@ -6,9 +6,9 @@ default:
     content-type: text/html
 
   metas:
-    title:        Juricaf
-    description:  La jurisprudence francophone des cours suprêmes
-    keywords:     jurisprudence, cassation, cour, suprême, francophone, francophonie, ahjucaf, arrêt, décision
+    title:        Juricaf - La jurisprudence francophone des cours suprêmes
+    description:  La base de données des décisions de justice en langue francophone créée par l'AHJUCAF, l'association des cours suprêmes judiciaires francophones
+    #keywords:     jurisprudence, cassation, cour, suprême, francophone, francophonie, ahjucaf, arrêt, décision
     language:     fr
     #robots:       index, follow
 
