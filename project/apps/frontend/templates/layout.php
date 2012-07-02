@@ -9,12 +9,11 @@
     <?php include_stylesheets() ?>
 	<link type="text/css" rel="stylesheet" href="/css/jquery.qtip.css" />
     <?php include_javascripts() ?>
+	<script type="text/javascript" src="/js/opensearch.js"></script>
 	<script type="text/javascript" src="/js/jquery.qtip.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function()
-{
-	// Match all <A/> links with a title tag and use it as the content (default).
-	$('a[title]').qtip();
+{		$('a[title]').qtip();
 });
 	</script>
 	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f0fffc35925f215"></script>
@@ -34,7 +33,6 @@
           <ul>
             <li><a href="/documentation/a_propos.php">A propos</a></li>
             <li><a href="/documentation/stats/statuts.php">Étendue des collections</a></li>
-<!---            <li><a href="#">Outils</a></li> -->
             <li><a href="/documentation/partenaires.php">Partenaires</a></li>
             <li><a href="/documentation/contact.php">Contact</a></li>
             <li><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
@@ -73,29 +71,5 @@
         <a href="/documentation/partenaires.php#francophonie"><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
       </div>
     </div>
-    <script type="text/javascript">
-    <!--
-    function juricafSearch() {
-      if (window.external && ("AddSearchProvider" in window.external)) {
-        window.external.AddSearchProvider("http://www.juricaf.org/juricaf.xml");
-      }
-      else {
-         alert("Votre navigateur ne supporte pas cette fonctionnalité");
-      }
-    }
-
-    $('#top').attr('href', 'javascript:$.scrollTo("body", 500);');
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-8802834-4']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    // -->
-    </script>
-  </body>
+   </body>
 </html>
