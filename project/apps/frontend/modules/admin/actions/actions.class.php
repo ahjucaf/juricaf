@@ -222,7 +222,7 @@ class adminActions extends sfActions
   }
 
   public function executeList(sfWebRequest $request) {
-    $this->pas = 30;
+    $this->pas = 86;
 
     if($this->modificationType($request) || $this->modificationChamps($request)) {
       $this->commitNow($request);
