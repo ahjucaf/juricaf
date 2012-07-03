@@ -70,9 +70,17 @@ function citation($string) {
 
 function dateFr($date) {
   if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $date)) {
-$Mois = array("janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre");
-  $d = explode('-', $date);
-    $date = $d[2].' '.$Mois[date('n')].' '.$d[0];
+
+   $split = explode('-', $date);
+   $annee = $split[0];
+   $mois = $split[1];
+   $jour = $split[2];
+   
+   $nb = array('01','02','03','04','05','06','07','08','09','10','11','12');
+   $lettres = array('janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre');
+   $mois = str_replace($nb,$lettres,$mois);
+   $date = $jour.' '.$mois.' '.$annee;
+  
   }
   return $date;
 }
