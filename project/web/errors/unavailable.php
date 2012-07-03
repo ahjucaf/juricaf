@@ -23,7 +23,7 @@
         <div class="reseaux_sociaux">
           <a href="http://www.parcesmotifs.net/spip.php?page=groupe&amp;id_groupe=12"><img src="/images/help.png" alt="Aide" title="Aide" /></a>
           <a href="https://www.facebook.com/Juricaf"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook" /></a>
-          <a href="https://twitter.com/#!/juricaf"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter" /></a>
+          <a href="https://twitter.com/juricaf"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter" /></a>
           <a href="http://www.parcesmotifs.net/spip.php?page=backend"><img src="/images/rss.png" alt="RSS" title="Flux RSS" /></a>
           <a href="javascript:juricafSearch();"><img src="/images/juricaf_search.png" alt="J" title="Ajouter Juricaf aux moteurs de recherches de votre navigateur" /></a>
         </div>
@@ -32,7 +32,6 @@
 
             <li><a href="/documentation/a_propos.php">A propos</a></li>
             <li><a href="/stats">Étendue des collections</a></li>
-<!---            <li><a href="#">Outils</a></li> -->
             <li><a href="/documentation/partenaires.php">Partenaires</a></li>
             <li><a href="/documentation/contact.php">Contact</a></li>
             <li><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
@@ -58,8 +57,8 @@
         </div>
         <hr />
         <h1>Maintenance en cours</h1>
-        <p>Veuillez nous excuser pour la gène occasionnée. Merci de réessayer plus tard.</p>
-        <p><a href="#" id="mail_admin">Nous contacter par email</a></p>
+        <p>Veuillez nous excuser pour la gêne occasionnée. Merci de réessayer plus tard.</p>
+        <p><a href="/documentation/contact.php">Nous contacter par email</a></p>
       </div>
       <div class="bottom">
         <p>Juricaf est un projet de l'<a href="http://www.ahjucaf.org">AHJUCAF</a>, l'association des cours judiciaires suprêmes francophones,<br />
@@ -73,11 +72,6 @@
     </div>
     <script type="text/javascript">
     <!--
-    $(document).ready(function() {
-      adresse = 'juricafg@htahjucaf.org';
-      $('#mail_admin').attr('href', 'mailto:'+adresse.replace(RegExp('(g@ht)','g'),'@'));
-    });
-
     function juricafSearch() {
       if (window.external && ("AddSearchProvider" in window.external)) {
         window.external.AddSearchProvider("http://v2.juricaf.org/juricaf.xml");
