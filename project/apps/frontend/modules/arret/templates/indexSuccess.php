@@ -237,10 +237,10 @@ $contributors = '';
       $contributors .= '<div itemscope itemtype="http://schema.org/Person" itemprop="contributor"><span itemprop="jobTitle">Avocat général</span> : <em itemprop="name">'.link_to($document->avocat_gl, '@recherche_resultats?query=avocat_gl:"'.replaceAccents($document->avocat_gl).'"').'</div></em>';
     }
     if (isset($document->rapporteur)) {
-      $contributors .= '<div itemscope itemtype="http://schema.org/Person" itemprop="contributor"><span itemprop="jobTitle">Rapporteur</span> : <em itemprop="name">'.link_to($document->rapporteur, '@recherche_resultats?query=rapporteur:"'.replaceAccents($document->rapporteur).'"').'</div></em>';
+      $contributors .= '<div itemscope itemtype="http://schema.org/Person" itemprop="contributor"><span itemprop="jobTitle">Rapporteur</span> <a href="#" title="<h1>Rapporteur</h1><p>Magistrat chargé de l’instruction du dossier ; il lui appartient de rédiger un projet de jugement ou d’arrêt et une note explicative. Lors du jugement, il siège avec voix délibérative pour les affaires qu’il a rapportées.<p>Source : Conseil d\'Etat http://www.conseil-etat.fr/fr/glossaire/"><img src="/images/aide.png" alt="?"/></a>: <em itemprop="name">'.link_to($document->rapporteur, '@recherche_resultats?query=rapporteur:"'.replaceAccents($document->rapporteur).'"').'</div></em>';
     }
     if (isset($document->commissaire_gvt)) {
-      $contributors .= '<div itemscope itemtype="http://schema.org/Person" itemprop="contributor"><span itemprop="jobTitle">Commissaire gouvernement</span> : <em itemprop="name">'.link_to($document->commissaire_gvt, '@recherche_resultats?query=commissaire_gvt:"'.replaceAccents($document->commissaire_gvt).'"').'</div></em>';
+      $contributors .= '<div itemscope itemtype="http://schema.org/Person" itemprop="contributor"><span itemprop="jobTitle">Rapporteur public</span> <a href="#" title="<h1>Rapporteur public</h1><p>Pour chacune des formations de jugement, l’affaire est exposée en public par un rapporteur public - anciennement appelé “commissaire du gouvernement” - qui est un membre de la juridiction. <p>Il est chargé de faire connaître, en toute indépendance, son appréciation, qui doit être impartiale, sur les circonstances de fait de l’espèce et les règles de droit applicables, ainsi que son opinion sur les solutions qu’appelle, suivant sa conscience, le litige soumis à la juridiction à laquelle il appartient. <p>Ayant pris publiquement position, le rapporteur public ne prend ensuite pas part à la délibération.<p>Source : Conseil d\'Etat http://www.conseil-etat.fr/fr/glossaire/"><img src="/images/aide.png" alt="?"/></a>: <em itemprop="name">'.link_to($document->commissaire_gvt, '@recherche_resultats?query=commissaire_gvt:"'.replaceAccents($document->commissaire_gvt).'"').'</div></em>';
     }
     if (isset($document->avocats)) {
       $contributors .= '<div itemscope itemtype="http://schema.org/Person" itemprop="contributor"><span itemprop="jobTitle">Avocat(s)</span> : <em itemprop="name">'.link_to($document->avocats, '@recherche_resultats?query=avocats:"'.replaceAccents($document->avocats).'"').'</em></div>';
@@ -458,16 +458,16 @@ if (!empty($citations)) {
       }
 	  
 	   if (isset($document->num_arret) and ($document->pays == 'Canada')) {
-        echo 'Référence neutre : '.$document->num_arret.'<br />';
+        echo 'Référence neutre : '.$document->num_arret.' <a href="#" title="<h1>Référence neutre</h1><p>Au Canada, depuis 2000, la référence neutre est le numéro unique, pérenne et indépendant servant à la citation de la jurisprudence"><img src="/images/aide.png" alt="?"/></a><br />';
       }
 	        if (isset($document->id_source)) {
-        echo 'Numéro NOR : '.$document->id_source.'<br />';
+        echo 'Numéro NOR : '.$document->id_source.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?"/></a><br />';
       }
 	  
 	  
 	     if(isset($document->nor) || isset($document->numeros_affaires)) {
       if (isset($document->nor)) {
-        echo 'Numéro NOR : '.$document->nor.'<br />';
+        echo 'Numéro NOR : '.$document->nor.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?"/><br />';
       }
 	  
       if (isset($document->numeros_affaires)) {
@@ -499,7 +499,7 @@ if (!empty($citations)) {
     }
 	 
 	  if (isset($document->urnlex)) {
-      echo 'Identifiant URN:LEX : '.$document->urnlex.' <img src="/images/aide.png" alt="?" style="margin-bottom: -3px; cursor: pointer;" title="A Uniform Resource Name (URN) Namespace for Sources of Law (LEX)" /><br />';
+      echo 'Identifiant URN:LEX : '.$document->urnlex.' <a href="#" title="<h1>URN-LEX </h1><p>L\'objectif du projet URN LEX est d’assigner de façon non équivoque, dans un format standard, tout document qui sont reconnus comme des sources du droit."><img src="/images/aide.png" alt="?"/></a><br />';
     }
 		
     if (!empty($analyses)) {
@@ -599,24 +599,41 @@ if (!empty($citations)) {
 
     else {
 	if(!empty($document->texte_arret)) { $texte_arret = $document->texte_arret; } else { $texte_arret = ''; }
-     
-$texte_arret = preg_replace('#État[\x20-\x7E][(]décision[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})#', 'État (<a href="http://www.juricaf.org/recherche/num_arret:$1">décision n° $1</a>', $texte_arret);
-$texte_arret = preg_replace('#État[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})#', 'État <a href="http://www.juricaf.org/recherche/num_arret:$1">n° $1</a>', $texte_arret);
-$texte_arret = preg_replace('#arrêt[\x20-\x7E]n°[\x20-\x7E]([0-9]{2}[A-Z]{2}[0-9]{5})#', 'arrêt <a href="http://www.juricaf.org/recherche/num_arret:$1">n° $1</a>', $texte_arret);
-$texte_arret = preg_replace('#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i', '<a href="$0" target="_blank">$0</a>', $texte_arret);
-$texte_arret = preg_replace('#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#', '<a href="http://www.juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>', $texte_arret);
-$texte_arret = preg_replace('#(loi[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#', '<a href="http://www.juricaf.org/recherche/texte_arret:$1">$1</a>', $texte_arret);
-$texte_arret = preg_replace('#(décret[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#', '<a href="http://www.juricaf.org/recherche/texte_arret:$1">$1</a>', $texte_arret);
-//$texte_arret = preg_replace('#(article[\x20-\x7E][a-z0-9._-]{1,}[\x20-\x7E]du[\x20-\x7E][c,C]ode[\x20-\x7E].{1,})([,.])#', '<a href="http://www.juricaf.org/recherche/$1">$1$2</a>', $texte_arret);
-//$texte_arret = preg_replace('#(article[\x20-\x7E][a-z0-9._-]{1,})([\x20-\x7E]de[\x20-\x7E]la[\x20-\x7E])(Constitution)#', '<a href="http://www.juricaf.org/recherche/texte_arret:"\$1 de la $3\"">$1$2$3</a>', $texte_arret); Pertinence mauvaise
-$texte_arret = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#', '<a href="http://www.juricaf.org/recherche/num_arret:$1">$1$2</a>', $texte_arret);
+	
+	
+$patterns = array();
+$patterns[0] = '#(perquisition)#';	
+$replacements[0] = '<a href="#" title="Mesure d’enquête qui consiste à rechercher des éléments de preuve d’une infraction, au domicile d’une personne ou dans tous lieux où ils peuvent se trouver.">$1</a>';
+$patterns[1] = '#État[\x20-\x7E][(]décision[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})#';
+$replacements[1] = 'État (<a href="http://www.juricaf.org/recherche/num_arret:$1">décision n° $1</a>';
 
-$texte_arret = preg_replace('#(perquisition)#', '<a href="#" title="Mesure d’enquête qui consiste à rechercher des éléments de preuve d’une infraction, au domicile d’une personne ou dans tous lieux où ils peuvent se trouver.">$1</a>', $texte_arret); //Testinfobulle définition
+$patterns[2] = '#État[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})#';
+$replacements[2] = 'État <a href="http://www.juricaf.org/recherche/num_arret:$1">n° $1</a>';
 
-$texte_arret = preg_replace('#(abus[\x20-\x7E]de[\x20-\x7E]pouvoir)#', '<a href="#" title="RT corruption<br>RT recours en annulation">$1</a>', $texte_arret); //Test infobulle thésaurus
+$patterns[3] = '#arrêt[\x20-\x7E]n°[\x20-\x7E]([0-9]{2}[A-Z]{2}[0-9]{5})#';
+$replacements[3] = 'arrêt <a href="http://www.juricaf.org/recherche/num_arret:$1">n° $1</a>';
 
-	echo '<h3>Texte : </h3>';
-	  echo '<span itemprop="articleBody">'.simple_format_text(trim($texte_arret)).'</span>';
+$patterns[4] = '#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i';
+$replacements[4] = '<a href="$0" target="_blank">$0</a>';
+
+$patterns[5] = '#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#';
+$replacements[5] = '<a href="http://www.juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>';
+
+$patterns[6] = '#(loi[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#';
+$replacements[6] = '<a href="http://www.juricaf.org/recherche/texte_arret:$1">$1</a>';
+
+$patterns[7] = '#(décret[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#';
+$replacements[7] = '<a href="http://www.juricaf.org/recherche/texte_arret:$1">$1</a>';
+
+$patterns[8] = '#(abus[\x20-\x7E]de[\x20-\x7E]pouvoir)#';
+$replacements[8] = '<a href="#" title="RT corruption<br>RT recours en annulation">$1</a>';
+
+
+	echo '<h3>Texte : </h3><span itemprop="articleBody">';
+	
+	echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret)));
+	
+	  echo '</span>';
      }
     if (!empty($citations_arret) || !empty($sources) || !empty($decisions_attaquees)) {
       echo '<p><h3>Références : </h3>';
@@ -688,7 +705,7 @@ $texte_arret = preg_replace('#(abus[\x20-\x7E]de[\x20-\x7E]pouvoir)#', '<a href=
       }
 
     if (isset($document->fonds_documentaire)) {
-	      echo '<p>Fonds documentaire : <em itemprop="publisher">'.replaceAccents($document->fonds_documentaire).'</em></p>';
+	      echo '<p>Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?"/></a>: <em itemprop="publisher">'.replaceAccents($document->fonds_documentaire).'</em> </p>';
     }
     ?>
 	
