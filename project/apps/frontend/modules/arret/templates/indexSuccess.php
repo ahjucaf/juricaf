@@ -44,7 +44,7 @@ function replaceAccents($string) {
 	  '(Sur le deuxieme moyen)' => '', '(Sur le troisieme moyen)' => '', '(Sur le moyen releve d\'office)' => '',
 	  '(sur le deuxieme moyen)' => '', '(sur le troisieme moyen)' => '', '(sur le moyen releve d\'office)' => '',
 	  '(Sur le deuxieme moyen)' => '', '(Sur le troisieme moyen)' => '', '(Sur le moyen releve d\'office)' => '',
-		  '\n' => ' ', '/' => ' ', '"' => ' ', '»' => ' ', '«' => ' ', '’' => ' ', '?' =>' '
+		  '\n' => ' ', '/' => ' ', '"' => ' ', '»' => ' ', '«' => ' ', '’' => ' ', '?' =>' ', ' (président)' => '', 'Avocats :' => '', 'Rapporteur :' => '','Avocat général :' => '', 'Président :' => '', ' (conseiller doyen faisant fonction de président)' => ''
  );
   return strtr($string, $table);
 }
@@ -627,6 +627,16 @@ $replacements[7] = '<a href="http://www.juricaf.org/recherche/texte_arret:$1">$1
 
 $patterns[8] = '#(abus[\x20-\x7E]de[\x20-\x7E]pouvoir)#';
 $replacements[8] = '<a href="#" title="RT corruption<br>RT recours en annulation">$1</a>';
+
+$patterns[9] = '#(MOYENS[\x20-\x7E]ANNEXES[\x20-\x7E]au[\x20-\x7E]présent[\x20-\x7E]arrêt)#';
+$replacements[9] = '<h2>$1 :</h2>';
+
+$patterns[10] = '#(MOYEN[\x20-\x7E]ANNEXE[\x20-\x7E]au[\x20-\x7E]présent[\x20-\x7E]arrêt)#';
+$replacements[10] = '<h2>$1 :</h2>';
+
+$patterns[10] = '#([A-Z]{1,10}[\x20-\x7E]MOYEN[\x20-\x7E]DE[\x20-\x7E]CASSATION)#';
+$replacements[10] = '<h3>$1 :</h3>';
+
 
 
 	echo '<h3>Texte : </h3><span itemprop="articleBody">';
