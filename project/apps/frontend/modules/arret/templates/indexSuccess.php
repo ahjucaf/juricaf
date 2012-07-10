@@ -604,7 +604,8 @@ if (!empty($citations)) {
 $patterns = array();
 $patterns[0] = '#(perquisition)#';	
 $replacements[0] = '<a href="#" title="Mesure d’enquête qui consiste à rechercher des éléments de preuve d’une infraction, au domicile d’une personne ou dans tous lieux où ils peuvent se trouver.">$1</a>';
-$patterns[1] = '#État[\x20-\x7E][(]décision[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})#';
+
+$patterns[1] = '#État[\x20-\x7E][(]décisions?[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})[\x20-\x7E]#';
 $replacements[1] = 'État (<a href="http://www.juricaf.org/recherche/num_arret:$1">décision n° $1</a>';
 
 $patterns[2] = '#État[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})#';
@@ -628,11 +629,8 @@ $replacements[7] = '<a href="http://www.juricaf.org/recherche/texte_arret:$1">$1
 $patterns[8] = '#(abus[\x20-\x7E]de[\x20-\x7E]pouvoir)#';
 $replacements[8] = '<a href="#" title="RT corruption<br>RT recours en annulation">$1</a>';
 
-$patterns[9] = '#(MOYENS[\x20-\x7E]ANNEXES[\x20-\x7E]au[\x20-\x7E]présent[\x20-\x7E]arrêt)#';
+$patterns[9] = '#(MOYENS?[\x20-\x7E]ANNEXES?[\x20-\x7E]au[\x20-\x7E]présent[\x20-\x7E]arrêt)#';
 $replacements[9] = '<h2>$1 :</h2>';
-
-$patterns[10] = '#(MOYEN[\x20-\x7E]ANNEXE[\x20-\x7E]au[\x20-\x7E]présent[\x20-\x7E]arrêt)#';
-$replacements[10] = '<h2>$1 :</h2>';
 
 $patterns[10] = '#([A-Z]{1,10}[\x20-\x7E]MOYEN[\x20-\x7E]DE[\x20-\x7E]CASSATION)#';
 $replacements[10] = '<h3>$1 :</h3>';
