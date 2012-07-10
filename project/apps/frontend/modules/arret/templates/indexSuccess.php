@@ -467,7 +467,7 @@ if (!empty($citations)) {
 	  
 	     if(isset($document->nor) || isset($document->numeros_affaires)) {
       if (isset($document->nor)) {
-        echo 'Numéro NOR : '.$document->nor.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?"/><br />';
+        echo 'Numéro NOR : '.$document->nor.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?"/><br /></a>';
       }
 	  
       if (isset($document->numeros_affaires)) {
