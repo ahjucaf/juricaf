@@ -44,7 +44,7 @@ function replaceAccents($string) {
 	  '(Sur le deuxieme moyen)' => '', '(Sur le troisieme moyen)' => '', '(Sur le moyen releve d\'office)' => '',
 	  '(sur le deuxieme moyen)' => '', '(sur le troisieme moyen)' => '', '(sur le moyen releve d\'office)' => '',
 	  '(Sur le deuxieme moyen)' => '', '(Sur le troisieme moyen)' => '', '(Sur le moyen releve d\'office)' => '',
-		  '\n' => ' ', '/' => ' ', '"' => ' ', '»' => ' ', '«' => ' ', '’' => ' ', '?' =>' ', ' (président)' => '', 'Avocats :' => '', 'Rapporteur :' => '','Avocat général :' => '', 'Président :' => '', ' (conseiller doyen faisant fonction de président)' => ''
+		  '\n' => ' ', '/' => ' ', '"' => ' ', '»' => ' ', '«' => ' ', '’' => ' ', '?' =>' ', ' (président)' => '', 'Avocats :' => '', 'Rapporteur :' => '','Avocat général :' => '', 'Président :' => '', ' (conseiller doyen faisant fonction de président)' => '', ' (conseiller le plus ancien faisant fonction de président)' =>''
  );
   return strtr($string, $table);
 }
