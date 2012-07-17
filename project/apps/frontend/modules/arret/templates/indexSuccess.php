@@ -424,6 +424,7 @@ if (!empty($citations)) {
         }
     }
 ?>
+
   <div class="arret" itemscope itemtype="http://schema.org/Article">
     <h1 id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre.'' ?></h1>
     <?php
@@ -636,7 +637,6 @@ $patterns[10] = '#([A-Z]{1,10}[\x20-\x7E]MOYEN[\x20-\x7E]DE[\x20-\x7E]CASSATION)
 $replacements[10] = '<h3>$1 :</h3>';
 
 
-
 	echo '<h3>Texte : </h3><span itemprop="articleBody">';
 	
 	echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret)));
@@ -713,7 +713,7 @@ $replacements[10] = '<h3>$1 :</h3>';
       }
 
     if (isset($document->fonds_documentaire)) {
-	      echo '<p>Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?"/></a>: <em itemprop="publisher">'.replaceAccents($document->fonds_documentaire).'</em> </p>';
+	      echo '<p>Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?"/></a>: <em itemprop="publisher">'.replaceAccents($document->fonds_documentaire).'</em> </p><img src="/images/'.replaceAccents($document->fonds_documentaire).'.gif" alt="'.replaceAccents($document->fonds_documentaire).'"/>';
     }
     ?>
 	
