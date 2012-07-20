@@ -607,7 +607,7 @@ $patterns[0] = '#(perquisition)#';
 $replacements[0] = '<a href="#" title="Mesure d’enquête qui consiste à rechercher des éléments de preuve d’une infraction, au domicile d’une personne ou dans tous lieux où ils peuvent se trouver.">$1</a>';
 
 $patterns[1] = '#État[\x20-\x7E][(]décisions?[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})[\x20-\x7E]#';
-$replacements[1] = 'État (<a href="http://www.juricaf.org/recherche/num_arret:$1">décision n° $1</a>';
+$replacements[1] = 'État (<a href="http://www.juricaf.org/recherche/num_arret:$1">décision n° $1</a> ';
 
 $patterns[2] = '#État[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})#';
 $replacements[2] = 'État <a href="http://www.juricaf.org/recherche/num_arret:$1">n° $1</a>';
@@ -635,6 +635,9 @@ $replacements[9] = '<h2>$1 :</h2>';
 
 $patterns[10] = '#([A-Z]{1,10}[\x20-\x7E]MOYEN[\x20-\x7E]DE[\x20-\x7E]CASSATION)#';
 $replacements[10] = '<h3>$1 :</h3>';
+
+$patterns[11] = '#([0-9]{4}-[0-9]{1,3}[\x20-\x7E]QPC)#';
+$replacements[11] = '<a href="http://www.juricaf.org/recherche/num_arret:$1">$1</a>';
 
 
 	echo '<h3>Texte : </h3><span itemprop="articleBody">';
