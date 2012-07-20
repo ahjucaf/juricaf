@@ -385,6 +385,7 @@ if(isset($document->section)) { $creator .= ' '.$document->section; }
 $docketNumber = $document->numeros_affaires['numero_affaire'];
 $docketNumber = $document->num_arret;
 $citations = '';
+$url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
 if (!empty($citations_analyses)) { $citations .= $citations_analyses; }
 if (!empty($citations_arret)) { $citations .= $citations_arret; }
@@ -403,7 +404,13 @@ $sf_response->addMeta('DC.publisher', 'AHJUCAF', false, false, false);
 $sf_response->addMeta('DC.subject', replacekey($keywords), false, false, false);
 $sf_response->addMeta('DC.type', 'case', false, false, false);
 $sf_response->addMeta('docketNumber', $docketNumber, false, false, false);
-$sf_response->addMeta('shortTitle', $citation, false, false, false);
+$sf_response->addMeta('shortTitle', 'AHJUCAF', false, false, false);
+$sf_response->addMeta('og:title', $document->titre, false, false, false);
+$sf_response->addMeta('g:type', 'article', false, false, false);
+$sf_response->addMeta('og:url', $url, false, false, false);
+$sf_response->addMeta('sog:image', 'http://www.juricaf.org/images/juricaf.png', false, false, false);
+$sf_response->addMeta('og:site_name', 'Juricaf', false, false, false);
+$sf_response->addMeta('fb:app_id', '199894740035999', false, false, false);
 
 if(isset($contrib)) {
   $sf_response->addMeta('DC.contributor', htmlspecialchars(strip_tags(str_replace('<br />', " ;\n", $contributors)), ENT_QUOTES), false, false, false);
@@ -424,10 +431,16 @@ if (!empty($citations)) {
         }
     }
 ?>
-
   <div class="arret" itemscope itemtype="http://schema.org/Article">
     <h1 id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre.'' ?></h1>
-    <?php
+<p><table><tr><td><a href="javascript:window.print()"><img src="/images/printer.png" alt="Imprimer"/></a> </td><td>
+<a href="http://www.delicious.com/save" onclick="window.open('http://www.delicious.com/save?v=5&noui&jump=close&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=550,height=550'); return false;"><img src="http://www.delicious.com/static/img/delicious.small.gif" height="16" width="16" alt="Delicious" /></a> </td><td><a href="https://twitter.com/share" class="twitter-share-button" data-via="juricaf" data-lang="fr">Tweeter</a></td><td><div class="g-plus" data-action="share" data-annotation="bubble"></div></td></tr>
+</table>
+</p>
+<?php
+// <div class="g-plus" data-action="share" data-annotation="none" data-height="15"></div></p>
+	?>
+	<?php
     if (isset($document->titre_supplementaire)) {
       echo '<h2 itemprop="alternativeHeadline">'.$document->titre_supplementaire.'</span></h2>';
     }
@@ -726,9 +739,14 @@ $replacements[13] = '<a href="http://www.juricaf.org/recherche/%22$1 du code civ
   <div class="download">
   <?php //echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
   </div> </div> 
-  
 <script type="text/javascript">
-<!--
-$('#titre').append('<span id="print"><div class="addthis_toolbox addthis_default_style "><a href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=ra-4f0fffc35925f215" class="addthis_button_compact">Partager</a></div><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f0fffc35925f215"></script><\/span>');
-// -->
+  window.___gcfg = {lang: 'fr'};
+
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
 </script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
