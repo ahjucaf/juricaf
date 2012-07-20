@@ -621,11 +621,8 @@ $replacements[4] = '<a href="$0" target="_blank">$0</a>';
 $patterns[5] = '#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#';
 $replacements[5] = '<a href="http://www.juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>';
 
-$patterns[6] = '#(loi[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#';
+$patterns[6] = '#(loi[[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,}|décret[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,}|ordonnance[[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#';
 $replacements[6] = '<a href="http://www.juricaf.org/recherche/texte_arret:$1">$1</a>';
-
-$patterns[7] = '#(décret[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#';
-$replacements[7] = '<a href="http://www.juricaf.org/recherche/texte_arret:$1">$1</a>';
 
 $patterns[8] = '#(abus[\x20-\x7E]de[\x20-\x7E]pouvoir)#';
 $replacements[8] = '<a href="#" title="RT corruption<br>RT recours en annulation">$1</a>';
