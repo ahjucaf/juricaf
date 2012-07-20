@@ -639,6 +639,11 @@ $replacements[10] = '<h3>$1 :</h3>';
 $patterns[11] = '#([0-9]{4}-[0-9]{1,3}[\x20-\x7E]QPC)#';
 $replacements[11] = '<a href="http://www.juricaf.org/recherche/num_arret:$1">$1</a>';
 
+$patterns[12] = '#article[\x20-\x7E]([0-9]{1,4})[\x20-\x7E]du[\x20-\x7E]code[\x20-\x7E]civil#';
+$replacements[12] = '<a href="http://www.juricaf.org/recherche/%22$1 du code civil%22">article $1 du code civil</a><a href="http://perlpot.net/cgi-bin/c.cgi?code=code+civil&article=$1" target="_blank"><img src="/images/fenetre.png" alt="legifrance" title="Voir l\'article $1 du code civil sur Légifrance" /></a>';
+
+$patterns[13] = '#article[\x20-\x7E]([0-9]{1,4}-[0-9]{1,4})[\x20-\x7E]du[\x20-\x7E]code[\x20-\x7E]civil#';
+$replacements[13] = '<a href="http://www.juricaf.org/recherche/%22$1 du code civil%22">article $1 du code civil</a><a href="http://perlpot.net/cgi-bin/c.cgi?code=code+civil&article=$1" target="_blank"><img src="/images/fenetre.png" alt="legifrance" title="Voir l\'article $1 du code civil sur Légifrance" /></a>';
 
 	echo '<h3>Texte : </h3><span itemprop="articleBody">';
 	
