@@ -617,13 +617,6 @@ if (!empty($citations)) {
     </object>
     <?php
     }
-   if($document->pays == "CEMAC" && trim($document->texte_arret) == "Le fac-simile de l'arrêt n'est disponible qu'au format PDF") {
-    ?>
-    <object data="http://<?php echo $sf_request->getHost(); ?>/pdf/CEMAC/cour_de_justice/<?php echo $document->id_source; ?>.pdf" type="application/pdf" width="100%" height="1000" navpanes="0" statusbar="0" messages="0">
-    Fac-similé disponible au format PDF : <a href="/pdf/CEMAC/cour_de_justice/<?php echo $document->id_source; ?>.pdf"><?php echo $document->titre; ?></a>
-    </object>
-    <?php
-    }
 
     else {
 	if(!empty($document->texte_arret)) { $texte_arret = $document->texte_arret; } else { $texte_arret = ''; }
