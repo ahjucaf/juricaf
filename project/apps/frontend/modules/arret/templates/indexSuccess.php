@@ -62,7 +62,7 @@ function replacekey($string) {
 
 function citation($string) {
   $table = array(
-      'Cour de cassation' => 'Cass.', 'Chambre civile 1' => 'Civ. 1re', 'Chambre civile 2' => 'Civ. 2e', 'Chambre civile 3' => 'Civ. 3e', 'Chambre criminelle' => 'Crim.', 'Chambre sociale' => 'Soc.', 'Chambre commerciale' => 'Com.', 'Chambres reunies' =>'ch. réun.', 'Chambre commerciale' => 'Com.', 'Assemblee pleniere' => 'Ass. Plén.','Chambre mixte' => 'ch. mixte.', 'Bulletin' => '', 'Publié au bulletin' => '', 'Bulletin Criminel  Cour de Cassation Chambre criminelle' => '', 'ARRETS Cour de Cassation Chambre civile' => '', 'Conseil constitutionnel' => 'C. Const.'
+      'Cour de cassation' => 'Cass.', 'Chambre civile 1' => 'Civ. 1re', 'Chambre civile 2' => 'Civ. 2e', 'Chambre civile 3' => 'Civ. 3e', 'Chambre criminelle' => 'Crim.', 'Chambre sociale' => 'Soc.', 'Chambre commerciale' => 'Com.', 'Chambres reunies' =>'ch. réun.', 'Chambre commerciale' => 'Com.', 'Assemblee pleniere' => 'Ass. Plén.','Chambre mixte' => 'ch. mixte.', 'Bulletin' => '', 'Publié au bulletin' => '', 'Bulletin Criminel  Cour de Cassation Chambre criminelle' => '', 'ARRETS Cour de Cassation Chambre civile' => '', 'Conseil constitutionnel' => 'Cons. Const.'
 	  
   );
   return strtr($string, $table);
