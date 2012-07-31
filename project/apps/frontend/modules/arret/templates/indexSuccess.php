@@ -26,12 +26,12 @@ function replaceAccents($string) {
   $table = array(
       'Å' => 'A', 'Ä' => 'A', 'Ã' => 'A', 'Â' => 'A', 'å' => 'a', 'ä' => 'a', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'Á' => 'A', 'Æ' => 'A', 'æ' => 'a', 'À' => 'A',
       'Þ' => 'B', 'þ' => 'b',
-      'ç' => 'c', 'Č' => 'C', 'č' => 'c', 'ć' => 'c', 'Ç' => 'C', 'Ć' => 'C', 'đ' => 'dj', 'Đ' => 'Dj',
+      'ç' => 'c', 'C' => 'C', 'c' => 'c', 'c' => 'c', 'Ç' => 'C', 'C' => 'C', 'd' => 'dj', 'Ð' => 'Dj',
       'ê' => 'e', 'É' => 'E', 'ë' => 'e', 'é' => 'e', 'è' => 'e', 'Ë' => 'E', 'È' => 'E', 'Ê' => 'E',
       'í' => 'i', 'ì' => 'i', 'Î' => 'I', 'Ì' => 'I', 'î' => 'i', 'Í' => 'I', 'ï' => 'i', 'Ï' => 'I',
       'ñ' => 'n', 'Ñ' => 'N',
       'ö' => 'o', 'ø' => 'o', 'õ' => 'o', 'ô' => 'o', 'ð' => 'o', 'ò' => 'o', 'ó' => 'o', 'Ö' => 'O', 'Ô' => 'O', 'Ó' => 'O', 'Ò' => 'O', 'Õ' => 'O', 'Ø' => 'O',
-      'ŕ' => 'r', 'Ŕ' => 'R',
+      'r' => 'r', 'R' => 'R',
       'š' => 's', 'Š' => 'S', 'ß' => 'Ss',
       'ü' => 'u', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'Ü' => 'U', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U',
       'ý' => 'y', 'ÿ' => 'y', 'Ý' => 'Y',
@@ -451,10 +451,36 @@ if (!empty($citations)) {
 <a href="http://www.delicious.com/save" onclick="window.open('http://www.delicious.com/save?v=5&noui&jump=close&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=550,height=550'); return false;"><img src="http://www.delicious.com/static/img/delicious.small.gif" height="16" width="16" alt="Delicious" /></a> </td><td><a href="https://twitter.com/share" class="twitter-share-button" data-via="juricaf" data-lang="fr">Tweeter</a></td><td><div class="g-plus" data-action="share" data-annotation="bubble"></div></td></tr>
 </table>
 </p>
-<?php
-// <div class="g-plus" data-action="share" data-annotation="none" data-height="15"></div></p>
-	?>
+
+<script type="text/javascript">
+function showCD(str)
+{
+if (str=="")
+  {
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.send();
+}
+</script>
+
 	<?php
+	
     if (isset($document->titre_supplementaire)) {
       echo '<h2 itemprop="alternativeHeadline">'.$document->titre_supplementaire.'</span></h2>';
     }
@@ -535,17 +561,6 @@ if (!empty($citations)) {
       echo $analyses;
     }
 
-  //bdd CNIL
-    if (isset($document->protection_donnees)) { //bdd CNIL
-      echo '<hr /><h3>Analyses protection des données personnelles : </h3>';
-      echo ''.$document->protection_donnees.'';
-    }
-
-      if (isset($document->cote_donnees)) {
-      echo '<hr /><h3>Intérêt pour la protection des données personnelles : '.$document->cote_donnees.'</h3>';
-
-    }
-
     if (!empty($citations_analyses)) {
       echo '<p><h3>Références :</h3><br />'.$citations_analyses.'</p>';
     }
@@ -608,7 +623,34 @@ if (!empty($citations)) {
       }
     }
 
-    echo '<hr />';
+//CNIL
+
+$xmlDoc = new DOMDocument();
+$xmlDoc->load("http://www.juricaf.org/cnil.xml");
+$x=$xmlDoc->getElementsByTagName('numero');
+
+for ($i=0; $i<=$x->length-1; $i++)
+{
+if ($x->item($i)->nodeType==1)
+  {
+  if ($x->item($i)->childNodes->item(0)->nodeValue == $document->num_arret)
+    {
+    $y=($x->item($i)->parentNode);
+    }
+  }
+}
+
+$cd=($y->childNodes);
+
+for ($i=2;$i<$cd->length;$i++)
+{
+echo '<hr /><h3>Intérêt pour la protection des données personnelles : </h3>';
+echo($cd->item(1)->nodeValue);  
+echo '<hr /><h3>Mots-clés protection des données personnelles : </h3>';
+echo($cd->item(2)->nodeValue);
+
+}
+	echo '<hr /><div id="txtHint"></div>';
 
     if($document->pays == "Madagascar" && $document->juridiction == "Cour suprême" && trim($document->texte_arret) == "En haut a droite, cliquez sur PDF pour visualiser le fac-simile de la décision") {
     ?>
@@ -623,8 +665,23 @@ if (!empty($citations)) {
 	
 	
 $patterns = array();
+
+if($document->pays == 'France') {
+
 $patterns[0] = '#(perquisition)#';	
 $replacements[0] = '<a href="#" title="Mesure d’enquête qui consiste à rechercher des éléments de preuve d’une infraction, au domicile d’une personne ou dans tous lieux où ils peuvent se trouver.">$1</a>';
+
+$patterns[6] = '#(loi|ordonnance)[[\x20-\x7E]n°[\x20-\x7E]([0-9]{2})-([0-9]{1,4})#';
+$replacements[6] = '<a href="http://legimobile.fr/fr/lr/texte/$1/19$2/$2-$3/">$1 n° $2-$3</a>';
+
+$patterns[7] = '#(loi|ordonnance)[[\x20-\x7E]n°[\x20-\x7E]([0-9]{4})-([0-9]{1,4})#';
+$replacements[7] = '<a href="http://legimobile.fr/fr/lr/texte/$1/$2/$2-$3/">$1 n° $2-$3</a>';
+
+$patterns[12] = '#article[\x20-\x7E]([0-9.-]{1,9})[\x20-\x7E]du[\x20-\x7E]Code[\x20-\x7E]civil#';
+$replacements[12] = '<a href="http://legimobile.fr/fr/lr/code/civil/$1/" title="Voir l\'article $1 du Code civil sur Légimobile" target="_blank">article $1 du code civil<img src="/images/fenetre.png" alt="legifrance" title="Voir l\'article $1 du Code civil sur Légimobile" /></a>';
+
+$patterns[13] = '#article[\x20-\x7E]([0-9.-]{1,9})[\x20-\x7E]du[\x20-\x7E]Code[\x20-\x7E]pénal#';
+$replacements[13] = '<a href="http://legimobile.fr/fr/lr/code/penal/$1/" title="Voir l\'article $1 du Code pénal sur Légimobile" target="_blank">article $1 du Code pénal<img src="/images/fenetre.png" alt="legifrance" title="Voir l\'article $1 du code pénal sur Légimobile" /></a>';
 
 $patterns[1] = '#État[\x20-\x7E][(]décisions?[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})[\x20-\x7E]#';
 $replacements[1] = 'État (<a href="http://www.juricaf.org/recherche/num_arret:$1">décision n° $1</a> ';
@@ -634,15 +691,6 @@ $replacements[2] = 'État <a href="http://www.juricaf.org/recherche/num_arret:$1
 
 $patterns[3] = '#arrêt[\x20-\x7E]n°[\x20-\x7E]([0-9]{2}[A-Z]{2}[0-9]{5})#';
 $replacements[3] = 'arrêt <a href="http://www.juricaf.org/recherche/num_arret:$1">n° $1</a>';
-
-$patterns[4] = '#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i';
-$replacements[4] = '<a href="$0" target="_blank">$0</a>';
-
-$patterns[5] = '#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#';
-$replacements[5] = '<a href="http://www.juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>';
-
-$patterns[6] = '#(loi[[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,}|décret[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,}|ordonnance[[\x20-\x7E]n°[\x20-\x7E][a-z0-9._-]{2,})#';
-$replacements[6] = '<a href="http://www.juricaf.org/recherche/texte_arret:$1">$1</a>';
 
 $patterns[8] = '#(abus[\x20-\x7E]de[\x20-\x7E]pouvoir)#';
 $replacements[8] = '<a href="#" title="RT corruption<br>RT recours en annulation">$1</a>';
@@ -656,11 +704,23 @@ $replacements[10] = '<h3>$1 :</h3>';
 $patterns[11] = '#([0-9]{4}-[0-9]{1,3}[\x20-\x7E]QPC)#';
 $replacements[11] = '<a href="http://www.juricaf.org/recherche/num_arret:$1">$1</a>';
 
-$patterns[12] = '#article[\x20-\x7E]([0-9]{1,4})[\x20-\x7E]du[\x20-\x7E]code[\x20-\x7E]civil#';
-$replacements[12] = '<a href="http://www.juricaf.org/recherche/%22$1 du code civil%22">article $1 du code civil</a><a href="http://perlpot.net/cgi-bin/c.cgi?code=code+civil&article=$1" target="_blank"><img src="/images/fenetre.png" alt="legifrance" title="Voir l\'article $1 du code civil sur Légifrance" /></a>';
+}
+else { };
 
-$patterns[13] = '#article[\x20-\x7E]([0-9]{1,4}-[0-9]{1,4})[\x20-\x7E]du[\x20-\x7E]code[\x20-\x7E]civil#';
-$replacements[13] = '<a href="http://www.juricaf.org/recherche/%22$1 du code civil%22">article $1 du code civil</a><a href="http://perlpot.net/cgi-bin/c.cgi?code=code+civil&article=$1" target="_blank"><img src="/images/fenetre.png" alt="legifrance" title="Voir l\'article $1 du code civil sur Légifrance" /></a>';
+if($document->pays == 'Canada') {
+
+$patterns[5] = '#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#';
+$replacements[5] = '<a href="http://www.juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>';
+}
+else { };
+
+
+
+$patterns[4] = '#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i';
+$replacements[4] = '<a href="$0" target="_blank">$0</a>';
+
+
+
 
 	echo '<h3>Texte : </h3><span itemprop="articleBody">';
 	
@@ -708,12 +768,9 @@ echo 'Proposition de citation de la décision: '.$citation.'';
 echo 'Proposition de citation de la décision: '.$citation.'';
 	echo '<br>'.$lebon.'<br>'; 
 	}
-	
-
-	
-       if(strpos($document->id_source, "CONSTEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriConstit" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
-        if(strpos($document->id_source, "JURITEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriJudi" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
-        if(strpos($document->id_source, "CETATEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriAdmin" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
+       if(strpos($document->id_source, "CONSTEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriConstit" target="_blank" title="Télécharger au format RTF"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
+        if(strpos($document->id_source, "JURITEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriJudi" title="Télécharger au format RTF" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
+        if(strpos($document->id_source, "CETATEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriAdmin" title="Télécharger au format RTF" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
       }
     }
 	
@@ -728,21 +785,20 @@ echo '<br>'.$civcrimlong.' '.citation($bulletins).'<br>';
 				
 		';
    	}
-	
     if(isset($contrib)) {
       echo '<hr /><h3>Composition du Tribunal :</h3>'.$contributors;
     }
 	echo '<h3>Origine de la décision</h3>';
 	
   if (isset($document->pays)) {
-        echo '<div itemprop="author" itemscope itemtype="http://schema.org/Organization"> <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Pays : <em itemprop="addressCountry">'.replaceAccents($document->pays).'</span></em><br>';
+        echo '<div itemprop="author" itemscope itemtype="http://schema.org/Organization"> <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Pays : <em itemprop="addressCountry">'.$document->pays.'</span></em><br>';
 		}
 		
  if (isset($document->juridiction)) {
-        echo 'Juridiction : <em><span itemprop="name">'.replaceAccents($document->juridiction).'</span></em></span></div>';
+        echo 'Juridiction : <em><span itemprop="name">'.$document->juridiction.'</span></em></span></div>';
       }
  if (isset($document->formation)) {
-        echo 'Formation : <em>'.replaceAccents($document->formation).'</em><br />';
+        echo 'Formation : <em>'.$document->formation.'</em><br />';
       }
 	  
  if (isset($document->date_arret)) {
