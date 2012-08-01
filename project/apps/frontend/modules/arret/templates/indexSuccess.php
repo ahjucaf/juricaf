@@ -26,7 +26,7 @@ function replaceAccents($string) {
   $table = array(
       'Å' => 'A', 'Ä' => 'A', 'Ã' => 'A', 'Â' => 'A', 'å' => 'a', 'ä' => 'a', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'Á' => 'A', 'Æ' => 'A', 'æ' => 'a', 'À' => 'A',
       'Þ' => 'B', 'þ' => 'b',
-      'ç' => 'c', 'C' => 'C', 'c' => 'c', 'c' => 'c', 'Ç' => 'C', 'C' => 'C', 'd' => 'dj', 'Ð' => 'Dj',
+      'ç' => 'c', 'C' => 'C', 'c' => 'c', 'c' => 'c', 'Ç' => 'C', 'C' => 'C', 'd' => 'd', 'Ð' => 'Dj',
       'ê' => 'e', 'É' => 'E', 'ë' => 'e', 'é' => 'e', 'è' => 'e', 'Ë' => 'E', 'È' => 'E', 'Ê' => 'E',
       'í' => 'i', 'ì' => 'i', 'Î' => 'I', 'Ì' => 'I', 'î' => 'i', 'Í' => 'I', 'ï' => 'i', 'Ï' => 'I',
       'ñ' => 'n', 'Ñ' => 'N',
@@ -260,7 +260,7 @@ if (isset($document->analyses)) {
           if($value !== "null") {
             $analyses .= '<blockquote>';
             if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($value, $document->pays); } else { $titrage = $value; } $analyses .= '<h2 itemprop="keywords">'.$titrage.'</span></h2>'; $keywords .= $value.' '; }
-            else { $analyses .= '<p><span itemprop="description">'.$value.'</span></p>'; }
+            else { $analyses .= '<p><span itemprop="keywords">'.$value.'</span></p>'; }
             $analyses .= '</blockquote>';
           }
         }
@@ -269,7 +269,7 @@ if (isset($document->analyses)) {
         if($values !== "null") {
           $analyses .= '<blockquote>';
             if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($values, $document->pays); } else { $titrage = $values; } $analyses .= '<h2 itemprop="keywords">'.$titrage.'</span></h2>'; $keywords .= $values.' '; }
-            else { $analyses .= '<p><span itemprop="description">'.$values.'</span></p>'; }
+            else { $analyses .= '<p><span itemprop="keywords">'.$values.'</span></p>'; }
           $analyses .= '</blockquote>';
         }
       }
@@ -377,8 +377,6 @@ if($document->pays == 'Canada') {
 $citation = ''.$document->titre.'' ;
 }
 
-
-
 // METADONNEES //
 
 if(!empty($analyses)) {
@@ -445,8 +443,17 @@ if (!empty($citations)) {
         }
     }
 ?>
+<div itemscope itemtype="http://schema.org/WebPage">
+<div itemprop="breadcrumb">
+<a href="http://www.juricaf.org" itemprop="url">Page d'accueil</a> > 
+<a href="http://www.juricaf.org/recherche/<?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>" itemprop="url">Résultats de la recherche <b><?php echo $sf_user->getAttribute('query'); ?></b></a></div>
+
+ 
   <div class="arret" itemscope itemtype="http://schema.org/Article">
-    <h1 id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre.'' ?></h1>
+   <h1 id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre.'' ?></h1>
+	
+
+	
 <p><table><tr><td><a href="javascript:window.print()"><img src="/images/printer.png" alt="Imprimer"/></a> </td><td>
 <a href="http://www.delicious.com/save" onclick="window.open('http://www.delicious.com/save?v=5&noui&jump=close&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=550,height=550'); return false;"><img src="http://www.delicious.com/static/img/delicious.small.gif" height="16" width="16" alt="Delicious" /></a> </td><td><a href="https://twitter.com/share" class="twitter-share-button" data-via="juricaf" data-lang="fr">Tweeter</a></td><td><div class="g-plus" data-action="share" data-annotation="bubble"></div></td></tr>
 </table>
@@ -478,7 +485,6 @@ xmlhttp.onreadystatechange=function()
 xmlhttp.send();
 }
 </script>
-
 	<?php
 	
     if (isset($document->titre_supplementaire)) {
@@ -813,7 +819,11 @@ echo '<br>'.$civcrimlong.' '.citation($bulletins).'<br>';
   </div>
   <div class="download">
   <?php //echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
-  </div> </div> 
+  </div> </div> </div> 
+  
+  
+  
+  
 <script type="text/javascript">
   window.___gcfg = {lang: 'fr'};
 
