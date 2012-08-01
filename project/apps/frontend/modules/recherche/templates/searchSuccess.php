@@ -17,21 +17,22 @@ function pathToFlag($str) {
 
 function remplacequery($string) {
   $table = array(
-   'analyses:' => '<br>et l\'analyse ', 
-   'type_recours:' => '<br>et le type de recours ', 
-   'references:' => '<br>et les références ', 
-   'president:' => '<br>dont les audiences ont été présidées par ', 
-   'rapporteur:' => '<br>rendues par le rapporteur ', 
-   'commissaire_gvt:' => '<br>avec pour commissaire du gouvernement ', 
-   'avocat_gl:' => '<br>avec pour l\'avocat général ', 
-   'fonds_documentaire:' => '<br>issues du fonds documentaire ', 
-   'avocats:' => '<br>avec pour avocat ', 
-   'decisions_attaquees:' => '<br>et la juridiction faisant l\'objet d\'un pouvoi en cassation ', 
-   'sens_arret:' => '<br>ayant pour sens ', 
-   'saisines:' => '<br>ayant été saisis par ', 
-   'ecli:' => '<br>qui ont comme numéro ECLI ', 
-   'nor:' => '<br>qui ont comme numéro NOR ', 
-   'type_affaire:' => '<br>et le type d\'affaire ',
+   'analyses:' => '<br><span itemprop="title">Analyse: ', 
+   'type_recours:' => '<br><span itemprop="title">Type de recours: ', 
+   'references:' => '<br><span itemprop="title">Références: ', 
+   'president:' => '<br><span itemprop="title">Président: ', 
+   'rapporteur:' => '<br><span itemprop="title">Rapporteur ', 
+   'commissaire_gvt:' => '<br><span itemprop="title">Rapporteur public: ', 
+   'avocat_gl:' => '<br><span itemprop="title">Avocat général: ', 
+   'texte_arret:' => '<br><span itemprop="title">Recherche : ', 
+   'fonds_documentaire:' => '<br><span itemprop="title">Fonds documentaire: ', 
+   'avocats:' => '<br><span itemprop="title">Avocat: ', 
+   'decisions_attaquees:' => '<br><span itemprop="title">Juridiction attaquée: ', 
+   'sens_arret:' => '<br><span itemprop="title">Sens :', 
+   'saisines:' => '<br><span itemprop="title">Saisine: ', 
+   'ecli:' => '<span itemprop="title">ECLI: ', 
+   'nor:' => '<span itemprop="title">NOR: ', 
+   'type_affaire:' => 'Type d\'affaire: ',
    '(premier avocat general)' => '',
    '(president)' => '',
       '"' => ''   
@@ -58,35 +59,34 @@ function remplacequerytitre($string) {
    'type_affaire:' => 'ayant pour type d\'affaire ',
 	'(president)' => '',
 	'(premier avocat general)' => '',
-		'"' => ''   
-   
+	'"' => ''   
    );
   return strtr($string, $table);
 }
 
 ?>
 <div class="recherche">
-
+  
   <h1><?php echo $nbResultats; ?> résultats
-  <?php
-  if (preg_match('/[a-z0-9]/i', $query)) { ?>
-    sur la recherche  <?php echo remplacequery($query); ?>
-    <span class="search_out">
-      <a onclick="window.open(this.href); return false;" href="http://www.jurispedia.org/index2.php?lr=lang_fr&amp;cof=FORID%3A11&amp;ie=UTF-8&amp;q=<?php echo urlencode($query); ?>&amp;sa=++%E2%86%92++&amp;cx=010401543614658542221%3A3iznlxhkw1q&amp;siteurl=www.juricaf.org%252F#905"><img src="/images/jurispedia.png" alt="Jurispedia" title="Rechercher sur Jurispedia" /></a>
-      <a onclick="window.open(this.href); return false;" href="http://www.savoirsenpartage.auf.org/discipline/9/recherche/?q=<?php echo urlencode($query); ?>"><img src="/images/savoirs_en_partage.png" alt="Savoirs en partage" title="Rechercher sur Savoirs en partage" /></a>
-	  <a onclick="window.open(this.href); return false;" href="http://www.lemondedudroit.fr/component/search/?ordering=&searchphrase=all&searchword=<?php echo urlencode($query); ?>"><img src="/images/mdd.png" alt="Le Monde du droit" title="Rechercher sur le Monde du Droit" /></a>	  
-      <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
-    </span>
-    <?php
-  }
-  else { ?>
-    <span class="search_out">
-      <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="S'abonner au flux RSS des résultats les plus récents pour cette recherche" /></a>
-    </span>
-    <?php
-  }
-  ?>
+  
 </h1>
+
+<div class="facets">
+<?php
+/////// TRI ////////
+?>
+<p><strong>Fil d'ariane: </strong><a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a> </p>
+<div itemscope itemtype="http://schema.org/WebPage">
+<div itemprop="breadcrumb">
+<ul><li><a href="http://www.juricaf.org" itemprop="url">Page d'accueil</span></a></li>
+<li>
+<a href="<?php echo $sf_request->getUri() ?>" itemprop="url">Résultats de la recherche</a></li></ul>
+</div>
+</div>
+<p><strong>Termes de la recherche : </strong></p>
+<ul>
+<li><?php echo remplacequery($query); ?></a></li>
+
 <?php
 //////////////////
 //  Suppression des options
@@ -94,30 +94,31 @@ function remplacequerytitre($string) {
 $myfacetslink = preg_replace('/^,/', '', $facetslink);
 $currentlink = array('module'=>'recherche', 'action'=>'search', 'query' => $query, 'facets'=>$myfacetslink);
 if (count($facetsset)) { ?>
-  <div class="options">
+
   <?php
   $myfacetslink = preg_replace('/^,/', '', $facetslink);
   $noorderlink = $currentlink;
   $noorderlink['facets'] = preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/order:[^:,]+,?/', '', $myfacetslink)));
 
   foreach($facetsset as $f) { ?>
-  <div class="option"><?php
+  <?php
     if (!preg_match('/order:/', $f)) {
       $text = preg_replace('/_/', ' ', preg_replace('/[^:]+:/', '', $f));
       $tmplink = $currentlink;
       $tmplink['facets'] = preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/'.preg_replace('/\|/', '\\\|', $f).',?/', '', $myfacetslink)));
-      echo link_to('<img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats filtrés sur <em>'.$text.'</em>', $tmplink);
+      echo link_to('<li><img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats filtrés sur <em>'.$text.'</em></li></ul>', $tmplink);
     }
     else {
       if (preg_match('/order:perti/', $f)) {
-        echo link_to('<img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats trié par pertinence', $noorderlink);
+        echo link_to('<li><img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats trié par pertinence</li>', $noorderlink);
       }
       else if (preg_match('/order:chrono/', $f)) {
-        echo link_to('<img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats trié dans l\'ordre chronologique', $noorderlink);
+        echo link_to('<li><img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats trié dans l\'ordre chronologique</li>', $noorderlink);
       }
     }
   ?>
-  </div>
+
+
   <?php
   }
 
@@ -148,7 +149,7 @@ else {
   elseif(isset($title_facet['pays'])) { $title_facet = $title_facet['pays']; }
 }
 ?>
-  </div>
+
 <?php
 }
 
@@ -186,10 +187,7 @@ if (trim($query) !== '' || isset($title_facet)) {
 //////////////////
 if ($resultats->response->numFound !== 0) {
 ?>
-<div class="facets">
-<?php
-/////// TRI ////////
-?>
+
 <p><strong>Tri</strong></p>
 <ul>
   <?php
@@ -227,6 +225,14 @@ if(isset($nobots)) { $sf_response->addMeta('robots', 'noindex, nofollow', false,
   //include_component('recherche', 'facets', array('label'=>'Juridiction', 'id'=>'juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
 include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction', 'id'=>'facet_pays_juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink, 'tree' => true, 'mainid' => 'facet_pays'));
 ?>
+<p><strong>Autres bases de données</strong></p>
+<span class="search_out">
+      <a onclick="window.open(this.href); return false;" href="http://www.jurispedia.org/index2.php?lr=lang_fr&amp;cof=FORID%3A11&amp;ie=UTF-8&amp;q=<?php echo urlencode($query); ?>&amp;sa=++%E2%86%92++&amp;cx=010401543614658542221%3A3iznlxhkw1q&amp;siteurl=www.juricaf.org%252F#905"><img src="/images/jurispedia.png" alt="Jurispedia" title="Rechercher sur Jurispedia" /></a>
+      <a onclick="window.open(this.href); return false;" href="http://www.savoirsenpartage.auf.org/discipline/9/recherche/?q=<?php echo urlencode($query); ?>"><img src="/images/savoirs_en_partage.png" alt="Savoirs en partage" title="Rechercher sur Savoirs en partage" /></a>
+	  <a onclick="window.open(this.href); return false;" href="http://www.lemondedudroit.fr/component/search/?ordering=&searchphrase=all&searchword=<?php echo urlencode($query); ?>"><img src="/images/mdd.png" alt="Le Monde du droit" title="Rechercher sur le Monde du Droit" /></a>	  
+   
+    </span>
+
 </div>
 <?php
 }
