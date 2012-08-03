@@ -485,6 +485,23 @@ xmlhttp.onreadystatechange=function()
 xmlhttp.send();
 }
 </script>
+ 
+<?php 
+$urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
+?>
+
+ <script type="text/javascript">
+    google.load("feeds", "1");
+    
+    function OnLoad() {
+      var feedControl = new google.feeds.FeedControl();
+      feedControl.addFeed("<?php echo $urlrss; ?>", "");
+     feedControl.draw(document.getElementById("feed"));
+    }
+    
+    google.setOnLoadCallback(OnLoad);
+    </script>
+	   
 	<?php
 	
     if (isset($document->titre_supplementaire)) {
@@ -570,6 +587,7 @@ xmlhttp.send();
     if (!empty($citations_analyses)) {
       echo '<p><h3>Références :</h3><br />'.$citations_analyses.'</p>';
     }
+	
     if (isset($document->saisines)) {
       echo '<hr />';
       echo '<h3>Saisine : </h3>';
@@ -761,24 +779,27 @@ $replacements[4] = '<a href="$0" target="_blank">$0</a>';
     { echo '<hr /><h3>Publications :</h3>'; }
 	
 if (isset($document->num_arret) AND($document->juridiction == 'Cour de cassation')) {
-echo 'Proposition de citation de l\'arrêt: '.$citation.'';
-echo '<br>'.$civcrimlong.' '.citation($bulletins).'<br>'; 
+echo 'Proposition de citation: '.$citation.'';
+echo '<br>'.$civcrimlong.' '.citation($bulletins).'<br><div id="feed"></div>'; 
 	}
 	
 	if (isset($document->num_arret)AND($document->juridiction == 'Conseil d\'État')) {
-echo 'Proposition de citation de la décision: '.$citation.'';
-	echo '<br>'.$lebon.'<br>'; 
+echo 'Proposition de citation: '.$citation.'';
+	echo '<br>'.$lebon.'<br><div id="feed"></div>'; 
 	}
 	
 		if (isset($document->num_arret)AND($document->juridiction == 'Conseil constitutionnel')) {
-echo 'Proposition de citation de la décision: '.$citation.'';
-	echo '<br>'.$lebon.'<br>'; 
+echo 'Proposition de citation: '.$citation.'';
+	
+	
+	echo '<br>'.$lebon.'<br><div id="feed"></div>'; 
 	}
        if(strpos($document->id_source, "CONSTEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriConstit" target="_blank" title="Télécharger au format RTF"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
         if(strpos($document->id_source, "JURITEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriJudi" title="Télécharger au format RTF" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
         if(strpos($document->id_source, "CETATEXT") !== false) { echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriAdmin" title="Télécharger au format RTF" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>'; }
       }
-    }
+
+	}
 	
 	if($document->pays == 'Canada') {
 	echo 'Proposition de citation de la décision: '.$citation.'';
@@ -820,9 +841,7 @@ echo '<br>'.$civcrimlong.' '.citation($bulletins).'<br>';
   <div class="download">
   <?php //echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
   </div> </div> </div> 
-  
-  
-  
+
   
 <script type="text/javascript">
   window.___gcfg = {lang: 'fr'};

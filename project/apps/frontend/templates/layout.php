@@ -16,7 +16,11 @@
 {		$('a[title]').qtip();
 });
 	</script>
-    <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+ 
+
+	
+	<link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
   </head>
   <body>
     <div class="site">
