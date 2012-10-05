@@ -66,26 +66,22 @@ function remplacequerytitre($string) {
 
 ?>
 <div class="recherche">
-  
-  <h1><?php echo $nbResultats; ?> résultats
-  
-</h1>
 
-<div class="facets">
-<?php
-/////// TRI ////////
-?>
-<p><strong>Fil d'ariane: </strong><a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a> </p>
-<div itemscope itemtype="http://schema.org/WebPage">
-<div itemprop="breadcrumb">
-<ul><li><a href="http://www.juricaf.org" itemprop="url">Page d'accueil</span></a></li>
-<li>
-<a href="<?php echo $sf_request->getUri() ?>" itemprop="url">Résultats de la recherche</a></li></ul>
-</div>
-</div>
-<p><strong>Termes de la recherche : </strong></p>
-<ul>
-<li><?php echo remplacequery($query); ?></a></li>
+<div class="affiner">
+	<h3>Affinez votre recherche</h3>
+	<div class="affinercols">
+		<ul>
+			<li id="fil_ariane">
+				<a href="http://www.juricaf.org">Accueil</a> > <a href="<?php echo $sf_request->getUri() ?>">Recherche</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
+			</li>
+			<li>
+				<h4>Termes de la recherches :</h4>
+				<p class="recherche_terme"><?php echo remplacequery($query); ?></p>
+			</li>
+			<li>
+				<h4>Tri :</h4>
+				<ul>
 
 <?php
 //////////////////
@@ -188,18 +184,17 @@ if (trim($query) !== '' || isset($title_facet)) {
 if ($resultats->response->numFound !== 0) {
 ?>
 
-<p><strong>Tri</strong></p>
-<ul>
+				
   <?php
   if (!preg_match('/order:/', $facetslink)) {
-    echo '<li>antéchronologique</li>';
+    echo '<li style="font-weight:bold;">antéchronologique</li>';
   }
   else {
     echo '<li>'.link_to('antéchronologique', $noorderlink).'</li>';
   }
 
   if (preg_match('/order:chrono/', $facetslink)) {
-    echo '<li>chronologique</li>';
+    echo '<li style="font-weight:bold;">chronologique</li>';
   }
   else {
     $tmplink = $currentlink;
@@ -208,14 +203,16 @@ if ($resultats->response->numFound !== 0) {
   }
 
   if (preg_match('/order:pertinence/', $facetslink)) {
-    echo '<li>par pertinence</li>';
+    echo '<li style="font-weight:bold;">par pertinence</li>';
   }
   else {
     $tmplink = $currentlink;
     $tmplink['facets'] = 'order:pertinence'.preg_replace('/,?order:[a-z]*,?/', '', $facetslink);
     echo '<li>'.link_to('par pertinence', $tmplink, array('rel'  => 'nofollow')).'</li>';
   } ?>
-</ul>
+
+				</ul>
+			</li>
 <?php
 // Eviter le duplicate content
 if(isset($nobots)) { $sf_response->addMeta('robots', 'noindex, nofollow', false, false, false); }
@@ -225,33 +222,37 @@ if(isset($nobots)) { $sf_response->addMeta('robots', 'noindex, nofollow', false,
   //include_component('recherche', 'facets', array('label'=>'Juridiction', 'id'=>'juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
 include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction', 'id'=>'facet_pays_juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink, 'tree' => true, 'mainid' => 'facet_pays'));
 ?>
-<p><strong>Autres bases de données</strong></p>
-<span class="search_out">
-      <a onclick="window.open(this.href); return false;" href="http://www.jurispedia.org/index2.php?lr=lang_fr&amp;cof=FORID%3A11&amp;ie=UTF-8&amp;q=<?php echo urlencode($query); ?>&amp;sa=++%E2%86%92++&amp;cx=010401543614658542221%3A3iznlxhkw1q&amp;siteurl=www.juricaf.org%252F#905"><img src="/images/jurispedia.png" alt="Jurispedia" title="Rechercher sur Jurispedia" /></a>
-      <a onclick="window.open(this.href); return false;" href="http://www.savoirsenpartage.auf.org/discipline/9/recherche/?q=<?php echo urlencode($query); ?>"><img src="/images/savoirs_en_partage.png" alt="Savoirs en partage" title="Rechercher sur Savoirs en partage" /></a>
-	  <a onclick="window.open(this.href); return false;" href="http://www.lemondedudroit.fr/component/search/?ordering=&searchphrase=all&searchword=<?php echo urlencode($query); ?>"><img src="/images/mdd.png" alt="Le Monde du droit" title="Rechercher sur le Monde du Droit" /></a>	  
-   
-    </span>
-
+	
+			<li>
+				<h4>Autres bases de données :</h4>
+				<p>
+					<a onclick="window.open(this.href); return false;" href="http://www.jurispedia.org/index2.php?lr=lang_fr&amp;cof=FORID%3A11&amp;ie=UTF-8&amp;q=<?php echo urlencode($query); ?>&amp;sa=++%E2%86%92++&amp;cx=010401543614658542221%3A3iznlxhkw1q&amp;siteurl=www.juricaf.org%252F#905"><img src="/images/jurispedia.png" alt="Jurispedia" title="Rechercher sur Jurispedia" /></a>
+					<a onclick="window.open(this.href); return false;" href="http://www.savoirsenpartage.auf.org/discipline/9/recherche/?q=<?php echo urlencode($query); ?>"><img src="/images/savoirs_en_partage.png" alt="Savoirs en partage" title="Rechercher sur Savoirs en partage" /></a>
+					<a onclick="window.open(this.href); return false;" href="http://www.lemondedudroit.fr/component/search/?ordering=&searchphrase=all&searchword=<?php echo urlencode($query); ?>"><img src="/images/mdd.png" alt="Le Monde du droit" title="Rechercher sur le Monde du Droit" /></a>	  
+				</p>
+			</li>
+		</ul>	 
+	</div>
 </div>
 <?php
 }
   //////////////////////////////////
   /// Affichage des résultats
   //////////////////////////////////
-?><div class="resultats">
-<div class="pager">
-<?php if ($resultats->response->numFound > 10) { echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); } ?>
-</div>
+?>
+<div class="resultat">
+	<h3><?php echo $nbResultats; ?> résultats</h3>
+	<div class="resultatcols">
+		<ul>
 <?php
 foreach ($resultats->response->docs as $resultat) {
-  echo '<div class="resultat"><h3><a href="'.url_for('@arret?id='.$resultat->id).'"><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</a></h3>';
+  echo '<li><a href="'.url_for('@arret?id='.$resultat->id).'"><h3><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</h3>';
   echo '<p>';
   if (isset($resultats->highlighting))
     echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});
   else
     echo JuricafArret::getExcerpt($resultat);
-  echo '</p>';
+  echo '</p></a>';
   $formation = '';
   if ($resultat->formation) {
     $formation = ', '.$resultat->formation;
@@ -266,13 +267,17 @@ foreach ($resultats->response->docs as $resultat) {
     echo ' - <span class="num">'.$resultat->urnlex.'</span>';
   }
   */
-  echo '</div></div>';
+  echo '</div></li>';
 }
 ?>
+		</ul>
+	</div>
+	<div class="navigation">
+	<?php if ($resultats->response->numFound > 10) { echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); } ?>
+	</div>
 </div>
-<div class="pager">
-<?php if ($resultats->response->numFound > 10) { echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); } ?>
-</div>
+
+<div style="clear:both;">&nbsp;</div>
 </div>
 <script type="text/javascript">
 <!--

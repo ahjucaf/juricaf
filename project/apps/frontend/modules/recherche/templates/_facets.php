@@ -4,8 +4,9 @@ function facet_link_to($t, $l) {
 }
 
 if (count($facets) > 0) : ?>
-<p><strong><?php echo $label; ?></strong></p>
-<ul><?php
+<li>
+	<h4><?php echo $label; ?> :</h4>
+	<ul><?php
 foreach($facets as $k => $v) {
     echo '<li style="margin-top: 5px;">';
     if($mainid === 'facet_pays')
@@ -31,5 +32,6 @@ foreach($facets as $k => $v) {
     echo "</li>";
   }
 ?>
-</ul>
+	</ul>
+</li>
 <?php endif;
