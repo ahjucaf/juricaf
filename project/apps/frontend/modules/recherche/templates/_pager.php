@@ -12,8 +12,10 @@ if (!function_exists('echolinkcondition')) {
   }
  }
 ?>
-<span class="begin"><?php echo echolinkcondition('<< Début', $currentlink, $pager['begin']); ?></span>
-<span class="last"><?php echo echolinkcondition('< Précédent', $currentlink, $pager['last']); ?></span>
-<span class="next"><?php echo echolinkcondition('Suivant >', $currentlink, $pager['next']); ?></span>
-<span class="end"><?php echo echolinkcondition('Fin >>', $currentlink, $pager['end']); ?></span>
 
+<?php echo echolinkcondition('<< Début', $currentlink, $pager['begin']); ?>
+<?php echo echolinkcondition('< Précédent', $currentlink, $pager['last']); ?>
+<div id="align_right">
+	<?php echo echolinkcondition('Suivant >', $currentlink, $pager['next']); ?>
+	<?php echo echolinkcondition('Fin >>', $currentlink, $pager['end']); ?>
+</div>
