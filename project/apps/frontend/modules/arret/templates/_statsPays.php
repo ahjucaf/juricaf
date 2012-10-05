@@ -14,7 +14,7 @@ function pathToFlag($str) {
 $cpt = 0;
 ?>
 <div class="pays">
-	<h3>Rechercher parmi <?php echo num($nb); ?> décisions provenant de <?php echo count($pays); ?> pays francophones</h3>
+	<h3>Rechercher parmi <?php echo num($nb); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</h3>
 	<div class="payscols">
 	  <table><tr>
 		<?php
