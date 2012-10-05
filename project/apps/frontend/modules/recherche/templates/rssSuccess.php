@@ -33,15 +33,15 @@ if (trim($query) !== '' || isset($title_facet)) {
 
   if(isset($title_facet) && trim($query) == '') {
     $title = 'Juricaf : Collection '.$title_facet;
-    $description = 'Les 15 arrêts les plus récents de cette collection (sur un total de '.$resultats->response->numFound.' résultats).';
+    $description = 'Les 30 arrêts les plus récents de cette collection (sur un total de '.$resultats->response->numFound.' résultats).';
   }
   if(isset($title_facet) && trim($query) !== '') {
     $title = 'Juricaf : Recherche sur "'.trim($query).'" dans la collection '.$title_facet;
-    $description = 'Les 15 arrêts les plus récents correspondants à cette recherche dans cette collection (sur un total de '.$resultats->response->numFound.' résultats)';
+    $description = 'Les 30 arrêts les plus récents correspondants à cette recherche dans cette collection (sur un total de '.$resultats->response->numFound.' résultats)';
   }
   if(!isset($title_facet) && trim($query) !== '') {
     $title = 'Juricaf : Recherche sur "'.trim($query).'"';
-    $description = 'Les 15 arrêts les plus récents correspondants à cette recherche dans toutes les collections (sur un total de '.$resultats->response->numFound.' résultats)';
+    $description = 'Les 30 arrêts les plus récents correspondants à cette recherche dans toutes les collections (sur un total de '.$resultats->response->numFound.' résultats)';
   }
 }
 echo '<?xml version="1.0" encoding="UTF-8" ?>';
@@ -51,7 +51,10 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
     <title><![CDATA[<?php echo $title; ?>]]></title>
     <link><?php echo $sf_request->getUri(); ?></link>
     <description><![CDATA[<?php echo $description; ?>]]></description>
-    <image>
+	<language>fr-fr</language>
+     <managingEditor>sgahjucaf@ahjucaf.org</managingEditor>
+       <webMaster>sgahjucaf@ahjucaf.org</webMaster>
+		<image>
       <url><?php echo 'http://'.$sf_request->getHost().'/images/juricaf.png'; ?></url>
       <title><![CDATA[<?php echo $title; ?>]]></title>
       <link><?php echo $sf_request->getUri(); ?></link>
