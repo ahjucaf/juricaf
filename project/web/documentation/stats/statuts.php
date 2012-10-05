@@ -57,14 +57,12 @@
         </div>
         <div class="menu">
 
-          <ul>
-            <li><a href="/documentation/a_propos.php">A propos</a></li>
+           <ul>
+            <li><a href="/documentation/presentation-generale-38/article/a-propos">A propos</a></li>
             <li><a href="/documentation/stats/statuts.php">Étendue des collections</a></li>
-<!---            <li><a href="#">Outils</a></li> -->
-            <li><a href="/documentation/partenaires.php">Partenaires</a></li>
-            <li><a href="/documentation/contact.php">Contact</a></li>
-            <li><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
-
+            <li><a href="/documentation/presentation-generale-38/article/partenaires">Partenaires</a></li>
+            <li><a href="/documentation/auteur/secretariat-general-de-l-ahjucaf">Contact</a></li>
+            <li><a href="/documentation/mentions-legales/">Mentions légales</a></li>
           </ul>
         </div>
       </div>
