@@ -97,7 +97,7 @@ class rechercheActions extends sfActions
 
     if($request->getParameter('format') === 'rss') {
       $this->setTemplate('rss');
-      $pas = 15;
+      $pas = 30;
       $param['sort'] = 'date_arret desc, id asc';
       $start = 0;
     }
