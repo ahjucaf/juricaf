@@ -17,10 +17,7 @@
 });
 	</script>
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
- 
-
-	
-	<link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
+ 	<link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
   </head>
   <body>
     <div class="site">
@@ -30,16 +27,17 @@
             <li><a href="/documentation/presentation-generale-38/article/a-propos">A propos</a></li>
             <li><a href="/documentation/stats/statuts.php">Étendue des collections</a></li>
             <li><a href="/documentation/presentation-generale-38/article/partenaires">Partenaires</a></li>
-            <li><a href="/documentation/auteur/secretariat-general-de-l-ahjucaf">Contact</a></li>
             <li><a href="/documentation/mentions-legales/">Mentions légales</a></li>
-          </ul>
+			<li><a href="/documentation/fonds-documentaire/">Fonds documentaire</a></li>
+			<li><a href="/documentation/aide/">Aide</a></li>
+			<li><a href="/documentation/auteur/secretariat-general-de-l-ahjucaf">Contact</a></li>
+            </ul>
         </div>
       </div>
 	  <div class="reseaux_sociaux">
-          <a href="http://www.parcesmotifs.net/spip.php?page=groupe&amp;id_groupe=12"target="_blank"><img src="/images/help.png" alt="Aide" title="Aide" /></a>
           <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
           <a href="http://twitter.com/juricaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
-          <a href="http://www.parcesmotifs.net/spip.php?page=backend"><img src="/images/rss.png" alt="RSS" title="Flux RSS" /></a>
+          <a href="http://www.juricaf.org/documentation/spip.php?page=distrib"><img src="/images/rss.png" alt="RSS" title="Flux RSS" /></a>
           <a href="javascript:juricafSearch();"><img src="/images/juricaf_search.png" alt="J" title="Ajouter Juricaf aux moteurs de recherches de votre navigateur" /></a>
       </div>
       <div class="main">
@@ -64,13 +62,14 @@
 		  <div class="top_page"><a id="top" href="#">Haut de page<img src="/images/fleche_haut.png" alt="Haut de page"/></a></div>
         </div>
       </div>
-	  <a href="/documentation/partenaires.php#ahjucaf"><img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
-	  <a href="/documentation/partenaires.php#francophonie"><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
+	  <a href="documentation/presentation-generale-38/article/partenaires"><img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
+	  <a href="documentation/presentation-generale-38/article/partenaires"><img src="documentation/local/cache-vignettes/L202xH60/lnlilogopetit-22b81.jpg" alt="LNLI" /></a>
+	  <a href="documentation/presentation-generale-38/article/partenaires"><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
       <div class="bottom">
-        <p>Juricaf est un projet de l'<a href="/documentation/partenaires.php#ahjucaf">AHJUCAF</a>, l'association des cours judiciaires suprêmes francophones,<br />
-        réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;I).<br />
-        Il est soutenu par l'<a href="/documentation/partenaires.php#francophonie">Organisation internationale de la Francophonie</a>,
-        le <a href="/documentation/partenaires.php#inforoutes">Fonds francophone des inforoutes</a>.</p>
+        <p>Juricaf est un projet de l'<a href="documentation/presentation-generale-38/article/partenaires">AHJUCAF</a>, l'association des cours judiciaires suprêmes francophones,<br />
+        réalisé en partenariat avec <a href="documentation/presentation-generale-38/article/partenaires">le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;I).</a><br />
+        Il est soutenu par l'<a href="documentation/presentation-generale-38/article/partenaires">Organisation internationale de la Francophonie</a>,
+        le <a href="documentation/presentation-generale-38/article/partenaires">Fonds francophone des inforoutes</a>.</p>
       </div>
     </div>
    </body>
