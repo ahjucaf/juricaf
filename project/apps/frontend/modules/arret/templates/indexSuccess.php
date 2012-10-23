@@ -687,7 +687,6 @@ echo($cd->item(2)->nodeValue);
     else {
 	if(!empty($document->texte_arret)) { $texte_arret = $document->texte_arret; } else { $texte_arret = ''; }
 	
-	
 $patterns = array();
 
 if($document->pays == 'France') {
@@ -738,13 +737,8 @@ $replacements[5] = '<a href="http://www.juricaf.org/recherche/num_arret:$1CSC$2"
 }
 else { };
 
-
-
 $patterns[4] = '#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i';
 $replacements[4] = '<a href="$0" target="_blank">$0</a>';
-
-
-
 
 	echo '<h3>Texte : </h3><span itemprop="articleBody">';
 	
