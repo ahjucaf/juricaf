@@ -21,27 +21,20 @@
 
 	<INCLURE{fond=inclure/header} />
 	
-	<div class="options">	<div class="option">
-	[(#REM) Contenu principal : contenu de la rubrique ]
 
-			<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p><!--.arbo-->
+			<div itemprop="breadcrumb"><a itemprop="url" href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a itemprop="url"  href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div><!--.arbo-->
 	
-			<div class="cartouche">
-				<h1 class="#EDIT{titre}">[(#LOGO_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h1>
-			</div>
+		
+			<h1 id="titre" align="center" class="#EDIT{titre}">[(#LOGO_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h1>
+		
 	
 			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
 	
-		</div></div>
-	
-		<div class="facets">
-	
-	<INCLURE{fond=inclure/nav,env} />
+	  <div class="recherche">
 
-	
-		
+		<div class="affiner">
+			<div class="affinercols">
 
-			
 			[(#REM) Menu de navigation mots-cles ]
 			<B_mots>
 			<div class="menu">
@@ -87,24 +80,21 @@
 			</div>
 			</B_sites>
 	
-			[(#REM) Proposer un site ]
-			#FORMULAIRE_SITE
-	</div>
-			<div class="resultats">
-	
+		
+	</div></div>
+			<div class="resultat">
+	<div class="resultatcols">
 			[(#REM) Articles de la rubrique ]
 			<B_articles>
 		
-				#ANCRE_PAGINATION
 				<ul>
-					<BOUCLE_articles(ARTICLES) {id_rubrique} {!par date} {pagination}>
+					<BOUCLE_articles(ARTICLES) {id_rubrique} {!par date}>
 					<li>
-						<strong><a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|image_reduire{40,*}) ]#TITRE</a></strong>
-						<br /><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS|supprimer_tags)]</small>
+						<h3><a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|image_reduire{40,*}) ]#TITRE</a></h3>
+						<br />
 					</li>
 					</BOUCLE_articles>
 				</ul>
-				[<p class="pagination">(#PAGINATION)</p>]
 			
 			</B_articles>
 	
@@ -112,14 +102,14 @@
 			<B_sous_rubriques>
 						<h2><:sous_rubriques:></h2>
 				
-					<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre}{!par date}>
+					<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre}>
 				
 						<p><a href="#URL_RUBRIQUE">#TITRE</a>
 	
 						[(#REM) Une boucle recursive pour le mini plan]
 						<B_miniplan>
 						
-							<BOUCLE_miniplan(RUBRIQUES) {id_parent} {par num titre}{!par date}>
+							<BOUCLE_miniplan(RUBRIQUES) {id_parent} {par num titre}>
 							
 								<p><a href="#URL_RUBRIQUE">#TITRE</a>
 								<BOUCLE_m2(BOUCLE_miniplan)></BOUCLE_m2>
@@ -140,8 +130,9 @@
 			[<div class="notes"><hr />(#NOTES)</div>]
 	
 
-			</div>
-
+			</div></div>
+			<div style="clear:both;"> </div>
+</div>
 
 	<INCLURE{fond=inclure/footer,self=#SELF} />
 

@@ -19,30 +19,23 @@
 
 	<INCLURE{fond=inclure/header} />
 	
-			[(#REM) Contenu principal : contenu de l'article ]
-<div class="options">	
-			<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+<div itemprop="breadcrumb"><a itemprop="url" href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a itemprop="url" href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane></div>
 	
-
-	<div class="option">
+	
 				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
-				<h1 class="#EDIT{titre} surlignable">[(#LOGO_ARTICLE_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h1>
-				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
-				</div>
-			
+				<h1 id="titre" align="center" class="#EDIT{titre} surlignable">[(#LOGO_ARTICLE_RUBRIQUE|image_reduire{40,*}) ]#TITRE</h1>
 				
-				#MODELE{article_traductions}
-		</div>
-	
-		<div class="facets">
-	<INCLURE{fond=inclure/nav,env} />
+				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+				    <div class="recherche">
 
-			<INCLURE{fond=inclure/navsub, id_rubrique} />
-	
+		
+		<div class="affiner">
+			<div class="affinercols">
+
 			[(#REM) Articles dans la meme rubrique ]
 			<B_articles_rubrique>
 			
-				<h2><:meme_rubrique:></h2>
+				<h3><:meme_rubrique:></h3>
 				<ul>
 					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {!par date} {0,10}>
 					<li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
@@ -52,13 +45,11 @@
 	
 			[(#REM) Menu de navigation mots-cles ]
 			#MODELE{article_mots}
-	
+	</div>
 </div>
-	
-
-
-
-			<div class="resultats">
+		<div class="resultat">
+			<div class="resultatcols">
+			
 			[<div class="#EDIT{chapo} chapo surlignable">(#CHAPO|image_reduire{500,*})</div>]
 			[<div class="#EDIT{texte} texte surlignable">(#TEXTE|image_reduire{500,*})</div>]
 		
@@ -67,19 +58,14 @@
 		
 			[(#REM) Gestion du portfolio et des documents ]
 			[(#INCLURE{fond=inclure/documents,id_article, env})]
-	
-			[(#REM) Petition :
-			La petition ayant une PAGINATION il faut absolument {env}
-			et pourquoi pas ajax
-			][(#PETITION|oui)<INCLURE{fond=inclure/petition,id_article,env,ajax} />]
-			
-			[<div class="notes"><hr />(#NOTES)</div>]
-			<p> Dernière mise à jour le [(#DATE|nom_jour) ][(#DATE|affdate)] <:par_auteur:> #LESAUTEURS
 				
-		</div></div></div>
+			[<div class="notes"><hr />(#NOTES)</div>]
+				
+		</div></div>
+		
+		<div style="clear:both;"> </div></div>
 <!--.page-->
 	<INCLURE{fond=inclure/footer,self=#SELF} />
-
 
 </body>
 </html>
