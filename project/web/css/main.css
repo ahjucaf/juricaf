@@ -16,14 +16,14 @@ time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; fo
 /* General */
 body {
   font-size: 62.5%; /* IE */
-  color:#555555; font-family: Verdana, Tahoma, Geneva, Arial, Sans-serif; font-size:12px; width: 1024px;margin:auto; }
+  color:#000000; font-family: Verdana, Tahoma, Geneva, Arial, Sans-serif; font-size:12px; width: 1024px;margin:auto; }
 .main { clear: both; width: 1024px; }
 a { color: #426E98; }
 ul,li {list-style-type: none; }
-h1 { font-size:16px; padding:10px; height:20px; width:868px; background-color:#cfd7de; border:1px solid #b9bcbf; margin:10px 0;}
-h2 { font-size:14px; color: #555555; text-decoration:underline; padding:5px; }
+h1 { font-size:16px; padding:10px; height:20px; width:1024px; background-color:#cfd7de; border:1px solid #b9bcbf; margin:10px 0;}
+h2 { font-size:14px; color: #000000; text-decoration:underline; padding:5px; }
 h3 { font-size: 12px; color: #426e98; margin:10px 0; font-weight:bold; }
-h4 { font-size: 12px; color: #555555;; margin:5px 0; font-weight:bold; }
+h4 { font-size: 12px; color: #000000;; margin:5px 0; font-weight:bold; }
 .menu {
 	width: 1024px; height: 45px; line-height:35px;
 	vertical-align:middle; margin:auto; background-image: url('../images/bg_nav.gif'); background-repeat:repeat-x;	text-align:center; }
@@ -42,7 +42,7 @@ padding: 6px; margin:5px 5px; font-size: 12px; color: #FFFFFF; text-decoration: 
 .reseaux_sociaux img:hover, .reseaux_sociaux img:focus { opacity: 0.7; }
 
 .recherche { text-align: justify; }
-.arret { text-align: justify; width:868px; }
+.arret { text-align: justify; width:1024px; }
 .arret p { padding:10px; }
 .arret .split_left { width:450px; float:left; }
 .arret .split_right { width:300px; float:right }
@@ -108,9 +108,9 @@ input[type="submit"]:hover, input[type="submit"]:focus {cursor:pointer;}
 .resultats { clear: left; }
 .resultat {margin-bottom: 10px; text-align: justify; }
 .resultat h3 {margin: 0px;}
-.resultat p {margin: 0px;}
+.resultat p {margin: 0px;}*/
 .resultat em { font-weight: bold; }
-*/
+
 .resultat .extra {color: gray;}
 .extra { margin-top: 10px; text-align: left; }
 
