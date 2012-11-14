@@ -68,15 +68,12 @@ function remplacequerytitre($string) {
 <div class="recherche">
 
 <div class="affiner">
-	<h3>Affinez votre recherche</h3>
-	<div class="affinercols">
-		<ul>
-			<li id="fil_ariane">
-				<a href="http://www.juricaf.org">Accueil</a> > <a href="<?php echo $sf_request->getUri() ?>">Recherche</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://www.juricaf.org">Accueil</a> > <a href="<?php echo $sf_request->getUri() ?>">Recherche</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
-			</li>
+	<div class="affinercols">
+		<ul>			
 			<li>
-				<h4>Termes de la recherches :</h4>
+				<h4>Termes de la recherche :</h4>
 				<p class="recherche_terme"><?php echo remplacequery($query); ?></p>
 			</li>
 			<li>
@@ -246,27 +243,18 @@ include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction'
 		<ul>
 <?php
 foreach ($resultats->response->docs as $resultat) {
-  echo '<li><a href="'.url_for('@arret?id='.$resultat->id).'"><h3><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</h3>';
+  echo '<li><a href="'.url_for('@arret?id='.$resultat->id).'"><h3><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</h3></a>';
   echo '<p>';
   if (isset($resultats->highlighting))
     echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});
   else
     echo JuricafArret::getExcerpt($resultat);
-  echo '</p></a>';
+  echo '</p>';
   $formation = '';
   if ($resultat->formation) {
     $formation = ', '.$resultat->formation;
   }
-  echo '<div class="extra"><span class="pays '.preg_replace('/ /', '_', $resultat->pays).'">'.$resultat->pays.'</span> - <span class="date">'.date('d/m/Y', strtotime($resultat->date_arret)).'</span> - <span class="juridiction">'.$resultat->juridiction.$formation.'</span>';
-  // if(isset($resultat->ecli)) {
-  //   echo ' - <span class="num">'.$resultat->ecli.'</span>';
- // } Désactivation temporaire ECLI
-
-  /* en attente
-  if(isset($resultat->urnlex)) {
-    echo ' - <span class="num">'.$resultat->urnlex.'</span>';
-  }
-  */
+  echo '<div class="extra"></span>';
   echo '</div></li>';
 }
 ?>
