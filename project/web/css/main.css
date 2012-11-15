@@ -61,7 +61,7 @@ input[type="submit"] { background:url('../images/btn_recherche.png') no-repeat;c
 input[type="submit"]:hover, input[type="reset"]:focus {cursor:pointer;}
 input[type="reset"] { background:url('../images/btn_recherche.png') no-repeat;color:#FFFFFF; padding:5px 10px; margin: 5px; border:none; height:29px;}
 input[type="reset"]:hover, input[type="reset"]:focus {cursor:pointer;}
-.form_recherche input[type="text"] { color:#7b7b7b; height:10px; padding:10px; width: 630px; margin-top: 2px; background-color:#f5f5f5; border:1px solid #7f7f7f; }
+.form_recherche input[type="text"] { color:#7b7b7b; height:16px; padding:10px; width: 630px; margin-top: 2px; background-color:#f5f5f5; border:1px solid #7f7f7f; }
 .form_recherche  form table td{text-align:center;width:1024px;height:250px;}
 
 .pays {float:left;}
