@@ -26,8 +26,25 @@ class arretActions extends sfActions
     $this->document = new JuricafArret($request->getParameter('id'));
     $this->forward404If($this->document->isNew());
     $this->setLayout(false);
-    $this->getResponse()->setContentType('text/xml');
+	
+	if($request->getParameter('format') === 'json') {
+		$this->json = true;
+		$this->getResponse()->setContentType('application/json');
+	}
+	else {
+		$this->json = false;
+		$this->getResponse()->setContentType('text/xml');
+	}
   }
+  
+  public function executeJson(sfWebRequest $request)
+  {
+    $this->document = new JuricafArret($request->getParameter('id'));
+    $this->forward404If($this->document->isNew());
+    $this->setLayout(false);
+    $this->getResponse()->setContentType('application/json');
+  }
+  
   public function executeStats(sfWebRequest $request)
   {
     return ;
