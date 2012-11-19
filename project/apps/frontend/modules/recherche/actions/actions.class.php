@@ -132,6 +132,15 @@ class rechercheActions extends sfActions
           $this->facets[$k][$n] = $v;
         }
       }
+	  
+	if($request->getParameter('format') === 'json') {
+		$this->json = true;
+		$this->setLayout(false);
+		$this->getResponse()->setContentType('application/json');
+	}
+	else {
+		$this->json = false;
+	}
   }
 
   private function convertDate($date) {

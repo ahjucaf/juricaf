@@ -1,4 +1,4 @@
-<?php
+<?php if ($json == false) {
 use_helper('Text');
 
 $nbResultats = number_format($resultats->response->numFound, 0, ',', ' ');
@@ -279,3 +279,43 @@ if(facets > resultats) {
 }
 // -->
 </script>
+<?php } 
+
+else { // JSON
+ 
+  $nbResultats = $resultats->response->numFound;
+
+// Ouverture de l'objet JSON
+ echo '{ ';
+ 
+ echo "\"nb_resultat\" : $nbResultats, \"docs\" : [ ";
+ 
+ // Gestion de la derniere boucle
+ $total = count($resultats->response->docs);
+ $i = 0;
+ 
+ foreach ($resultats->response->docs as $resultat) {
+	echo '{ ';
+		echo '"id" : "' . $resultat->id . '", ';
+		echo '"pays" : "' . $resultat->pays . '", ';
+		echo '"titre" : "' . $resultat->titre . '", ';
+		echo '"formation" : "' . $resultat->formation . '", ';
+		echo '"date_arret" : "' . date('d/m/Y', strtotime($resultat->date_arret)) . '", ';
+		echo '"juridiction" : "' . $resultat->juridiction . '"';
+		/*if (isset($resultats->highlighting))
+			echo '"highlighting" : "' . JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id}) . '"';
+		else
+			echo '"highlighting" : "' . JuricafArret::getExcerpt($resultat) . '"';*/
+
+	echo ' }';
+	// Gestion de la derniere boucle
+	$i++;
+	if ($i < $total)
+		echo ", ";
+}
+ 
+ // Fermeture de l'objet JSON
+echo ' ] }';
+ 
+ 
+} ?>
