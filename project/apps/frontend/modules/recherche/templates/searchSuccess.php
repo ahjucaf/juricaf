@@ -81,9 +81,9 @@ function remplacequerytitre($string) {
 				<ul>
 
 <?php
-//////////////////
+
 //  Suppression des options
-//////////////////
+
 $myfacetslink = preg_replace('/^,/', '', $facetslink);
 $currentlink = array('module'=>'recherche', 'action'=>'search', 'query' => $query, 'facets'=>$myfacetslink);
 if (count($facetsset)) { ?>
@@ -115,9 +115,7 @@ if (count($facetsset)) { ?>
   <?php
   }
 
-//////////////////
 // Metadonnées
-//////////////////
 
 foreach($facetsset as $facet) {
   if (preg_match('/^facet_pays_juridiction:/', $facet)) {
@@ -175,9 +173,9 @@ if (trim($query) !== '' || isset($title_facet)) {
   $sf_response->addMeta('description', $description);
   $sf_response->addMeta('keywords', $keywords);
 }
-//////////////////
+
 //  Gestion des facettes
-//////////////////
+
 if ($resultats->response->numFound !== 0) {
 ?>
 
@@ -211,12 +209,7 @@ if ($resultats->response->numFound !== 0) {
 				</ul>
 			</li>
 <?php
-// Eviter le duplicate content
 if(isset($nobots)) { $sf_response->addMeta('robots', 'noindex, nofollow', false, false, false); }
-  ////// FACETTE Pays //////////
-  //include_component('recherche', 'facets', array('label'=>'Pays', 'id'=>'pays', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
-  ////// FACETTE Juridiction //////////
-  //include_component('recherche', 'facets', array('label'=>'Juridiction', 'id'=>'juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink));
 include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction', 'id'=>'facet_pays_juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink, 'tree' => true, 'mainid' => 'facet_pays'));
 ?>
 	
@@ -229,21 +222,21 @@ include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction'
 				</p>
 			</li>
 		</ul>	 
-	</div>
-</div>
+	
 <?php
 }
-  //////////////////////////////////
-  /// Affichage des résultats
-  //////////////////////////////////
+
+// Affichage des résultats
+
 ?>
+</div>
+</div>
 <div class="resultat">
 	<h3><?php echo $nbResultats; ?> résultats</h3>
-	<div class="resultatcols">
-		<ul>
+		
 <?php
 foreach ($resultats->response->docs as $resultat) {
-  echo '<li><a href="'.url_for('@arret?id='.$resultat->id).'"><h3><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</h3></a>';
+  echo '<div class="resultatcols"><a href="'.url_for('@arret?id='.$resultat->id).'"><h3><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</h3></a>';
   echo '<p>';
   if (isset($resultats->highlighting))
     echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});
@@ -254,12 +247,10 @@ foreach ($resultats->response->docs as $resultat) {
   if ($resultat->formation) {
     $formation = ', '.$resultat->formation;
   }
-  echo '<div class="extra"></span>';
-  echo '</div></li>';
+ // echo '<div class="extra"></div>';
+  echo '</div>';
 }
 ?>
-		</ul>
-	</div>
 	<div class="navigation">
 	<?php if ($resultats->response->numFound > 10) { echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); } ?>
 	</div>
