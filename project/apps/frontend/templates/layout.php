@@ -62,7 +62,7 @@
         </div>
       </div>
 	  <a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires"><img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
-	  <a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires"><img src="documentation/local/cache-vignettes/L202xH60/lnlilogopetit-22b81.jpg" alt="LNLI" /></a>
+	  <a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires"><img src="http://www.juricaf.org/documentation/local/cache-vignettes/L202xH60/lnlilogopetit-22b81.jpg" alt="LNLI" /></a>
 	  <a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires"><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
       <div class="bottom">
         <p>Juricaf est un projet de l'<a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires">AHJUCAF</a>, l'association des cours judiciaires suprêmes francophones,<br />
