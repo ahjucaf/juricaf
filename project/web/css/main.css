@@ -12,8 +12,7 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline;}
-/* End of Reset */
-/* General */
+
 body {
   font-size: 62.5%; /* IE */
   color:#000000; font-family: Verdana, Tahoma, Geneva, Arial, Sans-serif; font-size:12px; width: 1024px;margin:auto; }
@@ -56,7 +55,6 @@ td { padding-top:8px; }
 .stats .plus {padding:10px; text-align: center;}
 .juridcols { margin-bottom: 0; }
 
-/*input[type="submit"] { border:1px solid #426e98; background-color:#426e98; color:#FFFFFF; padding:5px 10px; margin: 5px;}*/
 input[type="submit"] { background:url('../images/btn_recherche.png') no-repeat;color:#FFFFFF; padding:5px 10px; margin: 5px; border:none; height:29px;}
 input[type="submit"]:hover, input[type="reset"]:focus {cursor:pointer;}
 input[type="reset"] { background:url('../images/btn_recherche.png') no-repeat;color:#FFFFFF; padding:5px 10px; margin: 5px; border:none; height:29px;}
@@ -66,7 +64,7 @@ input[type="reset"]:hover, input[type="reset"]:focus {cursor:pointer;}
 
 .pays {float:left;}
 .payscols table td {min-width:150px;}
-.payscols { background-color:#f7f8f9; border:1px solid #f1f1f1; width:680px; padding:0 15px; /*height:272px;*/ }
+.payscols { background-color:#f7f8f9; border:1px solid #f1f1f1; width:680px; padding:0 15px;  }
 .payscols  a {text-decoration: none; }
 .payscols  a:hover, .payscols  a:focus { color:#F5821F; }
 
@@ -99,18 +97,13 @@ input[type="reset"]:hover, input[type="reset"]:focus {cursor:pointer;}
 
 .resultat {margin-left:300px;}
 .resultatcols a:hover h3, .resultat a:focus h3  {text-decoration:underline;}
-.resultatcols { background-color:#f7f8f9; border:1px solid #f1f1f1; padding:5px 15px 15px 15px; margin-bottom:10px;}
+.resultatcols { background-color:#f7f8f9; border:1px solid #f1f1f1; padding:5px; margin-bottom:5;}
 .resultatcols h3 img {position:relative;top:1px; margin-right:5px;}
 
 .navigation a:hover, .navigation a:focus{text-decoration:underline;}
 .navigation {font-weight:bold; }
 #align_right {text-align:right; float:right;}
 
-/*
-.resultats { clear: left; }
-.resultat {margin-bottom: 10px; text-align: justify; }
-.resultat h3 {margin: 0px;}
-.resultat p {margin: 0px;}*/
 .resultat em { font-weight: bold; }
 
 .resultat .extra {color: gray;}
