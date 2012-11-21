@@ -53,9 +53,9 @@
 			<li><a href="http://www.juricaf.org/documentation/presentation-generale-38/article/a-propos">A propos</a></li>
 			<li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Étendue des collections</a></li>
 			<li><a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires">Partenaires</a></li>
-			<li><a href="http://www.juricaf.org//documentation/mentions-legales/">Mentions légales</a></li>
-			<li><a href="http://www.juricaf.org//documentation/fonds-documentaire/">Fonds documentaire</a></li>
-			<li><a href="/documentation/auteur/secretariat-general-de-l-ahjucaf">Contact</a></li>
+			<li><a href="http://www.juricaf.org/documentation/mentions-legales/">Mentions légales</a></li>
+			<li><a href="http://www.juricaf.org/documentation/fonds-documentaire/">Fonds documentaire</a></li>
+			<li><a href="http://www.juricaf.org/documentation/mentions-legales/article/contact">Contact</a></li>
 			</ul>
 		    </div>
 			    <div class="site">
