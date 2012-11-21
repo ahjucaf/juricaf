@@ -31,13 +31,13 @@ function getSolrResults($pays, $juridiction, $sort) {
 
 function returnLicenceLink($value) {
   if(strpos($value, 'ODBL') !== false) {
-    $value = str_replace('ODBL', '<a href="http://www.juricaf.org/documentation/licence_odbl.php">ODBL</a>', $value);
+    $value = str_replace('ODBL', '<a href="http://www.juricaf.org/documentation/mentions-legales/article/licence-odbl">ODBL</a>', $value);
   }
   if(strpos($value, 'AHJUCAF') !== false) {
-    $value = str_replace('AHJUCAF', '<a href="http://www.juricaf.org/documentation/licence_ahjucaf.php">AHJUCAF</a>', $value);
+    $value = str_replace('AHJUCAF', '<a href="http://www.juricaf.org/documentation/mentions-legales/article/contact">AHJUCAF</a>', $value);
   }
   if(strpos($value, 'Légifrance') !== false) {
-    $value = str_replace('Légifrance', '<a href="http://www.legifrance.gouv.fr/Informations/Licences">Légifrance</a>', $value);
+    $value = str_replace('Légifrance', '<a href="http://rip.journal-officiel.gouv.fr/">Légifrance</a>', $value);
   }
   return $value;
 }
