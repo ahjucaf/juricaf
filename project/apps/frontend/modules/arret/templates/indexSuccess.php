@@ -443,11 +443,9 @@ if (!empty($citations)) {
         }
     }
 ?>
-<div itemscope itemtype="http://schema.org/WebPage">
-<div itemprop="breadcrumb">
-<a href="http://www.juricaf.org" itemprop="url">Page d'accueil</a> > 
-<a href="http://www.juricaf.org/recherche/<?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>" itemprop="url">Résultats de la recherche <b><?php echo $sf_user->getAttribute('query'); ?></b></a></div>
 
+<a href="http://www.juricaf.org">Page d'accueil</a> > 
+<a href="http://www.juricaf.org/recherche/<?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>">Résultats de la recherche <b><?php echo $sf_user->getAttribute('query'); ?></b></a>
  
   <div class="arret" itemscope itemtype="http://schema.org/Article">
    <h1 id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre.'' ?></h1>
@@ -834,7 +832,7 @@ echo '<br>'.$civcrimlong.' '.citation($bulletins).'<br>';
   </div>
   <div class="download">
   <?php //echo link_to('Télécharger au format juricaf', '@arretxml?id='.$document->_id); ?>
-  </div> </div> </div> 
+  </div>
 
   
 <script type="text/javascript">
