@@ -64,13 +64,13 @@ input[type="reset"]:hover, input[type="reset"]:focus {cursor:pointer;}
 
 .pays {float:left;}
 .payscols table td {min-width:150px;}
-.payscols { background-color:#f7f8f9; border:1px solid #f1f1f1; width:680px; padding:0 15px;  }
+.payscols { background-color:#f7f8f9; border:1px solid #f1f1f1; width:680px; padding:0 15px; margin-right: 20px; }
 .payscols  a {text-decoration: none; }
 .payscols  a:hover, .payscols  a:focus { color:#F5821F; }
 
 .rss { margin-left:730px;}
 .rss img { position:relative; top:6px; left:5px; height:22px;}
-.rsscols { background-color:#f7f8f9; border:1px solid #f1f1f1; padding:5px 15px; height:262px; }
+.rsscols { background-color:#f7f8f9; border:1px solid #f1f1f1; padding:5px 15px;}
 .rsscols ul, .rsscols li { list-style-type: none; margin: 5px 0; padding: 0; }
 .rsscols  a {text-decoration:none; }
 .rsscols  a:hover, .payscols  a:focus { color:#F5821F; }
