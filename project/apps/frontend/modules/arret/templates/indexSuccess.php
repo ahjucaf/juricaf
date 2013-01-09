@@ -824,9 +824,18 @@ echo '<br>'.$civcrimlong.' '.citation($bulletins).'<br>';
         echo 'Date de la décision : <span itemprop="dateCreated">'.date('d/m/Y', strtotime($document->date_arret)).'</span>' ;
       }
 
-    if (isset($document->fonds_documentaire)) {
+    if (isset($document->fonds_documentaire)) 
+	
+	
+	{
 	      echo '<p>Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?"/></a>: <em itemprop="publisher">'.replaceAccents($document->fonds_documentaire).'</em> </p><img src="/images/'.replaceAccents($document->fonds_documentaire).'.gif" alt="'.replaceAccents($document->fonds_documentaire).'"/>';
+		  	
     }
+	
+	if($document->pays == 'Luxembourg') {
+			 echo '<p>Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?"/></a>: <p><a href="http://www.legitech.lu" target="_blank"><img src="/images/Legitech.gif"/></a></p>';
+			
+			}
     ?>
 	
   </div>
