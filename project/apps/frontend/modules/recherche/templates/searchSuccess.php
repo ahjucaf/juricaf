@@ -99,11 +99,14 @@ if (count($facetsset)) { ?>
       $text = preg_replace('/_/', ' ', preg_replace('/[^:]+:/', '', $f));
       $tmplink = $currentlink;
       $tmplink['facets'] = preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/'.preg_replace('/\|/', '\\\|', $f).',?/', '', $myfacetslink)));
-      echo link_to('<li><img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats filtrés sur <em>'.$text.'</em></li></ul>', $tmplink);
+      echo link_to('<li><img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats filtrés sur <em>'.$text.'</em></li>', $tmplink);
     }
     else {
       if (preg_match('/order:perti/', $f)) {
         echo link_to('<li><img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats trié par pertinence</li>', $noorderlink);
+      }
+	  if (preg_match('/order:antéchronologique/', $f)) {
+        echo link_to('<li><img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats trié dans l\'ordre antechronologique</li>', $noorderlink);
       }
       else if (preg_match('/order:chrono/', $f)) {
         echo link_to('<li><img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats trié dans l\'ordre chronologique</li>', $noorderlink);
@@ -111,7 +114,7 @@ if (count($facetsset)) { ?>
     }
   ?>
 
-
+</ul><ul>
   <?php
   }
 
@@ -182,14 +185,14 @@ if ($resultats->response->numFound !== 0) {
 				
   <?php
   if (!preg_match('/order:/', $facetslink)) {
-    echo '<li style="font-weight:bold;">antéchronologique</li>';
+    echo '';
   }
   else {
     echo '<li>'.link_to('antéchronologique', $noorderlink).'</li>';
   }
 
   if (preg_match('/order:chrono/', $facetslink)) {
-    echo '<li style="font-weight:bold;">chronologique</li>';
+    echo '';
   }
   else {
     $tmplink = $currentlink;
@@ -198,7 +201,7 @@ if ($resultats->response->numFound !== 0) {
   }
 
   if (preg_match('/order:pertinence/', $facetslink)) {
-    echo '<li style="font-weight:bold;">par pertinence</li>';
+    echo '';
   }
   else {
     $tmplink = $currentlink;
@@ -212,15 +215,7 @@ if ($resultats->response->numFound !== 0) {
 if(isset($nobots)) { $sf_response->addMeta('robots', 'noindex, nofollow', false, false, false); }
 include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction', 'id'=>'facet_pays_juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink, 'tree' => true, 'mainid' => 'facet_pays'));
 ?>
-	
-			<li>
-				<h4>Autres bases de données :</h4>
-				<p>
-					<a onclick="window.open(this.href); return false;" href="http://www.jurispedia.org/index2.php?lr=lang_fr&amp;cof=FORID%3A11&amp;ie=UTF-8&amp;q=<?php echo urlencode($query); ?>&amp;sa=++%E2%86%92++&amp;cx=010401543614658542221%3A3iznlxhkw1q&amp;siteurl=www.juricaf.org%252F#905"><img src="/images/jurispedia.png" alt="Jurispedia" title="Rechercher sur Jurispedia" /></a>
-					<a onclick="window.open(this.href); return false;" href="http://www.savoirsenpartage.auf.org/discipline/9/recherche/?q=<?php echo urlencode($query); ?>"><img src="/images/savoirs_en_partage.png" alt="Savoirs en partage" title="Rechercher sur Savoirs en partage" /></a>
-					<a onclick="window.open(this.href); return false;" href="http://www.lemondedudroit.fr/component/search/?ordering=&searchphrase=all&searchword=<?php echo urlencode($query); ?>"><img src="/images/mdd.png" alt="Le Monde du droit" title="Rechercher sur le Monde du Droit" /></a>	  
-				</p>
-			</li>
+
 		</ul>	 
 	
 <?php
