@@ -11,8 +11,8 @@ Disallow: /recherche/fonds_documentaire
 Disallow: /recherche/type_affaire
 Disallow: /recherche/type_recours
 Disallow: /recherche/saisines
+Disallow: /recherche/parties
 Disallow: /juricaf/
 Disallow: /*?page=
-Disallow: /arret/BELGIQUE*
 Disallow: /*.jpg$
 Sitemap: http://www.juricaf.org/sitemap.xml
