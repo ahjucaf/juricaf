@@ -148,7 +148,7 @@ else {
 }
 
 if (trim($query) !== '' || isset($title_facet)) {
-  $pays_noindex = array(
+  $pays_noindex = array(Guinée
     // "Guinée", Pays non indexés
   );
 
@@ -162,7 +162,7 @@ if (trim($query) !== '' || isset($title_facet)) {
       }
   if(isset($title_facet)) {
     foreach ($pays_noindex as $noindex) {
-      if(strpos($title_facet, $noindex) !== false) { $sf_response->addMeta('robots', 'noindex', false, false, false); }
+      if(strpos($title_facet, $noindex) !== true) { $sf_response->addMeta('robots', 'noarchive', false, false, false); }
     }
   }
   if(!isset($title_facet) && trim($query) !== '') {
