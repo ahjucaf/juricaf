@@ -30,14 +30,15 @@
             <li><a href="http://www.juricaf.org/documentation/mentions-legales/">Mentions légales</a></li>
 			<li><a href="http://www.juricaf.org/documentation/fonds-documentaire/">Fonds documentaire</a></li>
 			<li><a href="http://www.juricaf.org/documentation/mentions-legales/article/contact">Contact</a></li>
+			
             </ul>
         </div>
       </div>
 	  <div class="reseaux_sociaux">
-          <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
+
+	   <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
           <a href="http://twitter.com/juricaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
-          <a href="http://www.juricaf.org/documentation/spip.php?page=backend"><img src="/images/rss.png" alt="RSS" title="Flux RSS" /></a>
-          <a href="javascript:juricafSearch();"><img src="/images/juricaf_search.png" alt="J" title="Ajouter Juricaf aux moteurs de recherches de votre navigateur" /></a>
+	<a href="https://itunes.apple.com/fr/app/id587420315?mt=8&affId=1578782" target="_blank"><img src="/images/appstore.png" alt="Appstore" title="Accès à la version IPhone"/></a>
       </div>
       <div class="main">
         <div class="content">
