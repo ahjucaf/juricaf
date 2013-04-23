@@ -1,0 +1,103 @@
+"Pays";"Institution";"Nombre";analyses;sens_arret;decisions_attaquees;parties;references;nor;ecli;type_affaire;type_recours;president;avocat_gl;rapporteur;commissaire_gvt;avocats;saisines
+"Belgique";"Cour de cassation";2938;611;28;28;28;247;0;0;0;0;0;0;0;0;0;0
+"Bénin";"Cour suprême";2612;800;691;820;1199;2;0;0;0;0;0;0;0;0;0;0
+"Bulgarie";"Cour suprême de cassation";22;12;9;7;7;0;0;0;0;0;0;0;0;0;0;0
+"Burkina Faso";"Cour de cassation";240;0;1;3;3;227;0;0;0;0;0;0;0;0;0;0
+"Burundi";"Cour suprême";25;16;7;17;22;8;0;0;0;0;0;0;0;0;0;0
+"Cambodge";"Conseil constitutionnel";58;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Cameroun";"Cour suprême";16;5;4;6;6;0;0;0;0;0;0;0;0;0;0;0
+"Cameroun";"Tribunal de première instance de yaoundé";1;1;0;0;1;1;0;0;0;0;0;0;0;0;0;0
+"Canada";"Cour suprême";4228;3820;3110;0;4159;4228;0;0;0;0;0;0;0;0;0;0
+"CEDEAO";"Cour de justice";2;0;0;0;2;0;0;0;0;0;0;0;0;0;0;0
+"CEMAC";"Cour de justice";19;14;0;1;18;1;0;0;0;0;0;0;0;0;0;0
+"Congo";"Cour suprême";16;5;3;5;5;0;0;0;0;0;0;0;0;0;0;0
+"Congo démocratique";"Cour suprême de justice";15;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Conseil de l'Europe";"Cour européenne des droits de l'homme";6316;5235;0;0;6316;1381;0;0;6315;6314;0;0;0;0;0;0
+"Côte d'Ivoire";"Cour suprême";7;0;7;7;7;0;0;0;0;0;0;0;0;0;0;0
+"Côte d'Ivoire";"Tribunal de premiere instance d'abidjan";2;2;0;0;1;2;0;0;0;0;0;0;0;0;0;0
+"France";"Conseil constitutionnel";4240;0;3928;4240;0;4240;3009;4225;4240;0;0;0;0;0;0;456
+"France";"Conseil d'État";134253;104923;43775;0;0;134250;0;134243;134253;79360;67469;0;122392;127783;22649;0
+"France";"Cour administrative d'appel de Bordeaux";33342;15650;6699;0;0;33279;0;0;33342;24307;18998;0;33296;33024;18139;0
+"France";"Cour administrative d'appel de Douai";10875;3992;2767;0;0;10846;0;0;10875;9355;8248;0;10791;10706;8316;0
+"France";"Cour administrative d'appel de Lyon";20166;11463;2702;0;0;20137;0;0;20166;13515;12227;0;20163;20154;11361;0
+"France";"Cour administrative d'appel de Marseille";27509;8413;7622;0;0;27487;0;0;27509;22968;22884;0;27389;27107;22666;0
+"France";"Cour administrative d'appel de Montpellier";1;1;0;0;0;1;0;0;1;0;1;0;1;1;0;0
+"France";"Cour administrative d'appel de Nancy";22063;11418;5660;0;0;22030;0;0;22063;16615;12765;0;22059;22054;11786;0
+"France";"Cour administrative d'appel de Nantes";25289;11221;4305;0;0;25255;0;0;25289;18225;13712;0;25255;25247;13436;0
+"France";"Cour administrative d'appel de Nice";1;1;0;0;0;1;0;0;1;0;1;0;1;1;0;0
+"France";"Cour administrative d'appel de Paris";24795;10791;5841;0;0;24781;0;0;24795;19900;16635;0;24787;24766;14978;0
+"France";"Cour administrative d'appel de Versailles";11374;3016;1538;0;0;11373;0;0;11374;11355;10316;0;11373;11371;11001;0
+"France";"Cour d'appel de Limoges";1;0;1;1;0;0;0;0;1;0;1;0;0;0;0;0
+"France";"Cour de cassation";418902;205435;411628;418901;0;203285;0;418902;417428;0;338570;95369;96575;0;133559;0
+"France";"Cour de discipline budgétaire et financière";68;68;68;0;0;68;0;68;68;0;68;0;68;0;9;0
+"France";"Tribunal administratif d'Amiens";185;185;182;0;0;185;0;0;185;183;184;0;181;173;0;0
+"France";"Tribunal administratif de Basse-Terre";6;6;6;0;0;6;0;0;6;6;5;0;6;6;0;0
+"France";"Tribunal administratif de Bastia";6;6;6;0;0;6;0;0;6;6;6;0;6;5;0;0
+"France";"Tribunal administratif de Besançon";59;59;59;0;0;59;0;0;59;59;59;0;59;59;0;0
+"France";"Tribunal administratif de Bordeaux";121;121;119;0;0;121;0;0;121;120;118;0;118;118;0;0
+"France";"Tribunal administratif de Caen";69;69;69;0;0;69;0;0;69;69;68;0;66;63;0;0
+"France";"Tribunal administratif de Cayenne";6;6;6;0;0;6;0;0;6;6;6;0;6;6;0;0
+"France";"Tribunal administratif de Châlons-en-Champagne";7;7;7;0;0;7;0;0;7;7;7;0;7;7;0;0
+"France";"Tribunal administratif de Châlons-sur-Marne";99;99;98;0;0;99;0;0;99;98;96;0;96;96;0;0
+"France";"Tribunal administratif de Clermont-Ferrand";230;230;230;0;0;230;0;0;230;230;229;0;226;223;0;0
+"France";"Tribunal administratif de Dijon";119;119;118;0;0;119;0;0;119;119;118;0;114;111;0;0
+"France";"Tribunal administratif de Fort-de-France";7;7;7;0;0;7;0;0;7;7;7;0;7;7;0;0
+"France";"Tribunal administratif de Grenoble";260;260;257;0;0;260;0;0;260;258;254;0;249;220;0;0
+"France";"Tribunal administratif de Lille";369;367;363;0;0;369;0;0;369;366;367;0;363;357;2;0
+"France";"Tribunal administratif de Limoges";88;88;87;0;0;88;0;0;88;85;87;0;87;86;1;0
+"France";"Tribunal administratif de Lyon";772;772;763;0;0;772;0;0;772;768;768;0;759;747;0;0
+"France";"Tribunal administratif de Marseille";190;189;189;0;0;190;0;0;190;190;186;0;186;180;1;0
+"France";"Tribunal administratif de Montpellier";184;184;183;0;0;184;0;0;184;183;182;0;178;171;0;0
+"France";"Tribunal administratif de Montpellier ordonnance du president";1;1;1;0;0;1;0;0;1;1;1;0;0;0;0;0
+"France";"Tribunal administratif de Nancy";60;60;59;0;0;60;0;0;60;60;59;0;56;54;0;0
+"France";"Tribunal administratif de Nantes";332;332;331;0;0;332;0;0;332;332;330;0;324;323;0;0
+"France";"Tribunal administratif de Nice";237;237;235;0;0;237;0;0;237;236;233;0;229;221;0;0
+"France";"Tribunal administratif de Nouméa";42;42;42;0;0;42;0;0;42;42;42;0;39;42;0;0
+"France";"Tribunal administratif de Papeete";43;43;43;0;0;43;0;0;43;43;43;0;43;43;0;0
+"France";"Tribunal administratif de Paris";760;760;685;0;0;758;0;0;760;739;749;0;736;712;2;0
+"France";"Tribunal administratif de Pau";130;130;129;0;0;130;0;0;130;128;127;0;123;121;0;0
+"France";"Tribunal administratif de Poitiers";204;204;202;0;0;204;0;0;204;203;201;0;200;198;0;0
+"France";"Tribunal administratif de Rennes";294;294;294;0;0;294;0;0;294;293;293;0;290;287;0;0
+"France";"Tribunal administratif de Rouen";256;256;253;0;0;256;0;0;256;254;254;0;249;243;0;0
+"France";"Tribunal administratif de Saint-Denis-de-la-Réunion";84;84;80;0;0;84;0;0;84;81;83;0;83;81;0;0
+"France";"Tribunal administratif de Strasbourg";316;316;314;0;0;316;0;0;316;316;315;0;313;305;0;0
+"France";"Tribunal administratif de Toulouse";103;103;100;0;0;103;0;0;103;100;101;0;97;92;0;0
+"France";"Tribunal administratif de Versailles";710;710;704;0;0;710;0;0;710;702;709;0;697;689;0;0
+"France";"Tribunal administratif d'Orléans";148;143;137;0;0;148;0;0;148;148;144;0;143;139;7;0
+"France";"Tribunal de commerce de Douai";1;1;0;1;0;0;0;0;0;0;1;0;0;0;0;0
+"France";"Tribunal de grande instance d'Auch";1;1;0;1;0;0;0;0;1;0;1;0;0;0;0;0
+"France";"Tribunal de grande instance de Paris";116;5;0;116;0;4;0;0;0;0;53;0;0;0;0;0
+"France";"Tribunal des conflits";2031;1703;866;584;0;2031;0;2031;1485;867;1836;583;2022;1443;502;0
+"France";"Tribunal d'instance d'Angers";1;0;0;1;0;0;0;0;0;0;1;0;0;0;0;0
+"France";"Tribunal d'instance d'Auch";1;1;0;1;0;1;0;0;1;0;1;0;0;0;0;0
+"France";"Tribunal d'instance de Condom";1;1;0;1;0;0;0;0;0;0;1;0;0;0;0;0
+"France";"Tribunal d'instance d'Illkirch-Graffenstaden";1;0;0;1;0;0;0;0;0;0;1;0;0;0;0;0
+"Gabon";"Cour de cassation";13;1;8;12;12;0;0;0;0;0;0;0;0;0;0;0
+"Guinée";"Cour suprême";78;3;2;3;78;22;0;0;0;0;0;0;0;0;0;0
+"Haïti";"Cour de cassation";62;14;19;12;19;1;0;0;0;0;0;0;0;0;0;0
+"Hongrie";"Cour suprême";3;3;0;0;0;3;0;0;0;0;0;0;0;0;0;0
+"Liban";"Cour de cassation";16;15;14;13;16;2;0;0;0;0;0;0;0;0;0;0
+"Luxembourg";"Cour constitutionnelle";1;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0
+"Luxembourg";"Cour de cassation";59;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Luxembourg";"Tribunal administratif";1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Madagascar";"Cour suprême";3060;80;81;25;2530;2917;0;0;0;0;0;0;0;0;0;0
+"Mali";"Cour suprême";757;5;5;6;6;0;0;0;0;0;0;0;0;0;0;0
+"Maroc";"Cour suprême";1607;1151;21;21;18;1;0;0;0;0;0;0;0;0;0;0
+"Mauritanie";"Cour suprême";5;5;3;5;5;0;0;0;0;0;0;0;0;0;0;0
+"Monaco";"Cour de révision";6;6;5;6;5;0;0;0;0;0;0;0;0;0;0;0
+"Niger";"Cour suprême";1532;22;21;20;406;1121;0;0;0;0;0;0;0;0;0;0
+"OHADA";"Cour commune de justice et d'arbitrage";2;2;0;0;1;2;0;0;0;0;0;0;0;0;0;0
+"Organisation des États américains";"Cour interaméricaine des droits de l'homme";3;0;0;0;3;3;0;0;0;0;0;0;0;0;0;0
+"Pologne";"Cour suprême";8;7;0;6;5;3;0;0;0;0;0;0;0;0;0;0
+"République Tchèque";"Cour suprême";59;59;32;36;5;6;0;0;0;0;0;0;0;0;0;0
+"Roumanie";"Haute cour de cassation et de justice";388;388;381;377;378;1;0;0;0;0;0;0;0;0;0;0
+"Rwanda";"Cour suprême";5;5;5;4;5;0;0;0;0;0;0;0;0;0;0;0
+"Sao Tomé et Principe";"Cour suprême";4;4;4;1;4;0;0;0;0;0;0;0;0;0;0;0
+"Sénégal";"Cour de cassation";1192;309;303;303;308;239;0;0;0;0;0;0;0;0;0;0
+"Suisse";"Tribunal fédéral suisse";23881;5102;0;0;0;5104;0;0;0;0;0;0;0;0;0;0
+"Tchad";"Cour suprême";380;14;301;292;369;63;0;0;0;0;0;0;0;0;0;0
+"Togo";"Cour suprême";6;4;5;5;5;0;0;0;0;0;0;0;0;0;0;0
+"Tunisie";"Cour de cassation";4;4;3;4;4;4;0;0;0;0;0;0;0;0;0;0
+"UEMOA";"Cour de justice";1;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Union Africaine";"Cour africaine des droits de l'homme et des peuples";1;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0
+"Vietnam";"Cour populaire suprême";3;0;3;3;3;3;0;0;0;0;0;0;0;0;0;0
