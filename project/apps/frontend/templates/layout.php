@@ -24,12 +24,11 @@
       <div class="head">
         <div class="menu">
           <ul>
-            <li><a href="http://www.juricaf.org/documentation/presentation-generale-38/article/a-propos">A propos</a></li>
+            <li><a href="http://www.juricaf.org/documentation/a_propos.php">A propos</a></li>
             <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Étendue des collections</a></li>
-            <li><a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires">Partenaires</a></li>
-            <li><a href="http://www.juricaf.org/documentation/mentions-legales/">Mentions légales</a></li>
-			<li><a href="http://www.juricaf.org/documentation/fonds-documentaire/">Fonds documentaire</a></li>
-			<li><a href="http://www.juricaf.org/documentation/mentions-legales/article/contact">Contact</a></li>
+            <li><a href="http://www.juricaf.org/documentation/partenaires.php">Partenaires</a></li>
+            <li><a href="http://www.juricaf.org/documentation/mentions_legales.php">Mentions légales</a></li>
+	    <li><a href="http://www.juricaf.org/documentation/contact.php">Contact</a></li>
 			
             </ul>
         </div>
@@ -62,14 +61,12 @@
 		  <div class="top_page"><a id="top" href="#">Haut de page<img src="/images/fleche_haut.png" alt="Haut de page"/></a></div>
         </div>
       </div>
-	  <a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires"><img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
-	  <a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires"><img src="http://www.juricaf.org/documentation/local/cache-vignettes/L202xH60/lnlilogopetit-22b81.jpg" alt="LNLI" /></a>
-	  <a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires"><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
+	 <img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones" />
+	 <img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
       <div class="bottom">
-        <p>Juricaf est un projet de l'<a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires">AHJUCAF</a>, l'association des cours judiciaires suprêmes francophones,<br />
-        réalisé en partenariat avec <a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires">le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;I).</a><br />
-        Il est soutenu par l'<a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires">Organisation internationale de la Francophonie</a>,
-        le <a href="http://www.juricaf.org/documentation/presentation-generale-38/article/partenaires">Fonds francophone des inforoutes</a>.</p>
+        <p>Juricaf est un projet de l'AHJUCAF, l'association des cours judiciaires suprêmes francophones,<br />
+        réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;I).<br />
+        Il est soutenu par l'Organisation internationale de la Francophonie et le Fonds francophone des inforoutes.</p>
       </div>
     </div>
    </body>
