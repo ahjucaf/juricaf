@@ -1,10 +1,10 @@
 User-agent: *
 Allow: /arret/
 Allow: /documentation/
-Allow: /recherche/analyses
 Allow: /recherche/+/facet_pays
 Allow: /
 Disallow: /recherche/+/
+Disallow: /recherche/analyses
 Disallow: /recherche/sens_arret
 Disallow: /recherche/decisions_attaquees
 Disallow: /recherche/fonds_documentaire
