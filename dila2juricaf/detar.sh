@@ -67,66 +67,35 @@ for fichier in $(cat $TOPROCESS);
     echo -e "\n=====================================================";
     echo "Traitement des ordres de suppression"
     echo "=====================================================";
-    echo "* Sauvegarde des ordres de suppression :" ;
-    NOTGZ=$(echo $fichier | sed "s/\(.*\)\(ahjucaf_.*\).tar.gz/\2/gi");
-    find $DATA/ -name "*.dat" | xargs cat >> $DIRLOGSUPP/$NOTGZ.dat ;
-    if [ $? -eq 0 ] ; then
-      echo "Ok : $DIRLOGSUPP/$NOTGZ.dat créé";
-    fi
+    echo "* Gestion des ordres de suppression :" ;
 
-    if test -s $DIRLOGSUPP/$NOTGZ.dat ; then
-      if [ -e $DIRLOGSUPP/$NOTGZ.log ] ; then rm $DIRLOGSUPP/$NOTGZ.log ; fi
-      echo -e "\n* Application des ordres de suppression :" ;
-      for fichier_suppr in $(php unique_sup_order.php $DIRLOGSUPP/$NOTGZ.dat);
-      do
-        # Identifiant Juricaf récupéré depuis solr
-        ID_DILA=$(echo "$fichier_suppr" | sed 's:.*/::')
+    DELETEDJSONDIR=$DELETED"/"$(date +%Y-%m-%d);
+    mkdir -p $DELETEDJSONDIR
+    find $DATA/ -name "*.dat" -exec cat '{}' ';' | sort -u | while read linetobedeleted ; do 
+        ID_DILA=$(echo "$linetobedeleted" | sed 's:.*/::')
         ID_JURICAF=$(php getIdFromSolr.php $ID_DILA)
         # Si le résultat de l'interrogation solr contient un espace c'est une erreur donc on l'affiche
         if echo $ID_JURICAF | grep " "  > /dev/null; then
-          echo "$NOTGZ : $ID_JURICAF" >> $DIRLOGSUPP/$NOTGZ.log
+          echo "Erreur : ID CouchDB non conforme : $ID_JURICAF ("$ID_DILA" <= "$linetobedeleted")" 
         else
           # Le document existe dans solr, on interroge couchdb
           DOC_COUCHDB=$(curl -s GET $COUCHDBURL/$ID_JURICAF) ;
           # Si le document n'existe pas dans couchdb
           if echo $DOC_COUCHDB | grep "not_found" > /dev/null; then
-            echo "$NOTGZ : Erreur : $ID_JURICAF ($ID_DILA) existe dans solr mais pas dans couchdb" >> $DIRLOGSUPP/$NOTGZ.log
+            echo "Erreur : $ID_JURICAF ($ID_DILA) existe dans solr mais pas dans couchdb"
           # S'il existe
           else
           # Suppression
-            REV=$(curl --stderr /dev/null $COUCHDBURL/$ID_JURICAF | sed 's/.*_rev":"//' | sed 's/",".*//' 2> /dev/null)
+            curl --stderr /dev/null $COUCHDBURL/$ID_JURICAF > $DELETEDJSONDIR"/"$ID_JURICAF
+            REV=$(cat $DELETEDJSONDIR"/"$ID_JURICAF | sed 's/.*_rev":"//' | sed 's/",".*//' 2> /dev/null)
             if curl -X DELETE $COUCHDBURL/$ID_JURICAF?rev=$REV | grep -v $ID_JURICAF > /dev/null; then
-              echo "$NOTGZ : Erreur : $ID_JURICAF ($ID_DILA) existe dans solr et couchdb mais n'a pas pu en être supprimé" >> $DIRLOGSUPP/$NOTGZ.log
+              echo "Erreur : $ID_JURICAF ($ID_DILA) existe dans solr et couchdb mais n'a pas pu en être supprimé" 
             else
-              echo "$NOTGZ : $ID_JURICAF ($ID_DILA) a été supprimé de couchdb avec succès" >> $DIRLOGSUPP/$NOTGZ.log
-              # Archivage du xml dila
-              if [ -e $ARCHIVE/$fichier_suppr.xml ] ; then
-                if [ ! -d $DELETED/$NOTGZ ] ; then
-                  mkdir $DELETED/$NOTGZ ;
-                fi
-                cp -f $ARCHIVE/$fichier_suppr.xml $DELETED/$NOTGZ/
-                rm $ARCHIVE/$fichier_suppr.xml
-                echo "$NOTGZ : $ID_JURICAF ($ID_DILA) a été sauvegardé dans $DELETED/$NOTGZ" >> $DIRLOGSUPP/$NOTGZ.log
-              else
-                echo "$NOTGZ : $ID_JURICAF ($ID_DILA) n'a pas été sauvegardé" >> $DIRLOGSUPP/$NOTGZ.log
-              fi
+              echo "Info : $ID_JURICAF ($ID_DILA) a été supprimé de couchdb avec succès" 
             fi
           fi
         fi
-      done
-      # Vérifie si des erreurs sont loguées
-      if cat $DIRLOGSUPP/$NOTGZ.log | grep "Erreur" > /dev/null ; then
-        echo -e "\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
-        echo "Certains ordres de suppression requièrent des vérifications manuelles"
-        echo -e "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
-      else
-        echo -e "Ok : Tous les ordres de suppression ont été appliqués avec succès\n"
-      fi
-      echo -e "* Rapport :"
-      cat $DIRLOGSUPP/$NOTGZ.log ;
-    else
-      echo "Ok : Le fichier d'ordres de suppression de $fichier est vide"
-    fi
+    done
   else
     echo "Ok : Aucun ordre de suppression dans $fichier"
   fi
