@@ -821,10 +821,10 @@ echo '<br>'.$civcrimlong.' '.citation($bulletins).'<br>';
 
 
 if (isset($document->date_arret)) {
-        echo 'Date de la décision : <span itemprop="dateCreated">'.date('d/m/Y', strtotime($document->date_arret)).'</span>' ;
+        echo 'Date de la décision : <span itemprop="dateCreated">'.date('d/m/Y', strtotime($document->date_arret)).'</span><br/>' ;
 }
 if (isset($document->date_import)) {
-  echo "Date de l'import : <span itemprop=\"dateImported\">".date('d/m/Y', strtotime($document->date_import)).'</span>' ;
+  echo "Date de l'import : <span itemprop=\"dateImported\">".date('d/m/Y', strtotime($document->date_import)).'</span><br/>' ;
 }
 
     if (isset($document->fonds_documentaire))
