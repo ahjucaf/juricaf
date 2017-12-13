@@ -39,3 +39,16 @@
 
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
+dila2juricaf/config/conf.sh
+dila2juricaf/config/old.sh
+juricaf2solr/couchdb2solr/conf/config.php
+parsers/ccBelgique/config/config.php
+parsers/ccBelgique/config/config.sh
+project/config/app.yml
+project/config/databases.yml
+project/web/sitemap*
+backup/
+dila2juricaf/log/
+data/
+juricaf2solr/conf/juricaf.conf
+juricaf2solr/conf/mysql_conf.php
