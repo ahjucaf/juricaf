@@ -1,0 +1,5 @@
+sudo aptitude install php5-imap
+sudo aptitude install lftp
+sudo aptitude install wv
+sudo aptitude install elinks
+sudo aptitude install unzip
