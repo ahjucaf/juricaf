@@ -23,8 +23,12 @@ lftp ftp://$USER:$PASS@$URL -e "mirror / $LOCALCOPY ; quit"
 # Nouveaux fichiers
 find $LOCALCOPY -name "*.tar.gz" | xargs stat -c "%Y#%n" > $NEWLOG
 
-# Compare
+#Compare
 php compare.php
+
+#begin double patch du jour by habett
+find $LOCALCOPY -name "*.tar.gz" | grep $(date -d "yesterday" +%Y%m%d) > $TO_UPDATE
+#end habett
 
 # Lance l'importation
 echo $DATE >> $LOG
