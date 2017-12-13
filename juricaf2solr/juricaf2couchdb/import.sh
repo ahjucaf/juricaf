@@ -139,7 +139,8 @@ if test -e $LOG ; then
     echo "====================================================="
     echo
 
-    sed 's/^\[."//' $LOG | grep 'id":"' | awk -F '"' '{ if ( $11 != "" ) print $3" not imported ("$11")" ; else if ( $9 == "updated" ) print $3" updated"; else print $3" imported" ; }'
+    sed 's/^\[."//' $LOG | sed 's/ok":true,"//' | grep 'id":"' | awk -F '"' '{ if ( $11 != "" ) print $3" not imported ("$11")" ; else if ( $9 == "updated" ) print $3" updated"; else print $3" imported" ; }'
 fi
-rm $LISTPOOL $LOG $LOCK 2> /dev/null
+#rm $LISTPOOL $LOG $LOCK 2> /dev/null
+rm $LOCK 2> /dev/null
 cd - > /dev/null 2>&1
