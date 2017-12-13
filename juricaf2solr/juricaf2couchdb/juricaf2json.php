@@ -39,7 +39,7 @@ function replaceAccents($string) {
 
 // Date pour _id couchdb
 function date_id($d) {
-  $d = explode('-', $d);
+  $d = preg_split('/[\/\-]/',$d);
   $date = $d[0].$d[1].$d[2];
   return $date;
 }
