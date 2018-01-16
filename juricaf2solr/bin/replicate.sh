@@ -7,7 +7,7 @@ if ! test  "$COUCHDISTANT" ; then
 	exit 2;
 fi
 
-REV=$(curl -s "http://10.80.75.2:5984/_replicator/REPLICATION_PROD" | sed 's/.*_rev":"//' | sed 's/{*".*//')
+REV=$(curl -s "http://127.0.0.1:5984/_replicator/REPLICATION_PROD" | sed 's/.*_rev":"//' | sed 's/{*".*//')
 if test "$REV" ; then
 	curl -s -X DELETE  "http://127.0.0.1:5984/_replicator/REPLICATION_PROD?rev="$REV
 fi
