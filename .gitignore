@@ -52,3 +52,7 @@ dila2juricaf/log/
 data/
 juricaf2solr/conf/juricaf.conf
 juricaf2solr/conf/mysql_conf.php
+project/cache/
+project/log/
+project/web/pdf/
+project/web/documentation/stats/
