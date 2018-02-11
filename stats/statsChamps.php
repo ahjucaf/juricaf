@@ -21,7 +21,7 @@ $criteres = array(
 
 function getSolrResults($pays, $juridiction, $critere = '') {
   if(!empty($critere)) { $critere = '+'.$critere.':*'; }
-  $stream = fopen('http://localhost:8080/solr/select/?q=facet_pays:"'.urlencode($pays).'"+facet_juridiction:"'.urlencode($juridiction).'"'.$critere.'&fq=type:arret&indent=on', 'r');
+  $stream = fopen('http://localhost:8080/solr/select/?q=facet_pays:%22'.urlencode($pays).'%22+facet_juridiction:%22'.urlencode($juridiction).'%22'.$critere.'&fq=type:arret&indent=on', 'r');
   $xml = trim(stream_get_contents($stream));
   $response = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_COMPACT);
   fclose($stream);
