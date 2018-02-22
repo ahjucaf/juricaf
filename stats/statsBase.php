@@ -2,7 +2,7 @@
 require("config.php");
 
 function getSolrResults($pays, $juridiction, $sort) {
-  $stream = fopen('http://localhost:8080/solr/select/?q=facet_pays:"'.urlencode($pays).'"+facet_juridiction:"'.urlencode($juridiction).'"&fq=type:arret&indent=on&sort=date_arret+'.$sort, 'r');
+  $stream = fopen('http://localhost:8080/solr/select/?q=facet_pays:%22'.urlencode($pays).'%22+facet_juridiction:%22'.urlencode($juridiction).'%22&fq=type:arret&indent=on&sort=date_arret+'.$sort, 'r');
   $xml = trim(stream_get_contents($stream));
   $response = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_COMPACT);
   fclose($stream);
@@ -88,6 +88,10 @@ while ($donnees = $req->fetch())
   $results = array();
   $results = getSolrResults($donnees['pays'], $donnees['juridiction'], 'desc'); // Premier
   $results = array_merge($results, getSolrResults($donnees['pays'], $donnees['juridiction'], 'asc')); // Dernier
+
+  if (!isset($results['date_debut'])) $results['date_debut'] = '1900-01-01';
+  if (!isset($results['date_fin'])) $results['date_fin'] = '2999-01-01';
+
 
   $csv .= '"'.$donnees['pays'].'";"'.$donnees['juridiction'].'";'.$results['nb'].';"'.$donnees['etat'].'";"'.$donnees['maj'].'";"'.$donnees['selection'].'";"'.$donnees['traduction'].'";"'.$results['date_fin'].'";"'.$results['date_debut'].'";"'.$donnees['licence']."\"\n";
 

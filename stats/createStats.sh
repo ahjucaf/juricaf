@@ -1,9 +1,7 @@
 #!/bin/bash
 
 # Répertoire de travail
-if [ "$(echo $0 | sed 's|[^/]*$||')" != "./" ] ; then
-  cd $(echo $0 | sed 's|[^/]*$||');
-fi
+cd $(dirname $0)
 
 echo "=====================================================";
 echo "|           Mise à jour des statistiques            |" ;
