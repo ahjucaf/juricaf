@@ -1,4 +1,3 @@
-<<<<<<< .mine
 #!/bin/bash
 # Répertoire de travail
 if [ "$(echo $0 | sed 's|[^/]*$||')" != "./" ] ; then cd $(echo $0 | sed 's|[^/]*$||') ; fi
@@ -202,4 +201,3 @@ echo -e "\n=====================================================";
 echo "Début : $DEBUT ; Fin : $FIN" ;
 
 deactivate
->>>>>>> .r509
