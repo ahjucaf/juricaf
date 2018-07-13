@@ -4,7 +4,7 @@ import re
 from bs4 import BeautifulSoup
 
 html_doc = open('index.html', 'r')
-soup = BeautifulSoup(html_doc)
+soup = BeautifulSoup(html_doc, "html.parser")
 
 for link in soup.find_all(href=re.compile("/fr/dn/")):
   try:

@@ -72,7 +72,7 @@
             </table>
 
             <h2>Les associations amies de l’AHJUCAF </h2>
-            <br /><a href="http://www.aahjf.org"><img src="img/aahjf.png" alt="AAHJF" /></a>
+            <br /><img src="img/aahjf.png" alt="AAHJF" />
 
             <br /><a href="http://www.droit.org"><img src="img/droitorg.gif" alt="Droit.org" /></a>
             <br /><a href="http://www.juriconnexion.fr"><img src="img/juriconnexion.jpg" alt="Juriconnexion" /></a>
