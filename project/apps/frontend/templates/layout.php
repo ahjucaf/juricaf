@@ -61,7 +61,7 @@
 		  <div class="top_page"><a id="top" href="#">Haut de page<img src="/images/fleche_haut.png" alt="Haut de page"/></a></div>
         </div>
       </div>
-	 <img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones" />
+	 <a href="ahjucaf.org"><img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
 	 <img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
       <div class="bottom">
         <p>Juricaf est un projet de l'AHJUCAF, l'association des cours judiciaires suprêmes francophones,<br />
