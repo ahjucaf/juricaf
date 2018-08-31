@@ -6,22 +6,22 @@ $content = file_get_contents('php://stdin');
 
 $content = preg_replace('/\&/', '&amp;', $content);
 
-$mois = array('JANVIER' => '01', 'FEVRIER' => '02', 'MARS' => '03', 'AVRIL'=>'04', 'MAI'=>'05', 'JUIN'=>'06', 'JUILLET'=>'07', 'AOUT'=>'08', 'SEPTEMBRE'=>'09', 'OCTOBRE'=>'10', 'NOVEMBRE'=>'11', 'DECEMBRE'=>'12');
+$mois = array('JANVIER' => '01', 'FEVRIER' => '02', 'MARS' => '03', 'AVRIL'=>'04', 'MAI'=>'05', 'JUIN'=>'06', 'JUILLET'=>'07', 'AOUT'=>'08', 'AOEUT' => '08', 'SEPTEMBRE'=>'09', 'OCTOBRE'=>'10', 'NOVEMBRE'=>'11', 'DECEMBRE'=>'12');
 
-if (!preg_match('/arret/', $content)) {
-  error_log("ERROR: Arret non Francais");
+if (!preg_match('/arrêt/i', $content) && !preg_match('/arret/i', $content)) {
+  error_log("ERROR: Arret non Francais (erreur arrêt)");
   exit(1) ;
  }
 
 if (!preg_match('/cour de cassation/i', $content)) {
-  error_log("ERROR: Arret non Francais");
+  error_log("ERROR: Arret non Francais (erreur cour)");
   exit(1) ;
  }
 
 //Récupération du numéro d'arret
 $num = '';
-if (preg_match('/NDEG\.?\s*([A-Z][^A-Z][^-\n]*)/', $content, $match)) {
-  $num = preg_replace('/ /', '', $match[1]);
+if (preg_match('/(NDEG\.?|N°[^A-Z]*|Nº[^A-Z]*)\s*([A-Z][^A-Z][^-\n]*)/', $content, $match)) {
+  $num = preg_replace('/ /', '', $match[2]);
  }
 
 if (!$num && preg_match('/([A-Z]\.[\d\.]+\.[A-Z])\/\d+\s+$/', $content, $match)) {
@@ -39,8 +39,10 @@ if ($num && preg_match('/([A-Z])(\d{2})(\d+)([A-Z])/i', $num, $match)) {
 
 //La date
 $date = '';
-if (preg_match('/(\d+)[eE]?[rR]?[\s\.]+(\w+)[\s\.]+(\d+)\s+(('.$num.'|[A-Z][\d\.]+\.[A-Z][\/\-])|\s*$)/', $content, $match)) {
-  $date = $match[3].'-'.$mois[strtoupper($match[2])].'-'.sprintf('%02d', $match[1]);
+if (preg_match('/(\d+)\^?[eE]?[rR]?[\s\.\^]+([^\d\s\.]+)[\s\.]+(\d+)\s+(('.$num.'|[A-Z][\d\.]+\.[A-Z][\/\-])|\s*$)/i', $content, $match) || 
+    preg_match('/à Bruxelles, le (\d+)\^?[eE]?[rR]?[\s\.]+([^\d\s\.]+)[\s\.]+(\d+)\s*\.\s*/', $content, $match)
+   ) {
+  $date = $match[3].'-'.$mois[strtoupper(preg_replace(array('/[éÉ]+/', '/[ûÛ]/'), array('e', 'u'), $match[2]))].'-'.sprintf('%02d', $match[1]);
  }
 
 if (!$date || !preg_match('/\d{4}\-\d{2}\-\d{2}/', $date)) {
