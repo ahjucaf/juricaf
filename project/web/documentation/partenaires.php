@@ -54,7 +54,7 @@
             <h1>Réalisation du projet </h1>
             <a href="#ahjucaf"></a><p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones, réalisé en partenariat avec le laboratoire de normologie, Linguistique et Informatique juridique (LNLI).</p>
 			
-			<p> <a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf.png" alt="AHJUCAF" /></a>
+			<p> <a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="AHJUCAF" /></a>
  <h1>Soutiens du projet </h1>
 			
             <p>Juricaf est soutenu par <a href="#francophonie"><a href="http://www.francophonie.org/">l'Organisation internationale de la Francophonie</a> et le <a href="#inforoutes"><a href="http://inforoutes.francophonie.org">Fonds francophone des inforoutes.</a></p>
