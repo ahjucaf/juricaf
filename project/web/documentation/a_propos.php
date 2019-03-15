@@ -8,7 +8,7 @@
     <meta name="language" content="fr" />
     <title>Juricaf - A propos</title>
     <link rel="shortcut icon" href="/images/favicon.ico" />
-    <link rel="stylesheet" type="text/css" media="screen" href="http://v2.juricaf.org/css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
     <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
     <script type="text/javascript" src="/js/jquery.scrollTo-min.js"></script>
     <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
