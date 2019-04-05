@@ -70,6 +70,11 @@ if ($date) {
   $date = strtolower($date);
   $date = str_replace(array('Û', 'É'), array('û', 'é'), $date);
   $date = preg_replace('(\.\.\.|…)', '01', $date);
+  $date = preg_replace('/\. /', ' ', $date);
+  $jour = null;
+  $mois = null;
+  $annee = null;
+
   if (preg_match('/([0-9]{1,2})[\.\/]([0-9]{1,2})[\.\/]([0-9]{4})/', $date, $m)) {
     $jour = sprintf("%02d", $m[1]);
     $mois = sprintf("%02d", $m[2]);
@@ -91,7 +96,7 @@ if ($date) {
   }
   if ($annee && $mois && $jour) {
     $date = $annee.'-'.$mois.'-'.$jour;
-  }else{
+  }elseif(!preg_match('/^....-..-..$/', $date)){
     error_log("d: $date\n");
   }
 }
