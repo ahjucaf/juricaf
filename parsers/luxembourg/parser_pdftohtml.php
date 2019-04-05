@@ -32,7 +32,19 @@ $partie2 = "";
 if (preg_match('/(COUR [^<]*[^ :]|TRIBUNAL[^<]*[^ :])[ :]*</i', $header, $match)) {
   $juridiction = $match[1];
 }
-if (preg_match('/(Numéros?|N°|Nos?) *([A-Z0-9][A-Z0-9\-, et\+]+) *du(<br.?>|\n| )*(rôle)/i', $header, $match) || preg_match('/(Numéros?|N°|Nos?) *du rôle[ : <b>]+([A-Z0-9][A-Z0-9 ]+[A-Z0-9])/', $header, $match)) {
+$formation = null   ;
+if (preg_match('/tribunal +administratif([^\.]+) statuant/i', $content, $match)) {
+    $test_formation = preg_replace('/[ ,]+$/', '', preg_replace('/^[ ,]+/', '', $match[1]));
+    if (preg_match('/chambre/', $test_formation)) {
+        $formation = $test_formation;
+    }
+    if ($juridiction) {
+        $juridiction = 'Tribunal adimnistratif';
+    }
+}elseif (preg_match('/la +cour[^\.]+ statuant/i', $content)) {
+    $juridiction = 'Cour adimnistrative';
+}
+if (preg_match('/(Numéros?|N°|Nos?) *([A-Z0-9][A-Z0-9\-, et\+]+) *du(<br.?>|\n| )*(rôle)/i', $header, $match) || preg_match('/(Numéros?|N°|Nos?) +du +rôle[ : <b>]+([A-Z0-9][A-Z0-9 ]+[A-Z0-9])/', $header, $match)) {
     $numero = $match[2];
 }elseif (preg_match('/(Numéros?|N°|Nos?) *([0-9]+ *\/ *([21][0-9]{3}|[0-9]{2}))/i', $header, $match)) {
     $numero = $match[2];
