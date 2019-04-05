@@ -111,14 +111,14 @@ if (preg_match('/Cour +de +cassation/i', $juridiction)) {
 
 $numero = preg_replace('/[+,] */', ',', $numero);
 
-$ligne = "$juridiction;$numero;$date;$partie1;$partie2";
+$ligne = "$juridiction;$formation;$numero;$date;$partie1;$partie2;$xmlfile";
 $ligne = preg_replace('/<[^>]*>/', '', $ligne);
 $ligne = preg_replace('/\n/', ' ', $ligne);
 $ligne = preg_replace('/  */', ' ', $ligne);
 $ligne = preg_replace('/; */', ';', $ligne);
 $ligne = preg_replace('/ *;/', ';', $ligne);
 
-print "$ligne\n";
+print "$ligne;\n";
 
 $content = preg_replace('/\.\.\./', '…', $content);
 $content = preg_replace('/<br[^>]*>/', "\n", $content);
