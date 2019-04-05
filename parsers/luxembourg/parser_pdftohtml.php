@@ -119,3 +119,17 @@ $ligne = preg_replace('/; */', ';', $ligne);
 $ligne = preg_replace('/ *;/', ';', $ligne);
 
 print "$ligne\n";
+
+$output = fopen($xmlfile, 'w');
+fwrite($output, "<DOCUMENT>\n");
+fwrite($output, "<NUM_ARRET>$numero</NUM_ARRET>\n");
+fwrite($output, "<DATE_ARRET>$date</DATE_ARRET>\n");
+fwrite($output, "<JURIDICTION>$juridiction</JURIDICTION>\n");
+fwrite($output, "<PAYS>Luxembourg</PAYS>\n");
+fwrite($output, "<TYPE>Arrêt</TYPE>\n");
+if ($formation) {
+    fwrite($output, "<FORMATION>$formation</FORMATION>\n");
+}
+fwrite($output, "<TEXTE_ARRET>$content</TEXTE_ARRET>\n");
+fwrite($output, "</DOCUMENT>\n");
+fclose($output);
