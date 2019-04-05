@@ -101,6 +101,15 @@ if ($date) {
   }
 }
 
+if (preg_match('/Cour +de +cassation/i', $juridiction)) {
+    $juridiction = 'Cour de cassation';
+}elseif (preg_match('/Cour +administrative/i', $juridiction)) {
+    $juridiction = 'Cour administrative';
+}elseif (preg_match('/Tribunal +administratif/i', $juridiction)) {
+    $juridiction = 'Tribunal administratif';
+}
+
+$numero = preg_replace('/[+,] */', ',', $numero);
 
 $ligne = "$juridiction;$numero;$date;$partie1;$partie2";
 $ligne = preg_replace('/<[^>]*>/', '', $ligne);
