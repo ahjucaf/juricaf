@@ -29,7 +29,7 @@ $date = preg_replace('/(....)(..)(..)/', '\1-\2-\3', $arguments[0]);
 $partie1 = "";
 $partie2 = "";
 
-if (preg_match('/(COUR[^<]*[^ :]|TRIBUNAL[^<]*[^ :])[ :]*</i', $header, $match)) {
+if (preg_match('/(COUR [^<]*[^ :]|TRIBUNAL[^<]*[^ :])[ :]*</i', $header, $match)) {
   $juridiction = $match[1];
 }
 if (preg_match('/(Numéros?|N°|Nos?) *([A-Z0-9][A-Z0-9\-, et\+]+) *du(<br.?>|\n| )*(rôle)/i', $header, $match) || preg_match('/(Numéros?|N°|Nos?) *du rôle[ : <b>]+([A-Z0-9][A-Z0-9 ]+[A-Z0-9])/', $header, $match)) {
