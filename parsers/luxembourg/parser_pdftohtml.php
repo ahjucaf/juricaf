@@ -120,6 +120,19 @@ $ligne = preg_replace('/ *;/', ';', $ligne);
 
 print "$ligne\n";
 
+$content = preg_replace('/\.\.\./', '…', $content);
+$content = preg_replace('/<br[^>]*>/', "\n", $content);
+$content = preg_replace('/<[^>]*>/', '', $content);
+$content = preg_replace('/\n/', 'ø', $content);
+$content = preg_replace('/ *ø */', 'ø', $content);
+$content = preg_replace('/([\.;_:=-])ø+ */', '\1'."\n\n", $content);
+$content = preg_replace('/ø+/', ' ', $content);
+$content = preg_replace('/\n +/', "\n", $content);
+$content = preg_replace('/  +/', " ", $content);
+$content = preg_replace('/[\n ]JUGEMENT /',"\n\nJUGEMENT\n\n", $content);
+$content = preg_replace('/ (_+)\n/',"\n".'$1'."\n", $content);
+$content = preg_replace('/^ +/', '', $content);
+
 $output = fopen($xmlfile, 'w');
 fwrite($output, "<DOCUMENT>\n");
 fwrite($output, "<NUM_ARRET>$numero</NUM_ARRET>\n");
