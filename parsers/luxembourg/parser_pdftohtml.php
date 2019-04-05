@@ -1,5 +1,8 @@
 <?php
 
+$xmlfile = $argv[1];
+$arguments =  explode('_', preg_replace('/.*\//', '', preg_replace('/\.[^\.]+$/', '', $xmlfile)));
+
 $lesmois = array("janvier" => "01", "janver"=>"01", "fevrier" => "02", "février" => "02", "mars" => "03", "avril" => "04", "mai" => "05", "juin" => "06", "juni" => "06",
  "juillet" => "07", "août" => "08", "septembre" => "09", "octobre" => "10", "ocotbre" => "10", "novembre" => "11", "décembre" => "12", "decembre" => "12");
 $lesnombres = array (
@@ -20,9 +23,9 @@ $content = preg_replace('/<br\/?>(janvier|février|mars|avril|mai|juin|juillet|a
 
 $header = substr($content, 0, 1000);
 
-$juridiction = "";
-$numero = "";
-$date = "";
+$juridiction = $arguments[1];
+$numero = $arguments[3];
+$date = preg_replace('/(....)(..)(..)/', '\1-\2-\3', $arguments[0]);
 $partie1 = "";
 $partie2 = "";
 
