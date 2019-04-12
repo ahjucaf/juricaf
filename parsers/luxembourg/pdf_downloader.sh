@@ -6,6 +6,10 @@ cd $(dirname $0)
 
 mkdir -p $DOC_DIR"/justice.public.lu"
 
+DATEFILE=$DOC_DIR"/justice.public.lu/.update"
+touch $DATEFILE
+sleep 1
+
 #repérage des arrêts en parcourrant la pagination
 for nexturl in https://justice.public.lu/fr/jurisprudence/cour-cassation.html https://justice.public.lu/fr/jurisprudence/juridictions-administratives.html; do
 	url=$nexturl
@@ -29,5 +33,7 @@ done | awk -F ';' '{gsub(/\//, ";", $17); print $10 ";" $1 ";" $17}' | grep '[0-
 awk -F ';' 'BEGIN{print "cd '$DOC_DIR'/justice.public.lu"} {url=$1 ; nom=url ; gsub(/.*\//, "", nom); gsub(/[()]/, "", nom); if ( url ~ /http/ ) print "wget -q -nc -O "$5 $4 $3 "_" $2 "_$(echo \""url"\" | sha256sum | cut -d \" \" -f 1)_"nom" \""url"\""}' |
 #réalisation du téléchargement
 sh
+
+find $DOC_DIR"/justice.public.lu/" -newer $DATEFILE -type f
 
 rm /tmp/$$.html
