@@ -51,6 +51,8 @@ if (preg_match('/(Numéros?|N°|Nos?) *([A-Z0-9][A-Z0-9\-, et\+]+) *du(<br.?>|\n
 }
 $numero = str_replace(' et ', ',', $numero);
 $numero = str_replace(' ', '', $numero);
+$numero = preg_replace('/\/20(\d\d)/', '/\1', $numero);
+
 if (preg_match('/Audience publique( extraordinaire | )(du)? *([^<]*[0-9]) *</i', $header, $match)){
   $date = $match[3];
 }elseif (preg_match('/(Luxembourg|publique)( |<br.?>|<b>)+du( |<br.?>|<b>)+(lundi.....[^<]*|mardi......[^<]*|mercredi.......[^<]*|jeudi......[^<]*|vendredi....[^<]*|samedi......[^<]*|dimanche......[^<]*) *</i', $header, $match)){
