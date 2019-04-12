@@ -137,6 +137,7 @@ $content = preg_replace('/  +/', " ", $content);
 $content = preg_replace('/[\n ](JUGEMENT|ORDONNANCE) /',"\n\n".'\1'."\n\n", $content);
 $content = preg_replace('/ (_+)\n/',"\n".'$1'."\n", $content);
 $content = preg_replace('/^ +/', '', $content);
+$content = preg_replace('/\n\d+ *$/', '', $content);
 
 $output = fopen($xmlfile, 'w');
 fwrite($output, "<DOCUMENT>\n");
