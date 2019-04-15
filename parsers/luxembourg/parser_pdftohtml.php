@@ -44,14 +44,19 @@ if (preg_match('/tribunal +administratif([^\.;]+) statuant/i', $content, $match)
 }elseif (preg_match('/la +cour[^\.]+ statuant/i', $content)) {
     $juridiction = 'Cour adimnistrative';
 }
+$found_numero = $numero;
 if (preg_match('/(Numéros?|N°|Nos?) *([A-Z0-9][A-Z0-9\-, et\+]+) *du(<br.?>|\n| )*(rôle)/i', $header, $match) || preg_match('/(Numéros?|N°|Nos?) +du +rôle[ : <b>]+([A-Z0-9][A-Z0-9 ]+[A-Z0-9])/', $header, $match)) {
-    $numero = $match[2];
+    $found_numero = $match[2];
 }elseif (preg_match('/(Numéros?|N°|Nos?) *([0-9]+ *\/ *([21][0-9]{3}|[0-9]{2}))/i', $header, $match)) {
-    $numero = $match[2];
+    $found_numero = $match[2];
 }
-$numero = str_replace(' et ', ',', $numero);
-$numero = str_replace(' ', '', $numero);
-$numero = preg_replace('/\/20(\d\d)/', '/\1', $numero);
+$found_numero = str_replace(' et ', ',', $found_numero);
+$found_numero = str_replace(' ', '', $found_numero);
+$found_numero = preg_replace('/\/20(\d\d)/', '/\1', $found_numero);
+
+if (preg_match('/[0-9]/', $found_numero)) {
+    $numero = $found_numero;
+}
 
 if (preg_match('/Audience publique( extraordinaire | )(du)? *([^<]*[0-9]) *</i', $header, $match)){
   $date = $match[3];
