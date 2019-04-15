@@ -33,7 +33,7 @@ if (preg_match('/(COUR [^<]*[^ :]|TRIBUNAL[^<]*[^ :])[ :]*</i', $header, $match)
   $juridiction = $match[1];
 }
 $formation = null   ;
-if (preg_match('/tribunal +administratif([^\.]+) statuant/i', $content, $match)) {
+if (preg_match('/tribunal +administratif([^\.;]+) statuant/i', $content, $match)) {
     $test_formation = preg_replace('/[ ,]+$/', '', preg_replace('/^[ ,]+/', '', $match[1]));
     if (preg_match('/chambre/', $test_formation)) {
         $formation = $test_formation;
