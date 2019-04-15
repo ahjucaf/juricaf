@@ -7,8 +7,6 @@ cd $(dirname $0)
 mkdir -p $DOC_DIR"/justice.public.lu"
 
 DATEFILE=$DOC_DIR"/justice.public.lu/.update"
-touch $DATEFILE
-sleep 1
 
 #repérage des arrêts en parcourrant la pagination
 for nexturl in https://justice.public.lu/fr/jurisprudence/cour-cassation.html https://justice.public.lu/fr/jurisprudence/juridictions-administratives.html; do
@@ -34,6 +32,10 @@ awk -F ';' 'BEGIN{print "cd '$DOC_DIR'/justice.public.lu"} {url=$1 ; nom=url ; g
 #réalisation du téléchargement
 sh
 
-find $DOC_DIR"/justice.public.lu/" -newer $DATEFILE -type f
+ls -rt $(find $DOC_DIR"/justice.public.lu/" -newer $DATEFILE -name '*pdf' -type f) > /tmp/$$.list
+if test -n /tmp/$$.list ; then
+    touch -r $(tail -n 1 /tmp/$$.list) $DATEFILE
+    cat /tmp/$$.list
+fi
 
 rm /tmp/$$.html
