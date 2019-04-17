@@ -32,7 +32,10 @@ awk -F ';' 'BEGIN{print "cd '$DOC_DIR'/justice.public.lu"} {url=$1 ; nom=url ; g
 #réalisation du téléchargement
 sh
 
-ls -rt $(find $DOC_DIR"/justice.public.lu/" -newer $DATEFILE -name '*pdf' -type f) > /tmp/$$.list
+if ! test -f $DATEFILE ; then
+       touch -t 7001010000 $DATEFILE
+fi
+ls -rt $(find $DOC_DIR"/justice.public.lu/" -name '*pdf' -type f -newer $DATEFILE ) > /tmp/$$.list
 if test -n /tmp/$$.list ; then
     touch -r $(tail -n 1 /tmp/$$.list) $DATEFILE
     cat /tmp/$$.list
