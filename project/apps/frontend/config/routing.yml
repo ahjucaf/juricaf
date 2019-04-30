@@ -23,14 +23,21 @@ recherche_avancee:
   param: {module: recherche, action: fullsearch, query: ""}
 
 #Affichage des arrets
+arretxml:
+  url: /arret/:id/xml
+  param: {module: arret, action: raw}
+
+arrettxt:
+  url: /arret/:id/txt
+  param: {module: arret, action: raw, format: txt}
+
+arretjson:
+  url: /arret/:id/json
+  param: {module: arret, action: raw, format: json}
 
 arret:
   url: /arret/:id
   param: {module: arret, action: index}
-
-arretxml:
-  url: /arret/:id/xml
-  param: {module: arret, action: xml}
 
 admin_list:
    url: /admin/list
@@ -50,4 +57,3 @@ stats:
 default_index:
   url:   /:module
   param: { action: index }
-

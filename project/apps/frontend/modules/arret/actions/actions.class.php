@@ -21,22 +21,30 @@ class arretActions extends sfActions
     $this->forward404If($this->document->isError());
   }
 
-  public function executeXml(sfWebRequest $request)
+  public function executeRaw(sfWebRequest $request)
   {
     $this->document = new JuricafArret($request->getParameter('id'));
     $this->forward404If($this->document->isNew());
     $this->setLayout(false);
-	
+
+    $this->json = false;
+    $this->txt = false;
 	if($request->getParameter('format') === 'json') {
 		$this->json = true;
 		$this->getResponse()->setContentType('application/json');
+
+        return ;
 	}
-	else {
-		$this->json = false;
-		$this->getResponse()->setContentType('text/xml');
+    if($request->getParameter('format') === 'txt') {
+		$this->txt = true;
+		$this->getResponse()->setContentType('text/plain');
+
+        return ;
 	}
+	$this->getResponse()->setContentType('text/xml');
+
   }
-  
+
   public function executeJson(sfWebRequest $request)
   {
     $this->document = new JuricafArret($request->getParameter('id'));
@@ -44,7 +52,7 @@ class arretActions extends sfActions
     $this->setLayout(false);
     $this->getResponse()->setContentType('application/json');
   }
-  
+
   public function executeStats(sfWebRequest $request)
   {
     return ;

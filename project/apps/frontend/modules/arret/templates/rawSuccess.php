@@ -1,6 +1,11 @@
-<?php if ($json == true) {
+<?php
+if ($txt == true) {
+    echo $document->texte_arret;
+    return;
+}
+if ($json == true) {
 
-function printJson($field, $balise) 
+function printJson($field, $balise)
 {
   if (!is_array($field)) {
 	if ($balise == "texte_arret") {
@@ -32,7 +37,7 @@ $total = count($document->getFields());
 $i = 0;
 
 // Boucle principale
-foreach ($document->getFields() as $field) : 
+foreach ($document->getFields() as $field) :
 
 if ($field == "_id")
 	echo '"id" : ';
@@ -45,7 +50,7 @@ $i++;
 if ($i < $total)
 echo ', ';
 
-endforeach; 
+endforeach;
 
 // Fermeture de l'objet JSON
 echo '}';
@@ -58,9 +63,9 @@ else { // XML
 echo '<?xml version="1.0" encoding="utf8"?>'; ?>
 
 <DOCUMENT>
-<?php 
+<?php
 
-function printBalise($field, $balise) 
+function printBalise($field, $balise)
 {
   if (!is_array($field)) {
     echo $field;
@@ -77,7 +82,7 @@ function printBalise($field, $balise)
       printBalise($v, $balise);
 }
 
-foreach ($document->getFields() as $f) : 
+foreach ($document->getFields() as $f) :
 if (preg_match('/^_/', $f))
   continue;
 echo '<'.strtoupper($f).'>';
