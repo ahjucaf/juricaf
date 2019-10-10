@@ -58,6 +58,7 @@
             </form>
           </div>
           <?php echo $sf_content; ?>
+		<div><a  href="https://www.lemondedudroit.fr/interviews/66303-jean-paul-jean-ahjucaf.html">Interview de JP Jean secrétaire général de l’AHJUCAF dans « Le Monde du droit » sur l’accès à la jurisprudence francophone<br><br><br></a></div>
 		  <div class="top_page"><a id="top" href="#">Haut de page<img src="/images/fleche_haut.png" alt="Haut de page"/></a></div>
         </div>
       </div>
