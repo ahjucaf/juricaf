@@ -58,8 +58,7 @@
             </form>
           </div>
           <?php echo $sf_content; ?>
-		<div align="center">
-			 <img src="/images/jeanpaul-jean2.jpg"  style="width: 400px; height: 267px; margin-top: 4px;" alt="Interview de JP Jean" itemprop="image" /><br />
+		<div align="center">	 
 			<a  href="https://www.lemondedudroit.fr/interviews/66303-jean-paul-jean-ahjucaf.html" target="new">Interview de JP Jean secrétaire général de l’AHJUCAF dans « Le Monde du droit » sur l’accès à la jurisprudence francophone.</a><br><br><br>
 		</div>
 		  <div class="top_page"><a id="top" href="#">Haut de page<img src="/images/fleche_haut.png" alt="Haut de page"/></a></div>
