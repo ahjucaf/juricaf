@@ -3,8 +3,8 @@
 $xmlfile = $argv[1];
 $arguments =  explode('_', preg_replace('/.*\//', '', preg_replace('/\.[^\.]+$/', '', $xmlfile)));
 
-$lesmois = array("janvier" => "01", "janver"=>"01", "fevrier" => "02", "février" => "02", "mars" => "03", "avril" => "04", "mai" => "05", "juin" => "06", "juni" => "06",
- "juillet" => "07", "août" => "08", "septembre" => "09", "octobre" => "10", "ocotbre" => "10", "novembre" => "11", "décembre" => "12", "decembre" => "12");
+$lesmois = array("janver"=>"01", "janvier" => "01", "fevrier" => "02", "février" => "02", "mars" => "03", "avril" => "04", "mai" => "05", "juni" => "06", "juin" => "06",
+ "juillet" => "07", "aout" => "08", "août" => "08", "septembre" => "09", "ocotbre" => "10", "octobre" => "10",  "novembre" => "11", "decembre" => "12", "décembre" => "12");
 $lesnombres = array (
   "un" => "01", "premier" => "02", "deux" => "02", "trois" => "03", "quatre"=>"04", "cinq"=>"05", "six"=>"06", "sept"=>"07", "huit"=>"08","neuf"=>"09",
   "dix"=>"10", "onze"=>"11", "douze"=>"12", "treize"=>"13", "quatorze"=>"14", "quinze"=>"15", "seize"=>"16", "dix-sept"=>"17", "dix-huit"=>"18", "dix-neuf"=>"19",
@@ -13,6 +13,11 @@ $lesnombres = array (
   "deux mille" => "2000", "deux mille un" => "2001", "deux mille deux" => "2002", "deux mille trois" => "2003", "deux mille quatre" => "2004", "deux mille cinq" => "2005", "deux mille six" => "2006", "deux mille sept" => "2007", "deux mille huit" => "2008", "deux mille neuf" => "2009", "deux mille dix" => "2010",
   "deux mille onze" => "2011", "deux mille douze" => "2012", "deux mille treize" => "2013", "deux mille quatorze" => "2014", "deux mille quinze" => "2015", "deux mille seize" => "2016", "deux mille dix-sept" => "2017", "deux mille dix-huit" => "2018", "deux mille dix-neuf" => "2019"
 );
+$lesmois_reverse = array();
+foreach ($lesmois as $key => $value) {
+    $lesmois_reverse[$value] = $key;
+}
+
 
 $content = file_get_contents('php://stdin');
 $content = preg_replace("/&(#160|nbsp);/", " ", $content);
@@ -151,6 +156,9 @@ fwrite($output, "<DATE_ARRET>$date</DATE_ARRET>\n");
 fwrite($output, "<JURIDICTION>$juridiction</JURIDICTION>\n");
 fwrite($output, "<PAYS>Luxembourg</PAYS>\n");
 fwrite($output, "<TYPE>Arrêt</TYPE>\n");
+$dates = explode('-', $date);
+$datefr = $dates[2].' '.$lesmois_reverse[$dates[1]].' '.$dates[0];
+fwrite($output, "<TITRE>Luxembourg, $juridiction, $datefr, $numero</TITRE>\n");
 if ($formation) {
     fwrite($output, "<FORMATION>$formation</FORMATION>\n");
 }
