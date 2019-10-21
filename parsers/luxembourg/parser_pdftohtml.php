@@ -1,6 +1,7 @@
 <?php
 
 $xmlfile = $argv[1];
+$source = $argv[2];
 $arguments =  explode('_', preg_replace('/.*\//', '', preg_replace('/\.[^\.]+$/', '', $xmlfile)));
 
 $lesmois = array("janver"=>"01", "janvier" => "01", "fevrier" => "02", "février" => "02", "mars" => "03", "avril" => "04", "mai" => "05", "juni" => "06", "juin" => "06",
@@ -158,6 +159,9 @@ fwrite($output, "<PAYS>Luxembourg</PAYS>\n");
 fwrite($output, "<TYPE>arret</TYPE>\n");
 $dates = explode('-', $date);
 $datefr = $dates[2].' '.$lesmois_reverse[$dates[1]].' '.$dates[0];
+if ($source) {
+    fwrite($output, "<SOURCE>$source</SOURCE>\n");
+}
 fwrite($output, "<TITRE>Luxembourg, $juridiction, $datefr, $numero</TITRE>\n");
 if ($formation) {
     fwrite($output, "<FORMATION>$formation</FORMATION>\n");

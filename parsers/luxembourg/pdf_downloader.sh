@@ -28,7 +28,7 @@ for nexturl in https://justice.public.lu/fr/jurisprudence/cour-cassation.html ht
 #réorganisation de linformtion pour avoir un CSV correctement organisé
 done | awk -F ';' '{gsub(/\//, ";", $17); print $10 ";" $1 ";" $17}' | grep '[0-9]' | sed 's|^/|https://justice.public.lu/|' | sed 's/\r//g' |
 #écriture des commandes wget qui télécharge les arrêts suivant le bon format
-awk -F ';' 'BEGIN{print "cd '$DOC_DIR'/justice.public.lu"} {url=$1 ; nom=url ; gsub(/.*\//, "", nom); gsub(/[()]/, "", nom); if ( url ~ /http/ ) print "wget -q -nc -O "$5 $4 $3 "_" $2 "_$(echo \""url"\" | sha256sum | cut -d \" \" -f 1)_"nom" \""url"\""}' |
+awk -F ';' 'BEGIN{print "cd '$DOC_DIR'/justice.public.lu"} {url=$1 ; nom=url ; gsub(/.*\//, "", nom); gsub(/[()]/, "", nom); if ( url ~ /http/ ) print "wget -q -nc -O "$5 $4 $3 "_" $2 "_$(echo \""url"\" | sha256sum | cut -d \" \" -f 1)_"nom" \""url"\" && echo \""url"\" > "$5 $4 $3 "_" $2 "_$(echo \""url"\" | sha256sum | cut -d \" \" -f 1)_"nom".url"}' |
 #réalisation du téléchargement
 sh
 
