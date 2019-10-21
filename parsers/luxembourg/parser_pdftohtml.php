@@ -39,10 +39,10 @@ if (preg_match('/tribunal +administratif([^\.;]+) statuant/i', $content, $match)
         $formation = $test_formation;
     }
     if ($juridiction) {
-        $juridiction = 'Tribunal adimnistratif';
+        $juridiction = 'Tribunal administratif';
     }
 }elseif (preg_match('/la +cour[^\.]+ statuant/i', $content)) {
-    $juridiction = 'Cour adimnistrative';
+    $juridiction = 'Cour administrative';
 }
 $found_numero = $numero;
 if (preg_match('/(Numéros?|N°|Nos?) *([A-Z0-9][A-Z0-9\-, et\+]+) *du(<br.?>|\n| )*(rôle)/i', $header, $match) || preg_match('/(Numéros?|N°|Nos?) +du +rôle[ : <b>]+([A-Z0-9][A-Z0-9 ]+[A-Z0-9])/', $header, $match)) {
