@@ -155,7 +155,7 @@ fwrite($output, "<NUM_ARRET>$numero</NUM_ARRET>\n");
 fwrite($output, "<DATE_ARRET>$date</DATE_ARRET>\n");
 fwrite($output, "<JURIDICTION>$juridiction</JURIDICTION>\n");
 fwrite($output, "<PAYS>Luxembourg</PAYS>\n");
-fwrite($output, "<TYPE>Arrêt</TYPE>\n");
+fwrite($output, "<TYPE>arret</TYPE>\n");
 $dates = explode('-', $date);
 $datefr = $dates[2].' '.$lesmois_reverse[$dates[1]].' '.$dates[0];
 fwrite($output, "<TITRE>Luxembourg, $juridiction, $datefr, $numero</TITRE>\n");
