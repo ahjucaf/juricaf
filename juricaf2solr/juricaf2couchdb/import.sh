@@ -100,17 +100,17 @@ do
     fi;
 
     while true ; do
-    php juricaf2json.php "$y" "$pays" "$juridiction" > $JSONFILE.tmp 2> $JSONFILE.err
-    RET=$?
-    cat $JSONFILE.err | grep 'id":"' >> $LOG
-    cat $JSONFILE.err | grep -v 'id":"'
-    if test $RET = 0; then
-      break;
-    fi
-    if test $RET = 33; then
-      rm $JSONFILE.tmp
-      break;
-    fi
+        php juricaf2json.php "$y" "$pays" "$juridiction" > $JSONFILE.tmp 2> $JSONFILE.err
+        RET=$?
+        cat $JSONFILE.err | grep 'id":"' >> $LOG
+        cat $JSONFILE.err | grep -v 'id":"'
+        if test $RET = 0; then
+          break;
+        fi
+        if test $RET = 33; then
+          rm $JSONFILE.tmp
+          break;
+        fi
     done ;
     if test -e $JSONFILE.tmp; then
       DOCID=$(cat $JSONFILE.tmp | sed 's/.*_id":"//'  | sed 's/".*//')
