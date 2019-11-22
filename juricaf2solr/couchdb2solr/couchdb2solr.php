@@ -65,8 +65,15 @@ function updateIndexer($id) {
   unset($couchdata->_rev);
   $solrdata = '<add><doc>';
   //Conversion des données couchdb vers l'XML solr
+  $has_anon = isset($couchdata->texte_arret_anon);
   foreach($couchdata as $k => $v) {
     $k = strtolower($k);
+    if ($has_anon && $k == 'texte_arret') {
+        continue;
+    }
+    if ($k == 'texte_arret_anon') {
+        $k = 'texte_arret';
+    }
     if ($k == 'id')
       continue;
     if ($k == '_id') {
