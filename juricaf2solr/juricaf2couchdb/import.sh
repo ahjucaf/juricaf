@@ -120,9 +120,9 @@ do
       else
         cat $JSONFILE.tmp >> $JSONFILE
       fi
+      echo -n ',' >> $JSONFILE ;
     fi
 
-    echo -n ',' >> $JSONFILE ;
     cpt=$(expr $cpt + 1) ;
     if test $cpt -eq 100 ; then
     add2couch ;
