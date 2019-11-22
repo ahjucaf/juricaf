@@ -113,7 +113,13 @@ do
     fi
     done ;
     if test -e $JSONFILE.tmp; then
-      cat $JSONFILE.tmp >> $JSONFILE
+      DOCID=$(cat $JSONFILE.tmp | sed 's/.*_id":"//'  | sed 's/".*//')
+      curl -s $COUCHDBURL"/"$DOCID > $JSONFILE.orig
+      if test -n $JSONFILE.orig ; then
+        php json_update.php $JSONFILE.orig $JSONFILE.tmp >> $JSONFILE
+      else
+        cat $JSONFILE.tmp >> $JSONFILE
+      fi
     fi
 
     echo -n ',' >> $JSONFILE ;
