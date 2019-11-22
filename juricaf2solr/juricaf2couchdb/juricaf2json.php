@@ -525,6 +525,12 @@ if (preg_match('/ /', $res['num_arret']))
   addError("num_arret ne devrait pas contenir d'espace");
 }
 
+if(!empty($res['texte_arret_anon'])) {
+  if(is_array($res['texte_arret_anon'])) {
+    $res['texte_arret_anon'] = trim(implode("\n", $res['texte_arret_anon']));
+  }
+}
+
 if(!empty($res['texte_arret'])) {
   if(is_array($res['texte_arret'])) {
     $res['texte_arret'] = trim(implode("\n", $res['texte_arret']));
