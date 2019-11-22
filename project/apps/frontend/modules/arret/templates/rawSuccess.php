@@ -1,6 +1,6 @@
 <?php
 if ($txt == true) {
-    echo $document->texte_arret;
+    echo $document->getTexteArret();
     return;
 }
 if ($json == true) {
@@ -8,7 +8,7 @@ if ($json == true) {
 function printJson($field, $balise)
 {
   if (!is_array($field)) {
-	if ($balise == "texte_arret") {
+	if ($balise == "texte_arret" || $balise == "texte_arret_anon") {
 		$texte_html = str_replace("\n", "<br/>", $field);
 		echo json_encode($texte_html, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
 	}
@@ -33,11 +33,11 @@ function printJson($field, $balise)
 echo '{';
 
 // Gestion de la derniere boucle
-$total = count($document->getFields());
+$total = count($document->getFields(true));
 $i = 0;
 
 // Boucle principale
-foreach ($document->getFields() as $field) :
+foreach ($document->getFields(true) as $field) :
 
 if ($field == "_id")
 	echo '"id" : ';
@@ -82,7 +82,7 @@ function printBalise($field, $balise)
       printBalise($v, $balise);
 }
 
-foreach ($document->getFields() as $f) :
+foreach ($document->getFields(true) as $f) :
 if (preg_match('/^_/', $f))
   continue;
 echo '<'.strtoupper($f).'>';

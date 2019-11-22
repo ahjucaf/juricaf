@@ -20,16 +20,20 @@ class JuricafArret extends sfCouchDocument
     return  preg_replace('/[\(\{\[\]\}\)]/', '', preg_replace ('/[^a-z0-9]*\.\.\.$/i', '...', truncate_text($exerpt.$resultat->texte_arret, 650, "...", true)));
   }
 
-  private static $fields = array('_id', 'analyses', 'date_arret', 'formation', 'juricaf_id', 'juridiction', 'num_arret', 'pays', 'section', 'texte_arret', 'titre', 'type'); 
-  public function getFields() {
+  private static $fields = array('_id', 'analyses', 'date_arret', 'formation', 'juricaf_id', 'juridiction', 'num_arret', 'pays', 'section', 'texte_arret', 'texte_arret_anon', 'titre', 'type');
+  public function getFields($choose_anon = false) {
     $fields = array();
-    foreach (self::$fields as $f) {
+    $fields_names = self::$fields;
+    if ($choose_anon && $this->isTexteArretAnon()) {
+        $fields_names = array_diff($fields_names, ['texte_arret']);
+    }
+    foreach ($fields_names as $f) {
       if ($this->__isset($f))
 	$fields[] = $f;
     }
     return $fields;
   }
-  
+
   //Champ issu du v1
   public function getPublication() {
     $pub = $this->publication;
@@ -61,6 +65,19 @@ class JuricafArret extends sfCouchDocument
     $this->save();
     return $this;
   }
+
+  public function isTexteArretAnon() {
+      return !empty($this->texte_arret_anon);
+  }
+
+  public function getTexteArret() {
+      if ($this->isTexteArretAnon()) {
+          return $this->texte_arret_anon;
+      }
+      return $this->texte_arret;
+  }
+
+
 
   public static function ids($str) {
     $str = strtr($str,

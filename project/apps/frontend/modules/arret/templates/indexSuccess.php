@@ -382,7 +382,7 @@ $citation = ''.$document->titre.'' ;
 if(!empty($analyses)) {
   $sf_response->addMeta('Description', '');
 }
-elseif (!empty($document->texte_arret)) {
+elseif (!empty($document->getTexteArret())) {
   $sf_response->addMeta('Description', '');
 }
 
@@ -673,7 +673,7 @@ echo($cd->item(2)->nodeValue);
 }
 	echo '<hr /><div id="txtHint"></div>';
 
-    if($document->pays == "Madagascar" && $document->juridiction == "Cour suprême" && trim($document->texte_arret) == "En haut a droite, cliquez sur PDF pour visualiser le fac-simile de la décision") {
+    if($document->pays == "Madagascar" && $document->juridiction == "Cour suprême" && trim($document->getTexteArret()) == "En haut a droite, cliquez sur PDF pour visualiser le fac-simile de la décision") {
     ?>
     <object data="http://<?php echo $sf_request->getHost(); ?>/pdf/madagascar/cour_supreme/<?php echo $document->id_source; ?>.pdf" type="application/pdf" width="100%" height="1000" navpanes="0" statusbar="0" messages="0">
     Fac-similé disponible au format PDF : <a href="/pdf/madagascar/cour_supreme/<?php echo $document->id_source; ?>.pdf"><?php echo $document->titre; ?></a>
@@ -682,7 +682,7 @@ echo($cd->item(2)->nodeValue);
     }
 
     else {
-	if(!empty($document->texte_arret)) { $texte_arret = $document->texte_arret; } else { $texte_arret = ''; }
+	if(!empty($document->getTexteArret())) { $texte_arret = $document->getTexteArret(); } else { $texte_arret = ''; }
 
 $patterns = array();
 
@@ -737,7 +737,11 @@ else { };
 $patterns[4] = '#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i';
 $replacements[4] = '<a href="$0" target="_blank">$0</a>';
 
-	echo '<h3>Texte : </h3><span itemprop="articleBody">';
+	echo '<h3>Texte';
+    if ($document->isTexteArretAnon()){
+        echo " (pseudonymisé)";
+    }
+    echo ' : </h3><span itemprop="articleBody">';
 
 	echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret)));
 
