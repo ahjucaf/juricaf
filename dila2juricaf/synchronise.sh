@@ -19,6 +19,11 @@ find $LOCALCOPY -name "*.tar.gz" | xargs stat -c "%Y#%n" > $OLDLOG
 
 # Synchronisation (non destructive)
 lftp ftp://$USER:$PASS@$URL -e "mirror / $LOCALCOPY ; quit"
+mkdir -p $LOCALCOPY/../http_dila
+wget -q -r --continue --no-parent -P $LOCALCOPY/../http_dila https://echanges.dila.gouv.fr/OPENDATA/CASS/
+wget -q -r --continue --no-parent -P $LOCALCOPY/../http_dila https://echanges.dila.gouv.fr/OPENDATA/JADE/
+rsync -c $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CASS/CASS_* $LOCALCOPY
+rsync -c $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/JADE/JADE_* $LOCALCOPY
 
 # Nouveaux fichiers
 find $LOCALCOPY -name "*.tar.gz" | xargs stat -c "%Y#%n" > $NEWLOG
