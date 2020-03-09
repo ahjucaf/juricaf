@@ -90,5 +90,6 @@ if ($source) {
     echo "  <SOURCE>$source</SOURCE>\n";
 }
 echo "  <TEXTE_ARRET>$text</TEXTE_ARRET>
+<FONDS_DOCUMENTAIRE>juridat.be</FONDS_DOCUMENTAIRE>
 </DOCUMENT>
 ";
