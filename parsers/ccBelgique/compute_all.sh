@@ -3,11 +3,7 @@
 mydir=$(echo $0 | sed 's/[^\/]*$//')
 if test $mydir ; then cd $mydir ; fi
 
-. config/config.sh
+. config/config.inc
 
-php ccBelgique_mail.php $DOCDIR all | sed 's/$/ : mail downloaded/';
-
-find $DOCDIR -name '*doc' > $LISTFILE
-
-bash ccBelgique_parse_all.sh $LISTFILE $POOL
-
+bash juridat_list.sh
+grep -l 'dec_juridiction>1<' documents/*.xml  | while read xml ; do bash ccBelgique_parser.sh $xml || echo "ERROR $xml ^ "; done
