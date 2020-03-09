@@ -810,6 +810,10 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
 
         ';
     }
+    if (isset($document->source)) {
+        echo "<h3>Source :</h3>";
+        echo "<p><a href='".$document->source."'>Voir la source</a></p>";
+    }
     if(isset($contrib)) {
         echo '<hr /><h3>Composition du Tribunal :</h3>'.$contributors;
     }
