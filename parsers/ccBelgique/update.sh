@@ -5,7 +5,6 @@ if test $mydir ; then cd $mydir ; fi
 
 . config/config.sh
 
-php ccBelgique_mail.php $DOCDIR > $LISTFILE;
-
-bash ccBelgique_parse_all.sh $LISTFILE $POOL
-
+bash juridat_list.sh | while read file ; do
+    bash ccBelgique_parser.sh $file;
+done

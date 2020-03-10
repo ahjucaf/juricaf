@@ -1,8 +1,7 @@
 #!/bin/bash
 
 xml=$1
-
-. config/config.inc
+. config/config.sh
 
 txt=$(echo $xml | sed 's/\.xml/_texte.txt/')
 date=$(cat $xml | sed 's/.*<dec_date>//' | sed 's/<.*//' | sed 's/T.*//')
@@ -15,4 +14,5 @@ if test -f $txt ; then
 	if ! test -s $res ; then
 		rm -f $res
 	fi
+	echo "$res created" > /dev/stderr
 fi
