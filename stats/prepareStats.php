@@ -3,7 +3,9 @@ require("config.php");
 
 $pays_juridictions = array();
 if (($handle = fopen("../project/web/documentation/stats/base.csv", "r")) !== FALSE) while (($donnees = fgetcsv($handle, 1000, ";")) !== FALSE) {
-    $pays_juridictions[$donnees[$HEADER2CSVID['pays']].' | '.$donnees[$HEADER2CSVID['juridiction']]] = $donnees;
+    if ($donnees[$HEADER2CSVID['maj']] || $donnees[$HEADER2CSVID['etat']] || $donnees[$HEADER2CSVID['licences']]) {
+        $pays_juridictions[$donnees[$HEADER2CSVID['pays']].' | '.$donnees[$HEADER2CSVID['juridiction']]] = $donnees;
+    }
 }
 
 $stream = fopen('http://'.$SOLRHOST.':8080/solr/select?indent=on&version=2.2&q=type:arret&rows=0&facet=true&facet.field=facet_pays_juridiction&facet.limit=-1', 'r');
