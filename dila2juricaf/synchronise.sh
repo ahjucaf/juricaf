@@ -1,9 +1,7 @@
 #!/bin/bash
 
 # Répertoire de travail
-if [ "$(echo $0 | sed 's|[^/]*$||')" != "./" ] ; then
-  cd $(echo $0 | sed 's|[^/]*$||');
-fi
+cd $(dirname $0);
 
 # Configuration
 . ./config/conf.sh
@@ -13,10 +11,13 @@ OLDLOG=log/old.log
 NEWLOG=log/new.log
 DATE=$(date +%Y-%m-%d-%H-%M)
 LOG=log/updates.log
+TIMEMEMORY=log/synchro.time
 
 # Anciens fichiers
 find $LOCALCOPY -name "*.tar.gz" | xargs stat -c "%Y#%n" > $OLDLOG
 
+touch $TIMEMEMORY
+sleep 1
 # Synchronisation (non destructive)
 lftp ftp://$USER:$PASS@$URL -e "mirror / $LOCALCOPY ; quit"
 mkdir -p $LOCALCOPY/../http_dila
@@ -26,13 +27,13 @@ rsync -c $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CASS/CASS_* $LOC
 rsync -c $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/JADE/JADE_* $LOCALCOPY
 
 # Nouveaux fichiers
-find $LOCALCOPY -name "*.tar.gz" | xargs stat -c "%Y#%n" > $NEWLOG
+find $LOCALCOPY -name "*.tar.gz"  -exec stat -c '%Y#%n' '{}' ';'
 
 #Compare
 php compare.php
 
 #begin double patch du jour by habett
-find $LOCALCOPY -name "*.tar.gz" | grep $(date -d "yesterday" +%Y%m%d) > $TO_UPDATE
+find $LOCALCOPY -name "*.tar.gz" -newer $TIMEMEMORY > $TO_UPDATE
 #end habett
 
 # Lance l'importation
@@ -42,7 +43,7 @@ then
 echo -e "\n=====================================================";
 echo "|                 Mise à jour Dila                  |" ;
 echo "=====================================================";
-./detar.sh
+bash ./detar.sh
 mv $OLDLOG log/$DATE-old.log
 mv $NEWLOG log/$DATE-new.log
 cat $TO_UPDATE >> $LOG
