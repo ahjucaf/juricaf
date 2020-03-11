@@ -20,20 +20,14 @@ $criteres = array(
 );
 
 function getSolrResults($pays, $juridiction, $critere = '') {
+  global $SOLRHOST;
   if(!empty($critere)) { $critere = '+'.$critere.':*'; }
-  $stream = fopen('http://localhost:8080/solr/select/?q=facet_pays:%22'.urlencode($pays).'%22+facet_juridiction:%22'.urlencode($juridiction).'%22'.$critere.'&fq=type:arret&indent=on', 'r');
+  $stream = fopen('http://'.$SOLRHOST.':8080/solr/select/?q=facet_pays:%22'.urlencode($pays).'%22+facet_juridiction:%22'.urlencode($juridiction).'%22'.$critere.'&fq=type:arret&indent=on', 'r');
   $xml = trim(stream_get_contents($stream));
   $response = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_COMPACT);
   fclose($stream);
   return $response->result["numFound"];
 }
-
-try { $bdd = new PDO('mysql:host='.$HOST.';dbname='.$DBNAME, $DBUSER, $DBPASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (Exception $error) { die('Erreur : '.$error->getMessage()); }
-
-$req = $bdd->query('SELECT * FROM '.$DBTABLE);
 
 $csv = '"Pays";"Institution";"Nombre"';
 $tableau = "<table class=\"statsbase\">\n";
@@ -48,18 +42,22 @@ $csv .= "\n";
 $tableau .= "</tr>\n";
 $classe = 'color2';
 
-while ($donnees = $req->fetch())
-{
-  $nb = getSolrResults($donnees['pays'], $donnees['juridiction']);
+$line = -1;
+if (($handle = fopen($ORIGINALCSV, "r")) !== FALSE) while (($donnees = fgetcsv($handle, 1000, ";")) !== FALSE) {
+  $line++;
+  if (!$line) {
+      continue;
+  }
+  $nb = getSolrResults($donnees[$HEADER2CSVID['pays']], $donnees[$HEADER2CSVID['juridiction']]);
   foreach ($criteres as $critere) {
-    $collection[$critere] = getSolrResults($donnees['pays'], $donnees['juridiction'], $critere);
+    $collection[$critere] = getSolrResults($donnees[$HEADER2CSVID['pays']], $donnees[$HEADER2CSVID['juridiction']], $critere);
   }
 
-  $csv .= '"'.$donnees['pays'].'";"'.$donnees['juridiction'].'";'.$nb;
+  $csv .= '"'.$donnees[$HEADER2CSVID['pays']].'";"'.$donnees[$HEADER2CSVID['juridiction']].'";'.$nb;
 
-  $fpjlink = str_replace(' ', '_', 'http://www.juricaf.org/recherche/+/facet_pays:'.$donnees['pays'].',facet_juridiction:'.$donnees['juridiction']);
+  $fpjlink = str_replace(' ', '_', 'http://www.juricaf.org/recherche/+/facet_pays:'.$donnees[$HEADER2CSVID['pays']].',facet_juridiction:'.$donnees[$HEADER2CSVID['juridiction']]);
   if($classe == "color1") { $classe = "color2"; } else { $classe = "color1"; }
-  $tableau .= '<tr class="'.$classe.'"><td><a href="http://www.juricaf.org/recherche/recherche/+/facet_pays:'.$donnees['pays'].'">'.$donnees['pays'].'</a></td><td><a href="'.$fpjlink.'">'.$donnees['juridiction'].'</a></td><td class="num">'.$nb.'</td>';
+  $tableau .= '<tr class="'.$classe.'"><td><a href="http://www.juricaf.org/recherche/recherche/+/facet_pays:'.$donnees[$HEADER2CSVID['pays']].'">'.$donnees[$HEADER2CSVID['pays']].'</a></td><td><a href="'.$fpjlink.'">'.$donnees[$HEADER2CSVID['juridiction']].'</a></td><td class="num">'.$nb.'</td>';
 
   foreach ($criteres as $critere) {
     $csv .= ';'.$collection[$critere];

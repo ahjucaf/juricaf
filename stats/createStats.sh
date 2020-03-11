@@ -3,6 +3,8 @@
 # Répertoire de travail
 cd $(dirname $0)
 
+php prepareStats.php
+
 echo "=====================================================";
 echo "|           Mise à jour des statistiques            |" ;
 echo "=====================================================";
