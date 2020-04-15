@@ -51,7 +51,7 @@ then
   TOPROCESS=$TORESUME ;
 fi
 
-for fichier in $(cat $TOPROCESS);
+for fichier in $(sort -u $TOPROCESS);
   do
   echo -e "\n=====================================================";
   echo "Décompression de $fichier" ;
