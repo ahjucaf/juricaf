@@ -19,10 +19,14 @@ find $LOCALCOPY -name "*.tar.gz" | xargs stat -c "%Y#%n" > $OLDLOG
 touch $TIMEMEMORY
 sleep 1
 # Synchronisation (non destructive)
-lftp ftp://$USER:$PASS@$URL -e "mirror / $LOCALCOPY ; quit"
+# lftp ftp://$USER:$PASS@$URL -e "mirror / $LOCALCOPY ; quit"
 mkdir -p $LOCALCOPY/../http_dila
-wget -q -r --continue --no-parent -P $LOCALCOPY/../http_dila https://echanges.dila.gouv.fr/OPENDATA/CASS/
-wget -q -r --continue --no-parent -P $LOCALCOPY/../http_dila https://echanges.dila.gouv.fr/OPENDATA/JADE/
+wget -q -O /dev/stdout https://echanges.dila.gouv.fr/OPENDATA/CASS/ | grep tar.gz | sed 's|.*href="|https://echanges.dila.gouv.fr/OPENDATA/CASS/|'  | sed 's/".*//' > /tmp/CASS.url
+wget -q -i /tmp/CASS.url -nc -P $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CASS/
+rm /tmp/CASS.url
+wget -q -O /dev/stdout https://echanges.dila.gouv.fr/OPENDATA/JADE/ | grep tar.gz | sed 's|.*href="|https://echanges.dila.gouv.fr/OPENDATA/JADE/|'  | sed 's/".*//' > /tmp/JADE.url
+wget -q -i /tmp/JADE.url -nc -P $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/JADE/
+rm /tmp/JADE.url
 rsync -c $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CASS/CASS_* $LOCALCOPY
 rsync -c $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/JADE/JADE_* $LOCALCOPY
 
