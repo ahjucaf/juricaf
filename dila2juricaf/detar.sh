@@ -71,7 +71,7 @@ for fichier in $(sort -u $TOPROCESS);
 
     DELETEDJSONDIR=$DELETED"/"$(date +%Y-%m-%d);
     mkdir -p $DELETEDJSONDIR
-    find ../data/ -name "*.dat" -exec cat '{}' ';' | sort -u | while read deleteorder ; do
+    find $DATA/ -name "*.dat" -exec cat '{}' ';' | sort -u | while read deleteorder ; do
         ID_DILA=$(echo "$deleteorder" | sed 's:.*/::')
         ID_JURICAF=$(php getIdFromSolr.php $ID_DILA | grep -v "Erreur getIdFromSolr")
         # Si le résultat de l'interrogation solr contient un espace c'est une erreur donc on l'affiche
