@@ -68,16 +68,16 @@ if test -s $LISTPOOL ; then
   php create_mysql_log.php
 fi
 
-while read y
+cat  $LISTPOOL | while read y
 do
     if test $VERBOSE ; then echo importing $y; fi
     if file -i "$y" | grep -v 'application/xml' > /dev/null;
     then
-    echo "ERROR: $y ignored : it is not an XML doc (empty ?)";
-    dest_error_dir=$(echo $y | sed "s/pool/archive\/$DATE\/error/" | sed 's/[^\/]*$//');
-    mkdir -p "$dest_error_dir"
-    mv "$y" "$dest_error_dir";
-    continue;
+        echo "ERROR: $y ignored : it is not an XML doc (empty ?)";
+        dest_error_dir=$(echo $y | sed "s/pool/archive\/$DATE\/error/" | sed 's/[^\/]*$//');
+        mkdir -p "$dest_error_dir"
+        mv "$y" "$dest_error_dir";
+        continue;
     fi
 
     if file -i "$y" | grep -v utf-8 > /dev/null;
@@ -135,7 +135,7 @@ do
     mkdir -p "$dest_dir"
     mv "$y" "$dest_dir";
 
-done < $LISTPOOL
+done
 
 add2couch;
 
