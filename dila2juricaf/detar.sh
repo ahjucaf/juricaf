@@ -144,11 +144,6 @@ for fichier in $(sort -u $TOPROCESS);
           else
             cat $TOPROCESS
         fi
-        if [ -e $DIRLOGSUPP/$NOTGZ.dat ]
-          then
-          echo "Le log de suppression sauvegardé en $DIRLOGSUPP/$NOTGZ.log.bak doit être comparé à $DIRLOGSUPP/$NOTGZ.dat lors de la reprise"
-          cp $DIRLOGSUPP/$NOTGZ.log $DIRLOGSUPP/$NOTGZ.log.bak
-        fi
         exit 1
       else
         echo "Import tiers en cours attente de $WAIT secondes" ;
@@ -171,8 +166,6 @@ for fichier in $(sort -u $TOPROCESS);
   }
   transmitFilesToImport ;
 done
-
-cat $DIRLOGSUPP/$NOTGZ.log >> $DIRLOGSUPP/global.log ;
 
 if [ -e $TORESUME ] ; then rm $TORESUME ; fi
 if [ -e $FULLIMPORT ] ; then rm $FULLIMPORT ; fi
