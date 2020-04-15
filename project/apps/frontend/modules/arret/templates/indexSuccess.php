@@ -165,7 +165,7 @@ function printDecisionAttaquee($ref_or_da, $is_text = 0) {
     if(!empty($decision_attaquee['titre'])) {
       $temp[$i] = $decision_attaquee['titre'];
     }
-    elseif(!empty($decision_attaquee['formation'])) {
+    elseif(isset($decision_attaquee['formation']) && !empty($decision_attaquee['formation'])) {
       $temp[$i] = $decision_attaquee['formation'];
       if(empty($decision_attaquee['url'])) {
         $temp[$i] = link_to($decision_attaquee['formation'], '@recherche_resultats?query=decisions_attaquees:"'.$decision_attaquee['formation'].'"');
@@ -344,8 +344,11 @@ if(isset($document->decisions_attaquees)) {
 if(isset($references['DECISION_ATTAQUEE'])) { $decisions_attaquees = printDecisionAttaquee($references['DECISION_ATTAQUEE'], $is_text);}
 elseif(isset($document->decisions_attaquees)) { $decisions_attaquees = printDecisionAttaquee($document->decisions_attaquees, $is_text);}
 
+$civcrim = '';
+$bulletins = '';
 if(isset($references['PUBLICATION'])) {
     foreach($references['PUBLICATION'] as $value) {
+      if (isset($document->formation)) {
         if($document->formation == 'Chambre criminelle')  {
             $civcrim = ', Bull. crim.' ;
             $civcrimlong ='Publié au bulletin des arrêts de la chambre criminelle';
@@ -354,26 +357,29 @@ if(isset($references['PUBLICATION'])) {
             $civcrim = ', Bull. civ.' ;
             $civcrimlong ='Publié au bulletin des arrêts des chambres civiles';
         }
-        if(isset($value['url'])) {
+      }
+      if(isset($value['url'])) {
             $bulletins = $value['titre'];
-        }
-        elseif(strpos(strtolower($value['titre']), 'lebon') !== false) {
+      }
+      elseif(strpos(strtolower($value['titre']), 'lebon') !== false) {
             $lebon = $value['titre'];
-        }
-        elseif(strpos(strtolower($value['titre']), 'Bulletin') == false)  {
+      }
+      elseif(strpos(strtolower($value['titre']), 'Bulletin') == false)  {
             $bulletins = $value['titre'];
-        }
+      }
     }
 }
+if($document->pays == 'France') {
 
-if($document->juridiction == 'Conseil constitutionnel') {
+  if($document->juridiction == 'Conseil constitutionnel') {
     $citation = ''.citation($document->juridiction).', décision n°'.$document->num_arret.' '.$document->type_affaire.' du '.dateFr($document->date_arret).'';
-}
-if($document->juridiction == 'Cour de cassation') {
+  }
+  if($document->juridiction == 'Cour de cassation') {
     $citation = 'Cass. '.citation($document->formation).', '.dateFr($document->date_arret).', pourvoi n°'.$document->num_arret.''.$civcrim.''.citation($bulletins).'';
-}
-if($document->juridiction == 'Conseil d\'État') {
+  }
+  if($document->juridiction == 'Conseil d\'État') {
     $citation = 'CE, '.dateFr($document->date_arret).', n° '.$document->num_arret.'' ;
+  }
 }
 if($document->pays == 'Canada') {
     $citation = ''.$document->titre.'' ;
@@ -416,14 +422,18 @@ $sf_response->addMeta('DC.accessRights', 'public', false, false, false);
 $sf_response->addMeta('DC.creator', $creator, false, false, false);
 $sf_response->addMeta('DC.coverage', htmlspecialchars($document->pays, ENT_QUOTES), false, false, false);
 $sf_response->addMeta('DC.date', $document->date_arret, false, false, false);
-$sf_response->addMeta('DC.description', $document->type_affaire, false, false, false);
+if (isset($document->type_affaire)) {
+  $sf_response->addMeta('DC.description', $document->type_affaire, false, false, false);
+}
 $sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
 $sf_response->addMeta('DC.language', 'FR', false, false, false);
 $sf_response->addMeta('DC.publisher', 'AHJUCAF', false, false, false);
 $sf_response->addMeta('DC.subject', replacekey($keywords), false, false, false);
 $sf_response->addMeta('DC.type', 'case', false, false, false);
 $sf_response->addMeta('docketNumber', $docketNumber, false, false, false);
-$sf_response->addMeta('shortTitle', $citation, false, false, false);
+if (isset($citation) && $citation) {
+  $sf_response->addMeta('shortTitle', $citation, false, false, false);
+}
 $sf_response->addMeta('og:title', $document->titre, false, false, false);
 $sf_response->addMeta('g:type', 'article', false, false, false);
 $sf_response->addMeta('og:url', $url, false, false, false);
