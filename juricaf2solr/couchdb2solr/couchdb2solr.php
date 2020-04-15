@@ -22,6 +22,7 @@ function readLockFile() {
     fclose($changes);
     $changes = null;
   }
+  return $last_seq;
 }
 #echo "last_seq : $last_seq\n";
 readLockFile();
@@ -143,7 +144,7 @@ function commitIndexer() {
   }catch (Exception $e) {
     echo "Erreur de commit (".$solrdata.")\n-------- INTERNAL MSG --------\n";
     echo $e->getMessage()."\n------------------------------\n";
-    // En cas d'erreur de commit : on retourne au dernier lock/seq qui a fonctionné 
+    // En cas d'erreur de commit : on retourne au dernier lock/seq qui a fonctionné
     //et on commite deux fois plus tot pour identifier si le pb vient d'un document erronné
     // Si la variable COMMITER est à 1 c'est qu'on a identifié l'enregistrement erronné
     //donc on passe à autre chose
@@ -194,8 +195,8 @@ while(1) {
     }
 
     //On commit et sauve le dernier seq si on perd la connexion avec couchdb
+    //=> Si un doc couchdb a un last_seq, c'est qu'il nous demande de forcer la sequence
     if (isset($change->last_seq)) {
-# echo "last_seq\n";
       storeSeq($change->last_seq);
       break;
     }
