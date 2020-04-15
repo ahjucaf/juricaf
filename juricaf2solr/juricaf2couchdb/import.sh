@@ -64,9 +64,9 @@ function add2couch {
 
 cpt=0;
 
-if test -s $LISTPOOL ; then
-  php create_mysql_log.php
-fi
+#if test -s $LISTPOOL ; then
+#  php create_mysql_log.php
+#fi
 
 cat  $LISTPOOL | while read y
 do
