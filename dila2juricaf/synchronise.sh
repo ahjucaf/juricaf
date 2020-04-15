@@ -31,7 +31,7 @@ rsync -c $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CASS/CASS_* $LOC
 rsync -c $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/JADE/JADE_* $LOCALCOPY
 
 # Nouveaux fichiers
-find $LOCALCOPY -name "*.tar.gz"  -exec stat -c '%Y#%n' '{}' ';'
+find $LOCALCOPY -name "*.tar.gz"  -exec stat -c '%Y#%n' '{}' ';' > $NEWLOG
 
 #Compare
 php compare.php
