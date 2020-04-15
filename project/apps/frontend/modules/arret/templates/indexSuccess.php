@@ -396,8 +396,13 @@ if(!empty($document->urnlex)) { $urnlex = $document->urnlex; } else { $urnlex = 
 $creator = $document->juridiction;
 if(isset($document->section)) { $creator .= ' '.$document->section; }
 
+$docketNumber = null;
+if (isset($document->numeros_affaires) && isset($document->numeros_affaires['numero_affaire'])) {
 $docketNumber = $document->numeros_affaires['numero_affaire'];
+}
+if (isset($document->num_arret) && $document->num_arret) {
 $docketNumber = $document->num_arret;
+}
 $citations = '';
 $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
@@ -650,7 +655,7 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
     $xmlDoc = new DOMDocument();
     $xmlDoc->load("http://www.juricaf.org/cnil.xml");
     $x=$xmlDoc->getElementsByTagName('numero');
-
+    $y=null;
     for ($i=0; $i<=$x->length-1; $i++)
     {
         if ($x->item($i)->nodeType==1)
@@ -662,15 +667,15 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
         }
     }
 
-    $cd=($y->childNodes);
-
-    for ($i=2;$i<$cd->length;$i++)
-    {
+   if ($y) { 
+      $cd=($y->childNodes);
+      for ($i=2;$i<$cd->length;$i++)
+      {
         echo '<hr /><h3>Intérêt pour la protection des données personnelles : </h3>';
         echo($cd->item(1)->nodeValue);
         echo '<hr /><h3>Mots-clés protection des données personnelles : </h3>';
         echo($cd->item(2)->nodeValue);
-
+      }
     }
     echo '<hr /><div id="txtHint"></div>';
 
