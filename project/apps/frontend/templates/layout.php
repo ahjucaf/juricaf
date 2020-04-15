@@ -24,19 +24,18 @@
       <div class="head">
         <div class="menu">
           <ul>
-            <li><a href="http://www.juricaf.org/documentation/a_propos.php">A propos</a></li>
-            <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Étendue des collections</a></li>
-            <li><a href="http://www.juricaf.org/documentation/partenaires.php">Partenaires</a></li>
-            <li><a href="http://www.juricaf.org/documentation/mentions_legales.php">Mentions légales</a></li>
-	    <li><a href="http://www.juricaf.org/documentation/contact.php">Contact</a></li>
-			
+              <li><a href="/documentation/a_propos.php">A propos</a></li>
+              <li><a href="/documentation/stats/statuts.php">Étendue des collections</a></li>
+              <li><a href="/documentation/partenaires.php">Partenaires</a></li>
+              <li><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
+              <li><a href="/documentation/contact.php">Contact</a></li>
             </ul>
         </div>
       </div>
 	  <div class="reseaux_sociaux">
 
 	   <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
-          <a href="http://twitter.com/juricaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
+          <a href="https://twitter.com/juricaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
 	<a href="https://itunes.apple.com/fr/app/id587420315?mt=8&affId=1578782" target="_blank"><img src="/images/appstore.png" alt="Appstore" title="Accès à la version IPhone"/></a>
       </div>
       <div class="main">
