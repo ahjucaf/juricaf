@@ -73,7 +73,7 @@ for fichier in $(sort -u $TOPROCESS);
     mkdir -p $DELETEDJSONDIR
     find ../data/ -name "*.dat" -exec cat '{}' ';' | sort -u | while read deleteorder ; do
         ID_DILA=$(echo "$deleteorder" | sed 's:.*/::')
-        ID_JURICAF=$(php getIdFromSolr.php $ID_DILA)
+        ID_JURICAF=$(php getIdFromSolr.php $ID_DILA | grep -v "Erreur getIdFromSolr")
         # Si le résultat de l'interrogation solr contient un espace c'est une erreur donc on l'affiche
         if echo $ID_JURICAF | grep " "  > /dev/null; then
           echo "Erreur : ID CouchDB non conforme : $ID_JURICAF ("$ID_DILA" <= "$deleteorder")"
