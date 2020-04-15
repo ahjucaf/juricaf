@@ -37,7 +37,7 @@ find $LOCALCOPY -name "*.tar.gz"  -exec stat -c '%Y#%n' '{}' ';' > $NEWLOG
 php compare.php
 
 #begin double patch du jour by habett
-find $LOCALCOPY -name "*.tar.gz" -newer $TIMEMEMORY > $TO_UPDATE
+find $LOCALCOPY -name "*.tar.gz" -newer $TIMEMEMORY >> $TO_UPDATE
 #end habett
 
 # Lance l'importation
