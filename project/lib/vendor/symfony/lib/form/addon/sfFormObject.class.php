@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage form
  * @author     Kris Wallsmith <kris.wallsmith@symfony-project.com>
- * @version    SVN: $Id: sfFormObject.class.php 22917 2009-10-10 13:44:53Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfFormObject.class.php 33250 2011-12-12 16:02:15Z fabien $
  */
 abstract class sfFormObject extends BaseForm
 {
@@ -241,8 +241,8 @@ abstract class sfFormObject extends BaseForm
     {
       if ($form instanceof sfFormObject)
       {
-        $form->saveEmbeddedForms($con);
         $form->getObject()->save($con);
+        $form->saveEmbeddedForms($con);
       }
       else
       {
@@ -278,6 +278,6 @@ abstract class sfFormObject extends BaseForm
 
   protected function camelize($text)
   {
-    return preg_replace(array('#/(.?)#e', '/(^|_|-)+(.)/e'), array("'::'.strtoupper('\\1')", "strtoupper('\\2')"), $text);
+    return strtr(ucwords(strtr($text, array('/' => '::', '_' => ' ', '-' => ' ', '.' => '_ '))), array(' ' => ''));
   }
 }

@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Mssql.php 7691 2011-02-04 15:43:29Z jwage $
+ *  $Id: Mssql.php 7690 2010-08-31 17:11:24Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -27,7 +27,7 @@
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 7691 $
+ * @version     $Revision: 7690 $
  * @link        www.doctrine-project.org
  * @since       1.0
  */

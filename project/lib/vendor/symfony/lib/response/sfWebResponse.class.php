@@ -406,7 +406,7 @@ class sfWebResponse extends sfResponse
    */
   protected function normalizeHeaderName($name)
   {
-    return preg_replace('/\-(.)/e', "'-'.strtoupper('\\1')", strtr(ucfirst(strtolower($name)), '_', '-'));
+    return strtr(ucwords(strtr(strtolower($name), array('_' => ' ', '-' => ' '))), array(' ' => '-'));
   }
 
   /**
@@ -547,17 +547,14 @@ class sfWebResponse extends sfResponse
   /**
    * Adds a meta header.
    *
-   * @param string  $key       Name of the header
-   * @param string  $value     Meta header value (if null, remove the meta)
-   * @param bool    $replace   true if it's replaceable
-   * @param bool    $escape    true for escaping the header
-   * @param bool    $lowercase false to dont convert key to lower case
+   * @param string  $key      Name of the header
+   * @param string  $value    Meta header value (if null, remove the meta)
+   * @param bool    $replace  true if it's replaceable
+   * @param bool    $escape   true for escaping the header
    */
-  public function addMeta($key, $value, $replace = true, $escape = true, $lowercase = true)
+  public function addMeta($key, $value, $replace = true, $escape = true)
   {
-    if ($lowercase) {
-      $key = strtolower($key);
-    }
+    $key = strtolower($key);
 
     if (null === $value)
     {
