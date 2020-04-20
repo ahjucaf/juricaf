@@ -14,5 +14,5 @@ if test -f $txt ; then
 	if ! test -s $res ; then
 		rm -f $res
 	fi
-	echo "$res created" > /dev/stderr
+	echo "$res created" 1>&2
 fi
