@@ -618,6 +618,42 @@ footer{
   #AHJUCAF_site{
     display: block;
   }
+  .lesliens {
+    width:80%;
+    margin:auto;
+    text-align: center;
+  }
+  h1 {
+   font-size:16px;
+   padding:10px;
+   height:auto;
+   width:80%;
+   background-color: whiteSmoke;
+   border:3px solid #b9bcbf;
+   margin:auto;
+ }
+ .arret {
+   text-align: left;
+   width:100%;
+ }
+ .arret p {
+   padding:10px;
+ }
+
+ .arret .split_left {
+   width:450px;
+   float:left;
+ }
+
+ .arret .split_right {
+   width:300px;
+   float:right
+ }
+
+ .bottom{
+   background-color: black;
+   height: auto;
+ }
 
   .bottom{
     height: 150px;
