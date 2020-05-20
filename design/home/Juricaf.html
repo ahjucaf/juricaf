@@ -13,22 +13,28 @@
 <link rel="stylesheet" type="text/css" media="screen" href="Juricaf_fichiers/a.html">
 <link rel="stylesheet" type="text/css" media="screen" href="Juricaf_fichiers/jquery-ui-1.css">
 <link type="text/css" rel="stylesheet" href="Juricaf_fichiers/jquery.css">
-
 <script type="text/javascript" async="" src="Juricaf_fichiers/ga.js"></script><script type="text/javascript" src="Juricaf_fichiers/jquery-1.js"></script>
 <script type="text/javascript" src="Juricaf_fichiers/jquery_002.js"></script>
 <script type="text/javascript" src="Juricaf_fichiers/jquery-ui-1.js"></script>
 <script type="text/javascript" src="Juricaf_fichiers/opensearch.js"></script>
 <script type="text/javascript" src="Juricaf_fichiers/jquery.js"></script>
 <script type="text/javascript">$(document).ready(function(){	$('a[title]').qtip();});</script>
-<script type="text/javascript">function openMenu() {var menu = document.getElementById("menu"); if (menu.style.display === "block") {menu.style.display = "none";} else {menu.style.display = "block";}}</script>
-<script type="text/javascript">function openPays() {var pays = document.getElementById("pays_content");var icon = document.getElementById("icon_rolldown"); if (pays.style.display === "block") {pays.style.height = "none";} else {pays.style.height = "auto";icon.style.display="none"}}</script>
 <script type="text/javascript" src="Juricaf_fichiers/jsapi"></script>
 <link rel="search" href="https://juricaf.org/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml">
 
+<!-- Ajout des fonctions  -->
+<script type="text/javascript">function openMenu() {var menu = document.getElementById("menu"); if (menu.style.display === "block") {menu.style.display = "none";} else {menu.style.display = "block";}}</script>
+<script type="text/javascript">function openPays() {var pays = document.getElementById("pays_content");var icon = document.getElementById("icon_rolldown"); if (pays.style.display === "block") {pays.style.height = "none";} else {pays.style.height = "auto";icon.style.display="none"}}</script>
+
+
 </head>
+
+
 <body>
 <div class="site">
 <div class="head" >
+
+  <!-- header 2.0 -->
   <div class="menu_bar" >
     <a onclick="openMenu()"><i id="icon_menu"></i></a>
     <h1 id="headbar">JURICAF.ORG</h1>
@@ -40,12 +46,15 @@
     <li><a href="https://juricaf.org/documentation/mentions_legales.php">MENTIONS LEGALES</a></li>
     <li><a href="https://juricaf.org/documentation/contact.php">CONTACT</a></li>
   </ul></div>
+  <!---->
+
 
 </div>
 
 <div class="main">
 <div class="content">
 
+<!-- Modifié -->
 <div class="form_recherche">
 <form method="get" action="/recherche">
 <table summary="Rechercher">
@@ -60,12 +69,18 @@
 </table>
 </form>
 </div>
+<!---->
+
+<!-- Modifié -->
 <div class="reseaux_sociaux">
   <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="Juricaf_fichiers/img/icon/logo_facebook.png" alt="Facebook" title="Devenez fan sur Facebook"></a>
   <a href="https://twitter.com/juricaf" target="_blank"><img src="Juricaf_fichiers/img/icon/logo_twitter.png" alt="Twitter" title="Suivez nous sur Twitter"></a>
   <a href="https://itunes.apple.com/fr/app/id587420315?mt=8&amp;affId=1578782" target="_blank"><img src="Juricaf_fichiers/img/icon/logo_apple.png" alt="Applestore" title="Accès à la version IPhone"></a>
 </div>
+<!---->
 
+
+<!--Modifié-->
 <div class="stats">
 <div class="pays" id="pays_content">
 	<div class="payscols">
@@ -112,53 +127,50 @@
     <td><img src="Juricaf_fichiers/img/flags/Niger.png" alt="Niger">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ANiger">Niger (686)</a></td>
   </tr>
   <tr>
-        <td><img src="Juricaf_fichiers/img/flags/OHADA.png" alt="OHADA">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AOHADA">OHADA (798)</a></td>
-        <td><img src="Juricaf_fichiers/img/flags/Organisation_des_tats_amricains.png" alt="Organisation_des_États_américains">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AOrganisation_des_%C3%89tats_am%C3%A9ricains">Organisation des États américains (3)</a></td>
-        <td><img src="Juricaf_fichiers/img/flags/Pologne.png" alt="Pologne">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3APologne">Pologne (8)</a></td>
-        <td><img src="Juricaf_fichiers/img/flags/Rpublique_Tchque.png" alt="République_Tchèque">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AR%C3%A9publique_Tch%C3%A8que">République Tchèque (59)</a></td>
-        <td><img src="Juricaf_fichiers/img/flags/Roumanie.png" alt="Roumanie">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ARoumanie">Roumanie (477)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/OHADA.png" alt="OHADA">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AOHADA">OHADA (798)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/Organisation_des_tats_amricains.png" alt="Organisation_des_États_américains">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AOrganisation_des_%C3%89tats_am%C3%A9ricains">Organisation des États américains (3)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/Pologne.png" alt="Pologne">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3APologne">Pologne (8)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/Rpublique_Tchque.png" alt="République_Tchèque">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AR%C3%A9publique_Tch%C3%A8que">République Tchèque (59)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/Roumanie.png" alt="Roumanie">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ARoumanie">Roumanie (477)</a></td>
   </tr>
   <tr>
-        <td><img src="Juricaf_fichiers/img/flags/Rwanda.png" alt="Rwanda">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ARwanda">Rwanda (4)</a></td>
-        <td><img src="Juricaf_fichiers/img/flags/Sao_Tom_et_Principe.png" alt="Sao_Tomé_et_Principe">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ASao_Tom%C3%A9_et_Principe">Sao Tomé et Principe (4)</a></td>
-        <td><img src="Juricaf_fichiers/img/flags/Sngal.png" alt="Sénégal">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AS%C3%A9n%C3%A9gal">Sénégal (1&nbsp;869)</a></td>
-        <td><img src="Juricaf_fichiers/img/flags/Suisse.png" alt="Suisse">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ASuisse">Suisse (44&nbsp;841)</a></td>
-        <td><img src="Juricaf_fichiers/img/flags/Tchad.png" alt="Tchad">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ATchad">Tchad (442)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/Rwanda.png" alt="Rwanda">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ARwanda">Rwanda (4)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/Sao_Tom_et_Principe.png" alt="Sao_Tomé_et_Principe">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ASao_Tom%C3%A9_et_Principe">Sao Tomé et Principe (4)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/Sngal.png" alt="Sénégal">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AS%C3%A9n%C3%A9gal">Sénégal (1&nbsp;869)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/Suisse.png" alt="Suisse">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ASuisse">Suisse (44&nbsp;841)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/Tchad.png" alt="Tchad">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ATchad">Tchad (442)</a></td>
   </tr>
   <tr>
-        <td><img src="Juricaf_fichiers/img/flags/Togo.png" alt="Togo">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ATogo">Togo (149)</a></td>
-        <td><img src="Juricaf_fichiers/img/flags/Tunisie.png" alt="Tunisie">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ATunisie">Tunisie (17)</a></td>
-        <td><img src="Juricaf_fichiers/img/flags/UEMOA.png" alt="UEMOA">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AUEMOA">UEMOA (14)</a></td>
-        <td><img src="Juricaf_fichiers/img/flags/Union_Africaine.png" alt="Union_Africaine">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AUnion_Africaine">Union Africaine (2)</a></td>
-        <td><img src="Juricaf_fichiers/img/flags/Vietnam.png" alt="Vietnam">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AVietnam">Vietnam (3)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/Togo.png" alt="Togo">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ATogo">Togo (149)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/Tunisie.png" alt="Tunisie">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3ATunisie">Tunisie (17)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/UEMOA.png" alt="UEMOA">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AUEMOA">UEMOA (14)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/Union_Africaine.png" alt="Union_Africaine">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AUnion_Africaine">Union Africaine (2)</a></td>
+    <td><img src="Juricaf_fichiers/img/flags/Vietnam.png" alt="Vietnam">&nbsp;<a href="https://juricaf.org/recherche/+/facet_pays%3AVietnam">Vietnam (3)</a></td>
   </tr>
       <tr>
         <td colspan="5" class="plus"><img src="Juricaf_fichiers/a.png" alt="+"> <a href="https://juricaf.org/documentation/stats/statuts.php">Plus de statistiques</a></td>
       </tr>
-    </tbody></table>
+  </tbody></table>
 	</div>
 </div>
+</div>
+<!---->
 
+<!--Modifié-->
 <div class="icon_more" >
   <a onclick="openPays()"><i id="icon_rolldown"></i></a>
 </div>
-
 <div class="laureat">
-<center><h4><img src="Juricaf_fichiers/iexpo.jpg">
-<p>Lauréat du prix I-Expo 2012 <br>catégorie "Open Data"
-</p><p><a href="http://iall.org/webAward.html" target="_blank"><img src="Juricaf_fichiers/iall.jpg"></a></p></h4></center>
+  <center><h4><img src="Juricaf_fichiers/iexpo.jpg"><p>Lauréat du prix I-Expo 2012 <br>catégorie "Open Data"</p>
+  <p><a href="http://iall.org/webAward.html" target="_blank"><img src="Juricaf_fichiers/iall.jpg"></a></p></h4></center>
 </div>
-
 <div id="AHJUCAF_site">
   <a href="http://www.ahjucaf.org/"><img  src="Juricaf_fichiers/ahjucafSite.jpg" alt="Association des cours judiciaires suprêmes francophones"></a>
-<a href="http://www.ahjucaf.org/">Visitez le nouveau site de l'AHJUCAF</a>
+  <a href="http://www.ahjucaf.org/">Visitez le nouveau site de l'AHJUCAF</a>
 </div>
 <div style="clear:both;">&nbsp;</div>
-</div>
-
-
 <div class="newsfeed">
-			<a href="https://www.lemondedudroit.fr/interviews/66303-jean-paul-jean-ahjucaf.html" target="new">Interview de JP Jean secrétaire général de l’AHJUCAF dans « Le Monde du droit » sur l’accès à la jurisprudence francophone.</a><br><br><br>
+	<a href="https://www.lemondedudroit.fr/interviews/66303-jean-paul-jean-ahjucaf.html" target="new">Interview de JP Jean secrétaire général de l’AHJUCAF dans « Le Monde du droit » sur l’accès à la jurisprudence francophone.</a><br><br><br>
 </div>
 
 </div>
@@ -167,22 +179,16 @@
 </div>
 
 </body>
-<footer>
 
+<footer>
   <a href="http://www.ahjucaf.org/"><img style="height:100px;"  src="Juricaf_fichiers/img/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones"></a>
   <img style="width: 180px;height: 80px;float:right;" src="Juricaf_fichiers/img/francophonie.png" alt="Organisation internationale de la francophonie">
-
   <div class="top_page"><a id="top" href="#">Haut de page<img src="Juricaf_fichiers/fleche_haut.png" alt="Haut de page"></a></div>
-
   <div class="bottom">
        <p>Juricaf est un projet de l'AHJUCAF, l'association des cours judiciaires suprêmes francophones,<br>
        réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;I).<br>
        Il est soutenu par l'Organisation internationale de la Francophonie et le Fonds francophone des inforoutes.</p>
  </div>
-
-
 </footer>
-
-
 
 </html>
