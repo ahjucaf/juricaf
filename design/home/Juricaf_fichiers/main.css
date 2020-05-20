@@ -28,31 +28,25 @@ h2 { font-size:1em; color: #000000; text-decoration:underline; padding:5px; }
 h3 { font-size: 1em; color: #426e98; margin:10px 0; font-weight:bold; }
 h4 { font-size: 1em; color: #000000;; margin:5px 0; font-weight:bold; }
 
-.menu {
-	width: 100%; height: 100%; line-height:35px;
-	margin: auto; background-image: url('../images/bg_nav.gif');
-   background-repeat:repeat-x;	text-align:center; }
-.menu ul, .menu li {
-  margin: 0; padding: 0; }
-.menu li {
-  margin: 10px;font-weight: bold;
-  letter-spacing: 5px;
-  display: inline-flex;
-}
-.menu a {
-padding: 10px; margin:5px 5px; font-size: 1em; color: #dae2e3; text-decoration: none; }
+.menu {display: block;width: 100%; height: auto; min-height: 100px;line-height:35px;margin: auto;background-image: url('../images/bg_nav.gif'); background-repeat:repeat-x;	text-align:center;}
+.menu ul, .menu li {  margin: 0; padding: 0; }
+.menu li {margin: 10px;font-weight: bold;letter-spacing: 2px;display: inline-flex;margin-top: 0;}
+.menu a {padding: 10px; margin:5px 5px; font-size: .8em; color: #030F57; text-decoration: none; }
 .menu a:hover, .menu a:focus { color: #f09241;border-bottom: 2px solid #002a6e;}
+.menu_bar{width: 100%;}
+#icon_menu{display:none;width: 50px;height: 50px;margin: 10px;background-image: url('img/icon/hamburger_icon.png');background-size: contain;}
+#icon_menu:hover{background-color: #F7F7F7;}
 
-#logo{float: left;padding:10px;width: 100px;height: 100px;}
+#logo{padding:10px;padding-top: 0;width: 100px;height: 100px;}
 #slogan{width: auto;font-style: italic;letter-spacing: 1px;}
-#slogan h2{text-decoration: none;font-size: 1.5em;margin: 10px;}
+#slogan h2{text-decoration: none;font-size: 1em;margin: 10px;}
 /* reseaux sociaux */
-.reseaux_sociaux {position:fixed;bottom: 0;width: 150px;height: 100px; margin:auto; margin-bottom: 0;}
+.reseaux_sociaux {position:fixed; bottom: 0;width: 150px;}
 .reseaux_sociaux img {padding: 10px;width: 25px;height: 25px; margin: 0 0 0 -2px; opacity: 1; }
 .reseaux_sociaux img:hover, .reseaux_sociaux img:focus { opacity: 0.7; }
 
 
-.form_recherche input[type="text"] {color:#7b7b7b; height:20px; padding:10px; width: 80%; margin:auto;margin-bottom: 20px;background-color:#FFF;border: none; border-bottom:1px solid #7f7f7f;}
+.form_recherche input[type="text"] {color:#7b7b7b; height:20px; padding:10px; width: 80%; margin:auto;margin-bottom: 20px;background-color:#f7f7f7;border: none; border-bottom:1px solid #7f7f7f;}
 .form_recherche  form table td{width:800px;height:auto;}
 .form_recherche form table {margin: auto;margin-top:20px;}
 
@@ -61,9 +55,8 @@ input[type="submit"]:hover, input[type="reset"]:focus {cursor:pointer;}
 input[type="reset"] { background:url('../images/btn_recherche.png') no-repeat;color:#FFFFFF; padding:5px 10px; margin: 5px; border:none; height:29px;}
 input[type="reset"]:hover, input[type="reset"]:focus {cursor:pointer;}
 
-.newsfeed{position: fixed;background-color: #1f4973;top: 100px;right: -270px;width: 300px;height: 120px;text-align: center;padding: 10px;transition: 0.5s ease;}
-.newsfeed a{text-decoration: none;color: white;}
-.newsfeed:hover{right: 0;}
+.newsfeed{top: 100px;width: 300px;height: 120px;text-align: center;padding: 10px;margin: auto;}
+.newsfeed a{text-decoration: none;color: black;}
 
 .pays {display: block;overflow: hidden;}
 .payscols table{margin: auto;}
@@ -167,34 +160,13 @@ footer{}
 
 
 @media screen and (max-width: 640px) {
-  .menu li {
-    display: block;
-  }
-  .form_recherche  form table td{width:100%;height:auto;}
-  #logo{
-    float: none;
-    width:50px;height: 50px;}
-  .reseaux_sociaux{
-    float: none;
-    padding: 0;
-    display: block;
-    width:150px;
-    height: auto;
-    margin: auto;
+.menu{display: none;}
+.menu li{display: block;text-align: left;}
+#icon_menu{display: block;}
+.form_recherche  form table td{width:100%;height:auto;}
+.reseaux_sociaux{position: relative;padding: 0;display: block;width:150px;height: auto; margin: auto;}
+.reseaux_sociaux img{float: none;display: inline-block;}
+table,tbody,tr,td {display: block;  width: auto;  }
+.bottom{  height: 150px;}
 
-  }
-  .reseaux_sociaux img{
-    float: none;
-    display: inline-block;
-  }
-  table,
-  tbody,
-  tr,
-  td {
-    display: block;
-    width: auto;
-  }
-  .bottom{
-    height: 150px;
-  }
 }
