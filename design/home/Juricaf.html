@@ -1,14 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="title" content="Juricaf">
+    <meta name="title" content="Juricaf">
 <meta name="description" content="La jurisprudence francophone des cours suprêmes">
 <meta name="keywords" content="jurisprudence, cassation, cour, suprême, francophone, francophonie, ahjucaf, arrêt, décision">
 <meta name="language" content="fr">
-    <title>Juricaf</title>
-
-<link rel="shortcut icon" href="Juricaf_fichiers/img/icon/favicon.png">
+    <title>Juricaf - Moteur de Recherche</title>
+<link rel="shortcut icon" href="Juricaf_fichiers/img/icon/favicon.ico">
 <link rel="stylesheet" type="text/css" media="screen" href="Juricaf_fichiers/main.css">
 <link rel="stylesheet" type="text/css" media="screen" href="Juricaf_fichiers/a.html">
 <link rel="stylesheet" type="text/css" media="screen" href="Juricaf_fichiers/a.html">
@@ -18,32 +17,21 @@
 <script type="text/javascript" async="" src="Juricaf_fichiers/ga.js"></script><script type="text/javascript" src="Juricaf_fichiers/jquery-1.js"></script>
 <script type="text/javascript" src="Juricaf_fichiers/jquery_002.js"></script>
 <script type="text/javascript" src="Juricaf_fichiers/jquery-ui-1.js"></script>
-	<script type="text/javascript" src="Juricaf_fichiers/opensearch.js"></script>
-	<script type="text/javascript" src="Juricaf_fichiers/jquery.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function(){	$('a[title]').qtip();});
-	</script>
-  <script type="text/javascript">
-  function openMenu() {
-  var menu = document.getElementById("menu");
-  if (menu.style.display === "block") {
-    menu.style.display = "none";
-  } else {menu.style.display = "block";menu.style.opacity = 1;}
-  }
-  </script>
+<script type="text/javascript" src="Juricaf_fichiers/opensearch.js"></script>
+<script type="text/javascript" src="Juricaf_fichiers/jquery.js"></script>
+<script type="text/javascript">$(document).ready(function(){	$('a[title]').qtip();});</script>
+<script type="text/javascript">function openMenu() {var menu = document.getElementById("menu"); if (menu.style.display === "block") {menu.style.display = "none";} else {menu.style.display = "block";}}</script>
+<script type="text/javascript">function openPays() {var pays = document.getElementById("pays_content");var icon = document.getElementById("icon_rolldown"); if (pays.style.display === "block") {pays.style.height = "none";} else {pays.style.height = "auto";icon.style.display="none"}}</script>
+<script type="text/javascript" src="Juricaf_fichiers/jsapi"></script>
+<link rel="search" href="https://juricaf.org/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml">
 
-	<script type="text/javascript" src="Juricaf_fichiers/jsapi"></script>
-
- 	<link rel="search" href="https://juricaf.org/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml">
 </head>
-
-
 <body>
 <div class="site">
-
-<div class="head">
+<div class="head" >
   <div class="menu_bar" >
     <a onclick="openMenu()"><i id="icon_menu"></i></a>
+    <h1 id="headbar">JURICAF.ORG</h1>
   </div>
   <div class="menu" id="menu"><ul>
     <li><a href="https://juricaf.org/documentation/a_propos.php">À PROPOS</a></li>
@@ -64,17 +52,14 @@
   <tbody><tr>
     <td width="104px" height="250px" align="center">
       <a href="https://juricaf.org/recherche"><img id="logo" src="Juricaf_fichiers/juricaf.png" alt="Juricaf"></a><br>
-<div id="slogan"><h2>La jurisprudence francophone des cours suprêmes</h2></div>
+      <div id="slogan"><h2>La jurisprudence francophone des cours suprêmes</h2></div>
     <input type="text" name="q" tabindex="10" placeholder="Rechercher parmi 1 050&nbsp;541 décisions provenant de 45 pays et institutions francophones"><br>
     <input type="submit" value="Rechercher" tabindex="20"> <a href="https://juricaf.org/recherche_avancee">Recherche avancée</a>
-
-  </td>
+    </td>
   </tr></tbody>
 </table>
 </form>
 </div>
-
-
 <div class="reseaux_sociaux">
   <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="Juricaf_fichiers/img/icon/logo_facebook.png" alt="Facebook" title="Devenez fan sur Facebook"></a>
   <a href="https://twitter.com/juricaf" target="_blank"><img src="Juricaf_fichiers/img/icon/logo_twitter.png" alt="Twitter" title="Suivez nous sur Twitter"></a>
@@ -82,8 +67,7 @@
 </div>
 
 <div class="stats">
-
-<div class="pays">
+<div class="pays" id="pays_content">
 	<div class="payscols">
 	  <table><tbody>
     <tr>
@@ -155,28 +139,27 @@
 	</div>
 </div>
 
-<div class="pays">
+<div class="icon_more" >
+  <a onclick="openPays()"><i id="icon_rolldown"></i></a>
+</div>
+
+<div class="laureat">
 <center><h4><img src="Juricaf_fichiers/iexpo.jpg">
 <p>Lauréat du prix I-Expo 2012 <br>catégorie "Open Data"
 </p><p><a href="http://iall.org/webAward.html" target="_blank"><img src="Juricaf_fichiers/iall.jpg"></a></p></h4></center>
-</div>
-
-<div style="clear:both;">&nbsp;</div>
-
-
-</div>
-
-<div class="newsfeed">
-			<a href="https://www.lemondedudroit.fr/interviews/66303-jean-paul-jean-ahjucaf.html" target="new">Interview de JP Jean secrétaire général de l’AHJUCAF dans « Le Monde du droit » sur l’accès à la jurisprudence francophone.</a><br><br><br>
 </div>
 
 <div id="AHJUCAF_site">
   <a href="http://www.ahjucaf.org/"><img  src="Juricaf_fichiers/ahjucafSite.jpg" alt="Association des cours judiciaires suprêmes francophones"></a>
 <a href="http://www.ahjucaf.org/">Visitez le nouveau site de l'AHJUCAF</a>
 </div>
+<div style="clear:both;">&nbsp;</div>
+</div>
 
-<div class="top_page"><a id="top" href="#">Haut de page<img src="Juricaf_fichiers/fleche_haut.png" alt="Haut de page"></a></div>
 
+<div class="newsfeed">
+			<a href="https://www.lemondedudroit.fr/interviews/66303-jean-paul-jean-ahjucaf.html" target="new">Interview de JP Jean secrétaire général de l’AHJUCAF dans « Le Monde du droit » sur l’accès à la jurisprudence francophone.</a><br><br><br>
+</div>
 
 </div>
 </div>
@@ -186,14 +169,17 @@
 </body>
 <footer>
 
+  <a href="http://www.ahjucaf.org/"><img style="height:100px;"  src="Juricaf_fichiers/img/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones"></a>
+  <img style="width: 180px;height: 80px;float:right;" src="Juricaf_fichiers/img/francophonie.png" alt="Organisation internationale de la francophonie">
+
+  <div class="top_page"><a id="top" href="#">Haut de page<img src="Juricaf_fichiers/fleche_haut.png" alt="Haut de page"></a></div>
+
   <div class="bottom">
        <p>Juricaf est un projet de l'AHJUCAF, l'association des cours judiciaires suprêmes francophones,<br>
        réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;I).<br>
        Il est soutenu par l'Organisation internationale de la Francophonie et le Fonds francophone des inforoutes.</p>
  </div>
 
- <a href="http://www.ahjucaf.org/"><img style="height:100px;"  src="Juricaf_fichiers/img/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones"></a>
- <img style="width: 180px;height: 80px;float:right;" src="Juricaf_fichiers/img/francophonie.png" alt="Organisation internationale de la francophonie">
 
 </footer>
 
