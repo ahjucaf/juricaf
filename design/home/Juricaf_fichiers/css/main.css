@@ -549,20 +549,24 @@ footer{
 @media screen and (max-width: 640px) {
   .menu{
     display: none;
-    background-color: #B2B7D2;
+    background-color: #0051b5;
   }
   .menu li{
     display: block;
     text-align: left;
     width: 100%;
     margin-left: 0;
-    border-bottom: 1px solid #0051b5;
+    border-bottom: 1px solid black;
+  }
+  .menu a {
+    color: white
   }
   .menu_bar{
     display: block;
     background-color: #0051b5;
     padding: 5px;
     text-align: center;
+    cursor: pointer;
   }
   #icon_menu{
     display: block;
