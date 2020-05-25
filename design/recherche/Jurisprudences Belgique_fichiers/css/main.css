@@ -350,17 +350,20 @@ td {
   float:left;
   position:relative;
   bottom:10px;
+  margin-left:10px;
 }
 
 .affiner a:hover, .affiner a:focus {
   text-decoration:underline;
+  text-align: center;
 }
 
 .affinercols {
-  width:250px;
+  max-width:250px;
   padding:10px 15px;
   background-color:#F7F8F9;
   border:1px solid #f1f1f1;
+  margin: auto;
 }
 
 .affinercols  ul {
@@ -383,8 +386,11 @@ td {
 }
 
 .resultat {
-  margin-left:300px;
+  margin-left:30%;
+  margin-right: 10px;
+  /* margin: auto; */
 }
+
 
 .resultatcols a:hover h3, .resultat a:focus h3  {
   text-decoration:underline;
@@ -393,7 +399,7 @@ td {
 .resultatcols {
   background-color:#f7f8f9;
   border:1px solid #F1F1F1;
-  padding:5px;
+  padding:20px;
   margin-bottom:5;
 }
 
@@ -546,7 +552,7 @@ footer{
 }
 
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 950px) {
   .menu{
     display: none;
     background-color: #0051b5;
@@ -564,7 +570,6 @@ footer{
   .menu_bar{
     display: block;
     background-color: #0051b5;
-    padding: 5px;
     text-align: center;
     cursor: pointer;
   }
@@ -664,4 +669,37 @@ footer{
   .bottom{
     height: 150px;
   }
+
+  .recherche {
+    text-align: justify;
+    display: block;
+  }
+
+  .resultat {
+    display: block;
+    /* margin-left:300px; */
+  margin:0;
+
+  }
+
+  .affiner {
+    /* float:left; */
+/* display: block; */
+    bottom:10px;
+    width: 80% !important;
+    float: none;
+    margin:auto;
+    padding: 5px 0;
+    text-align: center;
+  }
+
+  .resultat h3{
+  text-align: center;
+  }
+  .navigation {
+    font-weight:bold;
+    width: auto;
+  }
+
+
 }
