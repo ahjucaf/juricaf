@@ -82,7 +82,7 @@
               <tbody><tr>
                 <td width="100%" height="250px" align="center">
                   <a href="https://juricaf.org/recherche"><img id="logo" src="testarret2_fichiers/img/juricaf.png" alt="Juricaf"></a><br>
-                  <img src="testarret2_fichiers/slogan.png" alt="La jurisprudence francophone des cours suprêmes" itemprop="image"><br>
+                    <div id="slogan"><h2>La jurisprudence francophone des cours suprêmes</h2></div> <!--misàjour slogan-->
                   <input type="text" name="q" value=" " tabindex="10"><br>
                   <input type="submit" value="Rechercher" tabindex="20"> <a href="https://juricaf.org/recherche_avancee">recherche avancée</a>
                 </td>

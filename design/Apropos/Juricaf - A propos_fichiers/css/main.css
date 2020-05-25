@@ -1,0 +1,738 @@
+/* RESET */
+html, body{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color:#000000; font-family: Quicksand, Tahoma, Geneva, Arial, Sans-serif; font-size:1em;
+  scroll-behavior: smooth;
+  }
+
+* { font-size: 1em;margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline;}
+
+.main { clear: both; width: 100%; }
+
+a {
+  color: #23244a;
+}
+ul,li {
+  list-style-type: none;
+}
+h1 {
+  padding:10px;
+  height:20px;
+  width:100%;
+  background-color:#cfd7de;
+  border:1px solid #b9bcbf;
+  /* margin:10px 0; */
+  text-align:center;
+}
+
+h2 {
+  color: #000000;
+  text-decoration:underline;
+  padding:5px;
+}
+h3 {
+  color: #426e98;
+  margin:10px 0;
+  font-weight:bold;
+}
+h4 {
+  color: #000000;
+  margin:5px 0;
+  font-weight:bold;
+}
+
+.menu {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 100px;
+  line-height:35px;
+  margin: auto;
+  background-image: url('../images/bg_nav.gif');
+  background-repeat:repeat-x;
+  text-align:center;
+}
+
+.menu ul, .menu li {
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  margin: 10px;
+  margin-top: 0;
+  font-weight: bold;
+  letter-spacing: 2px;
+  display: inline-flex;
+}
+
+.menu a {
+  color: #030F57;
+  font-size: .8em;
+  text-decoration: none;
+  padding: 10px;
+  margin:5px 5px;
+}
+
+.menu a:hover, .menu a:focus {
+  color: #f09241;
+  border-bottom: 2px solid #002a6e;
+}
+
+.menu_bar{
+  width: 100%;
+  min-height:50px;
+  display: none;
+}
+
+#icon_menu{
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+  display:none;
+  background-image: url('../img/icon/hamburger_icon.png');
+  background-size: contain;
+}
+
+#headbar{
+  display: none
+}
+
+#logo {
+  width: 100px;
+  height: 100px;
+  padding:10px;
+  padding-top: 0;
+}
+
+#slogan {
+  width: auto;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+#slogan h2{
+  font-size: 1em;
+  text-decoration: none;
+  margin: 10px;}
+
+/* Reseaux sociaux */
+.reseaux_sociaux {
+  position:fixed;
+  bottom: 0;
+  width: 150px;
+}
+
+.reseaux_sociaux img {
+  width: 25px;
+  height: 25px;
+  padding: 10px;
+  margin: 0 0 0 -2px;
+  opacity: 1;
+}
+
+.reseaux_sociaux img:hover, .reseaux_sociaux img:focus {
+  opacity: 0.7;
+}
+
+.form_recherche input[type="text"] {
+  color:#7b7b7b;
+  height:20px;
+  padding:10px;
+  width: 80%;
+  margin:auto;
+  margin-bottom: 20px;
+  background-color:#F7F7F7;
+  border: none;
+  border-bottom:1px solid #7f7f7f;
+}
+
+.form_recherche  form table td{
+  width:800px;
+  height:auto;
+}
+
+.form_recherche form table {
+  margin: auto;
+  margin-top:20px;
+}
+
+input[type="submit"] {
+  color:#FFFFFF;
+  padding:5px 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 10px;
+  height:29px;
+  background:url('../images/btn_recherche.png') no-repeat;
+  background-color: #0051b5;
+}
+
+input[type="submit"]:hover, input[type="reset"]:focus {
+  cursor:pointer;
+}
+input[type="reset"] {
+  color:#FFFFFF;
+  padding:5px 10px;
+  margin: 5px;
+  height:29px;
+  border:none;
+  background:url('../images/btn_recherche.png') no-repeat;
+}
+
+input[type="reset"]:hover, input[type="reset"]:focus {
+  cursor:pointer;
+}
+
+.newsfeed{
+  top: 100px;
+  width: 300px;
+  height: 120px;
+  text-align: center;
+  padding: 10px;
+  margin: auto;
+  margin-top: 0;
+}
+
+.newsfeed a {
+  text-decoration: none;
+  color: black;
+}
+
+.pays {
+  display: block;
+  border:2px solid #ededed;
+  border-bottom: none;
+  overflow: hidden;
+  transition: height 0.5s ease;
+}
+
+.payscols {
+  width:100%;
+  height: auto;
+  padding:15px 15px;
+  margin:auto;
+  border:1px solid #f1f1f1;
+}
+
+.payscols table{ margin: auto;}
+.payscols table td {
+  min-width:150px;
+}
+
+.payscols  a {
+  text-decoration: none;
+  margin: 10px;
+}
+
+.payscols  a:hover, .payscols  a:focus {
+  color:#F5821F;
+}
+
+.icon_more{
+  border: 2px solid #ededed;
+  border-top: none;
+  margin-bottom: 40px;
+}
+
+#icon_rolldown{
+  display: none;
+  width: 20px;
+  height: 20px;
+  margin: auto;
+  background-image: url('../img/icon/roll_menu.png');
+  background-size: contain;
+}
+
+.recherche {
+  text-align: justify;
+}
+
+.arret {
+  text-align: justify;
+  width:80%;
+  margin:auto;
+}
+
+.arret p {
+   padding:10px;
+}
+
+.arret .split_left {
+  width:450px;
+  float:left;
+}
+
+.arret .split_right {
+   width:300px; float:right
+}
+
+td {
+  padding-top:8px;
+}
+
+.stats .plus {
+  padding:10px;
+  text-align: center;
+}
+
+.juridcols {
+  margin-bottom: 0;
+}
+
+.rss {
+  margin-left:730px;
+}
+
+.rss img {
+  position:relative;
+  top: 6px;
+  left: 5px;
+  height:22px;
+}
+
+.rsscols {
+  background-color:#F7F8F9;
+  border:1px solid #f1f1f1;
+  padding:5px 15px;
+}
+
+.rsscols ul, .rsscols li {
+  list-style-type: none;
+  margin: 5px 0;
+  padding: 0;
+}
+
+.rsscols  a {
+  text-decoration:none;
+}
+
+.rsscols  a:hover, .payscols  a:focus {
+  color:#F5821F;
+}
+
+.top_page {
+  text-align: right;
+  margin:10px;
+}
+
+.top_page #top{
+  text-decoration: none;
+}
+
+.top_page #top:hover, .top_page #top:focus{
+  text-decoration: underline;
+}
+
+.top_page #top img{
+  margin:0 10px;
+}
+
+.separator {
+  height: 1px;
+  background-color:#555555;
+  margin: 10px 0;
+}
+
+.separator_h {
+  min-width:500px;
+}
+
+.recherche a{
+  text-decoration:none;
+}
+
+#fil_ariane a {
+  text-decoration:underline;
+}
+
+.affiner {
+  float:left;
+  position:relative;
+  bottom:10px;
+  margin-left:10px;
+}
+
+.affiner a:hover, .affiner a:focus {
+  text-decoration:underline;
+  text-align: center;
+}
+
+.affinercols {
+  max-width:250px;
+  padding:10px 15px;
+  background-color:#F7F8F9;
+  border:1px solid #f1f1f1;
+  margin: auto;
+}
+
+.affinercols  ul {
+  margin-bottom:10px;
+}
+
+.affinercols li  li {
+  margin-left:20px;
+}
+
+.affinercols li {
+  margin-bottom:2px;
+}
+
+.affinercols li li img {
+  position:relative;
+  right:5px;
+  top:1px;
+  margin-top:3px;
+}
+
+.resultat {
+  margin-left:30%;
+  margin-right: 10px;
+  /* margin: auto; */
+}
+
+
+.resultatcols a:hover h3, .resultat a:focus h3  {
+  text-decoration:underline;
+}
+
+.resultatcols {
+  background-color:#f7f8f9;
+  border:1px solid #F1F1F1;
+  padding:20px;
+  margin-bottom:5;
+}
+
+.resultatcols h3 img {
+  position:relative;
+  top:1px;
+  margin-right:5px;
+}
+
+.navigation a:hover, .navigation a:focus{
+  text-decoration:underline;
+}
+
+.navigation {
+  font-weight:bold;
+}
+
+#align_right {
+  text-align:right;
+  float:right;
+}
+
+.resultat em {
+  font-weight: bold;
+}
+
+.resultat .extra {
+  color: gray;
+}
+
+.extra {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.flash {
+  text-align: center;
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+}
+
+.notice {
+  color: green;
+}
+
+.error_list {
+  color: red;
+  list-style: none;
+  padding: 0;
+}
+
+.options {
+  padding-bottom: 15px;
+  clear: left;
+  float: left;
+}
+
+.facets {
+  float: right;
+  margin-left: 10px;
+  margin-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 20px;
+  border: 1px solid #EBEBEB;
+  border-right: none;
+}
+
+.facets ul {
+  list-style-type: none;
+}
+
+.recherche h1 {
+  float: left;
+}
+
+.pager{
+  margin: 20px;
+}
+
+.w3c a {
+  color: #777677;
+}
+
+.search_out img {
+  margin-bottom: -2px;
+}
+
+.text_input {
+  width: 70%;
+}
+
+.calendars {
+  float: left;
+  margin-right: 5%;
+}
+#print {
+  float: right;
+  margin-left: 8px;
+}
+
+#searchbox {
+  background-color: #fff;
+  border-top: 1px solid #EBEBEB;
+  border-bottom: 1px solid #EBEBEB;
+  padding: 2px;
+  display: none;
+}
+
+#collection {
+  font-weight: bold;
+}
+
+.highlighted {
+  background-color: #EBEBEB;
+}
+
+.laureat{
+  display: inline-block;
+  width: 50%;
+}
+
+#AHJUCAF_site{
+  align:center;
+  width: 300px;
+  margin: auto;
+  display: inline-block
+}
+
+
+
+
+.bottom {
+  height:150px;
+  width: 100%;
+  background-color: #0a2654;
+  background-image:url('../images/bg_footer.gif');
+  background-repeat:repeat-x;
+  font-size:0.8em;
+  margin:auto;
+}
+.bottom p {
+  color:#f5f5f5;
+  text-align: center;
+  padding:15px;
+}
+
+.lesliens a{
+  margin: auto;
+  text-align: left;
+}
+
+.lesliens {
+  margin: auto;
+  width:80%;
+  text-align: left;
+  padding-bottom: 10px;
+
+}
+
+
+@media screen and (max-width: 950px) {
+  .menu{
+    display: none;
+    background-color: #0051b5;
+  }
+  .menu li{
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin-left: 0;
+    border-bottom: 1px solid black;
+  }
+  .menu a {
+    color: white
+  }
+  .menu_bar{
+    display: block;
+    background-color: #0051b5;
+    text-align: center;
+    cursor: pointer;
+  }
+  #icon_menu{
+    display: block;
+    float: left;
+  }
+
+  #headbar{
+    color: #FFF;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    margin: auto;
+    background-color: inherit;
+    border: none;
+    width: 300px;
+    display: block;
+  }
+
+  .form_recherche  form table td{
+    width:100%;
+    height:auto;
+  }
+  .pays{
+    height: 280px;
+    padding-bottom: 50px;
+  }
+
+  #icon_rolldown{
+    display: block;
+  }
+
+  .reseaux_sociaux{
+    position: relative;
+    width:150px;
+    height: auto;
+    margin: auto;
+    padding: 0;
+    display: block;
+  }
+  .reseaux_sociaux img{
+    float: none;
+    display: inline-block;
+  }
+
+  /* table{
+    display: inline-block;
+    width:80%;
+    margin:auto;
+    text-align: center;
+    border: 2px solid red;
+  } */
+  #imprimante{
+    margin-left:25px;
+
+
+  }
+
+  .laureat{
+    width: 350px;
+    margin: auto;
+  }
+
+  #AHJUCAF_site{
+    display: block;
+  }
+  .lesliens {
+    width:80%;
+    margin:auto;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  h1 {
+   font-size:16px;
+   padding:10px;
+   height:auto;
+   width:80%;
+   background-color: white;
+   border:3px solid #b9bcbf;
+   margin:auto;
+   text-align: center;
+ }
+ .arret {
+   text-align: justify;
+   width:100%;
+   padding:auto;
+ }
+ .arret p {
+   padding:10px;
+ }
+
+ .arret .split_left {
+   width:450px;
+   float:left;
+ }
+
+ .arret .split_right {
+   width:300px;
+   float:right
+ }
+
+ /* .bottom{
+   background-color: black;
+   height: auto;
+ }
+
+  .bottom{
+    height: 150px;
+  } */
+
+  .recherche {
+    text-align: justify;
+    display: block;
+  }
+
+  .resultat {
+    display: block;
+    /* margin-left:300px; */
+  margin:0;
+
+  }
+
+  .affiner {
+    /* float:left; */
+/* display: block; */
+    bottom:10px;
+    width: 80% !important;
+    float: none;
+    margin:auto;
+    padding: 5px 0;
+    text-align: center;
+  }
+
+  .resultat h3{
+  text-align: center;
+  }
+  .navigation {
+    font-weight:bold;
+    width: auto;
+  }
+
+  h3{
+    text-align: center;
+  }
+  .infosarret{
+    width:90%;
+    margin:auto;
+  }
+  #typeaff{
+    margin-left: 8px;
+  }
+}
