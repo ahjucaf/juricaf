@@ -644,8 +644,8 @@ td {
   .reseaux_sociaux{
     display: none;
   }
-  #imprimante{
-    margin-left:25px;
+  #imprimante{               /*honorine*/
+    display:none;
   }
 
   .laureat{
@@ -657,10 +657,10 @@ td {
     display: block;
   }
   .lesliens {
-    width:80%;
+    width:100%;
     margin:auto;
     text-align: center;
-    margin-bottom: 5px;
+
   }
   h1 {
    font-size:16px;
@@ -732,6 +732,7 @@ td {
 
   h3{
     text-align: center;
+    margin: auto;
   }
   .infosarret{
     width:90%;
@@ -739,5 +740,9 @@ td {
   }
   #typeaff{
     margin-left: 8px;
+  }
+
+  .lespentrop{                  /*honorine*/
+    display:none;
   }
 }
