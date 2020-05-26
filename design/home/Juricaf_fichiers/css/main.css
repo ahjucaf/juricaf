@@ -4,11 +4,11 @@ html, body{
   height: 100%;
   margin: 0;
   padding: 0;
-  color:#000000; font-family: Quicksand, Tahoma, Geneva, Arial, Sans-serif; font-size:1em;
+  color:#000000; font-family: Quicksand, Tahoma, Geneva, Arial, Sans-serif;
   scroll-behavior: smooth;
   }
 
-* { font-size: 1em;margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline;}
+* { font-size: 1em;margin: 0; padding: 0; border: 0; font: inherit; vertical-align: baseline;}
 
 .main { clear: both; width: 100%; }
 
@@ -47,9 +47,10 @@ h4 {
   display: block;
   width: 100%;
   height: auto;
-  min-height: 100px;
+  min-height: 60px;
   line-height:35px;
   margin: auto;
+  background-color: #134d94;
   background-image: url('../images/bg_nav.gif');
   background-repeat:repeat-x;
   text-align:center;
@@ -69,7 +70,7 @@ h4 {
 }
 
 .menu a {
-  color: #030F57;
+  color: white;
   font-size: .8em;
   text-decoration: none;
   padding: 10px;
@@ -78,7 +79,6 @@ h4 {
 
 .menu a:hover, .menu a:focus {
   color: #f09241;
-  border-bottom: 2px solid #002a6e;
 }
 
 .menu_bar{
@@ -101,8 +101,8 @@ h4 {
 }
 
 #logo {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   padding:10px;
   padding-top: 0;
 }
@@ -115,12 +115,12 @@ h4 {
 #slogan h2{
   font-size: 1em;
   text-decoration: none;
-  margin: 10px;}
+  margin: 10px;
+}
 
 /* Reseaux sociaux */
 .reseaux_sociaux {
-  position:fixed;
-  bottom: 0;
+  float: right;
   width: 150px;
 }
 
@@ -549,7 +549,7 @@ footer{
 @media screen and (max-width: 640px) {
   .menu{
     display: none;
-    background-color: #0051b5;
+    background-color: #134d94;
   }
   .menu li{
     display: block;
@@ -563,13 +563,17 @@ footer{
   }
   .menu_bar{
     display: block;
-    background-color: #0051b5;
+    background-color: #134d94;
     padding: 5px;
     text-align: center;
     cursor: pointer;
+    vertical-align: middle;
+  }
+  #logo{
+    display: none;
   }
   #icon_menu{
-    display: block;
+    display: inline-block;
     float: left;
   }
 
@@ -582,33 +586,45 @@ footer{
     background-color: inherit;
     border: none;
     width: 300px;
-    display: block;
+    display: inline-block;
+  }
+  #slogan h2{
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .form_recherche input[type="text"] {
+    width: 80%;
+    margin:0;
   }
 
   .form_recherche  form table td{
     width:100%;
     height:auto;
   }
+  .form_recherche  form table{
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
   .pays{
     height: 280px;
     padding-bottom: 50px;
   }
-
+  #menu_logo{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    float: right;
+    margin-right: 10px;
+  }
   #icon_rolldown{
     display: block;
   }
+  #btn_avance{
+    display: none;
+  }
 
   .reseaux_sociaux{
-    position: relative;
-    width:150px;
-    height: auto;
-    margin: auto;
-    padding: 0;
-    display: block;
-  }
-  .reseaux_sociaux img{
-    float: none;
-    display: inline-block;
+    display: none;
   }
 
   table,tbody,tr,td {
@@ -654,11 +670,6 @@ footer{
  .arret .split_right {
    width:300px;
    float:right
- }
-
- .bottom{
-   background-color: black;
-   height: auto;
  }
 
   .bottom{
