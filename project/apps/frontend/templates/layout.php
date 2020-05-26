@@ -11,17 +11,26 @@
     <?php include_javascripts() ?>
 	<script type="text/javascript" src="/js/opensearch.js"></script>
 	<script type="text/javascript" src="/js/jquery.qtip.min.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function()
-{		$('a[title]').qtip();
-});
-	</script>
+	<script type="text/javascript"> $(document).ready(function(){		$('a[title]').qtip();});</script>
+  <script type="text/javascript">function openMenu() {var menu = document.getElementById("menu"); if (menu.style.display === "block") {menu.style.display = "none";} else {menu.style.display = "block";}}</script>
+  <script type="text/javascript">function openPays() {var pays = document.getElementById("pays_content");var icon = document.getElementById("icon_rolldown"); if (pays.style.display === "block") {pays.style.height = "none";} else {pays.style.height = "auto";icon.style.display="none"}}</script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
  	<link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
   </head>
   <body>
     <div class="site">
       <div class="head">
+
+        <!---->
+        <div class="mobile_navigation" >
+          <a onclick="openMenu()"><i id="icon_menu"></i></a>
+          <h1 id="Header">JURICAF.ORG</h1>
+          <img class="juricaf_logo" src="Juricaf_fichiers/img/juricaf.png">
+        </div>
+        <!---->
+
+
+
         <div class="menu">
           <ul>
               <li><a href="/documentation/a_propos.php">A propos</a></li>
@@ -57,7 +66,7 @@
             </form>
           </div>
           <?php echo $sf_content; ?>
-		<div align="center">	 
+		<div align="center">
 			<a  href="https://www.lemondedudroit.fr/interviews/66303-jean-paul-jean-ahjucaf.html" target="new">Interview de JP Jean secrétaire général de l’AHJUCAF dans « Le Monde du droit » sur l’accès à la jurisprudence francophone.</a><br><br><br>
 		</div>
 		  <div class="top_page"><a id="top" href="#">Haut de page<img src="/images/fleche_haut.png" alt="Haut de page"/></a></div>
