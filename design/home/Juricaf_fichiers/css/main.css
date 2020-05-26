@@ -567,7 +567,6 @@ footer{
     padding: 5px;
     text-align: center;
     cursor: pointer;
-    vertical-align: middle;
   }
   #logo{
     display: none;
@@ -579,13 +578,13 @@ footer{
 
   #headbar{
     color: #FFF;
-    font-size: 2em;
+    font-size: 6vw;
     font-weight: bold;
     text-align: center;
     margin: auto;
     background-color: inherit;
     border: none;
-    width: 300px;
+    width: 100px;
     display: inline-block;
   }
   #slogan h2{
@@ -610,11 +609,11 @@ footer{
     padding-bottom: 50px;
   }
   #menu_logo{
-    display: inline-block;
-    width: 60px;
-    height: 60px;
+    width: 15vw;
+    height: 15vw;
     float: right;
-    margin-right: 10px;
+    padding-left: 10px;
+    margin-top: -2px;
   }
   #icon_rolldown{
     display: block;
