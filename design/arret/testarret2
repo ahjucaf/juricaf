@@ -91,7 +91,7 @@
 
           <div class="lesliens">  <!--ajout d'un div et de la classe les liens-->
             <a id="lienpageacc" href="http://www.juricaf.org/">Page d'accueil</a><!--ajout de l'Identifiant -->
-              <span id="fleche"> -----&gt; </span>     <!--ajout de l'Identifiant fleche-->
+              <span id="fleche"> &gt; </span>
             <a id="lienpageres" href="http://www.juricaf.org/recherche/">Résultats de la recherche <!--ajout de l'Identifiant -->
              <b> </b>
            </a>
@@ -132,7 +132,7 @@
       </table>
 
 
-      <p></p>
+      <p class="lespentrop"></p>
 
 <script type="text/javascript"> function showCD(str){if (str=="")  {  document.getElementById("txtHint").innerHTML="";  return;  }if (window.XMLHttpRequest) {  xmlhttp=new XMLHttpRequest();}
 else {  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");  }xmlhttp.onreadystatechange=function()  {if (xmlhttp.readyState==4 && xmlhttp.status==200){document.getElementById("txtHint").innerHTML=xmlhttp.responseText;}}
@@ -147,8 +147,8 @@ google.setOnLoadCallback(OnLoad);</script>
   </p>
   </span>
   </em>
-  <br>
-  <p></p>
+  <br class="lespentrop">
+  <p class="lespentrop"></p>
   <h3>NUMEROTATION : </h3>
   <hr> <!--à enlever-->
 
