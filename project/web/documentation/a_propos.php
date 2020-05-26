@@ -16,23 +16,34 @@
   <body>
     <div class="site">
       <div class="head">
-        <div class="menu">
+
+
+
+        <div class="menu_bar" > <!--26/05-->
+          <a onclick="openMenu()"><i id="icon_menu"></i></a>
+          <h1 id="headbar">JURICAF.ORG</h1>
+            <img id="menu_logo" src="/img/juricaf.png"> <!--Ajout d'image-->
+        </div>
+
+
+        <div class="menu" id="menu"> <!--26/05-->
           <ul>
-            <li><a href="http://www.juricaf.org/documentation/a_propos.php">A propos</a></li>
-            <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Etendue des collections</a></li>
-            <li><a href="http://www.juricaf.org/documentation/partenaires.php">Partenaires</a></li>
-            <li><a href="http://www.juricaf.org/documentation/mentions_legales.php">Mentions légales</a></li>
-	    <li><a href="http://www.juricaf.org/documentation/contact.php">Contact</a></li>
-			
+            <li><a href="http://www.juricaf.org/documentation/a_propos.php">À PROPOS</a></li><!--26/05-->
+            <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">ÉTENDUE DES COLLECTIONS</a></li><!--26/05-->
+            <li><a href="http://www.juricaf.org/documentation/partenaires.php">PARTENAIRES</a></li><!--26/05-->
+            <li><a href="http://www.juricaf.org/documentation/mentions_legales.php">MENTIONS LEGALES</a></li><!--26/05-->
+	    <li><a href="http://www.juricaf.org/documentation/contact.php">CONTACT</a></li><!--26/05-->
+
             </ul>
         </div>
       </div>
 	  <div class="reseaux_sociaux">
 
-	   <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
-          <a href="http://twitter.com/juricaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
-	<a href="https://itunes.apple.com/fr/app/id587420315?mt=8&affId=1578782" target="_blank"><img src="/images/appstore.png" alt="Appstore" title="Accs  la version IPhone"/></a>
+	   <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="/img/icon/logo_facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a><!--26/05-->
+     <a href="http://twitter.com/juricaf" target="_blank"><img src="/img/icon/logo_twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a><!--26/05-->
+	   <a href="https://itunes.apple.com/fr/app/id587420315?mt=8&affId=1578782" target="_blank"><img src="/img/icon/logo_apple.png" alt="Appstore" title="Accs  la version IPhone"/></a><!--26/05-->
       </div>
+
       <div class="main">
         <div class="content">
           <div class="form_recherche">
@@ -40,9 +51,9 @@
             <table summary="Rechercher">
               <tr>
                 <td>
-                  <a href="http://www.juricaf.org/recherche"><img id="logo" src="/images/juricaf.png" alt="Juricaf" /></a><br />
-                  <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des cours suprêmes</span><br />
-                  <input type="text" style="width: 300px; margin-top: 5px;" name="q" value="" tabindex="10" /><br />
+                  <a href="http://www.juricaf.org/recherche"><img id="logo" src="/img/juricaf.png" alt="Juricaf" /></a><br /><!--26/05-->
+                  <div id="slogan"><h2>La jurisprudence francophone des cours suprêmes</h2></div> <!--26/05-->
+                  <input type="text" name="q" tabindex="10" placeholder="Rechercher parmi  1  050&nbsp; 541  décisions provenant de 45 pays et institutions francophones"><br><!--26/05-->
                   <input type="submit" value="Rechercher" tabindex="20" /> <a href="#">recherche avancée</a>
                 </td>
               </tr>
@@ -81,8 +92,9 @@
           </div>
         </div>
       </div>
-	 <a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
-	 <img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
+	 <a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/img/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones" /></a><!--26/05-->
+	 <img style="float: right; margin-right: 10px;" src="/img/francophonie.png" alt="Organisation internationale de la francophonie" /><!--26/05-->
+<div class="top_page"><a id="top" href="#">Haut de page<img src="/img/fleche_haut.png" alt="Haut de page"></a></div><!--26/05-->
       <div class="bottom">
         <p>Juricaf est un projet de l'AHJUCAF, l'association des cours judiciaires suprêmes francophones,<br />
         réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;I).<br />
@@ -113,5 +125,3 @@
     </script>
   </body>
 </html>
-
-
