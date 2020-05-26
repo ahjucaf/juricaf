@@ -1,4 +1,3 @@
-/* RESET */
 html, body{
   width: 100%;
   height: 100%;
@@ -24,7 +23,8 @@ h1 {
   width:100%;
   background-color:#cfd7de;
   border:1px solid #b9bcbf;
-  margin:10px 0;
+  /* margin:10px 0; */
+  text-align:left;
 }
 
 h2 {
@@ -47,9 +47,10 @@ h4 {
   display: block;
   width: 100%;
   height: auto;
-  min-height: 100px;
+  min-height: 60px;
   line-height:35px;
   margin: auto;
+  background-color: #134d94;
   background-image: url('../images/bg_nav.gif');
   background-repeat:repeat-x;
   text-align:center;
@@ -69,7 +70,7 @@ h4 {
 }
 
 .menu a {
-  color: #030F57;
+  color: white;
   font-size: .8em;
   text-decoration: none;
   padding: 10px;
@@ -78,7 +79,6 @@ h4 {
 
 .menu a:hover, .menu a:focus {
   color: #f09241;
-  border-bottom: 2px solid #002a6e;
 }
 
 .menu_bar{
@@ -86,8 +86,6 @@ h4 {
   min-height:50px;
   display: none;
 }
-
-
 
 #icon_menu{
   width: 30px;
@@ -101,19 +99,10 @@ h4 {
 #headbar{
   display: none
 }
-/*
-#logo {
-  width: 100px;
-  height: 100px;
-  padding:10px;
-  padding-top: 0;
-} */
-
-
 
 #logo {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   padding:10px;
   padding-top: 0;
 }
@@ -126,14 +115,8 @@ h4 {
 #slogan h2{
   font-size: 1em;
   text-decoration: none;
-  margin: 10px;}
-
-/* Reseaux sociaux */
-/* .reseaux_sociaux {
-  position:fixed;
-  bottom: 0;
-  width: 150px;
-} */
+  margin: 10px;
+}
 
 /* Reseaux sociaux */
 .reseaux_sociaux {
@@ -268,7 +251,8 @@ input[type="reset"]:hover, input[type="reset"]:focus {
 
 .arret {
   text-align: justify;
-  width:1024px;
+  width:80%;
+  margin:auto;
 }
 
 .arret p {
@@ -548,13 +532,11 @@ td {
   display: inline-block
 }
 
-/* Footer */
-footer{
 
-}
+
 
 .bottom {
-  height:100px;
+  height:150px;
   width: 100%;
   background-color: #0a2654;
   background-image:url('../images/bg_footer.gif');
@@ -568,11 +550,24 @@ footer{
   padding:15px;
 }
 
+.lesliens a{
+  margin: auto;
+  text-align: left;
+}
+
+.lesliens {
+  margin: auto;
+  width:80%;
+  text-align: left;
+  padding-bottom: 10px;
+
+}
+
 
 @media screen and (max-width: 950px) {
   .menu{
     display: none;
-    background-color: #0051b5;
+    background-color: #134d94;
   }
   .menu li{
     display: block;
@@ -584,43 +579,21 @@ footer{
   .menu a {
     color: white
   }
-  /* .menu_bar{
-    display: block;
-    background-color: #0051b5;
-    text-align: center;
-    cursor: pointer;
-  } */
   .menu_bar{
     display: block;
     background-color: #134d94;
     padding: 5px;
     text-align: center;
     cursor: pointer;
+    vertical-align: middle;
+  }
+  #logo{
+    display: none;
   }
   #icon_menu{
-    display: block;
+    display: inline-block;
     float: left;
   }
-
-
- #menu_logo{
-  width: 15vw;
-  height: 15vw;
-  float: right;
-  padding-left: 10px;
-  margin-top: -2px;
-}
-
-
-.affiner{
-  display: none;
-}
-
-
-
- #logo{
-     display: none;
-   }
 
   #headbar{
     color: #FFF;
@@ -631,42 +604,48 @@ footer{
     background-color: inherit;
     border: none;
     width: 300px;
-    display: block;
+    display: inline-block;
+  }
+  #slogan h2{
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .form_recherche input[type="text"] {
+    width: 80%;
+    margin:0;
   }
 
   .form_recherche  form table td{
     width:100%;
     height:auto;
   }
+  .form_recherche  form table{
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
   .pays{
     height: 280px;
     padding-bottom: 50px;
   }
-
+  #menu_logo{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    float: right;
+    margin-right: 10px;
+  }
   #icon_rolldown{
     display: block;
   }
-
-  /* .reseaux_sociaux{
-    position: relative;
-    width:150px;
-    height: auto;
-    margin: auto;
-    padding: 0;
-    display: block;
-  } */
-  .reseaux_sociaux img{
-    float: none;
-    display: inline-block;
+  #btn_avance{
+    display: none;
   }
-
 
   .reseaux_sociaux{
     display: none;
   }
-  table,tbody,tr,td {
-    display: block;
-    width: auto;
+  #imprimante{
+    margin-left:25px;
   }
 
   .laureat{
@@ -681,19 +660,22 @@ footer{
     width:80%;
     margin:auto;
     text-align: center;
+    margin-bottom: 5px;
   }
   h1 {
    font-size:16px;
    padding:10px;
    height:auto;
    width:80%;
-   background-color: whiteSmoke;
+   background-color: white;
    border:3px solid #b9bcbf;
    margin:auto;
+   text-align: center;
  }
  .arret {
-   text-align: left;
+   text-align: justify;
    width:100%;
+   padding:auto;
  }
  .arret p {
    padding:10px;
@@ -709,14 +691,13 @@ footer{
    float:right
  }
 
- .bottom{
-   /* background-color: black; */
+ /* .bottom{
+   background-color: black;
    height: auto;
  }
-
   .bottom{
     height: 150px;
-  }
+  } */
 
   .recherche {
     text-align: justify;
@@ -749,5 +730,14 @@ footer{
     width: auto;
   }
 
-
+  h3{
+    text-align: center;
+  }
+  .infosarret{
+    width:90%;
+    margin:auto;
+  }
+  #typeaff{
+    margin-left: 8px;
+  }
 }
