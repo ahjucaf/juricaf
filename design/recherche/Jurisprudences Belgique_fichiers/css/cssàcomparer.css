@@ -602,8 +602,24 @@ td {
     display: inline-block;
     float: left;
   }
-  .affiner{
+  /* .affiner.{
     display: none;
+  } */
+
+  .affinercols .cacher{
+    display: none;
+
+  }
+
+  .affiner {
+    display: block;
+    float:left;
+    bottom:10px;
+    width: 100%;
+    float: none;
+    margin:auto;
+    padding: 5px 0;
+    text-align: center;
   }
   #headbar{
     color: #FFF;
@@ -751,16 +767,16 @@ td {
     text-align: center;
   } */
 
-   #affinerMobile  {
+   /* #affinerMobile  {
     /* float:left; */
-display: block;
-    bottom:10px;
+/* display: block; */
+    /* bottom:10px;
     width: 80% !important;
     float: none;
     margin:auto;
     padding: 5px 0;
-    text-align: center;
-  }
+    text-align: center; */
+  /* }  */
 
 
   .resultat h3{
