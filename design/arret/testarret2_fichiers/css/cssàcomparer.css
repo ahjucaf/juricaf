@@ -579,10 +579,9 @@ td {
   .menu a {
     color: white
   }
-  .menu_bar{
+  .menu_bar{                   /*honorine*/
     display: block;
     background-color: #134d94;
-    padding: 5px;
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
