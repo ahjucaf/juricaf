@@ -18,46 +18,53 @@ $_SESSION['token'] = $token;
 
     <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
 <script type="text/javascript" src="/js/jquery.scrollTo-min.js"></script>
+<script type="text/javascript">function openMenu() {var menu = document.getElementById("menu"); if (menu.style.display === "block") {menu.style.display = "none";} else {menu.style.display = "block";}}</script>
     <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
   </head>
   <body>
     <div class="site">
       <div class="head">
-         <div class="reseaux_sociaux">
-          <a href="http://www.parcesmotifs.net/spip.php?page=groupe&amp;id_groupe=12"><img src="/images/help.png" alt="Aide" title="Aide" /></a>
-          <a href="https://www.facebook.com/Juricaf"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook" /></a>
-          <a href="https://twitter.com/#!/juricaf"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter" /></a>
-          <a href="http://www.parcesmotifs.net/spip.php?page=backend"><img src="/images/rss.png" alt="RSS" title="Flux RSS" /></a>
-          <a href="javascript:juricafSearch();"><img src="/images/juricaf_search.png" alt="J" title="Ajouter Juricaf aux moteurs de recherches de votre navigateur" /></a>
+        <!---->
+        <div class="mobile_navigation" >
+          <a onclick="openMenu()"><i id="icon_menu"></i></a>
+          <h1 id="headline"><a href="https://juricaf.org/recherche">JURICAF.ORG</a></h1>
+          <img class="menu_logo" src="/images/juricaf.png">
         </div>
-        <div class="menu">
-          <ul>
-            <li><a href="/documentation/a_propos.php">A propos</a></li>
 
-            <li><a href="/documentation/stats/statuts.php">Étendue des collections</a></li>
-<!---            <li><a href="#">Outils</a></li> -->
-            <li><a href="/documentation/partenaires.php">Partenaires</a></li>
-            <li><a href="/documentation/contact.php">Contact</a></li>
-            <li><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
+        <div class="menu" id="menu">
+          <ul>
+            <li><a href="http://www.juricaf.org/documentation/a_propos.php">A propos</a></li>
+            <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Etendue des collections</a></li>
+            <li><a href="http://www.juricaf.org/documentation/partenaires.php">Partenaires</a></li>
+            <li><a href="http://www.juricaf.org/documentation/mentions_legales.php">Mentions légales</a></li>
+	          <li><a href="http://www.juricaf.org/documentation/contact.php">Contact</a></li>
           </ul>
         </div>
+          <!---->
       </div>
+      <div class="reseaux_sociaux">
+         <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
+         <a href="http://twitter.com/juricaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
+         <a href="https://itunes.apple.com/fr/app/id587420315?mt=8&affId=1578782" target="_blank"><img src="/images/apple.png" alt="Appstore" title="Accs  la version IPhone"/></a>
+     </div>
       <div class="main">
         <div class="content">
+          <!--MIS A JOUR-->
           <div class="form_recherche">
             <form method="get" action="/recherche">
-            <table summary="Rechercher">
-              <tr>
-                <td>
-                  <a href="http://www.juricaf.org/recherche"><img id="logo" src="/images/juricaf.png" alt="Juricaf" /></a><br />
-                  <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des cours suprêmes</span><br />
-                  <input type="text" style="width: 300px; margin-top: 5px;" name="q" value="" tabindex="10" /><br />
-                  <input type="submit" value="Rechercher" tabindex="20" /> <a href="#">recherche avancée</a>
-                </td>
-              </tr>
-            </table>
+              <table summary="Rechercher">
+                <tbody><tr>
+                  <td width="104px" height="250px" align="center">
+                    <a href="https://juricaf.org/recherche"><img id="logo" src="/images/juricaf.png" alt="Juricaf"></a><br>
+                    <div id="slogan"><h2>La jurisprudence francophone des cours suprêmes</h2></div>
+                  <input type="text" name="q" tabindex="10" placeholder="Rechercher parmi  1  050&nbsp; 541  décisions provenant de 45 pays et institutions francophones"><br>
+                  <input type="submit" value="Rechercher" tabindex="20"> <a id="btn_avance" href="https://juricaf.org/recherche_avancee">Recherche avancée</a><!--Ajout d'id-->
+                  </td>
+                </tr></tbody>
+              </table>
             </form>
           </div>
+          <!--fin MAJ-->
           <div class="arret">
             <h1>Mentions légales </h1>
             <p>Conformément aux dispositions des articles 6-III et 19 de la loi pour la Confiance dans l'Économie Numérique, nous vous informons que Juricaf est un projet de l’AHJUCAF, l’association des Hautes juridictions de cassation des pays ayant en partage l’usage du français, association française de loi 1901 inscrite au registre des déclarations d’association de la Préfecture de police de Paris, publié au Journal officiel du 9 juin 2001.
@@ -70,7 +77,7 @@ $_SESSION['token'] = $token;
             <p>
               Entrez votre adresse mail: <input type="text" name="email" /><br />
               Message:<br />
-              <textarea name="message" rows="8" cols="50"></textarea><br />
+              <textarea name="message" rows="8" cols="25"></textarea><br />
               <input name="token" type="hidden" value="<?php echo $token; ?>" />
               <input type="submit" value="Envoyer le mail" />
             </p>
@@ -79,18 +86,18 @@ $_SESSION['token'] = $token;
 			<h1>Droits de réutilisation des arrêts et licences</h1>
             Par contrat d’association des cours suprêmes dont la liste officielle figure sur le site Internet <a href="http://www.ahjucaf.org/-Membres-.html">http://www.ahjucaf.org/-Membres-.html</a> et notamment par l’article 5 de ses statuts <a href='http://www.ahjucaf.org/Statuts-de-l-association.html'>(http://www.ahjucaf.org/Statuts-de-l-association.html)</a>, l’AHJUCAF s’engage à « diffuser ou contribuer à diffuser en direction des institutions membres, notamment par un réseau de communication et un site Internet, des informations utiles sur l’organisation et le fonctionnement de chacune d’elles, ainsi que la jurisprudence de chacune de ces juridictions ».
             Par un protocole d’accord, les cours suivantes ont donné mandat à l’AHJUCAF de permettre la réutilisation de leurs arrêts par voie électronique.
-			
+
 			<p>Sauf pour les décisions provenant de France, les décisions collectées et publiées par l'AHJUCAF sous placé sous la licence ODbL 1.0. Elle est consultable à l'adresse : <a href=' http://www.juricaf.org/documentation/licence_odbl.php'>
 http://www.juricaf.org/documentation/licence_odbl.php</a>
 
 			<P>Si vous ne voulez pas ou ne souhaitez pas réutiliser les décisions sous cette licence ou si vous souhaitez disposer de fichiers XML structurés selon vos besoins ou tout autre prestation, les données seront disponibles prochainement sous licence. Merci de contacter le secrétariat pour toute information utile : <a href=' http://www.juricaf.org/documentation/licence_ahjucaf.php'>
 http://www.juricaf.org/documentation/licence_ahjucaf.php</a>
 
-			
-			
-			
-			
-			
+
+
+
+
+
             <h1>Droit d’accès et de rectification </h1>
 
             <h2>Décisions françaises </h2>
@@ -107,7 +114,7 @@ http://www.juricaf.org/documentation/licence_ahjucaf.php</a>
             <h2>Marques déposées</h2>
             Juricaf et Ahjucaf sont des marques déposées auprès de l’Institut national de la propriété intellectuelle (numéros 3284058, 2999936 et 3170015).
 
-  
+
 
             <h1>Mentions légales particulières aux collections de jurisprudences </h1>
 
@@ -118,18 +125,18 @@ http://www.juricaf.org/documentation/licence_ahjucaf.php</a>
             La création de liens vers ce site doit être communiquée à l'administrateur de ce site. Le lien doit être réalisé de manière telle qu'une nouvelle fenêtre supplémentaire s'ouvre dans le navigateur. Source&nbsp;: <a href="http://www.raadvst-consetat.be/?page=disclaimer&amp;lang=fr">http://www.raadvst-consetat.be/?page=disclaimer&amp;lang=fr</a>
 
             <h3>Cour constitutionnelle</h3>
-            <a href=http://www.const-court.be/fr/information/Disclaimer.html">		
+            <a href=http://www.const-court.be/fr/information/Disclaimer.html">
 			http://www.const-court.be/fr/information/Disclaimer.html</a>
-			
+
             La reproduction des informations et des textes de ce site est autorisée moyennant mention de la source (www.const-court.be). L’attention est attirée sur le fait que certaines de ces informations et certains de ces textes peuvent relever de la protection d’un droit de propriété intellectuelle, à savoir le droit d’auteur.
 
 			 <h2>Conseil de l'Europe</h2>
             <h3>Cour européenne des droits de l'Homme</h3>
-			
-			
+
+
 			<a href=http://www.echr.coe.int/ECHR/FR/Bottom/Disclaimer/">
 			http://www.echr.coe.int/ECHR/FR/Bottom/Disclaimer/</a>
-			
+
 			<p>Avis de non-responsabilité
 
 <p>L’objet du portail de la Cour européenne des Droits de l’Homme (« la Cour ») est de permettre au public d’accéder aux informations sur la Cour et ses activités.
@@ -146,10 +153,10 @@ Par le présent avis, la Cour décline toute responsabilité découlant de l’u
 
 
 
-			
-			
-			
-			
+
+
+
+
             <h3>France</h3>
             Les décisions provenant de la France sont issues de la bases JADE, CASS, INCA et CONSTIT sous licence de la Direction de l’information légale et administrative (DILA). Source&nbsp;: <a href="http://www.legifrance.gouv.fr/Informations/Licences">http://www.legifrance.gouv.fr/Informations/Licences</a>
 
@@ -163,14 +170,7 @@ Par le présent avis, la Cour décline toute responsabilité découlant de l’u
           </div>
         </div>
       </div>
- <div class="bottom">
-        <p>Juricaf est un projet de l'<a href="/documentation/partenaires.php#ahjucaf">AHJUCAF</a>, l'association des cours judiciaires suprêmes francophones,<br />
-        réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;I).<br />
-        Il est soutenu par l'<a href="/documentation/partenaires.php#francophonie">Organisation internationale de la Francophonie</a>,
-        le <a href="/documentation/partenaires.php#inforoutes">Fonds francophone des inforoutes</a>.</p>
-        <a href="/documentation/partenaires.php#ahjucaf"><img style="margin-left: 10px;" src="/images/ahjucaf.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
-        <a href="/documentation/partenaires.php#francophonie"><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
-      </div>
+
     </div>
     <script type="text/javascript">
     <!--
@@ -195,4 +195,14 @@ Par le présent avis, la Cour décline toute responsabilité découlant de l’u
     // -->
     </script>
   </body>
+  <footer>
+    <a href="http://www.ahjucaf.org/"><img style="height:100px;"  src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones"></a>
+    <img style="width: 150px;height: 80px;float:right;margin-right:1%;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie">
+    <div class="top_page"><a id="top" href="#">Haut de page<img src="/images/fleche_haut.png" alt="Haut de page"></a></div>
+    <div class="footer_content">
+         <p>Juricaf est un projet de l'AHJUCAF, l'association des cours judiciaires suprêmes francophones,<br>
+         réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;I).<br>
+         Il est soutenu par l'Organisation internationale de la Francophonie et le Fonds francophone des inforoutes.</p>
+   </div>
+  </footer>
 </html>

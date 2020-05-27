@@ -46,12 +46,9 @@ h4 {
   display: block;
   width: 100%;
   height: auto;
-  min-height: 60px;
   line-height:35px;
   margin: auto;
   background-color: #134d94;
-  background-image: url('../images/bg_nav.gif');
-  background-repeat:repeat-x;
   text-align:center;
 }
 
@@ -70,7 +67,6 @@ h4 {
 
 .menu a {
   color: white;
-  font-size: .8em;
   text-decoration: none;
   padding: 10px;
   margin:5px 5px;
@@ -80,8 +76,8 @@ h4 {
   color: #f09241;
 }
 #logo {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   padding:10px;
   padding-top: 0;
 }
@@ -95,21 +91,20 @@ h4 {
   text-decoration: none;
   margin: 10px;
 }
+
+/*A ENLEVER*/
 .menu_bar{
   width: 100%;
   min-height:50px;
   display: none;
 }
-#icon_menu{
-  display:none;
-}
-#headline{
-  display: none
-}
-#menu_logo{
+/*FIN*/
+
+.mobile_navigation{
+  width: 100%;
+  height: auto;
   display: none;
 }
-
 .reseaux_sociaux {
   float: right;
   width: 150px;
@@ -156,7 +151,6 @@ input[type="submit"] {
   border: none;
   border-radius: 10px;
   height:29px;
-  background:url('../images/btn_recherche.png') no-repeat;
   background-color: #0051b5;
 }
 
@@ -174,18 +168,6 @@ input[type="reset"] {
 
 input[type="reset"]:hover, input[type="reset"]:focus {
   cursor:pointer;
-}
-
-.newsfeed{
-  width: 300px;
-  height: 120px;
-  text-align: center;
-  padding: 10px;
-  margin: auto;
-}
-.newsfeed a {
-  text-decoration: none;
-  color: black;
 }
 
 .pays {
@@ -218,13 +200,13 @@ input[type="reset"]:hover, input[type="reset"]:focus {
   color:#F5821F;
 }
 
-.icon_more{
+.more{
   border: 2px solid #ededed;
   border-top: none;
   margin-bottom: 40px;
 }
 
-#icon_rolldown{
+#icon_down{
   display: none;
 }
 
@@ -493,24 +475,24 @@ td {
   width: 50%;
 }
 
-/**/
-#AHJUCAF_site{
+.bottom_item{
   align:center;
   width: 300px;
   margin: auto;
-  display: inline-block
+  text-align: center;
 }
-
-.bottom {
-  height:150px;
+.bottom_item a {
+  text-decoration: none;
+  color: black;
+}
+.footer_content {
+  height:auto;
   width: 100%;
   background-color: #0a2654;
-  background-image:url('../images/bg_footer.gif');
-  background-repeat:repeat-x;
   font-size:0.8em;
   margin:auto;
 }
-.bottom p {
+.footer_content p {
   color:#f5f5f5;
   text-align: center;
   padding:15px;
@@ -534,6 +516,7 @@ td {
   .menu{
     display: none;
     background-color: #134d94;
+
   }
   .menu li{
     display: block;
@@ -548,44 +531,48 @@ td {
   #logo{
     display: none;
   }
-  .menu_bar{                   /*honorine*/
+  .mobile_navigation{                   /*honorine*/
     display: block;
+    padding: 5px;
     background-color: #134d94;
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
   }
   #icon_menu{
-    width: 30px;
-    height: 30px;
+    width: 8vw;
+    height: 8vw;
     margin: 10px;
-    background-image: url('../img/icon/hamburger_icon.png');
+    background-image: url('../images/hamburger_icon.png');
     background-size: contain;
     display: inline-block;
     float: left;
   }
 
   #headline{
-    color: #FFF;
     font-size: 6vw;
     font-weight: bold;
     text-align: center;
     margin: auto;
     background-color: inherit;
     border: none;
-    width: 100px;
+    width: auto;
     display: inline-block;
   }
-  #menu_logo{
-    width: 15vw;
-    height: 13vw;
-    max-height: 100px;
-    padding-left: 10px;
+  #headline a {
+    text-decoration: none;
+    color: white;
+  }
+  .menu_logo{
+    width: 10vw;
+    height: 9vw;
+    max-height: 90px;
     float: right;
   }
   #slogan h2{
     margin-top: 0;
     padding-top: 0;
+    margin: auto;
   }
   .form_recherche input[type="text"] {
     width: 80%;
@@ -602,42 +589,32 @@ td {
   }
   .pays{
     height: 280px;
-    padding-bottom: 50px;
   }
-  #icon_rolldown{
+  #icon_down{
     display: block;
     width: 20px;
     height: 20px;
     margin: auto;
-    background-image: url('../img/icon/roll_menu.png');
+    background-image: url('../images/icon_down.png');
     background-size: contain;
   }
   .reseaux_sociaux,#btn_avance,#imprimante{
     display: none;
+  }
+  table,tbody,tr,td {
+  display: block;
+  width: auto;
   }
   .laureat{
     width: 350px;
     margin: auto;
   }
 
-  #AHJUCAF_site{
-    display: block;
-  }
   .lesliens {
     width:100%;
     margin:auto;
     text-align: center;
   }
-  h1 {
-   font-size:16px;
-   padding:10px;
-   height:auto;
-   width:80%;
-   background-color: white;
-   border:3px solid #b9bcbf;
-   margin:auto;
-   text-align: center;
- }
  h3{
    font-weight: normal;
    text-align: center;
@@ -675,7 +652,7 @@ td {
 
     }
   .affiner {
-    display: block; 
+    display: block;
     bottom:10px;
     width: 100%;
     float: none;

@@ -9,7 +9,8 @@ html, body{
 
 * { font-size: 1em;margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline;}
 
-.main { clear: both; width: 100%; }
+.main { clear: both;   width:80%;
+  margin:auto;}
 
 a {
   color: #23244a;
@@ -17,6 +18,7 @@ a {
 ul,li {
   list-style-type: none;
 }
+
 h1 {
   padding:10px;
   height:20px;
@@ -41,12 +43,16 @@ h4 {
   margin:5px 0;
   font-weight:bold;
 }
-
+input[type="text"]{
+  border:solid 2px #cfd7de;
+}
+textarea{
+  border:solid 2px #cfd7de;
+}
 .menu {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 60px;
   line-height:35px;
   margin: auto;
   background-color: #134d94;
@@ -68,7 +74,6 @@ h4 {
 
 .menu a {
   color: white;
-  font-size: .8em;
   text-decoration: none;
   padding: 10px;
   margin:5px 5px;
@@ -78,8 +83,8 @@ h4 {
   color: #f09241;
 }
 #logo {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   padding:10px;
   padding-top: 0;
 }
@@ -93,19 +98,12 @@ h4 {
   text-decoration: none;
   margin: 10px;
 }
-.menu_bar{
+
+.mobile_navigation{
   width: 100%;
-  min-height:50px;
+  height: auto;
   display: none;
 }
-#icon_menu{
-  display:none;
-}
-#headline{
-  display: none
-}
-
-
 .reseaux_sociaux {
   float: right;
   width: 150px;
@@ -171,32 +169,17 @@ input[type="reset"]:hover, input[type="reset"]:focus {
   cursor:pointer;
 }
 
-.newsfeed{
-  width: 300px;
-  height: 120px;
-  text-align: center;
-  padding: 10px;
-  margin: auto;
-}
-.newsfeed a {
-  text-decoration: none;
-  color: black;
-}
-
 .pays {
   display: block;
-  border:2px solid #ededed;
   border-bottom: none;
   overflow: hidden;
-  transition: height 0.5s ease;
 }
 
 .payscols {
-  width:100%;
   height: auto;
   padding:15px 15px;
   margin:auto;
-  border:1px solid #f1f1f1;
+  border:2px solid #F1F1F1;
 }
 
 .payscols table{ margin: auto;}
@@ -213,13 +196,11 @@ input[type="reset"]:hover, input[type="reset"]:focus {
   color:#F5821F;
 }
 
-.icon_more{
-  border: 2px solid #ededed;
-  border-top: none;
-  margin-bottom: 40px;
+.hideInfo{
+  display: none;
 }
 
-#icon_rolldown{
+#icon_down{
   display: none;
 }
 
@@ -229,8 +210,7 @@ input[type="reset"]:hover, input[type="reset"]:focus {
 
 .arret {
   text-align: justify;
-  width:80%;
-  margin:auto;
+
 }
 
 .arret p {
@@ -343,6 +323,7 @@ td {
   background-color:#F7F8F9;
   border:1px solid #f1f1f1;
   margin: auto;
+
 }
 
 .affinercols  ul {
@@ -472,7 +453,6 @@ td {
 }
 #print {
   float: right;
-  margin-left: 8px;
 }
 
 #collection {
@@ -488,23 +468,24 @@ td {
   width: 50%;
 }
 
-/**/
-#AHJUCAF_site{
+.bottom_item{
   align:center;
   width: 300px;
   margin: auto;
-  display: inline-block
+  text-align: center;
 }
-
-.bottom {
+.bottom_item a {
+  text-decoration: none;
+  color: black;
+}
+.footer_content {
   height:auto;
   width: 100%;
   background-color: #0a2654;
-  background-repeat:repeat-x;
   font-size:0.8em;
   margin:auto;
 }
-.bottom p {
+.footer_content p {
   color:#f5f5f5;
   text-align: center;
   padding:15px;
@@ -528,6 +509,7 @@ td {
   .menu{
     display: none;
     background-color: #134d94;
+
   }
   .menu li{
     display: block;
@@ -542,44 +524,49 @@ td {
   #logo{
     display: none;
   }
-  .menu_bar{                   /*honorine*/
+  .mobile_navigation{                   /*honorine*/
     display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
     background-color: #134d94;
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
   }
   #icon_menu{
-    width: 30px;
-    height: 30px;
+    width: 8vw;
+    height: 8vw;
     margin: 10px;
-    background-image: url('../images/icon/hamburger_icon.png');
+    background-image: url('../images/hamburger_icon.png');
     background-size: contain;
     display: inline-block;
     float: left;
   }
 
   #headline{
-    color: #FFF;
     font-size: 6vw;
     font-weight: bold;
     text-align: center;
     margin: auto;
     background-color: inherit;
     border: none;
-    width: 100px;
+    width: auto;
     display: inline-block;
   }
+  #headline a {
+    text-decoration: none;
+    color: white;
+  }
   .menu_logo{
-    width: 15vw;
-    height: 13vw;
-    max-height: 100px;
-    padding-left: 10px;
+    width: 10vw;
+    height: 9vw;
+    max-height: 90px;
     float: right;
   }
   #slogan h2{
     margin-top: 0;
     padding-top: 0;
+    margin: auto;
   }
   .form_recherche input[type="text"] {
     width: 80%;
@@ -594,29 +581,35 @@ td {
     margin-top: 0;
     margin-bottom: 10px;
   }
-  .pays{
-    height: 280px;
-    padding-bottom: 50px;
+  .payscols{
+    height: 270px;
+    border-bottom: none;
   }
-  #icon_rolldown{
+  .more{
+    border: 2px solid #F1F1F1;
+    border-top: none;
+
+  }
+  #icon_down{
     display: block;
     width: 20px;
     height: 20px;
     margin: auto;
-    background-image: url('../images/icon/roll_menu.png');
+    background-image: url('../images/icon_down.png');
     background-size: contain;
   }
   .reseaux_sociaux,#btn_avance,#imprimante{
     display: none;
+  }
+  table,tbody,tr,td {
+  display: block;
+  width: auto;
   }
   .laureat{
     width: 350px;
     margin: auto;
   }
 
-  #AHJUCAF_site{
-    display: block;
-  }
   .lesliens {
     width:100%;
     margin:auto;
@@ -663,11 +656,10 @@ td {
     display: block;
     margin:0;
   }
-
-    .affinercols .cacher{
+   .cacher{
       display: none;
-
     }
+
   .affiner {
     display: block;
     bottom:10px;
@@ -677,13 +669,16 @@ td {
     padding: 5px 0;
     text-align: center;
   }
+  .affinercols{
+    display: none;
+  }
   .navigation {
     font-weight:bold;
-    width: auto;
   }
   .infosarret{
     width:90%;
     margin:auto;
+    word-break: break-all;
   }
   #typeaff{
     margin-left: 8px;
