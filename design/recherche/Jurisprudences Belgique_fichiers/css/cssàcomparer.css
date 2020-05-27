@@ -613,10 +613,10 @@ td {
 
   .affiner {
     display: block;
-    float:left;
+    /* float:left; */
     bottom:10px;
     width: 100%;
-    float: none;
+    /* float: none; */
     margin:auto;
     padding: 5px 0;
     text-align: center;
