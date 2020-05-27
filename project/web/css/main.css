@@ -152,7 +152,6 @@ input[type="submit"] {
   border: none;
   border-radius: 10px;
   height:29px;
-  background:url('../images/btn_recherche.png') no-repeat;
   background-color: #0051b5;
 }
 
@@ -555,7 +554,7 @@ td {
     width: 30px;
     height: 30px;
     margin: 10px;
-    background-image: url('../img/icon/hamburger_icon.png');
+    background-image: url('../images/icon/hamburger_icon.png');
     background-size: contain;
     display: inline-block;
     float: left;
@@ -605,7 +604,7 @@ td {
     width: 20px;
     height: 20px;
     margin: auto;
-    background-image: url('../img/icon/roll_menu.png');
+    background-image: url('../images/icon/roll_menu.png');
     background-size: contain;
   }
   .reseaux_sociaux,#btn_avance,#imprimante{
