@@ -46,10 +46,12 @@ h4 {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 60px;
+  min-height: 60px;
   line-height:35px;
   margin: auto;
   background-color: #134d94;
+  background-image: url('../images/bg_nav.gif');
+  background-repeat:repeat-x;
   text-align:center;
 }
 
@@ -104,7 +106,9 @@ h4 {
 #headline{
   display: none
 }
-
+#menu_logo{
+  display: none;
+}
 
 .reseaux_sociaux {
   float: right;
@@ -572,7 +576,7 @@ td {
     width: 100px;
     display: inline-block;
   }
-  .menu_logo{
+  #menu_logo{
     width: 15vw;
     height: 13vw;
     max-height: 100px;
@@ -671,7 +675,7 @@ td {
 
     }
   .affiner {
-    display: block;
+    display: block; 
     bottom:10px;
     width: 100%;
     float: none;
