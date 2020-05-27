@@ -497,10 +497,9 @@ td {
 }
 
 .bottom {
-  height:150px;
+  height:auto;
   width: 100%;
   background-color: #0a2654;
-  background-image:url('../images/bg_footer.gif');
   background-repeat:repeat-x;
   font-size:0.8em;
   margin:auto;
