@@ -5,7 +5,7 @@ function facet_link_to($t, $l) {
 
 if (count($facets) > 0) : ?>
 <li>
-	<h4><?php echo $label; ?> :</h4>
+	<h4 class="cacher"><?php echo $label; ?> :</h4>
 	<ul><?php
 foreach($facets as $k => $v) {
     echo '<li style="margin-top: 5px;">';
@@ -19,7 +19,7 @@ foreach($facets as $k => $v) {
     if (count($v['sub'])) {
       echo '<ul>';
       foreach ($v['sub'] as $f => $o) {
-  echo "<li class='sub'>";
+  echo "<li class='cacher' class='sub'>";
   $facet = $o['fid'].':'.preg_replace('/ /', '_', $o['fname']);
   if (preg_match('/'.$facet.'/', $facetslink) || $o['count'] == $v['count'])
     echo $f."&nbsp;(".number_format($o['count'], 0, ',', ' ').")";

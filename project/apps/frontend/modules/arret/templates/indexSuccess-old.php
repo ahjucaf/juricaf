@@ -299,7 +299,7 @@ $sources = '';
 if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
     if(isset($references['CITATION_ARRET'])) {
         foreach($references['CITATION_ARRET'] as $value) {
-            if(isset($value['nature'], $value['date'], $value['titre'], $value[''])) {
+            if(isset($value['nature'], $value['date'], $value['titre'], $value['numero'])) {
                 $titre = '<a href="http://www.juricaf.org/recherche/num_decision:'.$value['numero'].'">'.$value['nature'].' du '.dateFr($value['date']).', '.$value['titre'].'</a>';
 
             } else {
@@ -461,34 +461,17 @@ if(isset($references['PUBLICATION'])) {
 }
 ?>
 
-<div class="lesliens">  <!--ajout d'un div et de la classe les liens-->
-<a id="lienpageacc" href="http://www.juricaf.org">Page d'accueil</a>
-  <span id="fleche"> &gt; </span>
-<a  id="lienpageres"href="http://www.juricaf.org/recherche/
-<?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>
-">Résultats de la recherche
-<b>
-  <?php echo $sf_user->getAttribute('query'); ?></b></a>
-</div>
+<a href="http://www.juricaf.org">Page d'accueil</a> >
+<a href="http://www.juricaf.org/recherche/<?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>">Résultats de la recherche <b><?php echo $sf_user->getAttribute('query'); ?></b></a>
+
   <div class="arret" itemscope itemtype="http://schema.org/Article">
    <h1 id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre.'' ?></h1>
 
 
 
-<table id="imprimante">
-  <tr>
-    <td>
-      <a href="javascript:window.print()"><img src="/images/printer.png" alt="Imprimer"  style="width:30px;margin-right:5px;" /></a>
-    </td>
-    <td>
-      <a href="https://twitter.com/share" class="twitter-share-button" data-via="juricaf" data-lang="fr">Tweeter</a>  <!--petit prob different de celui trouvé en static-->
-    </td>
-    <td>
-      <div class="g-plus" data-action="share" data-annotation="bubble"></div>
-    </td>
-  </tr>
+<p><table><tr><td><a href="javascript:window.print()"><img src="/images/printer.png" alt="Imprimer"/></a> </td><td><a href="https://twitter.com/share" class="twitter-share-button" data-via="juricaf" data-lang="fr">Tweeter</a></td><td><div class="g-plus" data-action="share" data-annotation="bubble"></div></td></tr>
 </table>
-
+</p>
 
 <script type="text/javascript">
 function showCD(str)
@@ -555,21 +538,20 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
         echo 'Type de recours : <em>'.link_to($document->type_recours, '@recherche_resultats?query=type_recours:"'.replaceAccents($document->type_recours).'"').'</em><br />';
     }
 
-
-    echo '<p class="lespentrop"><h3>NUMEROTATION: </h3><div class="infosarret">';
+    echo '<p><h3>Numérotation : </h3>';
     if (isset($document->num_arret)and ($document->pays !== 'Canada')and ($document->juridiction !== 'Conseil constitutionnel')){
-        echo ' Numéro d\'arrêt : '.$document->num_arret.'<br /></div>';
+        echo 'Numéro d\'arrêt : '.$document->num_arret.'<br />';
     }
 
     if (isset($document->num_arret)and ($document->juridiction == 'Conseil constitutionnel')) {
-        echo 'Numéro de décision : '.$document->num_arret.'<br /></div>';
+        echo 'Numéro de décision : '.$document->num_arret.'<br />';
     }
 
     if (isset($document->num_arret) and ($document->pays == 'Canada')) {
-        echo 'Référence neutre : '.replaceAccents($document->num_arret).'  <a href="#" title="<h1>Référence neutre</h1><p>Au Canada, depuis 2000, la référence neutre est le numéro unique, pérenne et indépendant servant à la citation de la jurisprudence"><img src="/images/aide.png" alt="?"/></a><br /></div>';
+        echo 'Référence neutre : '.replaceAccents($document->num_arret).'  <a href="#" title="<h1>Référence neutre</h1><p>Au Canada, depuis 2000, la référence neutre est le numéro unique, pérenne et indépendant servant à la citation de la jurisprudence"><img src="/images/aide.png" alt="?"/></a><br />';
     }
     if (isset($document->id_source)) {
-        echo 'Numéro NOR : '.$document->id_source.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?"/></a><br /></div>';
+        echo 'Numéro NOR : '.$document->id_source.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?"/></a><br />';
     }
 
 
@@ -607,7 +589,7 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
     }
 
     if (isset($document->urnlex)) {
-        echo '<div class="infosarret"> Identifiant URN:LEX :'.$document->urnlex.'<a href="#" title="<h1>URN-LEX </h1><p>L\'objectif du projet URN LEX est d’assigner de façon non équivoque, dans un format standard, tout document qui sont reconnus comme des sources du droit."><img src="/images/aide.png" alt="?"/></a> <br /></div>';
+        echo 'Identifiant URN:LEX : '.$document->urnlex.' <a href="#" title="<h1>URN-LEX </h1><p>L\'objectif du projet URN LEX est d’assigner de façon non équivoque, dans un format standard, tout document qui sont reconnus comme des sources du droit."><img src="/images/aide.png" alt="?"/></a><br />';
     }
 
     if (!empty($analyses)) {
@@ -695,7 +677,7 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
         }
     }
 
-   if ($y) {
+   if ($y) { 
       $cd=($y->childNodes);
       for ($i=2;$i<$cd->length;$i++)
       {
