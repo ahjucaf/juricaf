@@ -462,7 +462,7 @@ if(isset($references['PUBLICATION'])) {
 ?>
 
 <div class="lesliens">  <!--ajout d'un div et de la classe les liens-->
-<a id="lienpageacc" href="http://www.juricaf.org">Page d'accueil</a>
+<a id="lienpageacc" href="../../../../index.php">Page d'accueil</a>
   <span id="fleche"> &gt; </span>
 <a  id="lienpageres"href="http://www.juricaf.org/recherche/
 <?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>
