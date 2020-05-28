@@ -74,7 +74,7 @@ $csv = '"Pays";"Institution";Nombre;"Etat";"Mise à jour";"Selection";"Traductio
 $csv .= "\n";
 
 $tableau = "<table class=\"statsbase\">\n";
-$tableau .= "<tr><th>Pays</th><th>Institution</th><th>Nombre</th><th>Etat</th><th>Mise à jour</th><th>Selection</th><th>Traduction</th><th>Plus ancien</th><th>Plus récent</th><th>Licence</th></tr>\n";
+$tableau .= "<tr><th>Pays</th><th>Institution</th><th>Nombre</th><th class='cacher'>Etat</th><th class='cacher'>Mise à jour</th><th class='cacher'>Selection</th><th class='cacher'>Traduction</th><th>Plus ancien</th><th>Plus récent</th><th class='cacher'>Licence</th></tr>\n";
 $classe = "color2";
 $line = -1;
 if (($handle = fopen($ORIGINALCSV, "r")) !== FALSE) while (($donnees = fgetcsv($handle, 1000, ";")) !== FALSE) {
@@ -98,11 +98,14 @@ if (($handle = fopen($ORIGINALCSV, "r")) !== FALSE) while (($donnees = fgetcsv($
   $tableau .= '<tr class="'.$classe.'">
   <td><a href="http://www.juricaf.org/recherche/+/facet_pays:'.$donnees[$HEADER2CSVID['pays']].'">'.$donnees[$HEADER2CSVID['pays']].'</a></td>
   <td><a href="'.$fpjlink.'">'.$donnees[$HEADER2CSVID['juridiction']].'</a></td>
-  <td class="num">'.$results['nb'].'</td><td style="text-align: center;">'.addLegend($donnees[$HEADER2CSVID['etat']], 'etat').'</td>
-  <td style="text-align: center;">'.addLegend($donnees[$HEADER2CSVID['maj']], 'maj').'</td>
-  <td style="text-align: center;">'.addLegend($donnees[$HEADER2CSVID['selection']], 'selection').'</td>
-  <td>'.$donnees[$HEADER2CSVID['traduction']].'</td><td style="text-align: center;">'.$results['date_fin'].'</td>
-  <td style="text-align: center;">'.$results['date_debut'].'</td><td>'.returnLicenceLink($donnees[$HEADER2CSVID['licence']]).'</td>
+  <td class="num">'.$results['nb'].'</td>
+  <td style="text-align: center;" class="cacher">'.addLegend($donnees[$HEADER2CSVID['etat']], 'etat').'</td>
+  <td style="text-align: center;" class="cacher">'.addLegend($donnees[$HEADER2CSVID['maj']], 'maj').'</td>
+  <td style="text-align: center;" class="cacher">'.addLegend($donnees[$HEADER2CSVID['selection']], 'selection').'</td>
+  <td class="cacher">'.$donnees[$HEADER2CSVID['traduction']].'</td>
+  <td ">'.$results['date_fin'].'</td>
+  <td ">'.$results['date_debut'].'</td>
+  <td  class="cacher">'.returnLicenceLink($donnees[$HEADER2CSVID['licence']]).'</td>
   </tr>'."\n";
 }
 
