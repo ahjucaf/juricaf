@@ -656,8 +656,17 @@ td {
     display: block;
     margin:0;
   }
+
+  .statsbase th {
+    display:block;
+    text-align: left;
+  }
+  .statsbase td { 
+    text-align: left;
+  }
    .cacher{
-      display: none;
+      display: none !important;
+
     }
 
   .affiner {
@@ -687,4 +696,6 @@ td {
   .lespentrop{                  /*honorine*/
     display:none;
   }
+
+
 }
