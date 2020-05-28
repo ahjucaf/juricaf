@@ -611,17 +611,17 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
     }
 
     if (!empty($analyses)) {
-        echo '<hr /><h3>Analyses : </h3>';
+        echo '<hr /><h3>ANALYSES : </h3>';
         echo $analyses;
     }
 
     if (!empty($citations_analyses)) {
-        echo '<p><h3>Références :</h3><br />'.$citations_analyses.'</p>';
+        echo '<p><h3>RÉFÉRENCES :</h3><br />'.$citations_analyses.'</p>';
     }
 
     if (isset($document->saisines)) {
         echo '<hr />';
-        echo '<h3>Saisine : </h3>';
+        echo '<h3>SAISINE: </h3>';
         if (isset($document->saisines)) {
             if(is_array($document->saisines)) {
                 foreach($document->saisines as $key => $values) {
@@ -657,7 +657,7 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
 
     if (isset($document->parties)) {
         echo '<hr />';
-        echo '<h3>Parties : </h3>';
+        echo '<h3>PARTIES: </h3>';
         if (isset($document->parties['demandeurs'])) {
             echo 'Demandeurs : ';
             $sep = ''; $i = 1;
@@ -773,7 +773,7 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
         $patterns[4] = '#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i';
         $replacements[4] = '<a href="$0" target="_blank">$0</a>';
 
-        echo '<h3>Texte';
+        echo '<h3>TEXTE';
         if ($document->isTexteArretAnon()){
             echo " (pseudonymisé)";
         }
@@ -784,14 +784,14 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
         echo '</span>';
     }
     if (!empty($citations_arret) || !empty($sources) || !empty($decisions_attaquees)) {
-        echo '<p><h3>Références : </h3>';
+        echo '<p><h3>RÉFÉRENCE : </h3>';
         if (!empty($citations_arret)) { echo $citations_arret; }
         if (!empty($sources)) { echo $sources; }
         if (!empty($decisions_attaquees)) { echo $decisions_attaquees; }
         echo '</p>';
     }
     if(isset($references['ARRET'])) {
-        echo '<hr /><h3>Référence :</h3>';
+        echo '<hr /><h3>RÉFÉRENCE:</h3>';
         foreach($references['ARRET'] as $value) {
             if(isset($value['titre'])) {
                 echo $value['titre'].'<br />';
@@ -804,7 +804,7 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
     // Lien télécharger le document
     if($document->pays == 'France') {
         if(strpos($document->id_source, "CONSTEXT") !== false || strpos($document->id_source, "JURITEXT") !== false || strpos($document->id_source, "CETATEXT") !== false) {
-            { echo '<hr /><h3>Publications :</h3>'; }
+            { echo '<hr /><h3>PUBLICATIONS :</h3>'; }
 
             if (isset($document->num_arret) AND($document->juridiction == 'Cour de cassation')) {
                 echo 'Proposition de citation: '.$citation.'';
@@ -844,13 +844,13 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
         ';
     }
     if (isset($document->source)) {
-        echo "<h3>Source :</h3>";
+        echo "<h3>SOURCE :</h3>";
         echo "<p><a href='".$document->source."'>Voir la source</a></p>";
     }
     if(isset($contrib)) {
-        echo '<hr /><h3>Composition du Tribunal :</h3>'.$contributors;
+        echo '<hr /><h3>COMPOSITION DU TRAVAIL : </h3>'.$contributors;
     }
-    echo '<h3>Origine de la décision</h3>';
+    echo '<h3>ORIGINE DE LA DÉCISION</h3>';
 
     if (isset($document->pays)) {
         echo '<div itemprop="author" itemscope itemtype="http://schema.org/Organization"> <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Pays : <em itemprop="addressCountry">'.$document->pays.'</span></em><br>';

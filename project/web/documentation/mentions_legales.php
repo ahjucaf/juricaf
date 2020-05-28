@@ -12,6 +12,7 @@ $_SESSION['token'] = $token;
 <meta name="description" content="La base de données de jurisprudence francophone" />
 <meta name="keywords" content="jurisprudence, cassation, cour, suprême, francophone, francophonie, ahjucaf, arrêt, décision" />
 <meta name="language" content="fr" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juricaf - Mentions légales</title>
     <link rel="shortcut icon" href="/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -55,7 +56,7 @@ $_SESSION['token'] = $token;
               <table summary="Rechercher">
                 <tbody><tr>
                   <td width="104px" height="250px" align="center">
-                    <a href="https://juricaf.org/recherche"><img id="logo" src="/images/juricaf.png" alt="Juricaf"></a><br>
+                    <a href="../index.php"><img id="logo" src="/images/juricaf.png" alt="Juricaf"></a><br>
                     <div id="slogan"><h2>La jurisprudence francophone des cours suprêmes</h2></div>
                   <input type="text" name="q" tabindex="10" placeholder="Rechercher parmi  1  050&nbsp; 541  décisions provenant de 45 pays et institutions francophones"><br>
                   <input type="submit" value="Rechercher" tabindex="20"> <a id="btn_avance" href="https://juricaf.org/recherche_avancee">Recherche avancée</a><!--Ajout d'id-->

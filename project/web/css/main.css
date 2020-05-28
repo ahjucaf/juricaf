@@ -55,7 +55,7 @@ textarea{
   height: auto;
   line-height:35px;
   margin: auto;
-  background-color: #134d94;
+  background-color: #375d81;
   text-align:center;
 }
 
@@ -150,7 +150,7 @@ input[type="submit"] {
   border: none;
   border-radius: 10px;
   height:29px;
-  background-color: #0051b5;
+  background-color: #375d81;
 }
 
 input[type="submit"]:hover, input[type="reset"]:focus {
@@ -481,7 +481,7 @@ td {
 .footer_content {
   height:auto;
   width: 100%;
-  background-color: #0a2654;
+  background-color: #375d81;
   font-size:0.8em;
   margin:auto;
 }
@@ -503,12 +503,16 @@ td {
   padding-bottom: 10px;
 
 }
+.mobile_filter{
+  display: none;
+}
+
 
 
 @media screen and (max-width: 950px) {
   .menu{
     display: none;
-    background-color: #134d94;
+    background-color: #375d81;
 
   }
   .menu li{
@@ -524,11 +528,11 @@ td {
   #logo{
     display: none;
   }
-  .mobile_navigation{                   /*honorine*/
+  .mobile_navigation{
     display: block;
     padding-top: 5px;
     padding-bottom: 5px;
-    background-color: #134d94;
+    background-color: #375d81;
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
@@ -558,10 +562,17 @@ td {
     color: white;
   }
   .menu_logo{
-    width: 10vw;
-    height: 9vw;
+    width: 8vw;
+    height: 8vw;
     max-height: 90px;
+    margin: 10px;
     float: right;
+  }
+
+  .mobile_filter{
+    padding: 10px;
+    display: block;
+    cursor: pointer;
   }
   #slogan h2{
     margin-top: 0;
@@ -619,16 +630,20 @@ td {
    font-size:16px;
    padding:10px;
    height:auto;
-   width:80%;
-   background-color: white;
+   width:95%;
+   background-color:#cfd7de;
    border:3px solid #b9bcbf;
-   margin:auto;
-   text-align: center;
+   text-align: left;
+   font-weight: bold;
+   margin-bottom: 20px;
+
+
  }
  h3{
-   font-weight: normal;
-   text-align: center;
-   margin: auto;
+   margin-bottom:0px;
+   margin-top: 3px;
+   font-weight: bold;
+   text-align: left;
  }
  .arret {
    text-align: justify;
@@ -661,7 +676,7 @@ td {
     display:block;
     text-align: left;
   }
-  .statsbase td { 
+  .statsbase td {
     text-align: left;
   }
    .cacher{
@@ -695,6 +710,11 @@ td {
 
   .lespentrop{                  /*honorine*/
     display:none;
+  }
+
+  .resume{
+    height: 60px;
+    overflow: hidden;
   }
 
 
