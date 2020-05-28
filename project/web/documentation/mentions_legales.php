@@ -25,8 +25,7 @@ $_SESSION['token'] = $token;
   <body>
     <div class="site">
       <div class="head">
-        <!---->
-        <div class="mobile_navigation" >
+          <div class="mobile_navigation" >
           <a onclick="openMenu()"><i id="icon_menu"></i></a>
           <h1 id="headline"><a href="../index.php">JURICAF.ORG</a></h1>
           <img class="menu_logo" src="/images/juricaf.png">
@@ -41,7 +40,7 @@ $_SESSION['token'] = $token;
 	          <li><a href="contact.php">Contact</a></li>
           </ul>
         </div>
-          <!---->
+
       </div>
       <div class="reseaux_sociaux">
          <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
@@ -50,7 +49,7 @@ $_SESSION['token'] = $token;
      </div>
       <div class="main">
         <div class="content">
-          <!--MIS A JOUR-->
+
           <div class="form_recherche">
             <form method="get" action="/recherche">
               <table summary="Rechercher">
@@ -59,13 +58,13 @@ $_SESSION['token'] = $token;
                     <a href="../index.php"><img id="logo" src="/images/juricaf.png" alt="Juricaf"></a><br>
                     <div id="slogan"><h2>La jurisprudence francophone des cours suprêmes</h2></div>
                   <input type="text" name="q" tabindex="10" placeholder="Rechercher parmi  1  050&nbsp; 541  décisions provenant de 45 pays et institutions francophones"><br>
-                  <input type="submit" value="Rechercher" tabindex="20"> <a id="btn_avance" href="https://juricaf.org/recherche_avancee">Recherche avancée</a><!--Ajout d'id-->
+                  <input type="submit" value="Rechercher" tabindex="20"> <a id="btn_avance" href="https://juricaf.org/recherche_avancee">Recherche avancée</a>
                   </td>
                 </tr></tbody>
               </table>
             </form>
           </div>
-          <!--fin MAJ-->
+
           <div class="arret">
             <h1>Mentions légales </h1>
             <p>Conformément aux dispositions des articles 6-III et 19 de la loi pour la Confiance dans l'Économie Numérique, nous vous informons que Juricaf est un projet de l’AHJUCAF, l’association des Hautes juridictions de cassation des pays ayant en partage l’usage du français, association française de loi 1901 inscrite au registre des déclarations d’association de la Préfecture de police de Paris, publié au Journal officiel du 9 juin 2001.
@@ -174,7 +173,7 @@ Par le présent avis, la Cour décline toute responsabilité découlant de l’u
 
     </div>
     <script type="text/javascript">
-    <!--
+
     function juricafSearch() {
       if (window.external && ("AddSearchProvider" in window.external)) {
         window.external.AddSearchProvider("http://www.juricaf.org/juricaf.xml");

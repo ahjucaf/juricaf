@@ -461,12 +461,13 @@ if(isset($references['PUBLICATION'])) {
 }
 ?>
 
-<div class="lesliens">  <!--ajout d'un div et de la classe les liens-->
+<div class="lesliens">
 <a id="lienpageacc" href="../../../../index.php">Page d'accueil</a>
   <span id="fleche"> &gt; </span>
-<a  id="lienpageres"href="http://www.juricaf.org/recherche/
+<a  id="lienpageres"href="../../recherche/
 <?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>
-">Résultats de la recherche
+">Résultats de la
+<!-- recherche --> <!--deux fois le mots recherche-->
 <b>
   <?php echo $sf_user->getAttribute('query'); ?></b></a>
 </div>
@@ -481,8 +482,7 @@ if(isset($references['PUBLICATION'])) {
       <a href="javascript:window.print()"><img src="/images/printer.png" alt="Imprimer"  style="width:30px;margin-right:5px;" /></a>
     </td>
     <td>
-      <a href="https://twitter.com/share" class="twitter-share-button" data-via="juricaf" data-lang="fr">Tweeter</a>  <!--petit prob different de celui trouvé en static-->
-    </td>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="juricaf" data-lang="fr">Tweeter</a>
     <td>
       <div class="g-plus" data-action="share" data-annotation="bubble"></div>
     </td>

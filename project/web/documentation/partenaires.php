@@ -18,7 +18,7 @@
   <body>
     <div class="site">
       <div class="head">
-        <!---->
+
         <div class="mobile_navigation" >
           <a onclick="openMenu()"><i id="icon_menu"></i></a>
           <h1 id="headline"><a href="../index.php">JURICAF.ORG</a></h1>
@@ -34,7 +34,7 @@
 	          <li><a href="contact.php">Contact</a></li>
           </ul>
         </div>
-          <!---->
+
       </div>
       <div class="reseaux_sociaux">
   	     <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
@@ -43,7 +43,7 @@
      </div>
       <div class="main">
         <div class="content">
-          <!--MIS A JOUR-->
+
           <div class="form_recherche">
             <form method="get" action="/recherche">
               <table summary="Rechercher">
@@ -52,13 +52,13 @@
                     <a href="../index.php"><img id="logo" src="/images/juricaf.png" alt="Juricaf"></a><br>
                     <div id="slogan"><h2>La jurisprudence francophone des cours suprêmes</h2></div>
                   <input type="text" name="q" tabindex="10" placeholder="Rechercher parmi  1  050&nbsp; 541  décisions provenant de 45 pays et institutions francophones"><br>
-                  <input type="submit" value="Rechercher" tabindex="20"> <a id="btn_avance" href="https://juricaf.org/recherche_avancee">Recherche avancée</a><!--Ajout d'id-->
+                  <input type="submit" value="Rechercher" tabindex="20"> <a id="btn_avance" href="https://juricaf.org/recherche_avancee">Recherche avancée</a>
                   </td>
                 </tr></tbody>
               </table>
             </form>
           </div>
-          <!--fin MAJ-->
+
           <div class="arret">
             <h1>Réalisation du projet </h1>
             <a href="#ahjucaf"></a><p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones, réalisé en partenariat avec le laboratoire de normologie, Linguistique et Informatique juridique (LNLI).</p>

@@ -20,13 +20,13 @@
   <body>
     <div class="site">
       <div class="head">
-        <!---->
+
         <div class="mobile_navigation" >
           <a onclick="openMenu()"><i id="icon_menu"></i></a>
           <h1 id="headline"><a href="../../../../index.php">JURICAF.ORG</a></h1>
           <img class="menu_logo" src="/images/juricaf.png">
         </div>
-        <!---->
+
         <div class="menu" id="menu">
           <ul>
               <li><a href="/documentation/a_propos.php">A propos</a></li>
@@ -55,10 +55,9 @@
                 <td align="center" width="1024px" height="250px">
                   <a href="<?php echo url_for('@recherche'); ?>"><img id="logo" style="width: 100px; height: 100px;" src="/images/juricaf.png" alt="Juricaf" /></a><br />
 
-                  <!--Ajout slogan et input-->
                   <div id="slogan"><h2>La jurisprudence francophone des cours suprêmes</h2></div>
                   <input type="text" name="q" tabindex="10" placeholder="Rechercher parmi  1  050&nbsp; 541  décisions provenant de 45 pays et institutions francophones" value="<?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>" tabindex="10" /><br />
-                  <!--FIN-->
+
 
                   <input type="submit" value="Rechercher" tabindex="20" /> <a href="<?php echo url_for('@recherche_avancee'); ?>">recherche avancée</a>
                 </td>
@@ -71,7 +70,7 @@
         </div>
       </div>
 
-      <!--Modification-->
+
       <div class="bottom_item">
         <a href="http://www.ahjucaf.org/"><img  src="/images/ahjucafSite.jpg" alt="Association des cours judiciaires suprêmes francophones"></a>
         <a href="http://www.ahjucaf.org/">Visitez le nouveau site de l'AHJUCAF</a>
@@ -80,7 +79,6 @@
       <div class="bottom_item">
       	<a href="https://www.lemondedudroit.fr/interviews/66303-jean-paul-jean-ahjucaf.html" target="new">Interview de JP Jean secrétaire général de l’AHJUCAF dans « Le Monde du droit » sur l’accès à la jurisprudence francophone.</a><br><br><br>
       </div>
-      <!---->
 </div>
 </body>
 
