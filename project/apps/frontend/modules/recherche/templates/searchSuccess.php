@@ -70,7 +70,11 @@ function remplacequerytitre($string) {
 <div class="affiner">
 <a href="../../../../index.php">Accueil</a> > <a href="<?php echo $sf_request->getUri() ?>">Recherche</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
-	<div class="affinercols">
+
+<span class="mobile_filter" ><a onclick="openFilter()">Chercher par pays</a></span>
+
+
+  <div class="affinercols" id="affinercols">
 		<ul>
 			<li class="cacher">
 				<h4>Termes de la recherche :</h4>
@@ -232,7 +236,7 @@ include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction'
 <?php
 foreach ($resultats->response->docs as $resultat) {
   echo '<div class="resultatcols"><a href="'.url_for('@arret?id='.$resultat->id).'"><h3><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</h3></a>';
-  echo '<p class="cacher">';
+  echo '<p class="resume">';
   if (isset($resultats->highlighting))
     echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});
   else

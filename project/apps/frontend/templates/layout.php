@@ -11,10 +11,9 @@
     <?php include_javascripts() ?>
 	<script type="text/javascript" src="/js/opensearch.js"></script>
 	<script type="text/javascript" src="/js/jquery.qtip.min.js"></script>
+  <script type="text/javascript" src="/js/openItemScript.js"></script>
 	<script type="text/javascript"> $(document).ready(function(){		$('a[title]').qtip();});</script>
-  <script type="text/javascript">function openMenu() {var menu = document.getElementById("menu"); if (menu.style.display === "block") {menu.style.display = "none";} else {menu.style.display = "block";}}</script>
-  <script type="text/javascript">function openPays() {var pays = document.getElementById("payscols");var icon = document.getElementById("icon_down"); if (pays.style.display === "block") {pays.style.height = "none";} else {pays.style.height = "auto";icon.style.display="none"}}</script>
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
  	<link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
   </head>
   <body>
