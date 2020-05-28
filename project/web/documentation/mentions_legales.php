@@ -27,17 +27,17 @@ $_SESSION['token'] = $token;
         <!---->
         <div class="mobile_navigation" >
           <a onclick="openMenu()"><i id="icon_menu"></i></a>
-          <h1 id="headline"><a href="https://juricaf.org/recherche">JURICAF.ORG</a></h1>
+          <h1 id="headline"><a href="../index.php">JURICAF.ORG</a></h1>
           <img class="menu_logo" src="/images/juricaf.png">
         </div>
 
         <div class="menu" id="menu">
           <ul>
-            <li><a href="http://www.juricaf.org/documentation/a_propos.php">A propos</a></li>
-            <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Etendue des collections</a></li>
-            <li><a href="http://www.juricaf.org/documentation/partenaires.php">Partenaires</a></li>
-            <li><a href="http://www.juricaf.org/documentation/mentions_legales.php">Mentions légales</a></li>
-	          <li><a href="http://www.juricaf.org/documentation/contact.php">Contact</a></li>
+            <li><a href="a_propos.php">A propos</a></li>
+            <li><a href="stats/statuts.php">Etendue des collections</a></li>
+            <li><a href="partenaires.php">Partenaires</a></li>
+            <li><a href="mentions_legales.php">Mentions légales</a></li>
+	          <li><a href="contact.php">Contact</a></li>
           </ul>
         </div>
           <!---->

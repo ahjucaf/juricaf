@@ -23,7 +23,7 @@
         <!---->
         <div class="mobile_navigation" >
           <a onclick="openMenu()"><i id="icon_menu"></i></a>
-          <h1 id="headline"><a href="https://juricaf.org/recherche">JURICAF.ORG</a></h1>
+          <h1 id="headline"><a href="../../../../index.php">JURICAF.ORG</a></h1>
           <img class="menu_logo" src="/images/juricaf.png">
         </div>
         <!---->
