@@ -35,6 +35,10 @@ arretjson:
   url: /arret/:id/json
   param: {module: arret, action: raw, format: json}
 
+arretmd:
+  url: /arret/:id/md
+  param: {module: arret, action: md}
+
 arret:
   url: /arret/:id
   param: {module: arret, action: index}

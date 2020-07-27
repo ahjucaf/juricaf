@@ -21,6 +21,13 @@ class arretActions extends sfActions
     $this->forward404If($this->document->isError());
   }
 
+  public function executeMd(sfWebRequest $request)
+  {
+    $this->document = new JuricafArret($request->getParameter('id'));
+    $this->forward404If($this->document->isNew());
+    $this->setLayout(false);
+  }
+
   public function executeRaw(sfWebRequest $request)
   {
     $this->document = new JuricafArret($request->getParameter('id'));
