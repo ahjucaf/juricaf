@@ -27,8 +27,12 @@ rm /tmp/CASS.url
 wget -q -O /dev/stdout https://echanges.dila.gouv.fr/OPENDATA/JADE/ | grep tar.gz | sed 's|.*href="|https://echanges.dila.gouv.fr/OPENDATA/JADE/|'  | sed 's/".*//' > /tmp/JADE.url
 wget -q -i /tmp/JADE.url -nc -P $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/JADE/
 rm /tmp/JADE.url
+wget -q -O /dev/stdout https://echanges.dila.gouv.fr/OPENDATA/CONSTIT/ | grep tar.gz | sed 's|.*href="|https://echanges.dila.gouv.fr/OPENDATA/CONSTIT/|'  | sed 's/".*//' > /tmp/CONSTIT.url
+wget -q -i /tmp/CONSTIT.url -nc -P $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CONSTIT/
+rm /tmp/CONSTIT.url
 rsync -c $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CASS/CASS_* $LOCALCOPY
 rsync -c $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/JADE/JADE_* $LOCALCOPY
+rsync -c $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CONSTIT/CONSTIT_* $LOCALCOPY
 
 # Nouveaux fichiers
 find $LOCALCOPY -name "*.tar.gz"  -exec stat -c '%Y#%n' '{}' ';' > $NEWLOG
