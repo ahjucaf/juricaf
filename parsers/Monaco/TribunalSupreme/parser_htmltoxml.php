@@ -39,6 +39,7 @@ foreach ($fichiers as $k => $v) {
   $content=preg_replace('#</h[1-4]*>#',"\n",$content);
   $content=preg_replace('#</p>#',"\n",$content);
   $content=preg_replace('#<[^>]+>#', "", $content);
+  $content=preg_replace('/\s/', " ", $content);
   $content=strip_tags($content);
   $content=html_entity_decode($content);
   $content=preg_replace('#<b>#',"\n",$content);
@@ -50,7 +51,7 @@ foreach ($fichiers as $k => $v) {
 
   if($d>$date_min && $numero!=''){
 
-      $output = fopen($xmlfile.'TS_'.$numero, 'w');
+      $output = fopen($xmlfile.'TS_'.$numero.'.xml', 'w');
       fwrite($output, '<?xml version="1.0" encoding="utf8"?>');
       fwrite($output,"\n");
       fwrite($output, "<DOCUMENT>\n");
@@ -60,7 +61,7 @@ foreach ($fichiers as $k => $v) {
       fwrite($output, "<PAYS>Monaco</PAYS>\n");
       fwrite($output, "<TEXTE_ARRET>$content</TEXTE_ARRET>\n");
       $datefr=$j.' '.$mois[$m].' '.$a;
-      fwrite($output,"<TITRE>Monaco, $juridiction2, $datefr, $numero<TITRE>\n");
+      fwrite($output,"<TITRE>Monaco, $juridiction2, $datefr, TS/$numero</TITRE>\n");
       fwrite($output, "<TYPE>arret</TYPE>\n");
       fwrite($output, "</DOCUMENT>\n");
       fclose($output);
