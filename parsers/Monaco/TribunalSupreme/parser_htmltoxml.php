@@ -10,28 +10,31 @@ foreach ($fichiers as $k => $v) {
   if ($k!=0 && $k!=1){
   $content=file('tmp/pages/'.$v);
   $content=$content[0];
+
   preg_match("#<p class=\"date\">(.+)</p>#iU",$content,$date);
   $date=$date[1];
-  // print_r($date."\n");
   $j=$date[0].$date[1];
   $m=$date[3].$date[4];
   $a=$date[6].$date[7].$date[8].$date[9];
-
   $date=$a.'-'.$m.'-'.$j;
 
   preg_match('/<p class="date">.+<\/p><h1>([^<]+)/',$content,$titre);
   $titre=$titre[1];
+  echo($titre."\n");
+  // preg_match('\d\d\d\d-\d\d',$titre,$numero);
 
 
-  $juridiction='Tribunal suprême';  //Tribunal suprême  sur le site dans ce site www.tribunal-supreme           ou Cour de révision sur le site legimonaco.mc
+  $juridiction1='Tribunal suprême';
+  $juridiction2='Tribunal Suprême';
+
 
   preg_match("#<div class=\"content\">.+<div class=\"print-button\">#",$content,$content);
-
   $content=$content[0];
   // $content=strip_tags($content);
 
   // $content=preg_replace('#</h[1-4]*>#',"\n",$content);
   $content=preg_replace('#</p>#',"\n",$content);
+
   // $content=preg_replace('#<p>#',"\n",$content);
   // $content=preg_replace('#^>#',"",$content);
   // $content=preg_replace('#</p>#',"\n",$content);
@@ -59,12 +62,12 @@ foreach ($fichiers as $k => $v) {
   fwrite($output,"\n");
   fwrite($output, "<DOCUMENT>\n");
   fwrite($output, "<DATE_ARRET>$date</DATE_ARRET>\n");
-  fwrite($output, "<JURIDICTION>$juridiction</JURIDICTION>\n");
-  fwrite($output, "<NUM_ARRET>$numero</NUM_ARRET>\n");
+  fwrite($output, "<JURIDICTION>$juridiction1</JURIDICTION>\n");
+  // fwrite($output, "<NUM_ARRET>$numero</NUM_ARRET>\n");
   fwrite($output, "<PAYS>Monaco</PAYS>\n");
   fwrite($output, "<TEXTE_ARRET>$content</TEXTE_ARRET>\n");
   $datefr=$j.' '.$mois[$m].' '.$a;
-  fwrite($output,"<TITRE>Monaco, $juridiction, $datefr, $numero<TITRE>\n");
+  // fwrite($output,"<TITRE>Monaco, $juridiction, $datefr, $numero<TITRE>\n");
   fwrite($output, "<TYPE>arret</TYPE>\n");
   fwrite($output, "</DOCUMENT>\n");
   fclose($output);
