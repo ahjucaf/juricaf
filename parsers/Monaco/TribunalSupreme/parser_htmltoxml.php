@@ -20,7 +20,6 @@ foreach ($fichiers as $k => $v) {
 
   preg_match('/<p class="date">.+<\/p><h1>([^<]+)/',$content,$titre);
   $titre=$titre[1];
-  // echo($titre."\n");
   preg_match('/[0-9]+[-]+.+[0-9]/',$titre,$numero);
 
   if ($numero==null){
