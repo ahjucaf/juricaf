@@ -35,13 +35,14 @@ foreach ($fichiers as $k => $v) {
 
   preg_match("#<div class=\"content\">.+<div class=\"print-button\">#",$content,$content);
   $content=$content[0];
+  // $content=preg_replace("/\n\s/",'',$content);
   $content=preg_replace('#</h[1-4]*>#',"\n",$content);
   $content=preg_replace('#</p>#',"\n",$content);
   $content=preg_replace('#<[^>]+>#', "", $content);
   $content=strip_tags($content);
   $content=html_entity_decode($content);
-  $content=str_replace("+[\n]","",$content);
-
+  // $content=trim($content);
+  echo($content);
 
   $d=new DateTime($date);
   $date_min=new DateTime('2019-05-01');
