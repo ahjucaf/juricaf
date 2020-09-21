@@ -49,22 +49,22 @@ foreach ($fichiers as $k => $v) {
 
   if($d>$date_min){
 
-  $output = fopen($xmlfile.'TS_'.$numero, 'w');
-  fwrite($output, '<?xml version="1.0" encoding="utf8"?>');
-  fwrite($output,"\n");
-  fwrite($output, "<DOCUMENT>\n");
-  fwrite($output, "<DATE_ARRET>$date</DATE_ARRET>\n");
-  fwrite($output, "<JURIDICTION>$juridiction1</JURIDICTION>\n");
-  fwrite($output, "<NUM_ARRET>TS/$numero</NUM_ARRET>\n");
-  fwrite($output, "<PAYS>Monaco</PAYS>\n");
-  fwrite($output, "<TEXTE_ARRET>$content</TEXTE_ARRET>\n");
-  $datefr=$j.' '.$mois[$m].' '.$a;
-  fwrite($output,"<TITRE>Monaco, $juridiction2, $datefr, $numero<TITRE>\n");
-  fwrite($output, "<TYPE>arret</TYPE>\n");
-  fwrite($output, "</DOCUMENT>\n");
-  fclose($output);
+      $output = fopen($xmlfile.'TS_'.$numero, 'w');
+      fwrite($output, '<?xml version="1.0" encoding="utf8"?>');
+      fwrite($output,"\n");
+      fwrite($output, "<DOCUMENT>\n");
+      fwrite($output, "<DATE_ARRET>$date</DATE_ARRET>\n");
+      fwrite($output, "<JURIDICTION>$juridiction1</JURIDICTION>\n");
+      fwrite($output, "<NUM_ARRET>TS/$numero</NUM_ARRET>\n");
+      fwrite($output, "<PAYS>Monaco</PAYS>\n");
+      fwrite($output, "<TEXTE_ARRET>$content</TEXTE_ARRET>\n");
+      $datefr=$j.' '.$mois[$m].' '.$a;
+      fwrite($output,"<TITRE>Monaco, $juridiction2, $datefr, $numero<TITRE>\n");
+      fwrite($output, "<TYPE>arret</TYPE>\n");
+      fwrite($output, "</DOCUMENT>\n");
+      fclose($output);
 
-}
+  }
 
 
 
