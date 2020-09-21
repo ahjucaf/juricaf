@@ -35,7 +35,7 @@ $fichiers=scandir('tmp/home_pages');
 //     [26] => page9.html
 // )
 //
-$lignes_all_urls=file('tmp/all_urls.txt');
+$lignes_all_urls=file('all_urls.txt');
 
 $output = fopen('tmp/urls.txt', 'w');
 foreach ($fichiers as $k => $v) {
@@ -63,7 +63,7 @@ fclose($output);
 
 
 
-$all_urls=fopen('tmp/all_urls.txt','a+');
+$all_urls=fopen('all_urls.txt','a+');
 // $lignes_all_urls=file('tmp/all_urls.txt');
 $lignes=file('tmp/urls.txt');
 
