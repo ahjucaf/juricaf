@@ -26,8 +26,6 @@ while (url_exist($headurl.$i."/")==True  && $i<6){
   if ($i==1){
     shell_exec('cd tmp/home_pages');
     shell_exec('curl '.'https://www.tribunal-supreme.mc/decisions/'.'>'.$dossier.'/page'.$i.'.html');
-    shell_exec('cd ..');
-    shell_exec('cd ..');
     $i=$i+1;
   }
   else{
