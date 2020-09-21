@@ -41,13 +41,14 @@ foreach ($fichiers as $k => $v) {
   $content=preg_replace('#<[^>]+>#', "", $content);
   $content=strip_tags($content);
   $content=html_entity_decode($content);
+  $content=preg_replace('#<b>#',"\n",$content);
   // $content=trim($content);
-  echo($content);
+
 
   $d=new DateTime($date);
   $date_min=new DateTime('2019-05-01');
 
-  if($d>$date_min){
+  if($d>$date_min && $numero!=''){
 
       $output = fopen($xmlfile.'TS_'.$numero, 'w');
       fwrite($output, '<?xml version="1.0" encoding="utf8"?>');
