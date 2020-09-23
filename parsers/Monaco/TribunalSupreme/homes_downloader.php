@@ -18,7 +18,7 @@ $dossier='tmp/home_pages';
 
 
 $i=1;
-while (url_exist($headurl.$i."/")==True  && $i<1){
+while (url_exist($headurl.$i."/")==True  && $i<2){
   if ($i==1){
     shell_exec('cd tmp/home_pages');
     shell_exec('curl '.'https://www.tribunal-supreme.mc/decisions/'.'>'.$dossier.'/page'.$i.'.html');
