@@ -35,8 +35,8 @@ sh
 if ! test -f $DATEFILE ; then
        touch -t 7001010000 $DATEFILE
 fi
-ls -rt $(find $DOC_DIR"/justice.public.lu/" -name '*pdf' -type f -newer $DATEFILE ) > /tmp/$$.list
-if test -n /tmp/$$.list ; then
+find $DOC_DIR"/justice.public.lu/" -name '*pdf' -type f -newer $DATEFILE -exec ls -1 --full-time '{}' ';' | awk '{print $6"_"$7" "$9}' | sort  | grep '[a-z]' | awk '{print $2}' > /tmp/$$.list
+if test -s /tmp/$$.list ; then
     touch -r $(tail -n 1 /tmp/$$.list) $DATEFILE
     cat /tmp/$$.list
 fi
