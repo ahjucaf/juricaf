@@ -18,7 +18,8 @@ foreach ($fichiers as $k => $v) {
     foreach($lien as $k=>$v){
           if ($v!='https://www.tribunal-supreme.mc/' && $v!="https://www.tribunal-supreme.mc/mentions-legales/" && $v!='#tarteaucitron' && stristr($v,'communique')!=True){
             if($k%2 == 0){
-              if(in_array($v,$lignes_all_urls)!=True){
+              if(in_array($v,$lignes_all_urls)==true){
+                echo('Je ne suis pas dedans:');
                 fwrite($output,$v."\n");
               }
             }
