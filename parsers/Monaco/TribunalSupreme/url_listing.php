@@ -18,10 +18,17 @@ foreach ($fichiers as $k => $v) {
     foreach($lien as $k=>$v){
           if ($v!='https://www.tribunal-supreme.mc/' && $v!="https://www.tribunal-supreme.mc/mentions-legales/" && $v!='#tarteaucitron' && stristr($v,'communique')!=True){
             if($k%2 == 0){
+              if (count($lignes_all_urls)>0){
+              // print_r(count($lignes_all_urls));
               if(in_array($v,$lignes_all_urls)==true){
-                echo('Je ne suis pas dedans:');
+                // echo('Je suis dans la liste');
                 fwrite($output,$v."\n");
               }
+            }
+            else{
+              fwrite($output,$v."\n");
+            }
+
             }
         }
       }
@@ -37,7 +44,7 @@ $lignes=file('tmp/urls.txt');
 foreach($lignes as $ligne){
       if (in_array($ligne,$lignes_all_urls)!=True){
         fwrite($all_urls,$ligne);
-        echo($ligne);
+        // echo($ligne);
       }
 }
 fclose($all_urls);
