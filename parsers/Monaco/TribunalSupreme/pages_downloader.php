@@ -3,8 +3,7 @@
 $dossier=' pages';
 $urls=file('tmp/urls.txt');
 $i=1;
-$taburl;
-$output=fopen('tmp/url.json','w+');
+$taburl=[];
 
 foreach($urls as $k=>$v){
   $v = rtrim($v);
@@ -17,8 +16,10 @@ foreach($urls as $k=>$v){
       $i=$i+1;
   }
 }
+if ($taburl!=[]){
 
 file_put_contents('tmp/urls.json', json_encode($taburl));
+}
 // print_r($taburl);
 
 // echo($i)

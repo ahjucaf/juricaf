@@ -16,7 +16,7 @@ $date=$a.'-'.$m.'-'.$j;
 
 preg_match('/<p class="date">.+<\/p><h1>([^<]+)/',$content,$titre);
 $titre=$titre[1];
-preg_match('/[0-9]+[-]+.+[0-9]/',$titre,$numero);  
+preg_match('/[0-9]+[-]+.+[0-9]/',$titre,$numero);
 
 if ($numero==null){
   $numero=='';
