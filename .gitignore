@@ -56,3 +56,7 @@ project/log/
 project/web/pdf/
 project/web/documentation/stats/
 bin/config.inc
+
+#data
+parsers/Monaco/TribunalSupreme/all_urls.txt
+parsers/Monaco/TribunalSupreme/tmp/
