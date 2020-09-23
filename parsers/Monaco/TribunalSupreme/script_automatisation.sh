@@ -1,6 +1,8 @@
 #!/bin/bash
 
 rm -r tmp
+rm -r xmls
+mkdir xmls
 mkdir -p tmp/pages
 mkdir -p tmp/home_pages
 cd tmp/
