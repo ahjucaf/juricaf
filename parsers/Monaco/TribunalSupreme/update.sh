@@ -1,4 +1,8 @@
 #!/bin/bash
+
+cd $(basedir $0)
+. ../config.inc
+
 if [ -d "tmp" ];then
   rm -r tmp
 fi
@@ -22,5 +26,6 @@ if [ $nbr_pages != '0' ];then
   for page in tmp/pages/* ; do
     php parser_htmltoxml.php $page
   done
-
 fi
+
+rsync -a xmls/ $POOL
