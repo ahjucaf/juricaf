@@ -1,4 +1,3 @@
-
 <?php
 
 $fichiers=scandir('tmp/home_pages');
