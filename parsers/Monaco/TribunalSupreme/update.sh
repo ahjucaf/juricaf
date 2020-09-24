@@ -1,8 +1,7 @@
 #!/bin/bash
 
-cd $(basedir $0)
+cd $(dirname $0)
 . ../config.inc
-
 if [ -d "tmp" ];then
   rm -r tmp
 fi
@@ -18,7 +17,8 @@ mkdir xmls
 cd tmp/
 touch urls.txt
 cd ..
-php homes_downloader.php
+nb_home_pages=1
+php homes_downloader.php $nb_home_pages
 php url_listing.php
 php pages_downloader.php
 nbr_pages=$(ls -A "tmp/pages/" | wc -l)
@@ -27,5 +27,8 @@ if [ $nbr_pages != '0' ];then
     php parser_htmltoxml.php $page
   done
 fi
+nbr_xml=$(ls -A "xmls" | wc -l)
 
-rsync -a xmls/ $POOL
+if [ $nbr_xml != '0' ];then
+  cp xmls/* $POOL
+fi
