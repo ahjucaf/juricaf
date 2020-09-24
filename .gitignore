@@ -61,3 +61,4 @@ bin/config.inc
 parsers/Monaco/TribunalSupreme/all_urls.txt
 parsers/Monaco/TribunalSupreme/tmp/
 parsers/Monaco/config.inc
+parsers/Monaco/cour_de_revision/tmp/
