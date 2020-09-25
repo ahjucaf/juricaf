@@ -2,7 +2,7 @@
 
 $xmlfile='xmls/';
 $mois=['janvier'=>'01','février'=>'02','mars'=>'03','avril'=>'04','mai'=>'05','juin'=>'06','juillet'=>'07','août'=>'08','septembre'=>'09','octobre'=>'10','novembre'=>'11','décembre'=>'12'];
-$inputfile='tmp/pages/arret13.html'; //$arg[1]
+$inputfile='tmp/pages/arret1.html'; //$arg[1]
 $content=file_get_contents($inputfile);
 
 preg_match('/var url="\/305\/legismc\.nsf\/(.+)!/',$content,$numero);
@@ -61,11 +61,11 @@ fwrite($output, "<ANALYSE>\n<TITRE_PRINCIPAL>$titre_principale</TITRE_PRINCIPAL>
 fwrite($output, "<DATE_ARRET>$date</DATE_ARRET>\n");
 fwrite($output, "<JURIDICTION>$juridiction</JURIDICTION>\n");
 fwrite($output,"<FONDS_DOCUMENTAIRE>www.legimonaco.mc</FONDS_DOCUMENTAIRE>\n");
-fwrite($output, "<NUM_ARRET>TS/$numero</NUM_ARRET>\n");
+fwrite($output, "<NUM_ARRET>$numero</NUM_ARRET>\n");
 fwrite($output, "<PAYS>Monaco</PAYS>\n");
 fwrite($output, "<TEXTE_ARRET>$content</TEXTE_ARRET>\n");
 fwrite($output,"<PARTIES><DEMANDEURS><DEMANDEUR>$demandeur</DEMANDEUR></DEMANDEURS><DEFENDEURS><DEFENDEUR>$defendeur</DEFENDEUR></DEFENDEURS></PARTIES>\n");
-fwrite($output,"<TITRE>Monaco, $juridiction, $datefr, TS/$numero</TITRE>\n");
+fwrite($output,"<TITRE>Monaco, $juridiction, $datefr, $numero</TITRE>\n");
 fwrite($output,"<SOURCE>$source</SOURCE>");
 fwrite($output, "<TYPE>arret</TYPE>\n");
 fwrite($output, "</DOCUMENT>\n");
