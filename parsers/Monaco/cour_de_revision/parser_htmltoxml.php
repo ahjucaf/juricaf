@@ -5,7 +5,7 @@ $mois=['janvier'=>'01','février'=>'02','mars'=>'03','avril'=>'04','mai'=>'05','
 $inputfile='tmp/pages/arret13.html'; //$arg[1]
 $content=file_get_contents($inputfile);
 
-preg_match('/var url="(.+)"/',$content,$numero);
+preg_match('/var url="(.+)!/',$content,$numero);
 $numero=$numero[1];
 
 
