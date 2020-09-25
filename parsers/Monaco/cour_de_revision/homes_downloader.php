@@ -3,7 +3,7 @@ $head="https://www.legimonaco.mc/305/legismc.nsf/ViewJurisCR!OpenView&Start=1&Co
 $dossier='tmp/home_pages';
 
 $i=1;
-while($i<=48){
+while($i<=1){  //plus tard mettre 48
   $url=$head.$i."/";
   $cmd='curl -s "'. $url.'" >'.$dossier.'/page'.$i.'.html';
   shell_exec($cmd);
