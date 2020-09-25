@@ -11,9 +11,14 @@ foreach($urls as $k=>$v){
      preg_match('/(.+?)!/',$v,$v);
      $v=$v[1];
      $cmd='curl "'.$v.'"'." > tmp/pages/arret$i.html";
+     $taburl["arret$i.html"]=$v;
      shell_exec($cmd);
      $i=$i+1;
  }
+}
+
+if ($taburl!=[]){
+  file_put_contents('tmp/urls.json', json_encode($taburl));
 }
 
 ?>
