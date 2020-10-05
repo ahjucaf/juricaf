@@ -17,17 +17,18 @@ $headurl='https://www.tribunal-supreme.mc/decisions/page/';
 $dossier='tmp/home_pages';
 
 
+$nb_pages=$argv[1];
 $i=1;
-while (url_exist($headurl.$i."/")==True  && $i<2){
+while (url_exist($headurl.$i."/")==True  && $i<$nb_pages+1){
   if ($i==1){
     shell_exec('cd tmp/home_pages');
-    shell_exec('curl '.'https://www.tribunal-supreme.mc/decisions/'.'>'.$dossier.'/page'.$i.'.html');
+    shell_exec('curl -s '.'https://www.tribunal-supreme.mc/decisions/'.'>'.$dossier.'/page'.$i.'.html');
     $i=$i+1;
   }
   else{
     $url=$headurl.$i."/";
-    $cmd='curl '. $url.' >'.$dossier.'/page'.$i.'.html';
-    echo($cmd);
+    $cmd='curl -s '. $url.' >'.$dossier.'/page'.$i.'.html';
+    // echo($cmd);
     shell_exec($cmd);
     $i=$i+1;
   }

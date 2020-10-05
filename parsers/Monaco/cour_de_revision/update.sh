@@ -1,5 +1,4 @@
 #!/bin/bash
-
 cd $(dirname $0)
 . ../config.inc
 if [ -d "tmp" ];then
@@ -13,11 +12,10 @@ if [ -d "xmls" ];then
 fi
 
 mkdir xmls
-
 cd tmp/
 touch urls.txt
 cd ..
-nb_home_pages=1
+nb_home_pages=30
 php homes_downloader.php $nb_home_pages
 php url_listing.php
 php pages_downloader.php

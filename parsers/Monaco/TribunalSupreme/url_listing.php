@@ -1,4 +1,3 @@
-
 <?php
 
 $fichiers=scandir('tmp/home_pages');
@@ -16,11 +15,18 @@ foreach ($fichiers as $k => $v) {
     preg_match_all('/<a href="([^"]+)"/',$content,$lien);
     $lien=$lien[1];
     foreach($lien as $k=>$v){
+          // echo($v);
           if ($v!='https://www.tribunal-supreme.mc/' && $v!="https://www.tribunal-supreme.mc/mentions-legales/" && $v!='#tarteaucitron' && stristr($v,'communique')!=True){
             if($k%2 == 0){
-              if(in_array($v,$lignes_all_urls)!=True){
+              if (count($lignes_all_urls)>0){
+                if( in_array($v."\n",$lignes_all_urls)==false){
+                  fwrite($output,$v."\n");
+                }
+              }
+              else{
                 fwrite($output,$v."\n");
               }
+
             }
         }
       }
@@ -36,10 +42,7 @@ $lignes=file('tmp/urls.txt');
 foreach($lignes as $ligne){
       if (in_array($ligne,$lignes_all_urls)!=True){
         fwrite($all_urls,$ligne);
-        echo($ligne);
+        // echo($ligne);
       }
 }
 fclose($all_urls);
-
-
-?>

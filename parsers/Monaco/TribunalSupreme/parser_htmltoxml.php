@@ -16,7 +16,7 @@ $date=$a.'-'.$m.'-'.$j;
 
 preg_match('/<p class="date">.+<\/p><h1>([^<]+)/',$content,$titre);
 $titre=$titre[1];
-preg_match('/[0-9]+[-]+.+[0-9]/',$titre,$numero);  
+preg_match('/[0-9]+[-]+.+[0-9]/',$titre,$numero);
 
 if ($numero==null){
   $numero=='';
@@ -127,7 +127,11 @@ $date_min=new DateTime('2019-05-01');
 
 if($d>$date_min && $numero!=''){
 
-    $output = fopen($xmlfile.'TS_'.$numero.'.xml', 'w');
+
+    $sources = json_decode (file_get_contents('tmp/urls.json'), true);
+    $source=$sources[basename($inputfile)];
+    $name=preg_replace('/\//','_',$source);
+    $output = fopen($xmlfile.'TS_'.$name.'.xml', 'w');
     fwrite($output, '<?xml version="1.0" encoding="utf8"?>');
     fwrite($output,"\n");
     fwrite($output, "<DOCUMENT>\n");
@@ -140,8 +144,6 @@ if($d>$date_min && $numero!=''){
     fwrite($output,"<PARTIES><DEMANDEURS><DEMANDEUR>$demandeur</DEMANDEUR></DEMANDEURS><DEFENDEURS><DEFENDEUR>$defendeur</DEFENDEUR></DEFENDEURS></PARTIES>\n");
     $datefr=$j.' '.$mois[$m].' '.$a;
     fwrite($output,"<TITRE>Monaco, $juridiction2, $datefr, TS/$numero</TITRE>\n");
-    $sources = json_decode (file_get_contents('tmp/urls.json'), true);
-    $source=$sources[basename($inputfile)];
     fwrite($output,"<SOURCE>$source</SOURCE>");
     fwrite($output, "<TYPE>arret</TYPE>\n");
     fwrite($output, "</DOCUMENT>\n");

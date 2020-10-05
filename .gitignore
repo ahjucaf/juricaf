@@ -60,3 +60,8 @@ bin/config.inc
 #data
 parsers/Monaco/TribunalSupreme/all_urls.txt
 parsers/Monaco/TribunalSupreme/tmp/
+parsers/Monaco/config.inc
+parsers/Monaco/TribunalSupreme/xmls/
+parsers/Monaco/cour_de_revision/tmp/
+parsers/Monaco/cour_de_revision/xmls/
+
