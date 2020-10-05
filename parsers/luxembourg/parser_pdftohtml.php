@@ -151,7 +151,7 @@ $content = preg_replace('/^ +/', '', $content);
 $content = preg_replace('/\n\d+ *$/', '', $content);
 
 $output = fopen($xmlfile, 'w');
-fwrite($output, "<?xml version="1.0" encoding="utf8"?>\n");
+fwrite($output, '<?xml version="1.0" encoding="utf8"?>'."\n");
 fwrite($output, "<DOCUMENT>\n");
 fwrite($output, "<NUM_ARRET>$numero</NUM_ARRET>\n");
 fwrite($output, "<DATE_ARRET>$date</DATE_ARRET>\n");
