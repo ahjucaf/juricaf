@@ -10,10 +10,24 @@ foreach ($fichiers as $k => $v) {
       preg_match_all('/<font size="2" face="Verdana"><a href="(.+?)">/',$html,$lien);
       $lien=$lien[1];
       foreach($lien as $k=>$v){
-          fwrite($output,$head.$v."\n");
+          if (count($lignes_all_urls)>0){
+              if( in_array($head.$v."\n",$lignes_all_urls)==false){
+                fwrite($output,$head.$v."\n");
+              }
+            }
+
+
+          else{
+              fwrite($output,$head.$v."\n");
+            }
+
       }
     }
 }
+
+
+
+
 
 
 $all_urls=fopen('all_urls.txt','a+');
