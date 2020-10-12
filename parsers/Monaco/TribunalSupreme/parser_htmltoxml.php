@@ -3,9 +3,13 @@ $xmlfile='xmls/';
 $mois=['01'=>'janvier','02'=>'février','03'=>'mars','04'=>'avril','05'=>'mai','06'=>'juin','07'=>'juillet','08'=>'août','09'=>'septembre','10'=>'octobre','11'=>'novembre','12'=>'décembre'];
 
 $inputfile = $argv[1];
+$c= file($inputfile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
-$content=file($inputfile);
-$content=$content[0];
+$content='';
+foreach($c as $num=>$ligne){
+  $ligne=trim($ligne);
+  $content=$content.$ligne;
+}
 
 preg_match("#<p class=\"date\">(.+)</p>#iU",$content,$date);
 $date=$date[1];
