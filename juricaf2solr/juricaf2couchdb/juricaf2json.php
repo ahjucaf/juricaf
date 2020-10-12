@@ -516,7 +516,7 @@ if (isset($res['num_tros_gros'])) {
   $long_ok = true;
   unset($res['num_tros_gros']);
 }
-if (strlen($res['num_arret']) > 30 && !isset($long_ok))
+if (strlen($res['num_arret']) > 33 && !isset($long_ok))
 {
   addError("num_arret trop gros");
 }
