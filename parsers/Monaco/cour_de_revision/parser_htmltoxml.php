@@ -7,7 +7,7 @@ $content=file_get_contents($inputfile);
 
 preg_match('/var url="\/305\/legismc\.nsf\/(.+)!/',$content,$numero);
 $numero=$numero[1];
-
+// echo($numero."\n");
 $content=html_entity_decode($content);
 $content=preg_replace("/\n/"," ",$content);
 
