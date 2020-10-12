@@ -15,7 +15,7 @@ mkdir xmls
 cd tmp/
 touch urls.txt
 cd ..
-nb_home_pages=30
+nb_home_pages=48
 php homes_downloader.php $nb_home_pages
 php url_listing.php
 php pages_downloader.php
