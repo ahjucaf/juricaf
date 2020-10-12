@@ -5,9 +5,10 @@ $mois=['janvier'=>'01','février'=>'02','mars'=>'03','avril'=>'04','mai'=>'05','
 $inputfile= $argv[1];
 $content=file_get_contents($inputfile);
 
-preg_match('/var url="\/305\/legismc\.nsf\/(.+)!/',$content,$numero);
+
+preg_match('/var url="\/305\/legismc\.nsf\/.+\/(.+)!/',$content,$numero);
 $numero=$numero[1];
-// echo($numero."\n");
+//echo($numero."\n");
 $content=html_entity_decode($content);
 $content=preg_replace("/\n/"," ",$content);
 
@@ -21,7 +22,7 @@ else{
 }
 
 
-if ($numero=="22ad7ec95fb7c854c1257a4b003c5f23/e48f11b666607816c125858200339fa8"){
+if ($numero=="e48f11b666607816c125858200339fa8"){
   preg_match('/<p class=resume>.+?<\/p>(.+<p class=par-resume>.+?)<\/div>/',$content,$sommaire);
   $sommaire=$sommaire[1];
   $sommaire=strip_tags($sommaire);
@@ -65,7 +66,7 @@ else{
 }
 
 
-if ($numero=="22ad7ec95fb7c854c1257a4b003c5f23/e48f11b666607816c125858200339fa8"){
+if ($numero=="e48f11b666607816c125858200339fa8"){
   $content="";
 }
 else{
@@ -82,6 +83,7 @@ $sources = json_decode (file_get_contents('tmp/urls.json'), true);
 $source=$sources[basename($inputfile)];
 
 $name=preg_replace('/\//','_',$source);
+$name=preg_replace('/:/','',$name);
 
 $output = fopen($xmlfile.'CS_'.$name.'.xml', 'w');
 
