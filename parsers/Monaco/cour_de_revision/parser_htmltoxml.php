@@ -20,14 +20,25 @@ else{
   $titre_principale="";
 }
 
-preg_match('/<p class=resume>.+?<\/p>(.+<p class=par-resume>.+?)<div class=argument>/',$content,$sommaire);
-if(count($sommaire)>1){
+
+if ($numero=="22ad7ec95fb7c854c1257a4b003c5f23/e48f11b666607816c125858200339fa8"){
+  preg_match('/<p class=resume>.+?<\/p>(.+<p class=par-resume>.+?)<\/div>/',$content,$sommaire);
   $sommaire=$sommaire[1];
   $sommaire=strip_tags($sommaire);
 }
 else{
-  $sommaire="";
+  preg_match('/<p class=resume>.+?<\/p>(.+<p class=par-resume>.+?)<div class=argument>/',$content,$sommaire);
+  if(count($sommaire)>1){
+    $sommaire=$sommaire[1];
+    $sommaire=strip_tags($sommaire);
+  }
+  else{
+    $sommaire="";
+  }
 }
+
+
+
 preg_match('/<p class=date-decision>(.+?)<\/p>/',$content,$datefr);
 $datefr=$datefr[1];
 $j=$datefr[0].$datefr[1];
@@ -53,11 +64,19 @@ else{
   $defendeur=$parties[2];
 }
 
-preg_match('/<div class=argument>(.+?)<\/html>/',$content,$content);
-$content=$content[1];
-$content=preg_replace('#</p>#',"\n",$content);
-$content=strip_tags($content);
-$content=preg_replace("/\n/","<br/>",$content);
+
+if ($numero=="22ad7ec95fb7c854c1257a4b003c5f23/e48f11b666607816c125858200339fa8"){
+  $content="";
+}
+else{
+  preg_match('/<div class=argument>(.+?)<\/html>/',$content,$content);
+  // print_r($content);
+  $content=$content[1];
+  $content=preg_replace('#</p>#',"\n",$content);
+  $content=strip_tags($content);
+  $content=preg_replace("/\n/","<br/>",$content);
+
+}
 
 $sources = json_decode (file_get_contents('tmp/urls.json'), true);
 $source=$sources[basename($inputfile)];
