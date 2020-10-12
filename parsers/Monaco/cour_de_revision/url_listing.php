@@ -15,8 +15,6 @@ foreach ($fichiers as $k => $v) {
                 fwrite($output,$head.$v."\n");
               }
             }
-
-
           else{
               fwrite($output,$head.$v."\n");
             }
