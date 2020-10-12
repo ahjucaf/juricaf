@@ -64,4 +64,5 @@ parsers/Monaco/config.inc
 parsers/Monaco/TribunalSupreme/xmls/
 parsers/Monaco/cour_de_revision/tmp/
 parsers/Monaco/cour_de_revision/xmls/
+parsers/Monaco/cour_de_revision/all_urls.txt
 
