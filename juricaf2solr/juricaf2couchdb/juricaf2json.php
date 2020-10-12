@@ -1037,5 +1037,3 @@ ksort($res);
 //var_dump($res);
 print json_encode($res);
 //echo '</pre>';
-
-
