@@ -69,7 +69,7 @@ $name=preg_replace('/:/','',$name);
 
 
 $d=new DateTime($date);
-$date_min=new DateTime('2018-09-26');
+$date_min=new DateTime('2018-09-27');
 
 
 
@@ -80,7 +80,7 @@ if($d>$date_min){
     fwrite($output, '<?xml version="1.0" encoding="utf8"?>');
     fwrite($output,"\n");
     fwrite($output, "<DOCUMENT>\n");
-    fwrite($output, "<ANALYSES><ANALYSE>\n<TITRE_PRINCIPAL>$titre_principale</TITRE_PRINCIPAL><SOMMAIRE>$sommaire</SOMMAIRE></ANALYSE></ANALYSES>");
+    fwrite($output, "<ANALYSES><ANALYSE>\n<TITRE_PRINCIPAL>$titre_principale</TITRE_PRINCIPAL>\n<SOMMAIRE>$sommaire</SOMMAIRE>\n</ANALYSE></ANALYSES>\n");
     fwrite($output, "<DATE_ARRET>$date</DATE_ARRET>\n");
     fwrite($output, "<JURIDICTION>$juridiction</JURIDICTION>\n");
     fwrite($output,"<FONDS_DOCUMENTAIRE>www.legimonaco.mc</FONDS_DOCUMENTAIRE>\n");
