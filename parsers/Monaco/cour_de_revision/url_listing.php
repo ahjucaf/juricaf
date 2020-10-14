@@ -22,12 +22,6 @@ foreach ($fichiers as $k => $v) {
       }
     }
 }
-
-
-
-
-
-
 $all_urls=fopen('all_urls.txt','a+');
 $lignes=file('tmp/urls.txt');
 
