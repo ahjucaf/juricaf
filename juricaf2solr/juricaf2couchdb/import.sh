@@ -3,7 +3,7 @@
 #Default configuration options
 LISTPOOL=files.list
 JSONFILE=test.json
-LOG=/tmp/import.$$.log
+LOG=/tmp/import.$(date '+%Y%m%d').$$.log
 DATE=$(date +%Y-%m-%d_%H:%M)
 LOCK=/tmp/$0.lock
 VERBOSE=$1;
@@ -38,6 +38,7 @@ fi
 echo $$ > $LOCK
 
 rm -f $JSONFILE 2> /dev/null
+rm -f $LOG 2> /dev/null
 
 find $DIRPOOL -type f  | grep -v .svn > $LISTPOOL
 
