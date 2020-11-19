@@ -3,10 +3,6 @@ function replaceBlank($str) {
   return str_replace (' ', '_', $str);
 }
 
-function num($num) {
-  return preg_replace('/(\d)(\d{3})$/', '\1&nbsp;\2', $num);
-}
-
 function pathToFlag($str) {
   return urlencode(str_replace("'", '_', replaceBlank($str)));
 }
@@ -14,7 +10,7 @@ function pathToFlag($str) {
 $cpt = 0;
 ?>
 <div class="pays">
-	<h3>Rechercher parmi <?php echo num($nb); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</h3>
+	<h3>Rechercher parmi <?php echo number_format($nb, 0, '', ' '); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</h3>
 	<div class="payscols">
 	  <table><tr>
 		<?php
@@ -25,7 +21,7 @@ $cpt = 0;
 		  $cpt++;
 		  
 		  // Traitement du nom du pays : si trop long, le nom est coupé
-		  $pays_nom = $p['key'][0].' ('.num($p['value']).')';
+		  $pays_nom = $p['key'][0].' ('.number_format($p['value'], 0, '', ' ').')';
 		  $link = link_to($pays_nom,'recherche/search?query=+&facets=facet_pays:'.$pays);
 		  if (strlen($pays_nom) > 45) {
 			  $pays_nom_min = substr($pays_nom, 0, 16) . '...';
