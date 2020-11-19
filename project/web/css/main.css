@@ -45,7 +45,7 @@ padding: 6px; margin:5px 5px; font-size: 12px; color: #FFFFFF; text-decoration: 
 .arret p { padding:10px; }
 .arret .split_left { width:450px; float:left; }
 .arret .split_right { width:300px; float:right }
-td { padding-top:8px; }
+.lipays, td { padding-top:8px; }
 /* Footer */
 .bottom { background-image:url('../images/bg_footer.gif'); background-repeat:repeat-x; font-size:12px; height:78px; margin:auto; width: 1024px; }
 .bottom p { color:#f5f5f5; text-align: center; padding:15px;}

@@ -12,7 +12,7 @@ $cpt = 0;
 <div class="pays">
 	<h3>Rechercher parmi <?php echo number_format($nb, 0, '', ' '); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</h3>
 	<div class="payscols">
-	  <table><tr><td>
+	  <table><tr><td><ul>
 		<?php
 		foreach ($pays as $p)
 		{
@@ -27,10 +27,10 @@ $cpt = 0;
 			  $link = link_to($pays_nom_min,'recherche/search?query=+&facets=facet_pays:'.$pays);
 		  }
           if (strlen($pays) > 0) {
-  		      echo '<img src="/images/drapeaux/'.pathToFlag(ucfirst($pays)).'.png" alt="'.$pays.'" />&nbsp;'.$link .'<br/>';
+  		      echo '<li class="lipays"><img src="/images/drapeaux/'.pathToFlag(ucfirst($pays)).'.png" alt="'.$pays.'" />&nbsp;'.$link .'</li>';
           }
         }
 		?>
-    </td></tr><tr><td colspan="5" class="plus"><img src="images/+.png" alt="+" /> <a href="/documentation/stats/statuts.php">Plus de statistiques</a></td></tr></table>
+    </ul></td></tr><tr><td colspan="5" class="plus"><img src="images/+.png" alt="+" /> <a href="/documentation/stats/statuts.php">Plus de statistiques</a></td></tr></table>
 	</div>
 </div>
