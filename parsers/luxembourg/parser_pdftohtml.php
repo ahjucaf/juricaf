@@ -12,7 +12,7 @@ $lesnombres = array (
   "vingt"=>"20", "vingt-et-un" => "21", "vingt et un" => "21", "vingt-deux" => "22", "vingt-trois" => "23", "vingt-quatre" => "24", "vingt-cinq" => "25", "vingt-six" => "26","vingt-sept" => "27", "vingt-huit" => "28", "vingt-neuf" => "29",
   "trente"=>"30", "trente et un" => "31",
   "deux mille" => "2000", "deux mille un" => "2001", "deux mille deux" => "2002", "deux mille trois" => "2003", "deux mille quatre" => "2004", "deux mille cinq" => "2005", "deux mille six" => "2006", "deux mille sept" => "2007", "deux mille huit" => "2008", "deux mille neuf" => "2009", "deux mille dix" => "2010",
-  "deux mille onze" => "2011", "deux mille douze" => "2012", "deux mille treize" => "2013", "deux mille quatorze" => "2014", "deux mille quinze" => "2015", "deux mille seize" => "2016", "deux mille dix-sept" => "2017", "deux mille dix-huit" => "2018", "deux mille dix-neuf" => "2019", "deux mille vingt" => "2020"
+  "deux mille onze" => "2011", "deux mille douze" => "2012", "deux mille treize" => "2013", "deux mille quatorze" => "2014", "deux mille quinze" => "2015", "deux mille seize" => "2016", "deux mille dix-sept" => "2017", "deux mille dix-huit" => "2018", "deux mille dix-neuf" => "2019", "deux mille vingt" => "2020","deux mille vingt-et-un" => 2021
 );
 $lesmois_reverse = array();
 foreach ($lesmois as $key => $value) {
