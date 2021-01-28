@@ -11,5 +11,7 @@ pdftohtml $pdf .tmp/arret > /dev/null 2>&1
 if test -s .tmp/arrets.html ; then
 cat .tmp/arrets.html | php parser_pdftohtml.php $xml $url
 else
-echo "problème avec le pdf de $url";
+echo -n "problème avec le pdf (ou son téléchargement) de $url : ";
+cat $url;
+echo 
 fi
