@@ -27,7 +27,7 @@ done
 cat $ARRET_LIST | while read i arretnum arretdate ; do
     curl -s -m 1 --ciphers 'DEFAULT:!DH' "https://hudoc.echr.coe.int/app/conversion/docx/html/body?library=ECHR&id="$arretnum > arrets/$arretnum".html"
     if test -s arrets/$arretnum".html"; then
-        html2markdown arrets/$arretnum".html" > arrets/$arretnum".txt"
+        html2markdown -b 0 arrets/$arretnum".html" > arrets/$arretnum".txt"
     fi
     curl -s -m 1 --ciphers 'DEFAULT:!DH' "https://hudoc.echr.coe.int/app/query/results?query=(contentsitename=ECHR)%20AND%20"$arretnum"&select=advopidentifier,applicationnumber,advopstatus,applicability,appno,article,casecitation,conclusion,contentcategory,contentsitename,decisiondate,docname,doctype,documentcollectionid,documentcollectionid2,extractedappno,hudocdate,ecli,externalsources,importance,introductiondate,isplaceholder,issue,itemid,judgementdate,kpdate,kpdateAsText,kpthesaurus,meetingnumber,languageisocode,originatingbody,publishedby,referencedate,reportdate,representedby,resolutiondate,resolutionnumber,respondent,rulesofcourt,scl,sclappnos,separateopinion,typedescription&sort=&start=0&length=1" > arrets/$arretnum".json"
     echo $arretnum
