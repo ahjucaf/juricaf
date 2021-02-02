@@ -47,7 +47,9 @@ function date_id($d) {
 // Convert a string to juricaf ids
 function ids($str) {
   $str = preg_replace('/[^a-z0-9\-]/i', '', replaceAccents($str));
-  return strtoupper($str);
+  $str = strtoupper($str);
+  $str = preg_replace('/CEDH-/', 'CONSEILDELEUROPE-', $str);
+  return $str;
 }
 
 function cleanArray($array) {
