@@ -39,6 +39,8 @@ if (preg_match('/(.* SECTION|GRANDE CHAMBRE)\s*AFFAIRE/', $text, $m)) {
     $section = '('.$m[1].')';
 }
 
+$text = preg_replace('/\\\./', '.', $text);
+
 ?><?xml version="1.0" encoding="utf8"?>
 <DOCUMENT>
 <DATE_ARRET><?php echo preg_replace('/([0-9][0-9])\/([0-9][0-9])\/([0-9][0-9][0-9][0-9]) [0-9:]*/', '$3-$2-$1', $meta->judgementdate) ; ?></DATE_ARRET>
