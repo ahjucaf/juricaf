@@ -180,7 +180,9 @@ $res['type'] = 'arret';
 if(!isset($res['pays']) && isset($argv[2])) { $res['pays'] = $argv[2]; }
 if(isset($res['pays'])) { $res['pays'] = toString($res['pays']); }
 if(empty($res['pays'])) { addError("pays manquant"); $res['pays'] = 'inconnu'; }
-$res['pays'] = ucfirst(strtolower($res['pays']));
+if ($res['pays'] != 'CEDH') {
+    $res['pays'] = ucfirst(strtolower($res['pays']));
+}
 
 if(!isset($res['juridiction']) && isset($argv[3])) { $res['juridiction'] = $argv[3]; }
 if(isset($res['juridiction'])) { $res['juridiction'] = toString($res['juridiction']); }
