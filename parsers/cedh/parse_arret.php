@@ -26,7 +26,7 @@ $obj = null;
 $text = @file_get_contents("arrets/".$arret_id.".txt");
 
 if (!$meta || !$text) {
-    echo "ERREUR: $arret_id non trouvé\n";
+    fwrite(STDERR, "ERREUR: $arret_id non trouvé\n");
     exit(1);
 }
 
