@@ -30,7 +30,7 @@ if (!$meta || !$text) {
     exit(1);
 }
 
-if (preg_match('/affaire (.*) c\. ([^\(]*)/i', $meta->docname, $m)) {
+if (preg_match('/affaire ([^ ].*[^ ]) c\. ([^\(]*[^\( ])/i', $meta->docname, $m)) {
     $defenseur = $m[2];
     $demandeur = $m[1];
 }
