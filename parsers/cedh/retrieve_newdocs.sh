@@ -5,6 +5,8 @@ ARRET_LIST=/tmp/$$"_arrets.list"
 rm -f last_kpdate.txt.new
 mkdir -p arrets
 
+touch $ARRET_LIST
+
 for start in {0..10000..100} ; do
 
     curl -s -m 1 --ciphers 'DEFAULT:!DH' "https://hudoc.echr.coe.int/app/query/results?query=contentsitename%3AECHR%20AND%20(NOT%20(doctype%3DPR%20OR%20doctype%3DHFCOMOLD%20OR%20doctype%3DHECOMOLD))%20AND%20((languageisocode%3D%22FRE%22))%20AND%20((documentcollectionid%3D%22GRANDCHAMBER%22)%20OR%20(documentcollectionid%3D%22CHAMBER%22))&select=itemid,kpdate,kpdateAsText&sort=kpdate%20Descending&start="$start"&length=100&rankingModelId=11111111-0000-0000-0000-000000000000" |
@@ -33,7 +35,9 @@ cat $ARRET_LIST | while read i arretnum arretdate ; do
     echo $arretnum
 done
 
+if test -f last_kpdate.txt.new ; then
 mv last_kpdate.txt.new last_kpdate.txt
+fi
 rm -f $ARRET_LIST".one" $ARRET_LIST
 
 #https://hudoc.echr.coe.int/app/query/results?query=(contentsitename=ECHR)%20AND%20001-112422&select=itemid,applicability,appno,article,conclusion,decisiondate,docname,documentcollectionid,documentcollectionid2,doctype,externalsources,importance,introductiondate,issue,judgementdate,kpthesaurus,meetingnumber,originatingbody,publishedby,referencedate,kpdate,advopidentifier,advopstatus,reportdate,representedby,resolutiondate,resolutionnumber,respondent,rulesofcourt,separateopinion,scl,typedescription,ecli,casecitation,contentsitename&sort=&start=0&length=1
