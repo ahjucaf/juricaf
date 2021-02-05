@@ -21,6 +21,10 @@ $typedescription2typearret = array(
     );
 
 $obj = json_decode(@file_get_contents("arrets/".$arret_id.".json"));
+if (!$obj) {
+    fwrite(STDERR, "ERREUR: json non trouvé pour $arret_id\n");
+    exit(2);
+}
 $meta = $obj->results[0]->columns;
 $obj = null;
 $text = @file_get_contents("arrets/".$arret_id.".txt");
