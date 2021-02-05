@@ -57,7 +57,7 @@ $text = preg_replace('/\\\./', '.', $text);
 ]]>
 </TEXTE_ARRET>
 <TITRE>CEDH, <?php echo  $meta->docname ; ?>, <?php echo preg_replace('/([0-9][0-9])\/([0-9][0-9])\/([0-9][0-9][0-9][0-9]) [0-9:]*/', '$3', $meta->judgementdate); ?>, <?php echo $arret_id; ?></TITRE>
-<CITATION_ARRET_STRASBOURG><?php echo $meta->scl; ?></CITATION_ARRET_STRASBOURG>
+<CITATION_ARRET_STRASBOURG><![CDATA[<?php echo $meta->scl; ?>]]></CITATION_ARRET_STRASBOURG>
 <CITATION_ARTICLE><?php echo $meta->article; ?></CITATION_ARTICLE>
 <FONDS_DOCUMENTAIRE>HUDOC</FONDS_DOCUMENTAIRE>
 <IMPORTANCE><?php echo $meta->importance - 1 ; ?></IMPORTANCE>
