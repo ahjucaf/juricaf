@@ -52,8 +52,9 @@ $text = preg_replace('/\\\./', '.', $text);
 <JURIDICTION>Cour européenne des droits de l'homme</JURIDICTION>
 <NUM_ARRET><?php echo $arret_id; ?></NUM_ARRET>
 <PAYS>CEDH</PAYS>
-<TEXTE_ARRET>
-<?php echo $text; ?>
+<TEXTE_ARRET><![CDATA[
+   <?php echo $text; ?>
+]]>
 </TEXTE_ARRET>
 <TITRE>CEDH, <?php echo  $meta->docname ; ?>, <?php echo preg_replace('/([0-9][0-9])\/([0-9][0-9])\/([0-9][0-9][0-9][0-9]) [0-9:]*/', '$3', $meta->judgementdate); ?>, <?php echo $arret_id; ?></TITRE>
 <CITATION_ARRET_STRASBOURG><?php echo $meta->scl; ?></CITATION_ARRET_STRASBOURG>
