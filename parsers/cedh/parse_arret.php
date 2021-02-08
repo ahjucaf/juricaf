@@ -23,16 +23,21 @@ $typedescription2typearret = array(
 $obj = json_decode(@file_get_contents("arrets/".$arret_id.".json"));
 if (!$obj) {
     fwrite(STDERR, "ERREUR: json non trouvé pour $arret_id\n");
-    exit(2);
-}
-$meta = $obj->results[0]->columns;
-$obj = null;
-$text = @file_get_contents("arrets/".$arret_id.".txt");
-
-if (!$meta || !$text) {
-    fwrite(STDERR, "ERREUR: $arret_id non trouvé\n");
     exit(1);
 }
+$meta = $obj->results[0]->columns;
+if (!$meta) {
+    fwrite(STDERR, "ERREUR: meta de $arret_id non accessible\n");
+    exit(2);
+}
+$obj = null;
+
+$text = @file_get_contents("arrets/".$arret_id.".txt");
+if (!$text) {
+    fwrite(STDERR, "ERREUR: texte de $arret_id non trouvé\n");
+    exit(3);
+}
+
 
 if (preg_match('/affaire ([^ ].*[^ ]) c\. ([^\(]*[^\( ])/i', $meta->docname, $m)) {
     $defenseur = $m[2];
