@@ -42,6 +42,10 @@ if (!$text) {
 if (preg_match('/affaire ([^ ].*[^ ]) c\. ([^\(]*[^\( ])/i', $meta->docname, $m)) {
     $defenseur = $m[2];
     $demandeur = $m[1];
+}else{
+    fwrite(STDERR, "WARN: defenseur/demandeur non trouvé pour $arret_id (".$meta->docname.")\n");
+    $defenseur = null;
+    $demandeur = null;
 }
 
 if (preg_match('/(.* SECTION|GRANDE CHAMBRE)\s*AFFAIRE/', $text, $m)) {
@@ -67,12 +71,16 @@ $text = preg_replace('/\\\./', '.', $text);
 <FONDS_DOCUMENTAIRE>HUDOC</FONDS_DOCUMENTAIRE>
 <IMPORTANCE><?php echo $meta->importance - 1 ; ?></IMPORTANCE>
 <PARTIES>
+<?php if ($demandeur): ?>
     <DEMANDEURS>
         <DEMANDEUR><?php echo $demandeur; ?></DEMANDEUR>
     </DEMANDEURS>
+<?php endif; ?>
+<?php if ($defenseur): ?>
     <DEFENDEURS>
         <DEFENDEUR><?php echo $defenseur ; ?></DEFENDEUR>
     </DEFENDEURS>
+<?php endif; ?>
 </PARTIES>
 <?php if (isset($meta->representedby) && $meta->representedby && $meta->representedby != 'N/A'): ?>
 <AVOCATS><?php echo $meta->representedby; ?></AVOCATS>
