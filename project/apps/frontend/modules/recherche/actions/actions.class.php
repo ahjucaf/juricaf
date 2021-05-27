@@ -144,7 +144,7 @@ class rechercheActions extends sfActions
   }
 
   private function convertDate($date) {
-    $dates = split('/', $date);
+    $dates = explode('/', $date);
     return $dates[2].'-'.$dates[1].'-'.$dates[0];
   }
 
