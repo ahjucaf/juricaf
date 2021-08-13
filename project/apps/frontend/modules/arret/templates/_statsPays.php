@@ -14,10 +14,11 @@ $cpt = 0;
 	<div class="payscols">
 	  <table><tr><td><ul>
 		<?php
+        $max_per_col = intval(count($pays) / 3) + 1;
 		foreach ($pays as $p)
 		{
 		  $pays = preg_replace('/ /', '_', $p['key'][0]);
-		  if ($cpt % 15 == 0 && $cpt) { echo '</td><td>'; }
+		  if ($cpt % $max_per_col == 0 && $cpt) { echo '</td><td>'; }
 		  $cpt++;
 		  // Traitement du nom du pays : si trop long, le nom est coupé
 		  $pays_nom = $p['key'][0].' ('.number_format($p['value'], 0, '', ' ').')';
