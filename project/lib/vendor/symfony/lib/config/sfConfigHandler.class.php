@@ -75,8 +75,7 @@ abstract class sfConfigHandler
   {
     if (is_array($value))
     {
-      $func = function(&$value) { $value = sfToolkit::replaceConstants($value); };
-      array_walk_recursive($value, $func);
+      array_walk_recursive($value, function(&$value) { $value = sfToolkit::replaceConstants($value); });
     }
     else
     {

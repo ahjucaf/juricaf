@@ -165,7 +165,7 @@ class CoverageReportTask extends Task
 
 			$html = $geshi->parse_code();
 
-			$lines = explode("<li>|</li>", $html);
+			$lines = split("<li>|</li>", $html);
 
 			// skip first and last line
 			array_pop($lines);

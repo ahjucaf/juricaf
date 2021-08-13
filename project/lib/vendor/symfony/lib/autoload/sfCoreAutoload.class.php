@@ -11,7 +11,7 @@
 /**
  * The current symfony version.
  */
-define('SYMFONY_VERSION', '1.4.17');
+define('SYMFONY_VERSION', '1.4.20');
 
 /**
  * sfCoreAutoload class.
@@ -266,6 +266,7 @@ class sfCoreAutoload
     'sfcontrollerexception' => 'exception/sfControllerException.class.php',
     'sfdatabaseexception' => 'exception/sfDatabaseException.class.php',
     'sferror404exception' => 'exception/sfError404Exception.class.php',
+    'sferror403exception' => 'exception/sfError403Exception.class.php',
     'sfexception' => 'exception/sfException.class.php',
     'sffactoryexception' => 'exception/sfFactoryException.class.php',
     'sffileexception' => 'exception/sfFileException.class.php',

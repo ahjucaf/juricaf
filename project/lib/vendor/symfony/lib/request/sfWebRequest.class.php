@@ -18,7 +18,7 @@
  * @subpackage request
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @author     Sean Kerr <sean@code-box.org>
- * @version    SVN: $Id: sfWebRequest.class.php 32729 2011-07-05 15:23:04Z www-data $
+ * @version    SVN: $Id: sfWebRequest.class.php 33544 2012-10-05 10:42:42Z fabien $
  */
 class sfWebRequest extends sfRequest
 {
@@ -74,7 +74,7 @@ class sfWebRequest extends sfRequest
     parent::initialize($dispatcher, $parameters, $attributes, $options);
 
     // GET parameters
-    $this->getParameters = get_magic_quotes_gpc() ? sfToolkit::stripslashesDeep($_GET) : $_GET;
+    $this->getParameters = (function_exists("get_magic_quotes_gpc") && @get_magic_quotes_gpc()) ? sfToolkit::stripslashesDeep($_GET) : $_GET;
     $this->parameterHolder->add($this->getParameters);
 
     $postParameters = $_POST;
@@ -135,7 +135,7 @@ class sfWebRequest extends sfRequest
       $this->setMethod(self::GET);
     }
 
-    $this->postParameters = get_magic_quotes_gpc() ? sfToolkit::stripslashesDeep($postParameters) : $postParameters;
+    $this->postParameters = (function_exists("get_magic_quotes_gpc") && @get_magic_quotes_gpc()) ? sfToolkit::stripslashesDeep($postParameters) : $postParameters;
     $this->parameterHolder->add($this->postParameters);
 
     if (isset($this->options['formats']))
@@ -557,7 +557,7 @@ class sfWebRequest extends sfRequest
 
     if (isset($_COOKIE[$name]))
     {
-      $retval = get_magic_quotes_gpc() ? sfToolkit::stripslashesDeep($_COOKIE[$name]) : $_COOKIE[$name];
+      $retval = (function_exists("get_magic_quotes_gpc") && @get_magic_quotes_gpc()) ? sfToolkit::stripslashesDeep($_COOKIE[$name]) : $_COOKIE[$name];
     }
 
     return $retval;
@@ -633,12 +633,13 @@ class sfWebRequest extends sfRequest
   public function splitHttpAcceptHeader($header)
   {
     $values = array();
+    $groups = array();
     foreach (array_filter(explode(',', $header)) as $value)
     {
       // Cut off any q-value that might come after a semi-colon
       if ($pos = strpos($value, ';'))
       {
-        $q     = (float) trim(substr($value, strpos($value, '=') + 1));
+        $q     = trim(substr($value, strpos($value, '=') + 1));
         $value = substr($value, 0, $pos);
       }
       else
@@ -646,15 +647,20 @@ class sfWebRequest extends sfRequest
         $q = 1;
       }
 
-      if (0 < $q)
-      {
-        $values[trim($value)] = $q;
+      $groups[$q][] = $value;
+    }
+
+    krsort($groups);
+
+    foreach ($groups as $q => $items) {
+      if (0 < $q) {
+        foreach ($items as $value) {
+          $values[] = trim($value);
+        }
       }
     }
 
-    arsort($values);
-
-    return array_keys($values);
+    return $values;
   }
 
   /**

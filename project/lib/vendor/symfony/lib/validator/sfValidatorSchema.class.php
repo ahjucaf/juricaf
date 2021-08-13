@@ -116,6 +116,7 @@ class sfValidatorSchema extends sfValidatorBase implements ArrayAccess
 
       throw $errorSchema;
     }
+
     // pre validator
     try
     {
@@ -382,16 +383,15 @@ class sfValidatorSchema extends sfValidatorBase implements ArrayAccess
   protected function getBytes($value)
   {
     $value = trim($value);
-
     switch (strtolower($value[strlen($value) - 1]))
     {
       // The 'G' modifier is available since PHP 5.1.0
       case 'g':
-        $value = ((float) $value) * 1024;
+        $value = 1024 * (int) $value;
       case 'm':
-        $value = ((float) $value) * 1024;
+        $value = 1024 * (int) $value;
       case 'k':
-        $value = ((float) $value) * 1024;
+        $value = 1024 * (int) $value;
     }
 
     return $value;
