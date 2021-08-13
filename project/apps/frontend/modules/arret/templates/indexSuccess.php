@@ -663,7 +663,7 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
     //CNIL
 
     $xmlDoc = new DOMDocument();
-    $xmlDoc->load("http://www.juricaf.org/cnil.xml");
+    $xmlDoc->load(getcwd()."/cnil.xml");
     $x=$xmlDoc->getElementsByTagName('numero');
     $y=null;
     for ($i=0; $i<=$x->length-1; $i++)
