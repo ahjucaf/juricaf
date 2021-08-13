@@ -346,7 +346,7 @@ class sfCouchConnection
       break;
     }
 
-    if (substr($headers['content-type'], 0, 5) != 'text/') {
+    if ((substr($headers['content-type'], 0, 5) != 'text/') && ($headers['content-type'] != 'application/json')) {
       return ($body);
     }
 
