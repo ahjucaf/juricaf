@@ -12,7 +12,7 @@ $cpt = 0;
 <div class="pays">
 	<h3>Rechercher parmi <?php echo number_format($nb, 0, '', ' '); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</h3>
 	<div class="payscols">
-	  <table><tr><td><ul>
+	  <table style="margin: auto;"><tr><td><ul>
 		<?php
         $max_per_col = intval(count($pays) / 3) + 1;
 		foreach ($pays as $p)
