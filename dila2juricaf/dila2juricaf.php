@@ -47,7 +47,7 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
 
   function multiple($nom, $array_vals) {
     $i = 1;
-    $multiples = '';
+    $multiples = [];
     foreach ($array_vals as $value) {
       if(trim($value) !== '') {
         $multiples[$nom.' id="'.$i.'"'] = cdata($value); $i++;
@@ -157,7 +157,7 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
   }
 
   function addRef($references, $titre, $type, $nature, $date, $numero, $nor, $url) {
-    if(is_array($references)) { $i = count($references)+1; } else { $i = 1; }
+    if(is_array($references)) { $i = count($references)+1; } else { $references = [] ; $i = 1; }
     $titre = toString($titre);
     if(!empty($titre)) {
       $references['REFERENCE id="'.$i.'"'] =
