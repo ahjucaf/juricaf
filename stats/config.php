@@ -7,11 +7,6 @@ foreach ($juricaf_config_file as $vars) {
   $var[$vars[0]] = $vars[1];
 }
 
-$HOST = 'localhost';
-$DBTABLE = 'stats_params';
-$DBNAME = $var['MYSQLDBNAME'];
-$DBUSER = $var['MYSQLDBUSER'];
-$DBPASS = $var['MYSQLDBPASS'];
 $SOLRHOST = $var['SOLRHOST'];
 $ORIGINALCSV = "originalbase.csv";
 
