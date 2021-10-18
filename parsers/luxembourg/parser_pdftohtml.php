@@ -64,14 +64,15 @@ if (preg_match('/[0-9]/', $found_numero)) {
     $numero = $found_numero;
 }
 
-if (preg_match('/Audience publique( extraordinaire | )(du)? *([^<]*[0-9]) *</i', $header, $match)){
+
+
+if (preg_match('/Audience publique( extraordinaire | de vacation | )(du)? *([^<]*[0-9]) *</i', $header, $match)){
   $date = $match[3];
 }elseif (preg_match('/(Luxembourg|publique)( |<br.?>|<b>)+du( |<br.?>|<b>)+(lundi.....[^<]*|mardi......[^<]*|mercredi.......[^<]*|jeudi......[^<]*|vendredi....[^<]*|samedi......[^<]*|dimanche......[^<]*) *</i', $header, $match)){
   $date = $match[4];
 }elseif (preg_match('/du ([0-9]{1,2}[.\/][0-9]{1,2}[.\/][0-9]{4})./', $header, $match)){
   $date = $match[1];
 }
-
 if (preg_match('/Recours formé par ([^<]*) *<.*\ncontre ([^<]*) */', $header, $match)) {
   $partie1 = $match[1];
   $partie2 = $match[2];
