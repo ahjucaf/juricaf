@@ -2,7 +2,7 @@
 setlocale(LC_TIME, 'fr_FR.UTF8', 'fr.UTF8', 'fr_FR.UTF-8', 'fr.UTF-8');
 
 global $errors;
-$errors = '';
+$errors = array();
 
 $mois = array(
         '01'=>'janvier',
