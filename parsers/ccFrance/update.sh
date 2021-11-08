@@ -6,7 +6,8 @@ curl "$API_URL/export?batch=0&resolve_references=true" -H "KeyId: $API_TOKEN" | 
 
 cat /tmp/batch.json | while read json; do
   _id=$(echo "$json" | cut -d'"' -f4)
-  echo $_id
   touch /tmp/$_id.json
   echo "$json" > /tmp/$_id.json
+
+  php json2xml.php /tmp/$_id.json > /tmp/$_id.xml
 done
