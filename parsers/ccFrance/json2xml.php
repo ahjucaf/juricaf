@@ -38,6 +38,9 @@ class SimpleXMLExtended extends SimpleXMLElement {
 }
 
 $xml = new SimpleXMLExtended('<?xml version="1.0" encoding="utf8"?><DOCUMENT></DOCUMENT>');
+$analyses = $xml->addChild('ANALYSES');
+$analyse = $analyses->addChild('ANALYSE');
+$analyse->addChild('TITRE_PRINCIPAL', strtoupper(current($doc->themes)));
 $xml->addChild('DATE_ARRET', $doc->decision_date);
 $xml->addChild('PAYS', 'France');
 $xml->addChild('JURIDICTION', $doc->jurisdiction);
@@ -51,8 +54,6 @@ $xml->addChild('NUM_ARRET', $doc->number);
 $date_fr = substr($doc->decision_date, -2).' '.$mois[substr($doc->decision_date, -5, 2)].' '.strstr($doc->decision_date, '-', true);
 
 $xml->addChild('TITRE', "France, $doc->jurisdiction, $doc->chamber, $date_fr, $doc->number");
-
-
 
 echo $xml->asXML();
 ?>
