@@ -7,6 +7,21 @@ if (! $doc) {
     exit(1);
 }
 
+$mois = [
+    '01' => 'janvier',
+    '02' => 'février',
+    '03' => 'mars',
+    '04' => 'avril',
+    '05' => 'mai',
+    '06' => 'juin',
+    '07' => 'juillet',
+    '08' => 'août',
+    '09' => 'septembre',
+    '10' => 'octobre',
+    '11' => 'novembre',
+    '12' => 'décembre',
+];
+
 // https://stackoverflow.com/a/20511976
 class SimpleXMLExtended extends SimpleXMLElement {
   public function addChildWithCDATA($name, $value = NULL) {
@@ -33,7 +48,9 @@ $xml->addChildWithCDATA('TEXTE_ARRET', $doc->text);
 $xml->addChild('TYPE', $doc->type);
 $xml->addChild('NUM_ARRET', $doc->number);
 
-$xml->addChild('TITRE', "France, $doc->jurisdiction, $doc->chamber, $doc->decision_date, $doc->number");
+$date_fr = substr($doc->decision_date, -2).' '.$mois[substr($doc->decision_date, -5, 2)].' '.strstr($doc->decision_date, '-', true);
+
+$xml->addChild('TITRE', "France, $doc->jurisdiction, $doc->chamber, $date_fr, $doc->number");
 
 
 
