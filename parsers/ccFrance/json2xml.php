@@ -49,12 +49,13 @@ $xml->addChild('FORMATION', $doc->chamber);
 $xml->addChildWithCDATA('TEXTE_ARRET', $doc->text);
 
 $xml->addChild('TYPE', $doc->type);
-$xml->addChild('NUM_ARRET', $doc->number);
+
+$number = str_replace(".","",$doc->number);
+$xml->addChild('NUM_ARRET', $number);
 
 $date_fr = substr($doc->decision_date, -2).' '.$mois[substr($doc->decision_date, -5, 2)].' '.strstr($doc->decision_date, '-', true);
 
-$xml->addChild('TITRE', "France, $doc->jurisdiction, $doc->chamber, $date_fr, $doc->number");
+$xml->addChild('TITRE', "France, $doc->jurisdiction, $doc->chamber, $date_fr, $number");
 
 echo $xml->asXML();
 ?>
-
