@@ -20,7 +20,7 @@ class JuricafArret extends sfCouchDocument
     return  preg_replace('/[\(\{\[\]\}\)]/', '', preg_replace ('/[^a-z0-9]*\.\.\.$/i', '...', truncate_text($exerpt.$resultat->texte_arret, 650, "...", true)));
   }
 
-  private static $fields = array('_id', 'analyses', 'date_arret', 'formation', 'juricaf_id', 'juridiction', 'num_arret', 'pays', 'section', 'texte_arret', 'texte_arret_anon', 'titre', 'type');
+  private static $fields = array('_id', 'analyses', 'date_arret', 'formation', 'juricaf_id', 'juridiction', 'num_arret', 'pays', 'section', 'texte_arret', 'texte_arret_anon', 'titre', 'type','avocats','sens_arret','numeros_affaires','type_affaire','decision_attaquees','president','references','fonds_documentaire','id','num_decision');
   public function getFields($choose_anon = false) {
     $fields = array();
     $fields_names = self::$fields;
