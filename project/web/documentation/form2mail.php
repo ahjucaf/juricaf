@@ -15,13 +15,12 @@ $email = NULL;
 $message = NULL;
 
 /* Eviter le spam (permet d'être sur que le visiteur provient bien du site) */
-if(isset($_POST['token'])) {
-  if($_SESSION['token'] !== $_POST['token']) {
-    $resultat = "Erreur: Votre session a expiré, veuillez recharger la page du formulaire pour en initier une nouvelle.";
-  } else { $token = true; }
-} else { $resultat = "Erreur: Token manquant."; }
+if(!isset($_POST['token']) || ($_SESSION['token'] !== $_POST['token']) || $_SESSION['cap1'] + $_SESSION['cap2'] != $_POST['captcha']) {
+    header("Location: contact.php\n");
+    exit;
+} else { $token = true; }
 
-//$token = true;
+echo $_SESSION['cap1']." + ".$_SESSION['cap2']." != ".$_POST['captcha'];
 
 /* Récupération du champs email */
 if ($token && !empty($_POST['email'])) {
