@@ -66,7 +66,7 @@ if (preg_match('/[0-9]/', $found_numero)) {
 
 
 
-if (preg_match('/Audience publique( extraordinaire | de vacation | )(du)? *([^<]*[0-9]) *</i', $header, $match)){
+if (preg_match('/Audience publique( extraordinaire de vacation | extraordinaire | de vacation | )(du)? *([^<]*[0-9]) *</i', $header, $match)){
   $date = $match[3];
 }elseif (preg_match('/(Luxembourg|publique)( |<br.?>|<b>)+du( |<br.?>|<b>)+(lundi.....[^<]*|mardi......[^<]*|mercredi.......[^<]*|jeudi......[^<]*|vendredi....[^<]*|samedi......[^<]*|dimanche......[^<]*) *</i', $header, $match)){
   $date = $match[4];
