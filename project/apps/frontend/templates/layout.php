@@ -33,10 +33,8 @@
         </div>
       </div>
 	  <div class="reseaux_sociaux">
-
 	   <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
-          <a href="https://twitter.com/juricaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
-	<a href="https://itunes.apple.com/fr/app/id587420315?mt=8&affId=1578782" target="_blank"><img src="/images/appstore.png" alt="Appstore" title="Accès à la version IPhone"/></a>
+       <a href="https://twitter.com/juricaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
       </div>
       <div class="main">
         <div class="content">
@@ -57,15 +55,18 @@
             </form>
           </div>
           <?php echo $sf_content; ?>
-		<div align="center">	 
+		<div style="margin-top: 50px;" align="center">	 
 			<a  href="https://www.lemondedudroit.fr/interviews/66303-jean-paul-jean-ahjucaf.html" target="new">Interview de JP Jean secrétaire général de l’AHJUCAF dans « Le Monde du droit » sur l’accès à la jurisprudence francophone.</a><br><br><br>
 		</div>
-		  <div class="top_page"><a id="top" href="#">Haut de page<img src="/images/fleche_haut.png" alt="Haut de page"/></a></div>
         </div>
       </div>
-	 <a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
-	    <a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucafSite.jpg" alt="Association des cours judiciaires suprêmes francophones" />Visitez le nouveau site de l'AHJUCAF</a>
-	 <img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
+      <div>
+        <table width=100%><tr>
+	    <td><a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones" /></a></td>
+	    <td><center><a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucafSite.jpg" alt="Association des cours judiciaires suprêmes francophones" /><br/>Visitez le nouveau site de l'AHJUCAF</a></center></td>
+	    <td><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></td>
+        </tr></table>
+         
       <div class="bottom">
         <p>Juricaf est un projet de l'AHJUCAF, l'association des cours judiciaires suprêmes francophones,<br />
         réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université&nbsp;Paris&nbsp;I).<br />
