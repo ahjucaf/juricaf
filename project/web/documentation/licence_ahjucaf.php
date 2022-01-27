@@ -82,8 +82,8 @@ $_SESSION['token'] = $token;
         le <a href="http://inforoutes.francophonie.org">Fonds francophone des inforoutes</a> et les réseaux institutionnels francophones.</p>
         <a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
         <a href="http://www.francophonie.org/"><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la fra$
- --><p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones<br />
- initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I)<br />
+ --><p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones,<br />
+ initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I),<br />
       Il est soutenu par l'Organisation Internationale de la Francophonie.</p>
       </div>
     </div>
