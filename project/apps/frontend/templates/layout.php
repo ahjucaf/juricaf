@@ -70,7 +70,7 @@
       <div class="bottom">
       <p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones,<br />
         initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I).<br />
-        Il est soutenu par l'Organisation internationale de la Francophonie. </p>
+        Il est soutenu par l'Organisation Internationale de la Francophonie. </p>
       </div>
     </div>
    </body>
