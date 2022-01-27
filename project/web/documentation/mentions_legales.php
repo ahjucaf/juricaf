@@ -92,7 +92,7 @@ $_SESSION['token'] = $token;
             - favoriser l’entraide, la solidarité, la coopération, les échanges d’idées et d’expériences entre les institutions judiciaires membres sur les questions relevant de leur compétence ou intéressant leur organisation et leur fonctionnement ;<br/>
             - promouvoir le rôle des Hautes Juridictions dans la consolidation de l’Etat de droit, le renforcement de la sécurité juridique, la régulation des décisions judiciaires et l’harmonisation du droit au sein des États membres.</p>
 
-        <p>Dans ce cadre, l’AHJUCAF a créé la base de données JURICAF accessible sur internet à l’adresse www.juricaf.org. Il s’agit d’une base de données de décisions de justice en langue française de 43 pays et institutions.</p>
+        <p>Dans ce cadre, l’AHJUCAF a créé la base de données JURICAF accessible sur internet à l’adresse www.juricaf.org. Il s’agit d’une base de données de décisions de justice en langue française de 46 pays et institutions.</p>
 
         <p>L’AHJUCAF est titulaire du droit sui generis (titre IV, livre III du Code de la propriété intellectuelle) sur la base de données JURICAF accessible sur Internet à l’adresse www.juricaf.org.</p>
 
