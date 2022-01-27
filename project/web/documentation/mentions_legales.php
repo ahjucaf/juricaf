@@ -74,9 +74,6 @@ $_SESSION['token'] = $token;
 
             <h2>Coordinateurs techniques</h2>
 
-        <p>M. Mehdi BEN MIMOUN, chargé de mission auprès du Secrétaire général de l’AHJUCAF<br/>
-        5 quai de l’Horloge, 75001 PARIS</p>
-        <br/>
         <p>M. Thomas FRINCHABOY, chargé de mission auprès du Secrétaire général de l’AHJUCAF<br/>
         5 quai de l’Horloge, 75001 PARIS</p>
 
