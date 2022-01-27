@@ -173,7 +173,7 @@ $_SESSION['token'] = $token;
 
               <h2>8 - Gestion des cookies</h2>
 
-              <p>Aucun cookies n’est déposé par le site <a href="https://www.juricaf.org">www.juricaf.org</a>.</p>
+              <p>Aucun cookie n’est déposé par le site <a href="https://www.juricaf.org">www.juricaf.org</a>.</p>
 
         <br/><br/><br/>
         <small style="color:gray;"><i>Les  mentions légales et la politique de confidentialité de ce site ont été rédigées avec la collaboration de Maître Blandine Cornevin et Maître Irène Kris, réseau ELOKIA AVOCATS</i></small>
