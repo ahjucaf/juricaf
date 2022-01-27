@@ -44,7 +44,7 @@
                   <a href="http://www.juricaf.org/recherche"><img id="logo" src="/images/juricaf.png" alt="Juricaf" /></a><br />
                   <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des cours suprêmes</span><br />
                   <input type="text" style="width: 300px; margin-top: 5px;" name="q" value="" tabindex="10" /><br />
-                  <input type="submit" value="Rechercher" tabindex="20" /> <a href="#">recherche avancée</a>
+                  <input type="submit" value="Rechercher" tabindex="20" /> <a href="/recherche_avancee">recherche avancée</a>
                 </td>
               </tr>
             </table>
