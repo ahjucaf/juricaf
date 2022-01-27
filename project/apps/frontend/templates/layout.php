@@ -33,9 +33,9 @@
         </div>
       </div>
 	  <div class="reseaux_sociaux">
-	   <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
-       <a href="https://twitter.com/juricaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
-      </div>
+    <a href="https://www.facebook.com/AHJUCAFCoursSupremesJudiciairesFrancophones" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
+          <a href="https://twitter.com/ahjucaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
+	  </div>
       <div class="main">
         <div class="content">
           <?php if ($sf_user->hasFlash('notice')):?><div class="flash notice"><?php echo $sf_user->getFlash('notice'); ?></div><?php endif; ?>
