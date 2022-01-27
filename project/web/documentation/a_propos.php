@@ -81,7 +81,7 @@
               <p>Télécharger l’ouvrage «&nbsp;<a href="https://www.ahjucaf.org/sites/default/files/AHJUCAF%20Congr%C3%A8s%20Beyrouth%20Actes%20mars%202020.pdf">La diffusion de la jurisprudence des Cours suprêmes judiciaires dela francophonie au temps d’internet</a>&nbsp;»</p>
 
               <h2>L’AHJUCAF présente ses remerciements aux acteurs qui ont contribué à création et à la refonte du site de la base de données JURICAF :</h2>
-                  <p> - Cour de cassation : M. le Président Jean-Louis Gillet, M. Edouard Rottier, M. Guillaume Adréani</p>
+                  <p> - Cour de cassation : M. le Président Jean-Louis Gillet, M. Edouard Rottier, M. Guillaume Adréani, M. Mehdi Ben Mimoun</p>
                   <p> - Partenaire public : Université de Paris 1 CAVEJ, Bruno Dondéro, M. Jean Gasnault, M. Stéphane Cottin</p>
                   <p> - Partenaires privés : M. Tangui Morlier, M. Brice Person</p>
           </div>
