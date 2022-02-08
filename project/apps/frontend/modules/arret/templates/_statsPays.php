@@ -10,7 +10,7 @@ function pathToFlag($str) {
 $cpt = 0;
 ?>
 <div class="pays">
-	<h3>Rechercher parmi <?php echo number_format($nb, 0, '', ' '); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</h3>
+	<h3 style="text-align: center;">Rechercher parmi <?php echo number_format($nb, 0, '', ' '); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</h3>
 	<div class="payscols">
 	  <table style="margin: auto;"><tr><td><ul>
 		<?php
