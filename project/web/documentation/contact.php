@@ -8,7 +8,7 @@ $_SESSION['cap2'] = intval(rand(0, 10) + 1);
 ?>
 
 <?php include("header.php") ?>
-    <div class="arret container text-justify mt-5">
+    <div class="container text-justify mt-5">
 		   <h5 class="p-3 mb-2 bg-secondary bg-gradient">Formulaire de contact</h5>
             <form action="form2mail.php" method="post">
                <div class="form-group row">

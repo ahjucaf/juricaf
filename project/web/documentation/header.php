@@ -6,7 +6,7 @@
     <meta name="description" content="La base de données de jurisprudence francophone" />
     <meta name="keywords" content="jurisprudence, cassation, cour, suprême, francophone, francophonie, ahjucaf, arrêt, décision" />
     <meta name="language" content="fr" />
-    <title>Juricaf - A propos</title>
+    <title>Juricaf</title>
     <link rel="shortcut icon" href="/images/favicon.ico" />
     <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
     <script type="text/javascript" src="/js/jquery.scrollTo-min.js"></script>

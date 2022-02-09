@@ -6,7 +6,7 @@ $_SESSION['token'] = $token;
 ?>
 <?php include("header.php") ?>
 
-          <div class="arret container text-justify mt-5">
+          <div class="container text-justify mt-5">
               <h5 class="p-3 mb-2 bg-secondary bg-gradient">1 - Identité du responsable de traitement</h5>
 
               <p>L’Association des Hautes Juridictions de Cassation des pays ayant en partage l’usage du Français, ci-après AHJUCAF est responsable de traitement pour le site <a href="https://www.juricaf.org/">www.juricaf.org</a> (ci-après JURICAF)</p>
@@ -27,7 +27,7 @@ $_SESSION['token'] = $token;
               <p>Les données collectées seront communiquées aux seuls destinataires suivants : Secrétariat général de l’AHJUCAF.</p>
 
               <p>Elles sont conservées pendant une année.</p>
-              
+
               <p>Vous pouvez accéder aux données vous concernant, les rectifier, demander leur effacement ou exercer votre droit à la limitation du traitement de vos données.</p>
 
               <p>Consultez le site <a href="https://www.cnil.fr/">cnil.fr</a> pour plus d’informations sur vos droits.</p>
@@ -65,9 +65,9 @@ $_SESSION['token'] = $token;
               <o>Mise à disposition et réutilisation de données :</p>
 
               <p>Sauf pour les décisions des juridictions françaises, les données de JURICAF sont diffusées sous la licence ODbL 1.0. Elle est consultable à l'adresse : <a href="http://www.juricaf.org/documentation/licence_odbl.php">http://www.juricaf.org/documentation/licence_odbl.php</a>.</p>
-              
+
               <p>La réutilisation est autorisée dans les conditions de la licence ODbL.</p>
-              
+
               <p>Pour une compréhension facilitée de la licence ODbL, voici une traduction en français de la licence, toutefois, seule la version anglaise fait foi. Voici également un document de vulgarisation de la licence.</p>
 
               <p>Si vous ne voulez pas ou ne souhaitez pas réutiliser les décisions dans les conditions de la licence ODbL ou si vous souhaitez disposer de fichiers XML structurés selon vos besoins ou tout autre prestation, les données seront disponibles prochainement sous licence. Merci de contacter le secrétariat pour toute information utile via le formulaire de contact en bas de cette page.</p>
@@ -127,7 +127,7 @@ $_SESSION['token'] = $token;
               <p>Aucun cookie n’est déposé par le site <a href="https://www.juricaf.org">www.juricaf.org</a>.</p>
 
         <br/><br/><br/>
-        <small style="color:gray;"><i>Les  mentions légales et la politique de confidentialité de ce site ont été rédigées avec la collaboration de Maître Blandine Cornevin et Maître Irène Kris, réseau ELOKIA AVOCATS</i></small>
+        <small class="text-secondary"><i>Les  mentions légales et la politique de confidentialité de ce site ont été rédigées avec la collaboration de Maître Blandine Cornevin et Maître Irène Kris, réseau ELOKIA AVOCATS</i></small>
 
           </div>
         </div>

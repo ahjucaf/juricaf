@@ -1,9 +1,12 @@
+
 <div >
-<div class="container">
+
+
+<div class="container mt-5">
 <hr/>
 
-<img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones" />
-<img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
+<img src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones" />
+<img class="float-right" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
 </div>
  <div class="bottom text-center mt-3 p-3">
  <p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones,<br />

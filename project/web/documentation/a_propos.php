@@ -1,5 +1,5 @@
 <?php include("header.php");?>
-    <div class="arret container text-justify mt-5">
+    <div class="container text-justify mt-5">
 
         <h5 class="p-3 mb-2 bg-secondary bg-gradient">À Propos</h4>
 
