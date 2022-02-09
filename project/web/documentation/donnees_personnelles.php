@@ -4,59 +4,10 @@
 $token = sha1(mt_rand());
 $_SESSION['token'] = $token;
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="title" content="Juricaf - Données personnelles" />
-<meta name="description" content="La base de données de jurisprudence francophone" />
-<meta name="keywords" content="jurisprudence, cassation, cour, suprême, francophone, francophonie, ahjucaf, arrêt, décision" />
-<meta name="language" content="fr" />
-    <title>Juricaf - Mentions légales</title>
-    <link rel="shortcut icon" href="/images/favicon.ico" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+<?php include("header.php") ?>
 
-    <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
-<script type="text/javascript" src="/js/jquery.scrollTo-min.js"></script>
-    <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
-  </head>
-  <body>
-    <div class="site">
-      <div class="head">
-         <div class="reseaux_sociaux">
-         <a href="https://www.facebook.com/AHJUCAFCoursSupremesJudiciairesFrancophones" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
-          <a href="https://twitter.com/ahjucaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
-	 </div>
-        <div class="menu">
-          <ul>
-            <li><a href="/documentation/a_propos.php">A propos</a></li>
-
-            <li><a href="/documentation/stats/statuts.php">Étendue des collections</a></li>
-<!---            <li><a href="#">Outils</a></li> -->
-            <li><a href="/documentation/partenaires.php">Partenaires</a></li>
-            <li><a href="/documentation/contact.php">Contact</a></li>
-            <li><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="main">
-        <div class="content">
-          <div class="form_recherche">
-            <form method="get" action="/recherche">
-            <table summary="Rechercher">
-              <tr>
-                <td>
-                  <a href="http://www.juricaf.org/recherche"><img id="logo" src="/images/juricaf.png" alt="Juricaf" /></a><br />
-                  <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des cours suprêmes</span><br />
-                  <input type="text" style="width: 300px; margin-top: 5px;" name="q" value="" tabindex="10" /><br />
-                  <input type="submit" value="Rechercher" tabindex="20" /> <a href="/recherche_avancee">recherche avancée</a>
-                </td>
-              </tr>
-            </table>
-            </form>
-          </div>
-          <div class="arret">
-              <h2>1 - Identité du responsable de traitement</h2>
+          <div class="arret container text-justify mt-5">
+              <h5 class="p-3 mb-2 bg-secondary bg-gradient">1 - Identité du responsable de traitement</h5>
 
               <p>L’Association des Hautes Juridictions de Cassation des pays ayant en partage l’usage du Français, ci-après AHJUCAF est responsable de traitement pour le site <a href="https://www.juricaf.org/">www.juricaf.org</a> (ci-après JURICAF)</p>
 
@@ -66,7 +17,7 @@ $_SESSION['token'] = $token;
               <p>AHJUCAF, 5 quai de l’Horloge, 75001 PARIS<br/>
               Tel. : +33 1 46 34 67 40</p>
 
-              <h2>2 - Données collectées par le site et finalités poursuivies</h2>
+              <h5 class="p-3 mb-2 bg-secondary bg-gradient">2 - Données collectées par le site et finalités poursuivies</h5>
 
               <p>Les seules données personnelles collectées par le site sont celles collectées via le formulaire de <a href="https://juricaf.org/documentation/contact.php">contact</a> pour la gestion des commentaires, avis et questions déposés par les usagers par le biais de ce formulaire.</p>
 
@@ -85,7 +36,7 @@ $_SESSION['token'] = $token;
 
               <p>Si vous estimez, après nous avoir contactés, que vos droits « Informatique et Libertés » ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL.</p>
 
-              <h2>3 - Données personnelles diffusées sur le site www.juricaf.org</h2>
+              <h5 class="p-3 mb-2 bg-secondary bg-gradient">3 - Données personnelles diffusées sur le site www.juricaf.org</h5>
 
               <p>Les données de jurisprudence diffusées sur le site www.juricaf.org ont été pseudonymisées conformément aux articles L 111-13 et suivants du code de l’organisation judiciaire sauf à respecter la législation d’origine des décisions et les principes fondamentaux auxquels obéissent les juridictions étrangères. C’est pour cette raison que les décisions de la Cour suprême du Canada et de la Cour Européenne des droits de l’Homme ne font pas l’objet d’une pseudonymisation.</p>
 
@@ -98,7 +49,7 @@ $_SESSION['token'] = $token;
 
               <p>Vous pouvez écrire à l’adresse mail suivante : « sgahjucaf@ahjucaf.org »</p>
 
-              <h2>4 - Reproduction et réutilisation des données diffusées par le site www.juricaf.org</h2>
+              <h5 class="p-3 mb-2 bg-secondary bg-gradient">4 - Reproduction et réutilisation des données diffusées par le site www.juricaf.org</h5>
 
               <p>Contexte :</p>
 
@@ -139,7 +90,7 @@ $_SESSION['token'] = $token;
               <p>L’article L 111-13 du COJ dispose que « Les données d'identité des magistrats et des membres du greffe ne peuvent faire l'objet d'une réutilisation ayant pour objet ou pour effet d'évaluer, d'analyser, de comparer ou de prédire leurs pratiques professionnelles réelles ou supposées. La violation de cette interdiction est punie des peines prévues aux articles 226-18,226-24 et 226-31 du code pénal, sans préjudice des mesures et sanctions prévues par la loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. »</p>
 
 
-              <h2>5 - Base juridique du traitement</h2>
+              <h5 class="p-3 mb-2 bg-secondary bg-gradient">5 - Base juridique du traitement</h5>
 
               <p>La base légale du traitement des données personnelles insérées dans les décisions de jurisprudence diffusées sur le site www.juricaf.org est l’article 6-1-e du RGPD : « le traitement est nécessaire à l’exécution d’une mission d’intérêt public […] dont est investi le responsable de traitement »</p>
 
@@ -149,29 +100,29 @@ $_SESSION['token'] = $token;
 
               <p>Dans le cadre de ces missions, l’AHJUCAF a développé la base de données Juricaf, une base de décisions de jurisprudence des Etats membres de l’association ainsi que d’organisation internationale. Toutes les décisions sont en français. Cette base de données participe directement à la consolidation de l’Etat de droit, le renforcement de la sécurité juridique, la régulation des décisions judiciaires et l’harmonisation du droit au sein des Etats membres.</p>
 
-              <h2>6 - Vos droits sur les données personnelles diffusées sur le site <a href="https://www.juricaf.org">www.juricaf.org</a></h2>
+              <h5 class="p-3 mb-2 bg-secondary bg-gradient">6 - Vos droits sur les données personnelles diffusées sur le site <a href="https://www.juricaf.org">www.juricaf.org</a></h5>
 
               <p>Vous disposez d’un droit d’accès, de rectification, d’effacement de vos données ou encore de limitation de traitement. Vous pouvez également, pour des motifs légitimes, vous opposer au traitement des données vous concernant.</p>
 
               <p>Vous pouvez exercer vos droits en contactant le secrétariat général de l’AHJUCAF.</p>
 
               <p>Par courrier postal :</p>
-              
+
               <p>AHJUCAF, 5 quai de l’Horloge, 75001 Paris</p>
-              
+
               <p>Ou par courriel : sgahjucaf@ahjucaf.org</p>
-              
+
               <p>Il est également possible d’introduire une réclamation (ou plainte) auprès de la CNIL. Cette page du site internet de la CNIL explique les modalités : https://www.cnil.fr/fr/cnil-direct/question/adresser-unereclamation-plainte-la-cnil-quelles-conditions-et-comment</p>
               <p>Vous pouvez l’adresser par courrier postal en écrivant à : CNIL ; 3 Place de Fontenoy ; TSA 80715 ; 75334 PARIS CEDEX 07.</p>
 
               <p>Vous pouvez également adresser votre plainte via le téléservice de plainte en ligne :
               <a href="https://www.cnil.fr/fr/plaintes">https://www.cnil.fr/fr/plaintes</a></p>
 
-              <h2>7 - Transfert de données personnelles à destination d’un Etat non membre de l’Union Européenne</h2>
+              <h5 class="p-3 mb-2 bg-secondary bg-gradient">7 - Transfert de données personnelles à destination d’un Etat non membre de l’Union Européenne</h5>
 
               <p>Aucun transfert de données à caractère personnel n’est effectué vers un Etat non membre de l’Union Européenne.</p>
 
-              <h2>8 - Gestion des cookies</h2>
+              <h5 class="p-3 mb-2 bg-secondary bg-gradient">8 - Gestion des cookies</h5>
 
               <p>Aucun cookie n’est déposé par le site <a href="https://www.juricaf.org">www.juricaf.org</a>.</p>
 
@@ -181,37 +132,5 @@ $_SESSION['token'] = $token;
           </div>
         </div>
       </div>
-      <div style="margin-top: 50px;">
-      <hr/>
- 	 <img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones" />
- 	 <img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
-       <div class="bottom">
-       <p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones,<br />
-      initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I),<br />
-      Il est soutenu par l'Organisation Internationale de la Francophonie.</p>
-       </div>
-     </div>
-    <script type="text/javascript">
-    <!--
-    function juricafSearch() {
-      if (window.external && ("AddSearchProvider" in window.external)) {
-        window.external.AddSearchProvider("http://www.juricaf.org/juricaf.xml");
-      }
-      else {
-         alert("Votre navigateur ne supporte pas cette fonctionnalité");
-      }
-    }
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-8802834-4']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    // -->
-    </script>
-  </body>
-</html>
+<?php include("footer.php") ?>
