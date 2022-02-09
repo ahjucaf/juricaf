@@ -49,9 +49,6 @@
             <li class="nav-item">
               <a class="nav-link" href="http://twitter.com/juricaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
             </li>
-            <li class="nav-item">
-              <a href="https://itunes.apple.com/fr/app/id587420315?mt=8&affId=1578782" target="_blank"><img src="/images/appstore.png" alt="Appstore" title="Accs  la version IPhone"/></a>
-            </li>
           </ul>
         </div>
       </div>
@@ -63,6 +60,6 @@
                 <p ><small class="font-italic">La jurisprudence francophone des cours suprêmes</small><br/></p>
                 <input class="form-control w-75 p-3 mx-auto" type="text" name="q" value="" tabindex="10" /><br />
                 <input class="btn btn-primary "type="submit" value="Rechercher" tabindex="20" />
-                <a class="text-decoration-underline" href="#">recherche avancée</a>
+                <a href="/recherche_avancee">recherche avancée</a>
         </form>
     </div>
