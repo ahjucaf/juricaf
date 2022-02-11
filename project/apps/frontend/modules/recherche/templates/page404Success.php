@@ -1,7 +1,11 @@
 <?php use_helper('Text'); ?>
-<h1>Cette page n'est pas disponible</h1>
+
+<div class="container mt-5 pb-3">
+<h5 class="p-3 mb-2 bg-secondary bg-gradient">Cette page n'est pas disponible</h5>
 <p>Vous pouvez utiliser le <a href="<?php echo url_for('@recherche_avancee'); ?>">formulaire de recherche avancée</a> afin d'affiner votre recherche.</p>
 <p id="suggested"></p>
+</div>
+
 <script type="text/javascript">
 <!--
 url = '<?php echo url_for('@recherche'); ?>';
