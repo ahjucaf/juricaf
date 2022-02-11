@@ -65,12 +65,12 @@ function remplacequerytitre($string) {
 }
 
 ?>
-<div class="recherche container mt-5 text-justify recherche">
+  <div class="recherche container mt-5">
 <div class="row">
 <div class="col-sm-3">
   <a href="http://www.juricaf.org">Accueil</a> > <a href="<?php echo $sf_request->getUri() ?>">Recherche</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
-	<div class="affinercols">
+	<div class="affinercols ">
 		<ul class="list-unstyled">
 			<li>
 				<p class="font-weight-bold">Termes de la recherche :</p>
@@ -78,7 +78,7 @@ function remplacequerytitre($string) {
 			</li>
 			<li>
 				<p class="font-weight-bold">Tri :</p>
-				<ul class="list-unstyled">
+				<ul class="ul-sans-point">
 <?php
 //  Suppression des options
 $myfacetslink = preg_replace('/^,/', '', $facetslink);
@@ -108,7 +108,7 @@ if (count($facetsset)) {
     }
 ?>
 </ul>
-<ul class="list-unstyled">
+<ul  class="ul-sans-point">
 <?php
 }
 // Metadonnées
@@ -212,12 +212,12 @@ include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction'
 
 </div>
 </div>
-<div class="col-sm-8">
+<div class="col-sm-9 text-justify">
 	<p><?php echo $nbResultats; ?> résultats</p>
 
 <?php
 foreach ($resultats->response->docs as $resultat) {
-  echo '<div class="resultatcols"><a href="'.url_for('@arret?id='.$resultat->id).'"><h5 class="font-weight-bold"><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</h5></a>';
+  echo '<div class="resultatcols"><a href="'.url_for('@arret?id='.$resultat->id).'"><p class="font-weight-bold"><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</p></a>';
   echo '<small>';
   if (isset($resultats->highlighting))
     echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});

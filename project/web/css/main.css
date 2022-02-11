@@ -42,8 +42,19 @@ a{
 .affinercols{
     background-color: #f7f8f9;
     font-size:12px;
+    padding: 10px 15px;
     /* border: 1px solid #f1f1f1;
     padding: 5px;
     margin-bottom: 5; */
 
+}
+
+.ul-sans-point{
+  padding-top: 0;
+  list-style-type: none;
+  padding-left: 15px;
+}
+
+.affinercols p{
+  margin-top: 15px;
 }

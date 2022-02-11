@@ -6,7 +6,7 @@ function facet_link_to($t, $l) {
 if (count($facets) > 0) : ?>
 <li>
 	<p class="font-weight-bold"><?php echo $label; ?> :</p>
-	<ul class="list-unstyled mr-5"><?php
+	<ul  class="ul-sans-point"><?php
 foreach($facets as $k => $v) {
     echo '<li style="margin-top: 5px;">';
     if($mainid === 'facet_pays')
@@ -17,7 +17,7 @@ foreach($facets as $k => $v) {
     else
       echo facet_link_to($k."&nbsp;(".number_format($v['count'], 0, ',', ' ').")", '@recherche_resultats?query='.$query.'&facets='.$facet.$facetslink);
     if (count($v['sub'])) {
-      echo '<ul class="list-unstyled mr-5">';
+      echo '<ul class="ul-sans-point">';
       foreach ($v['sub'] as $f => $o) {
   echo "<li class='sub'>";
   $facet = $o['fid'].':'.preg_replace('/ /', '_', $o['fname']);
