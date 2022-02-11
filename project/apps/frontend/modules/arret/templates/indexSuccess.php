@@ -461,17 +461,16 @@ if(isset($references['PUBLICATION'])) {
 }
 ?>
 
-<a href="http://www.juricaf.org">Page d'accueil</a> >
-<a href="http://www.juricaf.org/recherche/<?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>">Résultats de la recherche <b><?php echo $sf_user->getAttribute('query'); ?></b></a>
 
-  <div class="arret" itemscope itemtype="http://schema.org/Article">
-   <h1 id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre.'' ?></h1>
+<div class="container mt-5">
+  <a href="http://www.juricaf.org">Page d'accueil</a> >
+  <a href="http://www.juricaf.org/recherche/<?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>">Résultats de la recherche <b><?php echo $sf_user->getAttribute('query'); ?></b></a>
+  <h5 class="p-3 mb-2 bg-secondary bg-gradient" id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> '.$document->titre.'' ?></h5 >
+  <a href="javascript:window.print()"><img src="/images/printer.png" alt="Imprimer"/></a>
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="juricaf" data-lang="fr">Tweeter</a>
+  <div class="g-plus" data-action="share" data-annotation="bubble"></div>
 
-
-
-<p><table><tr><td><a href="javascript:window.print()"><img src="/images/printer.png" alt="Imprimer"/></a> </td><td><a href="https://twitter.com/share" class="twitter-share-button" data-via="juricaf" data-lang="fr">Tweeter</a></td><td><div class="g-plus" data-action="share" data-annotation="bubble"></div></td></tr>
-</table>
-</p>
+</div>
 
 <script type="text/javascript">
 function showCD(str)
@@ -500,28 +499,26 @@ xmlhttp.send();
 }
 </script>
 
-<?php
-$urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
-?>
+<?php $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.''; ?>
 
  <script type="text/javascript">
-    google.load("feeds", "1");
+  google.load("feeds", "1");
 
-    function OnLoad() {
-      var feedControl = new google.feeds.FeedControl();
-      feedControl.addFeed("<?php echo $urlrss; ?>", "");
-     feedControl.draw(document.getElementById("feed"));
-    }
+  function OnLoad() {
+    var feedControl = new google.feeds.FeedControl();
+    feedControl.addFeed("<?php echo $urlrss; ?>", "");
+    feedControl.draw(document.getElementById("feed"));
+  }
 
-    google.setOnLoadCallback(OnLoad);
-    </script>
-
+  google.setOnLoadCallback(OnLoad);
+</script>
+    <div class="arret container text-justify" itemscope itemtype="http://schema.org/Article">
 	<?php
     if (isset($document->titre_supplementaire)) {
-        echo '<h2 itemprop="alternativeHeadline">'.$document->titre_supplementaire.'</span></h2>';
+        echo '<h5 itemprop="alternativeHeadline">'.$document->titre_supplementaire.'</span></h5>';
     }
     if (isset($document->section)) {
-        echo '<h3>'.$document->section.'</h3>';
+        echo '<h5>'.$document->section.'</h5>';
     }
     if (isset($document->sens_arret)) {
         echo 'Sens de l\'arrêt : <em>'.link_to($document->sens_arret, '@recherche_resultats?query=sens_arret:"'.replaceAccents($document->sens_arret).'"').'</em><br />';
@@ -538,7 +535,7 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
         echo 'Type de recours : <em>'.link_to($document->type_recours, '@recherche_resultats?query=type_recours:"'.replaceAccents($document->type_recours).'"').'</em><br />';
     }
 
-    echo '<p><h3>Numérotation : </h3>';
+    echo '<p><h5>Numérotation : </h5>';
     if (isset($document->num_arret)and ($document->pays !== 'Canada')and ($document->juridiction !== 'Conseil constitutionnel')){
         echo 'Numéro d\'arrêt : '.$document->num_arret.'<br />';
     }
@@ -593,17 +590,17 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
     }
 
     if (!empty($analyses)) {
-        echo '<hr /><h3>Analyses : </h3>';
+        echo '<hr /><h5>Analyses : </h5>';
         echo $analyses;
     }
 
     if (!empty($citations_analyses)) {
-        echo '<p><h3>Références :</h3><br />'.$citations_analyses.'</p>';
+        echo '<p><h5>Références :</h5><br />'.$citations_analyses.'</p>';
     }
 
     if (isset($document->saisines)) {
         echo '<hr />';
-        echo '<h3>Saisine : </h3>';
+        echo '<h5>Saisine : </h5>';
         if (isset($document->saisines)) {
             if(is_array($document->saisines)) {
                 foreach($document->saisines as $key => $values) {
@@ -639,7 +636,7 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
 
     if (isset($document->parties)) {
         echo '<hr />';
-        echo '<h3>Parties : </h3>';
+        echo '<h5>Parties : </h5>';
         if (isset($document->parties['demandeurs'])) {
             echo 'Demandeurs : ';
             $sep = ''; $i = 1;
@@ -677,13 +674,13 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
         }
     }
 
-   if ($y) { 
+   if ($y) {
       $cd=($y->childNodes);
       for ($i=2;$i<$cd->length;$i++)
       {
-        echo '<hr /><h3>Intérêt pour la protection des données personnelles : </h3>';
+        echo '<hr /><h5>Intérêt pour la protection des données personnelles : </h5>';
         echo($cd->item(1)->nodeValue);
-        echo '<hr /><h3>Mots-clés protection des données personnelles : </h3>';
+        echo '<hr /><h5>Mots-clés protection des données personnelles : </h5>';
         echo($cd->item(2)->nodeValue);
       }
     }
@@ -737,7 +734,7 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
             $replacements[9] = '<h2>$1 :</h2>';
 
             $patterns[10] = '#([A-Z]{1,10}[\x20-\x7E]MOYEN[\x20-\x7E]DE[\x20-\x7E]CASSATION)#';
-            $replacements[10] = '<h3>$1 :</h3>';
+            $replacements[10] = '<h5>$1 :</h5>';
 
             $patterns[11] = '#([0-9]{4}-[0-9]{1,3}[\x20-\x7E]QPC)#';
             $replacements[11] = '<a href="http://www.juricaf.org/recherche/num_arret:$1">$1</a>';
@@ -755,25 +752,25 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
         $patterns[4] = '#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i';
         $replacements[4] = '<a href="$0" target="_blank">$0</a>';
 
-        echo '<h3>Texte';
+        echo '<h5>Texte';
         if ($document->isTexteArretAnon()){
             echo " (pseudonymisé)";
         }
-        echo ' : </h3><span itemprop="articleBody">';
+        echo ' : </h5><span itemprop="articleBody">';
 
         echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret)));
 
         echo '</span>';
     }
     if (!empty($citations_arret) || !empty($sources) || !empty($decisions_attaquees)) {
-        echo '<p><h3>Références : </h3>';
+        echo '<p><h5>Références : </h5>';
         if (!empty($citations_arret)) { echo $citations_arret; }
         if (!empty($sources)) { echo $sources; }
         if (!empty($decisions_attaquees)) { echo $decisions_attaquees; }
         echo '</p>';
     }
     if(isset($references['ARRET'])) {
-        echo '<hr /><h3>Référence :</h3>';
+        echo '<hr /><h5>Référence :</h5>';
         foreach($references['ARRET'] as $value) {
             if(isset($value['titre'])) {
                 echo $value['titre'].'<br />';
@@ -786,7 +783,7 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
     // Lien télécharger le document
     if($document->pays == 'France') {
         if(strpos($document->id_source, "CONSTEXT") !== false || strpos($document->id_source, "JURITEXT") !== false || strpos($document->id_source, "CETATEXT") !== false) {
-            { echo '<hr /><h3>Publications :</h3>'; }
+            { echo '<hr /><h5>Publications :</h5>'; }
 
             if (isset($document->num_arret) AND($document->juridiction == 'Cour de cassation')) {
                 echo 'Proposition de citation: '.$citation.'';
@@ -826,13 +823,13 @@ $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.'';
         ';
     }
     if (isset($document->source)) {
-        echo "<h3>Source :</h3>";
+        echo "<h5>Source :</h5>";
         echo "<p><a href='".$document->source."'>Voir la source</a></p>";
     }
     if(isset($contrib)) {
-        echo '<hr /><h3>Composition du Tribunal :</h3>'.$contributors;
+        echo '<hr /><h5>Composition du Tribunal :</h5>'.$contributors;
     }
-    echo '<h3>Origine de la décision</h3>';
+    echo '<h5>Origine de la décision :</h5>';
 
     if (isset($document->pays)) {
         echo '<div itemprop="author" itemscope itemtype="http://schema.org/Organization"> <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Pays : <em itemprop="addressCountry">'.$document->pays.'</span></em><br>';
