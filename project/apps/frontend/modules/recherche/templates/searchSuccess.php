@@ -17,84 +17,78 @@ function pathToFlag($str) {
 
 function remplacequery($string) {
   $table = array(
-   'analyses:' => '<br><span itemprop="title">Analyse: ', 
-   'type_recours:' => '<br><span itemprop="title">Type de recours: ', 
-   'references:' => '<br><span itemprop="title">Références: ', 
-   'president:' => '<br><span itemprop="title">Président: ', 
-   'rapporteur:' => '<br><span itemprop="title">Rapporteur ', 
-   'commissaire_gvt:' => '<br><span itemprop="title">Rapporteur public: ', 
-   'avocat_gl:' => '<br><span itemprop="title">Avocat général: ', 
-   'texte_arret:' => '<br><span itemprop="title">Recherche : ', 
-   'fonds_documentaire:' => '<br><span itemprop="title">Fonds documentaire: ', 
-   'avocats:' => '<br><span itemprop="title">Avocat: ', 
-   'decisions_attaquees:' => '<br><span itemprop="title">Juridiction attaquée: ', 
-   'sens_arret:' => '<br><span itemprop="title">Sens :', 
-   'saisines:' => '<br><span itemprop="title">Saisine: ', 
-   'ecli:' => '<span itemprop="title">ECLI: ', 
-   'nor:' => '<span itemprop="title">NOR: ', 
+   'analyses:' => '<br><span itemprop="title">Analyse: ',
+   'type_recours:' => '<br><span itemprop="title">Type de recours: ',
+   'references:' => '<br><span itemprop="title">Références: ',
+   'president:' => '<br><span itemprop="title">Président: ',
+   'rapporteur:' => '<br><span itemprop="title">Rapporteur ',
+   'commissaire_gvt:' => '<br><span itemprop="title">Rapporteur public: ',
+   'avocat_gl:' => '<br><span itemprop="title">Avocat général: ',
+   'texte_arret:' => '<br><span itemprop="title">Recherche : ',
+   'fonds_documentaire:' => '<br><span itemprop="title">Fonds documentaire: ',
+   'avocats:' => '<br><span itemprop="title">Avocat: ',
+   'decisions_attaquees:' => '<br><span itemprop="title">Juridiction attaquée: ',
+   'sens_arret:' => '<br><span itemprop="title">Sens :',
+   'saisines:' => '<br><span itemprop="title">Saisine: ',
+   'ecli:' => '<span itemprop="title">ECLI: ',
+   'nor:' => '<span itemprop="title">NOR: ',
    'type_affaire:' => 'Type d\'affaire: ',
    '(premier avocat general)' => '',
    '(president)' => '',
-      '"' => ''   
+      '"' => ''
    );
   return strtr($string, $table);
 }
 
 function remplacequerytitre($string) {
   $table = array(
-   'analyses:' => 'avec l\'analyse ', 
-   'type_recours:' => 'avec pour type de recours ', 
-   'references:' => 'avec les références ', 
-   'president:' => 'dont les audiences ont été présidées par ', 
-   'rapporteur:' => 'qui ont été rapportées par ', 
-   'commissaire_gvt:' => ' avec pour le commissaire du gouvernement ', 
-   'avocat_gl:' => 'avec pour l\'avocat général ', 
-   'fonds_documentaire:' => 'issues du fonds documentaire ', 
-   'avocats:' => 'avec pour avocat ', 
-   'decisions_attaquees:' => 'ayant fait l\'objet d\'un pouvoi en cassation ', 
-   'sens_arret:' => 'ayant pour sens ', 
-   'saisines:' => 'ayant été saisis par ', 
-   'ecli:' => 'ayant comme numéro ECLI ', 
-   'nor:' => 'ayant comme numéro NOR ', 
+   'analyses:' => 'avec l\'analyse ',
+   'type_recours:' => 'avec pour type de recours ',
+   'references:' => 'avec les références ',
+   'president:' => 'dont les audiences ont été présidées par ',
+   'rapporteur:' => 'qui ont été rapportées par ',
+   'commissaire_gvt:' => ' avec pour le commissaire du gouvernement ',
+   'avocat_gl:' => 'avec pour l\'avocat général ',
+   'fonds_documentaire:' => 'issues du fonds documentaire ',
+   'avocats:' => 'avec pour avocat ',
+   'decisions_attaquees:' => 'ayant fait l\'objet d\'un pouvoi en cassation ',
+   'sens_arret:' => 'ayant pour sens ',
+   'saisines:' => 'ayant été saisis par ',
+   'ecli:' => 'ayant comme numéro ECLI ',
+   'nor:' => 'ayant comme numéro NOR ',
    'type_affaire:' => 'ayant pour type d\'affaire ',
 	'(president)' => '',
 	'(premier avocat general)' => '',
-	'"' => ''   
+	'"' => ''
    );
   return strtr($string, $table);
 }
 
 ?>
-<div class="recherche">
-
-<div class="affiner">
-<a href="http://www.juricaf.org">Accueil</a> > <a href="<?php echo $sf_request->getUri() ?>">Recherche</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
+<div class="recherche container mt-5 text-justify recherche">
+<div class="row">
+<div class="col-sm-3">
+  <a href="http://www.juricaf.org">Accueil</a> > <a href="<?php echo $sf_request->getUri() ?>">Recherche</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
 	<div class="affinercols">
-		<ul>			
+		<ul class="list-unstyled">
 			<li>
-				<h4>Termes de la recherche :</h4>
+				<p class="font-weight-bold">Termes de la recherche :</p>
 				<p class="recherche_terme"><?php echo remplacequery($query); ?></p>
 			</li>
 			<li>
-				<h4>Tri :</h4>
-				<ul>
-
+				<p class="font-weight-bold">Tri :</p>
+				<ul class="list-unstyled">
 <?php
-
 //  Suppression des options
-
 $myfacetslink = preg_replace('/^,/', '', $facetslink);
 $currentlink = array('module'=>'recherche', 'action'=>'search', 'query' => $query, 'facets'=>$myfacetslink);
-if (count($facetsset)) { ?>
-
-  <?php
+if (count($facetsset)) {
   $myfacetslink = preg_replace('/^,/', '', $facetslink);
   $noorderlink = $currentlink;
   $noorderlink['facets'] = preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/order:[^:,]+,?/', '', $myfacetslink)));
 
-  foreach($facetsset as $f) { ?>
-  <?php
+  foreach($facetsset as $f) {
     if (!preg_match('/order:/', $f)) {
       $text = preg_replace('/_/', ' ', preg_replace('/[^:]+:/', '', $f));
       $tmplink = $currentlink;
@@ -112,14 +106,12 @@ if (count($facetsset)) { ?>
         echo link_to('<li><img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats trié dans l\'ordre chronologique</li>', $noorderlink);
       }
     }
-  ?>
-
-</ul><ul>
-  <?php
-  }
-
+?>
+</ul>
+<ul class="list-unstyled">
+<?php
+}
 // Metadonnées
-
 foreach($facetsset as $facet) {
   if (preg_match('/^facet_pays_juridiction:/', $facet)) {
     $title_facet['pays_juri'] = replaceUnderscore(str_replace('facet_pays_juridiction:', '', $facet));
@@ -142,9 +134,7 @@ else {
   if(isset($title_facet['juri'])) { $title_facet = $title_facet['juri']; }
   elseif(isset($title_facet['pays'])) { $title_facet = $title_facet['pays']; }
 }
-?>
 
-<?php
 }
 
 if (trim($query) !== '' || isset($title_facet)) {
@@ -180,10 +170,6 @@ if (trim($query) !== '' || isset($title_facet)) {
 //  Gestion des facettes
 
 if ($resultats->response->numFound !== 0) {
-?>
-
-				
-  <?php
   if (!preg_match('/order:/', $facetslink)) {
     echo '';
   }
@@ -209,35 +195,35 @@ if ($resultats->response->numFound !== 0) {
     echo '<li>'.link_to('par pertinence', $tmplink, array('rel'  => 'nofollow')).'</li>';
   } ?>
 
-				</ul>
-			</li>
+</ul>
+</li>
 <?php
 if(isset($nobots)) { $sf_response->addMeta('robots', 'noindex, nofollow', false, false, false); }
 include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction', 'id'=>'facet_pays_juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink, 'tree' => true, 'mainid' => 'facet_pays'));
 ?>
 
-		</ul>	 
-	
+</ul>
+
 <?php
 }
-
 // Affichage des résultats
 
 ?>
+
 </div>
 </div>
-<div class="resultat">
-	<h3><?php echo $nbResultats; ?> résultats</h3>
-		
+<div class="col-sm-8">
+	<p><?php echo $nbResultats; ?> résultats</p>
+
 <?php
 foreach ($resultats->response->docs as $resultat) {
-  echo '<div class="resultatcols"><a href="'.url_for('@arret?id='.$resultat->id).'"><h3><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</h3></a>';
-  echo '<p>';
+  echo '<div class="resultatcols"><a href="'.url_for('@arret?id='.$resultat->id).'"><h5 class="font-weight-bold"><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</h5></a>';
+  echo '<small>';
   if (isset($resultats->highlighting))
     echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});
   else
     echo JuricafArret::getExcerpt($resultat);
-  echo '</p>';
+  echo '</small>';
   $formation = '';
   if ($resultat->formation) {
     $formation = ', '.$resultat->formation;
@@ -253,6 +239,7 @@ foreach ($resultats->response->docs as $resultat) {
 
 <div style="clear:both;">&nbsp;</div>
 </div>
+</div>
 <script type="text/javascript">
 <!--
 resultats = $('.resultats').css('height');
@@ -265,21 +252,21 @@ if(facets > resultats) {
 }
 // -->
 </script>
-<?php } 
+<?php }
 
 else { // JSON
- 
+
   $nbResultats = $resultats->response->numFound;
 
 // Ouverture de l'objet JSON
  echo '{ ';
- 
+
  echo "\"nb_resultat\" : $nbResultats, \"docs\" : [ ";
- 
+
  // Gestion de la derniere boucle
  $total = count($resultats->response->docs);
  $i = 0;
- 
+
  foreach ($resultats->response->docs as $resultat) {
 	echo '{ ';
 		echo '"id" : "' . $resultat->id . '", ';
@@ -299,9 +286,9 @@ else { // JSON
 	if ($i < $total)
 		echo ", ";
 }
- 
+
  // Fermeture de l'objet JSON
 echo ' ] }';
- 
- 
+
+
 } ?>

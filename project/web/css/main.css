@@ -26,3 +26,24 @@ a{
   color:#426e98;
   font-weight: bold;
 }
+
+.resultatcols {
+    background-color: #f7f8f9;
+    border: 1px solid #f1f1f1;
+    padding: 5px;
+    margin-bottom: 5;
+
+}
+
+.recherche{
+  line-height: 1;
+}
+
+.affinercols{
+    background-color: #f7f8f9;
+    font-size:12px;
+    /* border: 1px solid #f1f1f1;
+    padding: 5px;
+    margin-bottom: 5; */
+
+}
