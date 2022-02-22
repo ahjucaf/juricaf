@@ -24,12 +24,9 @@ $_SESSION['token'] = $token;
     <div class="site">
       <div class="head">
          <div class="reseaux_sociaux">
-          <a href="http://www.parcesmotifs.net/spip.php?page=groupe&amp;id_groupe=12"><img src="/images/help.png" alt="Aide" title="Aide" /></a>
-          <a href="https://www.facebook.com/Juricaf"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook" /></a>
-          <a href="https://twitter.com/#!/juricaf"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter" /></a>
-          <a href="http://www.parcesmotifs.net/spip.php?page=backend"><img src="/images/rss.png" alt="RSS" title="Flux RSS" /></a>
-          <a href="javascript:juricafSearch();"><img src="/images/juricaf_search.png" alt="J" title="Ajouter Juricaf aux moteurs de recherches de votre navigateur" /></a>
-        </div>
+         <a href="https://www.facebook.com/AHJUCAFCoursSupremesJudiciairesFrancophones" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
+          <a href="https://twitter.com/ahjucaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
+	 </div>
         <div class="menu">
           <ul>
             <li><a href="/documentation/a_propos.php">A propos</a></li>
@@ -52,7 +49,7 @@ $_SESSION['token'] = $token;
                   <a href="http://www.juricaf.org/recherche"><img id="logo" src="/images/juricaf.png" alt="Juricaf" /></a><br />
                   <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des cours suprêmes</span><br />
                   <input type="text" style="width: 300px; margin-top: 5px;" name="q" value="" tabindex="10" /><br />
-                  <input type="submit" value="Rechercher" tabindex="20" /> <a href="#">recherche avancée</a>
+                  <input type="submit" value="Rechercher" tabindex="20" /> <a href="/recherche_avancee">recherche avancée</a>
                 </td>
               </tr>
             </table>
@@ -112,7 +109,7 @@ $_SESSION['token'] = $token;
                   • promouvoir le rôle des Hautes Juridictions dans la consolidation de l’Etat de droit, le renforcement de la sécurité juridique, la régulation des décisions judiciaires et l’harmonisation du droit au sein des États membres.
               </p>
 
-              <p>Dans ce cadre, l’AHJUCAF a créé la base de données JURICAF accessible sur internet à l’adresse www.juricaf.org. Il s’agit d’une base de données de décisions de justice en langue française de 43 pays et institutions.</p>
+              <p>Dans ce cadre, l’AHJUCAF a créé la base de données JURICAF accessible sur internet à l’adresse www.juricaf.org. Il s’agit d’une base de données de décisions de justice en langue française de 46 pays et institutions.</p>
 
               <o>Mise à disposition et réutilisation de données :</p>
 
@@ -176,7 +173,7 @@ $_SESSION['token'] = $token;
 
               <h2>8 - Gestion des cookies</h2>
 
-              <p>Aucun cookies n’est déposé par le site <a href="https://www.juricaf.org">www.juricaf.org</a>.</p>
+              <p>Aucun cookie n’est déposé par le site <a href="https://www.juricaf.org">www.juricaf.org</a>.</p>
 
         <br/><br/><br/>
         <small style="color:gray;"><i>Les  mentions légales et la politique de confidentialité de ce site ont été rédigées avec la collaboration de Maître Blandine Cornevin et Maître Irène Kris, réseau ELOKIA AVOCATS</i></small>
@@ -189,9 +186,9 @@ $_SESSION['token'] = $token;
  	 <img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones" />
  	 <img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
        <div class="bottom">
-      <p>Juricaf est un projet de l'AHJUCAF, l'association des cours judiciaires suprêmes francophones,<br />
-         réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I).<br />
-         Il est soutenu par l'Organisation internationale de la Francophonie et le Fonds francophone des inforoutes.</p>
+       <p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones,<br />
+      initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I),<br />
+      Il est soutenu par l'Organisation Internationale de la Francophonie.</p>
        </div>
      </div>
     <script type="text/javascript">

@@ -29,10 +29,9 @@
       </div>
 	  <div class="reseaux_sociaux">
 
-	   <a href="https://www.facebook.com/Juricaf" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
-          <a href="http://twitter.com/juricaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
-	<a href="https://itunes.apple.com/fr/app/id587420315?mt=8&affId=1578782" target="_blank"><img src="/images/appstore.png" alt="Appstore" title="Accs  la version IPhone"/></a>
-      </div>
+	   <a href="https://www.facebook.com/AHJUCAFCoursSupremesJudiciairesFrancophones" target="_blank"><img src="/images/facebook.png" alt="Facebook" title="Devenez fan sur Facebook"/></a>
+          <a href="https://twitter.com/ahjucaf" target="_blank"><img src="/images/twitter.png" alt="Twitter" title="Suivez nous sur Twitter"/></a>
+	 </div>
       <div class="main">
         <div class="content">
           <div class="form_recherche">
@@ -43,7 +42,7 @@
                   <a href="http://www.juricaf.org/recherche"><img id="logo" src="/images/juricaf.png" alt="Juricaf" /></a><br />
                   <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des cours suprêmes</span><br />
                   <input type="text" style="width: 300px; margin-top: 5px;" name="q" value="" tabindex="10" /><br />
-                  <input type="submit" value="Rechercher" tabindex="20" /> <a href="#">recherche avancée</a>
+                  <input type="submit" value="Rechercher" tabindex="20" /> <a href="/recherche_avancee">recherche avancée</a>
                 </td>
               </tr>
             </table>
@@ -82,7 +81,7 @@
               <p>Télécharger l’ouvrage «&nbsp;<a href="https://www.ahjucaf.org/sites/default/files/AHJUCAF%20Congr%C3%A8s%20Beyrouth%20Actes%20mars%202020.pdf">La diffusion de la jurisprudence des Cours suprêmes judiciaires dela francophonie au temps d’internet</a>&nbsp;»</p>
 
               <h2>L’AHJUCAF présente ses remerciements aux acteurs qui ont contribué à création et à la refonte du site de la base de données JURICAF :</h2>
-                  <p> - Cour de cassation : M. le Président Jean-Louis Gillet, M. Edouard Rottier, M. Guillaume Adréani</p>
+                  <p> - Cour de cassation : M. le Président Jean-Louis Gillet, M. Edouard Rottier, M. Guillaume Adréani, M. Mehdi Ben Mimoun</p>
                   <p> - Partenaire public : Université de Paris 1 CAVEJ, Bruno Dondéro, M. Jean Gasnault, M. Stéphane Cottin</p>
                   <p> - Partenaires privés : M. Tangui Morlier, M. Brice Person</p>
           </div>
@@ -93,10 +92,10 @@
  	 <img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones" />
  	 <img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
        <div class="bottom">
-      <p>Juricaf est un projet de l'AHJUCAF, l'association des cours judiciaires suprêmes francophones,<br />
-         réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I).<br />
-         Il est soutenu par l'Organisation internationale de la Francophonie et le Fonds francophone des inforoutes.</p>
-       </div>
+       <p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones,<br />
+      initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I),<br />
+      Il est soutenu par l'Organisation Internationale de la Francophonie.</p>
+    </div>
      </div>
     </div>
     <script type="text/javascript">
