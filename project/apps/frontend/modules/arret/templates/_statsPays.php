@@ -8,10 +8,10 @@ function pathToFlag($str) {
 }
 $cpt = 0;
 ?>
-<div class="pays">
-	<h3 style="text-align: center;">Rechercher parmi <?php echo number_format($nb, 0, '', ' '); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</h3>
+<div class="pays container">
+	<h5  class="text-center pt-5">Rechercher parmi <?php echo number_format($nb, 0, '', ' '); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</h5>
 	<div class="payscols">
-    <div class="container accueil-div text-justify p-5">
+    <div class="accueil-div text-justify p-5 m-5">
       <div class="row">
     <?php
       $max_per_col = intval(count($pays) / 3) + 1;
