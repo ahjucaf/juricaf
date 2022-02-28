@@ -12,10 +12,15 @@ if (!function_exists('echolinkcondition')) {
   }
  }
 ?>
+<div class="mt-3 font-weight-bold">
 
-<?php echo echolinkcondition('<< Début', $currentlink, $pager['begin']); ?>
+<span class="float-left">
+<?php echo echolinkcondition('<< Début', $currentlink, $pager['begin']);?>
 <?php echo echolinkcondition('< Précédent', $currentlink, $pager['last']); ?>
-<div id="align_right">
+</span>
+
+<span class="float-right">
 	<?php echo echolinkcondition('Suivant >', $currentlink, $pager['next']); ?>
 	<?php echo echolinkcondition('Fin >>', $currentlink, $pager['end']); ?>
+</span>
 </div>
