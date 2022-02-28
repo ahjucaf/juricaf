@@ -58,8 +58,10 @@ a{
 .affinercols p{
   margin-top: 15px;
 }
-
-@media screen and (max-width: 992px) {
+.display-only-responsive{
+  display: none;
+}
+/* @media screen and (max-width: 992px) {
   .full-width {
       max-width: none;
       margin-right: auto;
@@ -67,3 +69,17 @@ a{
       padding:0 !important;
   }
 }
+
+@media screen and (max-width: 991px) {
+  .menu-recherche{
+    display: none;
+  }
+
+  .resultats-recherche{
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+  .display-only-responsive{
+    display: block;
+  }
+} */

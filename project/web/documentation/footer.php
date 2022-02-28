@@ -1,5 +1,5 @@
 
-<div class="container full-width">
+<div>
 
 
 <div class="container mt-5">
