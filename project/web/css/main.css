@@ -58,3 +58,12 @@ a{
 .affinercols p{
   margin-top: 15px;
 }
+
+@media screen and (max-width: 992px) {
+  .full-width {
+      max-width: none;
+      margin-right: auto;
+      margin-left: auto;
+      padding:0 !important;
+  }
+}

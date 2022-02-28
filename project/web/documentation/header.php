@@ -19,15 +19,16 @@
     <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
   </head>
   <body>
+    <div class="container full-width">
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-              <a class="nav-link active" href="http://localhost:8002/documentation/a_propos.php">A propos<span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+              <a class="nav-link" href="http://localhost:8002/documentation/a_propos.php">A propos<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="http://localhost:8002/documentation/stats/statuts.php">Etendue des collections </a>
@@ -51,9 +52,9 @@
             </li>
           </ul>
         </div>
-      </div>
-    </nav>
 
+    </nav>
+  </div>
     <div class="form_recherche container mt-5">
         <form class="text-center" method="get" action="/recherche">
                 <a href="http://www.juricaf.org/recherche"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
