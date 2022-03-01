@@ -35,7 +35,7 @@ $cpt = 0;
     <div>
 
   <div class="text-center mt-3 p-3">
-    <img src="images/+.png" alt="+" /> <a href="/documentation/stats/statuts.php">Plus de statistiques</a>
+    <a href="/documentation/stats/statuts.php">Plus de statistiques</a>
   </div>
 </div>
 

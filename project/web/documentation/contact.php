@@ -13,20 +13,20 @@ $_SESSION['cap2'] = intval(rand(0, 10) + 1);
        <div class="container">
             <form action="form2mail.php" method="post">
                <div class="form-group row">
-                  <label class="col-sm-2 col-form-label"> Email:</label>
+                  <label class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="text" name="email" class="form-control" id="inputPassword" placeholder="Entrez votre adresse mail">
+                    <input type="text" name="email" class="form-control" id="inputPassword" placeholder="Email">
                   </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Message:</label>
+                <label class="col-sm-2 col-form-label">Message</label>
                 <div class="col-sm-10">
-                  <textarea name="message" class="form-control" rows="8" cols="50"></textarea>
+                  <textarea name="message" class="form-control" rows="8" cols="50" placeholder="Message"></textarea>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Captcha:</label>
-                <div class="col-sm-10">
+                <label class="col-sm-2 col-form-label">Captcha</label>
+                <div class="col-sm-10 font-weight-bold">
                   <?php echo $_SESSION['cap1']; ?> + <?php echo $_SESSION['cap2']; ?> = <input type="text" name="captcha" size=4 />
                 </div>
               </div>
