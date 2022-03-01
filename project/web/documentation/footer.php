@@ -1,17 +1,25 @@
 
-<div>
+<div class="container">
 
+  <hr>
+  <div class="mt-3 text-center">
+    <a href="https://www.lemondedudroit.fr/interviews/66303-jean-paul-jean-ahjucaf.html" target="new">Interview de JP Jean secrétaire général de l’AHJUCAF dans « Le Monde du droit » sur l’accès à la jurisprudence francophone.</a><br><br><br>
+    <img src="/images/ahjucafSite.jpg" alt="Association des cours judiciaires suprêmes francophones" />
+    <a href="http://www.ahjucaf.org/"><br/>Accédez au site de l’AHJUCAF </a>
+  </div>
 
-<div class="container mt-5">
-<hr/>
-
-<img src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones" />
-<img class="float-right" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
 </div>
+</div>
+
+
+
  <div class="bottom text-center mt-3 p-3">
- <p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones,<br />
-initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I),<br />
-Il est soutenu par l'Organisation Internationale de la Francophonie.</p>
+   <img class="float-left" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones" />
+   <img class="float-right" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
+   <p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones,<br />
+    initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I),<br />
+    Il est soutenu par l'Organisation Internationale de la Francophonie.
+  </p>
 </div>
 </div>
 </div>

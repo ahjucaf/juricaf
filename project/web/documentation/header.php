@@ -57,27 +57,25 @@
 
     </nav>
   </div>
-
-
-    <div class="form_recherche container mt-5">
-      <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
-        <a href="http://www.juricaf.org/recherche"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
-        <p ><small class="font-italic">La jurisprudence francophone des cours suprêmes</small><br/></p>
-        <div class="form-inline input-group">
-          <input class="form-control w-75 p-3 mx-auto" type="text" placeholder="Recherche" name="q" aria-label="Rechercher">
-          <button class="btn btn-outline-success" type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg>
-          </button>
-        </div>
-        <a href="/recherche_avancee">recherche avancée</a>
-      </form>
-        <!-- <form class="text-center" method="get" action="/recherche">
-                <a href="http://www.juricaf.org/recherche"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
-                <p ><small class="font-italic">La jurisprudence francophone des cours suprêmes</small><br/></p>
-                <input class="form-control w-75 p-3 mx-auto" type="text" name="q" value="" tabindex="10" />
-                <input class="btn btn-primary "type="submit" value="Rechercher" tabindex="20" />
-                <a href="/recherche_avancee">recherche avancée</a>
-        </form> -->
-    </div>
+  <div class="form_recherche container mt-5">
+    <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
+      <a href="http://www.juricaf.org/recherche"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
+      <p ><small class="font-italic">La jurisprudence francophone des cours suprêmes</small><br/></p>
+      <div class="form-inline input-group">
+        <input class="form-control w-75 p-3 mx-auto" type="text" placeholder="Recherche" name="q" aria-label="Rechercher" tabindex="10">
+        <button class="btn btn-outline-success" type="submit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+        </button>
+      </div>
+      <a class="float-right" href="/recherche_avancee">recherche avancée</a>
+    </form>
+      <!-- <form class="text-center" method="get" action="/recherche">
+              <a href="http://www.juricaf.org/recherche"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
+              <p ><small class="font-italic">La jurisprudence francophone des cours suprêmes</small><br/></p>
+              <input class="form-control w-75 p-3 mx-auto" type="text" name="q" value="" tabindex="10" />
+              <input class="btn btn-primary "type="submit" value="Rechercher" tabindex="20" />
+              <a href="/recherche_avancee">recherche avancée</a>
+      </form> -->
+  </div>

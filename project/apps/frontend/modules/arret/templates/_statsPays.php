@@ -10,30 +10,51 @@ $cpt = 0;
 ?>
 <div class="pays container">
 	<h5  class="text-center pt-5">Rechercher parmi <?php echo number_format($nb, 0, '', ' '); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</h5>
-	<div class="payscols">
-    <div class="accueil-div text-justify p-5 m-5">
-      <div class="row">
-    <?php
-      $max_per_col = intval(count($pays) / 3) + 1;
+  <div class='col-12 container'>
+
+    <ul  class="list-unstyled row">
+      <?php
+      $i = 0;
       foreach($pays as $p){
         $pays = preg_replace('/ /', '_', $p['key'][0]);
-        if($cpt % $max_per_col == 0 && $cpt){
-          echo('</div><div class="row">');
-        }
-        $cpt++;
         $pays_nom = $p['key'][0].' ('.number_format($p['value'], 0, '', ' ').')';
         $link = link_to($pays_nom,'recherche/search?query=+&facets=facet_pays:'.$pays);
         if (strlen($pays_nom) > 45) {
           $pays_nom_min = substr($pays_nom, 0, 16) . '...';
           $link = link_to($pays_nom_min,'recherche/search?query=+&facets=facet_pays:'.$pays);
         }
-        if (strlen($pays) > 0) {
-          echo '<div class="col-lg-6"><img src="/images/drapeaux/'.pathToFlag(ucfirst($pays)).'.png" alt="'.$pays.'" />&nbsp;'.$link .'</div>';
+        if($i > 7){
+          $test = " hidden ";
         }
+        echo('<li class="'.$test.'list-group-item col-lg-3"> <img src="/images/drapeaux/'.pathToFlag(ucfirst($pays)).'.png" alt ="'.$pays.'" />&nbsp;'.$link."</li>");
+        $i++;
       }
+      echo('<li class="show text-center list-group-item col-lg-3"><button id="btn-showmore" type="button" class="btn btn-link" onclick="showmore()">Voir plus</button></li>');
       ?>
-	</div>
+    </ul>
+    <div>
+
   <div class="text-center mt-3 p-3">
     <img src="images/+.png" alt="+" /> <a href="/documentation/stats/statuts.php">Plus de statistiques</a>
   </div>
 </div>
+
+
+<script>
+  function showmore(){
+    if(document.getElementById("btn-showmore").innerHTML == "Voir plus"){
+      document.getElementById("btn-showmore").innerHTML= "Voir moins";
+      var toshow = document.getElementsByClassName("hidden");
+      for (var i=0;i< toshow.length;i++){
+        toshow[i].style.display = "block";
+      }
+    }
+    else{
+      document.getElementById("btn-showmore").innerHTML= "Voir plus";
+      var toshow = document.getElementsByClassName("hidden");
+      for (var i=0;i< toshow.length;i++){
+        toshow[i].style.display = "none";
+      }
+    }
+  }
+</script>

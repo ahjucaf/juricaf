@@ -61,16 +61,26 @@ a{
 .display-only-responsive{
   display: none;
 }
-/* @media screen and (max-width: 992px) {
-  .full-width {
+.show{
+  display:none;
+}
+@media screen and (max-width: 991px) {
+  /* .full-width {
       max-width: none;
       margin-right: auto;
       margin-left: auto;
       padding:0 !important;
+  } */
+  .hidden{
+    display:none;
+  }
+  .show{
+    display: block;
   }
 }
 
-@media screen and (max-width: 991px) {
+
+/* @media screen and (max-width: 991px) {
   .menu-recherche{
     display: none;
   }
