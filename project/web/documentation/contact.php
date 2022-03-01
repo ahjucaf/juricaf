@@ -10,6 +10,7 @@ $_SESSION['cap2'] = intval(rand(0, 10) + 1);
 <?php include("header.php") ?>
     <div class="container text-justify mt-5">
 		   <h5 class="p-3 mb-2 bg-secondary bg-gradient">Formulaire de contact</h5>
+       <div class="container">
             <form action="form2mail.php" method="post">
                <div class="form-group row">
                   <label class="col-sm-2 col-form-label"> Email:</label>
@@ -38,6 +39,7 @@ $_SESSION['cap2'] = intval(rand(0, 10) + 1);
             </form>
           </div>
         </div>
+      </div>
       </div>
 
 <?php include("footer.php") ?>

@@ -7,6 +7,8 @@ $_SESSION['token'] = $token;
 <?php include('header.php')?>
           <div class="container text-justify mt-5">
             <h5 class="p-3 mb-2 bg-secondary bg-gradient">Mentions légales</h5>
+
+            <div class="container">
             <h5 class="mt-3 mb-3"><u>Editeur</u></h5>
 
             <p>Le site www.juricaf.org est placé sous la responsabilité éditoriale de l’AHJUCAF (Association des Hautes JUridictions de CAssation des pays ayant en partage l’usage du Français), association loi 1901 inscrite au registre des déclarations d’association de la Préfecture de police de Paris, publié au Journal officiel du 9 juin 2001.</p>
@@ -64,6 +66,7 @@ $_SESSION['token'] = $token;
           </div>
         </div>
       </div>
+    </div>
 
 
 <?php include("footer.php") ?>
