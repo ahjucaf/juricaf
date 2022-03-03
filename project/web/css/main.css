@@ -58,38 +58,17 @@ a{
 .affinercols p{
   margin-top: 15px;
 }
-.display-only-responsive{
-  display: none;
+
+.btn-primary{
+  background-color: #375d81;
 }
-.show{
-  display:none;
-}
+
+
 @media screen and (max-width: 991px) {
-  /* .full-width {
+  .full-width {
       max-width: none;
       margin-right: auto;
       margin-left: auto;
       padding:0 !important;
-  } */
-  .hidden{
-    display:none;
-  }
-  .show{
-    display: block;
   }
 }
-
-
-/* @media screen and (max-width: 991px) {
-  .menu-recherche{
-    display: none;
-  }
-
-  .resultats-recherche{
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-  }
-  .display-only-responsive{
-    display: block;
-  }
-} */

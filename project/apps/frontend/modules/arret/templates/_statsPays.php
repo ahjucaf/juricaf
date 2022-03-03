@@ -34,7 +34,7 @@ $cpt = 0;
             echo('</ul></div>');
           }
         ?>
-          <div class="input-group d-lg-none">
+          <div class="input-group d-lg-none w-90 m-auto">
             <select id="selected-pays"class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
               <option selected>Rechercher par pays</option>
               <?php
