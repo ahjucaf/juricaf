@@ -8,15 +8,17 @@ class JuricafArret extends sfCouchDocument
 
   public static function getExcerpt($resultat, $highlighting = null) {
     $exerpt = '';
+    if ($resultat->analyses) {
+      $exerpt .= $resultat->analyses.'...';
+      $exerpt = "Analyse : <span class='text-decoration-underline'>".truncate_text($exerpt,150,"...",true)."</span><br>";
+    }
     if ($highlighting && isset($highlighting->content)) {
       foreach ($highlighting->content as $h) {
 	$exerpt .= '...'.html_entity_decode($h);
       }
       $exerpt .= '...' ;
     }
-    if ($resultat->analyses) {
-      $exerpt .= $resultat->analyses.'...';
-    }
+
     return  preg_replace('/[\(\{\[\]\}\)]/', '', preg_replace ('/[^a-z0-9]*\.\.\.$/i', '...', truncate_text($exerpt.$resultat->texte_arret, 650, "...", true)));
   }
 

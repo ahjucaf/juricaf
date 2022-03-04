@@ -74,6 +74,11 @@ a{
   text-align: justify;
 }
 
+.card-text em{
+    font-weight: bold;
+    font-style: normal;
+}
+
 @media screen and (max-width: 991px) {
   .full-width {
       max-width: none;
