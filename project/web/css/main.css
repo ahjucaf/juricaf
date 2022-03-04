@@ -35,10 +35,6 @@ a{
 
 }
 
-.recherche{
-  line-height: 1;
-}
-
 .affinercols{
     background-color: #f7f8f9;
     font-size:12px;
@@ -63,6 +59,16 @@ a{
   background-color: #375d81;
 }
 
+.a-unstyled{
+  text-decoration: inherit;
+  color:#375d81;
+}
+.a-unstyled:hover{
+  text-decoration: underline;
+}
+.card-header{
+  background-color:#f7f8f9;
+}
 
 @media screen and (max-width: 991px) {
   .full-width {
