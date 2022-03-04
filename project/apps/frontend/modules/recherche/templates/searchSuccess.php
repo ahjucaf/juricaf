@@ -65,9 +65,13 @@ function remplacequerytitre($string) {
 }
 
 ?>
-  <div class="recherche container mt-5">
+<div class="recherche container mt-5">
 <div class="row">
-<div class="col-sm-3">
+
+<p id="terme_recherche" hidden><?php echo remplacequery($query);?> </p>
+
+<div class="d-none">
+  <!-- pour l'instant je le cache sinon pagination de fonctionne pas -->
   <a href="http://www.juricaf.org">Accueil</a> > <a href="<?php echo $sf_request->getUri() ?>">Recherche</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
 	<div class="affinercols ">

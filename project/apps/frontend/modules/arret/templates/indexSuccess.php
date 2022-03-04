@@ -461,6 +461,7 @@ if(isset($references['PUBLICATION'])) {
 }
 ?>
 
+<p id="terme_recherche" hidden><?php echo $sf_user->getAttribute('query');?> </p>
 
 <div class="container mt-5">
   <a href="http://www.juricaf.org">Page d'accueil</a> >
