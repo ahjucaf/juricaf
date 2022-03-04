@@ -59,11 +59,3 @@ $cpt = 0;
     <a href="/documentation/stats/statuts.php">Plus de statistiques</a>
   </div>
 </div>
-
-<script>
-  function goTo(){
-    id = document.getElementById("selected-pays").value;
-    link=document.getElementById(id).dataset.test;
-    window.location.replace(link);
-  }
-</script>

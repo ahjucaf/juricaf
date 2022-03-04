@@ -212,28 +212,33 @@ include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction'
 
 </div>
 </div>
-<div class="col-sm-9 text-justify">
-	<p><?php echo $nbResultats; ?> résultats</p>
+<div class="text-justify">
+	<p class="text-center"><?php echo $nbResultats;?> résultats</p>
 
 <?php
 foreach ($resultats->response->docs as $resultat) {
-  echo '<div class="resultatcols"><a href="'.url_for('@arret?id='.$resultat->id).'"><p class="font-weight-bold"><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</p></a>';
-  echo '<small>';
-  if (isset($resultats->highlighting))
-    echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});
-  else
-    echo JuricafArret::getExcerpt($resultat);
-  echo '</small>';
-  $formation = '';
-  if ($resultat->formation) {
-    $formation = ', '.$resultat->formation;
-  }
- // echo '<div class="extra"></div>';
-  echo '</div>';
+ ?>
+  <div class="card mb-3">
+  <p class="card-header fs-5"> <?php echo('<img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> | <a class="a-unstyled " href="'.url_for('@arret?id='.$resultat->id).'">'.$resultat->juridiction.' '.$resultat->formation);?> </a></p>
+  <div class="card-body" style="background-color:white">
+    <p class="card-text"> <?php echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});?></p>
+    <a class="float-end" href="<?php echo(url_for('@arret?id='.$resultat->id));?>">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+      </svg>
+  </a>
+  </div>
+  <small class="card-header text-muted"> <?php echo(date('d/m/Y', strtotime($resultat->date_arret)) . ' | '. strtoupper($resultat->pays) . ' | N°'.$resultat->num_arret);?> </small>
+</div>
+<?php
 }
 ?>
 	<div class="navigation">
-	<?php if ($resultats->response->numFound > 10) { echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink)); } ?>
+
+	   <?php if ($resultats->response->numFound > 10) {
+       echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink));
+     }
+      ?>
 	</div>
 </div>
 

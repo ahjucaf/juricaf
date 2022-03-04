@@ -70,6 +70,10 @@ a{
   background-color:#f7f8f9;
 }
 
+.text-justify{
+  text-align: justify;
+}
+
 @media screen and (max-width: 991px) {
   .full-width {
       max-width: none;
