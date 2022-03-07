@@ -1,10 +1,5 @@
 function initFunctions(){
 
-  /* remplir la barre de recherche */
-  if( document.getElementById('terme_recherche')){
-    document.getElementById("recherche").value = document.getElementById('terme_recherche').innerHTML.replace(/ /g, "");
-  }
-
   /*fonction pour la pagination*/
   pages = document.getElementsByClassName('page-item');
   for(let i=0; i< pages.length; i++){

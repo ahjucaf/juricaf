@@ -73,8 +73,23 @@
       <a href="http://www.juricaf.org/recherche"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
       <p ><small class="font-italic">La jurisprudence francophone des cours suprêmes</small><br/></p>
         <div class="form-inline input-group input-group-lg">
-        <input id="recherche" class="form-control mx-auto" type="text" placeholder="Rechercher une jurisprudence" name="q" aria-label="Rechercher" tabindex="10" autofocus>
-        <button class="btn btn-primary"  type="submit">
+        <input id="recherche" class="form-control mx-auto" type="text"
+        <?php if($sf_request && $sf_request->getParameter('query') && ($sf_request->getParameter('query') != " ")){
+            echo( "value = '".$sf_request->getParameter('query')."'");
+            $not_autofocus=true;
+        }
+        elseif($sf_user && $sf_user->getAttribute('query') && ($sf_user->getAttribute('query')!= " ") ){
+          echo( "value = '".$sf_user->getAttribute('query')."'");
+          $not_autofocus=true;
+        }
+        ?>
+        placeholder="Rechercher une jurisprudence" name="q" aria-label="Rechercher" tabindex="10"
+        <?php
+          if(!$not_autofocus){
+            echo('autofocus=autofocus');
+          }
+        ?>
+        ><button class="btn btn-primary"  type="submit">
           <span class="d-lg-none">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
               <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
