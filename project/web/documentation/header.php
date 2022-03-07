@@ -71,7 +71,7 @@
   <div class="container form_recherche mt-5">
     <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
       <a href="http://www.juricaf.org/recherche"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
-      <p ><small class="font-italic">La jurisprudence francophone des cours suprêmes</small><br/></p>
+      <p ><small class="fst-italic slogan">La jurisprudence francophone des cours suprêmes</small><br/></p>
         <div class="form-inline input-group input-group-lg">
         <input id="recherche" class="form-control mx-auto" type="text"
         <?php if($sf_request && $sf_request->getParameter('query') && ($sf_request->getParameter('query') != " ")){

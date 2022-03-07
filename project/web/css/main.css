@@ -23,8 +23,8 @@ a{
 }
 
 .arret h5{
-  color:#426e98;
   font-weight: bold;
+  /* color: #375d81; */
 }
 
 .resultatcols {
@@ -32,17 +32,12 @@ a{
     border: 1px solid #f1f1f1;
     padding: 5px;
     margin-bottom: 5;
-
 }
 
 .affinercols{
     background-color: #f7f8f9;
     font-size:12px;
     padding: 10px 15px;
-    /* border: 1px solid #f1f1f1;
-    padding: 5px;
-    margin-bottom: 5; */
-
 }
 
 .ul-sans-point{
@@ -79,11 +74,32 @@ a{
     font-style: normal;
 }
 
+
+
+.arret hr{
+  color: #375d81 !important;
+}
+
+.slogan{
+  font-family: Georgia;
+  color: #4E4C4D;
+}
 @media screen and (max-width: 991px) {
   .full-width {
       max-width: none;
       margin-right: auto;
       margin-left: auto;
       padding:0 !important;
+  }
+}
+
+@media screen and (min-width:991px){
+  .bloc-droit{
+    border-style: dotted;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-width: thin;
+    border-color: #375d81;
   }
 }

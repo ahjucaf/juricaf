@@ -16,19 +16,19 @@ $_SESSION['token'] = $token;
 <h5><u>Vous êtes libres :</u></h5>
 
 <ul class="list-unstyled">
-<li><img src="img/share.png" class="bb-image" /> <span class="font-italic">De partager :</span> copier, distribuer et utiliser la base de données.</li>
-<li><img src="img/create.png" alt="" class="bb-image" /> <span class="font-italic" >De créer :</span> produire des créations à partir de cette base de données.</li>
+<li><img src="img/share.png" class="bb-image" /> <span class="fts-italic">De partager :</span> copier, distribuer et utiliser la base de données.</li>
+<li><img src="img/create.png" alt="" class="bb-image" /> <span class="fts-italic" >De créer :</span> produire des créations à partir de cette base de données.</li>
 
-<li><img src="img/adapt.png" alt="" class="bb-image" /> <span class="font-italic">D'adapter :</span> modifier, transformer et construire à partir de cette base de données.</li>
+<li><img src="img/adapt.png" alt="" class="bb-image" /> <span class="fts-italic">D'adapter :</span> modifier, transformer et construire à partir de cette base de données.</li>
 </ul>
 
 <h5><u>Aussi longtemps que :</u></h5>
 
 <ul class="list-unstyled">
-<li><img src="img/attribute.png" alt="" class="bb-image" /> <span class="font-italic">Vous mentionnez la paternité :</span> vous devez mentionnez la source de la base de données pour toute utilisation publique de la base de données, ou pour toute création produite à partir de la base de données, de la manière indiquée dans l'ODbL. Pour toute utilisation ou redistribution de la base de données, ou création produite à partir de cette base de données, vous devez clairement mentionner aux tiers la licence de la base de données et garder intacte toute mention légale sur la base de données originaire.</li>
-<li><img src="img/share_alike2.png" alt="" class="bb-image" /> <span class="font-italic">Vous partagez aux conditions identiques :</span> si vous utilisez publiquement une version adaptée de cette base de données, ou que vous produisiez une création à partir d'une base de données adaptée, vous devez aussi offrir cette base de données adaptée selon les termes de la licence ODbL.</li>
+<li><img src="img/attribute.png" alt="" class="bb-image" /> <span class="fts-italic">Vous mentionnez la paternité :</span> vous devez mentionnez la source de la base de données pour toute utilisation publique de la base de données, ou pour toute création produite à partir de la base de données, de la manière indiquée dans l'ODbL. Pour toute utilisation ou redistribution de la base de données, ou création produite à partir de cette base de données, vous devez clairement mentionner aux tiers la licence de la base de données et garder intacte toute mention légale sur la base de données originaire.</li>
+<li><img src="img/share_alike2.png" alt="" class="bb-image" /> <span class="fts-italic">Vous partagez aux conditions identiques :</span> si vous utilisez publiquement une version adaptée de cette base de données, ou que vous produisiez une création à partir d'une base de données adaptée, vous devez aussi offrir cette base de données adaptée selon les termes de la licence ODbL.</li>
 
-<li><img src="img/keep_open.png" alt="" class="bb-image" /> <span class="font-italic">Gardez ouvert :</span> si vous redistribuez la base de données, ou une version modifiée de celle-ci, alors vous ne pouvez utiliser de mesure technique restreignant la création que si vous distribuez aussi une version sans ces restrictions.</li></ul>
+<li><img src="img/keep_open.png" alt="" class="bb-image" /> <span class="fts-italic">Gardez ouvert :</span> si vous redistribuez la base de données, ou une version modifiée de celle-ci, alors vous ne pouvez utiliser de mesure technique restreignant la création que si vous distribuez aussi une version sans ces restrictions.</li></ul>
 
 <h5>Avertissement</u></h5>
 
