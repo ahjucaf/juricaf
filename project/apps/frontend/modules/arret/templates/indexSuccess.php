@@ -464,9 +464,49 @@ if(isset($references['PUBLICATION'])) {
 }
 ?>
 
-<div class="container mt-5 arret text-justify text-break">
+
+<div id="arret" class="container mt-5 arret text-justify text-break">
   <div class="row">
-  <div class="col-lg-9">
+    <div class="col-custom-1">
+      <nav class="bg-light">
+       <ul class="navbar-nav">
+         <li class="nav-item">
+           <button type="button" class="btn btn-light" onclick="fontSizePlus()">A+</button>
+         </li>
+         <li class="nav-item">
+           <button type="button" class="btn btn-light" onclick="fontSizeMoins()">A-</button>
+         </li>
+         <li class="nav-item">
+           <button type="button" class="btn btn-light"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+             <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+             <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+           </svg></button>
+         </li>
+         <li class="nav-item">
+           <button type="button" class="btn btn-light"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+             <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+             <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+           </svg></button>
+         </li>
+         <li class="nav-item">
+           <button type="button" class="btn btn-light" Download><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+             <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+           </svg></button>
+         </li>
+         <li class="nav-item">
+           <button type="button" class="btn btn-light" onclick="window.print()">
+             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+               <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+               <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+             </svg>
+         </button>
+         </li>
+       </ul>
+      </nav>
+    </div>
+
+  <div class="col-lg-8">
+
     <small class="text-muted"> <?php echo(date('d/m/Y', strtotime($document->date_arret)) . ' | '. strtoupper($document->pays) . ' | N°'.$document->num_arret);?> </small>
     <h3 class="fw-bold" id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> | '.$document->juridiction.' '.$document->formation ?></h3>
     <hr>
@@ -538,11 +578,10 @@ if(isset($references['PUBLICATION'])) {
       $patterns[4] = '#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i';
       $replacements[4] = '<a href="$0" target="_blank">$0</a>';
 
-      echo('<h5>Texte');
       if ($document->isTexteArretAnon()){
-          echo " (pseudonymisé)";
+        echo "<span class='text-muted'>Texte (pseudonymisé) </span>";
       }
-      echo '</h5><span itemprop="articleBody">';
+      echo '<span itemprop="articleBody">';
 
       echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret)));
 
@@ -870,8 +909,3 @@ xmlhttp.send();
 
  google.setOnLoadCallback(OnLoad);
 </script>
-
-<div class="arret container" itemscope itemtype="http://schema.org/Article">
-
-
-</div>

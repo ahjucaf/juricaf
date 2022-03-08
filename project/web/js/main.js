@@ -12,12 +12,24 @@ function initFunctions(){
       pages[i].style.color = '#6c757d';
     }
   }
-
-
-
 }
+
 function goTo(){
   id = document.getElementById("selected-pays").value;
   link=document.getElementById(id).dataset.test;
   window.location.replace(link);
+}
+
+function fontSizePlus(){
+  corps = document.getElementById('arret');
+  size = window.getComputedStyle(corps).getPropertyValue("font-size");
+  value = parseInt(size.match(/(\d+)/));
+  corps.style.fontSize = (value + 1) + 'px';
+}
+
+function fontSizeMoins(){
+  corps = document.getElementById('arret');
+  size = window.getComputedStyle(corps).getPropertyValue("font-size");
+  value = parseInt(size.match(/(\d+)/));
+  corps.style.fontSize = (value - 1) + 'px';
 }

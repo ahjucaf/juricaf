@@ -73,8 +73,19 @@ a{
     font-weight: bold;
     font-style: normal;
 }
+.col-custom-1{
+  max-width: 5%;
 
+}
 
+.col-custom-1 nav{
+  position: fixed;
+}
+
+.col-custom-1 li{
+    text-align:center;
+    border:1px solid black;
+}
 
 .arret hr{
   color: #375d81 !important;
