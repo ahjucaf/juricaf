@@ -12,25 +12,19 @@ $_SESSION['cap2'] = intval(rand(0, 10) + 1);
 		   <h5 class="p-3 mb-2 bg-secondary bg-gradient">Formulaire de contact</h5>
        <div class="container">
             <form action="form2mail.php" method="post">
-               <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Email</label>
-                  <div class="col-sm-10">
-                    <input type="text" name="email" class="form-control" id="inputPassword" placeholder="Email">
-                  </div>
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="text" name="email" class="form-control" placeholder="Email">
               </div>
-              <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Message</label>
-                <div class="col-sm-10">
-                  <textarea name="message" class="form-control" rows="8" cols="50" placeholder="Message"></textarea>
-                </div>
+              <div class="mb-3">
+                <label class="form-label">Message</label>
+                <textarea name="message" class="form-control" rows="8" cols="50" placeholder="Message"></textarea>
               </div>
-              <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Captcha</label>
-                <div class="col-sm-10 font-weight-bold">
-                  <?php echo $_SESSION['cap1']; ?> + <?php echo $_SESSION['cap2']; ?> = <input type="text" name="captcha" size=4 />
-                </div>
+              <div class="mb-3">
+                <label class="form-label">Captcha</label><br>
+                <?php echo $_SESSION['cap1']; ?> + <?php echo $_SESSION['cap2']; ?> = <input type="text" name="captcha" size=4 />
               </div>
-              <div class="form-check">
+              <div class="mb-3 form-check">
                 <input name="token" type="hidden" value="<?php echo $token; ?>" />
                 <input type="checkbox" class="form-check-input" required=required/>
                 <label class="form-check-label"> L’AHJUCAF traite les données recueillies pour la gestion des commentaires, avis et questions déposés par les usagers par le biais de ce formulaire</label>
