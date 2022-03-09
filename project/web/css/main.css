@@ -84,8 +84,9 @@ a{
 }
 
 .col-custom-1 button{
-  color:white;
-  background:#6c757d;
+  border: 1px solid #375d81;
+  color: #375d81;
+  background: white;
   font-size: revert;
 }
 

@@ -41,10 +41,9 @@ jQuery(function($){
 -->
 </script>
 
-<div class="container">
- <h5 class="p-3 mb-2 mt-5 bg-secondary bg-gradient">Recherche avancée</h5>
+<h5 class="p-3 mb-2 mt-5 bg-secondary bg-gradient">Recherche avancée</h5>
 
- <h5><b>Critères</b></h5>
+<h5><b>Critères</b></h5>
 <p>
 <div class="row">
   <div class="col-lg-3">
@@ -196,7 +195,7 @@ jQuery(function($){
     <label class="col-form-label"><h5><b>Date de la décision : </b></h5></label>
   </div>
   <div class="col-auto">
-    <input class="form-control col-auto" type="date" name="date[arret]" id="date_arret" size="10">
+    <input class="form-control col-auto" type="text" name="date[arret]" id="date_arret" size="10">
   </div>
 </div>
 OU
@@ -226,5 +225,3 @@ OU
   </div>
 </div>
 <hr />
-
-</div>
