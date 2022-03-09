@@ -1,6 +1,6 @@
 </div>
 
-<div class="bottom text-center p-3">
+<div class="bottom text-center p-3 mt-5">
   <div class="row">
     <div class="col-3 d-none d-lg-block">
       <img src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones"/>

@@ -80,11 +80,18 @@ a{
 
 .col-custom-1 nav{
   position: fixed;
+  /* left:0; */
+}
+
+.col-custom-1 button{
+  color:white;
+  background:#6c757d;
+  font-size: revert;
 }
 
 .col-custom-1 li{
     text-align:center;
-    border:1px solid black;
+    /* border:1px solid #375d81; */
 }
 
 .arret hr{
@@ -95,12 +102,20 @@ a{
   font-family: Georgia;
   color: #4E4C4D;
 }
-@media screen and (max-width: 991px) {
+.arret h2 {
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 992px) {
   .full-width {
       max-width: none;
       margin-right: auto;
       margin-left: auto;
       padding:0 !important;
+  }
+  .col-custom-1 nav{
+    left:0;
   }
 }
 
