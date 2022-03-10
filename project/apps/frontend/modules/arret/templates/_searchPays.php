@@ -16,7 +16,7 @@ echo('<div class="row">');
 foreach ($pays as $p){
   $nom_pays = preg_replace('/ /', '_', $p['key'][0]);
   echo('
-  <div class="col-lg-6">
+  <div class="col-lg-3">
     <input type="checkbox" name="pays['.$nom_pays.']" id="pays_'.$nom_pays.'" checked="checked"/>
     <label class="form-check-label" for="pays_'.$nom_pays.'"><img src="/images/drapeaux/'.pathToFlag(ucfirst($nom_pays)).'.png" alt="'.$nom_pays.'" />&nbsp;'.$p['key'][0].' ('.num($p['value']).')</label>
   </div>');
