@@ -33,3 +33,10 @@ function fontSizeMoins(){
   value = parseInt(size.match(/(\d+)/));
   corps.style.fontSize = (value - 1) + 'px';
 }
+
+function deletePaysfilter(){
+  currentlink = window.location.href;
+  pays= document.getElementById("pays_filter").value;
+  toGo = currentlink.replace("&pays="+pays, '');
+  window.location.replace(toGo);
+}
