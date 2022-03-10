@@ -67,156 +67,45 @@ function remplacequerytitre($string) {
 ?>
 <div class="recherche container mt-5">
 <div class="row">
-
-<p id="terme_recherche" hidden><?php echo remplacequery($query);?> </p>
-
-<div class="d-none">
-  <!-- pour l'instant je le cache sinon pagination de fonctionne pas -->
-  <a href="http://www.juricaf.org">Accueil</a> > <a href="<?php echo $sf_request->getUri() ?>">Recherche</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
-	<div class="affinercols ">
-		<ul class="list-unstyled">
-			<li>
-				<p class="font-weight-bold">Termes de la recherche :</p>
-				<p class="recherche_terme"><?php echo remplacequery($query); ?></p>
-			</li>
-			<li>
-				<p class="font-weight-bold">Tri :</p>
-				<ul class="ul-sans-point">
+<div>
 <?php
-//  Suppression des options
-$myfacetslink = preg_replace('/^,/', '', $facetslink);
-$currentlink = array('module'=>'recherche', 'action'=>'search', 'query' => $query, 'facets'=>$myfacetslink);
-if (count($facetsset)) {
+/* POUR LA PAGINATION */
   $myfacetslink = preg_replace('/^,/', '', $facetslink);
-  $noorderlink = $currentlink;
-  $noorderlink['facets'] = preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/order:[^:,]+,?/', '', $myfacetslink)));
-
-  foreach($facetsset as $f) {
-    if (!preg_match('/order:/', $f)) {
-      $text = preg_replace('/_/', ' ', preg_replace('/[^:]+:/', '', $f));
-      $tmplink = $currentlink;
-      $tmplink['facets'] = preg_replace('/^,/', '', preg_replace('/,$/', '', preg_replace('/'.preg_replace('/\|/', '\\\|', $f).',?/', '', $myfacetslink)));
-      echo link_to('<li><img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats filtrés sur <em>'.$text.'</em></li>', $tmplink);
-    }
-    else {
-      if (preg_match('/order:perti/', $f)) {
-        echo link_to('<li><img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats trié par pertinence</li>', $noorderlink);
-      }
-	  if (preg_match('/order:antéchronologique/', $f)) {
-        echo link_to('<li><img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats trié dans l\'ordre antechronologique</li>', $noorderlink);
-      }
-      else if (preg_match('/order:chrono/', $f)) {
-        echo link_to('<li><img src="/images/annuler.png" alt="Annuler" title="Annuler" />Résultats trié dans l\'ordre chronologique</li>', $noorderlink);
-      }
-    }
-?>
-</ul>
-<ul  class="ul-sans-point">
-<?php
-}
-// Metadonnées
-foreach($facetsset as $facet) {
-  if (preg_match('/^facet_pays_juridiction:/', $facet)) {
-    $title_facet['pays_juri'] = replaceUnderscore(str_replace('facet_pays_juridiction:', '', $facet));
-  }
-  if (preg_match('/^facet_pays:/', $facet)) {
-    $title_facet['pays'] = replaceUnderscore(str_replace('facet_pays:', '', $facet));
-  }
-  if(preg_match('/^facet_juridiction:/', $facet)) {
-    $title_facet['juri'] = replaceUnderscore(str_replace('facet_juridiction:', '', $facet));
-  }
-}
-
-if(isset($title_facet['pays_juri'])) {
-  $title_facet = $title_facet['pays_juri'];
-}
-elseif(isset($title_facet['pays']) && isset($title_facet['juri'])) {
-  $title_facet = $title_facet['pays'].' | '.$title_facet['juri'];
-}
-else {
-  if(isset($title_facet['juri'])) { $title_facet = $title_facet['juri']; }
-  elseif(isset($title_facet['pays'])) { $title_facet = $title_facet['pays']; }
-}
-
-}
-
-if (trim($query) !== '' || isset($title_facet)) {
-  $pays_noindex = array(Guinée
-    // "Guinée", Pays non indexés
-  );
-
-  if(isset($title_facet) && trim($query) == '') {
-    $title = 'Jurisprudences '.$title_facet.'';
-    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
-      }
-  if(isset($title_facet) && trim($query) !== '') {
-    $title = 'Jurisprudences '.remplacequerytitre($query).' - '.$title_facet.'';
-    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
-      }
-  if(isset($title_facet)) {
-    foreach ($pays_noindex as $noindex) {
-      if(strpos($title_facet, $noindex) !== true) { $sf_response->addMeta('robots', 'noarchive', false, false, false); }
-    }
-  }
-  if(!isset($title_facet) && trim($query) !== '') {
-    $title = 'Jurisprudences '.remplacequerytitre($query).'';
-    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
-      }
-  slot("metadata");
-  include_partial("metadata", array('url_flux' => $sf_request->getUri().'?format=rss', 'titre_flux' => "S'abonner à cette recherche"));
-  end_slot();
-  $sf_response->setTitle($title);
-  $sf_response->addMeta('description', $description);
-  $sf_response->addMeta('keywords', $keywords);
-}
-
-//  Gestion des facettes
-
-if ($resultats->response->numFound !== 0) {
-  if (!preg_match('/order:/', $facetslink)) {
-    echo '';
-  }
-  else {
-    echo '<li>'.link_to('antéchronologique', $noorderlink).'</li>';
-  }
-
-  if (preg_match('/order:chrono/', $facetslink)) {
-    echo '';
-  }
-  else {
-    $tmplink = $currentlink;
-    $tmplink['facets'] = 'order:chrono'.preg_replace('/,?order:[a-z]*,?/', '', $facetslink);
-    echo '<li>'.link_to('chronologique', $tmplink, array('rel'  => 'nofollow')).'</li>';
-  }
-
-  if (preg_match('/order:pertinence/', $facetslink)) {
-    echo '';
-  }
-  else {
-    $tmplink = $currentlink;
-    $tmplink['facets'] = 'order:pertinence'.preg_replace('/,?order:[a-z]*,?/', '', $facetslink);
-    echo '<li>'.link_to('par pertinence', $tmplink, array('rel'  => 'nofollow')).'</li>';
-  } ?>
-
-</ul>
-</li>
-<?php
-if(isset($nobots)) { $sf_response->addMeta('robots', 'noindex, nofollow', false, false, false); }
-include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction', 'id'=>'facet_pays_juridiction', 'facets' => $facets, 'query'=>$query, 'facetslink'=>$facetslink, 'tree' => true, 'mainid' => 'facet_pays'));
+  $currentlink = array('module'=>'recherche', 'action'=>'search', 'query' => $query, 'facets'=>$myfacetslink);
 ?>
 
-</ul>
-
-<?php
-}
-// Affichage des résultats
-
-?>
 
 </div>
 </div>
+<hr>
+<form method="get" action="<?php echo url_for('recherche')."/".$sf_request->getParameter('query')?>">
+<div class="row">
+  <div class="col-auto m-2">
+    <select name="tri" class="form-select" aria-label="Default select example">
+      <option value="antéchronologique">Antéchronologique</option>
+      <option value="chronologique">Chronologique</option>
+      <option value="pertinence">Par pertinence</option>
+    </select>
+  </div>
+
+<div class="col-auto m-2">
+  <select name="pays" class="form-select" aria-label="Default select example">
+    <option value="">Tous les pays</option>
+    <?php foreach($facets["facet_pays"] as $pays=>$num){
+      echo("<option value=".$pays.">".$pays."</option>");
+    } ?>
+  </select>
+</div>
+  <div class="col-auto m-2">
+    <button type="submit"class="btn btn-primary">Filtrer</button>
+  </div>
+  </div>
+</form>
+
+
+<hr>
 <div class="text-justify">
+  <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
 	<p class="text-center"><?php echo $nbResultats;?> résultats</p>
 
 <?php

@@ -53,28 +53,47 @@ class rechercheActions extends sfActions
       $param['fq'] = 'type:arret';
     }
 
-    $this->facetsset = array();
-    $this->facetslink = '';
-    if ($f = preg_replace('/’/', "'", preg_replace('/[<>]/', '', $request->getParameter('facets')))) {
-      $this->facetsset = preg_split('/,/', $f);
-      sort($this->facetsset);
-      $this->facetslink = ','.implode(',', $this->facetsset);
-      foreach ($this->facetsset as $facet) {
-        $f = explode(':', $facet);
-        //On ne doit pas retirer les _ des facettes donc on les replace par = pour les conserver
-        $solr_query .= ' '.preg_replace('/_/', '=', $f[0]).':'.$f[1];
+
+
+    if($request->getParameter('pays')){
+      $pays=$request->getParameter('pays');
+      $solr_query.=" facet=pays:".$pays;
+    }
+    else{
+      $this->facetsset = array();
+      $this->facetslink = '';
+      // var_dump(preg_replace('/’/', "'", preg_replace('/[<>]/', '', $request->getParameter('facets'))));
+      if ($f = preg_replace('/’/', "'", preg_replace('/[<>]/', '', $request->getParameter('facets')))) {
+        $this->facetsset = preg_split('/,/', $f);
+        sort($this->facetsset);
+        $this->facetslink = ','.implode(',', $this->facetsset);
+
+        foreach ($this->facetsset as $facet) {
+          $f = explode(':', $facet);
+          //On ne doit pas retirer les _ des facettes donc on les replace par = pour les conserver
+          $solr_query .= ' '.preg_replace('/_/', '=', $f[0]).':'.$f[1];
+        }
       }
     }
-
     // Si l'ordre des résultats est précisé
-    if (preg_match('/order:pertinence/', $solr_query)) {
-      $solr_query = ' '.preg_replace('/ order:pertinence/', '', $solr_query);
+    // if (preg_match('/order:pertinence/', $solr_query)) {
+    //   $solr_query = ' '.preg_replace('/ order:pertinence/', '', $solr_query);
+    //   unset($param['sort']);
+    //   $this->nobots = 1;
+    // }
+    // if (preg_match('/order:chrono/', $solr_query)) {
+    //   $solr_query = ' '.preg_replace('/ order:chrono/', '', $solr_query);
+    //   $param['sort'] = 'date_arret asc, id asc';
+    //   $this->nobots = 1;
+    // }
+
+    /* TRIE ORDRE*/
+    if($request->getParameter('tri') == "pertinence"){
       unset($param['sort']);
       $this->nobots = 1;
     }
-    if (preg_match('/order:chrono/', $solr_query)) {
-      $solr_query = ' '.preg_replace('/ order:chrono/', '', $solr_query);
-      $param['sort'] = 'date_arret asc, id asc';
+    if($request->getParameter('tri') == "chronologique"){
+      $param['sort'] =  'date_arret asc, id asc';
       $this->nobots = 1;
     }
 
