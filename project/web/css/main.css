@@ -84,7 +84,6 @@ a{
 }
 
 .col-lg-1 button{
-  border: 1px solid #375d81;
   color: #375d81;
   background: white;
   font-size: revert;
@@ -93,7 +92,7 @@ a{
 
 .col-lg-1 li{
     text-align:center;
-    /* border:1px solid #375d81; */
+    border: 1px solid #375d81;
 }
 
 .arret hr{

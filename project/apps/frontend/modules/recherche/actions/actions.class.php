@@ -54,11 +54,16 @@ class rechercheActions extends sfActions
     }
 
 
+    if($request->getParameter('juridiction')){
+      $pays_juridiction = str_replace(" ", "_", $request->getParameter('juridiction'));
+      $solr_query.=" facet=pays=juridiction:".$pays_juridiction;
+    }
 
-    if($request->getParameter('pays')){
+    elseif($request->getParameter('pays')){
       $pays=$request->getParameter('pays');
       $solr_query.=" facet=pays:".$pays;
     }
+
     else{
       $this->facetsset = array();
       $this->facetslink = '';

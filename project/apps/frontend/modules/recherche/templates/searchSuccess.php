@@ -79,65 +79,102 @@ function remplacequerytitre($string) {
 </div>
 <hr>
 <form method="get" action="<?php echo url_for('recherche')."/".$sf_request->getParameter('query')?>">
+
 <div class="row g-3 align-items-center">
-  <div class="col-auto m-2">
-    <label>Tri : </label>
+  <div class="col-lg-auto col-md-2 col-sm-2">
+    <label class="col-form-label">Tri :</label>
   </div>
-  <div class="col-auto m-2">
-    <select name="tri" class="form-select" aria-label="Default select example">
+  <div class="col-lg-auto col-md-10 col-sm-10">
+    <select name="tri" class="form-select form-control">
       <option value="antéchronologique"
       <?php
-        if(!$GET['tri'] || ($_GET['tri'] && $_GET['tri'] == "antéchronologique"))
+        if(!$sf_request->getParameter('tri') || ($sf_request->getParameter('tri') && $sf_request->getParameter('tri') == "antéchronologique"))
           echo('selected');
       ?>
-      >Plus récent au plus ancien</option>
+      >Plus récent</option>
       <option value="chronologique"
       <?php
-        if($_GET['tri'] && $_GET['tri']== "chronologique")
+        if($sf_request->getParameter('tri') && $sf_request->getParameter('tri')== "chronologique")
           echo('selected');
       ?>
-      >Plus ancien au plus récent</option>
+      >Plus ancien</option>
       <option value="pertinence"
       <?php
-        if($_GET['tri'] && $_GET['tri']== "pertinence")
+        if($sf_request->getParameter('tri') && $sf_request->getParameter('tri')== "pertinence")
           echo('selected');
       ?>
       >Par pertinence</option>
-    </select>
-  </div>
-<?php if(!preg_match("/facet_pays:/",$sf_request->getParameter('query'))){
-?>
-  <div class="col-auto m-2">
-    <label>Pays : </label>
-  </div>
-<div class="col-auto m-2">
-  <?php if($_GET['pays']){
-    echo('<div class="form-inline input-group">
-        <input id="pays_filter"class="form-control mx-auto" type="search" name="pays" value = '.$_GET['pays'].' readonly>
-        </input>
-        <a class="btn btn-light" onclick="deletePaysfilter()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-            </svg></a>
-        </div>');
-      }
-  else{
+    </select>  </div>
+  <?php if(!preg_match("/facet_pays:/",$sf_request->getParameter('query'))){
   ?>
-    <select name="pays" class="form-select" aria-label="Default select example">
+  <div class="col-lg-auto col-md-2 col-sm-2">
+    <label class="col-form-label">Pays :</label>
+  </div>
+  <div class="col-lg-auto col-md-10 col-sm-10">
+
+    <?php if($sf_request->getParameter('pays') || $sf_request->getParameter('juridiction')){
+      echo('<div class="form-inline input-group">
+          <input id="pays_filter" class="form-control mx-auto" type="search" name="pays" value = ');
+      if($sf_request->getParameter('juridiction')){
+        echo preg_replace("/\|.+/",'',trim($sf_request->getParameter('juridiction')));
+      }
+      else{
+        echo $sf_request->getParameter('pays');
+      }
+      echo(' readonly></input><a class="btn btn-light" onclick="deletePaysfilter()"><i class="bi bi-x-circle"></i></a></div>');
+        }
+    else{
+    ?>
+      <select name="pays" class="form-select">
+        <option value="">Tous</option>
+        <?php foreach($facets["facet_pays"] as $pays=>$num){
+          echo("<option value=".preg_replace('/ /', '_', $pays).">".$pays.'('.$num.")</option>");
+        } ?>
+      </select>
+    <?php } ?>
+  </div>
+
+<?php }?>
+  <div class="col-lg-auto col-md-2 col-sm-2">
+    <label class="col-form-label">Juridiction :</label>
+  </div>
+  <div class="col-lg-auto col-md-10 col-sm-10">
+
+    <?php if($sf_request->getParameter('juridiction')){
+      echo('<div class="input-group">
+          <input class="form-control" type="search" name="juridiction" value = "'.trim(preg_replace("/.+\|/",'',$sf_request->getParameter('juridiction'))).'"readonly>
+          </input>
+          <a class="btn btn-light" onclick="deleteJuridictionfilter()">
+            <i class="bi bi-x-circle"></i>
+          </a>
+          </div>');
+        }
+    else{?>
+    <select name="juridiction" class="form-select">
       <option value="">Tous</option>
-      <?php foreach($facets["facet_pays"] as $pays=>$num){
-        echo("<option value=".preg_replace('/ /', '_', $pays).">".$pays.'('.$num.")</option>");
-      } ?>
+      <?php
+        $tab = $facets["facet_pays_juridiction"];
+        $pays = array();
+        foreach($tab as $k=>$v){
+          $pays[explode("|",$k)[0]][explode("|",$k)[1]] = $v;
+        }
+        foreach($pays as $p => $j){
+          echo('<optgroup label="'.$p.'.">');
+            foreach($j as $juridiction => $num){
+            echo('<option value="'.$p.'|'.$juridiction.'">'.$juridiction."(".$num.")</option>");
+          }
+          echo("</optgroup>");
+        }
+      ?>
     </select>
   <?php } ?>
+  </div>
+  <div class="col-lg-auto col-md-1">
+    <button id="filtrer" type="submit"class="btn btn-primary">Filtrer</button>
+  </div>
 </div>
-<?php } ?>
-  <div class="col-auto m-2">
-    <button type="submit"class="btn btn-primary">Filtrer</button>
-  </div>
-  </div>
 </form>
+
 
 <hr>
 <div class="text-justify">
@@ -152,9 +189,7 @@ foreach ($resultats->response->docs as $resultat) {
   <div class="card-body" style="background-color:white">
     <p class="card-text"> <?php echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});?></p>
     <a class="float-end" href="<?php echo(url_for('@arret?id='.$resultat->id));?>">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-      </svg>
+      <i class="bi bi-arrow-right"></i>
   </a>
   </div>
   <small class="card-header text-muted"> <?php echo(date('d/m/Y', strtotime($resultat->date_arret)) . ' | '. strtoupper($resultat->pays) . ' | N°'.$resultat->num_arret);?> </small>
@@ -226,3 +261,8 @@ echo ' ] }';
 
 
 } ?>
+<script>
+  $(document).change(function(){
+    $( "#filtrer" ).trigger( "click" );
+  });
+</script>
