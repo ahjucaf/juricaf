@@ -251,9 +251,18 @@ class rechercheActions extends sfActions
       $filter .= ' ';
     }
 
-    if(!empty($dates['arret'])) { $filter .= 'date_arret:'.$dates['arret']; }
+    if(!empty($dates['arret'])) {
+      $dates['arret'] = str_replace("--",'',$dates['arret']);
+      $filter .= 'date_arret:'.$dates['arret'];
+    }
+
     if(!empty($dates['debut']) && !empty($dates['fin'])) {
-      if(!empty($dates['arret'])) { $filter .= ' OR '; }
+      if(!empty($dates['arret'])) {
+        $filter .= ' OR ';
+      }
+      $dates['debut'] = str_replace("--",'',$dates['debut']);
+      $dates['fin'] = str_replace("--",'',$dates['fin']);
+
       $filter .= 'date_arret:['.$dates['debut'].' TO '.$dates['fin'].']';
     }
 

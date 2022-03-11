@@ -1,46 +1,3 @@
-<script type="text/javascript">
-<!--
-aujourdhui = new Date();
-datemini = new Date();
-datemini.setTime(aujourdhui.getTime() + (-200*365*24*60*60*1000)); // 200 ans
-
-$(function() {
-  $('input[name^="date"]').each(function() {
-    $(this).datepicker({
-    yearRange: '1850:c',
-    minDate: datemini,
-    maxDate: aujourdhui,
-    changeMonth : true,
-    changeYear : true
-    //onClose: function() {  }
-    });
-  })
-});
-
-jQuery(function($){
-  $.datepicker.regional['fr'] = {
-    closeText: 'Fermer',
-    prevText: '&#x3c;Préc',
-    nextText: 'Suiv&#x3e;',
-    currentText: 'Courant',
-    monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
-    'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
-    monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
-    'Jul','Aoû','Sep','Oct','Nov','Déc'],
-    dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
-    dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
-    dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
-    weekHeader: 'Sm',
-    dateFormat: 'dd/mm/yy',
-    firstDay: 1,
-    isRTL: false,
-    showMonthAfterYear: false,
-    yearSuffix: ''};
-  $.datepicker.setDefaults($.datepicker.regional['fr']);
-});
--->
-</script>
-
 <h5 class="p-3 mb-2 mt-5 bg-secondary bg-gradient">Recherche avancée</h5>
 
 <h5><b>Critères</b></h5>
@@ -178,7 +135,7 @@ jQuery(function($){
   <option value="fonds_documentaire">Fonds documentaire</option>
 </select>
 </div>
-<div class="col-9">
+<div class="col-lg-9">
 <input type="text" name="val[4]" class="text_input form-control"/>
 </div>
 </div>
@@ -190,16 +147,16 @@ jQuery(function($){
 </div>
 <hr style="clear: both;"/>
 
-<div class="row g-3 align-items-center">
+<div class="row g-3">
   <div class="col-auto">
     <label class="col-form-label"><h5><b>Date de la décision : </b></h5></label>
   </div>
   <div class="col-auto">
-    <input class="form-control col-auto" type="text" name="date[arret]" id="date_arret" size="10">
+    <input class="form-control col-auto" type="date" name="date[arret]" id="date_arret" max=<?php echo(date('Y-m-d'))?>>
   </div>
 </div>
 OU
-<div class="row g-3 align-items-center">
+<div class="row g-3">
   <div class="col-auto">
     <label class="col-form-label"><h5><b>Période du :</b></h5></label>
   </div>
