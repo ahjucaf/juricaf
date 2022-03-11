@@ -33,7 +33,7 @@ function fontSizeMoins(){
 }
 
 function deletePaysfilter(){
-  currentlink = window.location.href;
+  currentlink = decodeURIComponent(window.location.href);
   pays= document.getElementById("pays_filter").value;
   toGo = currentlink.replace("&pays="+pays, '');
   window.location.replace(toGo);

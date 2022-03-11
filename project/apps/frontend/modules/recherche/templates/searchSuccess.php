@@ -122,13 +122,12 @@ function remplacequerytitre($string) {
             </svg></a>
         </div>');
       }
-
   else{
   ?>
     <select name="pays" class="form-select" aria-label="Default select example">
       <option value="">Tous les pays</option>
       <?php foreach($facets["facet_pays"] as $pays=>$num){
-        echo("<option value=".$pays.">".$pays."</option>");
+        echo("<option value=".preg_replace('/ /', '_', $pays).">".$pays."</option>");
       } ?>
     </select>
   <?php } ?>
