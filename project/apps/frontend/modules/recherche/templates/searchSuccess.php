@@ -127,7 +127,7 @@ function remplacequerytitre($string) {
     <select name="pays" class="form-select" aria-label="Default select example">
       <option value="">Tous</option>
       <?php foreach($facets["facet_pays"] as $pays=>$num){
-        echo("<option value=".preg_replace('/ /', '_', $pays).">".$pays."</option>");
+        echo("<option value=".preg_replace('/ /', '_', $pays).">".$pays.'('.$num.")</option>");
       } ?>
     </select>
   <?php } ?>
