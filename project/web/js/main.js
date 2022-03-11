@@ -1,6 +1,4 @@
-function initFunctions(){
-
-  /*fonction pour la pagination*/
+$( document ).ready(function() {
   pages = document.getElementsByClassName('page-item');
   for(let i=0; i< pages.length; i++){
     if(pages[i].children[0]){
@@ -12,7 +10,7 @@ function initFunctions(){
       pages[i].style.color = '#6c757d';
     }
   }
-}
+});
 
 function goTo(){
   id = document.getElementById("selected-pays").value;

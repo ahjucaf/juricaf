@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
     <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
     </head>
-  <body class="container full-width" onload="initFunctions()">
+  <body class="container full-width">
     <div>
 <div >
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
