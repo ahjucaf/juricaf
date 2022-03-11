@@ -85,11 +85,28 @@ function remplacequerytitre($string) {
   </div>
   <div class="col-auto m-2">
     <select name="tri" class="form-select" aria-label="Default select example">
-      <option value="antéchronologique">Plus récent au plus ancien</option>
-      <option value="chronologique">Plus ancien au plus récent</option>
-      <option value="pertinence">Par pertinence</option>
+      <option value="antéchronologique"
+      <?php
+        if(!$GET['tri'] || ($_GET['tri'] && $_GET['tri'] == "antéchronologique"))
+          echo('selected');
+      ?>
+      >Plus récent au plus ancien</option>
+      <option value="chronologique"
+      <?php
+        if($_GET['tri'] && $_GET['tri']== "chronologique")
+          echo('selected');
+      ?>
+      >Plus ancien au plus récent</option>
+      <option value="pertinence"
+      <?php
+        if($_GET['tri'] && $_GET['tri']== "pertinence")
+          echo('selected');
+      ?>
+      >Par pertinence</option>
     </select>
   </div>
+<?php if(!preg_match("/facet_pays:/",$sf_request->getParameter('query'))){
+?>
   <div class="col-auto m-2">
     <label>Pays : </label>
   </div>
@@ -116,11 +133,13 @@ function remplacequerytitre($string) {
     </select>
   <?php } ?>
 </div>
+<?php } ?>
   <div class="col-auto m-2">
     <button type="submit"class="btn btn-primary">Filtrer</button>
   </div>
   </div>
 </form>
+
 <hr>
 <div class="text-justify">
   <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
