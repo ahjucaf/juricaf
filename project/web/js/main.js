@@ -33,13 +33,16 @@ function fontSizeMoins(){
 }
 
 function deletePaysfilter(){
-  currentlink = decodeURIComponent(window.location.href);
-  toGo = currentlink.replace(/&pays=.+/, '');
-  window.location.replace(toGo);
+  var parsedUrl = new URL(window.location.href);
+  parsedUrl.searchParams.delete("pays");
+  parsedUrl.searchParams.delete("juridiction");
+  parsedUrl.searchParams.delete("page");
+  window.location.replace(parsedUrl);
 }
 
 function deleteJuridictionfilter(){
-  currentlink = decodeURIComponent(window.location.href);
-  toGo = currentlink.replace(/&juridiction=.+/, '');
-  window.location.replace(toGo);
+  var parsedUrl = new URL(window.location.href);
+  parsedUrl.searchParams.delete("juridiction");
+  parsedUrl.searchParams.delete("page");
+  window.location.replace(parsedUrl);
 }

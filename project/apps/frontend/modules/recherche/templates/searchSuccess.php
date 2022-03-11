@@ -71,7 +71,8 @@ function remplacequerytitre($string) {
 <?php
 /* POUR LA PAGINATION */
   $myfacetslink = preg_replace('/^,/', '', $facetslink);
-  $currentlink = array('module'=>'recherche', 'action'=>'search', 'query' => $query, 'facets'=>$myfacetslink);
+
+  $currentlink = array('module'=>'recherche', 'action'=>'search', 'query' => $query, 'facets'=>$myfacetslink,'tri'=>$sf_request->getParameter('tri'),'pays'=>$sf_request->getParameter('pays'), 'juridiction' => $sf_request->getParameter('juridiction'));
 ?>
 
 
@@ -169,7 +170,7 @@ function remplacequerytitre($string) {
     </select>
   <?php } ?>
   </div>
-  <div class="col-lg-auto col-md-1">
+  <div class="col-lg-auto">
     <button id="filtrer" type="submit"class="btn btn-primary">Filtrer</button>
   </div>
 </div>
@@ -198,8 +199,8 @@ foreach ($resultats->response->docs as $resultat) {
 }
 ?>
 	<div class="navigation">
-
-	   <?php if ($resultats->response->numFound > 10) {
+	   <?php
+      if ($resultats->response->numFound > 10) {
        echo include_partial('pager', array('pager' => $pager, 'currentlink' => $currentlink));
      }
       ?>

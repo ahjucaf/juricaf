@@ -115,6 +115,10 @@ a{
       margin-left: auto;
       padding:0 !important;
   }
+
+  #filtrer{
+    float:right;
+  }
 }
 
 @media screen and (min-width:991px){
