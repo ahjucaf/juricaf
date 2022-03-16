@@ -70,7 +70,7 @@
       <a href="http://www.juricaf.org/recherche"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
       <p ><small class="fst-italic slogan">La jurisprudence francophone des cours suprêmes</small><br/></p>
         <div class="form-inline input-group input-group-lg">
-        <input id="recherche" class="form-control mx-auto" type="text"
+        <input id="recherche" class="form-control mx-auto" autocomplete="off" type="text"
         <?php if($sf_request && $sf_request->getParameter('query') && ($sf_request->getParameter('query') != " ")){
             echo( "value = '".$sf_request->getParameter('query')."'");
             $not_autofocus=true;
