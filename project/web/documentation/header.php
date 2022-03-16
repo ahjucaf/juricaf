@@ -28,23 +28,23 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="http://www.juricaf.org/recherche">Juricaf.org</a>
+        <a class="navbar-brand" href="/">Juricaf.org</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav me-auto mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="http://localhost:8002/documentation/a_propos.php">À propos</a>
+              <a class="nav-link" href="/documentation/a_propos.php">À propos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://localhost:8002/documentation/stats/statuts.php">Etendue des collections </a>
+              <a class="nav-link" href="/stats/statuts.php">Etendue des collections </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://localhost:8002/documentation/partenaires.php">Partenaires</a>
+              <a class="nav-link" href="/documentation/partenaires.php">Partenaires</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://localhost:8002/documentation/mentions_legales.php">Mentions légales</a>
+              <a class="nav-link" href="/documentation/mentions_legales.php">Mentions légales</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://localhost:8002/documentation/contact.php">Contact</a>
+              <a class="nav-link" href="/documentation/contact.php">Contact</a>
             </li>
           </ul>
           <ul class="navbar-nav my-2 my-lg-0">
