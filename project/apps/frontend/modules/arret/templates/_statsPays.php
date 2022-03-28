@@ -38,18 +38,16 @@ $cpt = 0;
             <select id="selected-pays"class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
               <option selected>Rechercher par pays</option>
               <?php
+
               foreach($allPays as $p){
                 $pays = preg_replace('/ /', '_', $p['key'][0]);
                 $pays_nom = $p['key'][0].' ('.number_format($p['value'], 0, '', ' ').')';
                 $link = 'recherche/facet_pays:'.$pays;
-                echo('<option id="'.$p['key'][0].'"data-test ="'.$link.'">'.$p['key'][0].'</option>');
+                echo('<option id="'.$p['key'][0].'"data-test ="'.$link.'">'.$p['key'][0]." (".$p['value'].") ".'</option>');
                 echo($link);
               }
               ?>
             </select>
-            <button class="btn btn-outline-secondary" type="button" onclick="goTo()">
-              <i class="bi bi-search"></i>
-            </button>
           </div>
       </div>
   </div>
@@ -57,3 +55,11 @@ $cpt = 0;
     <a href="/documentation/stats/statuts.php">Plus de statistiques</a>
   </div>
 </div>
+
+<script>
+  $(document.getElementById('selected-pays')).change(function(){
+    id = document.getElementById("selected-pays").value.replace(/ \(/g, "\(").split('(')[0];
+    link=document.getElementById(id).dataset.test;
+    window.location.replace(link);
+  });
+</script>

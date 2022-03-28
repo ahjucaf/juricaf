@@ -12,12 +12,6 @@ $( document ).ready(function() {
   }
 });
 
-function goTo(){
-  id = document.getElementById("selected-pays").value;
-  link=document.getElementById(id).dataset.test;
-  window.location.replace(link);
-}
-
 function fontSizePlus(){
   corps = document.getElementById('arret');
   size = window.getComputedStyle(corps).getPropertyValue("font-size");
