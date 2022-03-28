@@ -18,6 +18,34 @@
 	</script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
  	<link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
+    <!-- Matomo -->
+    <script>
+    <!--
+      var _paq = window._paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      <?php if ($sf_params->get('query')): ?>
+      _paq.push(['trackSiteSearch',
+          // Search keyword searched for
+          "<?php echo $sf_params->get('query'); ?>",
+          // Search category selected in your search engine. If you do not need this, set to false
+          "<?php echo $sf_params->get('facets'). " ".$sf_params->get('filter'); ?>",
+          // Number of results on the Search results page. Zero indicates a 'No Result Search Keyword'. Set to false if you don't know
+          <?php echo $sf_params->get('nbResultats') ? str_replace(' ', '', $sf_params->get('nbResultats')) : "false"; ?>
+      ]);
+      <?php else: ?>
+      _paq.push(['trackPageView']);
+      <?php endif; ?>
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//juricaf.org/matomo/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    -->
+    </script>
+    <!-- End Matomo Code -->
   </head>
   <body>
     <div class="site">
@@ -47,7 +75,7 @@
                 <td align="center" width="1024px" height="250px">
                   <a href="<?php echo url_for('@recherche'); ?>"><img id="logo" style="width: 100px; height: 100px;" src="/images/juricaf.png" alt="Juricaf" /></a><br />
                   <img src="/images/slogan.png" style="width: 276px; height: 12px; margin-top: 4px;" alt="La jurisprudence francophone des cours suprêmes" itemprop="image" /><br />
-                  <input type="text" name="q" value="<?php echo htmlentities(utf8_decode($sf_user->getAttribute('query'))); ?>" tabindex="10" /><br />
+                  <input type="text" name="q" value="<?php echo $sf_params->get('query'); ?>" tabindex="10" /><br />
                   <input type="submit" value="Rechercher" tabindex="20" /> <a href="<?php echo url_for('@recherche_avancee'); ?>">recherche avancée</a>
                 </td>
               </tr>
