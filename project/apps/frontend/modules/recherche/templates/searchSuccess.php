@@ -228,7 +228,19 @@ include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction'
 </div>
 <div class="resultat">
 	<h3><?php echo $nbResultats; ?> résultats</h3>
-		
+<script><!--
+    ////////////////////////////////////////////////
+    // Matomo search
+    ///////////////////////////////////////////////
+    _paq.push(['trackSiteSearch',
+        // Search keyword searched for
+        "<?php echo $query ; ?>",
+        // Search category selected in your search engine. If you do not need this, set to false
+        "<?php echo $title_facet; ?>",
+        // Number of results on the Search results page. Zero indicates a 'No Result Search Keyword'. Set to false if you don't know
+        <?php echo $nbResultats; ?>
+    ]);
+--></script>
 <?php
 foreach ($resultats->response->docs as $resultat) {
   echo '<div class="resultatcols"><a href="'.url_for('@arret?id='.$resultat->id).'"><h3><img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> '.$resultat->titre.'</h3></a>';
