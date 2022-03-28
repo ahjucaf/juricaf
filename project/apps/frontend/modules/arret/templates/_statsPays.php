@@ -9,7 +9,7 @@ function pathToFlag($str) {
 $cpt = 0;
 ?>
 <div class="pays container w-75">
-	<h5  class="text-center pt-5">Rechercher parmi <?php echo number_format($nb, 0, '', ' '); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</h5>
+	<p  class="text-center pt-5">Rechercher parmi <?php echo number_format($nb, 0, '', ' '); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</p>
   <?php
     $allPays = $pays;
     $sliptPays = array_chunk($allPays,ceil(count($pays)/3));
