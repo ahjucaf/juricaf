@@ -19,6 +19,34 @@
     <script type="text/javascript" src="/js/main.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
     <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
+    <!-- Matomo -->
+    <script>
+    <!--
+      var _paq = window._paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      <?php if ($sf_params->get('query')): ?>
+      _paq.push(['trackSiteSearch',
+          // Search keyword searched for
+          "<?php echo $sf_params->get('query'); ?>",
+          // Search category selected in your search engine. If you do not need this, set to false
+          "<?php echo str_replace('_', ' ', str_replace('facet_pays_juridiction:', '', $sf_params->get('facets'))). " ".$sf_params->get('filter'); ?>",
+          // Number of results on the Search results page. Zero indicates a 'No Result Search Keyword'. Set to false if you don't know
+          <?php echo $sf_params->get('nbResultats') ? str_replace(' ', '', $sf_params->get('nbResultats')) : "false"; ?>
+      ]);
+      <?php else: ?>
+      _paq.push(['trackPageView']);
+      <?php endif; ?>
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//juricaf.org/matomo/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    -->
+    </script>
+    <!-- End Matomo Code -->
     </head>
   <body class="container full-width">
     <div>
