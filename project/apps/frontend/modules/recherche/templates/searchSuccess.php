@@ -238,7 +238,7 @@ include_component('recherche', 'facets', array('label'=>'Pays &amp; Juridiction'
         // Search category selected in your search engine. If you do not need this, set to false
         "<?php echo $title_facet; ?>",
         // Number of results on the Search results page. Zero indicates a 'No Result Search Keyword'. Set to false if you don't know
-        <?php echo $nbResultats; ?>
+        <?php echo str_replace(' ', '', $nbResultats); ?>
     ]);
 --></script>
 <?php
