@@ -23,51 +23,51 @@
   <body class="container full-width">
     <div>
 <div >
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="/">Juricaf.org</a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <ul class="navbar-nav me-auto mr-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="/documentation/a_propos.php">À propos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/stats/statuts.php">Etendue des collections </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/documentation/partenaires.php">Partenaires</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/documentation/mentions_legales.php">Mentions légales</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/documentation/contact.php">Contact</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav my-2 my-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.facebook.com/Juricaf" target="_blank">
-                <i class="bi bi-facebook"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="http://twitter.com/juricaf" target="_blank">
-                <i class="bi bi-twitter"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><i class="bi bi-house"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarToggler">
+      <ul class="navbar-nav me-auto mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/documentation/a_propos.php">À propos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/stats/statuts.php">Etendue des collections </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/documentation/partenaires.php">Partenaires</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/documentation/mentions_legales.php">Mentions légales</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/documentation/contact.php">Contact</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav my-2 my-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.facebook.com/Juricaf" target="_blank">
+            <i class="bi bi-facebook"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://twitter.com/juricaf" target="_blank">
+            <i class="bi bi-twitter"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
   </div>
   </div>
 
   <div class="container form_recherche mt-5">
     <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
-      <a href="http://www.juricaf.org/recherche"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
+      <a href="/"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
       <p ><small class="fst-italic slogan">La jurisprudence francophone des cours suprêmes</small><br/></p>
         <div class="form-inline input-group input-group-lg">
         <input id="recherche" class="form-control mx-auto" autocomplete="off" type="text"
