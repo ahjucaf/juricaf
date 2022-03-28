@@ -78,9 +78,9 @@ function remplacequerytitre($string) {
 
 </div>
 </div>
-<hr>
-<form method="get" action="<?php echo url_for('recherche')."/".$sf_request->getParameter('query')?>">
 
+<!-- BLOC FILTRES  -->
+<form method="get" action="<?php echo url_for('recherche')."/".$sf_request->getParameter('query')?>">
 <div class="row g-3 align-items-center">
   <div class="col-lg-auto col-md-2 col-sm-2">
     <label class="col-form-label">Tri :</label>
@@ -175,13 +175,17 @@ function remplacequerytitre($string) {
   </div>
 </div>
 </form>
-
-
+<br>
 <hr>
 <div class="text-justify">
-  <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
-	<p class="text-center"><?php echo $nbResultats;?> résultats</p>
-
+    <div class="row justify-content-between">
+      <div class="col-4">
+        <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
+      </div>
+      <div class="col-4">
+        <p class="text-end"><?php echo $nbResultats;?> résultats</p>
+      </div>
+    </div>
 <?php
 foreach ($resultats->response->docs as $resultat) {
  ?>
