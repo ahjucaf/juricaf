@@ -28,7 +28,7 @@
           // Search keyword searched for
           "<?php echo $sf_params->get('query'); ?>",
           // Search category selected in your search engine. If you do not need this, set to false
-          "<?php echo $sf_params->get('facets'). " ".$sf_params->get('filter'); ?>",
+          "<?php echo str_replace('_', ' ', str_replace('facet_pays_juridiction:', '', $sf_params->get('facets'))). " ".$sf_params->get('filter'); ?>",
           // Number of results on the Search results page. Zero indicates a 'No Result Search Keyword'. Set to false if you don't know
           <?php echo $sf_params->get('nbResultats') ? str_replace(' ', '', $sf_params->get('nbResultats')) : "false"; ?>
       ]);
