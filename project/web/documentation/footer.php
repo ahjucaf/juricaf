@@ -30,7 +30,9 @@
       <img class="float-end" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
     </div>
   </div>
+  <br>
 
+  <a href="http://iall.org/webAward.html"><img src="/images/iall.jpg" /></a>
 
 </div>
 </div>
