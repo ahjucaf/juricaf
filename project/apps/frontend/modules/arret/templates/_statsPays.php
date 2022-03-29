@@ -59,8 +59,7 @@ $cpt = 0;
 
 <script>
   $(document.getElementById('selected-pays')).change(function(){
-    id = document.getElementById("selected-pays").value.replace(/ \(/g, "\(").split('(')[0];
-    link=document.getElementById(id).dataset.test;
+    link=$("#selected-pays :selected").data("test");
     window.location.replace(link);
   });
 </script>
