@@ -22,19 +22,19 @@ $typedescription2typearret = array(
 
 $obj = json_decode(@file_get_contents("arrets/".$arret_id.".json"));
 if (!$obj) {
-    fwrite(STDERR, "ERREUR: json non trouvé pour $arret_id\n");
+    fwrite(STDERR, "ERREUR: CEDH / json non trouvé pour $arret_id (arrets/".$arret_id.".json)\n");
     exit(1);
 }
 $meta = $obj->results[0]->columns;
 if (!$meta) {
-    fwrite(STDERR, "ERREUR: meta de $arret_id non accessible\n");
+    fwrite(STDERR, "ERREUR: CEDH / meta de $arret_id non accessible (arrets/".$arret_id.".json)\n");
     exit(2);
 }
 $obj = null;
 
 $text = @file_get_contents("arrets/".$arret_id.".txt");
 if (!$text) {
-    fwrite(STDERR, "ERREUR: texte de $arret_id non trouvé\n");
+    fwrite(STDERR, "ERREUR: CEDH / texte de $arret_id non trouvé (arrets/".$arret_id.".json | arrets/".$arret_id.".txt)\n");
     exit(3);
 }
 
@@ -43,7 +43,7 @@ if (preg_match('/affaire ([^ ].*[^ ]) c\. ([^\(]*[^\( ])/i', $meta->docname, $m)
     $defenseur = $m[2];
     $demandeur = $m[1];
 }else{
-    fwrite(STDERR, "WARN: defenseur/demandeur non trouvé pour $arret_id (".$meta->docname.")\n");
+    fwrite(STDERR, "WARN: CEDH: defenseur/demandeur non trouvé pour $arret_id (".$meta->docname.")\n");
     $defenseur = null;
     $demandeur = null;
 }
