@@ -8,7 +8,7 @@ function pathToFlag($str) {
 }
 $cpt = 0;
 ?>
-<div class="pays container w-75">
+<div class="pays container">
 	<p  class="text-center pt-5">Rechercher parmi <?php echo number_format($nb, 0, '', ' '); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</p>
   <?php
     $allPays = $pays;
