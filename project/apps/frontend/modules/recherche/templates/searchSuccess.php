@@ -124,7 +124,7 @@ function remplacequerytitre($string) {
       <select id="pays_filter" name="pays" class="form-select">
         <option value="">Tous</option>
         <?php foreach($facets["facet_pays"] as $pays=>$num){
-          echo("<option value=".preg_replace('/ /', '_', $pays).">".$pays.'('.$num.")</option>");
+          echo("<option value=".preg_replace('/ /', '_', $pays).">".ClientArret::TAB_DRAPEAU[$pays]." ".$pays.'('.$num.")</option>");
         } ?>
       </select>
     <?php } ?>
@@ -157,9 +157,10 @@ function remplacequerytitre($string) {
           $pays[explode("|",$k)[0]][explode("|",$k)[1]] = $v;
         }
         foreach($pays as $p => $j){
-          echo('<optgroup label="'.$p.'.">');
+          $py = preg_replace('/ /', '_',trim($p));
+          echo('<optgroup label="'.ClientArret::TAB_DRAPEAU[$py]." ".$p.'">');
             foreach($j as $juridiction => $num){
-            echo('<option data-pays='.preg_replace('/ /', '_',trim($p)).' value="'.trim($juridiction).'">'.$juridiction."(".$num.")</option>");
+            echo('<option data-pays='.$py.' value="'.trim($juridiction).'">'.$juridiction."(".$num.")</option>");
           }
           echo("</optgroup>");
         }
@@ -168,7 +169,7 @@ function remplacequerytitre($string) {
   <?php } ?>
   </div>
   <div class="col-lg-auto">
-    <button id="filtrer" type="submit"class="btn btn-primary">Filtrer</button>
+    <button  id="filtrer" type="submit"class="btn btn-outline-secondary">Filtrer</button>
   </div>
 </div>
 </form>

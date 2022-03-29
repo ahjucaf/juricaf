@@ -34,16 +34,17 @@ $cpt = 0;
             echo('</ul></div>');
           }
         ?>
+
           <div class="input-group d-lg-none w-90 m-auto">
+
             <select id="selected-pays"class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
               <option selected>Rechercher par pays</option>
               <?php
-
               foreach($allPays as $p){
                 $pays = preg_replace('/ /', '_', $p['key'][0]);
                 $pays_nom = $p['key'][0].' ('.number_format($p['value'], 0, '', ' ').')';
                 $link = 'recherche/facet_pays:'.$pays;
-                echo('<option id="'.$p['key'][0].'"data-test ="'.$link.'">'.$p['key'][0]." (".$p['value'].") ".'</option>');
+                echo('<option id="'.$p['key'][0].'"data-test ="'.$link.'">'.ClientArret::TAB_DRAPEAU[$p['key'][0]]." ".$p['key'][0]." (".$p['value'].") ".'</option>');
                 echo($link);
               }
               ?>
