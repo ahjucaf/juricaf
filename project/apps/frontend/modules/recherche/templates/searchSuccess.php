@@ -190,7 +190,10 @@ function remplacequerytitre($string) {
 foreach ($resultats->response->docs as $resultat) {
  ?>
   <div class="card mb-3">
-  <p class="card-header fs-5"> <?php echo('<img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> | <a class="a-unstyled " href="'.url_for('@arret?id='.$resultat->id).'">'.$resultat->juridiction.' '.$resultat->formation);?> </a></p>
+
+  <p class="d-none d-lg-block card-header fs-5"><?php echo('<img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> | <a class="a-unstyled " href="'.url_for('@arret?id='.$resultat->id).'">'.$resultat->titre);?></a></p>
+  <p class="d-lg-none card-header fs-5"><?php echo('<img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> | <a class="a-unstyled " href="'.url_for('@arret?id='.$resultat->id).'#arret">'.$resultat->titre);?></a></p>
+
   <div class="card-body" style="background-color:white">
     <p class="card-text"> <?php echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});?></p>
     <a class="float-end" href="<?php echo(url_for('@arret?id='.$resultat->id));?>">
