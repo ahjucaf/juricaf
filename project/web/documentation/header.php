@@ -35,7 +35,7 @@
           <a class="nav-link" href="/documentation/a_propos.php">À propos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/stats/statuts.php">Etendue des collections </a>
+          <a class="nav-link" href="/documentation/stats/statuts.php">Etendue des collections </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/documentation/partenaires.php">Partenaires</a>
