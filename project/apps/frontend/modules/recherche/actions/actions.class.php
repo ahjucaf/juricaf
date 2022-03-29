@@ -53,10 +53,10 @@ class rechercheActions extends sfActions
       $param['fq'] = 'type:arret';
     }
 
-
-    if($request->getParameter('juridiction')){
+    if($request->getParameter('pays') && $request->getParameter('juridiction')){
+      $pays=$request->getParameter('pays');
       $pays_juridiction = str_replace(" ", "_", $request->getParameter('juridiction'));
-      $solr_query.=" facet=pays=juridiction:".$pays_juridiction;
+      $solr_query.=" facet=pays=juridiction:".$pays."_|_".$pays_juridiction;
     }
 
     elseif($request->getParameter('pays')){

@@ -115,18 +115,13 @@ function remplacequerytitre($string) {
 
     <?php if($sf_request->getParameter('pays') || $sf_request->getParameter('juridiction')){
       echo('<div class="form-inline input-group">
-          <input id="pays_filter" class="form-control mx-auto" type="search" name="pays" value = ');
-      if($sf_request->getParameter('juridiction')){
-        echo preg_replace("/\|.+/",'',trim($sf_request->getParameter('juridiction')));
-      }
-      else{
+          <input  class="form-control mx-auto" type="search" name="pays" value = ');
         echo $sf_request->getParameter('pays');
-      }
       echo(' readonly></input><a class="btn btn-light" onclick="deletePaysfilter()"><i class="bi bi-x-circle"></i></a></div>');
         }
     else{
     ?>
-      <select name="pays" class="form-select">
+      <select id="pays_filter" name="pays" class="form-select">
         <option value="">Tous</option>
         <?php foreach($facets["facet_pays"] as $pays=>$num){
           echo("<option value=".preg_replace('/ /', '_', $pays).">".$pays.'('.$num.")</option>");
@@ -143,7 +138,9 @@ function remplacequerytitre($string) {
 
     <?php if($sf_request->getParameter('juridiction')){
       echo('<div class="input-group">
-          <input class="form-control" type="search" name="juridiction" value = "'.trim(preg_replace("/.+\|/",'',$sf_request->getParameter('juridiction'))).'"readonly>
+          <input class="form-control g3" type="text" name="juridiction"
+          value = "'.trim(preg_replace("/.+\|/",'',$sf_request->getParameter('juridiction'))).'"
+          readonly>
           </input>
           <a class="btn btn-light" onclick="deleteJuridictionfilter()">
             <i class="bi bi-x-circle"></i>
@@ -151,7 +148,7 @@ function remplacequerytitre($string) {
           </div>');
         }
     else{?>
-    <select name="juridiction" class="form-select">
+    <select id="juridiction" name="juridiction" class="form-select">
       <option value="">Tous</option>
       <?php
         $tab = $facets["facet_pays_juridiction"];
@@ -162,7 +159,7 @@ function remplacequerytitre($string) {
         foreach($pays as $p => $j){
           echo('<optgroup label="'.$p.'.">');
             foreach($j as $juridiction => $num){
-            echo('<option value="'.$p.'|'.$juridiction.'">'.$juridiction."(".$num.")</option>");
+            echo('<option data-pays='.preg_replace('/ /', '_',trim($p)).' value="'.trim($juridiction).'">'.$juridiction."(".$num.")</option>");
           }
           echo("</optgroup>");
         }
@@ -196,11 +193,14 @@ foreach ($resultats->response->docs as $resultat) {
 
   <div class="card-body" style="background-color:white">
     <p class="card-text"> <?php echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});?></p>
-    <a class="float-end" href="<?php echo(url_for('@arret?id='.$resultat->id));?>">
-      <i class="bi bi-arrow-right"></i>
-  </a>
   </div>
-  <small class="card-header text-muted"> <?php echo(date('d/m/Y', strtotime($resultat->date_arret)) . ' | '. strtoupper($resultat->pays) . ' | N°'.$resultat->num_arret);?> </small>
+  <?php
+    $card_footer = $resultat->pays. " | ". date('d/m/Y', strtotime($resultat->date_arret));
+    if($resultat->formation){
+      $card_footer.=" | ".$resultat->formation;
+    }
+  ?>
+  <small class="card-header text-muted"> <?php echo($card_footer);?> </small>
 </div>
 <?php
 }
@@ -244,7 +244,7 @@ else { // JSON
  $total = count($resultats->response->docs);
  $i = 0;
 
- foreach ($resultats->response->docs as $resultat) {
+ foreach ($resultats->response->docs as $resultat){
 	echo '{ ';
 		echo '"id" : "' . $resultat->id . '", ';
 		echo '"pays" : "' . $resultat->pays . '", ';
@@ -271,6 +271,10 @@ echo ' ] }';
 } ?>
 <script>
   $(document).change(function(){
+    if($("#juridiction").val() != ""){
+      pays = $("#juridiction :selected").data("pays");
+      $('#pays_filter').val(pays);
+    }
     $( "#filtrer" ).trigger( "click" );
   });
 </script>
