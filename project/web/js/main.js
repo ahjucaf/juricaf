@@ -20,9 +20,21 @@ $( document ).ready(function() {
       $('#hidden-mode-mobile').addClass("d-none");
       $('#hidden-mode-mobile').addClass("d-lg-none");
     }
+
+    var arrets=document.getElementsByClassName("card-body");
+    if(arrets){
+      for(i=0;i<arrets.length;i++){
+        $(arrets[i]).wrap('<a class="text-decoration-none" href='+$(arrets[i]).data("link")+'></a>');
+      }
+    }
   }
 
 });
+
+// $(document.getElementById('selected-pays')).change(function(){
+//   link=$("#selected-pays :selected").data("test");
+//   window.location.replace(link);
+// });
 
 function fontSizePlus(){
   corps = document.getElementById('arret');

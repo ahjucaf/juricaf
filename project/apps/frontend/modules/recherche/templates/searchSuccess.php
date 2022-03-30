@@ -197,17 +197,9 @@ foreach ($resultats->response->docs as $resultat) {
 
   <p class="card-header fs-5"><?php echo('<img src="/images/drapeaux/'.$pathToFlag .'.png" alt="§" /> | <a class="a-unstyled " href="'.$urlForArret.'">'.$resultat->titre);?></a></p>
 
-  <!-- Grans écran -->
-  <div class="d-none d-lg-block card-body">
+  <div class="card-body" data-link=<?php echo($urlForArret);?>>
     <p class="card-text"> <?php echo($textArret); ?></p>
   </div>
-
-  <!-- Mode mobile -->
-  <a class="d-lg-none text-decoration-none" href=<?php echo($urlForArret); ?> >
-    <div class="card-body">
-      <p class="card-text"> <?php echo($textArret); ?></p>
-    </div>
-  </a>
 
   <?php
     $card_footer = $resultat->pays. " | ". date('d/m/Y', strtotime($resultat->date_arret));
@@ -284,6 +276,8 @@ echo ' ] }';
 
 
 } ?>
+<span id="is_mobile" class="d-lg-none"></span>
+
 <script>
   $(document).change(function(){
     if($("#juridiction").val() != ""){
