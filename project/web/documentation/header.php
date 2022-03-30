@@ -64,8 +64,7 @@
 </nav>
   </div>
   </div>
-
-  <div class="container form_recherche mt-5">
+  <div <?php if($sf_request && $sf_request->getParameter('module')=="arret"){ echo('id = "hidden-mode-mobile"');} ?>class="container form_recherche mt-5">
     <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
       <a href="/"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
       <p ><small class="fst-italic slogan">La jurisprudence francophone des cours suprêmes</small><br/></p>

@@ -10,6 +10,18 @@ $( document ).ready(function() {
       pages[i].style.color = '#6c757d';
     }
   }
+
+  var is_mobile = function() {
+      return !(window.getComputedStyle(document.getElementById('is_mobile')).display === "none");
+  };
+
+  if(is_mobile()){
+    if(document.getElementById('hidden-mode-mobile')){
+      $('#hidden-mode-mobile').addClass("d-none");
+      $('#hidden-mode-mobile').addClass("d-lg-none");
+    }
+  }
+
 });
 
 function fontSizePlus(){

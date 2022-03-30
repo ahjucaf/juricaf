@@ -475,7 +475,7 @@ if(isset($references['PUBLICATION'])) {
            <button type="button" class="btn btn-light" onclick="fontSizeMoins()">A-</button>
          </li>
          <li class="nav-item">
-           <button type="button" class="btn btn-light">
+           <button type="button" class="btn btn-light disabled">
              <i class="bi bi-download"></i>
             </button>
          </li>
@@ -485,7 +485,7 @@ if(isset($references['PUBLICATION'])) {
          </button>
          </li>
          <li class="nav-item">
-           <button type="button" class="btn btn-light" Download>
+           <button type="button" class="btn btn-light disabled" Download>
              <i class="bi bi-envelope"></i>
            </button>
          </li>
@@ -509,7 +509,7 @@ if(isset($references['PUBLICATION'])) {
          <button type="button" class="btn btn-sm btn-light" onclick="fontSizeMoins()">A-</button>
        </li>
        <li class="nav-item">
-         <button type="button" class="btn btn-sm btn-light">
+         <button type="button" class="btn btn-sm btn-light disabled">
             <i class="bi bi-download"></i>
         </button>
        </li>
@@ -519,7 +519,7 @@ if(isset($references['PUBLICATION'])) {
          </button>
        </li>
        <li class="nav-item">
-         <button type="button" class="btn btn-sm btn-light" Download>
+         <button type="button" class="btn btn-sm btn-light disabled" Download>
            <i class="bi bi-envelope"></i>
         </button>
        </li>
@@ -895,6 +895,8 @@ if(isset($references['PUBLICATION'])) {
 
     </div>
 </div>
+
+<span id="is_mobile" class="d-lg-none"></span>
 
 <script type="text/javascript">
 function showCD(str)

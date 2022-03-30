@@ -195,15 +195,15 @@ foreach ($resultats->response->docs as $resultat) {
   $textArret = JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});
   ?>
 
+  <p class="card-header fs-5"><?php echo('<img src="/images/drapeaux/'.$pathToFlag .'.png" alt="§" /> | <a class="a-unstyled " href="'.$urlForArret.'">'.$resultat->titre);?></a></p>
+
   <!-- Grans écran -->
-  <p class="d-none d-lg-block card-header fs-5"><?php echo('<img src="/images/drapeaux/'.$pathToFlag .'.png" alt="§" /> | <a class="a-unstyled " href="'.$urlForArret.'">'.$resultat->titre);?></a></p>
   <div class="d-none d-lg-block card-body">
     <p class="card-text"> <?php echo($textArret); ?></p>
   </div>
 
   <!-- Mode mobile -->
-  <p class="d-lg-none card-header fs-5"><?php echo('<img src="/images/drapeaux/'.$pathToFlag .'.png" alt="§" /> | <a class="a-unstyled " href="'.$urlForArret.'#arret">'.$resultat->titre);?></a></p>
-  <a class="d-lg-none text-decoration-none" href=<?php echo($urlForArret)."#arret"; ?> >
+  <a class="d-lg-none text-decoration-none" href=<?php echo($urlForArret); ?> >
     <div class="card-body">
       <p class="card-text"> <?php echo($textArret); ?></p>
     </div>
