@@ -189,12 +189,26 @@ foreach ($resultats->response->docs as $resultat) {
  ?>
   <div class="card mb-3">
 
-  <p class="d-none d-lg-block card-header fs-5"><?php echo('<img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> | <a class="a-unstyled " href="'.url_for('@arret?id='.$resultat->id).'">'.$resultat->titre);?></a></p>
-  <p class="d-lg-none card-header fs-5"><?php echo('<img src="/images/drapeaux/'.pathToFlag($resultat->pays).'.png" alt="§" /> | <a class="a-unstyled " href="'.url_for('@arret?id='.$resultat->id).'#arret">'.$resultat->titre);?></a></p>
+  <?php
+  $pathToFlag = pathToFlag($resultat->pays);
+  $urlForArret = url_for('@arret?id='.$resultat->id);
+  $textArret = JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});
+  ?>
 
-  <div class="card-body" style="background-color:white">
-    <p class="card-text"> <?php echo JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});?></p>
+  <!-- Grans écran -->
+  <p class="d-none d-lg-block card-header fs-5"><?php echo('<img src="/images/drapeaux/'.$pathToFlag .'.png" alt="§" /> | <a class="a-unstyled " href="'.$urlForArret.'">'.$resultat->titre);?></a></p>
+  <div class="d-none d-lg-block card-body">
+    <p class="card-text"> <?php echo($textArret); ?></p>
   </div>
+
+  <!-- Mode mobile -->
+  <p class="d-lg-none card-header fs-5"><?php echo('<img src="/images/drapeaux/'.$pathToFlag .'.png" alt="§" /> | <a class="a-unstyled " href="'.$urlForArret.'#arret">'.$resultat->titre);?></a></p>
+  <a class="d-lg-none text-decoration-none" href=<?php echo($urlForArret)."#arret"; ?> >
+    <div class="card-body">
+      <p class="card-text"> <?php echo($textArret); ?></p>
+    </div>
+  </a>
+
   <?php
     $card_footer = $resultat->pays. " | ". date('d/m/Y', strtotime($resultat->date_arret));
     if($resultat->formation){

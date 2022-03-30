@@ -107,6 +107,12 @@ a{
     font-size: 20px;
     text-decoration: underline;
 }
+.card-body{
+  background-color:white;
+}
+.card-text{
+  color:black;
+}
 
 @media screen and (max-width: 992px) {
   .full-width {
