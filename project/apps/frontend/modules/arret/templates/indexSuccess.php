@@ -480,7 +480,7 @@ if(isset($references['PUBLICATION'])) {
             </button>
          </li>
          <li class="nav-item">
-           <button type="button" class="btn btn-light">
+           <button type="button" title="copier" class="btn btn-light btn-cpy" onclick="copyArretUrl(<?php echo "'".addslashes($document->titre)."'"?>)">
              <i class="bi bi-clipboard"></i>
          </button>
          </li>
@@ -490,7 +490,7 @@ if(isset($references['PUBLICATION'])) {
            </button>
          </li>
          <li class="nav-item">
-           <button type="button" class="btn btn-light" onclick="window.print()">
+           <button type="button" title="imprimer" class="btn btn-light" onclick="window.print()">
              <i class="bi bi-printer"></i>
          </button>
          </li>
@@ -514,7 +514,7 @@ if(isset($references['PUBLICATION'])) {
         </button>
        </li>
        <li class="nav-item">
-         <button type="button" class="btn btn-sm btn-light">
+         <button type="button" title="copier" class="btn btn-sm btn-light btn-cpy" onclick="copyArretUrl(<?php echo "'".addslashes($document->titre)."'"?>)">
            <i class="bi bi-clipboard"></i>
          </button>
        </li>
@@ -524,7 +524,7 @@ if(isset($references['PUBLICATION'])) {
         </button>
        </li>
        <li class="nav-item">
-         <button type="button" class="btn btn-sm btn-light" onclick="window.print()">
+         <button type="button" title="imprimer" class="btn btn-sm btn-light" onclick="window.print()">
            <i class="bi bi-printer"></i>
        </button>
        </li>
