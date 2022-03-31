@@ -73,28 +73,6 @@ a{
     font-weight: bold;
     font-style: normal;
 }
-.col-lg-1{
-  max-width: 5%;
-
-}
-
-.col-lg-1 nav{
-  /* position: fixed; */
-  /* left:0; */
-}
-
-.col-lg-1 button{
-  color: #375d81;
-  background: white;
-  font-size: revert;
-  width: max-content;
-}
-
-.col-lg-1 li{
-    text-align:center;
-    border: 1px solid #375d81;
-}
-
 .arret hr{
   color: #375d81 !important;
 }
@@ -113,6 +91,22 @@ a{
 .card-text{
   color:black;
 }
+.mt-10{
+  margin-top: 100px !important;
+}
+
+#arret ul{
+  width: min-content;
+  display: block;
+  margin-left: -70px;
+}
+#arret li{
+  border: 1px solid black;
+  padding: 5px;
+}
+.inline li{
+  list-style: none;
+}
 
 @media screen and (max-width: 992px) {
   .full-width {
@@ -125,6 +119,26 @@ a{
   #filtrer{
     float:right;
   }
+  #arret ul{
+    display: flex;
+    margin: auto;
+    position: fixed;
+    width: 50%;
+    top:10px;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+
+  }
+  #arret li{
+    border: none;
+    padding: 0;
+    border:1px solid #436f99;
+    border-radius: 30px;
+  }
+  #arret li i{
+    color:white;
+  }
 }
 
 @media screen and (min-width:991px){
@@ -135,9 +149,6 @@ a{
     border-bottom-style: none;
     border-width: thin;
     border-color: #375d81;
-  }
-  .col-lg-1 nav{
-    position:fixed;
   }
 
 }

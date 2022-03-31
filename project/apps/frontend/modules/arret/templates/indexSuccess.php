@@ -465,76 +465,41 @@ if(isset($references['PUBLICATION'])) {
 ?>
 <div id="arret" class="container mt-5 arret text-justify text-break">
   <div class="row">
-    <div class="col-lg-1 d-none d-lg-block">
-      <nav class="bg-light">
-       <ul class="navbar-nav">
-         <li class="nav-item">
-           <button type="button" class="btn btn-light" onclick="fontSizePlus()">A+</button>
-         </li>
-         <li class="nav-item">
-           <button type="button" class="btn btn-light" onclick="fontSizeMoins()">A-</button>
-         </li>
-         <li class="nav-item">
-           <button type="button" class="btn btn-light disabled">
-             <i class="bi bi-download"></i>
-            </button>
-         </li>
-         <li class="nav-item">
-           <button type="button" title="copier" class="btn btn-light btn-cpy" onclick="copyArretUrl(<?php echo "'".addslashes($document->titre)."'"?>)">
-             <i class="bi bi-clipboard"></i>
-         </button>
-         </li>
-         <li class="nav-item">
-           <button type="button" class="btn btn-light disabled" Download>
-             <i class="bi bi-envelope"></i>
+      <ul class="nav justify-content-center flex-lg-column">
+        <li class="nav-item">
+          <button type="button" class="btn" onclick="fontSizePlus()">
+            <h5><i class="bi bi-zoom-in"></i></h5>
+          </button>
+        </li>
+        <li class="nav-item">
+           <button type="button" class="btn" onclick="fontSizeMoins()">
+             <h5><i class="bi bi-zoom-out"></i></h5>
            </button>
-         </li>
-         <li class="nav-item">
-           <button type="button" title="imprimer" class="btn btn-light" onclick="window.print()">
-             <i class="bi bi-printer"></i>
-         </button>
-         </li>
-       </ul>
-      </nav>
-    </div>
-
-
-  <div class="d-lg-none col-lg-1 float-end">
-    <nav class="navbar navbar-expand bg-light">
-     <ul class="navbar-nav">
-       <li class="nav-item">
-         <button type="button" class="btn btn-sm btn-light" onclick="fontSizePlus()">A+</button>
-       </li>
-       <li class="nav-item">
-         <button type="button" class="btn btn-sm btn-light" onclick="fontSizeMoins()">A-</button>
-       </li>
-       <li class="nav-item">
-         <button type="button" class="btn btn-sm btn-light disabled">
-            <i class="bi bi-download"></i>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="btn disabled">
+            <h5><i class="bi bi-download"></i></h5>
+           </button>
+        </li>
+        <li class="nav-item">
+          <button type="button" title="copier" class="btn btn-cpy" onclick="copyArretUrl(<?php echo "'".addslashes($document->titre)."'"?>)">
+            <h5><i class="bi bi-clipboard"></i></h5>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="btn disabled" Download>
+            <h5><i class="bi bi-envelope"></i></h5>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button type="button" title="imprimer" class="btn" onclick="window.print()">
+            <h5><i class="bi bi-printer"></i></h5>
         </button>
-       </li>
-       <li class="nav-item">
-         <button type="button" title="copier" class="btn btn-sm btn-light btn-cpy" onclick="copyArretUrl(<?php echo "'".addslashes($document->titre)."'"?>)">
-           <i class="bi bi-clipboard"></i>
-         </button>
-       </li>
-       <li class="nav-item">
-         <button type="button" class="btn btn-sm btn-light disabled" Download>
-           <i class="bi bi-envelope"></i>
-        </button>
-       </li>
-       <li class="nav-item">
-         <button type="button" title="imprimer" class="btn btn-sm btn-light" onclick="window.print()">
-           <i class="bi bi-printer"></i>
-       </button>
-       </li>
-     </ul>
-    </nav>
-  </div>
-
+        </li>
+      </ul>
   <div class="col-lg-8 col-sm-12">
 
-    <small id="arret" class="text-muted"> <?php echo(date('d/m/Y', strtotime($document->date_arret)) . ' | '. strtoupper($document->pays) . ' | N°'.$document->num_arret);?> </small>
+    <small class="text-muted"> <?php echo(date('d/m/Y', strtotime($document->date_arret)) . ' | '. strtoupper($document->pays) . ' | N°'.$document->num_arret);?> </small>
     <h3 class="fw-bold" id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> | '.$document->titre?></h3>
     <hr>
 
@@ -619,7 +584,7 @@ if(isset($references['PUBLICATION'])) {
   </div>
   <hr class="d-lg-none">
 
-    <div class="col-lg-3 bloc-droit">
+    <div class="col-lg-4 bloc-droit">
 
         <?php
 

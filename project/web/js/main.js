@@ -16,6 +16,9 @@ $( document ).ready(function() {
   };
 
   if(is_mobile()){
+    $("#navbar").addClass('fixed-top');
+    $('#menu').addClass("mt-10");
+
     if(document.getElementById('hidden-mode-mobile')){
       $('#hidden-mode-mobile').addClass("d-none");
       $('#hidden-mode-mobile').addClass("d-lg-none");
@@ -68,7 +71,7 @@ function deleteJuridictionfilter(){
 function copyArretUrl(titre){
   var btns = document.getElementsByClassName("btn-cpy");
   for(i=0; i< btns.length;i++){
-    btns[i].children[0].setAttribute("class","bi bi-check2-square");
+    btns[i].children[0].children[0].setAttribute("class","bi bi-check2-square");
     setTimeout(redisplayClipBoard, 5000);
   }
   navigator.clipboard.writeText(titre+' ('+window.location.href+')');
@@ -77,6 +80,6 @@ function copyArretUrl(titre){
 function redisplayClipBoard(){
   var btns = document.getElementsByClassName("btn-cpy");
   for(i=0; i< btns.length;i++){
-    btns[i].children[0].setAttribute("class","bi bi-clipboard");
+    btns[i].children[0].children[0].setAttribute("class","bi bi-clipboard");
   }
 }
