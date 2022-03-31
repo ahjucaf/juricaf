@@ -276,7 +276,6 @@ echo ' ] }';
 
 
 } ?>
-<span id="is_mobile" class="d-lg-none"></span>
 
 <script>
   $(document).change(function(){

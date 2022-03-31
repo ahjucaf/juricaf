@@ -896,8 +896,6 @@ if(isset($references['PUBLICATION'])) {
     </div>
 </div>
 
-<span id="is_mobile" class="d-lg-none"></span>
-
 <script type="text/javascript">
 function showCD(str)
 {

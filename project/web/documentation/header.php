@@ -22,8 +22,9 @@
     </head>
   <body class="container full-width">
     <div>
-<div >
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div>
+  <span id="is_mobile" class="d-lg-none"></span>
+  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="/"><img class="align-self-center" width="40px" height="40px" src="/images/logo_menu.png"/></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +65,7 @@
 </nav>
   </div>
   </div>
-  <div <?php if($sf_request && $sf_request->getParameter('module')=="arret"){ echo('id = "hidden-mode-mobile"');} ?>class="container form_recherche mt-5">
+  <div <?php if($sf_request && $sf_request->getParameter('module')=="arret"){ echo('id = "hidden-mode-mobile"');}else{echo('id = "menu"');} ?>class="container form_recherche mt-5">
     <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
       <a href="/"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
       <p ><small class="fst-italic slogan">La jurisprudence francophone des cours suprêmes</small><br/></p>
