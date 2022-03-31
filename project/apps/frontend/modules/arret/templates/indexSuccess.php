@@ -463,37 +463,37 @@ if(isset($references['PUBLICATION'])) {
     }
 }
 ?>
-<div id="arret" class="container mt-5 arret text-justify text-break">
+<div id="arret" class="container mt-10 arret text-justify text-break">
   <div class="row">
       <ul class="nav justify-content-center flex-lg-column">
         <li class="nav-item">
-          <button type="button" class="btn" onclick="fontSizePlus()">
-            <h5><i class="bi bi-zoom-in"></i></h5>
+          <button type="button" class="btn btn-option" onclick="fontSizePlus()">
+            <i class="bi bi-zoom-in"></i>
           </button>
         </li>
         <li class="nav-item">
-           <button type="button" class="btn" onclick="fontSizeMoins()">
-             <h5><i class="bi bi-zoom-out"></i></h5>
+           <button type="button" class="btn btn-option" onclick="fontSizeMoins()">
+             <i class="bi bi-zoom-out"></i>
            </button>
         </li>
         <li class="nav-item">
-          <button type="button" class="btn disabled">
-            <h5><i class="bi bi-download"></i></h5>
+          <button type="button" class="btn btn-option disabled">
+            <i class="bi bi-download"></i>
            </button>
         </li>
         <li class="nav-item">
-          <button type="button" title="copier" class="btn btn-cpy" onclick="copyArretUrl(<?php echo "'".addslashes($document->titre)."'"?>)">
-            <h5><i class="bi bi-clipboard"></i></h5>
+          <button type="button" title="copier" class="btn btn-option btn-cpy" onclick="copyArretUrl(<?php echo "'".addslashes($document->titre)."'"?>)">
+            <i class="bi bi-clipboard"></i>
           </button>
         </li>
         <li class="nav-item">
-          <button type="button" class="btn disabled" Download>
-            <h5><i class="bi bi-envelope"></i></h5>
+          <button type="button" class="btn btn-option disabled" Download>
+            <i class="bi bi-envelope"></i>
           </button>
         </li>
         <li class="nav-item">
-          <button type="button" title="imprimer" class="btn" onclick="window.print()">
-            <h5><i class="bi bi-printer"></i></h5>
+          <button type="button" title="imprimer" class="btn btn-option" onclick="window.print()">
+            <i class="bi bi-printer"></i>
         </button>
         </li>
       </ul>
