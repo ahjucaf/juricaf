@@ -467,32 +467,32 @@ if(isset($references['PUBLICATION'])) {
   <div class="row">
       <ul class="nav justify-content-center flex-lg-column">
         <li class="nav-item">
-          <button type="button" class="btn btn-option" onclick="fontSizePlus()">
+          <button type="button" class="btn" onclick="fontSizePlus()">
             <i class="bi bi-zoom-in"></i>
           </button>
         </li>
         <li class="nav-item">
-           <button type="button" class="btn btn-option" onclick="fontSizeMoins()">
+           <button type="button" class="btn" onclick="fontSizeMoins()">
              <i class="bi bi-zoom-out"></i>
            </button>
         </li>
         <li class="nav-item">
-          <button type="button" class="btn btn-option disabled">
+          <button type="button" class="btn disabled">
             <i class="bi bi-download"></i>
            </button>
         </li>
         <li class="nav-item">
-          <button type="button" title="copier" class="btn btn-option btn-cpy" onclick="copyArretUrl(<?php echo "'".addslashes($document->titre)."'"?>)">
+          <button type="button" title="copier" id="btn-cpy" class="btn" onclick="copyArretUrl(<?php echo "'".addslashes($document->titre)."'"?>)">
             <i class="bi bi-clipboard"></i>
           </button>
         </li>
         <li class="nav-item">
-          <button type="button" class="btn btn-option disabled" Download>
+          <button type="button" class="btn disabled" Download>
             <i class="bi bi-envelope"></i>
           </button>
         </li>
         <li class="nav-item">
-          <button type="button" title="imprimer" class="btn btn-option" onclick="window.print()">
+          <button type="button" title="imprimer" class="btn" onclick="window.print()">
             <i class="bi bi-printer"></i>
         </button>
         </li>

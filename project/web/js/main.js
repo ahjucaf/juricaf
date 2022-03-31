@@ -69,17 +69,13 @@ function deleteJuridictionfilter(){
 }
 
 function copyArretUrl(titre){
-  var btns = document.getElementsByClassName("btn-cpy");
-  for(i=0; i< btns.length;i++){
-    btns[i].children[0].children[0].setAttribute("class","bi bi-check2-square");
-    setTimeout(redisplayClipBoard, 5000);
-  }
+  var btnCpy = document.getElementById("btn-cpy");
+  btnCpy.children[0].setAttribute("class","bi bi-check2-square");
+  setTimeout(redisplayClipBoard, 5000);
   navigator.clipboard.writeText(titre+' ('+window.location.href+')');
 }
 
 function redisplayClipBoard(){
-  var btns = document.getElementsByClassName("btn-cpy");
-  for(i=0; i< btns.length;i++){
-    btns[i].children[0].children[0].setAttribute("class","bi bi-clipboard");
-  }
+  var btnCpy = document.getElementById("btn-cpy");
+  btnCpy.children[0].setAttribute("class","bi bi-clipboard");
 }
