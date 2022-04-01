@@ -97,7 +97,7 @@ class rechercheActions extends sfActions
       unset($param['sort']);
       $this->nobots = 1;
     }
-    if($request->getParameter('tri') == "chronologique"){
+    if($request->getParameter('tri') == "ASD"){
       $param['sort'] =  'date_arret asc, id asc';
       $this->nobots = 1;
     }

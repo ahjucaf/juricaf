@@ -96,15 +96,15 @@ function remplacequerytitre($string) {
   </div>
   <div class="col-lg-auto col-md-10 col-sm-10">
     <select name="tri" class="form-select form-control">
-      <option value="antéchronologique"
+      <option value="DESC"
       <?php
-        if(!$sf_request->getParameter('tri') || ($sf_request->getParameter('tri') && $sf_request->getParameter('tri') == "antéchronologique"))
+        if(!$sf_request->getParameter('tri') || ($sf_request->getParameter('tri') && $sf_request->getParameter('tri') == "DESC"))
           echo('selected');
       ?>
       >Plus récent</option>
-      <option value="chronologique"
+      <option value="ASD"
       <?php
-        if($sf_request->getParameter('tri') && $sf_request->getParameter('tri')== "chronologique")
+        if($sf_request->getParameter('tri') && $sf_request->getParameter('tri')== "ASD")
           echo('selected');
       ?>
       >Plus ancien</option>
