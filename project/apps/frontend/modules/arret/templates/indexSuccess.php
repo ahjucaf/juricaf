@@ -463,7 +463,7 @@ if(isset($references['PUBLICATION'])) {
     }
 }
 ?>
-<div id="arret" class="container mt-15 arret text-justify text-break">
+<div id="arret" class="container mt-5 mt-15 arret text-justify text-break">
   <div class="row">
       <ul class="nav justify-content-center flex-lg-column">
         <li class="nav-item">
