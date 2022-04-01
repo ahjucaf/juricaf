@@ -1,9 +1,8 @@
 $( document ).ready(function() {
   pages = document.getElementsByClassName('page-item');
   for(let i=0; i< pages.length; i++){
-    if(pages[i].children[0]){
+    if(pages[i].children[0] && pages[i].children[0].innerHTML){
       pages[i].children[0].className="page-link";
-      // pages[i].children[0].classList.add('a-unstyled');
   }
     if(!pages[i].innerHTML.startsWith('<a')){
       pages[i].classList.add("page-link");
