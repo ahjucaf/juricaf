@@ -574,15 +574,18 @@ if(isset($references['PUBLICATION'])) {
         echo "<span class='text-muted'>Texte (pseudonymisé) </span>";
       }
 ?>
-    <span id="debutArret" class="d-lg-none" itemprop="articleBody">
-      <?php echo preg_replace($patterns, $replacements,simple_format_text(truncate_text(trim($texte_arret),650))); ?>
-    </span>
 
     <span id="textArret" itemprop="articleBody">
     <?php echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret))); ?>
     </span>
 
-    <p class="float-end"><a id="btn-see-more" class="btn d-lg-none btn-outline-secondary" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret">Voir plus</a></p>'
+    <span id="debutArret" class="d-lg-none" itemprop="articleBody">
+      <?php echo preg_replace($patterns, $replacements,simple_format_text(truncate_text(trim($texte_arret),650))); ?>
+    </span>
+
+    <p class="float-end"><a id="btn-see-more" class="btn d-lg-none btn-outline-secondary" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret">Voir plus</a></p>
+
+
 <?php } ?>
 </div>
 

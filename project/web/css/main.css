@@ -136,7 +136,11 @@ a{
     padding: 0;
   }
   .mt-15{
-    margin-top: 5rem !important;
+    margin-top: 4rem !important;
+  }
+
+  #open-filters{
+    width: 100%;
   }
 
 

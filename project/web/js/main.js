@@ -15,6 +15,13 @@ $( document ).ready(function() {
       return !(window.getComputedStyle(document.getElementById('is_mobile')).display === "none");
   };
 
+  $(document).change(function(){
+    if($("#juridiction").val() != ""){
+      pays = $("#juridiction :selected").data("pays");
+      $('#pays_filter').val(pays);
+    }
+  });
+
   if(is_mobile()){
     if(document.getElementById("navbar")){
       $("#navbar").addClass('fixed-top');
@@ -41,6 +48,19 @@ $( document ).ready(function() {
           }
       });
     }
+    if(document.getElementById('bloc-filtres')){
+      $("#bloc-filtres").addClass("collapse");
+    }
+    if(document.getElementById("open-filters")){
+      $("#open-filters").click(function(){
+          if($("#open-filters").text()=="Ouvrir les filtres"){
+            $("#open-filters").html("Fermer les filtres");
+          }
+          else{
+            $("#open-filters").html("Ouvrir les filtres");
+          }
+      });
+    }
     var arrets=document.getElementsByClassName("card-body");
     if(arrets){
       for(i=0;i<arrets.length;i++){
@@ -48,7 +68,11 @@ $( document ).ready(function() {
       }
     }
   }
-
+  else{
+    $(document).change(function(){
+      $( "#filtrer" ).trigger( "click" );
+    });
+  }
 });
 
 

@@ -80,7 +80,16 @@ function remplacequerytitre($string) {
 </div>
 
 <!-- BLOC FILTRES  -->
-<form method="get" action="<?php echo url_for('recherche')."/".$sf_request->getParameter('query')?>">
+
+<p class="d-lg-none">Filtrés sur :
+  <?php
+  $tabFiltres = array($sf_request->getParameter('tri'),$sf_request->getParameter('pays'),$sf_request->getParameter('juridiction'));
+  echo "<span class='fst-italic'>".implode(" / ",array_filter($tabFiltres))."<span>";
+  ?>
+</p>
+<p><a id="open-filters" class="btn d-lg-none btn-outline-secondary" data-bs-toggle="collapse" href="#bloc-filtres" role="button" aria-expanded="false" aria-controls="bloc-filtres">Ouvrir les filtres</a></p>
+
+<form id="bloc-filtres" method="get" action="<?php echo url_for('recherche')."/".$sf_request->getParameter('query')?>">
 <div class="row g-3 align-items-center">
   <div class="col-lg-auto col-md-2 col-sm-2">
     <label class="col-form-label">Tri :</label>
@@ -276,13 +285,3 @@ echo ' ] }';
 
 
 } ?>
-
-<script>
-  $(document).change(function(){
-    if($("#juridiction").val() != ""){
-      pays = $("#juridiction :selected").data("pays");
-      $('#pays_filter').val(pays);
-    }
-    $( "#filtrer" ).trigger( "click" );
-  });
-</script>
