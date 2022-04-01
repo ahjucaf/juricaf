@@ -147,7 +147,7 @@ function remplacequerytitre($string) {
 
     <?php if($sf_request->getParameter('juridiction')){
       echo('<div class="input-group">
-          <input class="form-control g3" type="text" name="juridiction"
+          <input class="form-control g3" type="text" name="juridiction" size="45"
           value = "'.trim(preg_replace("/.+\|/",'',$sf_request->getParameter('juridiction'))).'"
           readonly>
           </input>
