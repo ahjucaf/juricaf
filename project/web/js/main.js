@@ -16,14 +16,31 @@ $( document ).ready(function() {
   };
 
   if(is_mobile()){
-    $("#navbar").addClass('fixed-top');
-    $('#menu').addClass("mt-10");
-
+    if(document.getElementById("navbar")){
+      $("#navbar").addClass('fixed-top');
+    }
+    if(document.getElementById("menu")){
+      $('#menu').addClass("mt-10");
+    }
+    if(document.getElementById("textArret")){
+      $("#textArret").addClass("collapse");
+    }
     if(document.getElementById('hidden-mode-mobile')){
       $('#hidden-mode-mobile').addClass("d-none");
       $('#hidden-mode-mobile').addClass("d-lg-none");
     }
-
+    if(document.getElementById("btn-see-more")){
+      $("#btn-see-more").click(function(){
+          if($("#btn-see-more").text()=="Voir plus"){
+            $("#btn-see-more").html("Voir moins");
+            $("#debutArret").addClass("d-sm-none");
+          }
+          else{
+            $("#btn-see-more").html("Voir plus");
+            $("#debutArret").removeClass("d-sm-none");
+          }
+      });
+    }
     var arrets=document.getElementsByClassName("card-body");
     if(arrets){
       for(i=0;i<arrets.length;i++){
@@ -34,10 +51,8 @@ $( document ).ready(function() {
 
 });
 
-// $(document.getElementById('selected-pays')).change(function(){
-//   link=$("#selected-pays :selected").data("test");
-//   window.location.replace(link);
-// });
+
+
 
 function fontSizePlus(){
   corps = document.getElementById('arret');

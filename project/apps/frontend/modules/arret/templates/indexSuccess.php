@@ -573,21 +573,29 @@ if(isset($references['PUBLICATION'])) {
       if ($document->isTexteArretAnon()){
         echo "<span class='text-muted'>Texte (pseudonymisé) </span>";
       }
-      echo '<span itemprop="articleBody">';
 
-      echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret)));
 
-      echo '</span>';
+
+    echo('<div id="debutArret" class="d-lg-none" itemprop="articleBody">');
+    echo truncate_text(preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret))), 650, "...", true);
+    echo('</div>');
+
+
+
+    echo '<div id="textArret" itemprop="articleBody">';
+    echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret)));
+    echo '</div>';
+
+      echo('<p class="float-end"><a id="btn-see-more" class="btn d-lg-none btn-outline-secondary" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret">Voir plus</a></p>');
+
   }
   ?>
+</div>
 
-  </div>
   <hr class="d-lg-none">
 
     <div class="col-lg-4 bloc-droit">
-
         <?php
-
 
         if (isset($document->titre_supplementaire)) {
             echo '<h5 itemprop="alternativeHeadline">'.$document->titre_supplementaire.'</span></h5>';
