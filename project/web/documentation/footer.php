@@ -6,11 +6,7 @@
       <img src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones"/>
     </div>
     <div class="col-6 d-none d-lg-block">
-      Juricaf est un projet de l'AHJUCAF, <br>
-      l'association des cours suprêmes judiciaires francophones,<br>
-       initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique <br>
-       et Informatique du droit (Université Paris I),<br>
-       Il est soutenu par l'Organisation Internationale de la Francophonie.
+      Juricaf est un projet de l'AHJUCAF, l'association des cours&nbsp;suprêmes&nbsp;judiciaires&nbsp;francophones.<br />Il est soutenu par l'Organisation Internationale de la Francophonie.
     </div>
     <div class="col-3 d-none d-lg-block">
       <img src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
@@ -19,11 +15,7 @@
     <!-- VERSION MOBILE -->
 
     <div class="col-sm  d-lg-none">
-      Juricaf est un projet de l'AHJUCAF, <br>
-      l'association des cours suprêmes judiciaires francophones,<br>
-       initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique <br>
-       et Informatique du droit (Université Paris I),<br>
-       Il est soutenu par l'Organisation Internationale de la Francophonie.
+       Juricaf est un projet de l'AHJUCAF, l'association des&nbsp;cours&nbsp;suprêmes&nbsp;judiciaires&nbsp;francophones.<br />Il est soutenu par l'Organisation Internationale de la Francophonie.
     </div>
     <div class="col-lg pt-3 d-lg-none">
       <img class="float-start"src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones"/>
