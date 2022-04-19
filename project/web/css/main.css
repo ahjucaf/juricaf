@@ -195,6 +195,11 @@ a{
     left: 0;
     z-index: 1030;
   }
+  #debutArret p:last-of-type{
+    background: -webkit-linear-gradient(#797b7c, white);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 @media screen and (min-width:991px){
