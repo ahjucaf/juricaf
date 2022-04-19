@@ -48,16 +48,6 @@ $( document ).ready(function() {
     if(document.getElementById('bloc-filtres')){ //id dans la page des resultats d'une recherche recherche/templates/searchSuccess.php
       $("#bloc-filtres").addClass("collapse"); //on cache les blocs des filtres.
     }
-    if(document.getElementById("open-filters")){ //id dans la page des resultats d'une recherche recherche/templates/searchSuccess.php
-      $("#open-filters").click(function(){ //changement de text
-          if($("#open-filters").text()=="Ouvrir les filtres"){
-            $("#open-filters").html("Fermer les filtres");
-          }
-          else{
-            $("#open-filters").html("Ouvrir les filtres");
-          }
-      });
-    }
 
     //class dans la page des resultats d'une recherche recherche/templates/searchSuccess.php
     //permet de pouvoir cliquer sur une "card" div d'un arret pour aller sur la page de l'arret

@@ -86,15 +86,15 @@ function remplacequerytitre($string) {
   $tabFiltres = array($sf_request->getParameter('tri'),$sf_request->getParameter('pays'),$sf_request->getParameter('juridiction'));
   echo "<span class='fst-italic'>".implode(" / ",array_filter($tabFiltres))."<span>";
   ?>
+  <span class="float-end"><a id="open-filters" class="btn btn-sm d-lg-none btn-outline-primary" data-bs-toggle="collapse" href="#bloc-filtres" role="button" aria-expanded="false" aria-controls="bloc-filtres" title="Filtrer"><i class="bi bi-filter"></i></a></span>
 </p>
-<p><a id="open-filters" class="btn d-lg-none btn-outline-secondary" data-bs-toggle="collapse" href="#bloc-filtres" role="button" aria-expanded="false" aria-controls="bloc-filtres">Ouvrir les filtres</a></p>
 
-<form id="bloc-filtres" method="get" action="<?php echo url_for('recherche')."/".$sf_request->getParameter('query')?>">
-<div class="row g-3 align-items-center">
-  <div class="col-lg-auto col-md-2 col-sm-2">
+<form method="get" action="<?php echo url_for('recherche')."/".$sf_request->getParameter('query')?>">
+<div id="bloc-filtres" class="row g-3 mt-5 align-items-center" >
+  <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Tri :</label>
   </div>
-  <div class="col-lg-auto col-md-10 col-sm-10">
+  <div class="col-lg-auto col-md-12 col-sm-12">
     <select name="tri" class="form-select form-control">
       <option value="DESC"
       <?php
@@ -117,10 +117,10 @@ function remplacequerytitre($string) {
     </select>  </div>
   <?php if(!preg_match("/facet_pays:/",$sf_request->getParameter('query'))){
   ?>
-  <div class="col-lg-auto col-md-2 col-sm-2">
+  <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Pays :</label>
   </div>
-  <div class="col-lg-auto col-md-10 col-sm-10">
+  <div class="col-lg-auto col-md-12 col-sm-12">
 
     <?php if($sf_request->getParameter('pays') || $sf_request->getParameter('juridiction')){
       echo('<div class="form-inline input-group">
@@ -131,7 +131,7 @@ function remplacequerytitre($string) {
     else{
     ?>
       <select id="pays_filter" name="pays" class="form-select">
-        <option value="">Tous</option>
+        <option value="">Tous les pays</option>
         <?php foreach($facets["facet_pays"] as $pays=>$num){
           echo("<option value=".preg_replace('/ /', '_', $pays).">".ClientArret::TAB_DRAPEAU[$pays]." ".$pays.'('.$num.")</option>");
         } ?>
@@ -140,10 +140,10 @@ function remplacequerytitre($string) {
   </div>
 
 <?php }?>
-  <div class="col-lg-auto col-md-2 col-sm-2">
+  <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Juridiction :</label>
   </div>
-  <div class="col-lg-auto col-md-10 col-sm-10">
+  <div class="col-lg-auto col-md-12 col-sm-12">
 
     <?php if($sf_request->getParameter('juridiction')){
       echo('<div class="input-group">
@@ -158,7 +158,7 @@ function remplacequerytitre($string) {
         }
     else{?>
     <select id="juridiction" name="juridiction" class="form-select">
-      <option value="">Tous</option>
+      <option value="">Toutes les juridictions</option>
       <?php
         $tab = $facets["facet_pays_juridiction"];
         $pays = array();
