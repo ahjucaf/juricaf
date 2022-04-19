@@ -84,13 +84,13 @@ function remplacequerytitre($string) {
 <p class="d-lg-none">Filtrés sur :
   <?php
   $tabFiltres = array($sf_request->getParameter('tri'),$sf_request->getParameter('pays'),$sf_request->getParameter('juridiction'));
-  echo "<span class='fst-italic'>".implode(" / ",array_filter($tabFiltres))."<span>";
+  echo "<span>".implode(" / ",array_filter($tabFiltres))."<span>";
   ?>
-  <span class="float-end"><a id="open-filters" class="btn btn-sm d-lg-none btn-outline-primary" data-bs-toggle="collapse" href="#bloc-filtres" role="button" aria-expanded="false" aria-controls="bloc-filtres" title="Filtrer"><i class="bi bi-filter"></i></a></span>
 </p>
+<span><a id="open-filters" class="btn btn-sm d-lg-none btn-outline-primary" data-bs-toggle="collapse" href="#bloc-filtres" role="button" aria-expanded="false" aria-controls="bloc-filtres" title="Filtrer"><i class="bi bi-filter"></i></a></span>
 
 <form method="get" action="<?php echo url_for('recherche')."/".$sf_request->getParameter('query')?>">
-<div id="bloc-filtres" class="row g-3 mt-5 align-items-center" >
+<div id="bloc-filtres" class="row g-3 align-items-center" style="margin-top: 5px;">
   <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Tri :</label>
   </div>
