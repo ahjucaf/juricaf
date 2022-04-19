@@ -24,7 +24,7 @@
     <div>
 <div>
   <span id="is_mobile" class="d-lg-none"></span>
-  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/"><img class="align-self-center" width="40px" height="40px" src="/images/logo_menu.png"/></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,16 +81,21 @@
       </ul>
     </div>
   </div>
-
 </nav>
+  <div class="d-lg-none">
+    <br><br>
+    <hr style="color:#375d81">
+    <p class="text-center"><small class="fst-italic slogan">La jurisprudence francophone des cours suprêmes</small><br/></p>
+    <hr style="color:#375d81">
+  </div>
   </div>
   </div>
   <div <?php if($sf_request && $sf_request->getParameter('module')=="arret"){ echo('id = "hidden-mode-mobile"');}else{echo('id = "menu"');} ?>class="container form_recherche mt-5">
     <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
       <div class="d-none d-lg-block">
         <a href="/"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
-      </div>
         <p ><small class="fst-italic slogan">La jurisprudence francophone des cours suprêmes</small><br/></p>
+      </div>
         <div class="form-inline input-group input-group-lg">
         <input id="recherche" class="form-control mx-auto" autocomplete="off" type="text"
         <?php if($sf_request && $sf_request->getParameter('query') && ($sf_request->getParameter('query') != " ")){

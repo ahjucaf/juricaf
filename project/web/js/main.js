@@ -28,12 +28,7 @@ $( document ).ready(function() {
 
   //SI ON EST EN MODE MOBILE
   if(is_mobile()){
-    if(document.getElementById("navbar")){   //id dans le header. la barre de menu reste en position fixed.
-      $("#navbar").addClass('fixed-top');
-    }
-    if(document.getElementById("menu")){  //id dans le header. si on est page dans la page d'un arret alors on fait un margin-top de 100px (voir main.css pour mt-10)
-      $('#menu').addClass("mt-10");
-    }
+
     if(document.getElementById("textArret")){ //id dans la page d'un arret/templates/indexSuccess.php on cache le texte pour n'afficher que le texte début
       $("#textArret").addClass("collapse");
     }
@@ -73,6 +68,7 @@ $( document ).ready(function() {
     $(document).change(function(){
       $( "#filtrer" ).trigger( "click" );
     });
+    $('#hidden-mode-mobile').addClass("mb-5"); //ajoute de l'espace entre la barre de recherche et le contenu en mode desktoop.
   }
 
 

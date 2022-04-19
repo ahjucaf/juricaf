@@ -118,6 +118,17 @@ a{
   background-color: #375d81;
   border-color: #375d81;
 }
+
+.fixed-top {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+
 @media screen and (max-width: 992px) {
   .full-width {
       max-width: none;
@@ -144,9 +155,7 @@ a{
   #arret li{
     padding: 0;
   }
-  .mt-15{
-    margin-top: 4rem !important;
-  }
+
   .navbar-search-input{
     width:80%;
   }
@@ -178,6 +187,13 @@ a{
   }
   .navbar-toggler i{
     font-size: 2rem;
+  }
+  .fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
   }
 }
 
