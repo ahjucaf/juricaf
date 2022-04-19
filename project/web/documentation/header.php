@@ -30,8 +30,27 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarToggler">
+    <div class="collapse navbar-collapse " id="navbarToggler">
+      <div class="mt-3 float-end">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
       <ul class="navbar-nav me-auto mr-auto mt-2 mt-lg-0">
+        <li class="nav-item d-lg-none">
+          <form class="my-2 my-lg-0 text-center d-flex d-lg-none navbar-search-input" method="get" action="/recherche">
+                <div class="form-inline input-group">
+              <input id="recherche" class="form-control" autocomplete="off" type="text" placeholder="Rechercher une jurisprudence" name="q" aria-label="Rechercher" tabindex="10">
+              <button class="btn btn-primary"  type="submit">
+                  <i class="bi bi-search"></i>
+              </button>
+              <br>
+            </div>
+          </form>
+        </li>
+        <li class="nav-item d-lg-none">
+          <a class="nav-link" href="/recherche_avancee">Recherche avancée</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="/documentation/a_propos.php">À propos</a>
         </li>
@@ -62,13 +81,16 @@
       </ul>
     </div>
   </div>
+
 </nav>
   </div>
   </div>
   <div <?php if($sf_request && $sf_request->getParameter('module')=="arret"){ echo('id = "hidden-mode-mobile"');}else{echo('id = "menu"');} ?>class="container form_recherche mt-5">
     <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
-      <a href="/"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
-      <p ><small class="fst-italic slogan">La jurisprudence francophone des cours suprêmes</small><br/></p>
+      <div class="d-none d-lg-block">
+        <a href="/"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
+      </div>
+        <p ><small class="fst-italic slogan">La jurisprudence francophone des cours suprêmes</small><br/></p>
         <div class="form-inline input-group input-group-lg">
         <input id="recherche" class="form-control mx-auto" autocomplete="off" type="text"
         <?php if($sf_request && $sf_request->getParameter('query') && ($sf_request->getParameter('query') != " ")){
