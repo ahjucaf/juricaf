@@ -13,6 +13,14 @@ $( document ).ready(function() {
     }
   }
 
+  //au choix de la juridiction le pays en question est mis dans le input du pays avant l'envoi du formulaire
+  $(document).change(function(){
+    if($("#juridiction").val() != ""){
+      pays = $("#juridiction :selected").data("pays");
+      $('#pays_filter').val(pays);
+    }
+  });
+
   //SAVOIR SI ON EST EN MODE MOBILE GRACE A   <span id="is_mobile" class="d-lg-none"></span> qui se trouve dans le header
   var is_mobile = function() {
       return !(window.getComputedStyle(document.getElementById('is_mobile')).display === "none");
@@ -67,13 +75,7 @@ $( document ).ready(function() {
     });
   }
 
-  //au choix de la juridiction le pays en question est mis dans le input du pays avant l'envoi du formulaire
-  $(document).change(function(){
-    if($("#juridiction").val() != ""){
-      pays = $("#juridiction :selected").data("pays");
-      $('#pays_filter').val(pays);
-    }
-  });
+
 
 });
 
@@ -98,7 +100,7 @@ function copyArretUrl(titre){
   var btnCpy = document.getElementById("btn-cpy");
   btnCpy.children[0].setAttribute("class","bi bi-check2-square");
   setTimeout(redisplayClipBoard, 5000);
-  navigator.clipboard.writeText(titre+' ('+window.location.href+')');
+  navigator.clipboard.writeText(titre+' '+window.location.href+'');
 }
 
 //fonction qui réaffiche l'icone initial du copier qui a été changé après le click pour avertir que ça avait bien été copié
