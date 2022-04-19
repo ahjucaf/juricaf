@@ -11,19 +11,29 @@ function num($num) {
 function pathToFlag($str) {
   return urlencode(str_replace("'", '_', replaceBlank($str)));
 }
+?>
 
-echo('<div class="row">');
-foreach ($pays as $p){
-  $nom_pays = preg_replace('/ /', '_', $p['key'][0]);
-  echo('
-  <div class="col-lg-3">
-    <input type="checkbox" name="pays['.$nom_pays.']" id="pays_'.$nom_pays.'" checked="checked"/>
-    <label class="form-check-label" for="pays_'.$nom_pays.'"><img src="/images/drapeaux/'.pathToFlag(ucfirst($nom_pays)).'.png" alt="'.$nom_pays.'" />&nbsp;'.$p['key'][0].' ('.num($p['value']).')</label>
-  </div>');
-}
-echo('</div>');
+<div>
+  <div class="row">
+    <?php
+    foreach ($pays as $p){
+      $nom_pays = preg_replace('/ /', '_', $p['key'][0]);
+      echo('
+
+      <div class="col-lg-3">
+        <input type="checkbox" name="pays['.$nom_pays.']" id="pays_'.$nom_pays.'" checked="checked"/>
+        <label class="form-check-label" for="pays_'.$nom_pays.'"><img src="/images/drapeaux/'.pathToFlag(ucfirst($nom_pays)).'.png" alt="'.$nom_pays.'" />&nbsp;'.$p['key'][0].' ('.num($p['value']).')</label>
+      </div>');
+
+    }
+    ?>
+  </div>
+</div>
+
+<?php
 echo '<input type="hidden" name="total" value="'.count($pays).'" />';
 ?>
+
 <div style="clear: both; padding-top: 1em; padding-bottom: 0.7em;">
   <a href="#" onclick="javascript:$('input[name^=\'pays\']').prop('checked', 'checked');return false">Tout cocher</a> /
   <a href="#" onclick="javascript:$('input[name^=\'pays\']:checked').prop('checked', '');return false;">Tout décocher</a>
