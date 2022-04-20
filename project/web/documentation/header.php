@@ -80,6 +80,11 @@
             <i class="bi bi-twitter"></i>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://fr.linkedin.com/company/ahjucaf---cours-supr-mes-judiciaires-francophones" target="_blank">
+            <i class="bi bi-linkedin"></i>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -123,7 +128,7 @@
         </button>
         <br>
       </div>
-      <a class="float-end" href="/recherche_avancee">recherche avancée</a>
+      <a class="float-end d-none d-lg-block" href="/recherche_avancee">recherche avancée</a>
 
     </form>
   </div>
