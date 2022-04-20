@@ -65,7 +65,7 @@ function remplacequerytitre($string) {
 }
 
 ?>
-<div class="recherche container mt-5">
+<div class="recherche container">
 <div class="row">
 <div>
 <?php
@@ -80,17 +80,43 @@ function remplacequerytitre($string) {
 </div>
 
 <!-- BLOC FILTRES  -->
+<hr class="mt-5 d-none d-lg-block">
+<hr class="d-lg-none">
 
-<p class="d-lg-none">Filtrés sur :
+<div class="d-lg-none">
+<div class="float-end">
+<span><a id="open-filters" class="btn btn-sm  btn-outline-secondary" data-bs-toggle="collapse" href="#bloc-filtres" role="button" aria-expanded="false" aria-controls="bloc-filtres" title="Filtrer"><i class="bi bi-filter"></i></a></span>
+</div>
+<p>
+  <small>Résultats par
+    <span>
+    <?php
+    if($sf_request->getParameter('tri') == "ASD"){
+      echo "plus ancien";
+    }
+    elseif ($sf_request->getParameter('tri') == "DESC") {
+      echo "plus récent";
+    }
+    else{
+      echo "pertinence";
+    }
+    ?>
+  </span>
+</small>
+</p>
   <?php
-  $tabFiltres = array($sf_request->getParameter('tri'),$sf_request->getParameter('pays'),$sf_request->getParameter('juridiction'));
-  echo "<span>".implode(" / ",array_filter($tabFiltres))."<span>";
+  $tabFiltres = array($sf_request->getParameter('pays'),$sf_request->getParameter('juridiction'));
+  if(!$sf_request->getParameter('pays') && !$sf_request->getParameter('juridiction')){
+    echo "<p><small>Aucun filtre appliqué</small></p>";
+  }
+  else{
+    echo "<p><small>Filtrés par : <span class='filtres'>".implode(" / ",array_filter($tabFiltres))."</span></small></p>";
+  }
   ?>
 </p>
-<span><a id="open-filters" class="btn btn-sm d-lg-none btn-outline-primary" data-bs-toggle="collapse" href="#bloc-filtres" role="button" aria-expanded="false" aria-controls="bloc-filtres" title="Filtrer"><i class="bi bi-filter"></i></a></span>
-
+</div>
 <form method="get" action="<?php echo url_for('recherche')."/".$sf_request->getParameter('query')?>">
-<div id="bloc-filtres" class="row g-3 align-items-center" style="margin-top: 5px;">
+<div id="bloc-filtres" class="row g-3 align-items-center">
   <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Tri :</label>
   </div>
@@ -182,7 +208,7 @@ function remplacequerytitre($string) {
   </div>
 </div>
 </form>
-<br>
+
 <hr>
 <div class="text-justify">
     <div class="row justify-content-between">

@@ -463,41 +463,44 @@ if(isset($references['PUBLICATION'])) {
     }
 }
 ?>
-<div id="arret" class="container arret text-justify text-break">
-  <div class="row">
-      <ul class="nav justify-content-center flex-lg-column">
-        <li class="nav-item">
-          <button type="button" class="btn" onclick="fontSizePlus()">
-            <i class="bi bi-zoom-in"></i>
-          </button>
-        </li>
-        <li class="nav-item">
-           <button type="button" class="btn" onclick="fontSizeMoins()">
-             <i class="bi bi-zoom-out"></i>
-           </button>
-        </li>
-        <li class="nav-item">
-          <button type="button" class="btn disabled">
-            <i class="bi bi-download"></i>
-           </button>
-        </li>
-        <li class="nav-item">
-          <button type="button" title="copier" id="btn-cpy" class="btn" onclick="copyArretUrl(<?php echo "'".addslashes($document->titre)."'"?>)">
-            <i class="bi bi-clipboard"></i>
-          </button>
-        </li>
-        <li class="nav-item">
-          <button type="button" class="btn disabled" Download>
-            <i class="bi bi-envelope"></i>
-          </button>
-        </li>
-        <li class="nav-item">
-          <button type="button" title="imprimer" class="btn" onclick="window.print()">
-            <i class="bi bi-printer"></i>
+<div class="barre-outil">
+
+    <ul class="nav justify-content-center flex-lg-column">
+      <li class="nav-item">
+        <button type="button" class="btn" onclick="fontSizePlus()">
+          <i class="bi bi-zoom-in"></i>
         </button>
-        </li>
-      </ul>
-  <div class="col-lg-8 col-sm-12">
+      </li>
+      <li class="nav-item">
+         <button type="button" class="btn" onclick="fontSizeMoins()">
+           <i class="bi bi-zoom-out"></i>
+         </button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn disabled">
+          <i class="bi bi-download"></i>
+         </button>
+      </li>
+      <li class="nav-item">
+        <button type="button" title="copier" id="btn-cpy" class="btn" onclick="copyArretUrl(<?php echo "'".addslashes($document->titre)."'"?>)">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn disabled" Download>
+          <i class="bi bi-envelope"></i>
+        </button>
+      </li>
+      <li class="nav-item">
+        <button type="button" title="imprimer" class="btn" onclick="window.print()">
+          <i class="bi bi-printer"></i>
+      </button>
+      </li>
+    </ul>
+</div>
+<div id="arret" class="container arret text-justify text-break">
+    <div class="row">
+  <div class="col-lg-8 col-sm-12 mt-10">
 
     <small class="text-muted"> <?php echo(date('d/m/Y', strtotime($document->date_arret)) . ' | '. strtoupper($document->pays) . ' | N°'.$document->num_arret);?> </small>
     <h3 class="fw-bold" id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> | '.$document->titre?></h3>
@@ -582,10 +585,10 @@ if(isset($references['PUBLICATION'])) {
     <span id="debutArret" class="d-lg-none" itemprop="articleBody">
       <?php echo preg_replace($patterns, $replacements,simple_format_text(truncate_text(trim($texte_arret),650))); ?>
     </span>
-
-    <p class="float-end"><a id="btn-see-more" class="btn d-lg-none btn-outline-secondary" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret">Voir plus</a></p>
-
-
+    <div class="text-center">
+      <a id="btn-see-more" class="btn d-lg-none btn-outline-primary" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret">Voir plus</a>
+    </div>
+    <br>
 <?php } ?>
 </div>
 

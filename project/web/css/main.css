@@ -79,7 +79,7 @@ a{
 
 .slogan{
   font-family: Georgia;
-  color: #4E4C4D;
+  color: white;
 }
 .arret h2 {
     font-size: 20px;
@@ -91,32 +91,24 @@ a{
 .card-text{
   color:black;
 }
-.mt-10{
-  margin-top: 100px !important;
-}
 
-#arret ul{
+.barre-outil ul{
   width: min-content;
   display: block;
   margin-left: -70px;
   position:fixed;
 }
-#arret li{
+
+.barre-outil li{
   border: 1px solid #375d81;
   padding: 5px;
 }
 .inline li{
   list-style: none;
 }
-
-.btn-outline-primary{
-  border-color: #375d81;
-  color: black;
-}
-
-.btn-outline-primary:hover{
-  background-color: #375d81;
-  border-color: #375d81;
+.filtres{
+  font-weight: bold;
+  color: #375d81;
 }
 
 .fixed-top {
@@ -129,6 +121,19 @@ a{
   padding-bottom: .5rem;
 }
 
+
+.btn-outline-primary{
+  border-color: #375d81;
+  color:  #375d81;
+}
+
+.btn-outline-primary:hover{
+  background-color: #375d81;
+  border-color: #375d81;
+}
+
+
+
 @media screen and (max-width: 992px) {
   .full-width {
       max-width: none;
@@ -140,10 +145,10 @@ a{
   #filtrer{
     float:right;
   }
-  #arret ul{
+  .barre-outil ul{
     display: flex;
     margin: auto;
-    position: sticky;
+    /* position: sticky; */
     width: 100%;
     top:65px;
     right: 0;
@@ -152,7 +157,7 @@ a{
     padding: 10px 0 10px 0;;
     border-bottom: 1px solid #375d81;
   }
-  #arret li{
+  .barre-outil li{
     padding: 0;
   }
 
@@ -210,8 +215,27 @@ a{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+  .hide-slogan{
+    flex-wrap:unset !important;
+  }
+  .mt-10{
+    margin-top: 100px !important;
+  }
 }
 
+@media screen and (max-width:496px){
+  .barre-outil ul{
+    padding: 26px 0 10px 0 !important;
+  }
+}
+@media screen and (max-width:350px) {
+  .slogan{
+    display:none;
+  }
+  .barre-outil ul{
+    padding: 10px 0 10px 0 !important;
+  }
+}
 @media screen and (min-width:991px){
   .bloc-droit{
     border-style: dotted;
