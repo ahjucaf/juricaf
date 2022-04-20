@@ -31,22 +31,24 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse " id="navbarToggler">
-      <div class="mt-3 float-end">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="bi bi-x"></i>
-      </button>
-    </div>
-      <ul class="navbar-nav me-auto mr-auto mt-2 mt-lg-0">
-        <li class="nav-item d-lg-none">
-          <form class="my-2 my-lg-0 text-center d-flex d-lg-none navbar-search-input" method="get" action="/recherche">
-                <div class="form-inline input-group">
-              <input id="recherche" class="form-control" autocomplete="off" type="text" placeholder="Rechercher une jurisprudence" name="q" aria-label="Rechercher" tabindex="10">
-              <button class="btn btn-primary"  type="submit">
-                  <i class="bi bi-search"></i>
+      <ul class="navbar-nav me-auto mr-auto  mt-lg-0" >
+        <li class="nav-item d-lg-none header-mobile-navbar">
+          <div class="container-fluid">
+            <div class="float-end">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-x"></i>
               </button>
-              <br>
             </div>
-          </form>
+            <form class="my-2 my-lg-0 text-center d-flex d-lg-none navbar-search-input" method="get" action="/recherche">
+                  <div class="form-inline input-group">
+                <input id="recherche" class="form-control" autocomplete="off" type="text" placeholder="Rechercher une jurisprudence" name="q" aria-label="Rechercher" tabindex="10">
+                <button class="btn btn-primary"  type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+                <br>
+              </div>
+            </form>
+          </div>
         </li>
         <li class="nav-item d-lg-none">
           <a class="nav-link" href="/recherche_avancee">Recherche avancée</a>
