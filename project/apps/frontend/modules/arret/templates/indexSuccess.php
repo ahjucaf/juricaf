@@ -496,6 +496,9 @@ if(isset($references['PUBLICATION'])) {
           <i class="bi bi-printer"></i>
       </button>
       </li>
+      <li class="nav-item d-lg-none">
+        <a id="btn-expand" class="btn d-lg-none" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret"><i class="bi bi-arrows-expand"></i></a>
+      </li>
     </ul>
 </div>
 <div id="arret" class="container arret text-justify text-break">

@@ -29,7 +29,7 @@ $( document ).ready(function() {
   //SI ON EST EN MODE MOBILE
   if(is_mobile()){
 
-    if(document.getElementById("textArret")){ //id dans la page d'un arret/templates/indexSuccess.php on cache le texte pour n'afficher que le texte début
+    if(document.getElementById("textArret")){ //id dans la page d'un arret/templates/indexSuccess.php on cache le texte pour n'afficher que le texte début au tout début
       $("#textArret").addClass("collapse");
     }
     if(document.getElementById('hidden-mode-mobile')){ //id dans le header si page d'un arret alors pas de barre de recherche
@@ -40,12 +40,19 @@ $( document ).ready(function() {
       $("#btn-see-more").click(function(){
           if($("#btn-see-more").text()=="Voir plus"){
             $("#btn-see-more").html("Voir moins");
-            $("#debutArret").addClass("d-sm-none"); //cache le texte debut "resume"
+            $("#btn-expand").html("<i class='bi bi-arrows-collapse'></i>") //change icone dans la barre d'option
+            $("#debutArret").addClass("d-none"); //cache le texte debut "resume"
           }
           else{
             $("#btn-see-more").html("Voir plus");
-            $("#debutArret").removeClass("d-sm-none");//affiche le texte debut "resume"
+            $("#btn-expand").html("<i class='bi bi-arrows-expand'></i>") //change icone dans la barre d'option
+            $("#debutArret").removeClass("d-none");//affiche le texte debut "resume"
           }
+      });
+    }
+    if(document.getElementById('btn-expand')){
+      $('#btn-expand').click(function(){
+        $("#btn-see-more").trigger( "click" );
       });
     }
     if(document.getElementById('bloc-filtres')){ //id dans la page des resultats d'une recherche recherche/templates/searchSuccess.php
