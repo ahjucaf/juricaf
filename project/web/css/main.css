@@ -210,8 +210,8 @@ a{
     left: 0;
     z-index: 1030;
   }
-  #debutArret p:last-of-type{
-    background: -webkit-linear-gradient(#797b7c, white);
+  #debutArret{
+    background: -webkit-linear-gradient( 0deg, black 75%, #797b7c 30%, white 100% );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }

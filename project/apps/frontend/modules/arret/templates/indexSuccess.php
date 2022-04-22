@@ -48,6 +48,10 @@ function replaceAccents($string) {
   return strtr($string, $table);
 }
 
+function addbr($text){
+  return str_replace("\n", "</br>", truncate_text(trim($text),650));
+}
+
 function replaceBlank($str) {
   return str_replace (' ', '_', $str);
 }
@@ -586,7 +590,7 @@ if(isset($references['PUBLICATION'])) {
     </span>
 
     <span id="debutArret" class="d-lg-none" itemprop="articleBody">
-      <?php echo preg_replace($patterns, $replacements,simple_format_text(truncate_text(trim($texte_arret),650))); ?>
+      <?php echo preg_replace($patterns, $replacements,addbr($texte_arret)); ?>
     </span>
     <div class="text-center">
       <a id="btn-see-more" class="btn d-lg-none btn-outline-primary" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret">Voir plus</a>
