@@ -78,7 +78,24 @@ $( document ).ready(function() {
     $('#hidden-mode-mobile').addClass("mb-5"); //ajoute de l'espace entre la barre de recherche et le contenu en mode desktoop.
   }
 
-
+  /* page recherche avancée select en mode mobile va aller cocher les bonnes cases qui sont en display none en mode mobile */
+  $("#selectpays option").click(function (e) {
+    // si click sur tout selectionner
+      if(this.id == "selectall"){ //si je click sur tout séléctionner
+        if(this.selected){  // et qu'il est sélectionner
+          $('#selectpays option').prop('selected', true); //je sélectionne tous les options
+          $("#checkall").trigger("click"); // et je clique sur Tout cocher
+        }
+        else{
+          $("#uncheckall").trigger("click"); // et je clique sur Tout décocher
+          $('#selectpays option').prop('selected', false); //je désélectionne tous les options
+        }
+      }
+      else{ //si une autre option est cliqué
+        $('#selectall').prop('selected', false); //je désélectionne tout séléctionner
+        $("#"+this.dataset.tocheck).trigger("click"); // je coche ou décoche la checkbox
+      }
+  });
 
 });
 
