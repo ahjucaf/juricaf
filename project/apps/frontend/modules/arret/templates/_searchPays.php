@@ -12,8 +12,8 @@ function pathToFlag($str) {
   return urlencode(str_replace("'", '_', replaceBlank($str)));
 }
 ?>
-
-<div class="d-none d-lg-block">
+ <!-- class="d-none d-lg-block" -->
+<div>
 <div>
   <div class="row">
     <?php
