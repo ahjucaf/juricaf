@@ -210,10 +210,11 @@ a{
     left: 0;
     z-index: 1030;
   }
-  #debutArret{
-    background: -webkit-linear-gradient( 0deg, black 75%, #797b7c 30%, white 100% );
+  #debutArret p{
+    display:inline;
+    background: -webkit-linear-gradient( 0deg, black 10%, #797b7c 30%, white 100% );
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
   .hide-slogan{
     flex-wrap:unset !important;
