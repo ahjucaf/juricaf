@@ -44,6 +44,8 @@ echo '<input type="hidden" name="total" value="'.count($pays).'" />';
 
 <div class="d-lg-none">
   <select id="selectpays" class="form-select" size="5" multiple="multiple" aria-label="multiple select example">
+    <option disabled></option>
+    <optgroup disabled hidden></optgroup>
     <option id="selectall" selected>Tout sélectionner</option>
     <?php
     foreach ($pays as $p){
