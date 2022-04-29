@@ -72,8 +72,7 @@ function addLegend($value, $type) {
 
 $csv = '"Pays";"Institution";Nombre;"Etat";"Mise à jour";"Selection";"Traduction";"Plus ancien";"Plus récent";"Licence"';
 $csv .= "\n";
-
-$tableau = "<table class=\"statsbase\">\n";
+$tableau = "<div class='table-responsive'><table class=\"table statsbase table-striped table-bordered\">\n";
 $tableau .= "<tr><th>Pays</th><th>Institution</th><th>Nombre</th><th>Etat</th><th>Mise à jour</th><th>Selection</th><th>Traduction</th><th>Plus ancien</th><th>Plus récent</th><th>Licence</th></tr>\n";
 $classe = "color2";
 $line = -1;
@@ -106,7 +105,7 @@ if (($handle = fopen($ORIGINALCSV, "r")) !== FALSE) while (($donnees = fgetcsv($
   </tr>'."\n";
 }
 
-$tableau .= '</table>';
+$tableau .= '</table></div>';
 
 try {
   $handler = fopen("../project/web/documentation/stats/base.csv","w");
