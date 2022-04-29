@@ -590,10 +590,11 @@ if(isset($references['PUBLICATION'])) {
     <span id="textArret" itemprop="articleBody">
     <?php echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret))); ?>
     </span>
-
+    <div>
     <span id="debutArret" class="d-lg-none" itemprop="articleBody">
       <?php echo preg_replace($patterns, $replacements,resume($texte_arret)); ?>
     </span>
+  </div>
     <div class="text-center">
       <a id="btn-see-more" class="btn d-lg-none btn-outline-primary" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret">Voir plus</a>
     </div>

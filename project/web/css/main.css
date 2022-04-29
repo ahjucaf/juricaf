@@ -214,7 +214,7 @@ a{
     display:inline;
     background: -webkit-linear-gradient( 0deg, black 10%, #797b7c 30%, white 100% );
     -webkit-background-clip: text;
-    color: grey;
+    color: lightgrey;
   }
   .hide-slogan{
     flex-wrap:unset !important;
