@@ -29,7 +29,7 @@ $_SESSION['token'] = $token;
 	 </div>
         <div class="menu">
           <ul>
-            <li><a href="/documentation/a_propos.php">A propos</a></li>
+            <li><a href="/documentation/a_propos.php">À propos</a></li>
 
             <li><a href="/documentation/stats/statuts.php">Étendue des collections</a></li>
 <!---            <li><a href="#">Outils</a></li> -->
@@ -47,7 +47,7 @@ $_SESSION['token'] = $token;
               <tr>
                 <td>
                   <a href="http://www.juricaf.org/recherche"><img id="logo" src="/images/juricaf.png" alt="Juricaf" /></a><br />
-                  <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des cours suprêmes</span><br />
+                  <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des Cours suprêmes</span><br />
                   <input type="text" style="width: 300px; margin-top: 5px;" name="q" value="" tabindex="10" /><br />
                   <input type="submit" value="Rechercher" tabindex="20" /> <a href="/recherche_avancee">recherche avancée</a>
                 </td>
@@ -63,19 +63,20 @@ $_SESSION['token'] = $token;
 
             <p>L’AHJUCAF est inscrite au répertoire national des entreprises et de leurs établissements sous le numéro SIREN 440 233 880 (APE 913 E).</p>
         
-            <p>Ahjucaf<br/>
+            <p>AHJUCAF<br/>
+	    Cour de cassation<br/>
             5 quai de l’Horloge 75001 PARIS<br/>
             Tel. : +33 1 46 34 67 40</p>
 
             <h2>Directeur de Publication</h2>
             
             <p>M. Jean-Paul JEAN, Secrétaire général de l’AHJUCAF<br/>
-                5 quai de l’Horloge, 75001 PARIS</p>
+                AHJUCAF, 5 quai de l’Horloge, 75001 PARIS</p>
 
             <h2>Coordinateur technique</h2>
 
         <p>M. Thomas FRINCHABOY, chargé de mission auprès du Secrétaire général de l’AHJUCAF<br/>
-        5 quai de l’Horloge, 75001 PARIS</p>
+        AHJUCAF, 5 quai de l’Horloge, 75001 PARIS</p>
 
             <h2>Hébergeur</h2>
         <p>ONLINE SAS BP 438 PARIS CEDEX 08 </p>
@@ -119,7 +120,7 @@ $_SESSION['token'] = $token;
  	 <img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones" />
  	 <img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
        <div class="bottom">
-       <p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones,<br />
+       <p>Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones,<br />
       initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I),<br />
       Il est soutenu par l'Organisation Internationale de la Francophonie.</p>
        </div>
