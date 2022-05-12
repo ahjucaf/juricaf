@@ -19,8 +19,8 @@
       <div class="head">
         <div class="menu">
           <ul>
-            <li><a href="http://www.juricaf.org/documentation/a_propos.php">A propos</a></li>
-            <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Etendue des collections</a></li>
+            <li><a href="http://www.juricaf.org/documentation/a_propos.php">À propos</a></li>
+            <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Étendue des collections</a></li>
             <li><a href="http://www.juricaf.org/documentation/partenaires.php">Partenaires</a></li>
             <li><a href="http://www.juricaf.org/documentation/mentions_legales.php">Mentions légales</a></li>
 	    <li><a href="http://www.juricaf.org/documentation/contact.php">Contact</a></li>
@@ -41,7 +41,7 @@
               <tr>
                 <td>
                   <a href="http://www.juricaf.org/recherche"><img id="logo" src="/images/juricaf.png" alt="Juricaf" /></a><br />
-                  <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des cours suprêmes</span><br />
+                  <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des Cours suprêmes</span><br />
                   <input type="text" style="width: 300px; margin-top: 5px;" name="q" value="" tabindex="10" /><br />
                   <input type="submit" value="Rechercher" tabindex="20" /> <a href="/recherche_avancee">recherche avancée</a>
                 </td>
