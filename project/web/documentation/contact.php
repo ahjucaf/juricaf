@@ -83,7 +83,7 @@ $_SESSION['cap2'] = intval(rand(0, 10) + 1);
 	 <a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
 	 <img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
       <div class="bottom">
-      <p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones,<br />
+      <p>JURICAF est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones,<br />
       initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I),<br />
       Il est soutenu par l'Organisation Internationale de la Francophonie.</p></div>
     </div>
