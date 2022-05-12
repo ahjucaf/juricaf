@@ -67,7 +67,7 @@
               <p>Plus de la moitié des Cours suprêmes d’Afrique francophone font parvenir leurs décisions au secrétariat de l’AHJUCAF, de manière plus régulière et sous un format normalisé. D’autres pays membres de l’AHJUCAF dont les arrêts ne sont pas rendus en français (par exemple l’Albanie, la Bulgarie, la Roumanie, les pays de langue arabe) transmettent régulièrement des arrêts traduits. Des séminaires de formation sont organisés avec les correspondants de l’AHJUCAF, facilitant ainsi la transmission régulière de jurisprudences sous une forme compatible.</p>
 
 
-              <h1>Histoire de JURICAFFF</h1>
+              <h1>Histoire de JURICAF</h1>
               
               <p>JURICAF est un projet de l'AHJUCAF, l'association des Cours judiciaires suprêmes francophones, réalisé initialement en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I), avec le soutien de l'Organisation internationale de la Francophonie.</p>
               <p>L’AHJUCAF a décidé de mettre à disposition des professionnels du droit et des citoyens de l’espace judiciaire francophone une base de jurisprudence permettant un accès gratuit aux décisions de justice rédigées ou traduites en français. La diffusion du droit francophone vient ainsi renforcer l’État de droit et la démocratie.</p>
