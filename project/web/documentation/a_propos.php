@@ -40,7 +40,7 @@
               <tr>
                 <td>
                   <a href="http://www.juricaf.org/recherche"><img id="logo" src="/images/juricaf.png" alt="Juricaf" /></a><br />
-                  <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des cours suprêmes</span><br />
+                  <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des Cours suprêmes</span><br />
                   <input type="text" style="width: 300px; margin-top: 5px;" name="q" value="" tabindex="10" /><br />
                   <input type="submit" value="Rechercher" tabindex="20" /> <a href="/recherche_avancee">recherche avancée</a>
                 </td>
@@ -50,13 +50,13 @@
           </div>
           <div class="arret">
               
-              <h1>À Propos</h1>
+              <h1>À propos</h1>
               
               <p>La base JURICAF est destinée en priorité au monde francophone, mais aussi aux ressortissants des pays de Common Law afin qu’ils puissent avoir accès à la jurisprudence rendue en français.</p>
               
               <p>Cette base de jurisprudence appartient à l’<a href="https://www.ahjucaf.org/">association AHJUCAF</a> et résulte de la contribution régulière des Cours suprêmes adhérentes de l’AHJUCAF et pratiquant l’usage du français.</p>
               
-              <p>Sous la responsabilité du Secrétaire général de l’AHJUCAF, le fonctionnement et l’alimentation du sitont assurés par une équipe animée par un greffier de la Cour de cassation française qui veille à son alimentation régulière. Un webmestre assure l’hébergement sécurisé des sites JURICAF et AHJUCAF.</p>
+              <p>Sous la responsabilité du Secrétaire général de l’AHJUCAF, le fonctionnement et l’alimentation du site sont assurés par une équipe animée par un greffier de la Cour de cassation française qui veille à son alimentation régulière. Un webmestre assure l’hébergement sécurisé des sites JURICAF et AHJUCAF.</p>
 
               <p>Depuis septembre 2016, M. Jean-Paul Jean Président de chambre honoraire à la Cour de cassation de France assure les fonctions de Secrétaire général de l’AHJUCAF. Une réorganisation des processus de récupération et de traitement des décisions a été conduite avec le concours de partenaires attachés depuis l’origine au projet JURICAF, les animateurs des sociétés 24ème et La Loi des Ours, ainsi que l’éditeur Lexbase. La reprise de l’alimentation régulière et la stratégie de développement ont permis à JURICAF de dépasser au cours de l’année 2020 le million d’arrêts intégrés. </p>
 
@@ -92,7 +92,7 @@
  	 <img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones" />
  	 <img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
        <div class="bottom">
-       <p>Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones,<br />
+       <p>JURICAF est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones,<br />
       initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I),<br />
       Il est soutenu par l'Organisation Internationale de la Francophonie.</p>
     </div>
