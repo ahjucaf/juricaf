@@ -55,7 +55,7 @@
   <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid hide-slogan" >
     <a class="navbar-brand d-lg-none" href="/"><img class="align-self-center" width="40px" height="40px" src="/images/logo_menu.png"/></a>
-    <div class="d-lg-none"><p class="text-center slogan"><small class="fst-italic slogan">La jurisprudence francophone des cours suprêmes</small><br/></p></div>
+    <div class="d-lg-none"><p class="text-center slogan"><small class="fst-italic slogan">La jurisprudence francophone des Cours suprêmes</small><br/></p></div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -127,7 +127,7 @@
     <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
       <div class="d-none d-lg-block">
         <a href="/"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
-        <p ><small class="fst-italic slogan">La jurisprudence francophone des cours suprêmes</small><br/></p>
+        <p ><small class="fst-italic slogan">La jurisprudence francophone des Cours suprêmes</small><br/></p>
       </div>
         <div class="form-inline input-group input-group-lg">
         <input id="recherche" class="form-control mx-auto" autocomplete="off" type="text"
