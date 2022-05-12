@@ -18,8 +18,8 @@
       <div class="head">
         <div class="menu">
           <ul>
-            <li><a href="http://www.juricaf.org/documentation/a_propos.php">A propos</a></li>
-            <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Etendue des collections</a></li>
+            <li><a href="http://www.juricaf.org/documentation/a_propos.php">À propos</a></li>
+            <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Étendue des collections</a></li>
             <li><a href="http://www.juricaf.org/documentation/partenaires.php">Partenaires</a></li>
             <li><a href="http://www.juricaf.org/documentation/mentions_legales.php">Mentions légales</a></li>
 	    <li><a href="http://www.juricaf.org/documentation/contact.php">Contact</a></li>
