@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="title" content="Juricaf" />
-    <meta name="description" content="La base de données de jurisprudence francophone" />
+    <meta name="description" content="La jurisprudence francophone des Cours suprêmes" />
     <meta name="keywords" content="jurisprudence, cassation, cour, suprême, francophone, francophonie, ahjucaf, arrêt, décision" />
     <meta name="language" content="fr" />
     <title>Juricaf</title>
@@ -86,7 +86,7 @@
           <a class="nav-link" href="/documentation/a_propos.php">À propos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/documentation/stats/statuts.php">Etendue des collections </a>
+          <a class="nav-link" href="/documentation/stats/statuts.php">Étendue des collections </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/documentation/partenaires.php">Partenaires</a>
