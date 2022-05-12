@@ -25,8 +25,8 @@ $_SESSION['token'] = $token;
      <div class="menu">
         <div class="menu">
           <ul>
-            <li><a href="http://www.juricaf.org/documentation/a_propos.php">A propos</a></li>
-            <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Etendue des collections</a></li>
+            <li><a href="http://www.juricaf.org/documentation/a_propos.php">À propos</a></li>
+            <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Étendue des collections</a></li>
             <li><a href="http://www.juricaf.org/documentation/partenaires.php">Partenaires</a></li>
             <li><a href="http://www.juricaf.org/documentation/mentions_legales.php">Mentions légales</a></li>
 	    <li><a href="http://www.juricaf.org/documentation/contact.php">Contact</a></li>
@@ -47,7 +47,7 @@ $_SESSION['token'] = $token;
               <tr>
                 <td>
                   <a href="http://www.juricaf.org/recherche"><img id="logo" src="/images/juricaf.png" alt="Juricaf" /></a><br />
-                  <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des cours suprêmes</span><br />
+                  <span style="font-family: Georgia; font-style: italic; color: #4E4C4D;">La jurisprudence francophone des Cours suprêmes</span><br />
                   <input type="text" style="width: 300px; margin-top: 5px;" name="q" value="" tabindex="10" /><br />
                   <input type="submit" value="Rechercher" tabindex="20" /> <a href="/recherche_avancee">recherche avancée</a>
                 </td>
@@ -59,7 +59,7 @@ $_SESSION['token'] = $token;
             <h1>Licence AHJUCAF </h1>
    
    
- <p>Pour pouvoir bénéficier des arrêts publiés au format XML ou PDF dans Juricaf, merci de prendre contact avec le Secrétariat général de l'AHJUCAF : 
+ <p>Pour pouvoir bénéficier des arrêts publiés au format XML ou PDF dans JURICAF, merci de prendre contact avec le Secrétariat général de l'AHJUCAF : 
    
 
             <h1>Formulaire de contact</h1>
@@ -76,11 +76,10 @@ $_SESSION['token'] = $token;
         </div>
       </div>
       <div class="bottom">
-        <!--<p>Juricaf est un projet de l'<a href="http://www.ahjucaf.org">AHJUCAF</a>, l'association des cours judiciaires suprêmes francophones,<br />
+        <!--<p>JURICAF est un projet de l'<a href="http://www.ahjucaf.org">AHJUCAF</a>, l'association des Cours judiciaires suprêmes francophones,<br />
         réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I).<br />
-        Il est soutenu par l'<a href="http://www.francophonie.org">Organisation internationale de la Francophonie</a>,
-        le <a href="http://inforoutes.francophonie.org">Fonds francophone des inforoutes</a> et les réseaux institutionnels francophones.</p>
-        <a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf.png" alt="Association des cours judiciaires suprêmes francophones" /></a>
+        Il est soutenu par l'<a href="http://www.francophonie.org">Organisation Internationale de la Francophonie</a>.</p>
+        <a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf.png" alt="Association des Cours judiciaires suprêmes francophones" /></a>
         <a href="http://www.francophonie.org/"><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la fra$
  --><p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones,<br />
  initialement réalisé en partenariat avec le Laboratoire Normologie Linguistique et Informatique du droit (Université Paris I),<br />
