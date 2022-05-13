@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="title" content="Juricaf" />
-<meta name="description" content="La jurisprudence francophone des cours suprêmes" />
+<meta name="description" content="La jurisprudence francophone des Cours suprêmes" />
 <meta name="keywords" content="jurisprudence, cassation, cour, suprême, francophone, francophonie, ahjucaf, arrêt, décision" />
 <meta name="language" content="fr" />
     <title>Statuts et licences des collections - Juricaf</title>
@@ -50,8 +50,8 @@
       <div class="head">
        <div class="menu">
           <ul>
-            <li><a href="http://www.juricaf.org/documentation/a_propos.php">A propos</a></li>
-            <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Etendue des collections</a></li>
+            <li><a href="http://www.juricaf.org/documentation/a_propos.php">À propos</a></li>
+            <li><a href="http://www.juricaf.org/documentation/stats/statuts.php">Étendue des collections</a></li>
             <li><a href="http://www.juricaf.org/documentation/partenaires.php">Partenaires</a></li>
             <li><a href="http://www.juricaf.org/documentation/mentions_legales.php">Mentions légales</a></li>
 	    <li><a href="http://www.juricaf.org/documentation/contact.php">Contact</a></li>
