@@ -52,7 +52,7 @@
       <div class="head">
         <div class="menu">
           <ul>
-              <li><a href="/documentation/a_propos.php">A propos</a></li>
+              <li><a href="/documentation/a_propos.php">À-propos</a></li>
               <li><a href="/documentation/stats/statuts.php">Étendue des collections</a></li>
               <li><a href="/documentation/partenaires.php">Partenaires</a></li>
               <li><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
@@ -74,7 +74,7 @@
               <tr>
                 <td align="center" width="1024px" height="250px">
                   <a href="<?php echo url_for('@recherche'); ?>"><img id="logo" style="width: 100px; height: 100px;" src="/images/juricaf.png" alt="Juricaf" /></a><br />
-                  <img src="/images/slogan.png" style="width: 276px; height: 12px; margin-top: 4px;" alt="La jurisprudence francophone des cours suprêmes" itemprop="image" /><br />
+                  <img src="/images/slogan.png" style="width: 276px; height: 12px; margin-top: 4px;" alt="La jurisprudence francophone des Cours suprêmes" itemprop="image" /><br />
                   <input type="text" name="q" value="<?php echo $sf_params->get('query'); ?>" tabindex="10" /><br />
                   <input type="submit" value="Rechercher" tabindex="20" /> <a href="<?php echo url_for('@recherche_avancee'); ?>">recherche avancée</a>
                 </td>
@@ -90,13 +90,13 @@
       </div>
       <div>
         <table width=100%><tr>
-	    <td><a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprêmes francophones" /></a></td>
-	    <td><center><a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucafSite.jpg" alt="Association des cours judiciaires suprêmes francophones" /><br/>Accédez au site de l’AHJUCAF </a></center></td>
+	    <td><a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucaf_small.png" alt="Association des Cours judiciaires suprêmes francophones" /></a></td>
+	    <td><center><a href="http://www.ahjucaf.org/"><img style="margin-left: 10px;" src="/images/ahjucafSite.jpg" alt="Association des Cours judiciaires suprêmes francophones" /><br/>Accédez au site de l’AHJUCAF </a></center></td>
 	    <td><img style="float: right; margin-right: 10px;" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></td>
         </tr></table>
          
       <div class="bottom">
-      <p>Juricaf est un projet de l'AHJUCAF, l'association des cours suprêmes judiciaires francophones,<br />
+      <p>Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones,<br />
         Il est soutenu par l'Organisation Internationale de la Francophonie. </p>
       </div>
     </div>
