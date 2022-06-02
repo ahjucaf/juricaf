@@ -18,22 +18,22 @@ $cpt = 0;
 
 <div >
       <div class="row">
-        <?php
-          for($i=0 ; $i < 3; $i++){
-            echo('<div class="col-lg-4"><ul class="list-unstyled list-group">');
-            foreach($sliptPays[$i] as $p){
-              $pays = preg_replace('/ /', '_', $p['key'][0]);
+        <?php for($i=0 ; $i < 3; $i++): ?>
+            <div class="col-lg-4"><ul class="list-unstyled list-group">
+
+            <?php foreach($sliptPays[$i] as $p):
+              $pays = str_replace(' ', '_', $p['key'][0]);
               $pays_nom = $p['key'][0].' ('.number_format($p['value'], 0, '', ' ').')';
               $link = link_to($pays_nom,'recherche/search?query=+&facets=facet_pays:'.$pays);
               if (strlen($pays_nom) > 45) {
                 $pays_nom_min = substr($pays_nom, 0, 16) . '...';
                 $link = link_to($pays_nom_min,'recherche/search?query=&facets=facet_pays:'.$pays);
               }
-               echo('<li class="d-none d-lg-block list-group-item"> <img src="/images/drapeaux/'.pathToFlag(ucfirst($pays)).'.png" alt ="'.$pays.'" />&nbsp;'.$link."</li>");
-            }
-            echo('</ul></div>');
-          }
-        ?>
+            ?>
+              <li class="d-none d-lg-block list-group-item"> <img src="/images/drapeaux/<?php echo pathToFlag(ucfirst($pays)) ?>.png" alt ="<?php echo $pays ?>" />&nbsp;<?php echo $link ?></li>
+            <?php endforeach ?>
+            </ul></div>
+        <?php endfor ?>
 
           <div class="input-group d-lg-none w-90 m-auto">
 
@@ -44,8 +44,7 @@ $cpt = 0;
                 $pays = preg_replace('/ /', '_', $p['key'][0]);
                 $pays_nom = $p['key'][0].' ('.number_format($p['value'], 0, '', ' ').')';
                 $link = 'recherche/+/facet_pays:'.$pays;
-                //echo('<option id="'.$p['key'][0].'"data-test ="'.$link.'">'.ClientArret::TAB_DRAPEAU[$p['key'][0]]." ".$p['key'][0]." (".$p['value'].") ".'</option>');
-                echo($link);
+                echo('<option id="'.$p['key'][0].'"data-test ="'.$link.'">'.ClientArret::TAB_DRAPEAU[$p['key'][0]]." ".$p['key'][0]." (".$p['value'].") ".'</option>');
               }
               ?>
             </select>

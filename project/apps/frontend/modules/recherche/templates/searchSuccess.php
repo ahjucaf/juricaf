@@ -148,9 +148,9 @@ function remplacequerytitre($string) {
   <div class="col-lg-auto col-md-12 col-sm-12">
     <?php if($filtre_pays || $filtre_juridiction){
       echo('<div class="form-inline input-group">
-          <input  class="form-control mx-auto" type="search" name="pays" value = ');
+          <input  class="form-control mx-auto" type="search" name="pays" value="');
         echo $filtre_pays;
-        echo(' readonly></input><a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query).'""><i class="bi bi-x-circle"></i></a></div>');
+        echo('" readonly></input><a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query).'""><i class="bi bi-x-circle"></i></a></div>');
         }
     else{
     ?>
@@ -228,7 +228,7 @@ foreach ($resultats->response->docs as $resultat) {
   $textArret = JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});
   ?>
 
-  <p class="card-header fs-5"><?php echo('<img src="/images/drapeaux/'.$pathToFlag .'.png" alt="§" /> | <a class="a-unstyled " target="_blank" href="'.$urlForArret.'">'.$resultat->titre);?></a></p>
+  <p class="card-header fs-5"><img src="/images/drapeaux/<?php echo $pathToFlag ?>.png" alt="§" /> | <a class="a-unstyled " target="_blank" href="<?php echo $urlForArret ?>"><?php echo $resultat->titre ?></a></p>
 
   <div class="card-body" data-link=<?php echo($urlForArret);?>>
     <p class="card-text"> <?php echo($textArret); ?></p>
