@@ -63,18 +63,18 @@
 
 <h5 class="mt-3 mb-3"><u>Entreprises / Structures professionnelles :</u></h5>
 
-  <p> - La Loi des Ours</p>
-  <p> - Lexbase</p>
-  <p> - 24ème</p>
+  <p> - <a href="http://www.loidesours.fr/">La Loi des Ours</a></p>
+  <p> - <a href="https://www.lexbase.fr/">Lexbase</a></p>
+  <p> - <a href="https://www.24eme.fr/">24ème</a></p>
   <p> - Le Réseau ALioka avocats</p>
 
   <h5 class="mt-3 mb-3"><u>Associations :</u></h5>
 
   <p>(Elles accompagnent les développements de JURICAF et rediffusent les informations venant de l’AHJUCAF)</p>
 
-  <p> - Open Law</p>
-  <p> - Juriconnexion</p>
-  <p> - ADIJ</p>
+  <p> - <a href="https://openlaw.fr/">Open Law</a></p>
+  <p> - <a href="https://www.juriconnexion.fr/">Juriconnexion</a></p>
+  <p> - <a href="http://www.adij.fr/">ADIJ</a></p>
 </div>
 
 
