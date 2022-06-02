@@ -53,7 +53,7 @@
   <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid hide-slogan" >
     <a class="navbar-brand" href="/"><img class="align-self-center" width="40px" height="40px" src="/images/logo_menu.png"/></a>
-    <div class="d-lg-none text-center"><small class="slogan">La jurisprudence francophone des Cours suprêmes</small></div>
+    <div class="d-lg-none text-center "><small class="slogan text-white">La jurisprudence francophone des Cours suprêmes</small></div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -125,6 +125,5 @@
     </div>
   </div>
 </nav>
-<div class="d-lg-none">
-<br><br>
+<div class="d-lg-none" style="height: 66px;">
 </div>

@@ -5,7 +5,7 @@ if(!empty($query)) { echo 'Query : '.$query."<br />"; }
 if(!empty($filter)) { echo 'Filter : '.$filter; }
 ?>
 
-<h5 class="p-3 mb-2 mt-5 bg-secondary bg-gradient">Recherche avancée</h5>
+<h5 class="p-3 mb-2 mt-3 bg-secondary bg-gradient">Recherche avancée</h5>
 
 <h5><b>Critères</b></h5>
 <p>

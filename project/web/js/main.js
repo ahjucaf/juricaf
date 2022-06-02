@@ -75,7 +75,7 @@ $( document ).ready(function() {
     $(document).change(function(){
       $( "#filtrer" ).trigger( "click" );
     });
-    $('#hidden-mode-mobile').addClass("mb-5"); //ajoute de l'espace entre la barre de recherche et le contenu en mode desktoop.
+    $('#hidden-mode-mobile').addClass("mb-3"); //ajoute de l'espace entre la barre de recherche et le contenu en mode desktoop.
   }
 
 });
