@@ -1,13 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="title" content="Juricaf" />
-    <meta name="description" content="La jurisprudence francophone des Cours suprêmes" />
-    <meta name="keywords" content="jurisprudence, cassation, cour, suprême, francophone, francophonie, ahjucaf, arrêt, décision" />
-    <meta name="language" content="fr" />
-    <title>Juricaf</title>
+    <?php include_http_metas() ?>
+    <?php if(has_slot("metadata")) { include_slot("metadata"); } ?>
+    <?php include_metas() ?>
+    <?php include_title() ?>
     <link rel="shortcut icon" href="/images/favicon.ico" />
+    <?php include_stylesheets() ?>
+	<link type="text/css" rel="stylesheet" href="/css/jquery.qtip.css" />
+    <?php include_javascripts() ?>
     <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
     <script type="text/javascript" src="/js/jquery.scrollTo-min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,7 +19,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/js/main.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-    <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
+	<script type="text/javascript" src="/js/opensearch.js"></script>
+ 	<link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
     <!-- Matomo -->
     <script>
     <!--
@@ -158,18 +160,6 @@ else {
    alert("Votre navigateur ne supporte pas cette fonctionnalité");
 }
 }
-
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-8802834-4']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-// -->
 </script>
 </body>
 </html>
-

@@ -44,8 +44,8 @@ $( document ).ready(function() {
             $("#debutArret").addClass("d-none"); //cache le texte debut "resume"
             location.hash = "#debutArret";
             window.scroll({
-             top: 0,
-             left: 0,
+             top: 10,
+             left: 10,
              behavior: 'smooth'
             });
           }
@@ -53,6 +53,13 @@ $( document ).ready(function() {
             $("#btn-see-more").html("Voir plus");
             $("#btn-expand").html("<i class='bi bi-arrows-expand'></i>") //change icone dans la barre d'option
             $("#debutArret").removeClass("d-none");//affiche le texte debut "resume"
+            
+            window.scroll({
+             top: 10,
+             left: 10,
+             behavior: 'smooth'
+            });
+            // location.hash = "#btn-see-more";
 
           }
       });
