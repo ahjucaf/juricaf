@@ -469,6 +469,7 @@ if(isset($references['PUBLICATION'])) {
     }
 }
 ?>
+<?php include_partial('recherche/barre'); ?>
 <div class="barre-outil">
     <ul class="nav justify-content-center flex-lg-column shadow-sm">
       <li class="nav-item">
