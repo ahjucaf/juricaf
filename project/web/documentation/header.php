@@ -72,7 +72,7 @@
       </ul>
       <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="https://www.facebook.com/Juricaf" target="_blank">
+          <a class="nav-link" href="https://www.facebook.com/AHJUCAFCoursSupremesJudiciairesFrancophones" target="_blank">
             <i class="bi bi-facebook"></i>
           </a>
         </li>
