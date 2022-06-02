@@ -20,12 +20,12 @@ if (isset($argv[3])) {
 }
 
 if (!preg_match('/arrêt/i', $content) && !preg_match('/arret/i', $content) && !preg_match('/demandeurs? en cassation/i', $content) && !preg_match('/défenderesses? en cassation/i', $content)) {
-  error_log("ERROR: Arret non Francais (erreur arrêt) [$num, $date, $source]");
+  error_log("ERROR: ccBelgique / Arret non Francais (erreur arrêt) [$num, $date, $source]");
   exit(1) ;
  }
 
 if (!preg_match('/cour de cassation/i', $content)) {
-  error_log("ERROR: Arret non Francais (erreur cour) [$num, $date, $source]");
+  error_log("ERROR: ccBelgique / Arret non Francais (erreur cour) [$num, $date, $source]");
   exit(1) ;
  }
 
@@ -45,7 +45,7 @@ if (!$num) {
 if ($num && preg_match('/([A-Z])\.?(\d{2})\.?(\d+)\.?([A-Z])/i', $num, $match)) {
   $num = $match[1].'.'.sprintf('%02d', $match[2]).'.'.sprintf('%04d', $match[3]).'.'.$match[4];
  }else{
-  error_log("ERROR: Numéro non trouvé $num [$num, $date, $source]");
+  error_log("ERROR: ccBelgique / Numéro non trouvé $num [$num, $date, $source]");
   exit(1) ;
  }
 
@@ -59,7 +59,7 @@ if (!$date) {
 }
 
 if (!$date || !preg_match('/\d{4}\-\d{2}\-\d{2}/', $date)) {
-  error_log("ERROR: Date non trouvée ou mal formée $date [$num, $date, $source]");
+  error_log("ERROR: ccBelgique / Date non trouvée ou mal formée $date [$num, $date, $source]");
   exit(1);
  }
 
@@ -67,7 +67,7 @@ if (!$date || !preg_match('/\d{4}\-\d{2}\-\d{2}/', $date)) {
 $text = $content;
 
 if (strlen($text) < 10) {
-    error_log("ERROR: Arrêt sans texte [$num, $date, $source]");
+    error_log("ERROR: ccBelgique / Arrêt sans texte [$num, $date, $source]");
     exit(1);
 }
 

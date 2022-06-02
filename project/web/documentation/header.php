@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="title" content="Juricaf" />
-    <meta name="description" content="La base de données de jurisprudence francophone" />
+    <meta name="description" content="La jurisprudence francophone des Cours suprêmes" />
     <meta name="keywords" content="jurisprudence, cassation, cour, suprême, francophone, francophonie, ahjucaf, arrêt, décision" />
     <meta name="language" content="fr" />
     <title>Juricaf</title>
@@ -19,6 +19,34 @@
     <script type="text/javascript" src="/js/main.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
     <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
+    <!-- Matomo -->
+    <script>
+    <!--
+      var _paq = window._paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      <?php if (isset($sf_params) && $sf_params->get('query')): ?>
+      _paq.push(['trackSiteSearch',
+          // Search keyword searched for
+          "<?php echo $sf_params->get('query'); ?>",
+          // Search category selected in your search engine. If you do not need this, set to false
+          "<?php echo str_replace('_', ' ', str_replace('facet_pays_juridiction:', '', $sf_params->get('facets'))). " ".$sf_params->get('filter'); ?>",
+          // Number of results on the Search results page. Zero indicates a 'No Result Search Keyword'. Set to false if you don't know
+          <?php echo $sf_params->get('nbResultats') ? str_replace(' ', '', $sf_params->get('nbResultats')) : "false"; ?>
+      ]);
+      <?php else: ?>
+      _paq.push(['trackPageView']);
+      <?php endif; ?>
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//juricaf.org/matomo/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    -->
+    </script>
+    <!-- End Matomo Code -->
     </head>
   <body class="container full-width">
     <div>
@@ -27,7 +55,7 @@
   <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid hide-slogan" >
     <a class="navbar-brand d-lg-none" href="/"><img class="align-self-center" width="40px" height="40px" src="/images/logo_menu.png"/></a>
-    <div class="d-lg-none"><p class="text-center slogan"><small class="fst-italic slogan">La jurisprudence francophone des cours suprêmes</small><br/></p></div>
+    <div class="d-lg-none"><p class="text-center slogan"><small class="fst-italic slogan">La jurisprudence francophone des Cours suprêmes</small><br/></p></div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -55,10 +83,10 @@
           <a class="nav-link" href="/recherche_avancee">Recherche avancée</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/documentation/a_propos.php">À propos</a>
+          <a class="nav-link" href="/documentation/a_propos.php">À-propos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/documentation/stats/statuts.php">Etendue des collections </a>
+          <a class="nav-link" href="/documentation/stats/statuts.php">Étendue des collections</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/documentation/partenaires.php">Partenaires</a>
@@ -105,7 +133,7 @@
     <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
       <div class="d-none d-lg-block">
         <a href="/"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
-        <p ><small class="fst-italic slogan">La jurisprudence francophone des cours suprêmes</small><br/></p>
+        <p ><small class="fst-italic slogan">La jurisprudence francophone des Cours suprêmes</small><br/></p>
       </div>
         <div class="form-inline input-group input-group-lg">
         <input id="recherche" class="form-control mx-auto" autocomplete="off" type="text"

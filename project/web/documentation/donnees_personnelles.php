@@ -98,7 +98,7 @@ $_SESSION['token'] = $token;
 
               <p>L’article 4 des statuts de l’AHJUCAF fixe ses missions : « favoriser l’entraide, la solidarité, la coopération, les échanges d’idées et d’expériences entre les institutions judiciaires membres sur les questions relevant de leur compétence ou intéressant leur organisation et leur fonctionnement ; promouvoir le rôle des Hautes Juridictions dans la consolidation de l’Etat de droit, le renforcement de la sécurité juridique, la régulation des décisions judiciaires et l’harmonisation du droit au sein des Etats membres. »
 
-              <p>Dans le cadre de ces missions, l’AHJUCAF a développé la base de données Juricaf, une base de décisions de jurisprudence des Etats membres de l’association ainsi que d’organisation internationale. Toutes les décisions sont en français. Cette base de données participe directement à la consolidation de l’Etat de droit, le renforcement de la sécurité juridique, la régulation des décisions judiciaires et l’harmonisation du droit au sein des Etats membres.</p>
+              <p>Dans le cadre de ces missions, l’AHJUCAF a développé la base de données JURICAF, une base de décisions de jurisprudence des Etats membres de l’association ainsi que d’organisation internationale. Toutes les décisions sont en français. Cette base de données participe directement à la consolidation de l’Etat de droit, le renforcement de la sécurité juridique, la régulation des décisions judiciaires et l’harmonisation du droit au sein des Etats membres.</p>
 
               <h5 class="p-3 mb-2 bg-secondary bg-gradient">6 - Vos droits sur les données personnelles diffusées sur le site <a href="https://www.juricaf.org">www.juricaf.org</a></h5>
 

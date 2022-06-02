@@ -126,6 +126,7 @@ class rechercheActions extends sfActions
     }
 
     $this->resultats = $res;
+    $request->setParameter('nbResultats', $res->response->numFound);
 
     // Suite pager
     $lastpage = intval($res->response->numFound / $pas) + 1;
