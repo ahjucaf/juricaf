@@ -1,4 +1,4 @@
-<div class="mt-6 text-center d-none d-sm-none d-lg-block">
+<div class="mt-6 d-none d-sm-none d-lg-block">
 	<div>
 		<p><a href="https://www.lemondedudroit.fr/interviews/66303-jean-paul-jean-ahjucaf.html" target="new">Interview de JP Jean secrétaire général de l’AHJUCAF dans « Le Monde du droit » sur l’accès à la jurisprudence francophone.</a></p>
 	</div>
