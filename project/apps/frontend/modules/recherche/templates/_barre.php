@@ -22,7 +22,7 @@
           echo('autofocus=autofocus');
         }
       ?>
-      ><button class="btn btn-primary"  type="submit">
+      ><button class="btn btn-primary rounded-end"  type="submit">
         <span class="d-lg-none">
           <i class="bi bi-search"></i>
         </span>
