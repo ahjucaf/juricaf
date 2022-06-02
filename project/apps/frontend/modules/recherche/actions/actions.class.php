@@ -10,21 +10,35 @@
  */
 class rechercheActions extends sfActions
 {
-  public function executeIndex(sfWebRequest $request)
-  {
-    $this->getUser()->setAttribute('query', '');
-    if($request->getParameter('q')) {
-      $search = strip_tags($request->getParameter('q'));
-      $search = preg_replace('/[\/\{\}\<\>]/', '', $search);
-      $search = preg_replace("/\'/", '’', $search);
-      $count = count_chars($search, 1);
-
-      if (isset($count[ord('"')]) && $count[ord('"')] % 2) {
-        $search = preg_replace ('/"/', '', $search);
-      }
-      $this->redirect('@recherche_resultats?query='.$search);
+    public function executeIndex(sfWebRequest $request)
+    {
+        $this->getUser()->setAttribute('query', '');
+        if($request->getParameter('q')) {
+            $search = strip_tags($request->getParameter('q'));
+            $search = preg_replace('/[\/\{\}\<\>]/', '', $search);
+            $search = preg_replace("/\'/", '’', $search);
+            $count = count_chars($search, 1);
+            
+            if (isset($count[ord('"')]) && $count[ord('"')] % 2) {
+                $search = preg_replace ('/"/', '', $search);
+            }
+            $this->redirect('@recherche_resultats?query='.$search);
+        }
     }
-  }
+
+  public function executeFiltres(sfWebRequest $request) {
+      $query = $request->getParameter('query', '+');
+      $facets = array();
+      if ($request->getParameter('pays') || $request->getParameter('juridiction')) {
+          if ($request->getParameter('pays')) {
+            if ($request->getParameter('juridiction')) {
+              $facets[] = str_replace(' ', '_', 'facet_pays_juridiction:'.$request->getParameter('pays').' | '.$request->getParameter('juridiction'));
+            }
+            $facets[] = str_replace(' ', '_', 'facet_pays:'.$request->getParameter('pays'));
+          }
+      }
+      return $this->redirect('@recherche_resultats?query='.$query."&facets=".implode(',', $facets).'&tri='.$request->getParameter('tri'));
+}
 
   public function executeSearch(sfWebRequest $request)
   {
@@ -53,57 +67,33 @@ class rechercheActions extends sfActions
       $param['fq'] = 'type:arret';
     }
 
-    if($request->getParameter('pays') && $request->getParameter('juridiction')){
-      $pays=$request->getParameter('pays');
-      $pays_juridiction = str_replace(" ", "_", $request->getParameter('juridiction'));
-      $solr_query.=" facet=pays=juridiction:".$pays."_|_".$pays_juridiction;
-    }
-
-    elseif($request->getParameter('pays')){
-      $pays=$request->getParameter('pays');
-      $solr_query.=" facet=pays:".$pays;
-    }
-
-    else{
-      $this->facetsset = array();
-      $this->facetslink = '';
-      // var_dump(preg_replace('/’/', "'", preg_replace('/[<>]/', '', $request->getParameter('facets'))));
-      if ($f = preg_replace('/’/', "'", preg_replace('/[<>]/', '', $request->getParameter('facets')))) {
-        $this->facetsset = preg_split('/,/', $f);
-        sort($this->facetsset);
-        $this->facetslink = ','.implode(',', $this->facetsset);
-
-        foreach ($this->facetsset as $facet) {
-          $f = explode(':', $facet);
-          //On ne doit pas retirer les _ des facettes donc on les replace par = pour les conserver
-          $solr_query .= ' '.preg_replace('/_/', '=', $f[0]).':'.$f[1];
-        }
+    $this->facetsset = array();
+    $this->facetslink = '';
+    if ($f = preg_replace('/’/', "'", preg_replace('/[<>]/', '', $request->getParameter('facets')))) {
+      $this->facetsset = preg_split('/,/', $f);
+      sort($this->facetsset);
+      $this->facetslink = ','.implode(',', $this->facetsset);
+      foreach ($this->facetsset as $facet) {
+        $f = explode(':', $facet);
+        //On ne doit pas retirer les _ des facettes donc on les replace par = pour les conserver
+        $solr_query .= ' '.preg_replace('/_/', '=', $f[0]).':'.$f[1];
       }
     }
-    // Si l'ordre des résultats est précisé
-    // if (preg_match('/order:pertinence/', $solr_query)) {
-    //   $solr_query = ' '.preg_replace('/ order:pertinence/', '', $solr_query);
-    //   unset($param['sort']);
-    //   $this->nobots = 1;
-    // }
-    // if (preg_match('/order:chrono/', $solr_query)) {
-    //   $solr_query = ' '.preg_replace('/ order:chrono/', '', $solr_query);
-    //   $param['sort'] = 'date_arret asc, id asc';
-    //   $this->nobots = 1;
-    // }
 
-    /* TRIE ORDRE*/
-    if($request->getParameter('tri') == "pertinence"){
+    // Si l'ordre des résultats est précisé
+    if (preg_match('/order:pertinence/', $solr_query)) {
+      $solr_query = ' '.preg_replace('/ order:pertinence/', '', $solr_query);
       unset($param['sort']);
       $this->nobots = 1;
     }
-    if($request->getParameter('tri') == "ASD"){
-      $param['sort'] =  'date_arret asc, id asc';
+    if (preg_match('/order:chrono/', $solr_query)) {
+      $solr_query = ' '.preg_replace('/ order:chrono/', '', $solr_query);
+      $param['sort'] = 'date_arret asc, id asc';
       $this->nobots = 1;
     }
 
     // Si la requète est vide
-    if (!count($this->facetsset) && !preg_match('/[a-z0-9]/i', $this->query) && !preg_match('/[a-z0-9]/i', $this->filter)) {
+    if ((!$this->facetsset || !count($this->facetsset)) && !preg_match('/[a-z0-9]/i', $this->query) && !preg_match('/[a-z0-9]/i', $this->filter)) {
       return $this->redirect('@recherche');
     }
 
@@ -140,7 +130,6 @@ class rechercheActions extends sfActions
     // Suite pager
     $lastpage = intval($res->response->numFound / $pas) + 1;
 
-
     $this->pager = array();
     $this->pager['begin'] = ($pagenum != 1) ? 1 : 0;
     $this->pager['last']  = ($pagenum != 1) ? $pagenum - 1 : 0;
@@ -161,10 +150,22 @@ class rechercheActions extends sfActions
 		$this->json = true;
 		$this->setLayout(false);
 		$this->getResponse()->setContentType('application/json');
-	}
-	else {
+	} else {
 		$this->json = false;
 	}
+    if (isset($this->facets['facet_pays']) && count($this->facets['facet_pays']) == 1 ) {
+        $pays = array_keys($this->facets['facet_pays'])[0];
+        if (in_array(str_replace(' ', '_', 'facet_pays:'.$pays), $this->facetsset)) {
+            $this->filtre_pays = $pays;
+        }
+    }
+    if (isset($this->facets['facet_pays_juridiction']) && count($this->facets['facet_pays_juridiction']) == 1 ) {
+        $juridiction = array_keys($this->facets['facet_pays_juridiction'])[0];
+        if (in_array(str_replace(' ', '_', 'facet_pays_juridiction:'.$juridiction), $this->facetsset)) {
+            $j = explode(' | ', $juridiction);
+            $this->filtre_juridiction = $juridiction;
+        }
+    }
   }
 
   private function convertDate($date) {
@@ -182,7 +183,6 @@ class rechercheActions extends sfActions
   {
     $string = strip_tags($string);
     $string = preg_replace('/[\/\{\}\[\]\<\>]/', '', $string);
-    //$string = preg_replace("/\'/", '’', $string);
     $count = count_chars($string, 1);
     if (isset($count[ord('"')]) && $count[ord('"')] % 2) {
       $string = preg_replace ('/"/', '', $string);
