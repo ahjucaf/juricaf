@@ -149,25 +149,34 @@
 
 <div class="row g-3">
   <div class="col-auto">
-    <label class="col-form-label"><h5><b>Date de la décision : </b></h5></label>
+    <label class="col-form-label" for="date_arret"><h5><b>Date de la décision : </b></h5></label>
   </div>
   <div class="col-auto">
-    <input class="form-control col-auto" type="date" name="date[arret]" id="date_arret" max=<?php echo(date('Y-m-d'))?>>
+    <div class="input-group">
+        <input class="form-control col-auto" type="date" name="date[arret]" id="date_arret" max=<?php echo(date('Y-m-d'))?>>
+        <label class="input-group-text" for="date_arret"><i class="bi bi-calendar"></i></label>
+    </div>
   </div>
 </div>
 OU
 <div class="row g-3">
   <div class="col-auto">
-    <label class="col-form-label"><h5><b>Période du :</b></h5></label>
+    <label class="col-form-label" for="date_debut"><h5><b>Période du :</b></h5></label>
   </div>
   <div class="col-auto">
-    <input class="form-control col-auto" type="date" name="date[debut]" id="date_debut" size="10" />
+    <div class="input-group">
+        <input class="form-control col-auto" type="date" name="date[debut]" id="date_debut" />
+        <label class="input-group-text" for="date_debut"><i class="bi bi-calendar"></i></label>
+    </div>
   </div>
   <div class="col-auto">
-    <label class="col-form-label"><h5><b>au :</b></h5></label>
+    <label class="col-form-label" for="date_fin"><h5><b>au :</b></h5></label>
   </div>
   <div class="col-auto">
-    <input class="form-control col-auto" type="date" name="date[fin]" id="date_fin" size="10" />
+    <div class="input-group">
+        <input class="form-control col-auto" type="date" name="date[fin]" id="date_fin" />
+        <label class="input-group-text" for="date_fin"><i class="bi bi-calendar"></i></label>
+    </div>
   </div>
 </div>
 
