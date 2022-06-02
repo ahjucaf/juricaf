@@ -75,7 +75,7 @@
       </ul>
       <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="https://www.facebook.com/Juricaf" target="_blank">
+          <a class="nav-link" href="https://www.facebook.com/AHJUCAFCoursSupremesJudiciairesFrancophones" target="_blank">
             <i class="bi bi-facebook"></i>
           </a>
         </li>
@@ -117,7 +117,7 @@
         ?>
         placeholder="Rechercher une jurisprudence" name="q" aria-label="Rechercher" tabindex="10"
         <?php
-          if(!$not_autofocus){
+          if(!isset($not_autofocus) || !$not_autofocus){
             echo('autofocus=autofocus');
           }
         ?>

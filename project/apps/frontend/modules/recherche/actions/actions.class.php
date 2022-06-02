@@ -277,30 +277,34 @@ class rechercheActions extends sfActions
 
     // Pays
     if(!empty($total) && !empty($pays)) {
-      if(intval($total) !== count($pays)) {
-        if(!empty($filter)) {
-          $filter .= ' ';
+        if(intval($total) !== count($pays)) {
+            if(!empty($filter)) {
+                $filter .= ' ';
+            }
+            $nb = count($pays); $i = 1;
+            if ($nb > 1) {
+                $filter .= '( ';
+                foreach ($pays as $p) {
+                    $quote = '';
+                    if (preg_match('/ /', $p))
+                    $quote = '"';
+                    $filter .= 'pays:'.$quote.$p.$quote;
+                    if($i < $nb) { $filter .= ' OR '; }
+                    $i++;
+                }
+                $filter .= ' ) ';
+            }
+            
         }
-        $nb = count($pays); $i = 1;
-  if ($nb) {
-    $filter .= '( ';
-    foreach ($pays as $p) {
-      $quote = '';
-      if (preg_match('/ /', $p))
-        $quote = '"';
-      $filter .= 'pays:'.$quote.$p.$quote;
-      if($i < $nb) { $filter .= ' OR '; }
-      $i++;
     }
-    $filter .= ' ) ';
-  }
-
-      }
-    }
-
+    
     $filter = preg_replace('/content:/', '', $filter);
     $filter = preg_replace('/ AND /', ' ', $filter);
     $filter = preg_replace('/ NOT /', ' !', $filter);
+
+    if ($pays && count($pays) == 1) {
+        return $this->redirect('@recherche_resultats?facets=facet_pays:'.urlencode($pays[0]).'&query='.urlencode($filter));
+    }
 
     if(!empty($filter)) {
       return $this->redirect('@recherche_resultats?query='.urlencode($filter));

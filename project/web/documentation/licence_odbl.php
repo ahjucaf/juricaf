@@ -11,7 +11,7 @@ $_SESSION['token'] = $token;
 	 <h5 class="p-3 mb-2 bg-secondary bg-gradient">Résumé de la licence ODbL 1.0 fr</h5>
 
 
-     <p>Ceci est le résumé explicatif de <a href="http://www.vvlibri.org/fr/licence/odbl/10/fr/legalcode">la licence ODbL 1.0</a>. Merci de lire l'avertissement ci-dessous.</p>
+     <p>Ceci est le résumé explicatif de <a href="http://vvlibri.org/fr/licence/odbl-10/legalcode/unofficial">la licence ODbL 1.0</a>. Merci de lire l'avertissement ci-dessous.</p>
 
 <h5><u>Vous êtes libres :</u></h5>
 

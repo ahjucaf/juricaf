@@ -24,7 +24,7 @@ $cpt = 0;
             foreach($sliptPays[$i] as $p){
               $pays = preg_replace('/ /', '_', $p['key'][0]);
               $pays_nom = $p['key'][0].' ('.number_format($p['value'], 0, '', ' ').')';
-              $link = link_to($pays_nom,'recherche/search?query=&facets=facet_pays:'.$pays);
+              $link = link_to($pays_nom,'recherche/search?query=+&facets=facet_pays:'.$pays);
               if (strlen($pays_nom) > 45) {
                 $pays_nom_min = substr($pays_nom, 0, 16) . '...';
                 $link = link_to($pays_nom_min,'recherche/search?query=&facets=facet_pays:'.$pays);
@@ -43,7 +43,7 @@ $cpt = 0;
               foreach($allPays as $p){
                 $pays = preg_replace('/ /', '_', $p['key'][0]);
                 $pays_nom = $p['key'][0].' ('.number_format($p['value'], 0, '', ' ').')';
-                $link = 'recherche/facet_pays:'.$pays;
+                $link = 'recherche/+/facet_pays:'.$pays;
                 echo('<option id="'.$p['key'][0].'"data-test ="'.$link.'">'.ClientArret::TAB_DRAPEAU[$p['key'][0]]." ".$p['key'][0]." (".$p['value'].") ".'</option>');
                 echo($link);
               }
