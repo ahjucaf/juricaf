@@ -10,7 +10,7 @@ class JuricafArret extends sfCouchDocument
     $exerpt = '';
     if ($resultat->analyses) {
       $exerpt .= $resultat->analyses.'...';
-      $exerpt = "Analyse : <span class='text-decoration-underline'>".truncate_text($exerpt,150,"...",true)."</span><br>";
+      $exerpt = truncate_text($exerpt,150,"...",true). " ";
     }
     if ($highlighting && isset($highlighting->content)) {
       foreach ($highlighting->content as $h) {
