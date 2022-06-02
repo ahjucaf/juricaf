@@ -15,18 +15,16 @@
 
     <!-- VERSION MOBILE -->
 <div class="text-center d-lg-none mt-3">
-  <div class="row">
-    <div class="col-lg pt-3 px-5 mb-3">
+    <div class="pt-3 px-5 mb-3 clearfix">
       <a href="https://www.ahjucaf.org/"><img class="float-start"src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones"/></a>
       <a href="https://www.francophonie.org/"><img class="float-end" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
     </div>
-    <div class="col-sm small bottom p-2">
+    <div class="small bottom p-2">
        Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones. Il est soutenu par l'Organisation Internationale de la Francophonie.
+       <div class="pt-3 p-2">
+           <img src="/images/iall.jpg" />
+       </div>
     </div>
-    <div class="col-lg pt-3 bottom p-2">
-        <img src="/images/iall.jpg" />
-    </div>
-  </div>
 </div>
 <script type="text/javascript">
 <!--
