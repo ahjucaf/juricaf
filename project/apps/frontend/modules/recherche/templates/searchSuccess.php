@@ -208,7 +208,7 @@ function remplacequerytitre($string) {
 </form>
 
 <hr>
-<div class="text-justify">
+<div>
     <div class="row justify-content-between">
       <div class="col-4">
         <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
