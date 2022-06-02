@@ -1,5 +1,3 @@
-</div>
-
 <div class="bottom text-center p-3 mt-5">
   <div class="row">
     <div class="col-3 d-none d-lg-block">
