@@ -2,8 +2,8 @@
 <div class="container text-justify mt-5">
 <h5 class="p-3 mb-2 bg-secondary bg-gradient">Partenaires institutionnels</h5>
 <div class="container">
-  <p>Juricaf est soutenu par <a href="#francophonie"><a href="http://www.francophonie.org/">l'Organisation internationale de la Francophonie</a>.</p>
-  <p class="text-center"><a href="http://www.francophonie.org/"><img src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a></p>
+  <p>Juricaf est soutenu par <a href="https://www.francophonie.org/">l'Organisation internationale de la Francophonie</a>.</p>
+  <p class="text-center"><a href="https://www.francophonie.org/"><img src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a></p>
 </div>
 <h5 class="p-3 mb-2 bg-secondary bg-gradient">Les cours suprêmes membres de l’AHJUCAF</h5>
 <div class="container">

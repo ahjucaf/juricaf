@@ -69,6 +69,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/documentation/contact.php">Contact</a>
         </li>
+        <li class="nav-item d-lg-none">
+          <a class="nav-link" href="/documentation/stats/statuts.php">Plus de statistiques</a>
+        </li>
       </ul>
       <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item">
@@ -77,12 +80,12 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="http://twitter.com/juricaf" target="_blank">
+          <a class="nav-link" href="http://twitter.com/ahjucaf" target="_blank">
             <i class="bi bi-twitter"></i>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://fr.linkedin.com/company/ahjucaf---cours-supr-mes-judiciaires-francophones" target="_blank">
+          <a class="nav-link" href="https://www.linkedin.com/in/ahjucaf-cours-supr%C3%AAmes-judiciaires-francophones-0a7a72230" target="_blank">
             <i class="bi bi-linkedin"></i>
           </a>
         </li>
