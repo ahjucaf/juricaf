@@ -108,6 +108,7 @@ $sf_response->addMeta('description', $description);
 $sf_response->addMeta('keywords', $keywords);
 
 ?>
+<?php include_partial('recherche/barre'); ?>
 <div class="recherche container">
 <div class="row">
 <div>

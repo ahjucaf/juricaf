@@ -469,6 +469,7 @@ if(isset($references['PUBLICATION'])) {
     }
 }
 ?>
+<?php include_partial('recherche/barre'); ?>
 <div class="barre-outil">
     <ul class="nav justify-content-center flex-lg-column shadow-sm">
       <li class="nav-item">
@@ -496,7 +497,7 @@ if(isset($references['PUBLICATION'])) {
           <i class="bi bi-printer"></i>
       </button>
       </li>
-      <li class="nav-item d-lg-none">
+      <li class="nav-item d-none">
         <a id="btn-expand" class="btn d-lg-none" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret"><i class="bi bi-arrows-expand"></i></a>
       </li>
     </ul>
