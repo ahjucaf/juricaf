@@ -1,8 +1,8 @@
-<div <?php if($sf_request && $sf_request->getParameter('module')=="arret"){ echo('id = "hidden-mode-mobile"');}else{echo('id = "menu"');} ?>class="container form_recherche mt-5">
+<div <?php if($sf_request && $sf_request->getParameter('module')=="arret"){ echo('id = "hidden-mode-mobile"');}else{echo('id = "menu"');} ?>class="container form_recherche mt-4 clearfix">
   <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
-    <div class="d-none d-lg-block">
+    <div>
       <a href="/"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
-      <p ><small class="fst-italic slogan">La jurisprudence francophone des Cours suprêmes</small><br/></p>
+      <p><small class="slogan-landing">La jurisprudence francophone des Cours suprêmes</small></p>
     </div>
       <div class="form-inline input-group input-group-lg">
       <input id="recherche" class="form-control mx-auto" autocomplete="off" type="text"

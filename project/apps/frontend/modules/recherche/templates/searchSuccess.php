@@ -80,7 +80,7 @@ function remplacequerytitre($string) {
 </div>
 
 <!-- BLOC FILTRES  -->
-<hr class="mt-5 d-none d-lg-block">
+<hr class="mt-3 d-none d-lg-block">
 <hr class="d-lg-none">
 
 <div class="d-lg-none">
@@ -228,7 +228,7 @@ foreach ($resultats->response->docs as $resultat) {
   $textArret = JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});
   ?>
 
-  <p class="card-header fs-5"><img src="/images/drapeaux/<?php echo $pathToFlag ?>.png" alt="§" /> | <a class="a-unstyled " target="_blank" href="<?php echo $urlForArret ?>"><?php echo $resultat->titre ?></a></p>
+  <p class="card-header fs-5"><img src="/images/drapeaux/<?php echo $pathToFlag ?>.png" alt="§" /> | <a class="a-unstyled" href="<?php echo $urlForArret ?>"><?php echo $resultat->titre ?></a></p>
 
   <div class="card-body" data-link=<?php echo($urlForArret);?>>
     <p class="card-text text-justify"> <?php echo($textArret); ?></p>

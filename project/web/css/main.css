@@ -77,7 +77,7 @@ a{
   color: #375d81 !important;
 }
 
-.slogan{
+.slogan-landing{
   font-family: Georgia;
   color:#4E4C4D;
 }
@@ -220,10 +220,7 @@ a{
     flex-wrap:unset !important;
   }
   .mt-10{
-    margin-top: 100px !important;
-  }
-  .slogan{
-    color:white;
+    margin-top: 82px !important;
   }
 }
 
