@@ -1,14 +1,14 @@
 <?php include("header.php")?>
-<div class="container text-justify mt-5">
+<div class="container mt-5">
 <h5 class="p-3 mb-2 bg-secondary bg-gradient">Partenaires institutionnels</h5>
-<div class="container">
+<div class="container text-justify">
   <p>Juricaf est soutenu par <a href="https://www.francophonie.org/">l'Organisation internationale de la Francophonie</a>.</p>
   <p class="text-center"><a href="https://www.francophonie.org/"><img src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a></p>
 </div>
 <h5 class="p-3 mb-2 bg-secondary bg-gradient">Les cours suprêmes membres de l’AHJUCAF</h5>
 <div class="container">
 
-<div class="container">
+<div class="container text-justify">
     <div class="row">
        <div class="col-lg-6"><img src="/images/drapeaux/Belgique.png" alt="Belgique" />&nbsp;Cour de cassation de Belgique</div>
        <div class="col-lg-6"><img src="/images/drapeaux/B%C3%A9nin.png" alt="Bénin" />&nbsp;Cour suprême du Bénin</div>
