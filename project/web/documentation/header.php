@@ -49,13 +49,11 @@
     <!-- End Matomo Code -->
     </head>
   <body class="container full-width">
-    <div>
-<div>
   <span id="is_mobile" class="d-lg-none"></span>
   <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid hide-slogan" >
-    <a class="navbar-brand d-lg-none" href="/"><img class="align-self-center" width="40px" height="40px" src="/images/logo_menu.png"/></a>
-    <div class="d-lg-none"><p class="text-center slogan"><small class="fst-italic slogan">La jurisprudence francophone des Cours suprêmes</small><br/></p></div>
+    <a class="navbar-brand" href="/"><img class="align-self-center" width="40px" height="40px" src="/images/logo_menu.png"/></a>
+    <div class="d-lg-none text-center"><small class="slogan">La jurisprudence francophone des Cours suprêmes</small></div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -127,8 +125,6 @@
     </div>
   </div>
 </nav>
-  <div class="d-lg-none">
-    <br><br>
-  </div>
-  </div>
-  </div>
+<div class="d-lg-none">
+<br><br>
+</div>
