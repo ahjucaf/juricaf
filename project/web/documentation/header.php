@@ -102,24 +102,14 @@
           <a class="nav-link" href="/documentation/stats/statuts.php">Plus de statistiques</a>
         </li>
         <li class="nav-item d-lg-none">
-          <a class="nav-link" href="https://www.lemondedudroit.fr/interviews/66303-jean-paul-jean-ahjucaf.html">Interview de JP Jean</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav my-2 my-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="https://www.facebook.com/AHJUCAFCoursSupremesJudiciairesFrancophones" target="_blank">
-            <i class="bi bi-facebook"></i>
-          </a>
+          <a class="nav-link" href="/actualites">Actualités</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="http://twitter.com/ahjucaf" target="_blank">
-            <i class="bi bi-twitter"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://www.linkedin.com/in/ahjucaf-cours-supr%C3%AAmes-judiciaires-francophones-0a7a72230" target="_blank">
-            <i class="bi bi-linkedin"></i>
-          </a>
+          <p class="nav-link"><a>Nous suivre :</a>
+          <a  href="https://www.facebook.com/AHJUCAFCoursSupremesJudiciairesFrancophones" target="_blank"><i class="bi bi-facebook"></i></a> &nbsp;
+          <a href="http://twitter.com/ahjucaf" target="_blank"><i class="bi bi-twitter"></i></a> &nbsp;
+          <a href="https://www.linkedin.com/in/ahjucaf-cours-supr%C3%AAmes-judiciaires-francophones-0a7a72230" target="_blank"><i class="bi bi-linkedin"></i></a>
+          </p>
         </li>
       </ul>
     </div>

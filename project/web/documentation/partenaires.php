@@ -1,4 +1,10 @@
 <?php include("header.php")?>
+<div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+      <li class="breadcrumb-item"><a href="/documentation/partenaires.php">Partenaires</a></li>
+    </ol>
+</div>
 <div class="container mt-5">
 <h5 class="p-3 mb-2 bg-secondary bg-gradient">Partenaires institutionnels</h5>
 <div class="container text-justify">

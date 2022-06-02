@@ -8,6 +8,14 @@ $_SESSION['cap2'] = intval(rand(0, 10) + 1);
 ?>
 
 <?php include("header.php") ?>
+
+<div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+      <li class="breadcrumb-item"><a href="">Contact</a></li>
+    </ol>
+</div>
+
     <div class="container text-justify mt-5">
 		   <h5 class="p-3 mb-2 bg-secondary bg-gradient">Formulaire de contact</h5>
        <div class="container">

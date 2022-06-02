@@ -5,7 +5,13 @@ $token = sha1(mt_rand());
 $_SESSION['token'] = $token;
 ?>
 <?php include("header.php") ?>
-
+          <div class="container">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
+                <li class="breadcrumb-item"><a href="">Données Personnels</a></li>
+              </ol>
+          </div>
           <div class="container text-justify mt-5">
               <h5 class="p-3 mb-2 bg-secondary bg-gradient">1 - Identité du responsable de traitement</h5>
 
