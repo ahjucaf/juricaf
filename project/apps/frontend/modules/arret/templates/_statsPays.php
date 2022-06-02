@@ -44,8 +44,7 @@ $cpt = 0;
                 $pays = preg_replace('/ /', '_', $p['key'][0]);
                 $pays_nom = $p['key'][0].' ('.number_format($p['value'], 0, '', ' ').')';
                 $link = 'recherche/+/facet_pays:'.$pays;
-                //echo('<option id="'.$p['key'][0].'"data-test ="'.$link.'">'.ClientArret::TAB_DRAPEAU[$p['key'][0]]." ".$p['key'][0]." (".$p['value'].") ".'</option>');
-                echo($link);
+                echo('<option id="'.$p['key'][0].'"data-test ="'.$link.'">'.ClientArret::TAB_DRAPEAU[$p['key'][0]]." ".$p['key'][0]." (".$p['value'].") ".'</option>');
               }
               ?>
             </select>
