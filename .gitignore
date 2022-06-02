@@ -36,6 +36,9 @@
 # Build data
 /build/
 
+# swap files
+*~
+
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
 dila2juricaf/config/conf.sh
