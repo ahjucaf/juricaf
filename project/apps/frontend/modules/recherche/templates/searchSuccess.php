@@ -64,6 +64,49 @@ function remplacequerytitre($string) {
   return strtr($string, $table);
 }
 
+foreach($facetsset as $facet) {
+    if (preg_match('/^facet_pays_juridiction:/', $facet)) {
+        $title_facet['pays_juri'] = replaceUnderscore(str_replace('facet_pays_juridiction:', '', $facet));
+    }
+    if (preg_match('/^facet_pays:/', $facet)) {
+        $title_facet['pays'] = replaceUnderscore(str_replace('facet_pays:', '', $facet));
+    }
+    if(preg_match('/^facet_juridiction:/', $facet)) {
+        $title_facet['juri'] = replaceUnderscore(str_replace('facet_juridiction:', '', $facet));
+    }
+}
+
+if(isset($title_facet['pays_juri'])) {
+    $title_facet = $title_facet['pays_juri'];
+} elseif(isset($title_facet['pays']) && isset($title_facet['juri'])) {
+    $title_facet = $title_facet['pays'].' | '.$title_facet['juri'];
+} else {
+    if(isset($title_facet['juri'])) {
+        $title_facet = $title_facet['juri'];
+    }elseif(isset($title_facet['pays'])) {
+        $title_facet = $title_facet['pays'];
+    }
+}
+
+if(isset($title_facet) && trim($query) == '') {
+    $title = 'Jurisprudences '.$title_facet.'';
+    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
+}
+if(isset($title_facet) && trim($query) !== '') {
+    $title = 'Jurisprudences '.remplacequerytitre($query).' - '.$title_facet.'';
+    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
+}
+if(!isset($title_facet) && trim($query) !== '') {
+    $title = 'Jurisprudences '.remplacequerytitre($query).'';
+    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
+}
+slot("metadata");
+include_partial("metadata", array('url_flux' => $sf_request->getUri().'?format=rss', 'titre_flux' => "S'abonner à cette recherche"));
+end_slot();
+$sf_response->setTitle($title);
+$sf_response->addMeta('description', $description);
+$sf_response->addMeta('keywords', $keywords);
+
 ?>
 <div class="recherche container">
 <div class="row">
