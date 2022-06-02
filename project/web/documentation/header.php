@@ -83,10 +83,10 @@
           <a class="nav-link" href="/recherche_avancee">Recherche avancée</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/documentation/a_propos.php">À propos</a>
+          <a class="nav-link" href="/documentation/a_propos.php">À-propos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/documentation/stats/statuts.php">Étendue des collections </a>
+          <a class="nav-link" href="/documentation/stats/statuts.php">Étendue des collections</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/documentation/partenaires.php">Partenaires</a>
