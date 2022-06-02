@@ -3,7 +3,7 @@
 <div class="bottom text-center p-3 mt-5">
   <div class="row">
     <div class="col-3 d-none d-lg-block">
-      <img src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones"/>
+      <a href="https://www.ahjucaf.org/"><img src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones"/></a>
     </div>
     <div class="col-6 d-none d-lg-block">
       Juricaf est un projet de l'AHJUCAF, <br>
@@ -13,7 +13,7 @@
        Il est soutenu par l'Organisation Internationale de la Francophonie.
     </div>
     <div class="col-3 d-none d-lg-block">
-      <img src="/images/francophonie.png" alt="Organisation internationale de la francophonie" />
+      <a href="https://www.francophonie.org/"><img src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
     </div>
 
     <!-- VERSION MOBILE -->
