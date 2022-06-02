@@ -65,6 +65,33 @@ actualites:
   url: /actualites
   param: {module: recherche, action: actualites}
 
+static_partenaires:
+  url: /static/partenaires
+  param: {module: static, action: partenaires}
+static_mentionslegales:
+  url: /static/mentions_legales
+  param: {module: static, action: mentionsLegales}
+static_licenceodbl:
+  url: /static/licence_odbl
+  param: {module: static, action: licenceODBL}
+static_licencejuricaf:
+  url: /static/licence_juricaf
+  param: {module: static, action: licenceJURICAF}
+static_formmail:
+  url: /static/form2mail
+  param: {module: static, action: formMail}
+static_donneespersonnelles:
+  url: /static/donnees_personnelles
+  param: {module: static, action: donneesPersonnelles}
+static_contact:
+  url: /static/contact
+  param: {module: static, action: contact}
+static_apropos:
+  url: /static/a_propos
+  param: {module: static, action: aPropos}
+
+
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
