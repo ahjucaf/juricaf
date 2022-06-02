@@ -72,6 +72,9 @@
         <li class="nav-item d-lg-none">
           <a class="nav-link" href="/documentation/stats/statuts.php">Plus de statistiques</a>
         </li>
+        <li class="nav-item d-lg-none">
+          <a class="nav-link" href="https://www.lemondedudroit.fr/interviews/66303-jean-paul-jean-ahjucaf.html">Interview de JP Jean</a>
+        </li>
       </ul>
       <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item">
