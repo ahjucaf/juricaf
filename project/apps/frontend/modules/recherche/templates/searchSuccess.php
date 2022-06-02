@@ -148,9 +148,9 @@ function remplacequerytitre($string) {
   <div class="col-lg-auto col-md-12 col-sm-12">
     <?php if($filtre_pays || $filtre_juridiction){
       echo('<div class="form-inline input-group">
-          <input  class="form-control mx-auto" type="search" name="pays" value = ');
+          <input  class="form-control mx-auto" type="search" name="pays" value="');
         echo $filtre_pays;
-        echo(' readonly></input><a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query).'""><i class="bi bi-x-circle"></i></a></div>');
+        echo('" readonly></input><a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query).'""><i class="bi bi-x-circle"></i></a></div>');
         }
     else{
     ?>

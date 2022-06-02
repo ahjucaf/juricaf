@@ -304,7 +304,12 @@ class rechercheActions extends sfActions
     $filter = preg_replace('/ NOT /', ' !', $filter);
 
     if ($pays && count($pays) == 1) {
-        return $this->redirect('@recherche_resultats?facets=facet_pays:'.urlencode($pays[0]).'&query='.urlencode($filter));
+        if(!$filter) {
+            $filter = '+';
+        }else{
+            $filter = urlencode($filter);
+        }
+        return $this->redirect('@recherche_resultats?facets=facet_pays:'.urlencode($pays[0]).'&query='.$filter);
     }
 
     if(!empty($filter)) {
