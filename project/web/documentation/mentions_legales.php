@@ -15,19 +15,20 @@ $_SESSION['token'] = $token;
 
             <p>L’AHJUCAF est inscrite au répertoire national des entreprises et de leurs établissements sous le numéro SIREN 440 233 880 (APE 913 E).</p>
 
-            <p>Ahjucaf<br/>
+            <p>AHJUCAF<br/>
+            Cour de cassation<br/>
             5 quai de l’Horloge 75001 PARIS<br/>
             Tel. : +33 1 46 34 67 40</p>
 
             <h5 class="mt-3 mb-3"><u>Directeur de Publication</u></h5>
 
             <p>M. Jean-Paul JEAN, Secrétaire général de l’AHJUCAF<br/>
-                5 quai de l’Horloge, 75001 PARIS</p>
+            AHJUCAF, 5 quai de l’Horloge, 75001 PARIS</p>
 
             <h5 class="mt-3 mb-3"><u>Coordinateur technique</u></h5>
 
         <p>M. Thomas FRINCHABOY, chargé de mission auprès du Secrétaire général de l’AHJUCAF<br/>
-        5 quai de l’Horloge, 75001 PARIS</p>
+        AHJUCAF, 5 quai de l’Horloge, 75001 PARIS</p>
 
             <h5 class="mt-3 mb-3"><u>Hébergeur</u></h5>
         <p>ONLINE SAS BP 438 PARIS CEDEX 08 </p>

@@ -2,11 +2,10 @@
 <div class="container mt-5">
 <h5 class="p-3 mb-2 bg-secondary bg-gradient">Partenaires institutionnels</h5>
 <div class="container text-justify">
-  <p>Juricaf est soutenu par <a href="https://www.francophonie.org/">l'Organisation internationale de la Francophonie</a>.</p>
-  <p class="text-center"><a href="https://www.francophonie.org/"><img src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a></p>
+  <p>JURICAF est soutenu par <a href="#francophonie"><a href="http://www.francophonie.org/">l'Organisation Internationale de la Francophonie</a>.</p>
+  <p class="text-center"><a href="http://www.francophonie.org/"><img src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a></p>
 </div>
-<h5 class="p-3 mb-2 bg-secondary bg-gradient">Les cours suprêmes membres de l’AHJUCAF</h5>
-<div class="container">
+<h5 class="p-3 mb-2 bg-secondary bg-gradient">Les Cours suprêmes membres de l’AHJUCAF</h5>
 
 <div class="container text-justify">
     <div class="row">
@@ -53,13 +52,7 @@
     </div>
 </div>
 
-<p class="mt-2">L’AHJUCAF ouvre actuellement des partenariats avec des universités françaises et francophones.</p>
-
-</div>
-
-
-
-<h5 class="p-3 mb-2 bg-secondary bg-gradient">Partenaires privés</u></h5>
+<h5 class="p-3 mt-3 mb-2 bg-secondary bg-gradient">Partenaires privés</u></h5>
 <div class="container">
 
 <h5 class="mt-3 mb-3"><u>Entreprises / Structures professionnelles :</u></h5>

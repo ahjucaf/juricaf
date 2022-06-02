@@ -3,7 +3,7 @@
 $doc = $argv[1];
 $doc = json_decode(@file_get_contents($doc));
 if (! $doc) {
-    fwrite(STDERR, "ERREUR: json non trouvé\n");
+    fwrite(STDERR, "ERREUR: ccFrance/json2.php: $doc json non trouvé\n");
     exit(1);
 }
 

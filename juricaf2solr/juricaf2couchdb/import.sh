@@ -74,7 +74,7 @@ do
     if test $VERBOSE ; then echo importing $y; fi
     if file -i "$y" | grep -v '/xml' > /dev/null;
     then
-        echo "ERROR: $y ignored : it is not an XML doc (empty ?)";
+        echo "ERROR: $0: $y ignored : it is not an XML doc (empty ?)";
         dest_error_dir=$(echo $y | sed "s/pool/archive\/$DATE\/error/" | sed 's/[^\/]*$//');
         mkdir -p "$dest_error_dir"
         mv "$y" "$dest_error_dir";

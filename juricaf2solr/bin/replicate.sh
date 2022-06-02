@@ -3,7 +3,7 @@
 . $(dirname $0)"/../conf/juricaf.conf"
 
 if ! test  "$COUCHDISTANT" ; then
-	echo "ERROR: COUCHDISTANT non configué dans juricaf.conf" >&2
+	echo "ERROR: $0: COUCHDISTANT non configué dans juricaf.conf" >&2
 	exit 2;
 fi
 
