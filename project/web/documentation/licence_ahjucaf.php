@@ -5,6 +5,13 @@ $token = sha1(mt_rand());
 $_SESSION['token'] = $token;
 ?>
 <?php include("header.php")?>
+<div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+      <li class="breadcrumb-item"><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
+      <li class="breadcrumb-item"><a href="">Licence Ahjucaf</a></li>
+    </ol>
+</div>
     <div class="container text-justify mt-5">
       <h5 class="p-3 mb-2 bg-secondary bg-gradient">Licence AHJUCAF </h5>
       <p>Pour pouvoir bénéficier des arrêts publiés au format XML ou PDF dans Juricaf, merci de prendre contact avec le Secrétariat général de l'AHJUCAF :

@@ -1,4 +1,12 @@
 <?php include("header.php");?>
+
+<div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+      <li class="breadcrumb-item"><a href="">À-propos</a></li>
+    </ol>
+</div>
+
     <div class="container text-justify mt-5">
 
         <h5 class="p-3 mb-2 bg-secondary bg-gradient">À-propos</h4>
