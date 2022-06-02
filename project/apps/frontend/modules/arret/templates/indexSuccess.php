@@ -487,8 +487,8 @@ if(isset($references['PUBLICATION'])) {
           <i class="bi bi-clipboard"></i>
         </button>
       </li>
-      <li class="nav-item d-none">
-        <a type="button" class="btn disabled">
+      <li class="nav-item">
+        <a type="button" title="envoyer par mail" class="btn"  onclick="javascript: var link= window.location.href; window.location.href='mailto:?body='+link+ '<?php echo '('.addslashes($document->titre).')';?>';">
           <i class="bi bi-envelope"></i>
         </a>
       </li>
