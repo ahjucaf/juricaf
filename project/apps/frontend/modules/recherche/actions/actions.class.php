@@ -286,7 +286,7 @@ class rechercheActions extends sfActions
                 $filter .= '( ';
                 foreach ($pays as $p) {
                     $quote = '';
-                    if (preg_match('/ /', $p))
+                    if (preg_match("/[' ]/", $p))
                     $quote = '"';
                     $filter .= 'pays:'.$quote.$p.$quote;
                     if($i < $nb) { $filter .= ' OR '; }
