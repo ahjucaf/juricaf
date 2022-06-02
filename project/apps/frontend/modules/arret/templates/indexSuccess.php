@@ -470,8 +470,7 @@ if(isset($references['PUBLICATION'])) {
 }
 ?>
 <div class="barre-outil">
-
-    <ul class="nav justify-content-center flex-lg-column">
+    <ul class="nav justify-content-center flex-lg-column shadow-sm">
       <li class="nav-item">
         <button type="button" class="btn" onclick="fontSizePlus()">
           <i class="bi bi-zoom-in"></i>
