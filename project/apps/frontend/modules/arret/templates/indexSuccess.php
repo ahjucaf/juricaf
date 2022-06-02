@@ -482,19 +482,14 @@ if(isset($references['PUBLICATION'])) {
          </button>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn disabled">
-          <i class="bi bi-download"></i>
-         </button>
-      </li>
-      <li class="nav-item">
         <button type="button" title="copier" id="btn-cpy" class="btn" onclick="copyArretUrl(<?php echo "'".addslashes($document->titre)."'"?>)">
           <i class="bi bi-clipboard"></i>
         </button>
       </li>
-      <li class="nav-item">
-        <button type="button" class="btn disabled" Download>
+      <li class="nav-item d-none">
+        <a type="button" class="btn disabled">
           <i class="bi bi-envelope"></i>
-        </button>
+        </a>
       </li>
       <li class="nav-item">
         <button type="button" title="imprimer" class="btn" onclick="window.print()">
