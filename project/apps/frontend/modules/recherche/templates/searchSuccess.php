@@ -209,7 +209,11 @@ function remplacequerytitre($string) {
 
 <hr>
 <div>
-    <p class="text-center"><?php if($nbResultats > 0): ?><?php echo $nbResultats;?> résultats<?php else: ?>Aucun résultat trouvé<?php endif; ?> <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>" class="text-muted float-end"><i class="bi bi-rss"></i></a></p>
+    <?php if($nbResultats > 0): ?>
+    <p class="text-start"><?php echo $nbResultats;?> résultats trouvés : <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>" class="text-muted float-end"><i class="bi bi-rss"></i></a></p>
+    <?php else: ?>
+    <p class="text-center">Aucun résultat trouvé</p>
+    <?php endif; ?>
 <?php
 foreach ($resultats->response->docs as $resultat) {
  ?>
