@@ -209,14 +209,7 @@ function remplacequerytitre($string) {
 
 <hr>
 <div>
-    <div class="row justify-content-between">
-      <div class="col-4">
-        <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>"><img src="/images/rss_mini.png" alt="RSS" title="Flux RSS" /></a>
-      </div>
-      <div class="col-4">
-        <p class="text-end"><?php echo $nbResultats;?> résultats</p>
-      </div>
-    </div>
+    <p class="text-center"><?php if($nbResultats > 0): ?><?php echo $nbResultats;?> résultats<?php else: ?>Aucun résultat trouvé<?php endif; ?> <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>" class="text-muted float-end"><i class="bi bi-rss"></i></a></p>
 <?php
 foreach ($resultats->response->docs as $resultat) {
  ?>
