@@ -69,6 +69,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/documentation/contact.php">Contact</a>
         </li>
+        <li class="nav-item d-lg-none">
+          <a class="nav-link" href="/documentation/stats/statuts.php">Plus de statistiques</a>
+        </li>
       </ul>
       <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item">

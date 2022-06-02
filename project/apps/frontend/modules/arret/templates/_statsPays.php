@@ -53,7 +53,9 @@ $cpt = 0;
       </div>
   </div>
   <div class="text-center mt-3 p-3">
-    <a href="/documentation/stats/statuts.php">Plus de statistiques</a>
+    <a class="d-none d-sm-none d-lg-block" href="/documentation/stats/statuts.php">Plus de statistiques</a>
+    <a class="d-lg-none" href="/recherche_avancee">Recherche avancée</a>
+
   </div>
 </div>
 
