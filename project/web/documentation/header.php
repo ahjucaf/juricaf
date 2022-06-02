@@ -114,7 +114,7 @@
         ?>
         placeholder="Rechercher une jurisprudence" name="q" aria-label="Rechercher" tabindex="10"
         <?php
-          if(!$not_autofocus){
+          if(!isset($not_autofocus) || !$not_autofocus){
             echo('autofocus=autofocus');
           }
         ?>
