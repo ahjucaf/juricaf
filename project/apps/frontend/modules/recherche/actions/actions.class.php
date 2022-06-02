@@ -322,6 +322,10 @@ class rechercheActions extends sfActions
 
   }
 
+  public function executeActualites(sfWebRequest $request) {
+    
+  }
+
   public function executePage404() { }
 
 }

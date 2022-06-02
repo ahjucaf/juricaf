@@ -60,6 +60,11 @@ stats:
   url: /stats
   param: {module: arret, action: stats}
 
+#Actualités
+actualites:
+  url: /actualites
+  param: {module: recherche, action: actualites}
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
