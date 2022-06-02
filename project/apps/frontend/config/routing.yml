@@ -11,6 +11,10 @@ recherche:
   url: /recherche
   param: {module: recherche, action: index, query: ""}
 
+recherche_filtres:
+  url: /recherche_filtres
+  param: {module: recherche, action: filtres}
+
 recherche_resultats:
   url: /recherche/:query/:facets/:filter
   param: {module: recherche, action: search, query: "", facets: "", filter: ""}
