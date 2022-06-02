@@ -110,18 +110,3 @@ function redisplayClipBoard(){
   btnCpy.children[0].setAttribute("class","bi bi-clipboard");
 }
 
-////fonction appelé au click sur la croix à coté du input pays dans les filtres dans la page de recherche
-function deletePaysfilter(){
-  var parsedUrl = new URL(window.location.href);
-  parsedUrl.searchParams.delete("pays");
-  parsedUrl.searchParams.delete("juridiction");
-  parsedUrl.searchParams.delete("page");
-  window.location.replace(parsedUrl);
-}
-////fonction appelé au click sur la croix à coté du input de la juridiction dans les filtres dans la page de recherche
-function deleteJuridictionfilter(){
-  var parsedUrl = new URL(window.location.href);
-  parsedUrl.searchParams.delete("juridiction");
-  parsedUrl.searchParams.delete("page");
-  window.location.replace(parsedUrl);
-}
