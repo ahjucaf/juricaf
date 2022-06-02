@@ -64,7 +64,51 @@ function remplacequerytitre($string) {
   return strtr($string, $table);
 }
 
+foreach($facetsset as $facet) {
+    if (preg_match('/^facet_pays_juridiction:/', $facet)) {
+        $title_facet['pays_juri'] = replaceUnderscore(str_replace('facet_pays_juridiction:', '', $facet));
+    }
+    if (preg_match('/^facet_pays:/', $facet)) {
+        $title_facet['pays'] = replaceUnderscore(str_replace('facet_pays:', '', $facet));
+    }
+    if(preg_match('/^facet_juridiction:/', $facet)) {
+        $title_facet['juri'] = replaceUnderscore(str_replace('facet_juridiction:', '', $facet));
+    }
+}
+
+if(isset($title_facet['pays_juri'])) {
+    $title_facet = $title_facet['pays_juri'];
+} elseif(isset($title_facet['pays']) && isset($title_facet['juri'])) {
+    $title_facet = $title_facet['pays'].' | '.$title_facet['juri'];
+} else {
+    if(isset($title_facet['juri'])) {
+        $title_facet = $title_facet['juri'];
+    }elseif(isset($title_facet['pays'])) {
+        $title_facet = $title_facet['pays'];
+    }
+}
+
+if(isset($title_facet) && trim($query) == '') {
+    $title = 'Jurisprudences '.$title_facet.'';
+    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
+}
+if(isset($title_facet) && trim($query) !== '') {
+    $title = 'Jurisprudences '.remplacequerytitre($query).' - '.$title_facet.'';
+    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
+}
+if(!isset($title_facet) && trim($query) !== '') {
+    $title = 'Jurisprudences '.remplacequerytitre($query).'';
+    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
+}
+slot("metadata");
+include_partial("metadata", array('url_flux' => $sf_request->getUri().'?format=rss', 'titre_flux' => "S'abonner à cette recherche"));
+end_slot();
+$sf_response->setTitle($title);
+$sf_response->addMeta('description', $description);
+$sf_response->addMeta('keywords', $keywords);
+
 ?>
+<?php include_partial('recherche/barre'); ?>
 <div class="recherche container">
 <div class="row">
 <div>
@@ -112,7 +156,6 @@ function remplacequerytitre($string) {
     echo "<p><small>Filtrés par : <span class='filtres'>".implode(" / ",array_filter(array($filtre_pays, $filtre_juridiction)))."</span></small></p>";
   }
   ?>
-</p>
 </div>
 <form method="get" action="<?php echo url_for('@recherche_filtres?query='.$filtre_query); ?>">
 <div id="bloc-filtres" class="row g-3 align-items-center">
@@ -150,7 +193,7 @@ function remplacequerytitre($string) {
       echo('<div class="form-inline input-group">
           <input  class="form-control mx-auto" type="search" name="pays" value="');
         echo $filtre_pays;
-        echo('" readonly></input><a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query).'""><i class="bi bi-x-circle"></i></a></div>');
+        echo('" readonly="readonly"/><a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query).'"><i class="bi bi-x-circle"></i></a></div>');
         }
     else{
     ?>
@@ -172,10 +215,9 @@ function remplacequerytitre($string) {
     <?php if($filtre_juridiction){
       echo('<div class="input-group">
           <input class="form-control g3" type="text" name="juridiction" size="45"
-          value = "'.trim(preg_replace("/.+\|/",'',$filtre_juridiction)).'"
-          readonly>
-          </input>
-          <a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query.'&facets=facet_pays:'.urlencode($filtre_pays)).'"">
+          value="'.trim(preg_replace("/.+\|/",'',$filtre_juridiction)).'"
+          readonly="readonly"/>
+          <a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query.'&facets=facet_pays:'.urlencode($filtre_pays)).'">
             <i class="bi bi-x-circle"></i>
           </a>
           </div>');
@@ -202,14 +244,18 @@ function remplacequerytitre($string) {
   <?php } ?>
   </div>
   <div class="col-lg-auto">
-    <button  id="filtrer" type="submit"class="btn btn-outline-secondary">Filtrer</button>
+    <button  id="filtrer" type="submit" class="btn btn-outline-secondary">Filtrer</button>
   </div>
 </div>
 </form>
 
 <hr>
 <div>
-    <p class="text-center"><?php if($nbResultats > 0): ?><?php echo $nbResultats;?> résultats<?php else: ?>Aucun résultat trouvé<?php endif; ?> <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>" class="text-muted float-end"><i class="bi bi-rss"></i></a></p>
+    <?php if($nbResultats > 0): ?>
+    <p class="text-start"><?php echo $nbResultats;?> résultats trouvés : <a href="<?php echo $sf_request->getUri().'?format=rss'; ?>" class="text-muted float-end"><i class="bi bi-rss"></i></a></p>
+    <?php else: ?>
+    <p class="text-center">Aucun résultat trouvé</p>
+    <?php endif; ?>
 <?php
 foreach ($resultats->response->docs as $resultat) {
  ?>
@@ -248,7 +294,6 @@ foreach ($resultats->response->docs as $resultat) {
 </div>
 
 <div style="clear:both;">&nbsp;</div>
-</div>
 </div>
 <script type="text/javascript">
 <!--

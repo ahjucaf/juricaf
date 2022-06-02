@@ -97,6 +97,8 @@ a{
   display: block;
   margin-left: -70px;
   position:fixed;
+  transform: translateY(-50%);
+  top: 50%;
 }
 
 .barre-outil li{
@@ -159,6 +161,7 @@ a{
     left: 0;
     background-color: white;
     padding: 10px 0 10px 0;
+    transform: inherit;
   }
   .barre-outil li{
     padding: 0;

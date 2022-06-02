@@ -8,39 +8,39 @@
 <div class="container mt-5">
 <h5 class="p-3 mb-2 bg-secondary bg-gradient">Partenaires institutionnels</h5>
 <div class="container text-justify">
-  <p>JURICAF est soutenu par <a href="#francophonie"><a href="http://www.francophonie.org/">l'Organisation Internationale de la Francophonie</a>.</p>
-  <p class="text-center"><a href="http://www.francophonie.org/"><img src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a></p>
+  <p>JURICAF est soutenu par <a href="https://www.francophonie.org/">l'Organisation Internationale de la Francophonie</a>.</p>
+  <p class="text-center"><a href="https://www.francophonie.org/"><img src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a></p>
 </div>
 <h5 class="p-3 mb-2 bg-secondary bg-gradient">Les Cours suprêmes membres de l’AHJUCAF</h5>
 
 <div class="container text-justify">
     <div class="row">
        <div class="col-lg-6"><img src="/images/drapeaux/Belgique.png" alt="Belgique" /><a href="https://www.ahjucaf.org/belgique-cour-de-cassation" target="new">&nbsp;Cour de cassation de Belgique</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/B%C3%A9nin.png" alt="Bénin" /><a href="">&nbsp;Cour suprême du Bénin</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Bulgarie.png" alt="Bulgarie" /><a href="">&nbsp;Cour suprême de Bulgarie</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Burkina_Faso.png" alt="Burkina_Faso" /><a href="">&nbsp;Cour de cassation du Burkina Faso</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Burundi.png" alt="Burundi" /><a href="">&nbsp;Cour suprême du Burundi</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Cambodge.png" alt="Cambodge" /><a href="">&nbsp;Cour suprême du Cambodge</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Cameroun.png" alt="Cameroun" /><a href="">&nbsp;Cour suprême du Cameroun</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Canada.png" alt="Canada" /><a href="">&nbsp;Cour suprême du Canada</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/B%C3%A9nin.png" alt="Bénin" /><a href="https://www.ahjucaf.org/index.php/b%C3%A9nin-cour-supr%C3%AAme">&nbsp;Cour suprême du Bénin</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Bulgarie.png" alt="Bulgarie" /><a href="ahjucaf.org/index.php/bulgarie-cour-suprême-de-cassation">&nbsp;Cour suprême de Bulgarie</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Burkina_Faso.png" alt="Burkina_Faso" /><a href="https://www.ahjucaf.org/index.php/burkina-faso-cour-de-cassation">&nbsp;Cour de cassation du Burkina Faso</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Burundi.png" alt="Burundi" /><a href="https://www.ahjucaf.org/index.php/burundi-cour-supr%C3%AAme">&nbsp;Cour suprême du Burundi</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Cambodge.png" alt="Cambodge" /><a href="https://www.ahjucaf.org/index.php/cambodge-cour-supr%C3%AAme">&nbsp;Cour suprême du Cambodge</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Cameroun.png" alt="Cameroun" /><a href="https://www.ahjucaf.org/index.php/cameroun-cour-supr%C3%AAme">&nbsp;Cour suprême du Cameroun</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Canada.png" alt="Canada" /><a href="https://www.ahjucaf.org/index.php/canada-cour-supr%C3%AAme">&nbsp;Cour suprême du Canada</a></div>
        <div class="col-lg-6"><img src="/images/drapeaux/CEMAC.png" alt="CEMAC" /><a href="">&nbsp;Cour de justice de la CEMAC</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Congo.png" alt="Congo" /><a href="">&nbsp;Cour de justice du Congo</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Congo_d%C3%A9mocratique.png" alt="Congo_démocratique" /><a href="">&nbsp;Cour suprême de justice du Congo démocratique</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/C%C3%B4te_d_Ivoire.png" alt="Côte_d'Ivoire" /><a href="">&nbsp;Cour suprême de Côte d'Ivoire</a> </div>
-       <div class="col-lg-6"><img src="/images/drapeaux/France.png" alt="France" /><a href="">&nbsp;Cour de cassation de France</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Gabon.png" alt="Gabon" /><a href="">&nbsp;Cour de cassation du Gabon</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Guin%C3%A9e.png" alt="Guinée" /><a href="">&nbsp;Cour suprême de Guinée</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Ha%C3%AFti.png" alt="Haïti" /><a href="">&nbsp;Cour de cassation d'Haïti</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Congo.png" alt="Congo" /><a href="https://www.ahjucaf.org/index.php/congo-cour-supr%C3%AAme">&nbsp;Cour de justice du Congo</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Congo_d%C3%A9mocratique.png" alt="Congo_démocratique" /><a href="https://www.ahjucaf.org/index.php/r%C3%A9publique-d%C3%A9mocratique-du-congo-cour-de-cassation">&nbsp;Cour suprême de justice du Congo démocratique</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/C%C3%B4te_d_Ivoire.png" alt="Côte_d'Ivoire" /><a href="https://www.ahjucaf.org/c%C3%B4te-d%E2%80%99ivoire-cour-de-cassation">&nbsp;Cour suprême de Côte d'Ivoire</a> </div>
+       <div class="col-lg-6"><img src="/images/drapeaux/France.png" alt="France" /><a href="https://www.ahjucaf.org/france-cour-de-cassation">&nbsp;Cour de cassation de France</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Gabon.png" alt="Gabon" /><a href="https://www.ahjucaf.org/index.php/gabon-cour-de-cassation">&nbsp;Cour de cassation du Gabon</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Guin%C3%A9e.png" alt="Guinée" /><a href="https://www.ahjucaf.org/guin%C3%A9e-cour-supr%C3%AAme">&nbsp;Cour suprême de Guinée</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Ha%C3%AFti.png" alt="Haïti" /><a href="https://www.ahjucaf.org/ha%C3%AFti-cour-de-cassation">&nbsp;Cour de cassation d'Haïti</a></div>
        <div class="col-lg-6"><img src="/images/drapeaux/Hongrie.png" alt="Hongrie" /><a href="">&nbsp;Cour suprême de Hongrie</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Liban.png" alt="Liban" /><a href="">&nbsp;Cour de cassation du Liban</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Madagascar.png" alt="Madagascar" /><a href="">&nbsp;Cour suprême de Madagascar</a></div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Mali.png" alt="Mali" /><a href="">&nbsp;Cour suprême du Mali</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Liban.png" alt="Liban" /><a href="https://www.ahjucaf.org/liban-cour-de-cassation">&nbsp;Cour de cassation du Liban</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Madagascar.png" alt="Madagascar" /><a href="https://www.ahjucaf.org/index.php/madagascar-cour-supr%C3%AAme">&nbsp;Cour suprême de Madagascar</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Mali.png" alt="Mali" /><a href="https://www.ahjucaf.org/index.php/mali-cour-supr%C3%AAme">&nbsp;Cour suprême du Mali</a></div>
     </div>
     <div class="row">
       <div class="col-lg-6"><img src="/images/drapeaux/Maroc.png" alt="Maroc" /><a href="">&nbsp;Cour suprême du Maroc</a></div>
       <div class="col-lg-6"><img src="/images/drapeaux/Mauritanie.png" alt="Mauritanie" /><a href="">&nbsp;Cour suprême de Mauritanie</a></div>
       <div class="col-lg-6"><img src="/images/drapeaux/Monaco.png" alt="Monaco" /><a href="">&nbsp;Cour de révision de Monaco</a></div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Niger.png" alt="Niger" /><a href="">&nbsp;Cour d'Etat du Niger</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Niger.png" alt="Niger" /><a href="">&nbsp;Cour de cassation du Niger</a></div>
       <div class="col-lg-6"><img src="/images/drapeaux/OHADA.png" alt="OHADA" /><a href="">&nbsp;Cour commune de justice et d'arbitrage de l'OHADA</a></div>
       <div class="col-lg-6"><img src="/images/drapeaux/Pologne.png" alt="Pologne" /><a href="">&nbsp;Cour suprême de Pologne</a></div>
       <div class="col-lg-6"><img src="/images/drapeaux/R%C3%A9publique_Tch%C3%A8que.png" alt="République_Tchèque" /><a href="">&nbsp;Cour suprême de République Tchèque</a></div>
@@ -63,18 +63,18 @@
 
 <h5 class="mt-3 mb-3"><u>Entreprises / Structures professionnelles :</u></h5>
 
-  <p> - La Loi des Ours</p>
-  <p> - Lexbase</p>
-  <p> - 24ème</p>
+  <p> - <a href="http://www.loidesours.fr/">La Loi des Ours</a></p>
+  <p> - <a href="https://www.lexbase.fr/">Lexbase</a></p>
+  <p> - <a href="https://www.24eme.fr/">24ème</a></p>
   <p> - Le Réseau ALioka avocats</p>
 
   <h5 class="mt-3 mb-3"><u>Associations :</u></h5>
 
   <p>(Elles accompagnent les développements de JURICAF et rediffusent les informations venant de l’AHJUCAF)</p>
 
-  <p> - Open Law</p>
-  <p> - Juriconnexion</p>
-  <p> - ADIJ</p>
+  <p> - <a href="https://openlaw.fr/">Open Law</a></p>
+  <p> - <a href="https://www.juriconnexion.fr/">Juriconnexion</a></p>
+  <p> - <a href="http://www.adij.fr/">ADIJ</a></p>
 </div>
 
 
