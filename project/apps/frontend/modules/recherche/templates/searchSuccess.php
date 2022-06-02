@@ -72,7 +72,7 @@ function remplacequerytitre($string) {
 /* POUR LA PAGINATION */
   $myfacetslink = preg_replace('/^,/', '', $facetslink);
 
-  $currentlink = array('module'=>'recherche', 'action'=>'search', 'query' => $query, 'facets'=>$myfacetslink,'tri'=>$sf_request->getParameter('tri'),'pays'=>$sf_request->getParameter('pays'), 'juridiction' => $sf_request->getParameter('juridiction'));
+  $currentlink = array('module'=>'recherche', 'action'=>'search', 'query' => $query, 'facets'=>$myfacetslink,'tri'=>$filtre_tri,'pays'=>$filtre_pays, 'juridiction' => $filtre_juridiction);
 ?>
 
 
@@ -91,10 +91,10 @@ function remplacequerytitre($string) {
   <small>Résultats par
     <span>
     <?php
-    if($sf_request->getParameter('tri') == "ASD"){
+    if($filtre_tri == "ASD"){
       echo "plus ancien";
     }
-    elseif ($sf_request->getParameter('tri') == "DESC") {
+    elseif ($filtre_tri == "DESC") {
       echo "plus récent";
     }
     else{
@@ -105,17 +105,16 @@ function remplacequerytitre($string) {
 </small>
 </p>
   <?php
-  $tabFiltres = array($sf_request->getParameter('pays'),$sf_request->getParameter('juridiction'));
-  if(!$sf_request->getParameter('pays') && !$sf_request->getParameter('juridiction')){
+  if(!$filtre_pays && !$filtre_juridiction){
     echo "<p><small>Aucun filtre appliqué</small></p>";
   }
   else{
-    echo "<p><small>Filtrés par : <span class='filtres'>".implode(" / ",array_filter($tabFiltres))."</span></small></p>";
+    echo "<p><small>Filtrés par : <span class='filtres'>".implode(" / ",array_filter(array($filtre_pays, $filtre_juridiction)))."</span></small></p>";
   }
   ?>
 </p>
 </div>
-<form method="get" action="<?php echo url_for('recherche')."/".$sf_request->getParameter('query')?>">
+<form method="get" action="<?php echo url_for('@recherche_filtres?query='.$filtre_query); ?>">
 <div id="bloc-filtres" class="row g-3 align-items-center">
   <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Tri :</label>
@@ -124,34 +123,33 @@ function remplacequerytitre($string) {
     <select name="tri" class="form-select form-control">
       <option value="DESC"
       <?php
-        if(!$sf_request->getParameter('tri') || ($sf_request->getParameter('tri') && $sf_request->getParameter('tri') == "DESC"))
+        if(!$filtre_tri || ($filtre_tri && $filtre_tri == "DESC"))
           echo('selected');
       ?>
       >Plus récent</option>
       <option value="ASD"
       <?php
-        if($sf_request->getParameter('tri') && $sf_request->getParameter('tri')== "ASD")
+        if($filtre_tri && $filtre_tri == "ASD")
           echo('selected');
       ?>
       >Plus ancien</option>
       <option value="pertinence"
       <?php
-        if($sf_request->getParameter('tri') && $sf_request->getParameter('tri')== "pertinence")
+        if($filtre_tri && $filtre_tri == "pertinence")
           echo('selected');
       ?>
       >Par pertinence</option>
     </select>  </div>
-  <?php if(!preg_match("/facet_pays:/",$sf_request->getParameter('query'))){
+  <?php if(!preg_match("/facet_pays:/", $filtre_query)){
   ?>
   <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Pays :</label>
   </div>
   <div class="col-lg-auto col-md-12 col-sm-12">
-
-    <?php if($sf_request->getParameter('pays') || $sf_request->getParameter('juridiction')){
+    <?php if($filtre_pays || $filtre_juridiction){
       echo('<div class="form-inline input-group">
           <input  class="form-control mx-auto" type="search" name="pays" value = ');
-        echo $sf_request->getParameter('pays');
+        echo $filtre_pays;
       echo(' readonly></input><a class="btn btn-light" onclick="deletePaysfilter()"><i class="bi bi-x-circle"></i></a></div>');
         }
     else{
@@ -171,10 +169,10 @@ function remplacequerytitre($string) {
   </div>
   <div class="col-lg-auto col-md-12 col-sm-12">
 
-    <?php if($sf_request->getParameter('juridiction')){
+    <?php if($filtre_juridiction){
       echo('<div class="input-group">
           <input class="form-control g3" type="text" name="juridiction" size="45"
-          value = "'.trim(preg_replace("/.+\|/",'',$sf_request->getParameter('juridiction'))).'"
+          value = "'.trim(preg_replace("/.+\|/",'',$filtre_juridiction)).'"
           readonly>
           </input>
           <a class="btn btn-light" onclick="deleteJuridictionfilter()">
