@@ -53,6 +53,7 @@ $( document ).ready(function() {
             $("#btn-see-more").html("Voir plus");
             $("#btn-expand").html("<i class='bi bi-arrows-expand'></i>") //change icone dans la barre d'option
             $("#debutArret").removeClass("d-none");//affiche le texte debut "resume"
+            location.hash = "#btn-see-more";
 
           }
       });
