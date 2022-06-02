@@ -1,26 +1,11 @@
-<div class="bottom text-center p-3 mt-5 d-none d-lg-block">
-  <div class="row">
-    <div class="col-3">
-      <a href="https://www.ahjucaf.org/"><img src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprèmes francophones"/></a>
-    </div>
-    <div class="col-6 small">
-      <p>Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones. Il est soutenu par l'Organisation Internationale de la Francophonie.</p>
-      <img class="mt-3" src="/images/iall.jpg" />
-    </div>
-    <div class="col-3">
-      <a href="https://www.francophonie.org/"><img src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
-    </div>
-  </div>
-</div>
-
-    <!-- VERSION MOBILE -->
-<div class="text-center d-lg-none mt-3">
+<div class="text-center mt-3">
     <div class="pt-3 px-5 mb-3 clearfix">
       <a href="https://www.ahjucaf.org/"><img class="float-start"src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones"/></a>
       <a href="https://www.francophonie.org/"><img class="float-end" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
     </div>
     <div class="small bottom p-2">
-       Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones. Il est soutenu par l'Organisation Internationale de la Francophonie.
+       <span class="d-lg-none">Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones. Il est soutenu par l'Organisation Internationale de la Francophonie.</span>
+       <span class="d-none d-lg-block col-6 mx-auto">Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones. Il est soutenu par l'Organisation Internationale de la Francophonie.</span>
        <div class="pt-3 p-2">
            <img src="/images/iall.jpg" />
        </div>
