@@ -469,6 +469,7 @@ if(isset($references['PUBLICATION'])) {
     }
 }
 ?>
+<?php include_partial('recherche/barre'); ?>
 <div class="barre-outil">
     <ul class="nav justify-content-center flex-lg-column shadow-sm">
       <li class="nav-item">
@@ -482,26 +483,21 @@ if(isset($references['PUBLICATION'])) {
          </button>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn disabled">
-          <i class="bi bi-download"></i>
-         </button>
-      </li>
-      <li class="nav-item">
         <button type="button" title="copier" id="btn-cpy" class="btn" onclick="copyArretUrl(<?php echo "'".addslashes($document->titre)."'"?>)">
           <i class="bi bi-clipboard"></i>
         </button>
       </li>
-      <li class="nav-item">
-        <button type="button" class="btn disabled" Download>
+      <li class="nav-item d-none">
+        <a type="button" class="btn disabled">
           <i class="bi bi-envelope"></i>
-        </button>
+        </a>
       </li>
       <li class="nav-item">
         <button type="button" title="imprimer" class="btn" onclick="window.print()">
           <i class="bi bi-printer"></i>
       </button>
       </li>
-      <li class="nav-item d-lg-none">
+      <li class="nav-item d-none">
         <a id="btn-expand" class="btn d-lg-none" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret"><i class="bi bi-arrows-expand"></i></a>
       </li>
     </ul>

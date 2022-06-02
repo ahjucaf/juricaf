@@ -1,3 +1,4 @@
+<?php include_partial('recherche/barre'); ?>
 <div class="stats">
 <?php include_component('arret', 'statsPays'); ?>
 </div>

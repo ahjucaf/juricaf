@@ -1,3 +1,4 @@
+<?php //////////////// BARRE DE RECHECHE ///////////////// ?>
 <div <?php if($sf_request && $sf_request->getParameter('module')=="arret"){ echo('id = "hidden-mode-mobile"');}else{echo('id = "menu"');} ?>class="container form_recherche mt-4 clearfix">
   <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
     <div>
@@ -33,3 +34,4 @@
 
   </form>
 </div>
+<?php ///////////////////////////////////////////////////////////////////////// ?>
