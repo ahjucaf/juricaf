@@ -108,17 +108,17 @@
       <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="https://www.facebook.com/AHJUCAFCoursSupremesJudiciairesFrancophones" target="_blank">
-            <i class="bi bi-facebook"></i>
+            <i class="bi bi-facebook"></i> <span class="d-lg-none"> Nous suivre sur Facebook</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="http://twitter.com/ahjucaf" target="_blank">
-            <i class="bi bi-twitter"></i>
+            <i class="bi bi-twitter"></i> <span class="d-lg-none"> Nous suivre sur twitter</span>
           </a>
          </li>
          <li class="nav-item">
           <a class="nav-link" href="https://www.linkedin.com/in/ahjucaf-cours-supr%C3%AAmes-judiciaires-francophones-0a7a72230" target="_blank">
-            <i class="bi bi-linkedin"></i>
+            <i class="bi bi-linkedin"></i> <span class="d-lg-none"> Nous suivre sur LinkedIn</span>
           </a>
         </li>
       </ul>
