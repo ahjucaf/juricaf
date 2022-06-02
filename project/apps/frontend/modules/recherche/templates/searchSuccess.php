@@ -157,7 +157,7 @@ function remplacequerytitre($string) {
       <select id="pays_filter" name="pays" class="form-select">
         <option value="">Tous les pays</option>
         <?php foreach($facets["facet_pays"] as $pays=>$num){
-          echo("<option value=".preg_replace('/ /', '_', $pays).">".ClientArret::TAB_DRAPEAU[$pays]." ".$pays.'&nbps;('.number_format($num, 0, '', ' ').")</option>");
+          echo("<option value=".preg_replace('/ /', '_', $pays).">".ClientArret::TAB_DRAPEAU[$pays]." ".$pays.'&nbsp;('.number_format($num, 0, '', ' ').")</option>");
         } ?>
       </select>
     <?php } ?>
