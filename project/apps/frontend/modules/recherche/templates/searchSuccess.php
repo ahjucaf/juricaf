@@ -150,7 +150,7 @@ function remplacequerytitre($string) {
       echo('<div class="form-inline input-group">
           <input  class="form-control mx-auto" type="search" name="pays" value = ');
         echo $filtre_pays;
-      echo(' readonly></input><a class="btn btn-light" onclick="deletePaysfilter()"><i class="bi bi-x-circle"></i></a></div>');
+        echo(' readonly></input><a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query).'""><i class="bi bi-x-circle"></i></a></div>');
         }
     else{
     ?>
@@ -175,7 +175,7 @@ function remplacequerytitre($string) {
           value = "'.trim(preg_replace("/.+\|/",'',$filtre_juridiction)).'"
           readonly>
           </input>
-          <a class="btn btn-light" onclick="deleteJuridictionfilter()">
+          <a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query.'&facets=facet_pays:'.urlencode($filtre_pays)).'"">
             <i class="bi bi-x-circle"></i>
           </a>
           </div>');
