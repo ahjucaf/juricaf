@@ -231,7 +231,7 @@ foreach ($resultats->response->docs as $resultat) {
   <p class="card-header fs-5"><img src="/images/drapeaux/<?php echo $pathToFlag ?>.png" alt="§" /> | <a class="a-unstyled " target="_blank" href="<?php echo $urlForArret ?>"><?php echo $resultat->titre ?></a></p>
 
   <div class="card-body" data-link=<?php echo($urlForArret);?>>
-    <p class="card-text"> <?php echo($textArret); ?></p>
+    <p class="card-text text-justify"> <?php echo($textArret); ?></p>
   </div>
 
   <?php
