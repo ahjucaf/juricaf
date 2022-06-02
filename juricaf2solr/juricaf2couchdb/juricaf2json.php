@@ -213,9 +213,8 @@ if (empty($res['num_arret']))
   {
     $res['num_arret'] = $res['nor'];
   }
-  else
-  {
-    $res['num_arret'] = $res['id'];
+  elseif (isset($res['id'])) {
+        $res['num_arret'] = $res['id'];
   }
   if(empty($res['num_arret']) || $res['num_arret'] == '.') {
     addError("numéro d'arrêt : nombre aléatoire généré");
