@@ -3,7 +3,7 @@
   <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
     <div>
       <a href="/"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a> <br>
-      <p><small class="slogan-landing">La jurisprudence francophone des Cours suprêmes</small></p>
+      <p><span class="text-secondary">La jurisprudence francophone des Cours suprêmes</span></p>
     </div>
       <div class="form-inline input-group input-group-lg">
       <input id="recherche" class="form-control mx-auto" autocomplete="off" type="text"
