@@ -24,7 +24,7 @@
     <!--
       var _paq = window._paq = window._paq || [];
       /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-      <?php if ($sf_params->get('query')): ?>
+      <?php if (isset($sf_params) && $sf_params->get('query')): ?>
       _paq.push(['trackSiteSearch',
           // Search keyword searched for
           "<?php echo $sf_params->get('query'); ?>",
