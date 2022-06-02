@@ -9,46 +9,46 @@
 
 <div class="container text-justify">
     <div class="row">
-       <div class="col-lg-6"><img src="/images/drapeaux/Belgique.png" alt="Belgique" />&nbsp;Cour de cassation de Belgique</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/B%C3%A9nin.png" alt="Bénin" />&nbsp;Cour suprême du Bénin</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Bulgarie.png" alt="Bulgarie" />&nbsp;Cour suprême de Bulgarie</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Burkina_Faso.png" alt="Burkina_Faso" />&nbsp;Cour de cassation du Burkina Faso</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Burundi.png" alt="Burundi" />&nbsp;Cour suprême du Burundi</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Cambodge.png" alt="Cambodge" />&nbsp;Cour suprême du Cambodge</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Cameroun.png" alt="Cameroun" />&nbsp;Cour suprême du Cameroun</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Canada.png" alt="Canada" />&nbsp;Cour suprême du Canada</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/CEMAC.png" alt="CEMAC" />&nbsp;Cour de justice de la CEMAC</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Congo.png" alt="Congo" />&nbsp;Cour de justice du Congo</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Congo_d%C3%A9mocratique.png" alt="Congo_démocratique" />&nbsp;Cour suprême de justice du Congo démocratique</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/C%C3%B4te_d_Ivoire.png" alt="Côte_d'Ivoire" />&nbsp;Cour suprême de Côte d'Ivoire </div>
-       <div class="col-lg-6"><img src="/images/drapeaux/France.png" alt="France" />&nbsp;Cour de cassation de France</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Gabon.png" alt="Gabon" />&nbsp;Cour de cassation du Gabon</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Guin%C3%A9e.png" alt="Guinée" />&nbsp;Cour suprême de Guinée</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Ha%C3%AFti.png" alt="Haïti" />&nbsp;Cour de cassation d'Haïti</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Hongrie.png" alt="Hongrie" />&nbsp;Cour suprême de Hongrie</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Liban.png" alt="Liban" />&nbsp;Cour de cassation du Liban</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Madagascar.png" alt="Madagascar" />&nbsp;Cour suprême de Madagascar</div>
-       <div class="col-lg-6"><img src="/images/drapeaux/Mali.png" alt="Mali" />&nbsp;Cour suprême du Mali</div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Belgique.png" alt="Belgique" /><a href="https://www.ahjucaf.org/belgique-cour-de-cassation" target="new">&nbsp;Cour de cassation de Belgique</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/B%C3%A9nin.png" alt="Bénin" /><a href="">&nbsp;Cour suprême du Bénin</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Bulgarie.png" alt="Bulgarie" /><a href="">&nbsp;Cour suprême de Bulgarie</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Burkina_Faso.png" alt="Burkina_Faso" /><a href="">&nbsp;Cour de cassation du Burkina Faso</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Burundi.png" alt="Burundi" /><a href="">&nbsp;Cour suprême du Burundi</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Cambodge.png" alt="Cambodge" /><a href="">&nbsp;Cour suprême du Cambodge</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Cameroun.png" alt="Cameroun" /><a href="">&nbsp;Cour suprême du Cameroun</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Canada.png" alt="Canada" /><a href="">&nbsp;Cour suprême du Canada</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/CEMAC.png" alt="CEMAC" /><a href="">&nbsp;Cour de justice de la CEMAC</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Congo.png" alt="Congo" /><a href="">&nbsp;Cour de justice du Congo</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Congo_d%C3%A9mocratique.png" alt="Congo_démocratique" /><a href="">&nbsp;Cour suprême de justice du Congo démocratique</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/C%C3%B4te_d_Ivoire.png" alt="Côte_d'Ivoire" /><a href="">&nbsp;Cour suprême de Côte d'Ivoire</a> </div>
+       <div class="col-lg-6"><img src="/images/drapeaux/France.png" alt="France" /><a href="">&nbsp;Cour de cassation de France</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Gabon.png" alt="Gabon" /><a href="">&nbsp;Cour de cassation du Gabon</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Guin%C3%A9e.png" alt="Guinée" /><a href="">&nbsp;Cour suprême de Guinée</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Ha%C3%AFti.png" alt="Haïti" /><a href="">&nbsp;Cour de cassation d'Haïti</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Hongrie.png" alt="Hongrie" /><a href="">&nbsp;Cour suprême de Hongrie</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Liban.png" alt="Liban" /><a href="">&nbsp;Cour de cassation du Liban</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Madagascar.png" alt="Madagascar" /><a href="">&nbsp;Cour suprême de Madagascar</a></div>
+       <div class="col-lg-6"><img src="/images/drapeaux/Mali.png" alt="Mali" /><a href="">&nbsp;Cour suprême du Mali</a></div>
     </div>
     <div class="row">
-      <div class="col-lg-6"><img src="/images/drapeaux/Maroc.png" alt="Maroc" />&nbsp;Cour suprême du Maroc</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Mauritanie.png" alt="Mauritanie" />&nbsp;Cour suprême de Mauritanie</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Monaco.png" alt="Monaco" />&nbsp;Cour de révision de Monaco</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Niger.png" alt="Niger" />&nbsp;Cour d'Etat du Niger</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/OHADA.png" alt="OHADA" />&nbsp;Cour commune de justice et d'arbitrage de l'OHADA</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Pologne.png" alt="Pologne" />&nbsp;Cour suprême de Pologne</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/R%C3%A9publique_Tch%C3%A8que.png" alt="République_Tchèque" />&nbsp;Cour suprême de République Tchèque</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Roumanie.png" alt="Roumanie" />&nbsp;Haute Cour de justice et de cassation de Roumanie</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Rwanda.png" alt="Rwanda" />&nbsp;Cour suprême du Rwanda</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Sao_Tom%C3%A9_et_Principe.png" alt="Sao_Tomé_et_Principe" />&nbsp;Cour suprême de Sao Tomé et Principe</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/S%C3%A9n%C3%A9gal.png" alt="Sénégal" />&nbsp;Cour suprême du Sénégal</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Suisse.png" alt="Suisse" />&nbsp;Tribunal fédéral suisse</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Tchad.png" alt="Tchad" />&nbsp;Cour suprême du Tchad</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Togo.png" alt="Togo" />&nbsp;Cour suprême du Togo</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Tunisie.png" alt="Tunisie" />&nbsp;Cour de cassation de Tunisie</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/UEMOA.png" alt="UEMOA" />&nbsp;Cour de justice de l'UEMOA</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Vanuatu.png" alt="Vanuatu" />&nbsp;Cour suprême du Vanuatu</div>
-      <div class="col-lg-6"><img src="/images/drapeaux/Vietnam.png" alt="Vietnam" />&nbsp;Cour suprême du Vietnam</div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Maroc.png" alt="Maroc" /><a href="">&nbsp;Cour suprême du Maroc</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Mauritanie.png" alt="Mauritanie" /><a href="">&nbsp;Cour suprême de Mauritanie</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Monaco.png" alt="Monaco" /><a href="">&nbsp;Cour de révision de Monaco</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Niger.png" alt="Niger" /><a href="">&nbsp;Cour d'Etat du Niger</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/OHADA.png" alt="OHADA" /><a href="">&nbsp;Cour commune de justice et d'arbitrage de l'OHADA</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Pologne.png" alt="Pologne" /><a href="">&nbsp;Cour suprême de Pologne</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/R%C3%A9publique_Tch%C3%A8que.png" alt="République_Tchèque" /><a href="">&nbsp;Cour suprême de République Tchèque</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Roumanie.png" alt="Roumanie" /><a href="">&nbsp;Haute Cour de justice et de cassation de Roumanie</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Rwanda.png" alt="Rwanda" /><a href="">&nbsp;Cour suprême du Rwanda</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Sao_Tom%C3%A9_et_Principe.png" alt="Sao_Tomé_et_Principe" /><a href="">&nbsp;Cour suprême de Sao Tomé et Principe</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/S%C3%A9n%C3%A9gal.png" alt="Sénégal" /><a href="">&nbsp;Cour suprême du Sénégal</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Suisse.png" alt="Suisse" /><a href="">&nbsp;Tribunal fédéral suisse</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Tchad.png" alt="Tchad" /><a href="">&nbsp;Cour suprême du Tchad</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Togo.png" alt="Togo" /><a href="">&nbsp;Cour suprême du Togo</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Tunisie.png" alt="Tunisie" /><a href="">&nbsp;Cour de cassation de Tunisie</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/UEMOA.png" alt="UEMOA" /><a href="">&nbsp;Cour de justice de l'UEMOA</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Vanuatu.png" alt="Vanuatu" /><a href="">&nbsp;Cour suprême du Vanuatu</a></div>
+      <div class="col-lg-6"><img src="/images/drapeaux/Vietnam.png" alt="Vietnam" /><a href="">&nbsp;Cour suprême du Vietnam</a></div>
     </div>
 </div>
 

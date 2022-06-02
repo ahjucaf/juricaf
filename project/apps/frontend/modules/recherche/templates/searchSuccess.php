@@ -150,14 +150,14 @@ function remplacequerytitre($string) {
       echo('<div class="form-inline input-group">
           <input  class="form-control mx-auto" type="search" name="pays" value = ');
         echo $filtre_pays;
-      echo(' readonly></input><a class="btn btn-light" onclick="deletePaysfilter()"><i class="bi bi-x-circle"></i></a></div>');
+        echo(' readonly></input><a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query).'""><i class="bi bi-x-circle"></i></a></div>');
         }
     else{
     ?>
       <select id="pays_filter" name="pays" class="form-select">
         <option value="">Tous les pays</option>
         <?php foreach($facets["facet_pays"] as $pays=>$num){
-          echo("<option value=".preg_replace('/ /', '_', $pays).">".ClientArret::TAB_DRAPEAU[$pays]." ".$pays.'('.$num.")</option>");
+          echo("<option value=".preg_replace('/ /', '_', $pays).">".ClientArret::TAB_DRAPEAU[$pays]." ".$pays.'&nbps;('.number_format($num, 0, '', ' ').")</option>");
         } ?>
       </select>
     <?php } ?>
@@ -175,7 +175,7 @@ function remplacequerytitre($string) {
           value = "'.trim(preg_replace("/.+\|/",'',$filtre_juridiction)).'"
           readonly>
           </input>
-          <a class="btn btn-light" onclick="deleteJuridictionfilter()">
+          <a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query.'&facets=facet_pays:'.urlencode($filtre_pays)).'"">
             <i class="bi bi-x-circle"></i>
           </a>
           </div>');
@@ -193,7 +193,7 @@ function remplacequerytitre($string) {
           $py = preg_replace('/ /', '_',trim($p));
           echo('<optgroup label="'.ClientArret::TAB_DRAPEAU[$py]." ".$p.'">');
             foreach($j as $juridiction => $num){
-            echo('<option data-pays='.$py.' value="'.trim($juridiction).'">'.$juridiction."(".$num.")</option>");
+            echo('<option data-pays='.$py.' value="'.trim($juridiction).'">'.$juridiction."&nbsp;(".number_format($num, 0, ',', ' ').")</option>");
           }
           echo("</optgroup>");
         }
