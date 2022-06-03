@@ -17,8 +17,7 @@
     <script type="text/javascript" src="/js/boostrap-5.js" ></script>
     <script type="text/javascript" src="/js/main.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-	<script type="text/javascript" src="/js/opensearch.js"></script>
- 	<link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
+ 	  <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
     <!-- Matomo -->
     <script>
     <!--
