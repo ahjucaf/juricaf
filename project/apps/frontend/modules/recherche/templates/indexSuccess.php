@@ -1,6 +1,6 @@
 <div class="col-xl-10 offset-xl-1">
     <div class="text-center mt-4 container">
-    <a href="/"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a>
+    <a href="/"><img class="align-self-center" style="height:100px;" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a>
     <p><small class="text-secondary">La jurisprudence francophone des Cours suprêmes</small></p>
     <p class="pt-2 text-secondary">Rechercher parmi <?php echo number_format($nb, 0, '', ' '); ?> décisions provenant de <?php echo count($pays); ?> pays et institutions francophones</p>
     </div>
@@ -64,10 +64,12 @@
         </div>
 
         <script>
+        (function() {
           $(document.getElementById('selected-pays')).change(function(){
             link=$("#selected-pays :selected").data("test");
             window.location.replace(link);
           });
+        })
         </script>
     </div>
     <hr class="d-none d-sm-none d-lg-block">

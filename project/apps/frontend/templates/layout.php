@@ -8,13 +8,13 @@
     <link rel="shortcut icon" href="/images/favicon.ico" />
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
-    <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/css/boostrap-5.css">
     <script type="text/javascript" src="/js/boostrap-5.js" ></script>
     <script type="text/javascript" src="/js/main.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
- 	  <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
+    <link rel="stylesheet" type="text/css" media="print" href="/css/print.css">
+
     <!-- Matomo -->
     <script>
     <!--
@@ -155,5 +155,9 @@ else {
 }
 }
 </script>
+
+<script type="text/javascript" src="/js/jquery-3.6.0.slim.min.js"></script>
+<script type="text/javascript" src="/js/boostrap-5.js" ></script>
+<script type="text/javascript" src="/js/main.js"></script>
 </body>
 </html>
