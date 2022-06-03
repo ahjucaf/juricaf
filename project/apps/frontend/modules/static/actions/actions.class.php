@@ -10,29 +10,7 @@
  */
 class staticActions extends sfActions
 {
-    public function executePartenaires(sfWebRequest $request) {
+    public function executePage(sfWebRequest $request) {
+        $this->setTemplate(str_replace('_', '', $request->getParameter('template')));
     }
-
-    public function executeMentionsLegales(sfWebRequest $request) {
-    }
-
-    public function executeLicenceODBL(sfWebRequest $request) {
-    }
-
-    public function executeLicenceJURICAF(sfWebRequest $request) {
-    }
-
-    public function executeFormMail(sfWebRequest $request) {
-    }
-
-    public function executeDonneesPersonnelles(sfWebRequest $request) {
-    }
-
-    public function executeContact(sfWebRequest $request) {
-    }
-
-    public function executeAPropos(sfWebRequest $request) {
-    }
-
-
 }
