@@ -108,9 +108,9 @@ if (($handle = fopen($ORIGINALCSV, "r")) !== FALSE) while (($donnees = fgetcsv($
 $tableau .= '</table></div>';
 
 try {
-  $handler = fopen("../project/web/documentation/stats/base.csv","w");
+  $handler = fopen("static/base.csv","w");
   fputs($handler,$csv);
-  $handler = fopen("../project/web/documentation/stats/base.html","w");
+  $handler = fopen("static/base.html","w");
   fputs($handler,$tableau);
   echo "Page mise à jour : http://www.juricaf.org/documentation/stats/statuts.php\n";
   echo "Tableur généré : http://www.juricaf.org/documentation/stats/base.csv";

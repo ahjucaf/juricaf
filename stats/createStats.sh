@@ -3,6 +3,8 @@
 # Répertoire de travail
 cd $(dirname $0)
 
+mkdir -p static
+
 php prepareStats.php
 
 echo "=====================================================";

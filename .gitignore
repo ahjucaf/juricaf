@@ -57,7 +57,7 @@ juricaf2solr/conf/mysql_conf.php
 project/cache/
 project/log/
 project/web/pdf/
-project/web/documentation/stats/
+stats/static
 bin/config.inc
 
 #data
