@@ -62,15 +62,6 @@
             <a class="d-none d-sm-none d-lg-block" href="/documentation/stats/statuts.php">Voir toutes les statistiques</a>
           </div>
         </div>
-
-        <script>
-        (function() {
-          $(document.getElementById('selected-pays')).change(function(){
-            link=$("#selected-pays :selected").data("test");
-            window.location.replace(link);
-          });
-        })
-        </script>
     </div>
     <hr class="d-none d-sm-none d-lg-block">
     <div class="text-center d-none d-lg-block">

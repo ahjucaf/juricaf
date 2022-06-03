@@ -58,7 +58,7 @@ echo '<input type="hidden" name="total" value="'.count($pays).'" />';
     }
     $('input[name^=\'pays\']').change(tout_cocher_decocher);
     tout_cocher_decocher();
-    })
+    })();
 </script>
 </div>
 </div>
