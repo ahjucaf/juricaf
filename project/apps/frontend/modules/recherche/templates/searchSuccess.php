@@ -108,7 +108,7 @@ $sf_response->addMeta('description', $description);
 $sf_response->addMeta('keywords', $keywords);
 
 ?>
-<div>
+<div class="container">
 <form method="get" action="<?php echo url_for('@recherche_filtres'); ?>">
 <?php include_partial('recherche/barre', array('noform' => true)); ?>
 <div class="recherche container mt-3">
