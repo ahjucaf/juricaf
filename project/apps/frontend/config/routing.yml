@@ -65,6 +65,11 @@ actualites:
   url: /actualites
   param: {module: recherche, action: actualites}
 
+contact:
+  url: /static/contact
+  param: {module: static, action: contact}
+
+
 static_pages:
   url: /static/:template
   param: {module: static, action: page}

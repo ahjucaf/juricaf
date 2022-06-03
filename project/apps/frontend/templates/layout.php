@@ -83,7 +83,7 @@
           <a class="nav-link d-none d-lg-block" href="/">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/static/apropos">À-propos</a>
+          <a class="nav-link" href="/static/apropos">À propos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/static/statuts">Étendue des collections</a>
