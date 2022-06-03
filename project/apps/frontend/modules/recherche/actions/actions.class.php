@@ -24,6 +24,15 @@ class rechercheActions extends sfActions
             }
             $this->redirect('@recherche_resultats?query='.$search);
         }
+        $this->db = sfCouchConnection::getInstance();
+        try{
+        $this->pays = $this->db->get('_design/stats/_view/pays_juridiction_date?group_level=1&stale=ok')->rows;
+        }catch(Exception $e) {$this->pays = null;}
+        try{
+          $nb = $this->db->get('_design/stats/_view/pays_juridiction_date?group_level=0&stale=ok')->rows;
+          $nb = array_values($nb[0]);
+          $this->nb = array_pop($nb);
+        }catch(Exception $e) {$this->nb = 0;}
     }
 
   public function executeFiltres(sfWebRequest $request) {
