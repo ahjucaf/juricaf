@@ -884,6 +884,11 @@ if(isset($references['PUBLICATION'])) {
 <div class="pb-5 d-lg-none"></div>
 
 <script type="text/javascript">
+(function() {
+    if((window.getComputedStyle(document.getElementById('is_mobile')).display === "none")) {
+        document.querySelector('#arret').scrollIntoView({block: "start", inline: "nearest", behavior: "auto"});
+    }
+})();
 function showCD(str)
 {
 if (str=="")

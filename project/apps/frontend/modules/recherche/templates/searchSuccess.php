@@ -290,20 +290,6 @@ foreach ($resultats->response->docs as $resultat) {
 
 <div style="clear:both;">&nbsp;</div>
 </div>
-<script type="text/javascript">
-(function() {
-<!--
-resultats = $('.resultats').css('height');
-resultats = parseInt(resultats.substring(0,(resultats).length-2));
-facets = $('.facets').css('height');
-facets = parseInt(facets.substring(0,(facets).length-2));
-if(facets > resultats) {
-  $('.facets').css('height', resultats+'px');
-  $('.facets').css('overflow', 'auto');
-}
-})
-// -->
-</script>
 <?php }
 
 else { // JSON
