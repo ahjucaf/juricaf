@@ -9,6 +9,8 @@
       <a href="/"><img style="height: 100px;" class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a>
       <p><small class="text-secondary">La jurisprudence francophone des Cours suprêmes</small></p>
     </div>
+    <div class="pt-2 d-lg-none"></div>
+    <?php else: ?>
     <?php endif; ?>
       <div class="form-inline input-group input-group-lg">
       <input id="recherche" class="form-control mx-auto" autocomplete="off" type="text"
