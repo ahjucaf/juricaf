@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?php $gitcommit = str_replace("\n", "", file_get_contents('../../.git/ORIG_HEAD'));?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
   <head>
     <?php include_http_metas() ?>
@@ -9,9 +9,9 @@
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/css/boostrap-5.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-    <link rel="stylesheet" type="text/css" media="print" href="/css/print.css">
+    <link rel="stylesheet" href="/css/boostrap-5.css?<?php echo $gitcommit; ?>">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css?<?php echo $gitcommit; ?>" />
+    <link rel="stylesheet" type="text/css" media="print" href="/css/print.css?<?php echo $gitcommit; ?>">
 
     <!-- Matomo -->
     <script>
@@ -154,8 +154,8 @@ else {
 }
 </script>
 
-<script type="text/javascript" src="/js/jquery-3.6.0.slim.min.js"></script>
-<script type="text/javascript" src="/js/boostrap-5.js" ></script>
-<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/jquery-3.6.0.slim.min.js?<?php echo $gitcommit; ?>"></script>
+<script type="text/javascript" src="/js/boostrap-5.js?<?php echo $gitcommit; ?>" ></script>
+<script type="text/javascript" src="/js/main.js?<?php echo $gitcommit; ?>"></script>
 </body>
 </html>
