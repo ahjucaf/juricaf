@@ -154,7 +154,7 @@ $sf_response->addMeta('keywords', $keywords);
   <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Tri :</label>
   </div>
-  <div class="col-lg-auto col-md-12 col-sm-12">
+  <div class="col-lg-2 col-md-12 col-sm-12">
     <select name="tri" class="form-select form-control">
       <option value="DESC"
       <?php
@@ -180,7 +180,7 @@ $sf_response->addMeta('keywords', $keywords);
   <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Pays :</label>
   </div>
-  <div class="col-lg-auto col-md-12 col-sm-12">
+  <div class="col-lg-3 col-md-12 col-sm-12">
     <?php if($filtre_pays || $filtre_juridiction){
       echo('<div class="form-inline input-group">
           <input  class="form-control mx-auto" type="search" name="pays" value="');
@@ -202,7 +202,7 @@ $sf_response->addMeta('keywords', $keywords);
   <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Juridiction :</label>
   </div>
-  <div class="col-lg-auto col-md-12 col-sm-12">
+  <div class="col-lg-4 col-md-12 col-sm-12">
 
     <?php if($filtre_juridiction){
       echo('<div class="input-group">
@@ -235,9 +235,10 @@ $sf_response->addMeta('keywords', $keywords);
     </select>
   <?php } ?>
   </div>
-  <div class="col-lg-auto">
+  <div class="col-lg-1">
     <button  id="filtrer" type="submit" class="btn btn-outline-secondary">Filtrer</button>
   </div>
+</div>
 <div class="clearfix mt-3">
 <a class="float-end d-none d-lg-block" href="/recherche_avancee">recherche avancée</a>
 </div>
