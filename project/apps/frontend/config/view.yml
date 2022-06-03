@@ -12,9 +12,9 @@ default:
     language:     fr
     #robots:       index, follow
 
-  stylesheets:    [main.css, print.css: { media: print }, jquery-ui-1.8.16.custom.css]
+  stylesheets:    [main.css, print.css: { media: print }]
 
-  javascripts:    [jquery.scrollTo-min.js]
+  javascripts:    []
 
   has_layout:     true
   layout:         layout

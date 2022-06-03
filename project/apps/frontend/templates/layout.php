@@ -7,10 +7,8 @@
     <?php include_title() ?>
     <link rel="shortcut icon" href="/images/favicon.ico" />
     <?php include_stylesheets() ?>
-	<link type="text/css" rel="stylesheet" href="/css/jquery.qtip.css" />
     <?php include_javascripts() ?>
     <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.scrollTo-min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/css/boostrap-5.css">
     <link rel="stylesheet" href="/css/boostrap-5-icons.css">
