@@ -8,10 +8,12 @@ $_SESSION['token'] = $token;
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Accueil</a></li>
                 <li class="breadcrumb-item"><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
-                <li class="breadcrumb-item"><a href="">Données Personnels</a></li>
+                <li class="breadcrumb-item"><a href="">Données Personnelles</a></li>
               </ol>
+          <h5 class="p-3 mb-2 bg-secondary bg-title fw-bold ">Données Personnelles</h5>
+
           </div>
-          <div class="container text-justify mt-5">
+          <div class="container text-justify mt-3">
               <h5 class="p-3 mb-2 bg-secondary bg-gradient">1 - Identité du responsable de traitement</h5>
 
               <p>L’Association des Hautes Juridictions de Cassation des pays ayant en partage l’usage du Français, ci-après AHJUCAF est responsable de traitement pour le site <a href="https://www.juricaf.org/">www.juricaf.org</a> (ci-après JURICAF)</p>

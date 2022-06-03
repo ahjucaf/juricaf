@@ -9,12 +9,13 @@ $_SESSION['token'] = $token;
       <li class="breadcrumb-item"><a href="/">Accueil</a></li>
       <li class="breadcrumb-item"><a href="">Mentions légales</a></li>
     </ol>
-</div>
-          <div class="container text-justify mt-5">
-            <h5 class="p-3 mb-2 bg-secondary bg-gradient">Mentions légales</h5>
+    
+    <h5 class="p-3 mb-2 bg-secondary bg-title fw-bold ">Mentions légales</h5>
 
-            <div class="container">
-            <h5 class="mt-3 mb-3"><u>Editeur</u></h5>
+</div>
+          <div class="container text-justify mt-3">
+            <div>
+            <h5 class="p-3 mb-2 bg-secondary bg-gradient">Editeur</h5>
 
             <p>Le site www.juricaf.org est placé sous la responsabilité éditoriale de l’AHJUCAF (Association des Hautes JUridictions de CAssation des pays ayant en partage l’usage du Français), association loi 1901 inscrite au registre des déclarations d’association de la Préfecture de police de Paris, publié au Journal officiel du 9 juin 2001.</p>
 
@@ -63,7 +64,7 @@ $_SESSION['token'] = $token;
 
 
             <h5 class="mt-3"><u>Données personnelles</u></h5>
-        <p>Pour tout ce qui concerne les données personnelles, consultez la page <a href="donnees_personnelles.php">politique de confidentialité/données personnelles</a>.</p>
+        <p>Pour tout ce qui concerne les données personnelles, consultez la page <a href="/documentation/donnees_personnelles.php">politique de confidentialité/données personnelles</a>.</p>
 
 
         <br/><br/><br/>

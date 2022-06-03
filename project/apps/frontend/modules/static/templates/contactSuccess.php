@@ -12,9 +12,11 @@ $_SESSION['cap2'] = intval(rand(0, 10) + 1);
       <li class="breadcrumb-item"><a href="/">Accueil</a></li>
       <li class="breadcrumb-item"><a href="">Contact</a></li>
     </ol>
+    <h5 class="p-3 mb-2 bg-secondary bg-title fw-bold ">Contact</h5>
+
 </div>
 
-    <div class="container text-justify mt-5">
+    <div class="container text-justify mt-3">
 		   <h5 class="p-3 mb-2 bg-secondary bg-gradient">Formulaire de contact</h5>
        <div class="container">
             <form action="form2mail.php" method="post">
