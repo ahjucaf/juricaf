@@ -30,12 +30,12 @@
         <div class="menu">
           <ul>
 
-            <li><a href="/documentation/a_propos.php">A propos</a></li>
-            <li><a href="/stats">Étendue des collections</a></li>
+            <li><a href="/static/apropos">A propos</a></li>
+            <li><a href="/stats/statuts">Étendue des collections</a></li>
 <!---            <li><a href="#">Outils</a></li> -->
-            <li><a href="/documentation/partenaires.php">Partenaires</a></li>
-            <li><a href="/documentation/contact.php">Contact</a></li>
-            <li><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
+            <li><a href="/static/partenaires">Partenaires</a></li>
+            <li><a href="/static/contact">Contact</a></li>
+            <li><a href="/static/mentionslegales">Mentions légales</a></li>
           </ul>
 
         </div>

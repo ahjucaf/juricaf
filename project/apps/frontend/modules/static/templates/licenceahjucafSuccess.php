@@ -3,15 +3,18 @@
 @session_start();
 $token = sha1(mt_rand());
 $_SESSION['token'] = $token;
+$sf_response->setTitle("Juricaf - Licence Ahjucaf");
+
 ?>
 <div class="container">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-      <li class="breadcrumb-item"><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
-      <li class="breadcrumb-item"><a href="">Licence Ahjucaf</a></li>
+      <li class="breadcrumb-item"><a href="/static/mentionslegales">Mentions légales</a></li>
+      <li class="breadcrumb-item"><a href="/static/licenceahjucaf">Licence Ahjucaf</a></li>
     </ol>
+    <h5 class="p-3 mb-2 bg-secondary bg-title fw-bold ">Licence Ahjucaf</h5>
 </div>
-    <div class="container text-justify mt-5">
+    <div class="container text-justify mt-3">
       <h5 class="p-3 mb-2 bg-secondary bg-gradient">Licence AHJUCAF </h5>
       <p>Pour pouvoir bénéficier des arrêts publiés au format XML ou PDF dans Juricaf, merci de prendre contact avec le Secrétariat général de l'AHJUCAF :
       <h5 class="p-3 mb-2 bg-secondary bg-gradient">Formulaire de contact</h5>

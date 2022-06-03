@@ -3,18 +3,21 @@
 @session_start();
 $token = sha1(mt_rand());
 $_SESSION['token'] = $token;
+$sf_response->setTitle("Juricaf - Mentions légales");
+
 ?>
 <div class="container">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Accueil</a></li>
       <li class="breadcrumb-item"><a href="">Mentions légales</a></li>
     </ol>
-</div>
-          <div class="container text-justify mt-5">
-            <h5 class="p-3 mb-2 bg-secondary bg-gradient">Mentions légales</h5>
+    
+    <h5 class="p-3 mb-2 bg-secondary bg-title fw-bold ">Mentions légales</h5>
 
-            <div class="container">
-            <h5 class="mt-3 mb-3"><u>Editeur</u></h5>
+</div>
+          <div class="container text-justify mt-3">
+            <div>
+            <h5 class="p-3 mb-2 bg-secondary bg-gradient">Editeur</h5>
 
             <p>Le site www.juricaf.org est placé sous la responsabilité éditoriale de l’AHJUCAF (Association des Hautes JUridictions de CAssation des pays ayant en partage l’usage du Français), association loi 1901 inscrite au registre des déclarations d’association de la Préfecture de police de Paris, publié au Journal officiel du 9 juin 2001.</p>
 
@@ -55,7 +58,7 @@ $_SESSION['token'] = $token;
         <p>L’AHJUCAF est titulaire du droit sui generis (titre IV, livre III du Code de la propriété intellectuelle) sur la base de données JURICAF accessible sur Internet à l’adresse www.juricaf.org.</p>
 
             <h5 class="mt-3"><u>Mise à disposition et réutilisation des données</u></h5>
-        <p>Les données de JURICAF sont en accès libre. Sauf pour les décisions des juridictions françaises, ces données sont protégées par le Code de la propriété intellectuelle et diffusées sous la licence ODbL 1.0. Elle est consultable à l'adresse : <a href="/documentation/licence_odbl.php">https://juricaf.org/documentation/licence_odbl.php</a></p>
+        <p>Les données de JURICAF sont en accès libre. Sauf pour les décisions des juridictions françaises, ces données sont protégées par le Code de la propriété intellectuelle et diffusées sous la licence ODbL 1.0. Elle est consultable à l'adresse : <a href="/static/licenceodbl">https://juricaf.org/static/licenceodbl</a></p>
 
         <p>La réutilisation est autorisée dans les conditions de la licence ODbL (<a href="http://vvlibri.org/fr/licence/odbl-10/legalcode/unofficial">version française de la licence ODbL</a>, <a href="https://blog.vvlibri.org/public/docs/OpenData/ODbL_fr_VF.pdf">mode d’emploi</a> )</p>
 
@@ -63,7 +66,7 @@ $_SESSION['token'] = $token;
 
 
             <h5 class="mt-3"><u>Données personnelles</u></h5>
-        <p>Pour tout ce qui concerne les données personnelles, consultez la page <a href="donnees_personnelles.php">politique de confidentialité/données personnelles</a>.</p>
+        <p>Pour tout ce qui concerne les données personnelles, consultez la page <a href="/documentation/donnees_personnelles.php">politique de confidentialité/données personnelles</a>.</p>
 
 
         <br/><br/><br/>

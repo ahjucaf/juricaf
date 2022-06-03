@@ -1,6 +1,9 @@
 <?php //////////////// BARRE DE RECHECHE ///////////////// ?>
+<div class="text-center my-2 my-lg-0">
+<?php if (!isset($noform) || !$noform): ?>
 <div <?php if($sf_request && $sf_request->getParameter('module')=="arret"){ echo('id = "hidden-mode-mobile"');}else{echo('id = "menu"');} ?>class="container form_recherche mt-4 clearfix">
-  <form class=" my-2 my-lg-0 text-center" method="get" action="/recherche">
+  <form class="my-2 my-lg-0 text-center" method="get" action="/recherche">
+  <?php endif; ?>
       <?php if(!isset($noentete)): ?>
     <div class="d-none d-lg-block">
       <a href="/"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a>
@@ -32,8 +35,10 @@
       </button>
       <br>
     </div>
+<?php if (!isset($noform) || !$noform): ?>
     <a class="float-end d-none d-lg-block" href="/recherche_avancee">recherche avancée</a>
-
   </form>
+</div>
+<?php endif; ?>
 </div>
 <?php ///////////////////////////////////////////////////////////////////////// ?>
