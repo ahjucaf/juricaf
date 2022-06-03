@@ -118,6 +118,7 @@ $sf_response->addMeta('keywords', $keywords);
 
   $currentlink = array('module'=>'recherche', 'action'=>'search', 'query' => $query, 'facets'=>$myfacetslink,'tri'=>$filtre_tri,'pays'=>$filtre_pays, 'juridiction' => $filtre_juridiction);
 ?>
+<div class="bg-light border p-2 rounded">
 <!-- BLOC FILTRES  -->
 <div class="d-lg-none">
 <div class="float-end">
@@ -149,7 +150,7 @@ $sf_response->addMeta('keywords', $keywords);
   }
   ?>
 </div>
-<div id="bloc-filtres" class="row g-3 align-items-center mt-1 bg-light border p-2 rounded">
+<div id="bloc-filtres" class="row g-3 align-items-center mt-1">
   <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Tri :</label>
   </div>
@@ -184,7 +185,7 @@ $sf_response->addMeta('keywords', $keywords);
       echo('<div class="form-inline input-group">
           <input  class="form-control mx-auto" type="search" name="pays" value="');
         echo $filtre_pays;
-        echo('" readonly="readonly"/><a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query).'"><i class="bi bi-x-circle"></i></a></div>');
+        echo('" readonly="readonly"/><a class="btn btn-light border" href="'.url_for('@recherche_resultats?query='.$query).'"><i class="bi bi-x-circle"></i></a></div>');
         }
     else{
     ?>
@@ -208,7 +209,7 @@ $sf_response->addMeta('keywords', $keywords);
           <input class="form-control g3" type="text" name="juridiction" size="45"
           value="'.trim(preg_replace("/.+\|/",'',$filtre_juridiction)).'"
           readonly="readonly"/>
-          <a class="btn btn-light" href="'.url_for('@recherche_resultats?query='.$query.'&facets=facet_pays:'.urlencode($filtre_pays)).'">
+          <a class="btn btn-light border" href="'.url_for('@recherche_resultats?query='.$query.'&facets=facet_pays:'.urlencode($filtre_pays)).'">
             <i class="bi bi-x-circle"></i>
           </a>
           </div>');
@@ -239,6 +240,7 @@ $sf_response->addMeta('keywords', $keywords);
   </div>
 <div class="clearfix mt-3">
 <a class="float-end d-none d-lg-block" href="/recherche_avancee">recherche avancée</a>
+</div>
 </div>
 </div>
 </form>
