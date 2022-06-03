@@ -57,9 +57,11 @@ class rechercheActions extends sfActions
     $this->getUser()->setAttribute('query', $this->query);
     $this->getUser()->setAttribute('facets', $this->cleanValue($request->getParameter('facets')));
     $this->getUser()->setAttribute('filter', $this->cleanValue($request->getParameter('filter')));
+
     $solr_query = strtolower($this->query);
-    $solr_query = preg_replace('/ or /', ' OR ', $this->query);
-    $solr_query = preg_replace('/ to /', ' TO ', $this->query);
+    $solr_query = str_replace(' or ', ' OR ', $solr_query);
+    $solr_query = str_replace(' a ', ' TO ', $solr_query);
+    $solr_query = str_replace(' to ', ' TO ', $solr_query);
     $solr_query = preg_replace('/_([^ :]*):/', '=\1:', $solr_query);
     if(preg_match('/\[\d{4}\-\d{2}\-\d{2} TO \d{4}\-\d{2}\-\d{2}\]/', $solr_query)) {
       $solr_query = preg_replace('/\[(\d{4}\-\d{2}\-\d{2}) TO (\d{4}\-\d{2}\-\d{2})\]/', ' [\1T00:00:00Z TO \2T23:59:59Z]', $solr_query);
@@ -268,19 +270,21 @@ class rechercheActions extends sfActions
       $filter .= ' ';
     }
 
-    if(!empty($dates['arret'])) {
-      $dates['arret'] = str_replace("--",'',$dates['arret']);
-      $filter .= 'date_arret:'.$dates['arret'];
-    }
-
-    if(!empty($dates['debut']) && !empty($dates['fin'])) {
+    if(!empty($dates['debut']) && !empty($dates['fin']) && $dates['debut'] != $dates['fin']) {
       if(!empty($dates['arret'])) {
         $filter .= ' OR ';
       }
       $dates['debut'] = str_replace("--",'',$dates['debut']);
       $dates['fin'] = str_replace("--",'',$dates['fin']);
 
-      $filter .= 'date_arret:['.$dates['debut'].' TO '.$dates['fin'].']';
+      $filter .= 'date_arret:['.$dates['debut'].' A '.$dates['fin'].']';
+    }elseif( !empty($dates['debut']) || !empty($dates['fin']) ){
+        $date = $dates['debut'];
+        if (!empty($dates['fin'])) {
+            $date = $dates['fin'];
+        }
+        $dates['arret'] = str_replace("--",'',$date);
+        $filter .= 'date_arret:'.$dates['arret'];
     }
 
     // Références

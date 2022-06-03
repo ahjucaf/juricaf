@@ -470,6 +470,10 @@ if(isset($references['PUBLICATION'])) {
 }
 ?>
 <?php include_partial('recherche/barre'); ?>
+
+<div class="container d-none d-lg-block">
+    <hr class="col-12 " />
+</div>
 <div class="barre-outil">
     <ul class="nav justify-content-center flex-lg-column shadow-sm">
       <li class="nav-item">
@@ -586,19 +590,18 @@ if(isset($references['PUBLICATION'])) {
         echo "<span class='text-muted'>Texte (pseudonymisé) </span>";
       }
 ?>
-
-    <span id="textArret" itemprop="articleBody">
-    <?php echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret))); ?>
-    </span>
-    <div>
-    <span id="debutArret" class="d-lg-none" itemprop="articleBody">
-      <?php echo preg_replace($patterns, $replacements,resume($texte_arret)); ?>
-    </span>
-  </div>
-    <div class="text-center">
-      <a id="btn-see-more" class="btn d-lg-none btn-outline-primary" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret">Voir plus</a>
+    <div id="debutArret" class="d-lg-none">
+        <?php echo preg_replace($patterns, $replacements,resume($texte_arret)); ?>
     </div>
-    <br>
+    <div class="text-center mb-3 d-lg-none">
+        <button type="button" id="btn-see-more" class="btn btn-outline-primary">Voir plus</button>
+    </div>
+    <article id="textArret">
+    <?php echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret))); ?>
+    </article>
+    <div class="text-center mb-3 d-lg-none">
+        <button type="button" id="btn-see-less" class="btn btn-outline-primary d-none">Réduire</button>
+    </div>
 <?php } ?>
 </div>
 
@@ -905,18 +908,4 @@ xmlhttp.onreadystatechange=function()
   }
 xmlhttp.send();
 }
-</script>
-
-<?php $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.''; ?>
-
-<script type="text/javascript">
- google.load("feeds", "1");
-
- function OnLoad() {
-   var feedControl = new google.feeds.FeedControl();
-   feedControl.addFeed("<?php echo $urlrss; ?>", "");
-   feedControl.draw(document.getElementById("feed"));
- }
-
- google.setOnLoadCallback(OnLoad);
 </script>

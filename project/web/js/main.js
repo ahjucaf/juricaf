@@ -30,7 +30,7 @@ $( document ).ready(function() {
   if(is_mobile()){
 
     if(document.getElementById("textArret")){ //id dans la page d'un arret/templates/indexSuccess.php on cache le texte pour n'afficher que le texte début au tout début
-      $("#textArret").addClass("collapse");
+      $("#textArret").addClass("d-none");
     }
     if(document.getElementById('hidden-mode-mobile')){ //id dans le header si page d'un arret alors pas de barre de recherche
       $('#hidden-mode-mobile').addClass("d-none");
@@ -38,37 +38,21 @@ $( document ).ready(function() {
     }
     if(document.getElementById("btn-see-more")){  //id dans la page d'un arret/templates/indexSuccess.php si click sur le bouton voir plus d'un arrêt.
       $("#btn-see-more").click(function(){
-          if($("#btn-see-more").text()=="Voir plus"){
-            $("#btn-see-more").html("Voir moins");
-            $("#btn-expand").html("<i class='bi bi-arrows-collapse'></i>") //change icone dans la barre d'option
-            $("#debutArret").addClass("d-none"); //cache le texte debut "resume"
-            location.hash = "#debutArret";
-            window.scroll({
-             top: 10,
-             left: 10,
-             behavior: 'smooth'
-            });
-          }
-          else{
-            $("#btn-see-more").html("Voir plus");
-            $("#btn-expand").html("<i class='bi bi-arrows-expand'></i>") //change icone dans la barre d'option
-            $("#debutArret").removeClass("d-none");//affiche le texte debut "resume"
-            
-            window.scroll({
-             top: 10,
-             left: 10,
-             behavior: 'smooth'
-            });
-            // location.hash = "#btn-see-more";
+        $("#textArret").removeClass("d-none"); //cache le texte debut "resume"
+        $("#btn-see-more").addClass('d-none');
+        $("#btn-see-less").removeClass('d-none');
+        $("#btn-expand").html("<i class='bi bi-arrows-collapse'></i>") //change icone dans la barre d'option
+        $("#debutArret").addClass("d-none"); //cache le texte debut "resume"
+     });
+     $("#btn-see-less").click(function(){
+        $("#textArret").addClass("d-none"); //cache le texte debut "resume"
+        $("#btn-see-more").removeClass('d-none');
+        $("#btn-see-less").addClass('d-none');
+        $("#btn-expand").html("<i class='bi bi-arrows-expand'></i>") //change icone dans la barre d'option
+        $("#debutArret").removeClass("d-none");//affiche le texte debut "resume"
+      });
+    }
 
-          }
-      });
-    }
-    if(document.getElementById('btn-expand')){
-      $('#btn-expand').click(function(){
-        $("#btn-see-more").trigger( "click" );
-      });
-    }
     if(document.getElementById('bloc-filtres')){ //id dans la page des resultats d'une recherche recherche/templates/searchSuccess.php
       $("#bloc-filtres").addClass("collapse"); //on cache les blocs des filtres.
     }
