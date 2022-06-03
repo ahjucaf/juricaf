@@ -1,7 +1,7 @@
 <div class="container">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-      <li class="breadcrumb-item"><a href="/documentation/partenaires.php">Partenaires</a></li>
+      <li class="breadcrumb-item"><a href="/static/partenaires">Partenaires</a></li>
     </ol>
 </div>
 <div class="container mt-5">

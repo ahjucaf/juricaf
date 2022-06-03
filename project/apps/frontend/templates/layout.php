@@ -86,22 +86,22 @@
           <a class="nav-link d-none d-lg-block" href="/">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/documentation/a_propos.php">À-propos</a>
+          <a class="nav-link" href="/static/apropos">À-propos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/documentation/stats/statuts.php">Étendue des collections</a>
+          <a class="nav-link" href="/static/statuts">Étendue des collections</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/documentation/partenaires.php">Partenaires</a>
+          <a class="nav-link" href="/static/partenaires">Partenaires</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/documentation/mentions_legales.php">Mentions légales</a>
+          <a class="nav-link" href="/static/mentionslegales">Mentions légales</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/documentation/contact.php">Contact</a>
+          <a class="nav-link" href="/static/contact">Contact</a>
         </li>
         <li class="nav-item d-lg-none">
-          <a class="nav-link" href="/documentation/stats/statuts.php">Plus de statistiques</a>
+          <a class="nav-link" href="/static/statuts">Plus de statistiques</a>
         </li>
         <li class="nav-item d-lg-none">
           <a class="nav-link" href="/actualites">Actualités</a>

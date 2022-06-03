@@ -7,7 +7,7 @@ $_SESSION['token'] = $token;
 <div class="container">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-      <li class="breadcrumb-item"><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
+      <li class="breadcrumb-item"><a href="/static/mentionslegales">Mentions légales</a></li>
       <li class="breadcrumb-item"><a href="">Licence ODbL</a></li>
     </ol>
 </div>

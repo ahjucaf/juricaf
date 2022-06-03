@@ -7,8 +7,8 @@ $_SESSION['token'] = $token;
           <div class="container">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-                <li class="breadcrumb-item"><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
-                <li class="breadcrumb-item"><a href="">Données Personnels</a></li>
+                <li class="breadcrumb-item"><a href="/static/mentionslegales">Mentions légales</a></li>
+                <li class="breadcrumb-item"><a href="/static/donneespersonnelles">Données Personnelles</a></li>
               </ol>
           </div>
           <div class="container text-justify mt-5">
@@ -24,7 +24,7 @@ $_SESSION['token'] = $token;
 
               <h5 class="p-3 mb-2 bg-secondary bg-gradient">2 - Données collectées par le site et finalités poursuivies</h5>
 
-              <p>Les seules données personnelles collectées par le site sont celles collectées via le formulaire de <a href="https://juricaf.org/documentation/contact.php">contact</a> pour la gestion des commentaires, avis et questions déposés par les usagers par le biais de ce formulaire.</p>
+              <p>Les seules données personnelles collectées par le site sont celles collectées via le formulaire de <a href="https://juricaf.org/static/contact">contact</a> pour la gestion des commentaires, avis et questions déposés par les usagers par le biais de ce formulaire.</p>
 
               <p>Les informations recueillies dans le formulaire sont insérées dans un mail adressé au secrétariat général de l’AHJUCAF. La base légale du traitement est le consentement recueilli au moment où vous remplissez le formulaire.</p>
 
@@ -69,7 +69,7 @@ $_SESSION['token'] = $token;
 
               <o>Mise à disposition et réutilisation de données :</p>
 
-              <p>Sauf pour les décisions des juridictions françaises, les données de JURICAF sont diffusées sous la licence ODbL 1.0. Elle est consultable à l'adresse : <a href="http://www.juricaf.org/documentation/licence_odbl.php">http://www.juricaf.org/documentation/licence_odbl.php</a>.</p>
+              <p>Sauf pour les décisions des juridictions françaises, les données de JURICAF sont diffusées sous la licence ODbL 1.0. Elle est consultable à l'adresse : <a href="http://www.juricaf.org/static/licenceodbl">http://www.juricaf.org/static/licenceodbl</a>.</p>
 
               <p>La réutilisation est autorisée dans les conditions de la licence ODbL.</p>
 
