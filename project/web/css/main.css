@@ -80,6 +80,10 @@ a{
   text-align: justify;
 }
 
+.text-left{
+  text-align: left;
+}
+
 .card-text em{
     font-weight: bold;
     font-style: normal;

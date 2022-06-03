@@ -607,7 +607,7 @@ if(isset($references['PUBLICATION'])) {
 
   <hr class="d-lg-none">
 
-    <div class="col-lg-4 bloc-droit">
+    <div class="col-lg-4 bloc-droit text-left">
         <?php
 
         if (isset($document->titre_supplementaire)) {
