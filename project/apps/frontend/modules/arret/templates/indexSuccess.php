@@ -501,6 +501,11 @@ if(isset($references['PUBLICATION'])) {
           <i class="bi bi-printer"></i>
       </button>
       </li>
+      <li class="nav-item">
+        <a title="Tweeter" class="btn" target="_blank" href="https://twitter.com/intent/tweet?url=<?php echo urlencode(url_for('@arret?id='.$document->_id, true)) ?>&text=<?php echo urlencode($document->titre) ?>&via=juricaf">
+          <i class="bi bi-twitter"></i>
+        </a>
+      </li>
       <li class="nav-item d-none">
         <a id="btn-expand" class="btn d-lg-none" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret"><i class="bi bi-arrows-expand"></i></a>
       </li>
