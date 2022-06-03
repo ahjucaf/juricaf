@@ -36,7 +36,10 @@ class rechercheActions extends sfActions
     }
 
   public function executeFiltres(sfWebRequest $request) {
-      $query = $request->getParameter('q', '+');
+      $query = $request->getParameter('q');
+      if (!$query) {
+        $query = '+';
+      }
       $facets = array();
       if ($request->getParameter('pays') || $request->getParameter('juridiction')) {
           if ($request->getParameter('pays')) {
@@ -52,7 +55,7 @@ class rechercheActions extends sfActions
   public function executeSearch(sfWebRequest $request)
   {
     $solr = new sfBasicSolr();
-    $this->query = $request->getParameter('query', '');
+    $this->query = $request->getParameter('query', '+');
     $this->query = preg_replace('/’/', "'", preg_replace('/[<>]/', '', $this->query));
     $this->getUser()->setAttribute('query', $this->query);
     $this->getUser()->setAttribute('facets', $this->cleanValue($request->getParameter('facets')));

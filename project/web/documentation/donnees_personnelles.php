@@ -1,1 +1,1 @@
-<?php header("Location: /static/donnees_personnelles\n");
+<?php header("Location: /static/donneespersonnelles\n");
