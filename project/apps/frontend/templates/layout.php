@@ -71,7 +71,7 @@
             <form class="my-2 my-lg-0 text-center d-flex d-lg-none navbar-search-input" method="get" action="/recherche">
                   <div class="form-inline input-group">
                 <input id="recherche" class="form-control" autocomplete="off" type="text" placeholder="Rechercher une jurisprudence" name="q" aria-label="Rechercher" tabindex="10">
-                <button class="btn btn-primary"  type="submit">
+                <button class="btn btn-primary rounded-end"  type="submit">
                     <i class="bi bi-search"></i>
                 </button>
                 <br>
