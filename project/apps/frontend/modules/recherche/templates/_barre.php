@@ -1,7 +1,7 @@
 <?php //////////////// BARRE DE RECHECHE ///////////////// ?>
-<div class="text-center my-2 my-lg-0">
+<div <?php if($sf_request && $sf_request->getParameter('module')=="arret"){ echo('id = "hidden-mode-mobile"');}else{echo('id = "menu"');} ?> class="text-center my-2 my-lg-0">
 <?php if (!isset($noform) || !$noform): ?>
-<div <?php if($sf_request && $sf_request->getParameter('module')=="arret"){ echo('id = "hidden-mode-mobile"');}else{echo('id = "menu"');} ?>class="container form_recherche mt-4 clearfix">
+<div class="container form_recherche mt-4 clearfix">
   <form class="my-2 my-lg-0 text-center" method="get" action="/recherche">
   <?php endif; ?>
       <?php if(!isset($noentete)): ?>
