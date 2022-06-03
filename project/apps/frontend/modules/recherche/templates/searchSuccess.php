@@ -120,7 +120,7 @@ $sf_response->addMeta('keywords', $keywords);
 ?>
 <div class="bg-light border p-2 ps-2 pt-0 rounded">
 <!-- BLOC FILTRES  -->
-<div class="d-lg-none">
+<div class="d-lg-none mt-2">
 <div class="float-end">
 <span><a id="open-filters" class="btn btn-sm  btn-outline-secondary" data-bs-toggle="collapse" href="#bloc-filtres" role="button" aria-expanded="false" aria-controls="bloc-filtres" title="Filtrer"><i class="bi bi-filter"></i></a></span>
 </div>
