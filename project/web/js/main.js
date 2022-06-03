@@ -65,6 +65,10 @@ $( document ).ready(function() {
         $(arrets[i]).wrap('<a class="text-decoration-none" href='+$(arrets[i]).data("link")+'></a>');
       }
     }
+
+    (document.querySelectorAll('details') || []).forEach(function (el) {
+       el.removeAttribute('open')
+    })
   }
 
   //SI PAS en mode mobile => maj des résultats au changement du filtres
