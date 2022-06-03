@@ -887,7 +887,7 @@ if(isset($references['PUBLICATION'])) {
 
 window.addEventListener('DOMContentLoaded', function() {
     if((window.getComputedStyle(document.getElementById('is_mobile')).display === "none")) {
-        document.querySelector('#arret').scrollIntoView(true);
+        document.querySelector('#titre').scrollIntoView(true);
     }
 });
 function showCD(str)
