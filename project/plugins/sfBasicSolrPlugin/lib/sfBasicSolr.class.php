@@ -22,14 +22,6 @@ class sfBasicSolr
     $this->solr = sfBasicSolrConnector::getInstance();
   }
   public function search($query, $start = 0, $end = 10, $param = array()) {
-    $luceneReservedCharacters = preg_quote('+-&|!(){}[]^"~*?:\\');
-    $query = preg_replace_callback(
-            '/([' . $luceneReservedCharacters . '])/',
-            function($matches) {
-                    return '\\' . $matches[0];
-            },
-            $query);
-
     return $this->solr->search($query, $start, $end, $param);
   }
 }
