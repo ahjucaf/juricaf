@@ -6,7 +6,6 @@
       <li class="breadcrumb-item"><a href="">À-propos</a></li>
     </ol>
     <h5 class="p-3 mb-2 bg-secondary bg-title fw-bold ">À-propos</h5>
-    <?php $title="À-propos";?>
 </div>
     <div class="container text-justify mt-3">
 
