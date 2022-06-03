@@ -138,6 +138,9 @@ a{
   padding-bottom: .5rem;
 }
 
+.statsbase tr:nth-child(2n) {
+    background-color: var(--bs-light);
+}
 
 .btn-outline-primary{
   border-color: #375d81;
