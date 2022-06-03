@@ -95,15 +95,18 @@ class rechercheActions extends sfActions
     }
 
     // Si l'ordre des résultats est précisé
-    if (preg_match('/order:pertinence/', $solr_query)) {
+    $this->filtre_tri = 'DESC';
+    if (preg_match('/order:pertinence/', $solr_query) || $request->getParameter('tri') == 'pertinence') {
       $solr_query = ' '.preg_replace('/ order:pertinence/', '', $solr_query);
       unset($param['sort']);
       $this->nobots = 1;
+      $this->filtre_tri = 'pertinence';
     }
-    if (preg_match('/order:chrono/', $solr_query)) {
+    if (preg_match('/order:chrono/', $solr_query) || $request->getParameter('tri') == 'ASC') {
       $solr_query = ' '.preg_replace('/ order:chrono/', '', $solr_query);
       $param['sort'] = 'date_arret asc, id asc';
       $this->nobots = 1;
+      $this->filtre_tri = 'ASC';
     }
 
     // Si la requète est vide

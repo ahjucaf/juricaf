@@ -128,7 +128,7 @@ $sf_response->addMeta('keywords', $keywords);
   <small>Résultats par
     <span>
     <?php
-    if($filtre_tri == "ASD"){
+    if($filtre_tri == "ASC"){
       echo "plus ancien";
     }
     elseif ($filtre_tri == "DESC") {
@@ -162,9 +162,9 @@ $sf_response->addMeta('keywords', $keywords);
           echo('selected');
       ?>
       >Plus récent</option>
-      <option value="ASD"
+      <option value="ASC"
       <?php
-        if($filtre_tri && $filtre_tri == "ASD")
+        if($filtre_tri && $filtre_tri == "ASC")
           echo('selected');
       ?>
       >Plus ancien</option>
