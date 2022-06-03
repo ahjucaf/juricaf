@@ -2,20 +2,6 @@
 
 class arretComponents extends sfComponents
 {
-  private function addNbArrets() {
-    try{
-      $nb = $this->db->get('_design/stats/_view/pays_juridiction_date?group_level=0&stale=ok')->rows;
-      $nb = array_values($nb[0]);
-      $this->nb = array_pop($nb);
-    }catch(Exception $e) {$this->nb = 0;}
-  }
-  public function executeStatsPays() {
-    $this->db = sfCouchConnection::getInstance();
-    try{
-    $this->pays = $this->db->get('_design/stats/_view/pays_juridiction_date?group_level=1&stale=ok')->rows;
-    }catch(Exception $e) {$this->pays = null;}
-    $this->addNbArrets();
-  }
   public function executeStatsPaysJuridiction() {
     $this->db = sfCouchConnection::getInstance();
     try{
@@ -34,7 +20,11 @@ class arretComponents extends sfComponents
           $this->pays[$p['key'][0]][$p['key'][1]]['fin'] = $p['key'][2];
       }
     }catch(Exception $e) {$this->pays = null;}
-    $this->addNbArrets();
+    try{
+      $nb = $this->db->get('_design/stats/_view/pays_juridiction_date?group_level=0&stale=ok')->rows;
+      $nb = array_values($nb[0]);
+      $this->nb = array_pop($nb);
+    }catch(Exception $e) {$this->nb = 0;}
   }
 
   public function executeSearchPays() {
