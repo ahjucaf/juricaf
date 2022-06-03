@@ -875,6 +875,8 @@ if(isset($references['PUBLICATION'])) {
     </div>
 </div>
 
+<div class="pb-5 d-lg-none"></div>
+
 <script type="text/javascript">
 function showCD(str)
 {

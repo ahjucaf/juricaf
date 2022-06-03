@@ -259,7 +259,7 @@ $sf_response->addMeta('keywords', $keywords);
 <?php
 foreach ($resultats->response->docs as $resultat) {
  ?>
-  <div class="card mb-3">
+  <div class="card bloc-search-item">
 
   <?php
   $pathToFlag = pathToFlag($resultat->pays);

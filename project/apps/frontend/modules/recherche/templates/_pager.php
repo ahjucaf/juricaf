@@ -12,7 +12,7 @@ if (!function_exists('echolinkcondition')) {
   }
  }
 ?>
-<nav>
+<nav class="mt-3">
   <ul class="pagination justify-content-center">
     <li class="page-item"><?php echo echolinkcondition('<i class="bi bi-chevron-double-left"></i>', $currentlink, $pager['begin']); ?></li>
     <li class="page-item"><?php echo echolinkcondition('<i class="bi bi-chevron-left"></i> Précédent', $currentlink, $pager['last']); ?></li>
