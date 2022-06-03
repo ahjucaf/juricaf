@@ -157,7 +157,8 @@ $sf_response->addMeta('keywords', $keywords);
   }
   ?>
 </div>
-<form method="get" action="<?php echo url_for('@recherche_filtres?query='.$filtre_query); ?>">
+<form method="get" action="<?php echo url_for('@recherche_filtres'); ?>">
+<input type="hidden" name="query" value="<?php echo $query; ?>"/>
 <div id="bloc-filtres" class="row g-3 align-items-center">
   <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Tri :</label>
