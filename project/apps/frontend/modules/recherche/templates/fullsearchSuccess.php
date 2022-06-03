@@ -152,22 +152,6 @@ if(!empty($filter)) { echo 'Filter : '.$filter; }
 
 <div class="row g-3">
   <div class="col-lg-3">
-    <label class="col-form-label" for="date_arret"><h5><b>Date de la décision : </b></h5></label>
-  </div>
-  <div class="col-auto">
-    <div class="input-group">
-        <input class="form-control col-auto" type="date" name="date[arret]" id="date_arret" max=<?php echo(date('Y-m-d'))?>>
-        <label class="input-group-text" for="date_arret"><i class="bi bi-calendar"></i></label>
-    </div>
-  </div>
-</div>
-<div class="row g-3">
-    <div class="col-lg-3">
-        OU
-    </div>
-</div>
-<div class="row g-3">
-  <div class="col-lg-3">
     <label class="col-form-label" for="date_debut"><h5><b>Période du :</b></h5></label>
   </div>
   <div class="col-auto">
