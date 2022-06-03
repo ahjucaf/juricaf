@@ -6,7 +6,7 @@
   <?php endif; ?>
       <?php if(!isset($noentete)): ?>
     <div class="d-none d-lg-block mt-4">
-      <a href="/"><img class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a>
+      <a href="/"><img style="height: 100px;" class="align-self-center" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a>
       <p><small class="text-secondary">La jurisprudence francophone des Cours suprêmes</small></p>
     </div>
     <?php endif; ?>

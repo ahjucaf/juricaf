@@ -44,6 +44,7 @@ echo '<input type="hidden" name="total" value="'.count($pays).'" />';
   <a  href="#" onclick="javascript:$('input[name^=\'pays\']:checked').prop('checked', '');tout_cocher_decocher();return false;">Décocher tous les pays</a>
   </span>
 <script>
+    (function () {
     nb_pays = $('input[name^=\'pays\']').length;
     function tout_cocher_decocher() {
         nb_pays_checked = $('input[name^=\'pays\']:checked').length;
@@ -57,7 +58,7 @@ echo '<input type="hidden" name="total" value="'.count($pays).'" />';
     }
     $('input[name^=\'pays\']').change(tout_cocher_decocher);
     tout_cocher_decocher();
-    
+    })
 </script>
 </div>
 </div>
