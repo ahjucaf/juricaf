@@ -92,6 +92,10 @@ a{
     font-size: 20px;
     text-decoration: underline;
 }
+
+.bloc-droit hr:first-child {
+    display: none;
+}
 .card-body{
   background-color:white;
 }

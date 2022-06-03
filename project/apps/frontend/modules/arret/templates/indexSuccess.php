@@ -470,6 +470,10 @@ if(isset($references['PUBLICATION'])) {
 }
 ?>
 <?php include_partial('recherche/barre'); ?>
+
+<div class="container d-none d-lg-block">
+    <hr class="col-12 " />
+</div>
 <div class="barre-outil">
     <ul class="nav justify-content-center flex-lg-column shadow-sm">
       <li class="nav-item">
@@ -488,7 +492,7 @@ if(isset($references['PUBLICATION'])) {
         </button>
       </li>
       <li class="nav-item">
-        <a type="button" title="envoyer par mail" class="btn"  onclick="javascript: var link= window.location.href; window.location.href='mailto:?body='+link+ '<?php echo '('.addslashes($document->titre).')';?>';">
+        <a type="button" title="envoyer par mail" class="btn"  onclick="javascript: var link= window.location.href; window.location.href='mailto:?body='+'<?php echo addslashes($document->titre).' : ';?>'+ link;">
           <i class="bi bi-envelope"></i>
         </a>
       </li>
@@ -496,6 +500,11 @@ if(isset($references['PUBLICATION'])) {
         <button type="button" title="imprimer" class="btn" onclick="window.print()">
           <i class="bi bi-printer"></i>
       </button>
+      </li>
+      <li class="nav-item">
+        <a title="Tweeter" class="btn" target="_blank" href="https://twitter.com/intent/tweet?url=<?php echo urlencode(url_for('@arret?id='.$document->_id, true)) ?>&text=<?php echo urlencode($document->titre) ?>&via=juricaf">
+          <i class="bi bi-twitter"></i>
+        </a>
       </li>
       <li class="nav-item d-none">
         <a id="btn-expand" class="btn d-lg-none" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret"><i class="bi bi-arrows-expand"></i></a>
@@ -581,19 +590,18 @@ if(isset($references['PUBLICATION'])) {
         echo "<span class='text-muted'>Texte (pseudonymisé) </span>";
       }
 ?>
-
-    <span id="textArret" itemprop="articleBody">
-    <?php echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret))); ?>
-    </span>
-    <div>
-    <span id="debutArret" class="d-lg-none" itemprop="articleBody">
-      <?php echo preg_replace($patterns, $replacements,resume($texte_arret)); ?>
-    </span>
-  </div>
-    <div class="text-center">
-      <a id="btn-see-more" class="btn d-lg-none btn-outline-primary" data-bs-toggle="collapse" href="#textArret" role="button" aria-expanded="false" aria-controls="textArret">Voir plus</a>
+    <div id="debutArret" class="d-lg-none">
+        <?php echo preg_replace($patterns, $replacements,resume($texte_arret)); ?>
     </div>
-    <br>
+    <div class="text-center mb-3 d-lg-none">
+        <button type="button" id="btn-see-more" class="btn btn-outline-primary">Voir plus</button>
+    </div>
+    <article id="textArret">
+    <?php echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret))); ?>
+    </article>
+    <div class="text-center mb-3 d-lg-none">
+        <button type="button" id="btn-see-less" class="btn btn-outline-primary d-none">Réduire</button>
+    </div>
 <?php } ?>
 </div>
 
@@ -900,18 +908,4 @@ xmlhttp.onreadystatechange=function()
   }
 xmlhttp.send();
 }
-</script>
-
-<?php $urlrss = 'http://perlpot.net/cgi-bin/qr.cgi?what='.$document->num_arret.''; ?>
-
-<script type="text/javascript">
- google.load("feeds", "1");
-
- function OnLoad() {
-   var feedControl = new google.feeds.FeedControl();
-   feedControl.addFeed("<?php echo $urlrss; ?>", "");
-   feedControl.draw(document.getElementById("feed"));
- }
-
- google.setOnLoadCallback(OnLoad);
 </script>
