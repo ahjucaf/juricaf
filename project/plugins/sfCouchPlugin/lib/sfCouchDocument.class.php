@@ -134,7 +134,7 @@ class sfCouchDocument
   public function __isset ($property)
   {
     // Check if property exists as a custom document property
-    if (array_key_exists($property, $this->storage ) || in_array($property, self::$specialProperties)) {
+    if (array_key_exists($property, (array) $this->storage ) || in_array($property, self::$specialProperties)) {
       return true;
     }
 
