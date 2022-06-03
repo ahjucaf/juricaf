@@ -11,9 +11,9 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
 <link rel="stylesheet" type="text/css" media="screen" href="/css/jquery-ui-1.8.16.custom.css" />
-    <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
-<script type="text/javascript" src="/js/jquery.scrollTo-min.js"></script>
-<script type="text/javascript" src="/js/jquery-ui-1.8.16.custom.min.js"></script>
+    <!-- <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script> -->
+<!-- <script type="text/javascript" src="/js/jquery.scrollTo-min.js"></script> -->
+<!-- <script type="text/javascript" src="/js/jquery-ui-1.8.16.custom.min.js"></script> -->
     <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
   </head>
   <body>
