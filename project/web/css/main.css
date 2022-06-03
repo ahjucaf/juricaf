@@ -68,6 +68,14 @@ a{
   background-color:#f7f8f9;
 }
 
+.card.bloc-search-item .card-header.fs-5 {
+    font-size: 1.15rem !important;
+}
+
+.card.bloc-search-item {
+    margin-bottom: 0.85rem !important;
+} 
+
 .text-justify{
   text-align: justify;
 }
@@ -236,11 +244,6 @@ a{
   }
 }
 
-@media screen and (max-width:496px){
-  .barre-outil ul{
-    padding: 26px 0 10px 0 !important;
-  }
-}
 @media screen and (max-width:350px) {
   .slogan{
     display:none;

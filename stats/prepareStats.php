@@ -2,7 +2,7 @@
 require("config.php");
 
 $pays_juridictions = array();
-if (($handle = fopen("../project/web/documentation/stats/base.csv", "r")) !== FALSE) while (($donnees = fgetcsv($handle, 1000, ";")) !== FALSE) {
+if (($handle = fopen("../stats/static/base.csv", "r")) !== FALSE) while (($donnees = fgetcsv($handle, 1000, ";")) !== FALSE) {
     if ($donnees[$HEADER2CSVID['maj']] || $donnees[$HEADER2CSVID['etat']] || $donnees[$HEADER2CSVID['licence']] ) {
         $pays_juridictions[$donnees[$HEADER2CSVID['pays']].' | '.$donnees[$HEADER2CSVID['juridiction']]] = $donnees;
     }

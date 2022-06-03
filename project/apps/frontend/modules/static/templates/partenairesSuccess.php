@@ -1,7 +1,9 @@
+<?php $sf_response->setTitle("Juricaf - Partenaires");?>
+
 <div class="container">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-      <li class="breadcrumb-item"><a href="/documentation/partenaires.php">Partenaires</a></li>
+      <li class="breadcrumb-item"><a href="/static/partenaires">Partenaires</a></li>
     </ol>
     <h5 class="p-3 mb-2 bg-secondary bg-title fw-bold ">Partenaires</h5>
 

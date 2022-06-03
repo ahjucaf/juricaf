@@ -5,6 +5,8 @@ $token = sha1(mt_rand());
 $_SESSION['token'] = $token;
 $_SESSION['cap1'] = intval(rand(0, 10) + 1);
 $_SESSION['cap2'] = intval(rand(0, 10) + 1);
+$sf_response->setTitle("Juricaf - Contact");
+
 ?>
 
 <div class="container">

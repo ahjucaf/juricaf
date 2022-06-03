@@ -71,9 +71,9 @@ if (($handle = fopen($ORIGINALCSV, "r")) !== FALSE) while (($donnees = fgetcsv($
 $tableau .= "\n</table>";
 
 try {
-  $handler = fopen("../project/web/documentation/stats/champs.csv","w");
+  $handler = fopen("static/champs.csv","w");
   fputs($handler,$csv);
-  $handler = fopen("../project/web/documentation/stats/champs.html","w");
+  $handler = fopen("static/champs.html","w");
   fputs($handler,$tableau);
   echo "Tableur généré : http://www.juricaf.org/documentation/stats/champs.csv";
 }

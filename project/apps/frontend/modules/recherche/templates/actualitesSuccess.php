@@ -1,3 +1,4 @@
+<?php $sf_response->setTitle("Juricaf - Actualités");?>
 <div class="container">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Accueil</a></li>

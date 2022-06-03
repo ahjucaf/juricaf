@@ -3,6 +3,8 @@
 @session_start();
 $token = sha1(mt_rand());
 $_SESSION['token'] = $token;
+$sf_response->setTitle("Juricaf - Mentions légales");
+
 ?>
 <div class="container">
     <ol class="breadcrumb">
@@ -56,7 +58,7 @@ $_SESSION['token'] = $token;
         <p>L’AHJUCAF est titulaire du droit sui generis (titre IV, livre III du Code de la propriété intellectuelle) sur la base de données JURICAF accessible sur Internet à l’adresse www.juricaf.org.</p>
 
             <h5 class="mt-3"><u>Mise à disposition et réutilisation des données</u></h5>
-        <p>Les données de JURICAF sont en accès libre. Sauf pour les décisions des juridictions françaises, ces données sont protégées par le Code de la propriété intellectuelle et diffusées sous la licence ODbL 1.0. Elle est consultable à l'adresse : <a href="/documentation/licence_odbl.php">https://juricaf.org/documentation/licence_odbl.php</a></p>
+        <p>Les données de JURICAF sont en accès libre. Sauf pour les décisions des juridictions françaises, ces données sont protégées par le Code de la propriété intellectuelle et diffusées sous la licence ODbL 1.0. Elle est consultable à l'adresse : <a href="/static/licenceodbl">https://juricaf.org/static/licenceodbl</a></p>
 
         <p>La réutilisation est autorisée dans les conditions de la licence ODbL (<a href="http://vvlibri.org/fr/licence/odbl-10/legalcode/unofficial">version française de la licence ODbL</a>, <a href="https://blog.vvlibri.org/public/docs/OpenData/ODbL_fr_VF.pdf">mode d’emploi</a> )</p>
 

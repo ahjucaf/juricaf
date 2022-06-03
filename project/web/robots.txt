@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /arret/
-Allow: /documentation/
+Allow: /static/
 Allow: /recherche/+/facet_pays
 Allow: /
 Disallow: /recherche/+/

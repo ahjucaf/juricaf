@@ -3,11 +3,12 @@
 @session_start();
 $token = sha1(mt_rand());
 $_SESSION['token'] = $token;
+$sf_response->setTitle("Juricaf - Licence ODbL");
 ?>
 <div class="container">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-      <li class="breadcrumb-item"><a href="/documentation/mentions_legales.php">Mentions légales</a></li>
+      <li class="breadcrumb-item"><a href="/static/mentionslegales">Mentions légales</a></li>
       <li class="breadcrumb-item"><a href="">Licence ODbL</a></li>
     </ol>
     <h5 class="p-3 mb-2 bg-secondary bg-title fw-bold ">Licence ODbL</h5>
