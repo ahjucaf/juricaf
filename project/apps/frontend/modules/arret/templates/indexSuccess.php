@@ -159,7 +159,7 @@ function linkifyAnalyses($titrage, $pays) {
   foreach ($values as $value) {
     if($i == 0) { $link[$i] = $value; }
       else { $link[$i] = $link[$i-1].' - '.$value; }
-    $titrage .= link_to($value, '@recherche_resultats?query=analyses:'.replaceAccents(str_replace(array("\n", "/",'"','»','«',"'","’","?"), " ", $link[$i]))).' - '; // &facets=order:pertinance
+    $titrage .= link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents(str_replace(array("\n", "/",'"','»','«',"'","’","?"), " ", $link[$i])).'"').' - '; // &facets=order:pertinance
       $i++;
   }
   return rtrim($titrage, '- ').'.';
