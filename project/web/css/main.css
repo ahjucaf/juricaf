@@ -138,6 +138,10 @@ a{
   padding-bottom: .5rem;
 }
 
+.textArret {
+    min-height: 800px;
+}
+
 .statsbase tr:nth-child(2n) {
     background-color: var(--bs-light);
 }
