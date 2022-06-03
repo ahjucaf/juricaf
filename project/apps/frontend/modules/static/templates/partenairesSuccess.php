@@ -1,10 +1,14 @@
+<?php $sf_response->setTitle("Juricaf - Partenaires");?>
+
 <div class="container">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Accueil</a></li>
       <li class="breadcrumb-item"><a href="/static/partenaires">Partenaires</a></li>
     </ol>
+    <h5 class="p-3 mb-2 bg-secondary bg-title fw-bold ">Partenaires</h5>
+
 </div>
-<div class="container mt-5">
+<div class="container mt-3">
 <h5 class="p-3 mb-2 bg-secondary bg-gradient">Partenaires institutionnels</h5>
 <div class="container text-justify">
   <p>JURICAF est soutenu par <a href="https://www.francophonie.org/">l'Organisation Internationale de la Francophonie</a>.</p>
