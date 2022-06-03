@@ -469,7 +469,7 @@ if(isset($references['PUBLICATION'])) {
     }
 }
 ?>
-<?php include_partial('recherche/barre'); ?>
+<?php include_partial('recherche/barre', array('not_autofocus' => true)); ?>
 
 <div class="container d-none d-lg-block">
     <hr class="col-12 " />
@@ -884,6 +884,12 @@ if(isset($references['PUBLICATION'])) {
 <div class="pb-5 d-lg-none"></div>
 
 <script type="text/javascript">
+
+window.addEventListener('DOMContentLoaded', function() {
+    if((window.getComputedStyle(document.getElementById('is_mobile')).display === "none")) {
+        document.querySelector('#titre').scrollIntoView(true);
+    }
+});
 function showCD(str)
 {
 if (str=="")
