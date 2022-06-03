@@ -146,18 +146,16 @@ class rechercheActions extends sfActions
           $this->facets[$k][$n] = $v;
         }
       }
-	  
-	if($request->getParameter('format') === 'json') {
-		$this->json = true;
-		$this->setLayout(false);
-		$this->getResponse()->setContentType('application/json');
-	} elseif ($request->getParameter('format') === 'rss') {
-		$this->json = false;
-		$this->setLayout(false);
-		$this->getResponse()->setContentType('application/rss+xml');
-	} else {
-		$this->json = false;
-	}
+
+    if($request->getParameter('format') === 'json') {
+            $this->json = true;
+            $this->setLayout(false);
+            $this->getResponse()->setContentType('application/json');
+    } elseif ($request->getParameter('format') === 'rss') {
+            $this->setLayout(false);
+            $this->getResponse()->setContentType('application/rss+xml');
+    }
+
     if (isset($this->facets['facet_pays']) && count($this->facets['facet_pays']) == 1 ) {
         $pays = array_keys($this->facets['facet_pays'])[0];
         if (in_array(str_replace(' ', '_', 'facet_pays:'.$pays), $this->facetsset)) {
