@@ -241,11 +241,6 @@ a{
   }
 }
 
-@media screen and (max-width:496px){
-  .barre-outil ul{
-    padding: 26px 0 10px 0 !important;
-  }
-}
 @media screen and (max-width:350px) {
   .slogan{
     display:none;
