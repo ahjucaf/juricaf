@@ -69,3 +69,13 @@
     <?php include_partial('recherche/actualites'); ?>
     </div>
 </div>
+
+
+<script>
+    (function() {
+        document.getElementById('selected-pays').addEventListener('change', function(){
+            link=$("#selected-pays :selected").data("test");
+            window.location.replace(link);
+        });
+    })();
+</script>
