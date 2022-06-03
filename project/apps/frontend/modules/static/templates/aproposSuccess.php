@@ -21,7 +21,7 @@
 
           <p>Depuis septembre 2016, M. Jean-Paul Jean Président de chambre honoraire à la Cour de cassation de France assure les fonctions de Secrétaire général de l’AHJUCAF. Une réorganisation des processus de récupération et de traitement des décisions a été conduite avec le concours de partenaires attachés depuis l’origine au projet JURICAF, les animateurs des sociétés 24ème et La Loi des Ours, ainsi que l’éditeur Lexbase. La reprise de l’alimentation régulière et la stratégie de développement ont permis à JURICAF de dépasser au cours de l’année 2020 le million d’arrêts intégrés. </p>
 
-          <p>Dans le même temps JURICAF a été mis aux normes RGPD. La quasi-totalité de ses fonds sont désormais pseudonymisés, sauf pour quelques situations très particulières de Cours suprêmes non soumises à cette exigence (voir la page <a href="mentions_legales.php">Mentions légales</a>)</p>
+          <p>Dans le même temps JURICAF a été mis aux normes RGPD. La quasi-totalité de ses fonds sont désormais pseudonymisés, sauf pour quelques situations très particulières de Cours suprêmes non soumises à cette exigence (voir la page <a href="mentionslegales">Mentions légales</a>)</p>
 
           <p>Les arrêts des Cours suprêmes de pays francophones de l’hémisphère nord (France, Belgique, Luxembourg, Canada) sont intégrés automatiquement tous les mois. Début 2021 le fonds des arrêts CEDH a été mis à jour avec les décisions de 2013 à 2021.</p>
 
