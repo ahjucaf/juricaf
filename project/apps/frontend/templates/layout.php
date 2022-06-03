@@ -7,18 +7,15 @@
     <?php include_title() ?>
     <link rel="shortcut icon" href="/images/favicon.ico" />
     <?php include_stylesheets() ?>
-	<link type="text/css" rel="stylesheet" href="/css/jquery.qtip.css" />
     <?php include_javascripts() ?>
     <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.scrollTo-min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/css/boostrap-5.css">
     <link rel="stylesheet" href="/css/boostrap-5-icons.css">
     <script type="text/javascript" src="/js/boostrap-5.js" ></script>
     <script type="text/javascript" src="/js/main.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-	<script type="text/javascript" src="/js/opensearch.js"></script>
- 	<link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
+ 	  <link rel="search" href="/juricaf.xml" title="Rechercher sur Juricaf" type="application/opensearchdescription+xml" />
     <!-- Matomo -->
     <script>
     <!--

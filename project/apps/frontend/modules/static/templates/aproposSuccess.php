@@ -7,9 +7,10 @@
     </ol>
     <h5 class="p-3 mb-2 bg-secondary bg-title fw-bold ">À propos</h5>
 </div>
-    <div class="container text-justify mt-3">
 
-        <h5 class="p-3 mb-2 bg-secondary bg-gradient">Juricaf</h4>
+    <div class="container text-justify mt-3">
+        <details open>
+        <summary class="p-3 mb-2 bg-secondary bg-gradient">Juricaf</summary>
 
         <div class="container">
 
@@ -28,8 +29,10 @@
           <p>Plus de la moitié des Cours suprêmes d’Afrique francophone font parvenir leurs décisions au secrétariat de l’AHJUCAF, de manière plus régulière et sous un format normalisé. D’autres pays membres de l’AHJUCAF dont les arrêts ne sont pas rendus en français (par exemple l’Albanie, la Bulgarie, la Roumanie, les pays de langue arabe) transmettent régulièrement des arrêts traduits. Des séminaires de formation sont organisés avec les correspondants de l’AHJUCAF, facilitant ainsi la transmission régulière de jurisprudences sous une forme compatible.</p>
 
         </div>
+        </details>
 
-        <h5 class="p-3 mb-2 bg-secondary bg-gradient">Histoire de JURICAF</h5>
+        <details open>
+        <summary class="p-3 mb-2 bg-secondary bg-gradient">Histoire de JURICAF</summary>
 
         <div class="container">
 
@@ -45,15 +48,21 @@
         <p><a  target="_blank" href="https://www.ahjucaf.org/sites/default/files/inline-files/AHJUCAF%20Congre%CC%80s%20Beyrouth%20Actes%20sommaire%20mars%202020_0.pdf">Recommandations adoptées à Beyrouth par les Cours suprêmes judiciaires de la Francophonie</a>, au nom de leurs valeurs communes et au moment de l’ouverture croissante des données publiques, ont fixé comme action prioritaire la diffusion par internet de la jurisprudence francophone numérisée, afin de faciliter les échanges de la communauté internationale des juristes et le développement de l’Etat de droit, au service des citoyens pour faciliter la connaissance et l’exercice effectifs de leurs droits dans une société démocratique.</p>
           
         <p>Télécharger l’ouvrage « &nbsp;<a  target="_blank" href="https://www.ahjucaf.org/sites/default/files/inline-files/AHJUCAF%20Congre%CC%80s%20Beyrouth%20Actes%20mars%202020.pdf"> La diffusion de la jurisprudence des Cours suprêmes judiciaires de la francophonie au temps d’internet</a>&nbsp;»</p>
+        </div>
 
-        <h5 class="p-3 mb-2 bg-secondary bg-gradient">Remerciements</h5>
+        </details>
+        <details open>
+        <summary class="p-3 mb-2 bg-secondary bg-gradient">Remerciements</summary>
+
+        <div class="container">
         <strong>L’AHJUCAF présente ses remerciements aux acteurs qui ont contribué à la création et à la refonte du site de la base de données JURICAF :</strong>
 
         <p> - Cour de cassation : M. le Président Jean-Louis Gillet, M. Edouard Rottier, M. Guillaume Adréani, M. Mehdi Ben Mimoun</p>
         <p> - Partenaires publics : Université de Paris 1 CAVEJ, M. Bruno Dondéro, M. Jean Gasnault, M. Stéphane Cottin</p>
         <p> - Partenaires privés : M. Tangui Morlier, M. Brice Person</p>
-
         </div>
+        </details>
+
     </div>
   </div>
 </div>
