@@ -111,14 +111,14 @@ $sf_response->addMeta('keywords', $keywords);
 <div class="container">
 <form method="get" action="<?php echo url_for('@recherche_filtres'); ?>">
 <?php include_partial('recherche/barre', array('noform' => true)); ?>
-<div class="recherche container mt-3">
+<div class="recherche mt-3">
 <?php
 /* POUR LA PAGINATION */
   $myfacetslink = preg_replace('/^,/', '', $facetslink);
 
   $currentlink = array('module'=>'recherche', 'action'=>'search', 'query' => $query, 'facets'=>$myfacetslink,'tri'=>$filtre_tri,'pays'=>$filtre_pays, 'juridiction' => $filtre_juridiction);
 ?>
-<div class="bg-light border p-2 rounded">
+<div class="bg-light border p-2 ps-2 pt-0 rounded">
 <!-- BLOC FILTRES  -->
 <div class="d-lg-none">
 <div class="float-end">
@@ -150,7 +150,7 @@ $sf_response->addMeta('keywords', $keywords);
   }
   ?>
 </div>
-<div id="bloc-filtres" class="row g-3 align-items-center mt-1">
+<div id="bloc-filtres" class="row g-3 align-items-center mt-0">
   <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Tri :</label>
   </div>
@@ -245,7 +245,7 @@ $sf_response->addMeta('keywords', $keywords);
 </div>
 </div>
 </form>
-<div class="mt-5">
+<div class="mt-3">
     <?php if($nbResultats > 0): ?>
     <p class="text-start"><?php echo $nbResultats;?> résultats trouvés : <a onclick="navigator.clipboard.writeText(this.href); alert('Le lien RSS a été copié dans le presse-papier'); return false;" href="<?php echo $sf_request->getUri().'?format=rss'; ?>" class="text-muted float-end"><i class="bi bi-rss"></i></a></p>
     <?php else: ?>

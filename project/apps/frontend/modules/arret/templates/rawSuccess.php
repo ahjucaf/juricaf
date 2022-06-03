@@ -1,64 +1,58 @@
 <?php
+////////////////////
+///  Export TXT
+///////////////////
+
 if ($txt == true) {
     echo $document->getTexteArret();
     return;
 }
+
+////////////////////
+///  Export JSON
+///////////////////
+
 if ($json == true) {
-
-function printJson($field, $balise)
-{
-  if (!is_array($field)) {
-	if ($balise == "texte_arret" || $balise == "texte_arret_anon") {
-		$texte_html = str_replace("\n", "<br/>", $field);
-		echo json_encode($texte_html, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
-	}
-	else
-		echo json_encode($field, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
-    return ;
-  }
-  echo '{';
-  if (array_keys($field))
-    foreach ($field as $key => $value) {
-      if (!is_int($key)) echo '"'.$key.'" : ';
-      printJson($value, $key);
-      if (!is_int($key)) echo ',';
+    
+    function printJson($field, $balise) {
+        if (!is_array($field)) {
+            if ($balise == "texte_arret" || $balise == "texte_arret_anon") {
+                $texte_html = str_replace("\n", "<br/>", $field);
+                return $texte_html;
+            }
+            return $field;
+        }
+        $ret = array();
+        if (array_keys($field)) {
+            foreach ($field as $key => $value) {
+                if (!is_int($key)) {
+                    $ret[$key] = printJson($value, $key);
+                }else{
+                    $ret[] = printJson($value, $key);
+                }
+            }
+        } else {
+            foreach($field as $value) {
+                $ret[] = printJson($value, $balise);
+            }
+        }
+        return $ret;
     }
-  else
-    foreach($field as $value)
-      printJson($value, $balise);
-  echo '}';
-}
+    
+    $json = array();
+    foreach ($document->getFields(true) as $field) {
+        $json[$field] = printJson($document->{$field}, $field);
+    }
+    
+    echo json_encode($json, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
+    
+    return ;
 
-// Ouverture de l'objet JSON
-echo '{';
+} 
 
-// Gestion de la derniere boucle
-$total = count($document->getFields(true));
-$i = 0;
-
-// Boucle principale
-foreach ($document->getFields(true) as $field) :
-
-if ($field == "_id")
-	echo '"id" : ';
-else
-	echo '"'.$field.'" : ';
-printJson($document->{$field}, $field);
-
-// Gestion de la derniere boucle
-$i++;
-if ($i < $total)
-echo ', ';
-
-endforeach;
-
-// Fermeture de l'objet JSON
-echo '}';
-
-}
-
-else { // XML
-
+//////////////////
+///  Export XML
+//////////////////
 
 echo '<?xml version="1.0" encoding="utf8"?>'; ?>
 
@@ -90,4 +84,3 @@ printBalise($document->{$f}, $f);
 echo '</'.strtoupper($f).'>';
 endforeach; ?>
 </DOCUMENT>
-<?php } ?>
