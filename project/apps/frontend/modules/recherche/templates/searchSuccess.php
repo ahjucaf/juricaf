@@ -108,25 +108,17 @@ $sf_response->addMeta('description', $description);
 $sf_response->addMeta('keywords', $keywords);
 
 ?>
-<?php include_partial('recherche/barre'); ?>
-<div class="recherche container">
-<div class="row">
 <div>
+<form method="get" action="<?php echo url_for('@recherche_filtres'); ?>">
+<?php include_partial('recherche/barre', array('noform' => true)); ?>
+<div class="recherche container mt-3">
 <?php
 /* POUR LA PAGINATION */
   $myfacetslink = preg_replace('/^,/', '', $facetslink);
 
   $currentlink = array('module'=>'recherche', 'action'=>'search', 'query' => $query, 'facets'=>$myfacetslink,'tri'=>$filtre_tri,'pays'=>$filtre_pays, 'juridiction' => $filtre_juridiction);
 ?>
-
-
-</div>
-</div>
-
 <!-- BLOC FILTRES  -->
-<hr class="mt-3 d-none d-lg-block">
-<hr class="d-lg-none">
-
 <div class="d-lg-none">
 <div class="float-end">
 <span><a id="open-filters" class="btn btn-sm  btn-outline-secondary" data-bs-toggle="collapse" href="#bloc-filtres" role="button" aria-expanded="false" aria-controls="bloc-filtres" title="Filtrer"><i class="bi bi-filter"></i></a></span>
@@ -157,9 +149,7 @@ $sf_response->addMeta('keywords', $keywords);
   }
   ?>
 </div>
-<form method="get" action="<?php echo url_for('@recherche_filtres'); ?>">
-<input type="hidden" name="query" value="<?php echo urlencode($query); ?>"/>
-<div id="bloc-filtres" class="row g-3 align-items-center">
+<div id="bloc-filtres" class="row g-3 align-items-center mt-1 bg-light border p-2 rounded">
   <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Tri :</label>
   </div>
@@ -247,11 +237,12 @@ $sf_response->addMeta('keywords', $keywords);
   <div class="col-lg-auto">
     <button  id="filtrer" type="submit" class="btn btn-outline-secondary">Filtrer</button>
   </div>
+<div class="clearfix mt-3">
+<a class="float-end d-none d-lg-block" href="/recherche_avancee">recherche avancée</a>
+</div>
 </div>
 </form>
-
-<hr>
-<div>
+<div class="mt-5">
     <?php if($nbResultats > 0): ?>
     <p class="text-start"><?php echo $nbResultats;?> résultats trouvés : <a onclick="navigator.clipboard.writeText(this.href); alert('Le lien RSS a été copié dans le presse-papier'); return false;" href="<?php echo $sf_request->getUri().'?format=rss'; ?>" class="text-muted float-end"><i class="bi bi-rss"></i></a></p>
     <?php else: ?>

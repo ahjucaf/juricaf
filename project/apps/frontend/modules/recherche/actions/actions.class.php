@@ -27,7 +27,7 @@ class rechercheActions extends sfActions
     }
 
   public function executeFiltres(sfWebRequest $request) {
-      $query = $request->getParameter('query', '+');
+      $query = $request->getParameter('q', '+');
       $facets = array();
       if ($request->getParameter('pays') || $request->getParameter('juridiction')) {
           if ($request->getParameter('pays')) {
