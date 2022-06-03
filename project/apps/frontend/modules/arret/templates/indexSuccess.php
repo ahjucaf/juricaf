@@ -807,10 +807,8 @@ if(isset($references['PUBLICATION'])) {
 
         if (isset($document->fonds_documentaire))
 
-
         {
-            echo '<p>Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?"/></a>: <em itemprop="publisher">'.replaceAccents($document->fonds_documentaire).'</em> </p><img src="/images/'.replaceAccents($document->fonds_documentaire).'.gif" alt="'.replaceAccents($document->fonds_documentaire).'"/>';
-
+            echo '<p>Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?"/></a>: <em itemprop="publisher">'.replaceAccents($document->fonds_documentaire).'</em> </p>';
         }
 
         if($document->pays == 'Luxembourg') {
