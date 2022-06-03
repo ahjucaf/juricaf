@@ -12,9 +12,9 @@
     <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
     <script type="text/javascript" src="/js/jquery.scrollTo-min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/boostrap-5.css">
+    <link rel="stylesheet" href="/css/boostrap-5-icons.css">
+    <script type="text/javascript" src="/js/boostrap-5.js" ></script>
     <script type="text/javascript" src="/js/main.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 	<script type="text/javascript" src="/js/opensearch.js"></script>
@@ -29,7 +29,7 @@
           // Search keyword searched for
           "<?php echo $sf_params->get('query'); ?>",
           // Search category selected in your search engine. If you do not need this, set to false
-          "<?php echo str_replace('_', ' ', str_replace('facet_pays_juridiction:', '', $sf_params->get('facets'))). " ".$sf_params->get('filter'); ?>",
+          "<?php echo trim(str_replace('_', ' ', preg_replace('/(facet_[^:]+:|,.*)/', '', $sf_params->get('facets'))). " ".$sf_params->get('filter')); ?>",
           // Number of results on the Search results page. Zero indicates a 'No Result Search Keyword'. Set to false if you don't know
           <?php echo $sf_params->get('nbResultats') ? str_replace(' ', '', $sf_params->get('nbResultats')) : "false"; ?>
       ]);
