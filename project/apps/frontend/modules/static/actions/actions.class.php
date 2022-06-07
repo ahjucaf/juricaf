@@ -22,14 +22,13 @@ class staticActions extends sfActions
             return sfView::SUCCESS;
         }
         /* Initialisation des variables */
-        $from = "Juricaf <juricaf@ahjucaf.org>"; // l'expéditeur : remplacer ici domaine.ext par votre domaine
-        $to = "sgahjucaf@ahjucaf.org"; // le destinataire : mettez ici votre adresse mail valide (ou plusieurs séparé par des virgules. ex : Paul <paul@mail.com>, Jacques <jacques@mail.com>
+        $from = "juricaf@ahjucaf.org";
+        $to = "sgahjucaf@ahjucaf.org";
         
         /* Préparation */
         $subject = "[Juricaf] Demande de contact"; // le sujet du mail
         $this->email = $_POST['email'];
-        $message = NULL;
-        $this->message = $_POST['message'];
+        $this->message = NULL;
 
         if(!isset($_POST['token']) || ($_SESSION['token'] !== $_POST['token']) || $_SESSION['cap1'] + $_SESSION['cap2'] != $_POST['captcha']) {
             $this->resultat = "Mauvais Captcha";
@@ -47,18 +46,19 @@ class staticActions extends sfActions
         }
         /* Nettoyage */
         $test_mail = htmlentities(strip_tags($_POST['email']));
+        $this->email = null;
         /* Vérification que c'est bien un email valide */
         if(preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$/', $test_mail)) {
             $this->email = $test_mail;
         }
         /* Nettoyage */
-        $cleaned_message = htmlspecialchars($_POST['message']);
-        
-        /* Adresse IP */
-        $ip = "\n\n-----------------------\nAdresse IP de l'expediteur : ".$_SERVER["REMOTE_ADDR"];
-        
+        $this->message = htmlentities($_POST['message']);
+
         /* Message */
-        $message = "Message envoyé depuis https://juricaf.org/static/contact de ".$this->email." :\n-----------------------\n\n".$cleaned_message.$ip;
+        $message  = "Message envoyé depuis https://juricaf.org/static/contact de ".$this->email." :\n";
+        $message .= "-----------------------\n\n";
+        $message .= $_POST['message'];
+        $message .= "\n\n-----------------------\nAdresse IP de l'expediteur : ".$_SERVER["REMOTE_ADDR"];
         
         if (!$this->email){
             $this->resultat = "Erreur: vous devez spécifier une adresse email valide et un texte\n";
