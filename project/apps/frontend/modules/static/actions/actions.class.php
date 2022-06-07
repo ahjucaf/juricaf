@@ -27,7 +27,8 @@ class staticActions extends sfActions
         
         /* Préparation */
         $subject = "[Juricaf] Demande de contact"; // le sujet du mail
-        $this->email = null;
+        $this->email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        $this->email = filter_var($this->email, FILTER_VALIDATE_EMAIL);
         $this->message = NULL;
 
         if(!isset($_POST['token']) || ($_SESSION['token'] !== $_POST['token']) || $_SESSION['cap1'] + $_SESSION['cap2'] != $_POST['captcha']) {
@@ -38,7 +39,7 @@ class staticActions extends sfActions
         }
         
         /* Récupération du champs email */
-        if (empty(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) || empty(htmlspecialchars($_POST['message']))) {
+        if (empty($this->email) || empty(htmlspecialchars($_POST['message']))) {
             $this->resultat = "Erreur: vous devez spécifier une adresse email valide et un texte\n";
             $this->token = sha1(mt_rand());
             $_SESSION['token'] = $this->token;
@@ -46,7 +47,6 @@ class staticActions extends sfActions
         }
 
         /* Nettoyage */
-        $this->email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL | FILTER_VALIDATE_EMAIL);
         $this->message = htmlentities($_POST['message']);
 
         /* Message */
