@@ -52,7 +52,7 @@ class staticActions extends sfActions
         /* Message */
         $message  = "Message envoyé depuis https://juricaf.org/static/contact de ".$this->email." :\n";
         $message .= "-----------------------\n\n";
-        $message .= $this->message;
+        $message .= $_POST['message'];
         $message .= "\n\n-----------------------\nAdresse IP de l'expediteur : ".$_SERVER["REMOTE_ADDR"];
         
         if (!$this->email){
