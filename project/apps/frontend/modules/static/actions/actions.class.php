@@ -27,7 +27,7 @@ class staticActions extends sfActions
         
         /* Préparation */
         $subject = "[Juricaf] Demande de contact"; // le sujet du mail
-        $this->email = $_POST['email'];
+        $this->email = null;
         $this->message = NULL;
 
         if(!isset($_POST['token']) || ($_SESSION['token'] !== $_POST['token']) || $_SESSION['cap1'] + $_SESSION['cap2'] != $_POST['captcha']) {
@@ -38,26 +38,21 @@ class staticActions extends sfActions
         }
         
         /* Récupération du champs email */
-        if (empty($_POST['email']) || empty($_POST['message'])) {
+        if (empty(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) || empty(htmlspecialchars($_POST['message']))) {
             $this->resultat = "Erreur: vous devez spécifier une adresse email valide et un texte\n";
             $this->token = sha1(mt_rand());
             $_SESSION['token'] = $this->token;
             return sfView::SUCCESS;
         }
+
         /* Nettoyage */
-        $test_mail = htmlentities(strip_tags($_POST['email']));
-        $this->email = null;
-        /* Vérification que c'est bien un email valide */
-        if(preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$/', $test_mail)) {
-            $this->email = $test_mail;
-        }
-        /* Nettoyage */
+        $this->email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL | FILTER_VALIDATE_EMAIL);
         $this->message = htmlentities($_POST['message']);
 
         /* Message */
         $message  = "Message envoyé depuis https://juricaf.org/static/contact de ".$this->email." :\n";
         $message .= "-----------------------\n\n";
-        $message .= $_POST['message'];
+        $message .= $this->message;
         $message .= "\n\n-----------------------\nAdresse IP de l'expediteur : ".$_SERVER["REMOTE_ADDR"];
         
         if (!$this->email){
