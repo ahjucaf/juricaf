@@ -12,7 +12,7 @@
         }
 
         function pathToFlag($str) {
-          return urlencode(str_replace("'", '_', replaceBlank($str)));
+          return str_replace("'", '_', replaceBlank($str));
         }
         $cpt = 0;
         ?>
@@ -35,7 +35,7 @@
                     $link = link_to($pays_nom_min,'recherche/search?query=&facets=facet_pays:'.$pays);
                   }
                 ?>
-                  <li class="d-none d-lg-block list-group-item"> <img src="/images/drapeaux/<?php echo pathToFlag(ucfirst($pays)) ?>.png" alt ="<?php echo $pays ?>" />&nbsp;<?php echo $link ?></li>
+                  <li class="d-none d-lg-block list-group-item"> <img src="data:image/png;base64,<?php echo base64_encode(file_get_contents(sfConfig::get('sf_web_dir').'/images/drapeaux/'.pathToFlag($pays).'.png')) ?>" alt ="<?php echo $pays ?>" />&nbsp;<?php echo $link ?></li>
                 <?php endforeach ?>
                 </ul></div>
             <?php endfor ?>
