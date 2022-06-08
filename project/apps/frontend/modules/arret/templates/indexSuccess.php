@@ -159,7 +159,7 @@ function linkifyAnalyses($titrage, $pays) {
   foreach ($values as $value) {
     if($i == 0) { $link[$i] = $value; }
       else { $link[$i] = $link[$i-1].' - '.$value; }
-    $titrage .= link_to($value, '@recherche_resultats?query=analyses:'.replaceAccents(str_replace(array("\n", "/",'"','»','«',"'","’","?"), " ", $link[$i]))).' - '; // &facets=order:pertinance
+    $titrage .= link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents(str_replace(array("\n", "/",'"','»','«',"'","’","?"), " ", $link[$i])).'"').' - '; // &facets=order:pertinance
       $i++;
   }
   return rtrim($titrage, '- ').'.';
@@ -175,7 +175,7 @@ function printDecisionAttaquee($ref_or_da, $is_text = 0) {
     elseif(isset($decision_attaquee['formation']) && !empty($decision_attaquee['formation'])) {
       $temp[$i] = $decision_attaquee['formation'];
       if(empty($decision_attaquee['url'])) {
-        $temp[$i] = link_to($decision_attaquee['formation'], '@recherche_resultats?query=decisions_attaquees:'.$decision_attaquee['formation']);
+        $temp[$i] = link_to($decision_attaquee['formation'], '@recherche_resultats?query=decisions_attaquees:"'.$decision_attaquee['formation'].'"');
       }
       if(!empty($decision_attaquee['date'])) {
         $temp[$i] .= ', '.dateFr($decision_attaquee['date']);
@@ -185,10 +185,10 @@ function printDecisionAttaquee($ref_or_da, $is_text = 0) {
       $temp[$i] = '<a href="'.$decision_attaquee['url'].'">'.$temp[$i].'</a>';
     }
     if(!empty($decision_attaquee['nature']) && !empty($temp[$i])) {
-        $temp[$i] = $temp[$i].' (Nature : '.link_to($decision_attaquee['nature'], '@recherche_resultats?query=decisions_attaquees:'.$decision_attaquee['nature']).')';
+        $temp[$i] = $temp[$i].' (Nature : '.link_to($decision_attaquee['nature'], '@recherche_resultats?query=decisions_attaquees:"'.$decision_attaquee['nature'].'"').')';
     }
     if(!empty($decision_attaquee['type']) && empty($temp[$i])) {
-        $temp[$i] = link_to($decision_attaquee['type'], '@recherche_resultats?query=decisions_attaquees:'.$decision_attaquee['type']).' (type)';
+        $temp[$i] = link_to($decision_attaquee['type'], '@recherche_resultats?query=decisions_attaquees:"'.$decision_attaquee['type'].'"').' (type)';
     }
     $i++;
   }
@@ -238,10 +238,10 @@ $contributors = '';
 
 if(isset($document->president) || isset($document->avocat_gl) || isset($document->rapporteur) || isset($document->commissaire_gvt) || isset($document->avocats)) {
     if (isset($document->president)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Président</span> : <em itemprop="name">'.link_to($document->president, '@recherche_resultats?query=president:'.replaceAccents($document->president)).'</div></em>'; // replace br par ' ; '
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Président</span> : <em itemprop="name">'.link_to($document->president, '@recherche_resultats?query=president:"'.replaceAccents($document->president).'"').'</div></em>'; // replace br par ' ; '
     }
     if (isset($document->avocat_gl)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Avocat général</span> : <em itemprop="name">'.link_to($document->avocat_gl, '@recherche_resultats?query=avocat_gl:'.replaceAccents($document->avocat_gl)).'</div></em>';
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Avocat général</span> : <em itemprop="name">'.link_to($document->avocat_gl, '@recherche_resultats?query=avocat_gl:"'.replaceAccents($document->avocat_gl).'"').'</div></em>';
     }
     if (isset($document->rapporteur)) {
         $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Rapporteur</span> <a href="#" title="<h1>Rapporteur</h1><p>Magistrat chargé de l’instruction du dossier ; il lui appartient de rédiger un projet de jugement ou d’arrêt et une note explicative. Lors du jugement, il siège avec voix délibérative pour les affaires qu’il a rapportées.<p>Source : Conseil d\'Etat http://www.conseil-etat.fr/fr/glossaire/"><img src="/images/aide.png" alt="?"/></a>: <em itemprop="name">'.link_to($document->rapporteur, '@recherche_resultats?query=rapporteur:"'.replaceAccents($document->rapporteur).'"').'</div></em>';
@@ -251,7 +251,7 @@ if(isset($document->president) || isset($document->avocat_gl) || isset($document
             link_to($document->commissaire_gvt, '@recherche_resultats?query=commissaire_gvt:"'.replaceAccents($document->commissaire_gvt).'"').'</div></em>';
     }
     if (isset($document->avocats)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Avocat(s)</span> : <em itemprop="name">'.link_to($document->avocats, '@recherche_resultats?query=avocats:'.replaceAccents($document->avocats)).'</em></div>';
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Avocat(s)</span> : <em itemprop="name">'.link_to($document->avocats, '@recherche_resultats?query=avocats:"'.replaceAccents($document->avocats).'"').'</em></div>';
     }
     $contrib = true;
 }
@@ -607,7 +607,7 @@ if(isset($references['PUBLICATION'])) {
 
   <hr class="d-lg-none">
 
-    <div class="col-lg-4 bloc-droit">
+    <div class="col-lg-4 bloc-droit text-left">
         <?php
 
         if (isset($document->titre_supplementaire)) {
@@ -617,19 +617,19 @@ if(isset($references['PUBLICATION'])) {
             echo '<h5>'.$document->section.'</h5>';
         }
         if (isset($document->sens_arret)) {
-            echo 'Sens de l\'arrêt : <em>'.link_to($document->sens_arret, '@recherche_resultats?query=sens_arret:'.replaceAccents($document->sens_arret)).'</em><br />';
+            echo 'Sens de l\'arrêt : <em>'.link_to($document->sens_arret, '@recherche_resultats?query=sens_arret:"'.replaceAccents($document->sens_arret).'"').'</em><br />';
         }
         if (isset($document->type_affaire)) {
 
             if(isset($natureConstit[$document->type_affaire])) {
-                echo 'Type d\'affaire : <em><span itemprop="about">'.link_to($natureConstit[$document->type_affaire], '@recherche_resultats?query=type_affaire:'.replaceAccents($document->type_affaire)).'</span></em><br />';
+                echo 'Type d\'affaire : <em><span itemprop="about">'.link_to($natureConstit[$document->type_affaire], '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</span></em><br />';
             }
             else {
-                echo 'Type d\'affaire : <em><span itemprop="about">'.link_to($document->type_affaire, '@recherche_resultats?query=type_affaire:'.replaceAccents($document->type_affaire)).'</span></em><br />';
+                echo 'Type d\'affaire : <em><span itemprop="about">'.link_to($document->type_affaire, '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</span></em><br />';
             }
         }
         if (isset($document->type_recours)) {
-            echo 'Type de recours : <em>'.link_to($document->type_recours, '@recherche_resultats?query=type_recours:'.replaceAccents($document->type_recours)).'</em><br />';
+            echo 'Type de recours : <em>'.link_to($document->type_recours, '@recherche_resultats?query=type_recours:"'.replaceAccents($document->type_recours).'"').'</em><br />';
         }
 
         if (!empty($analyses)) {
@@ -708,7 +708,7 @@ if(isset($references['PUBLICATION'])) {
                 $sep = ''; $i = 1;
                 foreach($document->parties['demandeurs'] as $value) {
                     if($i > 1) { $sep = ', '; }
-                    echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'').'</em>'; $i++;
+                    echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:"'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'"').'</em>'; $i++;
                 }
                 echo '<br />';
             }
@@ -717,7 +717,7 @@ if(isset($references['PUBLICATION'])) {
                 $sep = ''; $i = 1;
                 foreach($document->parties['defendeurs'] as $value) {
                     if($i > 1) { $sep = ', '; }
-                    echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'').'</em>'; $i++;
+                    echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:"'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'"').'</em>'; $i++;
                 }
                 echo '<br />';
             }
