@@ -124,7 +124,7 @@
           <a href="https://www.ahjucaf.org/"><img class="img-fluid" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones"/></a>
         </div>
         <div class="col">
-          <a href="https://www.francophonie.org/"><img class="img-fluid" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
+          <a href="https://www.francophonie.org/"><img class="img-fluid" src="/images/francophonie_small.png" alt="Organisation internationale de la francophonie" /></a>
         </div>
       </div>
     </div>
