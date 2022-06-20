@@ -49,6 +49,7 @@ if ($parties) {
 $titre = $obj->xpath('//EXPRESSION_TITLE/LANG[. ="fr"]/parent::*/VALUE');
 $formation = null;
 $arretType = null;
+$arretAnalyses = array();
 if ($titre) {
   $tabTitre = explode("#", (string)$titre[0]);
   $arretType = substr($tabTitre[0], 0, strpos($tabTitre[0], ' '));
@@ -56,6 +57,11 @@ if ($titre) {
   $posDeb = strpos($tabTitre[0], '(');
   $posFin = strpos($tabTitre[0], ')');
   $arretFormation = ($posDeb && $posFin)? ucfirst(substr($tabTitre[0], $posDeb+1, $posFin-$posDeb-1)) : null;
+  $index = 2;
+  while ($index < (count($tabTitre) - 1)) {
+    $analyses[] = $tabTitre[$index];
+    $index++;
+  }
 }
 $arretTypeAffaire = null;
 $arretTypeRecours = null;
@@ -91,7 +97,20 @@ if ($arretTypes = $obj->xpath('//CASE-LAW_HAS_TYPE_PROCEDURE_CONCEPT_TYPE_PROCED
 <?php endif; ?>
 </PARTIES>
 <TYPE><?php echo $arretType; ?></TYPE>
-<?php if ($arretTypeAffaire): ?><TYPE_AFFAIRE><?php echo $arretTypeAffaire; ?></TYPE_AFFAIRE><?php endif; ?>
-<?php if ($arretTypeRecours): ?><TYPE_RECOURS><?php echo $arretTypeRecours; ?></TYPE_RECOURS><?php endif; ?>
+<?php if ($arretTypeAffaire): ?>
+<TYPE_AFFAIRE><?php echo $arretTypeAffaire; ?></TYPE_AFFAIRE>
+<?php endif; ?>
+<?php if ($arretTypeRecours): ?>
+<TYPE_RECOURS><?php echo $arretTypeRecours; ?></TYPE_RECOURS>
+<?php endif; ?>
+<?php if ($analyses): ?>
+<ANALYSES>
+<?php foreach ($analyses as $a): ?>
+<ANALYSE>
+  <TITRE_PRINCIPAL><?php echo $a ?></TITRE_PRINCIPAL>
+</ANALYSE>
+<?php endforeach; ?>
+</ANALYSES>
+<?php endif; ?>
 <SOURCE><?php echo $arretSource ?></SOURCE>
 </DOCUMENT>
