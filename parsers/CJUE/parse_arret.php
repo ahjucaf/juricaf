@@ -62,7 +62,7 @@ if ($titre) {
 <FORMATION><?php echo $formation ?></FORMATION>
 <JURIDICTION>Cour de justice de l'Union européenne</JURIDICTION>
 <NUM_ARRET><?php echo $arretId; ?></NUM_ARRET>
-<PAYS>Luxembourg</PAYS>
+<PAYS>CJUE</PAYS>
 <TEXTE_ARRET><![CDATA[
    <?php echo $arretTxt; ?>
 ]]>
