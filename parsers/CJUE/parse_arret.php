@@ -77,6 +77,12 @@ if ($avocatItems = $obj->xpath('//CASE-LAW_DELIVERED_BY_ADVOCATE-GENERAL//TYPE[.
     $avocats[] = (string)$avocatItem;
   }
 }
+$rapporteurs = array();
+if ($rapporteurItems = $obj->xpath('//CASE-LAW_DELIVERED_BY_JUDGE//TYPE[. ="agent"]/parent::*/IDENTIFIER')) {
+  foreach($rapporteurItems as $rapporteurItem) {
+    $rapporteurs[] = (string)$rapporteurItem;
+  }
+}
 ?><?xml version="1.0" encoding="utf8"?>
 <DOCUMENT>
 <DATE_ARRET><?php echo $date ; ?></DATE_ARRET>
@@ -120,6 +126,9 @@ if ($avocatItems = $obj->xpath('//CASE-LAW_DELIVERED_BY_ADVOCATE-GENERAL//TYPE[.
 <?php endif; ?>
 <?php if ($avocats): ?>
 <AVOCATS><?php echo implode(', ', $avocats); ?></AVOCATS>
+<?php endif; ?>
+<?php if ($rapporteurs): ?>
+<RAPPORTEUR><?php echo implode(', ', $rapporteurs); ?></RAPPORTEUR>
 <?php endif; ?>
 <SOURCE><?php echo $arretSource ?></SOURCE>
 </DOCUMENT>
