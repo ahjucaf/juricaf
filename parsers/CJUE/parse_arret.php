@@ -1,5 +1,6 @@
 <?php
 $xmlfile_arret_metas = $argv[1];
+$xmlfile_arret_txt = $argv[2];
 
 $obj = new SimpleXMLElement(@file_get_contents($xmlfile_arret_metas));
 
@@ -27,8 +28,8 @@ if (!$arretSource) {
       fwrite(STDERR, "ERREUR: CJUE / WORK->URI->VALUE non définie\n");
       exit(1);
 }
-$arretSource .= '.0002.05/DOC_1'; // Version FR du texte de l'arret
-$arretTxt = file_get_contents($arretSource);
+
+$arretTxt = file_get_contents($xmlfile_arret_txt);
 if (!$arretTxt) {
       fwrite(STDERR, "ERREUR: CJUE / Arret texte non récupéré\n");
       exit(1);
