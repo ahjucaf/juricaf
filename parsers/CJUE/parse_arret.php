@@ -71,6 +71,12 @@ if ($arretTypes = $obj->xpath('//CASE-LAW_HAS_TYPE_PROCEDURE_CONCEPT_TYPE_PROCED
     $arretTypeRecours = (string)$arretTypes[1];
   }
 }
+$avocats = array();
+if ($avocatItems = $obj->xpath('//CASE-LAW_DELIVERED_BY_ADVOCATE-GENERAL//TYPE[. ="agent"]/parent::*/IDENTIFIER')) {
+  foreach($avocatItems as $avocatItem) {
+    $avocats[] = (string)$avocatItem;
+  }
+}
 ?><?xml version="1.0" encoding="utf8"?>
 <DOCUMENT>
 <DATE_ARRET><?php echo $date ; ?></DATE_ARRET>
@@ -111,6 +117,9 @@ if ($arretTypes = $obj->xpath('//CASE-LAW_HAS_TYPE_PROCEDURE_CONCEPT_TYPE_PROCED
     </ANALYSE>
 <?php endforeach; ?>
 </ANALYSES>
+<?php endif; ?>
+<?php if ($avocats): ?>
+<AVOCATS><?php echo implode(', ', $avocats); ?></AVOCATS>
 <?php endif; ?>
 <SOURCE><?php echo $arretSource ?></SOURCE>
 </DOCUMENT>
