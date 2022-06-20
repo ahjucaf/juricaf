@@ -1,3 +1,4 @@
+<?php $sf_response->setTitle("Juricaf : la jurisprudence francophone des Cours suprêmes");?>
 <div class="col-xl-10 offset-xl-1">
     <div class="text-center mt-4 container">
     <a href="/"><img class="align-self-center" style="height:100px;" id="logo" src="/images/juricaf.png" alt="Juricaf" /></a>
