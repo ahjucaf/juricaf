@@ -52,14 +52,15 @@ $arretType = null;
 if ($titre) {
   $tabTitre = explode("#", (string)$titre[0]);
   $arretType = substr($tabTitre[0], 0, strpos($tabTitre[0], ' '));
+  $arretTitre = substr($tabTitre[0], 0, strpos($tabTitre[0], ' ('));
   $posDeb = strpos($tabTitre[0], '(');
   $posFin = strpos($tabTitre[0], ')');
-  $formation = ($posDeb && $posFin)? ucfirst(substr($tabTitre[0], $posDeb+1, $posFin-$posDeb-1)) : null;
+  $arretFormation = ($posDeb && $posFin)? ucfirst(substr($tabTitre[0], $posDeb+1, $posFin-$posDeb-1)) : null;
 }
 ?><?xml version="1.0" encoding="utf8"?>
 <DOCUMENT>
 <DATE_ARRET><?php echo $date ; ?></DATE_ARRET>
-<FORMATION><?php echo $formation ?></FORMATION>
+<FORMATION><?php echo $arretFormation ?></FORMATION>
 <JURIDICTION>Cour de justice de l'Union européenne</JURIDICTION>
 <NUM_ARRET><?php echo $arretId; ?></NUM_ARRET>
 <PAYS>CJUE</PAYS>
@@ -67,7 +68,7 @@ if ($titre) {
    <?php echo $arretTxt; ?>
 ]]>
 </TEXTE_ARRET>
-<TITRE>CJUE, <?php echo  $formation ; ?>, <?php echo $dateFr; ?>, <?php echo $arretId; ?></TITRE>
+<TITRE>CJUE, <?php echo  $arretTitre ; ?>, <?php echo $parties ?>, <?php echo $dateFr; ?>, <?php echo $arretId; ?></TITRE>
 <FONDS_DOCUMENTAIRE>http://publications.europa.eu</FONDS_DOCUMENTAIRE>
 <PARTIES>
 <?php if ($demandeur): ?>
