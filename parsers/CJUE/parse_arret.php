@@ -106,9 +106,9 @@ if ($arretTypes = $obj->xpath('//CASE-LAW_HAS_TYPE_PROCEDURE_CONCEPT_TYPE_PROCED
 <?php if ($analyses): ?>
 <ANALYSES>
 <?php foreach ($analyses as $a): ?>
-<ANALYSE>
-  <TITRE_PRINCIPAL><?php echo $a ?></TITRE_PRINCIPAL>
-</ANALYSE>
+    <ANALYSE>
+        <TITRE_PRINCIPAL><?php echo $a ?></TITRE_PRINCIPAL>
+    </ANALYSE>
 <?php endforeach; ?>
 </ANALYSES>
 <?php endif; ?>
