@@ -125,7 +125,7 @@ if ($rapporteurItems = $obj->xpath('//CASE-LAW_DELIVERED_BY_JUDGE//TYPE[. ="agen
 </ANALYSES>
 <?php endif; ?>
 <?php if ($avocats): ?>
-<AVOCATS><?php echo implode(', ', $avocats); ?></AVOCATS>
+<AVOCAT_GL><?php echo implode(', ', $avocats); ?></AVOCAT_GL>
 <?php endif; ?>
 <?php if ($rapporteurs): ?>
 <RAPPORTEUR><?php echo implode(', ', $rapporteurs); ?></RAPPORTEUR>
