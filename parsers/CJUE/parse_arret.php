@@ -57,6 +57,14 @@ if ($titre) {
   $posFin = strpos($tabTitre[0], ')');
   $arretFormation = ($posDeb && $posFin)? ucfirst(substr($tabTitre[0], $posDeb+1, $posFin-$posDeb-1)) : null;
 }
+$arretTypeAffaire = null;
+$arretTypeRecours = null;
+if ($arretTypes = $obj->xpath('//CASE-LAW_HAS_TYPE_PROCEDURE_CONCEPT_TYPE_PROCEDURE/IDENTIFIER/parent::*/PREFLABEL')) {
+  $arretTypeAffaire = (string)$arretTypes[0];
+  if (isset($arretTypes[1])) {
+    $arretTypeRecours = (string)$arretTypes[1];
+  }
+}
 ?><?xml version="1.0" encoding="utf8"?>
 <DOCUMENT>
 <DATE_ARRET><?php echo $date ; ?></DATE_ARRET>
@@ -83,5 +91,7 @@ if ($titre) {
 <?php endif; ?>
 </PARTIES>
 <TYPE><?php echo $arretType; ?></TYPE>
+<?php if ($arretTypeAffaire): ?><TYPE_AFFAIRE><?php echo $arretTypeAffaire; ?></TYPE_AFFAIRE><?php endif; ?>
+<?php if ($arretTypeRecours): ?><TYPE_RECOURS><?php echo $arretTypeRecours; ?></TYPE_RECOURS><?php endif; ?>
 <SOURCE><?php echo $arretSource ?></SOURCE>
 </DOCUMENT>
