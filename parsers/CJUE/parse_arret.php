@@ -16,11 +16,10 @@ if (!$date) {
 $dateFr = date('d/m/Y', strtotime($date));
 $arretId = $obj->xpath('//TYPE[. ="case"]/parent::*/IDENTIFIER');
 if (!$arretId) {
-      fwrite(STDERR, "ERREUR: CJUE / TYPE=case non définie\n");
-      exit(1);
+  $arretId = $obj->xpath('//EXPRESSION_CASE-LAW_IDENTIFIER_CASE/VALUE');
 }
-if (count($arretId) > 0) {
-  $arretId = (string)$arretId[0];
+if ($arretId) {
+  $arretId = str_replace('Affaire ', '', str_replace('Affaires ', '', (string)$arretId[0]));
 }
 $arretSource = (string)$obj->WORK->URI->VALUE;
 $arretTxt = null;
