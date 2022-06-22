@@ -82,6 +82,10 @@ if ($rapporteurItems = $obj->xpath('//CASE-LAW_DELIVERED_BY_JUDGE//TYPE[. ="agen
     $rapporteurs[] = (string)$rapporteurItem;
   }
 }
+$ecli = null;
+if ($ecliItems = $obj->xpath('//ECLI/VALUE')) {
+  $ecli = (string)$ecliItems[0];
+}
 ?><?xml version="1.0" encoding="utf8"?>
 <DOCUMENT>
 <DATE_ARRET><?php echo $date ; ?></DATE_ARRET>
@@ -130,4 +134,10 @@ if ($rapporteurItems = $obj->xpath('//CASE-LAW_DELIVERED_BY_JUDGE//TYPE[. ="agen
 <RAPPORTEUR><?php echo implode(', ', $rapporteurs); ?></RAPPORTEUR>
 <?php endif; ?>
 <SOURCE><?php echo $arretSource ?></SOURCE>
+<?php if ($ecli): ?>
+<ECLI><?php echo $ecli ?></ECLI>
+<?php endif; ?>
+<?php if (preg_match('/([0-9A-Z]+).xml$/', $xmlfile_arret_metas, $matches)): ?>
+<ID_SOURCE><?php echo $matches[1] ?></ID_SOURCE>
+<?php endif; ?>
 </DOCUMENT>
