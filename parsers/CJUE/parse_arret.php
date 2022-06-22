@@ -17,7 +17,6 @@ if (!$arretTxt) {
       fwrite(STDERR, "ERREUR: CJUE / Arret texte non récupéré\n");
       exit(1);
 }
-$arretTxt = strip_tags($arretTxt);
 
 
 
