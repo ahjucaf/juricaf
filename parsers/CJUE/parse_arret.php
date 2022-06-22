@@ -118,9 +118,9 @@ if ($ecliItems = $obj->xpath('//ECLI/VALUE')) {
 <?php if ($arretTypeRecours): ?>
 <TYPE_RECOURS><?php echo $arretTypeRecours; ?></TYPE_RECOURS>
 <?php endif; ?>
-<?php if ($analyses): ?>
+<?php if ($arretAnalyses): ?>
 <ANALYSES>
-<?php foreach ($analyses as $a): ?>
+<?php foreach ($arretAnalyses as $a): ?>
     <ANALYSE>
         <TITRE_PRINCIPAL><?php echo $a ?></TITRE_PRINCIPAL>
     </ANALYSE>
