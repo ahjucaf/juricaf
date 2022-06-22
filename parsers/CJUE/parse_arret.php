@@ -2,8 +2,12 @@
 $xmlfile_arret_metas = $argv[1];
 $xmlfile_arret_txt = $argv[2];
 
-$obj = new SimpleXMLElement(@file_get_contents($xmlfile_arret_metas));
-
+try {
+  $obj = new SimpleXMLElement(@file_get_contents($xmlfile_arret_metas));
+} catch (Exception $e) {
+    fwrite(STDERR, "ERREUR: CJUE / pb format xml : $xmlfile_arret_metas\n");
+    exit(1);
+}
 if (!$obj) {
     fwrite(STDERR, "ERREUR: CJUE / xml non trouvé : $xmlfile_arret_metas\n");
     exit(1);
