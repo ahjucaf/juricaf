@@ -180,7 +180,7 @@ $res['type'] = 'arret';
 if(!isset($res['pays']) && isset($argv[2])) { $res['pays'] = $argv[2]; }
 if(isset($res['pays'])) { $res['pays'] = toString($res['pays']); }
 if(empty($res['pays'])) { addError("pays manquant"); $res['pays'] = 'inconnu'; }
-if ($res['pays'] != 'CEDH') {
+if (!in_array($res['pays'], array('CEDH', 'CJUE'))) {
     $res['pays'] = ucfirst(strtolower($res['pays']));
 }
 
