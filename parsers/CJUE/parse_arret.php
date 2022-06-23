@@ -21,7 +21,7 @@ if ($parser->hasErrors()) {
 <NUM_ARRET><?php echo $parser->identifiant; ?></NUM_ARRET>
 <PAYS><?php echo $parser->pays; ?></PAYS>
 <TEXTE_ARRET><![CDATA[
-   <?php /*echo $parser->getTxtDoc();*/ ?>
+   <?php echo $parser->getTxtDoc(); ?>
 ]]>
 </TEXTE_ARRET>
 <TITRE><?php echo $parser->getTitre(); ?></TITRE>
