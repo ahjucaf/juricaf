@@ -62,7 +62,7 @@ if ($parser->hasErrors()) {
 <?php if ($parser->rapporteurs): ?>
 <RAPPORTEUR><?php echo $parser->rapporteurs; ?></RAPPORTEUR>
 <?php endif; ?>
-<SOURCE><![CDATA[<?php echo $parser->source ?>]]></SOURCE>
+<SOURCE><?php echo $parser->source ?></SOURCE>
 <?php if ($parser->ecli): ?>
 <ECLI><?php echo $parser->ecli ?></ECLI>
 <?php endif; ?>

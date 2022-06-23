@@ -4,7 +4,7 @@ class XmlParserCJUE {
   const PAYS = 'CJUE';
   const JURIDICTION = 'Cour de justice de l\'Union européenne';
   const FONDS_DOCUMENTAIRE = 'http://publications.europa.eu';
-  const TEMPLATE_URL_SOURCE = 'https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:__ID__&from=FR';
+  const TEMPLATE_URL_SOURCE = 'https://eur-lex.europa.eu/legal-content/fr/ALL/?uri=CELEX:__ID__';
 
   private $xmlObj;
   private $txtDoc;
