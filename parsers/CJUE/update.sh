@@ -4,9 +4,9 @@ mkdir -p xml
 mkdir -p data
 
 ls data|grep ".xml"|sed "s/.xml//"|sort|uniq | while read id ; do
-  if [ -e data/$id.html -a -e data/$id.xml ]
+  if [ -e data/$id.xml -a -e data/$id.txt ]
   then
-    php parse_arret.php data/$id.xml data/$id.html > xml/$id.xml
+    php parse_arret.php data/$id.xml data/$id.txt > xml/$id.xml
     if ! test -s xml/$id.xml ; then
         rm xml/$id.xml
     fi

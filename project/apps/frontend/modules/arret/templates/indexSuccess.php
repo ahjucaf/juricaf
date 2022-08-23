@@ -516,9 +516,8 @@ if(isset($references['PUBLICATION'])) {
   <div class="col-lg-8 col-sm-12 mt-10">
 
     <small class="text-muted"> <?php echo(date('d/m/Y', strtotime($document->date_arret)) . ' | '. strtoupper($document->pays) . ' | N°'.$document->num_arret);?> </small>
-    <h3 class="fw-bold" id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> | '.$document->titre?></h3>
-    <hr>
-
+    <h1 class="fw-bold h3" id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> | '.$document->titre?></h1>
+    <hr />
   <?php
   if($document->pays == "Madagascar" && $document->juridiction == "Cour suprême" && trim($document->getTexteArret()) == "En haut a droite, cliquez sur PDF pour visualiser le fac-simile de la décision") {
       ?>
