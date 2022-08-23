@@ -4,6 +4,8 @@
 # ./detar.sh pour extraire uniquement les nouveaux documents
 
 START=$(date '+%d-%m-%Y-%H:%M:%S') ;
+TOPROCESS=$1
+ALL=$2
 
 # Répertoire de travail
 if [ "$(echo $0 | sed 's|[^/]*$||')" != "./" ] ; then
@@ -18,7 +20,6 @@ CONVERTED=../data/dila/converted
 ARCHIVE=../data/dila/archive
 DELETED=../data/dila/deleted
 POOL=../data/pool
-TOPROCESS=log/to_detar_update.txt
 LOCK=/tmp/import.sh.lock
 DIRLOGSUPP=log/suppression
 FULLIMPORT=log/full_import.lock
@@ -35,7 +36,7 @@ then
   fi
 fi
 
-if test "$1" ; then
+if test "$ALL" ; then
   echo "Extraire TOUS les documents dila ? (les crons doivent être désactivés et les bdd vidées) : veuillez confirmer (y/n)"
   read AA;
   TOPROCESS=log/to_detar_all.txt
@@ -61,7 +62,7 @@ for fichier in $(sort -u $TOPROCESS);
   echo -e "\n=====================================================";
   echo "Conversion des fichiers" ;
   echo "=====================================================";
-  ./extract.sh ;
+  bash ./extract.sh $DATA/ ;
 
   if find $DATA/ -name "*.dat" > /dev/null; then
     echo -e "\n=====================================================";
