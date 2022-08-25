@@ -20,18 +20,18 @@ touch $TIMEMEMORY
 sleep 1
 # Synchronisation (non destructive)
 # lftp ftp://$USER:$PASS@$URL -e "mirror / $LOCALCOPY ; quit"
-#mkdir -p $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CASS/
-#wget -q -O /dev/stdout https://echanges.dila.gouv.fr/OPENDATA/CASS/ | grep tar.gz | sed 's|.*href="|https://echanges.dila.gouv.fr/OPENDATA/CASS/|'  | sed 's/".*//' > /tmp/CASS.url
-#wget -q -i /tmp/CASS.url -nc -P $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CASS/
-#rm /tmp/CASS.url
-#mkdir -p $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/JADE/
-#wget -q -O /dev/stdout https://echanges.dila.gouv.fr/OPENDATA/JADE/ | grep tar.gz | sed 's|.*href="|https://echanges.dila.gouv.fr/OPENDATA/JADE/|'  | sed 's/".*//' > /tmp/JADE.url
-#wget -q -i /tmp/JADE.url -nc -P $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/JADE/
-#rm /tmp/JADE.url
-#mkdir -p $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CONSTIT/
-#wget -q -O /dev/stdout https://echanges.dila.gouv.fr/OPENDATA/CONSTIT/ | grep tar.gz | sed 's|.*href="|https://echanges.dila.gouv.fr/OPENDATA/CONSTIT/|'  | sed 's/".*//' > /tmp/CONSTIT.url
-#wget -q -i /tmp/CONSTIT.url -nc -P $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CONSTIT/
-#rm /tmp/CONSTIT.url
+mkdir -p $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CASS/
+wget -q -O /dev/stdout https://echanges.dila.gouv.fr/OPENDATA/CASS/ | grep tar.gz | sed 's|.*href="|https://echanges.dila.gouv.fr/OPENDATA/CASS/|'  | sed 's/".*//' > /tmp/CASS.url
+wget -q -i /tmp/CASS.url -nc -P $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CASS/
+rm /tmp/CASS.url
+mkdir -p $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/JADE/
+wget -q -O /dev/stdout https://echanges.dila.gouv.fr/OPENDATA/JADE/ | grep tar.gz | sed 's|.*href="|https://echanges.dila.gouv.fr/OPENDATA/JADE/|'  | sed 's/".*//' > /tmp/JADE.url
+wget -q -i /tmp/JADE.url -nc -P $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/JADE/
+rm /tmp/JADE.url
+mkdir -p $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CONSTIT/
+wget -q -O /dev/stdout https://echanges.dila.gouv.fr/OPENDATA/CONSTIT/ | grep tar.gz | sed 's|.*href="|https://echanges.dila.gouv.fr/OPENDATA/CONSTIT/|'  | sed 's/".*//' > /tmp/CONSTIT.url
+wget -q -i /tmp/CONSTIT.url -nc -P $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CONSTIT/
+rm /tmp/CONSTIT.url
 mkdir -p $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CAPP/
 wget -q -O /dev/stdout https://echanges.dila.gouv.fr/OPENDATA/CAPP/ | grep tar.gz | sed 's|.*href="|https://echanges.dila.gouv.fr/OPENDATA/CAPP/|'  | sed 's/".*//' > /tmp/CAPP.url
 wget -q -i /tmp/CAPP.url -nc -P $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CAPP/
