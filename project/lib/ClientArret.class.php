@@ -20,6 +20,7 @@ class ClientArret {
     "Congo"=>"🇨🇬",
     "Congo démocratique"=>"🇨🇩",
     "Côte d'Ivoire"=>"🇨🇮",
+    "Égypte"=>"🇪🇬",
     "France"=>"🇫🇷",
     "Gabon" =>"🇬🇦",
     "Guinée"=>"🇬🇳",
