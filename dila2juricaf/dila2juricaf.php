@@ -5,7 +5,7 @@ $instant = date("d-m-Y-H:i:s");
 
 $INPUT_FILE=$argv[1];
 $CONVERTED_DIR=$argv[2];
-$DRYRUN=$argv[1];
+$DRYRUN=isset($argv[3]) && $argv[3];
 
 if (!file_exists($INPUT_FILE) || filesize($INPUT_FILE) == 0) {
     $erreur = "chemin incorrect : ";

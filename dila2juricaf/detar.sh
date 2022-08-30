@@ -43,6 +43,7 @@ sort -u $TOPROCESS | while read fichier; do
         sed -f ansi2html < $fichier >  $fichier".tmp" ;
         mv $fichier".tmp" $fichier;
         php dila2juricaf.php $fichier $CONVERTED;
+        rm $fichier
   done
   find $DATA/ -name "*.dat" | while read deleteorder; do
     if ! test "$DELETEDJSONDIR"; then
@@ -88,6 +89,7 @@ sort -u $TOPROCESS | while read fichier; do
 
   # Vérifie l'état de juricaf2couchdb avant de transmettre les fichiers, diffère la transmission ou génère un fichier de reprise suivant la situation
   rsync -a $CONVERTED/France $POOL/
+  rm -rf $CONVERTED/France
 done
 
 END=$(date '+%d-%m-%Y-%H:%M:%S') ;
