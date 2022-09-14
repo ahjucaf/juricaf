@@ -36,10 +36,15 @@ mkdir -p $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CAPP/
 wget -q -O /dev/stdout https://echanges.dila.gouv.fr/OPENDATA/CAPP/ | grep tar.gz | sed 's|.*href="|https://echanges.dila.gouv.fr/OPENDATA/CAPP/|'  | sed 's/".*//' > /tmp/CAPP.url
 wget -q -i /tmp/CAPP.url -nc -P $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CAPP/
 rm /tmp/CAPP.url
+mkdir -p $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/INCA/
+wget -q -O /dev/stdout https://echanges.dila.gouv.fr/OPENDATA/INCA/ | grep tar.gz | sed 's|.*href="|https://echanges.dila.gouv.fr/OPENDATA/INCA/|'  | sed 's/".*//' > /tmp/INCA.url
+wget -q -i /tmp/INCA.url -nc -P $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/INCA/
+rm /tmp/INCA.url
 rsync -ac $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CASS/ $LOCALCOPY
 rsync -ac $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/JADE/ $LOCALCOPY
 rsync -ac $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CONSTIT/ $LOCALCOPY
 rsync -ac $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/CAPP/ $LOCALCOPY
+rsync -ac $LOCALCOPY/../http_dila/echanges.dila.gouv.fr/OPENDATA/INCA/ $LOCALCOPY
 
 # Nouveaux fichiers
 find $LOCALCOPY -name "*.tar.gz"  -exec stat -c '%Y#%n' '{}' ';' > $NEWLOG
