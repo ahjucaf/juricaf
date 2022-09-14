@@ -13,10 +13,8 @@ if [ -d "xmls" ];then
 fi
 
 mkdir xmls
+touch tmp/urls.txt all_urls.txt
 
-cd tmp/
-touch urls.txt
-cd ..
 nb_home_pages=1
 php homes_downloader.php $nb_home_pages
 php url_listing.php
