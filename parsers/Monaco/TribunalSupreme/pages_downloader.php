@@ -9,7 +9,6 @@ foreach($urls as $v){
     {
       $cmd="curl -k -L -s $v > tmp/pages/arret$i.html";
       $taburl["arret$i.html"]=$v;
-    echo "$cmd\n";
       shell_exec($cmd);
       $i=$i+1;
   }
