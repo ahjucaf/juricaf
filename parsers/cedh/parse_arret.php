@@ -34,7 +34,7 @@ $obj = null;
 
 $text = @file_get_contents("arrets/".$arret_id.".txt");
 if (!$text) {
-    fwrite(STDERR, "ERREUR: CEDH / texte de $arret_id non trouvé (arrets/".$arret_id.".json | arrets/".$arret_id.".txt)\n");
+    fwrite(STDERR, "ERREUR: CEDH / pas de texte français pour l'$arret_id trouvé (arrets/".$arret_id.".json | arrets/".$arret_id.".txt | https://hudoc.echr.coe.int/eng?i=".$arret_id.")\n");
     exit(3);
 }
 
