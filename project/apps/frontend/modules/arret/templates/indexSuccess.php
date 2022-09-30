@@ -396,15 +396,6 @@ if($document->pays == 'Canada') {
     $citation = ''.$document->titre.'' ;
 }
 
-if(!empty($analyses)) {
-    $sf_response->addMeta('Description', '');
-}
-elseif (!empty($document->getTexteArret())) {
-    $sf_response->addMeta('Description', '');
-}
-
-$sf_response->addMeta('Keywords', '');
-
 if(!empty($document->urnlex)) { $urnlex = $document->urnlex; } else { $urnlex = ''; }
 
 $creator = $document->juridiction;
@@ -418,7 +409,7 @@ if (isset($document->num_arret) && $document->num_arret) {
 $docketNumber = $document->num_arret;
 }
 $citations = '';
-$url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+$url = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
 if (!empty($citations_analyses)) { $citations .= $citations_analyses; }
 if (!empty($citations_arret)) { $citations .= $citations_arret; }
@@ -426,13 +417,15 @@ if (!empty($sources)) { $citations .= $sources; }
 if (!empty($decisions_attaquees)) { $citations .= $decisions_attaquees; }
 
 $sf_response->setTitle($document->titre);
+$sf_response->addMeta('Description', $document->getDescription());
+$sf_response->addMeta('Keywords', $document->getKeywords());
+
 $sf_response->addMeta('DC.accessRights', 'public', false, false, false);
 $sf_response->addMeta('DC.creator', $creator, false, false, false);
 $sf_response->addMeta('DC.coverage', htmlspecialchars($document->pays, ENT_QUOTES), false, false, false);
 $sf_response->addMeta('DC.date', $document->date_arret, false, false, false);
-if (isset($document->type_affaire)) {
-  $sf_response->addMeta('DC.description', $document->type_affaire, false, false, false);
-}
+$sf_response->addMeta('DC.description', $document->getDescription(), false, false, false);
+
 $sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
 $sf_response->addMeta('DC.language', 'FR', false, false, false);
 $sf_response->addMeta('DC.publisher', 'AHJUCAF', false, false, false);

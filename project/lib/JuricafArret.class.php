@@ -79,7 +79,26 @@ class JuricafArret extends sfCouchDocument
       return $this->texte_arret;
   }
 
+  public function getDescription() {
+      if (isset($this->analyses) && isset($this->analyses['analyse']) && count($this->analyses['analyse'])) {
+        $description = 'Arrêt du '.$this->juridiction;
+        foreach($this->analyses['analyse'] as $a) {
+            $description .= ' '.$a['sommaire'];
+        }
+        return preg_replace('/  +/' , ' ', preg_replace('/\n/', ' ', truncate_text($description, 250, "...", true)));
+      }
+      return preg_replace('/  +/' , ' ', preg_replace('/\n/', ' ', truncate_text($this->getTexteArret(), 250, "...", true)));
+  }
 
+  public function getKeywords() {
+      $keywords = 'jurisprudence - '.$this->pays.' - '.$this->juridiction.' - '.$this->formation.' - '.$this->type_affaire;
+      if (isset($this->analyses) && isset($this->analyses['analyse']) && count($this->analyses['analyse'])) {
+        foreach($this->analyses['analyse'] as $a) {
+            $keywords .= ' '.$a['titre_principal'];
+        }
+      }
+      return $keywords;
+  }
 
   public static function ids($str) {
     $str = strtr($str,
