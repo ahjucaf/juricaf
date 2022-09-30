@@ -64,4 +64,17 @@ class arretActions extends sfActions
   {
     return ;
   }
+
+  public function executeAttachment(sfWebRequest $request)
+  {
+    $this->document = new JuricafArret($request->getParameter('id'));
+    $this->forward404If($this->document->isNew());
+    $this->forward404Unless(isset($this->document->_attachments) && $this->document->_attachments);
+    $this->setLayout(false);
+    foreach($this->document->_attachments as $uri => $a) {
+        $this->getResponse()->setContentType($a['content_type']);
+        $this->path = $this->document->getFile($uri);
+        return ;
+    }
+  }
 }

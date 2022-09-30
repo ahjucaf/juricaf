@@ -590,6 +590,12 @@ if(isset($references['PUBLICATION'])) {
     </div>
     <article id="textArret">
     <?php echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret))); ?>
+<?php if (isset($document->_attachments) && $document->_attachments ): ?>
+    <hr/>
+    <div>
+    <a href="<?php echo url_for('arret_attachment', array('id' => $document->_id)); ?>">Télécharger la décision originale</a>
+    </div>
+<?php endif; ?>
     </article>
     <div class="text-center mb-3 d-lg-none">
         <button type="button" id="btn-see-less" class="btn btn-outline-primary d-none">Réduire</button>
@@ -868,8 +874,12 @@ if(isset($references['PUBLICATION'])) {
             echo 'Identifiant URN:LEX : '.$document->urnlex.' <a href="#" title="<h1>URN-LEX </h1><p>L\'objectif du projet URN LEX est d’assigner de façon non équivoque, dans un format standard, tout document qui sont reconnus comme des sources du droit."><img src="/images/aide.png" alt="?"/></a><br />';
         }
         ?>
+<?php if (isset($document->_attachments) && $document->_attachments ): ?>
+        <hr/>
+        <h5>Décision originale</h5>
+        <a href="<?php echo url_for('arret_attachment', array('id' => $document->_id)); ?>">Télécharger la décision originale</a>
+<?php endif; ?>
       </div>
-
     </div>
 </div>
 
