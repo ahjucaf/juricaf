@@ -509,7 +509,7 @@ if(isset($references['PUBLICATION'])) {
   <div class="col-lg-8 col-sm-12 mt-10">
 
     <small class="text-muted"> <?php echo(date('d/m/Y', strtotime($document->date_arret)) . ' | '. strtoupper($document->pays) . ' | N°'.$document->num_arret);?> </small>
-    <h1 class="fw-bold h3" id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> | '.$document->titre?></h1>
+    <h1 class="fw-bold h3" id="titre" itemprop="name"><a href="<?php echo url_for('recherche/search?query=+&facets=facet_pays:'.str_replace(' ', '_', $document->pays)); ?>"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /></a> | '.$document->titre?></h1>
     <hr />
   <?php
   if($document->pays == "Madagascar" && $document->juridiction == "Cour suprême" && trim($document->getTexteArret()) == "En haut a droite, cliquez sur PDF pour visualiser le fac-simile de la décision") {
@@ -793,14 +793,22 @@ if(isset($references['PUBLICATION'])) {
         echo '<hr /><h5>Origine de la décision</h5>';
 
         if (isset($document->pays)) {
-            echo '<div itemprop="author" itemscope itemtype="http://schema.org/Organization"> <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Pays : <em itemprop="addressCountry">'.$document->pays.'</span></em><br>';
+            echo '<div itemprop="author" itemscope itemtype="http://schema.org/Organization"> <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Pays : <em itemprop="addressCountry"><a href="'.url_for('recherche/search?query=+&facets=facet_pays:'.str_replace(' ', '_', $document->pays)).'">'.$document->pays.'</a></span></em><br>';
         }
 
         if (isset($document->juridiction)) {
-            echo 'Juridiction : <em><span itemprop="name">'.$document->juridiction.'</span></em></span></div>';
+            if (isset($document->pays)) {
+                echo 'Juridiction : <em><span itemprop="name"><a href="'.url_for('recherche/search?query=+&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->juridiction.'</a></span></em></span></div>';
+            }else{
+                echo 'Juridiction : <em><span itemprop="name">'.$document->juridiction.'</span></em></span></div>';
+            }
         }
         if (isset($document->formation)) {
-            echo 'Formation : <em>'.$document->formation.'</em><br />';
+            if (isset($document->pays) && isset($document->juridiction)) {
+                echo 'Formation : <em><a href="'.url_for('recherche/search?query=formation:"'.$document->formation.'"&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->formation.'</a></em><br />';
+            }else{
+                echo 'Formation : <em>'.$document->formation.'</em><br />';
+            }
         }
 
 
