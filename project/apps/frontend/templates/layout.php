@@ -6,6 +6,8 @@
     <?php include_metas() ?>
     <?php include_title() ?>
     <link rel="shortcut icon" href="/images/favicon.ico" />
+    <link rel="preload" href="/css/boostrap-5.css?<?php echo $gitcommit; ?>" as="style">
+    <link rel="preload" href="/css/main.css?<?php echo $gitcommit; ?>" as="style">
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
