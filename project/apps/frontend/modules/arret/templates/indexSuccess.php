@@ -416,9 +416,16 @@ if (!empty($citations_arret)) { $citations .= $citations_arret; }
 if (!empty($sources)) { $citations .= $sources; }
 if (!empty($decisions_attaquees)) { $citations .= $decisions_attaquees; }
 
+$keywords = $document->getKeywords();
+$description = $document->getDescription();
+if ($citation) {
+    $description = $citation." : ".$description;
+    $keywords = $citation." - ".$keywords;
+}
+
 $sf_response->setTitle($document->titre);
-$sf_response->addMeta('Description', $document->getDescription());
-$sf_response->addMeta('Keywords', $document->getKeywords());
+$sf_response->addMeta('Description', $description);
+$sf_response->addMeta('Keywords', $keywords);
 
 $sf_response->addMeta('DC.accessRights', 'public', false, false, false);
 $sf_response->addMeta('DC.creator', $creator, false, false, false);
