@@ -18,6 +18,7 @@
     @font-face {
       font-family: "bootstrap-icons";
       src: url("/css/fonts/bootstrap-icons.woff2") format("woff2"), url("/css/fonts/bootstrap-icons.woff") format("woff");
+      font-display: swap;
     }
     </style>
     <!-- Matomo -->
