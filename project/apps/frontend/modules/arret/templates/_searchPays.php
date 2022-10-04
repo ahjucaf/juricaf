@@ -36,27 +36,31 @@ echo '<input type="hidden" name="total" value="'.count($pays).'" />';
 ?>
 
 <div style="clear: both; padding-top: 1em; padding-bottom: 0.7em;">
-  <span class="tout">
-  <a  href="#" onclick="javascript:$('input[name^=\'pays\']').prop('checked', 'checked');tout_cocher_decocher();return false">Tous les pays</a>
+<span class="tout">
+  <button type="button" class="btn btn-link" onclick="javascript:$('input[name^=\'pays\']').prop('checked', 'checked');tout_cocher_decocher();">Tous les pays</button>
   </span><span class="aucun tout">
   /
   </span><span class="aucun">
-  <a  href="#" onclick="javascript:$('input[name^=\'pays\']:checked').prop('checked', '');tout_cocher_decocher();return false;">Décocher tous les pays</a>
+  <button type="button" class="btn btn-link" onclick="javascript:$('input[name^=\'pays\']:checked').prop('checked', '');tout_cocher_decocher();">Décocher tous les pays</button>
   </span>
 <script>
-    (function () {
-    nb_pays = $('input[name^=\'pays\']').length;
-    function tout_cocher_decocher() {
-        nb_pays_checked = $('input[name^=\'pays\']:checked').length;
-        $('.tout').show();
-        $('.aucun').show();
+        function tout_cocher_decocher() {
+        let nb_pays = document.querySelectorAll('input[name^=\'pays\']').length;
+        let nb_pays_checked = document.querySelectorAll('input[name^=\'pays\']:checked').length;
+
+        document.querySelectorAll('.tout').forEach(function(item) { item.classList.remove('d-none') });
+        document.querySelectorAll('.aucun').forEach(function(item) { item.classList.remove('d-none') });
         if (nb_pays == nb_pays_checked) {
-            $('.tout').hide();
+            document.querySelectorAll('.tout').forEach(function(item) { item.classList.add('d-none') });
         }else if (nb_pays_checked == 0) {
-            $('.aucun').hide();
+            document.querySelectorAll('.aucun').forEach(function(item) { item.classList.add('d-none') });
         }
     }
-    $('input[name^=\'pays\']').change(tout_cocher_decocher);
+
+    (function () {
+    document.querySelectorAll('input[name^=\'pays\']').forEach(function(item) {
+        item.addEventListener('change', function() {tout_cocher_decocher();});
+    });
     tout_cocher_decocher();
     })();
 </script>
