@@ -253,6 +253,9 @@ a{
   .breadcrumb{
     margin-top:45px;
   }
+  #hidden-mode-mobile, .hidden-mode-mobile {
+    display: none;
+  }
 }
 
 @media screen and (max-width:350px) {
@@ -262,7 +265,11 @@ a{
   .barre-outil ul{
     padding: 10px 0 10px 0 !important;
   }
+  #hidden-mode-mobile, .hidden-mode-mobile {
+    display: none;
+  }
 }
+
 @media screen and (min-width:991px){
   .bloc-droit{
     border-style: dotted;
@@ -272,5 +279,4 @@ a{
     border-width: thin;
     border-color: #375d81;
   }
-
 }
