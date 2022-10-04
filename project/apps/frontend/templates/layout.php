@@ -133,10 +133,10 @@
     <div class="pt-3 px-5 mb-3 clearfix">
       <div class="row">
         <div class="col">
-          <a href="https://www.ahjucaf.org/"><img height="86" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones"/></a>
+          <a href="https://www.ahjucaf.org/"><img height="86" width="100" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones"/></a>
         </div>
         <div class="col">
-          <a href="https://www.francophonie.org/"><img height="86" src="/images/francophonie_small.png" alt="Organisation internationale de la francophonie" /></a>
+          <a href="https://www.francophonie.org/"><img height="86" width="100" src="/images/francophonie_small.png" alt="Organisation internationale de la francophonie" /></a>
         </div>
       </div>
     </div>
@@ -144,7 +144,7 @@
        <span class="d-lg-none">Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones. Il est soutenu par l'Organisation Internationale de la Francophonie.</span>
        <span class="d-none d-lg-block col-6 mx-auto">Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones. Il est soutenu par l'Organisation Internationale de la Francophonie.</span>
        <div class="pt-3 p-2">
-           <img height="44" src="/images/iall.jpg" />
+           <img height="44" width="224" src="/images/iall.jpg" />
        </div>
     </div>
 </div>

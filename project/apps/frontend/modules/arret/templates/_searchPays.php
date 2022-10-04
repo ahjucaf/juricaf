@@ -23,7 +23,7 @@ function pathToFlag($str) {
       echo('
       <div class="col-lg-3">
         <input id="pays_'.$nom_pays.'" type="checkbox" name="pays['.$nom_pays.']" id="pays_'.$nom_pays.'" checked="checked"/>
-        <label class="form-check-label" for="pays_'.$nom_pays.'"><img src="/images/drapeaux/'.pathToFlag(ucfirst($nom_pays)).'.png" alt="'.$nom_pays.'" />&nbsp;'.$p['key'][0].' ('.num($p['value']).')</label>
+        <label class="form-check-label" for="pays_'.$nom_pays.'"><img src="/images/drapeaux/'.pathToFlag(ucfirst($nom_pays)).'.png" alt="'.$nom_pays.'" width="17" height="12" />&nbsp;'.$p['key'][0].' ('.num($p['value']).')</label>
       </div>');
 
     }
