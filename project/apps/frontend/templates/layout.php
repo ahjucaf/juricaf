@@ -163,7 +163,7 @@ else {
 </script>
 
 <script type="text/javascript" src="/js/jquery-3.6.0.slim.min.js?<?php echo $gitcommit; ?>"></script>
-<script type="text/javascript" src="/js/boostrap-5.js?<?php echo $gitcommit; ?>" ></script>
-<script type="text/javascript" src="/js/main.js?<?php echo $gitcommit; ?>"></script>
+<script type="text/javascript" src="/js/boostrap-5.js?<?php echo $gitcommit; ?>" async></script>
+<script type="text/javascript" src="/js/main.js?<?php echo $gitcommit; ?>" async></script>
 </body>
 </html>
