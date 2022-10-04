@@ -604,9 +604,6 @@ if(isset($references['PUBLICATION'])) {
     </div>
 <?php endif; ?>
     </article>
-    <div class="text-center mb-3 d-lg-none">
-        <button type="button" id="btn-see-less" class="btn btn-outline-primary d-none">Réduire</button>
-    </div>
 <?php } ?>
 </div>
 
