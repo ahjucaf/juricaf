@@ -12,15 +12,15 @@
     <?php include_javascripts() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/css/boostrap-5.css?<?php echo $gitcommit; ?>">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css?<?php echo $gitcommit; ?>" />
+    <link rel="stylesheet" type="text/css" media="print" href="/css/print.css?<?php echo $gitcommit; ?>">
     <style>
     @font-face {
       font-family: "bootstrap-icons";
       src: url("/css/fonts/bootstrap-icons.woff2") format("woff2"), url("/css/fonts/bootstrap-icons.woff") format("woff");
+      font-display: swap;
     }
     </style>
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css?<?php echo $gitcommit; ?>" />
-    <link rel="stylesheet" type="text/css" media="print" href="/css/print.css?<?php echo $gitcommit; ?>">
-
     <!-- Matomo -->
     <script>
     <!--
@@ -163,7 +163,7 @@ else {
 </script>
 
 <script type="text/javascript" src="/js/jquery-3.6.0.slim.min.js?<?php echo $gitcommit; ?>"></script>
-<script type="text/javascript" src="/js/boostrap-5.js?<?php echo $gitcommit; ?>" ></script>
-<script type="text/javascript" src="/js/main.js?<?php echo $gitcommit; ?>"></script>
+<script type="text/javascript" src="/js/boostrap-5.js?<?php echo $gitcommit; ?>" async></script>
+<script type="text/javascript" src="/js/main.js?<?php echo $gitcommit; ?>" async></script>
 </body>
 </html>
