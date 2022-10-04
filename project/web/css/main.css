@@ -89,7 +89,8 @@ a{
     font-style: normal;
 }
 .arret hr{
-  color: #375d81 !important;
+  color: #c8d5e1 !important;
+  opacity: 1 !important;
 }
 
 .arret h2 {
@@ -116,10 +117,11 @@ a{
   top: 50%;
 }
 
-.barre-outil li{
-  border: 1px solid #375d81;
-  padding: 5px;
+.barre-outil .btn {
+  height: 40px;
+  width: 40px;
 }
+
 .inline li{
   list-style: none;
 }
@@ -278,5 +280,15 @@ a{
     border-bottom-style: none;
     border-width: thin;
     border-color: #375d81;
+  }
+  .barre-outil ul > li:first-child{
+    border-top: 1px solid #375d81;
+  }
+
+  .barre-outil li{
+    border-right: 1px solid #375d81;
+    border-left: 1px solid #375d81;
+    border-bottom: 1px solid #375d81;
+    padding: 5px;
   }
 }
