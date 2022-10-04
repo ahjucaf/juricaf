@@ -258,6 +258,9 @@ a{
   #hidden-mode-mobile, .hidden-mode-mobile {
     display: none;
   }
+  .collapse-bydefault-mobile:not(.show) {
+    display: none;
+  }
 }
 
 @media screen and (max-width:350px) {
@@ -268,6 +271,9 @@ a{
     padding: 10px 0 10px 0 !important;
   }
   #hidden-mode-mobile, .hidden-mode-mobile {
+    display: none;
+  }
+  .collapse-bydefault-mobile:not(.show) {
     display: none;
   }
 }

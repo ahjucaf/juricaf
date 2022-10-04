@@ -155,7 +155,7 @@ if ($pager['begin']) {
   }
   ?>
 </div>
-<div id="bloc-filtres" class="row g-3 align-items-center mt-0">
+<div id="bloc-filtres" class="row g-3 align-items-center mt-0 collapse-bydefault-mobile">
   <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Tri :</label>
   </div>
