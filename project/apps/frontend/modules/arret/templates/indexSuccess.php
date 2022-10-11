@@ -750,17 +750,17 @@ if(isset($references['PUBLICATION'])) {
                 { echo '<hr /><h5>Publications</h5>'; }
 
                 if (isset($document->num_arret) AND($document->juridiction == 'Cour de cassation')) {
-                    echo 'Proposition de citation: '.$citation.'';
+                    echo 'Proposition de citation: <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
                     echo '<br>'.$civcrimlong.' '.citation($bulletins).'<br><div id="feed"></div>';
                 }
 
                 if (isset($document->num_arret)AND($document->juridiction == 'Conseil d\'État')) {
-                    echo 'Proposition de citation: '.$citation.'';
+                    echo 'Proposition de citation: <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
                     echo '<br>'.$lebon.'<br><div id="feed"></div>';
                 }
 
                 if (isset($document->num_arret)AND($document->juridiction == 'Conseil constitutionnel')) {
-                    echo 'Proposition de citation: '.$citation.'';
+                    echo 'Proposition de citation: <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
                     echo '<br>'.$lebon.'<br><div id="feed"></div>';
                 }
                 if(strpos($document->id_source, "CONSTEXT") !== false) {
@@ -776,7 +776,7 @@ if(isset($references['PUBLICATION'])) {
         }
 
         if($document->pays == 'Canada') {
-            echo 'Proposition de citation de la décision: '.$citation.'';
+            echo 'Proposition de citation de la décision: <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
             echo '<br>'.$civcrimlong.' '.citation($bulletins).'<br>';
 
             echo '<p><a href="http://csc.lexum.org/fr/'.date('Y', strtotime($document->date_arret)).'/'.replaceDate($document->num_arret).'/'.replaceDate($document->num_arret).'.pdf" target="_blank"><img src="/images/pdf.png" alt="PDF" title="Télécharger au format PDF" width="16" height="16"/>Télécharger au format PDF</a>
