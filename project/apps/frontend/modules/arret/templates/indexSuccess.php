@@ -641,9 +641,6 @@ if(isset($references['PUBLICATION'])) {
             echo '<hr><h5>Analyses</h5>'.$analyses;
         }
 
-        if (!empty($citations_analyses)) {
-            echo '<hr><h5>Références</h5>'.$citations_analyses;
-        }
         $xmlDoc = new DOMDocument();
         $xmlDoc->load(getcwd()."/cnil.xml");
         $x=$xmlDoc->getElementsByTagName('numero');
@@ -727,26 +724,47 @@ if(isset($references['PUBLICATION'])) {
                 echo '<br />';
             }
         }
-        if (!empty($citations_arret) || !empty($sources) || !empty($decisions_attaquees)) {
-            echo '<hr />';
-            echo '<p><h5>Références</h5>';
-            if (!empty($citations_arret)) { echo $citations_arret; }
-            if (!empty($sources)) { echo $sources; }
-            if (!empty($decisions_attaquees)) { echo $decisions_attaquees; }
-            echo '</p>';
+        if (!empty($citations_arret) || !empty($sources) || !empty($decisions_attaquees) || !empty($citations_analyses)) {
+            $ref = array();
+            if (!empty($citations_arret)) { $ref = array_merge($ref, explode(';', $citations_arret)); }
+            if (!empty($sources)) { $ref[] = $sources; }
+            if (!empty($decisions_attaquees)) { $ref[] = $decisions_attaquees; }
+            if (!empty($citations_analyses)) {
+                $r = str_replace(']', ']</p><p>', str_replace('. Cf', '.</p><p>Cf', str_replace(' ; ', ' ;</p><p>', preg_replace('/(.)\[/', '\1</p><p>[', str_replace(", et l'", '</p><p>', $citations_analyses)))));
+                $ref = array_merge($ref, explode('</p><p>', $r));
+            }
         }
         if(isset($references['ARRET'])) {
-            echo '<hr />';
-            echo '<hr /><h5>Référence :</h5>';
             foreach($references['ARRET'] as $value) {
                 if(isset($value['titre'])) {
-                    echo $value['titre'].'<br />';
+                    $ref[] = $value['titre'];
                 }
                 if(isset($value['contenu'])) {
-                    echo $value['contenu'].'<br />';
+                    $ref[] = $value['contenu'];
                 }
             }
         }
+        echo '<hr />';
+        echo '<h5>Références :</h5>';
+        foreach($ref as $r) {
+            $arret_num = '';
+            if (preg_match('/n°s? *([0-9]+)[^0-9]/', $r, $m)) {
+                $arret_num = $m[1];
+            }
+            if (preg_match('/, ([0-9]{1,2}) ([a-zéüû]+) ([0-9]{4}) ?,/i', $r, $m)) {
+                $arret_date = sprintf("%d-%02d-%02d", $m[3], array_search(strtolower($m[2]), $list_mois_nom) + 1, $m[1]);
+            }
+            echo '<p>';
+            if ($arret_num && $arret_date) {
+                echo '<a href="'.url_for('@recherche?q=num_arret:'.$arret_num.' date_arret:'.$arret_date).'">';
+            }
+            echo $r;
+            if ($arret_num && $arret_date) {
+                echo '</a>';
+            }
+            echo "</p>";
+        }
+
         // Lien télécharger le document
         if($document->pays == 'France') {
             if(strpos($document->id_source, "CONSTEXT") !== false || strpos($document->id_source, "JURITEXT") !== false || strpos($document->id_source, "CETATEXT") !== false) {
