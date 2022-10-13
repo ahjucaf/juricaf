@@ -74,17 +74,20 @@ function citation($string) {
   return strtr($string, $table);
 }
 
-function dateFr($date) {
+global $list_mois_nom;
+$list_mois_nom = array('janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre');
+function dateFr($date, $small_month = false) {
+  global $list_mois_nom;
   if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $date)) {
 
    $split = explode('-', $date);
    $annee = $split[0];
    $mois = $split[1];
    $jour = $split[2];
-
-   $nb = array('01','02','03','04','05','06','07','08','09','10','11','12');
-   $lettres = array('janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre');
-   $mois = str_replace($nb,$lettres,$mois);
+   $mois = $list_mois_nom[$mois - 1];
+   if ($small_month)  {
+        $mois = mb_substr($mois, 0, 3).'.';
+   }
    $date = $jour.' '.$mois.' '.$annee;
 
   }
@@ -383,13 +386,13 @@ if(isset($references['PUBLICATION'])) {
 if($document->pays == 'France') {
 
   if($document->juridiction == 'Conseil constitutionnel') {
-    $citation = ''.citation($document->juridiction).', décision n°'.$document->num_arret.' '.$document->type_affaire.' du '.dateFr($document->date_arret).'';
+    $citation = citation($document->juridiction).', décision n°'.$document->num_arret.' '.$document->type_affaire.' du '.dateFr($document->date_arret).'';
   }
   if($document->juridiction == 'Cour de cassation') {
-    $citation = 'Cass. '.citation($document->formation).', '.dateFr($document->date_arret).', pourvoi n°'.$document->num_arret.''.$civcrim.''.citation($bulletins).'';
+    $citation = 'Cass. '.citation($document->formation).', '.dateFr($document->date_arret, true).', pourvoi n°'.$document->num_arret.''.$civcrim.''.citation($bulletins).'';
   }
   if($document->juridiction == 'Conseil d\'État') {
-    $citation = 'CE, '.dateFr($document->date_arret).', n° '.$document->num_arret.'' ;
+    $citation = 'CE, '.dateFr($document->date_arret, true).', n° '.$document->num_arret.'' ;
   }
 }
 if($document->pays == 'Canada') {
