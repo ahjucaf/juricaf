@@ -177,11 +177,11 @@ function printDecisionAttaquee($ref_or_da, $is_text = 0) {
     }
     elseif(isset($decision_attaquee['formation']) && !empty($decision_attaquee['formation'])) {
       $temp[$i] = $decision_attaquee['formation'];
-      if(empty($decision_attaquee['url'])) {
-        $temp[$i] = link_to($decision_attaquee['formation'], '@recherche_resultats?query=decisions_attaquees:"'.$decision_attaquee['formation'].'"');
-      }
       if(!empty($decision_attaquee['date'])) {
         $temp[$i] .= ', '.dateFr($decision_attaquee['date']);
+      }
+      if(empty($decision_attaquee['url'])) {
+        $temp[$i] = link_to($temp[$i], '@recherche_resultats?query=formation:"'.$decision_attaquee['formation'].'" date_arret:'.$decision_attaquee['date']);
       }
     }
     if(!empty($decision_attaquee['url']) && !empty($temp[$i])) {
