@@ -316,6 +316,9 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
 
             } else {
                 $titre = $value['titre'];
+                if (preg_match('/([0-9]{4}-[0-9]{2}-[0-9]{2})/', $titre, $m)) {
+                    $titre = str_replace($m[1], ' du '.dateFr($m[1]), $titre);
+                }
             }
             if(isset($value['url'])) {
                 $citations_arret .= '<a href="'.$value['url'].'">'.$titre.'</a><br />';
