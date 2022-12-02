@@ -3,7 +3,15 @@
 
 $instant = date("d-m-Y-H:i:s");
 
-if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
+$INPUT_FILE=$argv[1];
+$CONVERTED_DIR=$argv[2];
+$DRYRUN=isset($argv[3]) && $argv[3];
+
+if (!file_exists($INPUT_FILE) || filesize($INPUT_FILE) == 0) {
+    $erreur = "chemin incorrect : ";
+    if(file_exists($INPUT_FILE)) { $erreur = "le fichier est vide : "; }
+    echo "Erreur : ".$erreur.$INPUT_FILE." : ".$instant."\n";
+}
 
   global $mois;
 
@@ -258,14 +266,14 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
                          "AUTR" => "Autres textes et décisions");
 
   // Nom du fichier
-  $res = explode('/', $argv[1]);
+  $res = explode('/', $INPUT_FILE);
   $res = array_reverse($res);
 
   try {
-    $dila = simplexml_load_file($argv[1], 'SimpleXMLElement', LIBXML_COMPACT);
+    $dila = simplexml_load_file($INPUT_FILE, 'SimpleXMLElement', LIBXML_COMPACT);
   }
   catch (Exception $e) {
-    echo "Erreur : ".$argv[1]." n'est pas un fichier xml valide : ".$e->getMessage()."\n";
+    echo "Erreur : ".$INPUT_FILE." n'est pas un fichier xml valide : ".$e->getMessage()."\n";
   }
 
   // Identification de l'origine
@@ -524,13 +532,13 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
     $juricaf = simplexml_load_string($juricaf_str, 'SimpleXMLElement', LIBXML_COMPACT);
   }
   catch (Exception $e) {
-    echo "Erreur : problème lors de la conversion de ".$argv[1]." en xml : ".$instant."\n";
+    echo "Erreur : problème lors de la conversion de ".$INPUT_FILE." en xml : ".$instant."\n";
     echo $e->getMessage()."\n";
   }
 
   // Sous dossiers année/institution
   if(empty($juricaf_array['DATE_ARRET'])) { $date_rec = "date_manquante"; } else { $date_rec = substr($juricaf_array['DATE_ARRET'], 0, 4); }
-  $dir = "../data/dila/converted/France/".$date_rec."/".ids($juricaf_array['JURIDICTION']) ;
+  $dir = $CONVERTED_DIR."/France/".$date_rec."/".ids($juricaf_array['JURIDICTION']) ;
   if (!is_dir($dir)) {
     try {
       mkdir($dir, 0777, true);
@@ -587,7 +595,7 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
   $num_arret_id = str_replace(';', '-', $num_rec);
 
   $id_predictible = "FRANCE-".$juri_rec."-".$date_rec."-".$num_rec;
-  if(!isset($argv[2])) {
+  if(!$DRYRUN) {
     // Enregistrement
     try {
       $file = $dir."/".$res[0];
@@ -596,16 +604,9 @@ if (file_exists($argv[1]) && filesize($argv[1]) != 0) {
       echo $id_predictible." : ".$res[0]." : ".$instant."\n";
     }
     catch (Exception $e) {
-      echo "Erreur : enregistrement de ".$file." a échoué (".$argv[1].") : ".$instant."\n";
+      echo "Erreur : enregistrement de ".$file." a échoué (".$INPUT_FILE.") : ".$instant."\n";
       echo $e->getMessage()."\n";
     }
   }
   // Ordre de suppression Dila
-  else { echo $id_predictible; }
-}
-else {
-  $erreur = "chemin incorrect : ";
-  if(file_exists($argv[1])) { $erreur = "le fichier est vide : "; }
-  echo "Erreur : ".$erreur.$argv[1]." : ".$instant."\n";
-}
-?>
+  else { echo "$id_predictible\n"; }

@@ -74,17 +74,20 @@ function citation($string) {
   return strtr($string, $table);
 }
 
-function dateFr($date) {
+global $list_mois_nom;
+$list_mois_nom = array('janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre');
+function dateFr($date, $small_month = false) {
+  global $list_mois_nom;
   if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $date)) {
 
    $split = explode('-', $date);
    $annee = $split[0];
    $mois = $split[1];
    $jour = $split[2];
-
-   $nb = array('01','02','03','04','05','06','07','08','09','10','11','12');
-   $lettres = array('janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre');
-   $mois = str_replace($nb,$lettres,$mois);
+   $mois = $list_mois_nom[$mois - 1];
+   if ($small_month)  {
+        $mois = mb_substr($mois, 0, 3).'.';
+   }
    $date = $jour.' '.$mois.' '.$annee;
 
   }
@@ -93,7 +96,7 @@ function dateFr($date) {
 
 
 function pathToFlag($str) {
-  return urlencode(str_replace("'", '_', replaceBlank($str)));
+  return str_replace("'", '_', replaceBlank($str));
 }
 
 function sortLength($a,$b) {
@@ -159,7 +162,7 @@ function linkifyAnalyses($titrage, $pays) {
   foreach ($values as $value) {
     if($i == 0) { $link[$i] = $value; }
       else { $link[$i] = $link[$i-1].' - '.$value; }
-    $titrage .= link_to($value, '@recherche_resultats?query=analyses:'.replaceAccents(str_replace(array("\n", "/",'"','»','«',"'","’","?"), " ", $link[$i]))).' - '; // &facets=order:pertinance
+    $titrage .= link_to($value, '@recherche_resultats?query=analyses:"'.replaceAccents(str_replace(array("\n", "/",'"','»','«',"'","’","?"), " ", $link[$i])).'"').' - '; // &facets=order:pertinance
       $i++;
   }
   return rtrim($titrage, '- ').'.';
@@ -174,21 +177,21 @@ function printDecisionAttaquee($ref_or_da, $is_text = 0) {
     }
     elseif(isset($decision_attaquee['formation']) && !empty($decision_attaquee['formation'])) {
       $temp[$i] = $decision_attaquee['formation'];
-      if(empty($decision_attaquee['url'])) {
-        $temp[$i] = link_to($decision_attaquee['formation'], '@recherche_resultats?query=decisions_attaquees:'.$decision_attaquee['formation']);
-      }
       if(!empty($decision_attaquee['date'])) {
         $temp[$i] .= ', '.dateFr($decision_attaquee['date']);
+      }
+      if(empty($decision_attaquee['url'])) {
+        $temp[$i] = link_to($temp[$i], '@recherche_resultats?query=formation:"'.$decision_attaquee['formation'].'" date_arret:'.$decision_attaquee['date']);
       }
     }
     if(!empty($decision_attaquee['url']) && !empty($temp[$i])) {
       $temp[$i] = '<a href="'.$decision_attaquee['url'].'">'.$temp[$i].'</a>';
     }
     if(!empty($decision_attaquee['nature']) && !empty($temp[$i])) {
-        $temp[$i] = $temp[$i].' (Nature : '.link_to($decision_attaquee['nature'], '@recherche_resultats?query=decisions_attaquees:'.$decision_attaquee['nature']).')';
+        $temp[$i] = $temp[$i].' (Nature : '.link_to($decision_attaquee['nature'], '@recherche_resultats?query=decisions_attaquees:"'.$decision_attaquee['nature'].'"').')';
     }
     if(!empty($decision_attaquee['type']) && empty($temp[$i])) {
-        $temp[$i] = link_to($decision_attaquee['type'], '@recherche_resultats?query=decisions_attaquees:'.$decision_attaquee['type']).' (type)';
+        $temp[$i] = link_to($decision_attaquee['type'], '@recherche_resultats?query=decisions_attaquees:"'.$decision_attaquee['type'].'"').' (type)';
     }
     $i++;
   }
@@ -238,20 +241,20 @@ $contributors = '';
 
 if(isset($document->president) || isset($document->avocat_gl) || isset($document->rapporteur) || isset($document->commissaire_gvt) || isset($document->avocats)) {
     if (isset($document->president)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Président</span> : <em itemprop="name">'.link_to($document->president, '@recherche_resultats?query=president:'.replaceAccents($document->president)).'</div></em>'; // replace br par ' ; '
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Président</span> : <em itemprop="name">'.link_to($document->president, '@recherche_resultats?query=president:"'.replaceAccents($document->president).'"').'</div></em>'; // replace br par ' ; '
     }
     if (isset($document->avocat_gl)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Avocat général</span> : <em itemprop="name">'.link_to($document->avocat_gl, '@recherche_resultats?query=avocat_gl:'.replaceAccents($document->avocat_gl)).'</div></em>';
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Avocat général</span> : <em itemprop="name">'.link_to($document->avocat_gl, '@recherche_resultats?query=avocat_gl:"'.replaceAccents($document->avocat_gl).'"').'</div></em>';
     }
     if (isset($document->rapporteur)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Rapporteur</span> <a href="#" title="<h1>Rapporteur</h1><p>Magistrat chargé de l’instruction du dossier ; il lui appartient de rédiger un projet de jugement ou d’arrêt et une note explicative. Lors du jugement, il siège avec voix délibérative pour les affaires qu’il a rapportées.<p>Source : Conseil d\'Etat http://www.conseil-etat.fr/fr/glossaire/"><img src="/images/aide.png" alt="?"/></a>: <em itemprop="name">'.link_to($document->rapporteur, '@recherche_resultats?query=rapporteur:"'.replaceAccents($document->rapporteur).'"').'</div></em>';
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Rapporteur</span> <a href="#" title="<h1>Rapporteur</h1><p>Magistrat chargé de l’instruction du dossier ; il lui appartient de rédiger un projet de jugement ou d’arrêt et une note explicative. Lors du jugement, il siège avec voix délibérative pour les affaires qu’il a rapportées.<p>Source : Conseil d\'Etat"><img src="/images/aide.png" width="14" height="14" alt="?"/></a>: <em itemprop="name">'.link_to($document->rapporteur, '@recherche_resultats?query=rapporteur:"'.replaceAccents($document->rapporteur).'"').'</div></em>';
     }
     if (isset($document->commissaire_gvt)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Rapporteur public</span> <a href="#" title="<h1>Rapporteur public</h1><p>Pour chacune des formations de jugement, l’affaire est exposée en public par un rapporteur public - anciennement appelé “commissaire du gouvernement” - qui est un membre de la juridiction. <p>Il est chargé de faire connaître, en toute indépendance, son appréciation, qui doit être impartiale, sur les  circonstances de fait de l’espèce et les règles de droit applicables, ainsi que son opinion sur les solutions qu’appelle, suivant sa conscience, le litige soumis à la juridiction à laquelle il appartient. <p>Ayant pris publiquement position, le rapporteur public ne prend ensuite pas part à la délibération.<p>Source : Conseil d\'Etat http://www.conseil-etat.fr/fr/glossaire/"><img src="/images/aide.png" alt="?"/></a>: <em itemprop="name">'.
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Rapporteur public</span> <a href="#" title="<h1>Rapporteur public</h1><p>Pour chacune des formations de jugement, l’affaire est exposée en public par un rapporteur public - anciennement appelé “commissaire du gouvernement” - qui est un membre de la juridiction. <p>Il est chargé de faire connaître, en toute indépendance, son appréciation, qui doit être impartiale, sur les  circonstances de fait de l’espèce et les règles de droit applicables, ainsi que son opinion sur les solutions qu’appelle, suivant sa conscience, le litige soumis à la juridiction à laquelle il appartient. <p>Ayant pris publiquement position, le rapporteur public ne prend ensuite pas part à la délibération.<p>Source : Conseil d\'Etat"><img src="/images/aide.png" alt="?" width="14" height="14"/></a>: <em itemprop="name">'.
             link_to($document->commissaire_gvt, '@recherche_resultats?query=commissaire_gvt:"'.replaceAccents($document->commissaire_gvt).'"').'</div></em>';
     }
     if (isset($document->avocats)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Avocat(s)</span> : <em itemprop="name">'.link_to($document->avocats, '@recherche_resultats?query=avocats:'.replaceAccents($document->avocats)).'</em></div>';
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Avocat(s)</span> : <em itemprop="name">'.link_to($document->avocats, '@recherche_resultats?query=avocats:"'.replaceAccents($document->avocats).'"').'</em></div>';
     }
     $contrib = true;
 }
@@ -294,7 +297,7 @@ if (isset($document->analyses)) {
                 else {
                     $citations_analyses .= $titre.'<br />';
                 }
-                $citations_analyses = preg_replace('#pourvoi[\x20-\x7E]n°[\x20-\x7E]([0-9]{2}[-][0-9]{2})[.]([0-9]{3})#', '<a href="http://www.juricaf.org/recherche/num_arret:$1$2$3">pourvoi n° $1$2$3</a>', $titre);
+                $citations_analyses = preg_replace('#pourvoi[\x20-\x7E]n°[\x20-\x7E]([0-9]{2}[-][0-9]{2})[.]([0-9]{3})#', '<a href="https://juricaf.org/recherche/num_arret:$1$2$3">pourvoi n° $1$2$3</a>', $titre);
             }
         }
     }
@@ -309,16 +312,19 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
     if(isset($references['CITATION_ARRET'])) {
         foreach($references['CITATION_ARRET'] as $value) {
             if(isset($value['nature'], $value['date'], $value['titre'], $value['numero'])) {
-                $titre = '<a href="http://www.juricaf.org/recherche/num_decision:'.$value['numero'].'">'.$value['nature'].' du '.dateFr($value['date']).', '.$value['titre'].'</a>';
+                $titre = '<a href="https://juricaf.org/recherche/num_decision:'.$value['numero'].'">'.$value['nature'].' du '.dateFr($value['date']).', '.$value['titre'].'</a>';
 
             } else {
                 $titre = $value['titre'];
+                if (preg_match('/([0-9]{4}-[0-9]{2}-[0-9]{2})/', $titre, $m)) {
+                    $titre = str_replace($m[1], ' du '.dateFr($m[1]), $titre);
+                }
             }
             if(isset($value['url'])) {
                 $citations_arret .= '<a href="'.$value['url'].'">'.$titre.'</a><br />';
             } else {
-                $citations_arret = preg_replace('#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i', '<a href="$0" target="_blank">$0</a>', $citations_arret);
-                $citations_arret = preg_replace('#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#', '<a href="http://www.juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>', $citations_arret);
+                $citations_arret = preg_replace('#(?<!href=")(?<!>)https?://[a-z0-9._/-]+#i', '<a href="$0" target="_blank">$0</a>', $citations_arret);
+                $citations_arret = preg_replace('#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#', '<a href="https://juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>', $citations_arret);
                 $citations_arret .=  $titre.'<br />';
             }
         }
@@ -383,27 +389,18 @@ if(isset($references['PUBLICATION'])) {
 if($document->pays == 'France') {
 
   if($document->juridiction == 'Conseil constitutionnel') {
-    $citation = ''.citation($document->juridiction).', décision n°'.$document->num_arret.' '.$document->type_affaire.' du '.dateFr($document->date_arret).'';
+    $citation = citation($document->juridiction).', décision n°'.$document->num_arret.' '.$document->type_affaire.' du '.dateFr($document->date_arret).'';
   }
   if($document->juridiction == 'Cour de cassation') {
-    $citation = 'Cass. '.citation($document->formation).', '.dateFr($document->date_arret).', pourvoi n°'.$document->num_arret.''.$civcrim.''.citation($bulletins).'';
+    $citation = 'Cass. '.citation($document->formation).', '.dateFr($document->date_arret, true).', pourvoi n°'.$document->num_arret.''.$civcrim.''.citation($bulletins).'';
   }
   if($document->juridiction == 'Conseil d\'État') {
-    $citation = 'CE, '.dateFr($document->date_arret).', n° '.$document->num_arret.'' ;
+    $citation = 'CE, '.dateFr($document->date_arret, true).', n° '.$document->num_arret.'' ;
   }
 }
 if($document->pays == 'Canada') {
     $citation = ''.$document->titre.'' ;
 }
-
-if(!empty($analyses)) {
-    $sf_response->addMeta('Description', '');
-}
-elseif (!empty($document->getTexteArret())) {
-    $sf_response->addMeta('Description', '');
-}
-
-$sf_response->addMeta('Keywords', '');
 
 if(!empty($document->urnlex)) { $urnlex = $document->urnlex; } else { $urnlex = ''; }
 
@@ -418,21 +415,30 @@ if (isset($document->num_arret) && $document->num_arret) {
 $docketNumber = $document->num_arret;
 }
 $citations = '';
-$url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+$url = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
 if (!empty($citations_analyses)) { $citations .= $citations_analyses; }
 if (!empty($citations_arret)) { $citations .= $citations_arret; }
 if (!empty($sources)) { $citations .= $sources; }
 if (!empty($decisions_attaquees)) { $citations .= $decisions_attaquees; }
 
+$keywords = $document->getKeywords();
+$description = $document->getDescription();
+if ($citation) {
+    $description = $citation." : ".$description;
+    $keywords = $citation." - ".$keywords;
+}
+
 $sf_response->setTitle($document->titre);
+$sf_response->addMeta('Description', $description);
+$sf_response->addMeta('Keywords', $keywords);
+
 $sf_response->addMeta('DC.accessRights', 'public', false, false, false);
 $sf_response->addMeta('DC.creator', $creator, false, false, false);
 $sf_response->addMeta('DC.coverage', htmlspecialchars($document->pays, ENT_QUOTES), false, false, false);
 $sf_response->addMeta('DC.date', $document->date_arret, false, false, false);
-if (isset($document->type_affaire)) {
-  $sf_response->addMeta('DC.description', $document->type_affaire, false, false, false);
-}
+$sf_response->addMeta('DC.description', $document->getDescription(), false, false, false);
+
 $sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
 $sf_response->addMeta('DC.language', 'FR', false, false, false);
 $sf_response->addMeta('DC.publisher', 'AHJUCAF', false, false, false);
@@ -445,7 +451,7 @@ if (isset($citation) && $citation) {
 $sf_response->addMeta('og:title', $document->titre, false, false, false);
 $sf_response->addMeta('g:type', 'article', false, false, false);
 $sf_response->addMeta('og:url', $url, false, false, false);
-$sf_response->addMeta('sog:image', 'http://www.juricaf.org/images/juricaf.png', false, false, false);
+$sf_response->addMeta('sog:image', 'https://juricaf.org/images/juricaf.png', false, false, false);
 $sf_response->addMeta('og:site_name', 'Juricaf', false, false, false);
 $sf_response->addMeta('fb:app_id', '199894740035999', false, false, false);
 
@@ -516,9 +522,8 @@ if(isset($references['PUBLICATION'])) {
   <div class="col-lg-8 col-sm-12 mt-10">
 
     <small class="text-muted"> <?php echo(date('d/m/Y', strtotime($document->date_arret)) . ' | '. strtoupper($document->pays) . ' | N°'.$document->num_arret);?> </small>
-    <h3 class="fw-bold" id="titre" itemprop="name"><?php echo '<img class="drapeau" src="/images/drapeaux/'.pathToFlag($document->pays).'.png" alt="§" /> | '.$document->titre?></h3>
-    <hr>
-
+    <h1 class="fw-bold h3" id="titre" itemprop="name"><a href="<?php echo url_for('recherche/search?query=+&facets=facet_pays:'.str_replace(' ', '_', $document->pays)); ?>"><?php echo '<img class="drapeau '.$document->pays.'" src="data:image/png;base64,'. base64_encode(file_get_contents(sfConfig::get('sf_web_dir').'/images/drapeaux/'.pathToFlag($document->pays).'.png')).'"  alt="'.$document->pays.'" width="17" height="12" /></a> | '.$document->titre?></h1>
+    <hr />
   <?php
   if($document->pays == "Madagascar" && $document->juridiction == "Cour suprême" && trim($document->getTexteArret()) == "En haut a droite, cliquez sur PDF pour visualiser le fac-simile de la décision") {
       ?>
@@ -540,26 +545,26 @@ if(isset($references['PUBLICATION'])) {
           $patterns[0] = '#(perquisition)#';
           $replacements[0] = '<a href="#" title="Mesure d’enquête qui consiste à rechercher des éléments de preuve d’une infraction, au domicile d’une personne ou dans tous lieux où ils peuvent se trouver.">$1</a>';
 
-          $patterns[6] = '#(loi|ordonnance)[[\x20-\x7E]n°[\x20-\x7E]([0-9]{2})-([0-9]{1,4})#';
-          $replacements[6] = '<a href="http://legimobile.fr/fr/lr/texte/$1/19$2/$2-$3/">$1 n° $2-$3</a>';
-
-          $patterns[7] = '#(loi|ordonnance)[[\x20-\x7E]n°[\x20-\x7E]([0-9]{4})-([0-9]{1,4})#';
-          $replacements[7] = '<a href="http://legimobile.fr/fr/lr/texte/$1/$2/$2-$3/">$1 n° $2-$3</a>';
-
-          $patterns[12] = '#article[\x20-\x7E]([0-9.-]{1,9})[\x20-\x7E]du[\x20-\x7E]Code[\x20-\x7E]civil#';
-          $replacements[12] = '<a href="http://legimobile.fr/fr/lr/code/civil/$1/" title="Voir l\'article $1 du Code civil sur Légimobile" target="_blank">article $1 du code civil<img src="/images/fenetre.png" alt="legifrance" title="Voir l\'article $1 du Code civil sur Légimobile" /></a>';
-
-          $patterns[13] = '#article[\x20-\x7E]([0-9.-]{1,9})[\x20-\x7E]du[\x20-\x7E]Code[\x20-\x7E]pénal#';
-          $replacements[13] = '<a href="http://legimobile.fr/fr/lr/code/penal/$1/" title="Voir l\'article $1 du Code pénal sur Légimobile" target="_blank">article $1 du Code pénal<img src="/images/fenetre.png" alt="legifrance" title="Voir l\'article $1 du code pénal sur Légimobile" /></a>';
-
+#          $patterns[6] = '#(loi|ordonnance)[[\x20-\x7E]n°[\x20-\x7E]([0-9]{2})-([0-9]{1,4})#';
+#          $replacements[6] = '<a href="http://legimobile.fr/fr/lr/texte/$1/19$2/$2-$3/">$1 n° $2-$3</a>';
+#
+#          $patterns[7] = '#(loi|ordonnance)[[\x20-\x7E]n°[\x20-\x7E]([0-9]{4})-([0-9]{1,4})#';
+#          $replacements[7] = '<a href="http://legimobile.fr/fr/lr/texte/$1/$2/$2-$3/">$1 n° $2-$3</a>';
+#
+#          $patterns[12] = '#article[\x20-\x7E]([0-9.-]{1,9})[\x20-\x7E]du[\x20-\x7E]Code[\x20-\x7E]civil#';
+#          $replacements[12] = '<a href="http://legimobile.fr/fr/lr/code/civil/$1/" title="Voir l\'article $1 du Code civil sur Légimobile" target="_blank">article $1 du code civil<img src="/images/fenetre.png" alt="legifrance" title="Voir l\'article $1 du Code civil sur Légimobile" /></a>';
+#
+#          $patterns[13] = '#article[\x20-\x7E]([0-9.-]{1,9})[\x20-\x7E]du[\x20-\x7E]Code[\x20-\x7E]pénal#';
+#          $replacements[13] = '<a href="http://legimobile.fr/fr/lr/code/penal/$1/" title="Voir l\'article $1 du Code pénal sur Légimobile" target="_blank">article $1 du Code pénal<img src="/images/fenetre.png" alt="legifrance" title="Voir l\'article $1 du code pénal sur Légimobile" /></a>';
+#
           $patterns[1] = '#État[\x20-\x7E][(]décisions?[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})[\x20-\x7E]#';
-          $replacements[1] = 'État (<a href="http://www.juricaf.org/recherche/num_arret:$1">décision n° $1</a> ';
+          $replacements[1] = 'État (<a href="https://juricaf.org/recherche/num_arret:$1">décision n° $1</a> ';
 
           $patterns[2] = '#État[\x20-\x7E]n°[\x20-\x7E]([0-9]{5,6})#';
-          $replacements[2] = 'État <a href="http://www.juricaf.org/recherche/num_arret:$1">n° $1</a>';
+          $replacements[2] = 'État <a href="https://juricaf.org/recherche/num_arret:$1">n° $1</a>';
 
           $patterns[3] = '#arrêt[\x20-\x7E]n°[\x20-\x7E]([0-9]{2}[A-Z]{2}[0-9]{5})#';
-          $replacements[3] = 'arrêt <a href="http://www.juricaf.org/recherche/num_arret:$1">n° $1</a>';
+          $replacements[3] = 'arrêt <a href="https://juricaf.org/recherche/num_arret:$1">n° $1</a>';
 
           $patterns[8] = '#(abus[\x20-\x7E]de[\x20-\x7E]pouvoir)#';
           $replacements[8] = '<a href="#" title="RT corruption<br>RT recours en annulation">$1</a>';
@@ -571,7 +576,7 @@ if(isset($references['PUBLICATION'])) {
           $replacements[10] = '<h5>$1 :</h5>';
 
           $patterns[11] = '#([0-9]{4}-[0-9]{1,3}[\x20-\x7E]QPC)#';
-          $replacements[11] = '<a href="http://www.juricaf.org/recherche/num_arret:$1">$1</a>';
+          $replacements[11] = '<a href="https://juricaf.org/recherche/num_arret:$1">$1</a>';
 
       }
       else { };
@@ -579,11 +584,11 @@ if(isset($references['PUBLICATION'])) {
       if($document->pays == 'Canada') {
 
           $patterns[5] = '#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#';
-          $replacements[5] = '<a href="http://www.juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>';
+          $replacements[5] = '<a href="https://juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>';
       }
       else { };
 
-      $patterns[4] = '#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i';
+      $patterns[4] = '#(?<!href=")(?<!>)https?://[a-z0-9._/-]+#i';
       $replacements[4] = '<a href="$0" target="_blank">$0</a>';
 
       if ($document->isTexteArretAnon()){
@@ -598,16 +603,19 @@ if(isset($references['PUBLICATION'])) {
     </div>
     <article id="textArret">
     <?php echo preg_replace($patterns, $replacements, simple_format_text(trim($texte_arret))); ?>
-    </article>
-    <div class="text-center mb-3 d-lg-none">
-        <button type="button" id="btn-see-less" class="btn btn-outline-primary d-none">Réduire</button>
+<?php if (isset($document->_attachments) && $document->_attachments ): ?>
+    <hr/>
+    <div>
+    <a href="<?php echo url_for('arret_attachment', array('id' => $document->_id)); ?>">Télécharger la décision originale</a>
     </div>
+<?php endif; ?>
+    </article>
 <?php } ?>
 </div>
 
   <hr class="d-lg-none">
 
-    <div class="col-lg-4 bloc-droit">
+    <div class="col-lg-4 bloc-droit text-left">
         <?php
 
         if (isset($document->titre_supplementaire)) {
@@ -617,28 +625,25 @@ if(isset($references['PUBLICATION'])) {
             echo '<h5>'.$document->section.'</h5>';
         }
         if (isset($document->sens_arret)) {
-            echo 'Sens de l\'arrêt : <em>'.link_to($document->sens_arret, '@recherche_resultats?query=sens_arret:'.replaceAccents($document->sens_arret)).'</em><br />';
+            echo 'Sens de l\'arrêt : <em>'.link_to($document->sens_arret, '@recherche_resultats?query=sens_arret:"'.replaceAccents($document->sens_arret).'"').'</em><br />';
         }
         if (isset($document->type_affaire)) {
 
             if(isset($natureConstit[$document->type_affaire])) {
-                echo 'Type d\'affaire : <em><span itemprop="about">'.link_to($natureConstit[$document->type_affaire], '@recherche_resultats?query=type_affaire:'.replaceAccents($document->type_affaire)).'</span></em><br />';
+                echo 'Type d\'affaire : <em><span itemprop="about">'.link_to($natureConstit[$document->type_affaire], '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</span></em><br />';
             }
             else {
-                echo 'Type d\'affaire : <em><span itemprop="about">'.link_to($document->type_affaire, '@recherche_resultats?query=type_affaire:'.replaceAccents($document->type_affaire)).'</span></em><br />';
+                echo 'Type d\'affaire : <em><span itemprop="about">'.link_to($document->type_affaire, '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</span></em><br />';
             }
         }
         if (isset($document->type_recours)) {
-            echo 'Type de recours : <em>'.link_to($document->type_recours, '@recherche_resultats?query=type_recours:'.replaceAccents($document->type_recours)).'</em><br />';
+            echo 'Type de recours : <em>'.link_to($document->type_recours, '@recherche_resultats?query=type_recours:"'.replaceAccents($document->type_recours).'"').'</em><br />';
         }
 
         if (!empty($analyses)) {
             echo '<hr><h5>Analyses</h5>'.$analyses;
         }
 
-        if (!empty($citations_analyses)) {
-            echo '<hr><h5>Références</h5>'.$citations_analyses;
-        }
         $xmlDoc = new DOMDocument();
         $xmlDoc->load(getcwd()."/cnil.xml");
         $x=$xmlDoc->getElementsByTagName('numero');
@@ -690,10 +695,10 @@ if(isset($references['PUBLICATION'])) {
                 else {
                     echo '<div><blockquote><p>';
 
-                    $document->saisines = preg_replace('#(article[\x20-\x7E][a-z0-9._-]{1,})([\x20-\x7E]de[\x20-\x7E]la[\x20-\x7E])(Constitution)#', '<a href="http://www.juricaf.org/recherche/$1 $3">$1$2$3</a>', $document->saisines);
-                    $document->saisines = preg_replace('#(?<!href=")(?<!>)http://[a-z0-9._/-]+#i', '<a href="$0" target="_blank">$0</a>', $document->saisines);
+                    $document->saisines = preg_replace('#(article[\x20-\x7E][a-z0-9._-]{1,})([\x20-\x7E]de[\x20-\x7E]la[\x20-\x7E])(Constitution)#', '<a href="https://juricaf.org/recherche/$1 $3">$1$2$3</a>', $document->saisines);
+                    $document->saisines = preg_replace('#(?<!href=")(?<!>)https?://[a-z0-9._/-]+#i', '<a href="$0" target="_blank">$0</a>', $document->saisines);
 
-                    $document->saisines = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#', '<a href="http://www.juricaf.org/recherche/num_arret:$1">$1$2</a>', $document->saisines);
+                    $document->saisines = preg_replace('#([a-z0-9._-]{2,}-[a-z0-9._-]{1,})([\x20-\x7E]*DC)#', '<a href="https://juricaf.org/recherche/num_arret:$1">$1$2</a>', $document->saisines);
 
                     echo simple_format_text($document->saisines);
                     echo '</p></blockquote></div>';
@@ -708,7 +713,7 @@ if(isset($references['PUBLICATION'])) {
                 $sep = ''; $i = 1;
                 foreach($document->parties['demandeurs'] as $value) {
                     if($i > 1) { $sep = ', '; }
-                    echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'').'</em>'; $i++;
+                    echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:"'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'"').'</em>'; $i++;
                 }
                 echo '<br />';
             }
@@ -717,72 +722,93 @@ if(isset($references['PUBLICATION'])) {
                 $sep = ''; $i = 1;
                 foreach($document->parties['defendeurs'] as $value) {
                     if($i > 1) { $sep = ', '; }
-                    echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'').'</em>'; $i++;
+                    echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:"'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'"').'</em>'; $i++;
                 }
                 echo '<br />';
             }
         }
-        if (!empty($citations_arret) || !empty($sources) || !empty($decisions_attaquees)) {
-            echo '<hr />';
-            echo '<p><h5>Références</h5>';
-            if (!empty($citations_arret)) { echo $citations_arret; }
-            if (!empty($sources)) { echo $sources; }
-            if (!empty($decisions_attaquees)) { echo $decisions_attaquees; }
-            echo '</p>';
+        if (!empty($citations_arret) || !empty($sources) || !empty($decisions_attaquees) || !empty($citations_analyses)) {
+            $ref = array();
+            if (!empty($citations_arret)) { $ref = array_merge($ref, explode(';', $citations_arret)); }
+            if (!empty($sources)) { $ref[] = $sources; }
+            if (!empty($decisions_attaquees)) { $ref[] = $decisions_attaquees; }
+            if (!empty($citations_analyses)) {
+                $r = str_replace(']', ']</p><p>', str_replace('. Cf', '.</p><p>Cf', str_replace(' ; ', ' ;</p><p>', preg_replace('/(.)\[/', '\1</p><p>[', str_replace(", et l'", '</p><p>', $citations_analyses)))));
+                $ref = array_merge($ref, explode('</p><p>', $r));
+            }
         }
         if(isset($references['ARRET'])) {
-            echo '<hr />';
-            echo '<hr /><h5>Référence :</h5>';
             foreach($references['ARRET'] as $value) {
                 if(isset($value['titre'])) {
-                    echo $value['titre'].'<br />';
+                    $ref[] = $value['titre'];
                 }
                 if(isset($value['contenu'])) {
-                    echo $value['contenu'].'<br />';
+                    $ref[] = $value['contenu'];
                 }
             }
         }
+        echo '<hr />';
+        echo '<h5>Références :</h5>';
+        foreach($ref as $r) {
+            $arret_num = '';
+            if (preg_match('/n°s? *([0-9]+)[^0-9]/', $r, $m)) {
+                $arret_num = $m[1];
+            }
+            if (preg_match('/, ([0-9]{1,2}) ([a-zéüû]+) ([0-9]{4}) ?,/i', $r, $m)) {
+                $arret_date = sprintf("%d-%02d-%02d", $m[3], array_search(strtolower($m[2]), $list_mois_nom) + 1, $m[1]);
+            }
+            echo '<p>';
+            if ($arret_num && $arret_date) {
+                echo '<a href="'.url_for('@recherche?q=num_arret:'.$arret_num.' date_arret:'.$arret_date).'">';
+            }
+            echo $r;
+            if ($arret_num && $arret_date) {
+                echo '</a>';
+            }
+            echo "</p>";
+        }
+
         // Lien télécharger le document
         if($document->pays == 'France') {
             if(strpos($document->id_source, "CONSTEXT") !== false || strpos($document->id_source, "JURITEXT") !== false || strpos($document->id_source, "CETATEXT") !== false) {
                 { echo '<hr /><h5>Publications</h5>'; }
 
                 if (isset($document->num_arret) AND($document->juridiction == 'Cour de cassation')) {
-                    echo 'Proposition de citation: '.$citation.'';
+                    echo 'Proposition de citation: <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
                     echo '<br>'.$civcrimlong.' '.citation($bulletins).'<br><div id="feed"></div>';
                 }
 
                 if (isset($document->num_arret)AND($document->juridiction == 'Conseil d\'État')) {
-                    echo 'Proposition de citation: '.$citation.'';
+                    echo 'Proposition de citation: <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
                     echo '<br>'.$lebon.'<br><div id="feed"></div>';
                 }
 
                 if (isset($document->num_arret)AND($document->juridiction == 'Conseil constitutionnel')) {
-                    echo 'Proposition de citation: '.$citation.'';
+                    echo 'Proposition de citation: <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
                     echo '<br>'.$lebon.'<br><div id="feed"></div>';
                 }
                 if(strpos($document->id_source, "CONSTEXT") !== false) {
-                    echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriConstit" target="_blank" title="Télécharger au format RTF"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>';
+                    echo '<a href="https://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriConstit" target="_blank" title="Télécharger au format RTF"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" width="16" height="16"/>Télécharger au format RTF</a>';
                 }
                 if(strpos($document->id_source, "JURITEXT") !== false) {
-                    echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriJudi" title="Télécharger au format RTF" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>';
+                    echo '<a href="https://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriJudi" title="Télécharger au format RTF" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" width="16" height="16"/>Télécharger au format RTF</a>';
                 }
                 if(strpos($document->id_source, "CETATEXT") !== false) {
-                    echo '<a href="http://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriAdmin" title="Télécharger au format RTF" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>';
+                    echo '<a href="https://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriAdmin" title="Télécharger au format RTF" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>';
                 }
             }
         }
 
         if($document->pays == 'Canada') {
-            echo 'Proposition de citation de la décision: '.$citation.'';
+            echo 'Proposition de citation de la décision: <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
             echo '<br>'.$civcrimlong.' '.citation($bulletins).'<br>';
 
-            echo '<p><a href="http://csc.lexum.org/fr/'.date('Y', strtotime($document->date_arret)).'/'.replaceDate($document->num_arret).'/'.replaceDate($document->num_arret).'.pdf" target="_blank"><img src="/images/pdf.png" alt="PDF" title="Télécharger au format PDF" />Télécharger au format PDF</a>
-            <br><a href="http://csc.lexum.org/fr/'.date('Y', strtotime($document->date_arret)).'/'.replaceDate($document->num_arret).'/'.replaceDate($document->num_arret).'.docx" target="_blank"><img src="/images/rtf.png" alt="DOCX" title="Télécharger au format DOCX" />Télécharger au format DOCX</a>
-            <br><a href="http://csc.lexum.org/fr/'.date('Y', strtotime($document->date_arret)).'/'.replaceDate($document->num_arret).'/'.replaceDate($document->num_arret).'.html" target="_blank"><img src="/images/web.png" alt="Web" title="Lien vers le site des jugements de la Cour suprême" />Version d\'origine</a>
-            <br><a href="http://csc.lexum.org/en/'.date('Y', strtotime($document->date_arret)).'/'.replaceDateCa($document->num_arret).'/'.replaceDateCa($document->num_arret).'.html" target="_blank"><img src="/images/web.png" alt="Web" title="Lien vers le site des jugements de la Cour suprême" />Version en anglais</a><p/>
-
-            ';
+#            echo '<p><a href="http://csc.lexum.org/fr/'.date('Y', strtotime($document->date_arret)).'/'.replaceDate($document->num_arret).'/'.replaceDate($document->num_arret).'.pdf" target="_blank"><img src="/images/pdf.png" alt="PDF" title="Télécharger au format PDF" width="16" height="16"/>Télécharger au format PDF</a>
+#            <br><a href="http://csc.lexum.org/fr/'.date('Y', strtotime($document->date_arret)).'/'.replaceDate($document->num_arret).'/'.replaceDate($document->num_arret).'.docx" target="_blank"><img src="/images/rtf.png" alt="DOCX" title="Télécharger au format DOCX" width="16" height="16"/>Télécharger au format DOCX</a>
+#            <br><a href="http://csc.lexum.org/fr/'.date('Y', strtotime($document->date_arret)).'/'.replaceDate($document->num_arret).'/'.replaceDate($document->num_arret).'.html" target="_blank"><img src="/images/web.png" alt="Web" title="Lien vers le site des jugements de la Cour suprême" width="16" height="16"/>Version d\'origine</a>
+#            <br><a href="http://csc.lexum.org/en/'.date('Y', strtotime($document->date_arret)).'/'.replaceDateCa($document->num_arret).'/'.replaceDateCa($document->num_arret).'.html" target="_blank"><img src="/images/web.png" alt="Web" title="Lien vers le site des jugements de la Cour suprême" width="16" height="16"/>Version en anglais</a><p/>
+#
+#            ';
         }
         if (isset($document->source)) {
             echo "<hr>";
@@ -795,14 +821,22 @@ if(isset($references['PUBLICATION'])) {
         echo '<hr /><h5>Origine de la décision</h5>';
 
         if (isset($document->pays)) {
-            echo '<div itemprop="author" itemscope itemtype="http://schema.org/Organization"> <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Pays : <em itemprop="addressCountry">'.$document->pays.'</span></em><br>';
+            echo '<div itemprop="author" itemscope itemtype="http://schema.org/Organization"> <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Pays : <em itemprop="addressCountry"><a href="'.url_for('recherche/search?query=+&facets=facet_pays:'.str_replace(' ', '_', $document->pays)).'">'.$document->pays.'</a></span></em><br>';
         }
 
         if (isset($document->juridiction)) {
-            echo 'Juridiction : <em><span itemprop="name">'.$document->juridiction.'</span></em></span></div>';
+            if (isset($document->pays)) {
+                echo 'Juridiction : <em><span itemprop="name"><a href="'.url_for('recherche/search?query=+&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->juridiction.'</a></span></em></span></div>';
+            }else{
+                echo 'Juridiction : <em><span itemprop="name">'.$document->juridiction.'</span></em></span></div>';
+            }
         }
         if (isset($document->formation)) {
-            echo 'Formation : <em>'.$document->formation.'</em><br />';
+            if (isset($document->pays) && isset($document->juridiction)) {
+                echo 'Formation : <em><a href="'.url_for('recherche/search?query=formation:"'.$document->formation.'"&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->formation.'</a></em><br />';
+            }else{
+                echo 'Formation : <em>'.$document->formation.'</em><br />';
+            }
         }
 
 
@@ -816,12 +850,7 @@ if(isset($references['PUBLICATION'])) {
         if (isset($document->fonds_documentaire))
 
         {
-            echo '<p>Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?"/></a>: <em itemprop="publisher">'.replaceAccents($document->fonds_documentaire).'</em> </p>';
-        }
-
-        if($document->pays == 'Luxembourg') {
-            echo '<p>Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?"/></a>: <p><a href="http://www.legitech.lu" target="_blank"><img src="/images/Legitech.gif"/></a></p>';
-
+            echo '<p>Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?" width="14" height="14"/></a>: <em itemprop="publisher">'.replaceAccents($document->fonds_documentaire).'</em> </p>';
         }
         echo '<hr><h5>Numérotation</h5>';
         if (isset($document->num_arret)and ($document->pays !== 'Canada')and ($document->juridiction !== 'Conseil constitutionnel')){
@@ -833,15 +862,15 @@ if(isset($references['PUBLICATION'])) {
         }
 
         if (isset($document->num_arret) and ($document->pays == 'Canada')) {
-            echo 'Référence neutre : '.replaceAccents($document->num_arret).'  <a href="#" title="<h1>Référence neutre</h1><p>Au Canada, depuis 2000, la référence neutre est le numéro unique, pérenne et indépendant servant à la citation de la jurisprudence"><img src="/images/aide.png" alt="?"/></a><br />';
+            echo 'Référence neutre : '.replaceAccents($document->num_arret).'  <a href="#" title="<h1>Référence neutre</h1><p>Au Canada, depuis 2000, la référence neutre est le numéro unique, pérenne et indépendant servant à la citation de la jurisprudence"><img src="/images/aide.png" alt="?" width="14" height="14"/></a><br />';
         }
         if (isset($document->id_source)) {
-            echo 'Numéro NOR : '.$document->id_source.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?"/></a><br />';
+            echo 'Numéro NOR : '.$document->id_source.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?" width="14" height="14"/></a><br />';
         }
 
         if(isset($document->nor) || isset($document->numeros_affaires)) {
             if (isset($document->nor)) {
-                echo 'Numéro NOR : '.$document->nor.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?"/><br /></a>';
+                echo 'Numéro NOR : '.$document->nor.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?" width="14" height="14"/><br /></a>';
             }
 
             if (isset($document->numeros_affaires)) {
@@ -873,11 +902,15 @@ if(isset($references['PUBLICATION'])) {
         }
 
         if (isset($document->urnlex)) {
-            echo 'Identifiant URN:LEX : '.$document->urnlex.' <a href="#" title="<h1>URN-LEX </h1><p>L\'objectif du projet URN LEX est d’assigner de façon non équivoque, dans un format standard, tout document qui sont reconnus comme des sources du droit."><img src="/images/aide.png" alt="?"/></a><br />';
+            echo 'Identifiant URN:LEX : '.$document->urnlex.' <a href="#" title="<h1>URN-LEX </h1><p>L\'objectif du projet URN LEX est d’assigner de façon non équivoque, dans un format standard, tout document qui sont reconnus comme des sources du droit."><img src="/images/aide.png" alt="?" width="14" height="14"/></a><br />';
         }
         ?>
+<?php if (isset($document->_attachments) && $document->_attachments ): ?>
+        <hr/>
+        <h5>Décision originale</h5>
+        <a href="<?php echo url_for('arret_attachment', array('id' => $document->_id)); ?>">Télécharger la décision originale</a>
+<?php endif; ?>
       </div>
-
     </div>
 </div>
 
@@ -889,28 +922,4 @@ if(isset($references['PUBLICATION'])) {
         document.querySelector('#arret').scrollIntoView({block: "start", inline: "nearest", behavior: "auto"});
     }
 })();
-function showCD(str)
-{
-if (str=="")
-  {
-  document.getElementById("txtHint").innerHTML="";
-  return;
-  }
-if (window.XMLHttpRequest)
-  {
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-    }
-  }
-xmlhttp.send();
-}
 </script>

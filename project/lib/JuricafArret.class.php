@@ -79,7 +79,32 @@ class JuricafArret extends sfCouchDocument
       return $this->texte_arret;
   }
 
+  public function getDescription() {
+      if (isset($this->analyses) && isset($this->analyses['analyse']) && count($this->analyses['analyse'])) {
+        $description = 'Arrêt '.$this->juridiction;
+        foreach($this->analyses['analyse'] as $a) {
+            if (is_array($a) && isset($a['sommaire'])) {
+                $description .= ' '.$a['sommaire'];
+            }elseif(is_string($a)){
+                $description .= ' '.$a;
+            }
+        }
+        return preg_replace('/  +/' , ' ', preg_replace('/\n/', ' ', truncate_text($description, 250, "...", true)));
+      }
+      return preg_replace('/  +/' , ' ', preg_replace('/\n/', ' ', truncate_text($this->getTexteArret(), 250, "...", true)));
+  }
 
+  public function getKeywords() {
+      $keywords = 'jurisprudence - '.$this->pays.' - '.$this->juridiction.' - '.$this->formation.' - '.$this->type_affaire;
+      if (isset($this->analyses) && isset($this->analyses['analyse']) && count($this->analyses['analyse'])) {
+        foreach($this->analyses['analyse'] as $a) {
+            if (is_array($a) && isset($a['titre_principal'])) {
+                $keywords .= ' '.$a['titre_principal'];
+            }
+        }
+      }
+      return $keywords;
+  }
 
   public static function ids($str) {
     $str = strtr($str,

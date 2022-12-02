@@ -89,16 +89,19 @@ if(isset($title_facet['pays_juri'])) {
 }
 
 if(isset($title_facet) && trim($query) == '') {
-    $title = 'Jurisprudences '.$title_facet.'';
-    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
+    $title = 'La jurisprudences de '.$title_facet.'';
+    $description = "Les ".$resultats->response->numFound.' arrêts de la jurisprudence de '.$title_facet;
 }
 if(isset($title_facet) && trim($query) !== '') {
-    $title = 'Jurisprudences '.remplacequerytitre($query).' - '.$title_facet.'';
-    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
+    $title = 'La Jurisprudences de '.$title_facet.' concernant '.remplacequerytitre($query);
+    $description = 'Les '.$resultats->response->numFound.' arrêts concernant "'.remplacequerytitre($query).'" dans la jurisprudence de '.$title_facet;
 }
 if(!isset($title_facet) && trim($query) !== '') {
-    $title = 'Jurisprudences '.remplacequerytitre($query).'';
-    $description = $resultats->response->numFound.' arrêts publiés dans la base de données';
+    $title = 'Recherche de '.remplacequerytitre($query).' dans la jurisprudence francophone';
+    $description = 'Les '.$resultats->response->numFound.' arrêts concernant "'.remplacequerytitre($query).'" dans la jurisprudence francophone';
+}
+if ($pager['begin']) {
+    $title .= " - page ".($pager['last'] + 1);
 }
 slot("metadata");
 include_partial("metadata", array('url_flux' => $sf_request->getUri().'?format=rss', 'titre_flux' => "S'abonner à cette recherche"));
@@ -106,7 +109,9 @@ end_slot();
 $sf_response->setTitle($title);
 $sf_response->addMeta('description', $description);
 $sf_response->addMeta('keywords', $keywords);
-
+if ($pager['begin']) {
+    $sf_response->addMeta('robots', 'noindex,follow');
+}
 ?>
 <div class="container">
 <form method="get" action="<?php echo url_for('@recherche_filtres'); ?>">
@@ -150,7 +155,7 @@ $sf_response->addMeta('keywords', $keywords);
   }
   ?>
 </div>
-<div id="bloc-filtres" class="row g-3 align-items-center mt-0">
+<div id="bloc-filtres" class="row g-3 align-items-center mt-0 collapse-bydefault-mobile">
   <div class="col-lg-auto col-md-2 d-none d-lg-block">
     <label class="col-form-label">Tri :</label>
   </div>
@@ -246,11 +251,19 @@ $sf_response->addMeta('keywords', $keywords);
 </div>
 </form>
 <div class="mt-3">
+    <h1 class="visually-hidden"><?php echo $title ?></h1>
     <?php if($nbResultats > 0): ?>
-    <p class="text-start"><?php echo $nbResultats;?> résultats trouvés : <a onclick="navigator.clipboard.writeText(this.href); alert('Le lien RSS a été copié dans le presse-papier'); return false;" href="<?php echo $sf_request->getUri().'?format=rss'; ?>" class="text-muted float-end"><i class="bi bi-rss"></i></a></p>
+    <p class="text-start">
+<?php if ($pager['begin']): ?>
+        Page <?php echo $pager['last'] + 1; ?> des
+<?php endif; ?>
+        <?php echo $nbResultats;?> résultats trouvés :
+        <a onclick="navigator.clipboard.writeText(this.href); alert('Le lien RSS a été copié dans le presse-papier'); return false;" href="<?php echo $sf_request->getUri().'?format=rss'; ?>" class="text-muted float-end"><i class="bi bi-rss"></i></a>
+    </p>
     <?php else: ?>
     <p class="text-center">Aucun résultat trouvé</p>
     <?php endif; ?>
+
 <?php
 foreach ($resultats->response->docs as $resultat) {
  ?>
@@ -262,7 +275,7 @@ foreach ($resultats->response->docs as $resultat) {
   $textArret = JuricafArret::getExcerpt($resultat, $resultats->highlighting->{$resultat->id});
   ?>
 
-  <p class="card-header fs-5"><img src="/images/drapeaux/<?php echo $pathToFlag ?>.png" alt="§" /> | <a class="a-unstyled" href="<?php echo $urlForArret ?>"><?php echo $resultat->titre ?></a></p>
+  <p class="card-header fs-5"><img src="/images/drapeaux/<?php echo $pathToFlag ?>.png" alt="<?php echo $resultat->pays ?>" width="17" height="12"/> | <a class="a-unstyled" href="<?php echo $urlForArret ?>"><?php echo $resultat->titre ?></a></p>
 
   <div class="card-body" data-link=<?php echo($urlForArret);?>>
     <p class="card-text text-justify"> <?php echo($textArret); ?></p>

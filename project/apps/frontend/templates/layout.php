@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?php $gitcommit = str_replace("\n", "", file_get_contents('../../.git/ORIG_HEAD'));?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
   <head>
     <?php include_http_metas() ?>
@@ -6,13 +6,21 @@
     <?php include_metas() ?>
     <?php include_title() ?>
     <link rel="shortcut icon" href="/images/favicon.ico" />
+    <link rel="preload" href="/css/boostrap-5.css?<?php echo $gitcommit; ?>" as="style">
+    <link rel="preload" href="/css/main.css?<?php echo $gitcommit; ?>" as="style">
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/css/boostrap-5.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-    <link rel="stylesheet" type="text/css" media="print" href="/css/print.css">
-
+    <link rel="stylesheet" href="/css/boostrap-5.css?<?php echo $gitcommit; ?>">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css?<?php echo $gitcommit; ?>" />
+    <link rel="stylesheet" type="text/css" media="print" href="/css/print.css?<?php echo $gitcommit; ?>">
+    <style>
+    @font-face {
+      font-family: "bootstrap-icons";
+      src: url("/css/fonts/bootstrap-icons.woff2") format("woff2"), url("/css/fonts/bootstrap-icons.woff") format("woff");
+      font-display: swap;
+    }
+    </style>
     <!-- Matomo -->
     <script>
     <!--
@@ -127,10 +135,10 @@
     <div class="pt-3 px-5 mb-3 clearfix">
       <div class="row">
         <div class="col">
-          <a href="https://www.ahjucaf.org/"><img class="img-fluid" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones"/></a>
+          <a href="https://www.ahjucaf.org/"><img height="86" width="100" src="/images/ahjucaf_small.png" alt="Association des cours judiciaires suprmes francophones"/></a>
         </div>
         <div class="col">
-          <a href="https://www.francophonie.org/"><img class="img-fluid" src="/images/francophonie.png" alt="Organisation internationale de la francophonie" /></a>
+          <a href="https://www.francophonie.org/"><img height="86" width="100" src="/images/francophonie_small.png" alt="Organisation internationale de la francophonie" /></a>
         </div>
       </div>
     </div>
@@ -138,7 +146,7 @@
        <span class="d-lg-none">Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones. Il est soutenu par l'Organisation Internationale de la Francophonie.</span>
        <span class="d-none d-lg-block col-6 mx-auto">Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones. Il est soutenu par l'Organisation Internationale de la Francophonie.</span>
        <div class="pt-3 p-2">
-           <img src="/images/iall.jpg" />
+           <img height="44" width="224" src="/images/iall.jpg" />
        </div>
     </div>
 </div>
@@ -154,8 +162,8 @@ else {
 }
 </script>
 
-<script type="text/javascript" src="/js/jquery-3.6.0.slim.min.js"></script>
-<script type="text/javascript" src="/js/boostrap-5.js" ></script>
-<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/jquery-3.6.0.slim.min.js?<?php echo $gitcommit; ?>"></script>
+<script type="text/javascript" src="/js/boostrap-5.js?<?php echo $gitcommit; ?>" async></script>
+<script type="text/javascript" src="/js/main.js?<?php echo $gitcommit; ?>" async></script>
 </body>
 </html>

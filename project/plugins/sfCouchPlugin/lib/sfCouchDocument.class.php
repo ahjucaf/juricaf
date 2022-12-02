@@ -376,7 +376,7 @@ class sfCouchDocument
     }
 
     $db = sfCouchConnection::getInstance();
-    $response = $db->get(urlencode($this->_id ) . '/' . $fileName, null, true);
+    $response = $db->get(urlencode($this->_id ) . '/' . urlencode($fileName), null, true);
 
     if (is_null($response)) {
       return null;

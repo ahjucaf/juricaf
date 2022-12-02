@@ -22,14 +22,14 @@ class staticActions extends sfActions
             return sfView::SUCCESS;
         }
         /* Initialisation des variables */
-        $from = "juricaf@ahjucaf.org"; // l'expéditeur : remplacer ici domaine.ext par votre domaine
-        $to = "Juricaf <sgahjucaf@ahjucaf.org>"; // le destinataire : mettez ici votre adresse mail valide (ou plusieurs séparé par des virgules. ex : Paul <paul@mail.com>, Jacques <jacques@mail.com>
+        $from = "juricaf@ahjucaf.org";
+        $to = "sgahjucaf@ahjucaf.org";
         
         /* Préparation */
-        $subject = "Contact Juricaf"; // le sujet du mail
-        $this->email = $_POST['email'];
-        $message = NULL;
-        $this->message = $_POST['message'];
+        $subject = "[Juricaf] Demande de contact"; // le sujet du mail
+        $this->email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        $this->email = filter_var($this->email, FILTER_VALIDATE_EMAIL);
+        $this->message = NULL;
 
         if(!isset($_POST['token']) || ($_SESSION['token'] !== $_POST['token']) || $_SESSION['cap1'] + $_SESSION['cap2'] != $_POST['captcha']) {
             $this->resultat = "Mauvais Captcha";
@@ -39,26 +39,21 @@ class staticActions extends sfActions
         }
         
         /* Récupération du champs email */
-        if (empty($_POST['email']) || empty($_POST['message'])) {
+        if (empty($this->email) || empty(htmlspecialchars($_POST['message']))) {
             $this->resultat = "Erreur: vous devez spécifier une adresse email valide et un texte\n";
             $this->token = sha1(mt_rand());
             $_SESSION['token'] = $this->token;
             return sfView::SUCCESS;
         }
+
         /* Nettoyage */
-        $test_mail = htmlentities(strip_tags($_POST['email']));
-        /* Vérification que c'est bien un email valide */
-        if(preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$/', $test_mail)) {
-            $this->email = $test_mail;
-        }
-        /* Nettoyage */
-        $cleaned_message = htmlspecialchars(strip_tags(iconv("UTF-8", "ISO-8859-15//TRANSLIT", $_POST['message']))); // Si les variables proviennent d'une page en iso-8859-1(5), il ne faut pas utiliser iconv (ex: $cleaned_message = htmlspecialchars(strip_tags($_POST['message'])); ) et modifier en conséquence le charset de la meta http-equiv dans le html. Si c'est de l'UTF8, utf8_decode($_POST['message']) peut être utilisé à la place d'iconv lorsque celui-ci n'est pas installé sur le serveur mais le signe € ne sera pas reconnu et remplacé par des "?".
-        
-        /* Adresse IP */
-        $ip = "\n\n-----------------------\n\nAdresse IP de l'expediteur : ".$_SERVER["REMOTE_ADDR"];
-        
+        $this->message = htmlentities($_POST['message']);
+
         /* Message */
-        $message = "Message transmis par ".$this->email." :\n\n".$cleaned_message.$ip;
+        $message  = "Message envoyé depuis https://juricaf.org/static/contact de ".$this->email." :\n";
+        $message .= "-----------------------\n\n";
+        $message .= $_POST['message'];
+        $message .= "\n\n-----------------------\nAdresse IP de l'expediteur : ".$_SERVER["REMOTE_ADDR"];
         
         if (!$this->email){
             $this->resultat = "Erreur: vous devez spécifier une adresse email valide et un texte\n";
@@ -72,9 +67,10 @@ class staticActions extends sfActions
         {
             /* En-têtes obligatoires du message */
             $headers = "From: Webmaster <".$from.">\n";
+            $headers .= "Reply-To: ".$this->email."\n";
             //$headers .= "To: Contact <".$to.">\n"; (la variable $to est utilisée à la place)
             $headers .= "MIME-Version: 1.0\n";
-            $headers .= "Content-type: text/plain; charset=iso-8859-15\n";
+            $headers .= "Content-type: text/plain; charset=UTF-8\n";
             
             /* Appel a la fonction mail */
             if (!mail($to, $subject, $message, $headers)){

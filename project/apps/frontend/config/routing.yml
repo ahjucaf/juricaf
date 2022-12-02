@@ -43,6 +43,10 @@ arretmd:
   url: /arret/:id/md
   param: {module: arret, action: md}
 
+arret_attachment:
+  url: /arret/:id/attachment
+  param: {module: arret, action: attachment}
+
 arret:
   url: /arret/:id
   param: {module: arret, action: index}

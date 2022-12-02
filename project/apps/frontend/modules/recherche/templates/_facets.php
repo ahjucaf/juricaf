@@ -10,7 +10,7 @@ if (count($facets) > 0) : ?>
 foreach($facets as $k => $v) {
     echo '<li style="margin-top: 5px;">';
     if($mainid === 'facet_pays')
-  echo '<img style="height: 10px;" src="/images/drapeaux/'.pathToFlag($v['fname']).'.png" alt="" />&nbsp;';
+  echo '<img style="height: 10px;" src="/images/drapeaux/'.pathToFlag($v['fname']).'.png" alt="'.$v['fname'].'" width="17" height="12" />&nbsp;';
     $facet = $v['fid'].':'.preg_replace('/ /', '_', $v['fname']);
     if (preg_match('/'.$facet.'/', $facetslink))
       echo $k."&nbsp;(".number_format($v['count'], 0, ',', ' ').")";
