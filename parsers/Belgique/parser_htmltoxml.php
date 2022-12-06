@@ -136,7 +136,7 @@ if (count($analyses)) {
         echo("<TITRE>");
         echo("[$notice_id] " . implode(" ; ", $analyse['reference']));
         echo("</TITRE>");
-        echo("<REFERENCE>\n");
+        echo("</REFERENCE>\n");
       }
     }
     echo("</REFERENCES>\n");
