@@ -16,32 +16,32 @@ while (true) {
 
   $html = file_get_contents("https://e-justice.europa.eu/eclisearch/integrated/beta/search.html?issued=01%2F01%2F".$annee."%2C31%2F12%2F".$annee."&text-language=FR&ascending=false&country-coded=BE&lang=fr&index=$index");
 
-  preg_match_all('#<a target="_blank" href="([^>]+)">https://juportal\.just\.fgov\.be#iU', $html, $links);
-
-  if (empty($links[1])) {
+  if (! preg_match_all('#<a target="_blank" href="([^>]+)">https://juportal\.just\.fgov\.be#iU', $html, $links)) {
     break;
   }
 
   foreach ($links[1] as $link) {
-    fwrite(STDERR, "Récupère le HTML de l'arrêt à partir de $link\n");
-    preg_match('#https:\/\/juportal\.just\.fgov\.be\/content\/ViewDecision\.php\?id=([^&]+)#i',$link, $jurimatch);
-
-    if (!empty($jurimatch[1])) {
-      $juriid = $jurimatch[1];
-      $output_url = "https://juportal.be/content/$juriid/FR";
-      $filename = $dossierArretsHTML."/".$juriid.".html";
-      if (file_exists($filename)) {
-        fwrite(STDERR, "arrêt déjà présent dans $dossierArretsHTML\n");
-      }
-      fwrite(STDERR, "Enregistre $output_url dans \n");
-      $content = file_get_contents($output_url);
-      if (strpos($content, '<html lang="nl">')) {
-        fwrite(STDERR, "arrêt nl => ignore \n");
-        continue;
-      }
-      file_put_contents($filename, $content);
-      echo "$filename $output_url\n";
+    if (! preg_match('#https:\/\/juportal\.just\.fgov\.be\/content\/ViewDecision\.php\?id=([^&]+)#i',$link, $jurimatch)) {
+      continue;
     }
+    if (empty($jurimatch[1])) {
+      continue;
+    }
+    $juriid = $jurimatch[1];
+    $output_url = "https://juportal.be/content/$juriid/FR";
+    $filename = $dossierArretsHTML."/".$juriid.".html";
+    if (file_exists($filename)) {
+      fwrite(STDERR, "arrêt $juriid déjà présent dans $dossierArretsHTML\n");
+      continue;
+    }
+    fwrite(STDERR, "Enregistre $output_url dans $filename\n");
+    $content = file_get_contents($output_url);
+    if (strpos($content, '<html lang="nl">')) {
+      fwrite(STDERR, "arrêt nl => ignore \n");
+      continue;
+    }
+    file_put_contents($filename, $content);
+    echo "$filename $output_url\n";
   }
 
   $index +=25;
