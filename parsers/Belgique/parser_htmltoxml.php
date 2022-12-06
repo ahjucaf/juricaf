@@ -53,7 +53,7 @@ echo("<JURIDICTION>$juridiction</JURIDICTION>\n");
 echo("<NUM_ARRET>$numero</NUM_ARRET>\n");
 echo("<PAYS>Belgique</PAYS>\n");
 echo("<TEXTE_ARRET>$arret_text</TEXTE_ARRET>\n");
-echo("<TITRE>Belgique, $juridiction, $datefr</TITRE>\n");
+echo("<TITRE>Belgique, $juridiction, $datefr, $numero</TITRE>\n");
 echo("<SOURCE>$source</SOURCE>\n");
 echo("<TYPE>arret</TYPE>\n");
 echo("<FONDS_DOCUMENTAIRE>juportal.be</FONDS_DOCUMENTAIRE>\n");
