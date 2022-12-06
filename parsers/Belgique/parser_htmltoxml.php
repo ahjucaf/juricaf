@@ -40,7 +40,9 @@ if (preg_match('#<p class="champ-entete-table">No Rôle:</p></td> *<td><p class=
 
 if (preg_match('#<div id="plaintext">(.+?)</div> *<p><a href="/JUPORTA#s',$content,$m)){
   $arret_text = $m[1];
-  $arret_text = str_replace("<br>","\n",$arret_text);
+  $arret_text = preg_replace("/\s*<p>\s*/", "", $arret_text);
+  $arret_text = str_replace('&apos;', "'", $arret_text);
+  $arret_text = str_replace("</p>", "\n", $arret_text);
   $arret_text = strip_tags($arret_text);
 }
 
