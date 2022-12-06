@@ -10,7 +10,7 @@ $source = $argv[2];
 $content = file_get_contents($inputfile);
 $content = str_replace("\n", '', $content); 
 
-$name = basename($inputfile,".html");
+$name = basename($inputfile, ".html");
 
 if (preg_match('#<p class="champ-entete-table">No ECLI:</p></td> *<td><p class="description-entete-table">[^<]*\.(\d{4})(\d{2})(\d{2})\.[^<]*</p>#', $content, $m)) {
   $mois = ['01' => 'janvier', '02' => 'février', '03' => 'mars', '04' => 'avril', '05' => 'mai', '06' => 'juin', '07' => 'juillet', '08' => 'août', '09' => 'septembre', '10' => 'octobre', '11' => 'novembre', '12' => 'décembre'];
@@ -27,18 +27,18 @@ $juridictions = ["CASS" => "Cour de cassation",
                 "CTBRL" => "Cour du travail de Bruxelles",
                 "PIBRL" => "Tribunal de première instance francophone de Bruxelles"];
 
-if (preg_match("#ECLI:BE:(.+?):#",$name,$j)) {
+if (preg_match("#ECLI:BE:(.+?):#", $name, $j)) {
   $juridiction = $j[1];
   if (array_key_exists($j[1], $juridictions)){
     $juridiction = $juridictions[$j[1]];
   }
 }
 
-if (preg_match('#<p class="champ-entete-table">No Rôle:</p></td> *<td><p class="description-entete-table">(.+?)</p>#',$content,$m)) {
+if (preg_match('#<p class="champ-entete-table">No Rôle:</p></td> *<td><p class="description-entete-table">(.+?)</p>#', $content, $m)) {
   $numero = $m[1];
 }
 
-if (preg_match('#<div id="plaintext">(.+?)</div> *<p><a href="/JUPORTA#s',$content,$m)){
+if (preg_match('#<div id="plaintext">\s*(\S.+\S)\s*</div> *<p><a href="/JUPORTA#s', $content, $m)){
   $arret_text = $m[1];
   $arret_text = preg_replace("/\s*<p>\s*/", "", $arret_text);
   $arret_text = str_replace('&apos;', "'", $arret_text);
