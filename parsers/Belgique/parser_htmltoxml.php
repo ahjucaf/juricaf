@@ -46,7 +46,7 @@ if (preg_match('#<div id="plaintext">(.+?)</div> *<p><a href="/JUPORTA#s',$conte
   $arret_text = strip_tags($arret_text);
 }
 
-echo('<?xml version="1.0" encoding="utf8"?>'."\n");
+echo('<?xml version="1.0" encoding="UTF-8"?>'."\n");
 echo("<DOCUMENT>\n");
 echo("<DATE_ARRET>$dateiso</DATE_ARRET>\n");
 echo("<JURIDICTION>$juridiction</JURIDICTION>\n");
