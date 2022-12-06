@@ -76,6 +76,10 @@ if (preg_match_all('#<fieldset id="(notice\d+)" >.*?<div class="plaintext"> *<p>
     $analyses[$index]['titre_principal'] = $fieldset_match[2];
     if (preg_match_all('#<p class="champ-notice-table">(Thésaurus Cassation|Mots libres|Bases légales):</p></td> *<td> *<p class="description-notice-table">\s*(\S.*?\S)\s*</p>#', $fieldset_match[0], $m3, PREG_SET_ORDER)) {
       foreach ($m3 as $tr) {
+        $tr[2] = str_replace('<br>', ' ; ', $tr[2]);
+        $tr[2] = str_replace('<a ', ' / <a ', $tr[2]);
+        $tr[2] = str_replace('Lien ELI ', '', $tr[2]);
+        $tr[2] = strip_tags($tr[2]);
         if ($tr[1] == 'Bases légales') {
           $analyses[$index]['reference'][$tr[2]] = $tr[2];
         } else{
