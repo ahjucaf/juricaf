@@ -46,6 +46,25 @@ if (preg_match('#<div id="plaintext">\s*(\S.+\S)\s*</div> *<p><a href="/JUPORTA#
   $arret_text = strip_tags($arret_text);
 }
 
+if (preg_match('#<p class="champ-entete-table">Audience:</p></td> *<td><p class="description-entete-table">([^\/]*)</p>#', $content, $m)) {
+  $meta_audience = explode('<br>', $m[1]);
+  $formation = trim(array_shift($meta_audience));
+  foreach($meta_audience as $meta) {
+    if (preg_match('/ *(\S.*\S), Présidente?/', $meta, $m)) {
+      $president = $m[1];
+    }
+    if (preg_match('/ *(\S.*\S), Assesseurs?/', $meta, $m)) {
+      $assesseurs = $m[1];
+    }
+    if (preg_match('/ *(\S.*\S), Ministère public/', $meta, $m)) {
+      $ministere_public = $m[1];
+    }
+    if (preg_match('/ *(\S.*\S), Greffi[eè]re?/', $meta, $m)) {
+      $greffier = $m[1];
+    }
+  }
+}
+
 echo('<?xml version="1.0" encoding="UTF-8"?>'."\n");
 echo("<DOCUMENT>\n");
 echo("<DATE_ARRET>$dateiso</DATE_ARRET>\n");
@@ -56,5 +75,20 @@ echo("<TEXTE_ARRET>$arret_text</TEXTE_ARRET>\n");
 echo("<TITRE>Belgique, $juridiction, $datefr, $numero</TITRE>\n");
 echo("<SOURCE>$source</SOURCE>\n");
 echo("<TYPE>arret</TYPE>\n");
+if ($formation) {
+  echo("<FORMATION>$formation</FORMATION>\n");
+}
+if ($president) {
+  echo("<PRESIDENT>$president</PRESIDENT>\n");
+}
+if ($assesseurs) {
+  echo("<ASSESSEURS>$assesseurs</ASSESSEURS>\n");
+}
+if ($ministere_public) {
+  echo("<MINISTERE_PUBLIC>$ministere_public</MINISTERE_PUBLIC>\n");
+}
+if ($greffier) {
+  echo("<GREFFIER>$greffier</GREFFIER>\n");
+}
 echo("<FONDS_DOCUMENTAIRE>juportal.be</FONDS_DOCUMENTAIRE>\n");
 echo("</DOCUMENT>\n");
