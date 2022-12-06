@@ -12,8 +12,8 @@ $content = str_replace("\n", '', $content);
 
 $name = basename($inputfile,".html");
 
-if (preg_match('#<p class="champ-entete-table">Date d\'introduction:</p></td> *<td><p class="description-entete-table">(\d+)\-(\d+)\-(\d+)</p>#',$content,$m)) {
-  $mois = ['01' => 'janvier','02' => 'février','03' => 'mars','04' => 'avril','05' => 'mai','06' => 'juin','07' => 'juillet','08' => 'août','09' => 'septembre','10' => 'octobre','11' => 'novembre','12' => 'décembre'];
+if (preg_match('#<p class="champ-entete-table">No ECLI:</p></td> *<td><p class="description-entete-table">[^<]*\.(\d{4})(\d{2})(\d{2})\.[^<]*</p>#', $content, $m)) {
+  $mois = ['01' => 'janvier', '02' => 'février', '03' => 'mars', '04' => 'avril', '05' => 'mai', '06' => 'juin', '07' => 'juillet', '08' => 'août', '09' => 'septembre', '10' => 'octobre', '11' => 'novembre', '12' => 'décembre'];
   $dateiso = "$m[1]-$m[2]-$m[3]";
   $datefr = $m[3]." ".$mois[$m[2]]." ".$m[1];
 }
