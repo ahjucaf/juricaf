@@ -9,6 +9,7 @@ $source = $argv[2];
 
 $content = file_get_contents($inputfile);
 $content = str_replace("\n", '', $content); 
+$content = preg_replace('/  +/', ' ', $content);
 
 $name = basename($inputfile, ".html");
 
@@ -19,13 +20,13 @@ if (preg_match('#<p class="champ-entete-table">No ECLI:</p></td> *<td><p class="
 }
 
 $juridictions = ["CASS" => "Cour de cassation",
-                "GHCC" => "Cour constitutionnel",
-                "CALIE" => "Cour d'appel du ressort de Liège",
-                "CTLIE" => "Cour du travail de Liège et divisions Namur - Neufchâteau",
-                "CABRL" => "Cour d'appel du ressort de Liège",
-                "CAMON" => "Cour d'appel du ressort de Mons",
-                "CTBRL" => "Cour du travail de Bruxelles",
-                "PIBRL" => "Tribunal de première instance francophone de Bruxelles"];
+"GHCC" => "Cour constitutionnel",
+"CALIE" => "Cour d'appel du ressort de Liège",
+"CTLIE" => "Cour du travail de Liège et divisions Namur - Neufchâteau",
+"CABRL" => "Cour d'appel du ressort de Liège",
+"CAMON" => "Cour d'appel du ressort de Mons",
+"CTBRL" => "Cour du travail de Bruxelles",
+"PIBRL" => "Tribunal de première instance francophone de Bruxelles"];
 
 if (preg_match("#ECLI:BE:(.+?):#", $name, $j)) {
   $juridiction = $j[1];
@@ -46,7 +47,7 @@ if (preg_match('#<div id="plaintext">\s*(\S.+\S)\s*</div> *<p><a href="/JUPORTA#
   $arret_text = strip_tags($arret_text);
 }
 
-if (preg_match('#<p class="champ-entete-table">Audience:</p></td> *<td><p class="description-entete-table">([^\/]*)</p>#', $content, $m)) {
+if (preg_match('#<p class="champ-entete-table">Audience:</p></td> *<td><p class="description-entete-table">\s*(\S.*?\S)\s*</p>#', $content, $m)) {
   $meta_audience = explode('<br>', $m[1]);
   $formation = trim(array_shift($meta_audience));
   foreach($meta_audience as $meta) {
@@ -61,6 +62,26 @@ if (preg_match('#<p class="champ-entete-table">Audience:</p></td> *<td><p class=
     }
     if (preg_match('/ *(\S.*\S), Greffi[eè]re?/', $meta, $m)) {
       $greffier = $m[1];
+    }
+  }
+}
+if (preg_match('#<p class="champ-entete-table">Domaine juridique:</p></td> *<td><p class="description-entete-table">\s*(\S.*?\S)\s*</p>#', $content, $m)) {
+  $type_affaire = $m[1];
+}
+$analyses = [];
+if (preg_match_all('#<fieldset id="(notice\d+)" >.*?<div class="plaintext"> *<p>\s*(\S.*?\S)\s*</p>.*?</fieldset>#', $content, $m, PREG_SET_ORDER)) { 
+  foreach ($m as $fieldset_match) {
+    $index = $fieldset_match[1];
+    $analyses[$index] = ['titre_principal' => '', 'reference' => [], 'sommaire' => []];
+    $analyses[$index]['titre_principal'] = $fieldset_match[2];
+    if (preg_match_all('#<p class="champ-notice-table">(Thésaurus Cassation|Mots libres|Bases légales):</p></td> *<td> *<p class="description-notice-table">\s*(\S.*?\S)\s*</p>#', $fieldset_match[0], $m3, PREG_SET_ORDER)) {
+      foreach ($m3 as $tr) {
+        if ($tr[1] == 'Bases légales') {
+          $analyses[$index]['reference'][$tr[2]] = $tr[2];
+        } else{
+          $analyses[$index]['sommaire'][$tr[2]] = $tr[2];
+        }
+      }
     }
   }
 }
@@ -89,6 +110,40 @@ if ($ministere_public) {
 }
 if ($greffier) {
   echo("<GREFFIER>$greffier</GREFFIER>\n");
+}
+if (count($analyses)) {
+  $has_ref = false;
+  echo("<ANALYSES>\n");
+  foreach($analyses as $notice_id => $analyse)  {
+    echo("<ANALYSE>\n");
+    echo("<TITRE_PRINCIPAL>".$analyse['titre_principal']."</TITRE_PRINCIPAL>\n");
+    echo("<SOMMAIRE>");
+    echo(implode(' - ', $analyse['sommaire']));
+    if (isset($analyse['reference'])) {
+      $has_ref = true;
+      echo(" [$notice_id]");
+    }
+    echo("</SOMMAIRE>\n");
+    echo("</ANALYSE>\n");
+  }
+  echo("</ANALYSES>\n");
+  if ($has_ref) {
+    echo("<REFERENCES>\n");
+    foreach($analyses as $notice_id => $analyse)  {
+      if (isset($analyse['reference'])) {
+        echo("<REFERENCE>\n");
+        echo("<TYPE>CITATION_ANALYSE</TYPE>");
+        echo("<TITRE>");
+        echo("[$notice_id] " . implode(" ; ", $analyse['reference']));
+        echo("</TITRE>");
+        echo("<REFERENCE>\n");
+      }
+    }
+    echo("</REFERENCES>\n");
+  }
+}
+if(isset($type_affaire)) {
+  echo("<TYPE_AFFAIRE>$type_affaire</TYPE_AFFAIRE>\n");
 }
 echo("<FONDS_DOCUMENTAIRE>juportal.be</FONDS_DOCUMENTAIRE>\n");
 echo("</DOCUMENT>\n");
