@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage helper
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: I18NHelper.php 31894 2011-01-24 18:12:37Z fabien $
+ * @version    SVN: $Id$
  */
 
 function __($text, $args = array(), $catalogue = 'messages')
@@ -60,7 +60,7 @@ function __($text, $args = array(), $catalogue = 'messages')
  *
  * @return string Result of the translation
  */
-function format_number_choice($text, $args = array(), $number, $catalogue = 'messages')
+function format_number_choice($text, $args = array(), $number = null, $catalogue = 'messages')
 {
   $translated = __($text, $args, $catalogue);
 

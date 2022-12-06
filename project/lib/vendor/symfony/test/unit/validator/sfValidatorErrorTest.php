@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
+require_once(__DIR__.'/../../bootstrap/unit.php');
 
 $t = new lime_test(14);
 
@@ -62,6 +62,16 @@ class NotSerializable implements Serializable
   }
 
   public function unserialize($serialized)
+  {
+    throw new Exception('Not serializable');
+  }
+
+  public function __serialize()
+  {
+    throw new Exception('Not serializable');
+  }
+
+  public function __unserialize($data)
   {
     throw new Exception('Not serializable');
   }

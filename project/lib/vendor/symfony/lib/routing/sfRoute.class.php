@@ -14,7 +14,10 @@
  * @package    symfony
  * @subpackage routing
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfRoute.class.php 32939 2011-08-22 13:40:06Z fabien $
+ * @version    SVN: $Id$
+ *
+ * @property $firstOptional int
+ * @property $segments array
  */
 class sfRoute implements Serializable
 {
@@ -89,7 +92,7 @@ class sfRoute implements Serializable
    * @param  string  $url     The URL
    * @param  array   $context The context
    *
-   * @return array   An array of parameters
+   * @return array|bool   An array of parameters or false if not matching
    */
   public function matchesUrl($url, $context = array())
   {
@@ -261,13 +264,15 @@ class sfRoute implements Serializable
 
   static private function generateCompareVarsByStrlen($a, $b)
   {
-    return strlen($a) < strlen($b);
+    return (strlen($a) < strlen($b)) ? 1 : -1;
   }
 
   /**
    * Generates a URL for the given parameters by using the route tokens.
    *
    * @param array $parameters An array of parameters
+   *
+   * @return string
    */
   protected function generateWithTokens($parameters)
   {
@@ -280,7 +285,7 @@ class sfRoute implements Serializable
       switch ($token[0])
       {
         case 'variable':
-          if (!$optional || !isset($this->defaults[$token[3]]) || $parameters[$token[3]] != $this->defaults[$token[3]])
+          if (!$optional || !isset($this->defaults[$token[3]]) || (isset($parameters[$token[3]]) && $parameters[$token[3]] != $this->defaults[$token[3]]))
           {
             $url[] = urlencode($parameters[$token[3]]);
             $optional = false;
@@ -581,7 +586,7 @@ class sfRoute implements Serializable
         throw new InvalidArgumentException(sprintf('Unable to parse "%s" route near "%s".', $this->pattern, $buffer));
       }
     }
-    
+
     // check for suffix
     if ($this->suffix)
     {
@@ -691,7 +696,6 @@ class sfRoute implements Serializable
       'extra_parameters_as_query_string' => true,
     ), $this->getDefaultOptions(), $this->options);
 
-    //$preg_quote_hash = create_function('$a', 'return preg_quote($a, \'#\');');
     $preg_quote_hash = function($a) { return preg_quote($a, '#'); };
 
     // compute some regexes
@@ -702,7 +706,6 @@ class sfRoute implements Serializable
       $this->options['segment_separators_regex'] = '(?:'.implode('|', array_map($preg_quote_hash, $this->options['segment_separators'])).')';
 
       // as of PHP 5.3.0, preg_quote automatically quotes dashes "-" (see http://bugs.php.net/bug.php?id=47229)
-      //$preg_quote_hash_53 = create_function('$a', 'return str_replace(\'-\', \'\-\', preg_quote($a, \'#\'));');
       $preg_quote_hash_53 = function($a) { return str_replace('-', '\-', preg_quote($a, '#')); };
       $this->options['variable_content_regex'] = '[^'.implode('',
           array_map(version_compare(PHP_VERSION, '5.3.0RC4', '>=') ? $preg_quote_hash : $preg_quote_hash_53, $this->options['segment_separators'])
@@ -788,7 +791,7 @@ class sfRoute implements Serializable
       }
       else
       {
-        $this->defaults[$key] = urldecode($value);
+        $this->defaults[$key] = urldecode((string) $value);
       }
     }
   }
@@ -844,15 +847,38 @@ class sfRoute implements Serializable
 
   public function serialize()
   {
+    return serialize($this->__serialize());
+  }
+
+  public function unserialize($serialized)
+  {
+    $array = unserialize($serialized);
+
+    $this->__unserialize($array);
+  }
+
+  /**
+   * Serializes the current instance for php 7.4+
+   *
+   * @return array
+   */
+  public function __serialize()
+  {
     // always serialize compiled routes
     $this->compile();
     // sfPatternRouting will always re-set defaultParameters, so no need to serialize them
-    return serialize(array($this->tokens, $this->defaultOptions, $this->options, $this->pattern, $this->staticPrefix, $this->regex, $this->variables, $this->defaults, $this->requirements, $this->suffix, $this->customToken));
+    return array($this->tokens, $this->defaultOptions, $this->options, $this->pattern, $this->staticPrefix, $this->regex, $this->variables, $this->defaults, $this->requirements, $this->suffix, $this->customToken);
   }
 
-  public function unserialize($data)
+  /**
+   * Unserializes a sfRoute instance for php 7.4+
+   *
+   * @param array $data
+   */
+  public function __unserialize($data)
   {
-    list($this->tokens, $this->defaultOptions, $this->options, $this->pattern, $this->staticPrefix, $this->regex, $this->variables, $this->defaults, $this->requirements, $this->suffix, $this->customToken) = unserialize($data);
+    list($this->tokens, $this->defaultOptions, $this->options, $this->pattern, $this->staticPrefix, $this->regex, $this->variables, $this->defaults, $this->requirements, $this->suffix, $this->customToken) = $data;
+
     $this->compiled = true;
   }
 }
