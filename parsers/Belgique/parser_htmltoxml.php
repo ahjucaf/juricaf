@@ -18,7 +18,7 @@ if (preg_match('#<p class="champ-entete-table">No ECLI:</p></td> *<td><p class="
   $datefr = $m[3]." ".$mois[$m[2]]." ".$m[1];
 }
 
-$juridictions = ["CASS" => "Cours de Cassation",
+$juridictions = ["CASS" => "Cour de cassation",
                 "GHCC" => "Cour constitutionnel",
                 "CALIE" => "Cour d'appel du ressort de Liège",
                 "CTLIE" => "Cour du travail de Liège et divisions Namur - Neufchâteau",
