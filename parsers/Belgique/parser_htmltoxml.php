@@ -1,27 +1,22 @@
 <?php
 
-
-$xmlFolder='/tmp/xmls/';
-
-shell_exec("mkdir -p $xmlFolder");
-
-if(!$argv[1]){
-  echo "MISSING HTML FILE";
-  exit;
+if( count($argv) != 3 || !file_exists($argv[1]) ){
+  echo "MISSING HTML FILE OR SOURCE\n";
+  exit(1);
 }
+$inputfile = $argv[1];
+$source = $argv[2];
 
-$inputfile= $argv[1];
-$content=file_get_contents($inputfile);
-
+$content = file_get_contents($inputfile);
 $content = str_replace("\n", '', $content); 
 
-$name =basename($inputfile,".html");
+$name = basename($inputfile,".html");
 
-$sources = file_get_contents('/tmp/links_Belgique',true);
-$source = "https://juportal.be/content/".$name;
-
-preg_match('#<p class="champ-entete-table">Date d\'introduction:</p></td>            <td><p class="description-entete-table">(.+?)</p>#',$content,$date);
-$date = $date[1];
+if (preg_match('#<p class="champ-entete-table">Date d\'introduction:</p></td> *<td><p class="description-entete-table">(\d+)\-(\d+)\-(\d+)</p>#',$content,$m)) {
+  $mois = ['01' => 'janvier','02' => 'février','03' => 'mars','04' => 'avril','05' => 'mai','06' => 'juin','07' => 'juillet','08' => 'août','09' => 'septembre','10' => 'octobre','11' => 'novembre','12' => 'décembre'];
+  $dateiso = "$m[1]-$m[2]-$m[3]";
+  $datefr = $m[3]." ".$mois[$m[2]]." ".$m[1];
+}
 
 $juridictions = ["CASS" => "Cours de Cassation",
                 "GHCC" => "Cour constitutionnel",
@@ -32,47 +27,32 @@ $juridictions = ["CASS" => "Cours de Cassation",
                 "CTBRL" => "Cour du travail de Bruxelles",
                 "PIBRL" => "Tribunal de première instance francophone de Bruxelles"];
 
-preg_match("#ECLI:BE:(.+?):#",$name,$j);
-$juridiction = $j[1];
-
-if (array_key_exists($j[1], $juridictions)){
-  $juridiction = $juridictions[$j[1]];
+if (preg_match("#ECLI:BE:(.+?):#",$name,$j)) {
+  $juridiction = $j[1];
+  if (array_key_exists($j[1], $juridictions)){
+    $juridiction = $juridictions[$j[1]];
+  }
 }
 
-preg_match('#<p class="champ-entete-table">No Rôle:</p></td>            <td><p class="description-entete-table">(.+?)</p>#',$content,$numero);
-$numero = $numero[1];
+if (preg_match('#<p class="champ-entete-table">No Rôle:</p></td> *<td><p class="description-entete-table">(.+?)</p>#',$content,$m)) {
+  $numero = $m[1];
+}
 
+if (preg_match('#<div id="plaintext">(.+?)</div> *<p><a href="/JUPORTA#s',$content,$m)){
+  $arret_text = $m[1];
+  $arret_text = str_replace("<br>","\n",$arret_text);
+  $arret_text = strip_tags($arret_text);
+}
 
-preg_match('#<div id="plaintext">(.+?)</div>       <p><a href="/JUPORTA#s',$content,$content);
-$content = $content[1];
-$content = str_replace("<br>","\n",$content);
-$content = strip_tags($content);
-
-
-$mois = ['janvier'=>'01','février'=>'02','mars'=>'03','avril'=>'04','mai'=>'05','juin'=>'06','juillet'=>'07','août'=>'08','septembre'=>'09','octobre'=>'10','novembre'=>'11','décembre'=>'12'];
-$j = substr($date, 8,2);
-$m = substr($date, 5,2);
-$m = array_keys($mois,$m);
-$m = $m[0];
-$a = substr($date, 0,4);
-$datefr = $j." ".$m." ".$a;
-
-
-$output = fopen($xmlFolder.$name.'.xml', 'w');
-
-fwrite($output, '<?xml version="1.0" encoding="utf8"?>');
-fwrite($output,"\n");
-fwrite($output, "<DOCUMENT>\n");
-fwrite($output, "<DATE_ARRET>$date</DATE_ARRET>\n");
-fwrite($output, "<JURIDICTION>$juridiction</JURIDICTION>\n");
-fwrite($output, "<NUM_ARRET>$numero</NUM_ARRET>\n");
-fwrite($output, "<PAYS>Belgique</PAYS>\n");
-fwrite($output, "<TEXTE_ARRET>$content</TEXTE_ARRET>\n");
-fwrite($output,"<TITRE>Belgique, $juridiction, $datefr</TITRE>\n");
-fwrite($output,"<SOURCE>$source</SOURCE>");
-fwrite($output, "<TYPE>arret</TYPE>\n");
-fwrite($output, "<FONDS_DOCUMENTAIRE>juportal.be</FONDS_DOCUMENTAIRE>\n");
-fwrite($output, "</DOCUMENT>\n");
-fclose($output);
-
-?>
+echo('<?xml version="1.0" encoding="utf8"?>'."\n");
+echo("<DOCUMENT>\n");
+echo("<DATE_ARRET>$dateiso</DATE_ARRET>\n");
+echo("<JURIDICTION>$juridiction</JURIDICTION>\n");
+echo("<NUM_ARRET>$numero</NUM_ARRET>\n");
+echo("<PAYS>Belgique</PAYS>\n");
+echo("<TEXTE_ARRET>$arret_text</TEXTE_ARRET>\n");
+echo("<TITRE>Belgique, $juridiction, $datefr</TITRE>\n");
+echo("<SOURCE>$source</SOURCE>\n");
+echo("<TYPE>arret</TYPE>\n");
+echo("<FONDS_DOCUMENTAIRE>juportal.be</FONDS_DOCUMENTAIRE>\n");
+echo("</DOCUMENT>\n");
