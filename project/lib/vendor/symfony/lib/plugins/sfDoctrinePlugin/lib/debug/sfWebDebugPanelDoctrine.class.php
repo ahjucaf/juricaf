@@ -16,7 +16,7 @@
  * @subpackage debug
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @author     Jonathan H. Wage <jonwage@gmail.com>
- * @version    SVN: $Id: sfWebDebugPanelDoctrine.class.php 28999 2010-04-06 17:42:14Z Kris.Wallsmith $
+ * @version    SVN: $Id$
  */
 class sfWebDebugPanelDoctrine extends sfWebDebugPanel
 {
@@ -68,7 +68,7 @@ class sfWebDebugPanelDoctrine extends sfWebDebugPanel
 
   /**
    * Returns an array of Doctrine query events.
-   * 
+   *
    * @return array
    */
   protected function getDoctrineEvents()
@@ -116,7 +116,7 @@ class sfWebDebugPanelDoctrine extends sfWebDebugPanel
       // interpolate parameters
       foreach ($params as $param)
       {
-        $param = htmlspecialchars($param, ENT_QUOTES, sfConfig::get('sf_charset'));
+        $param = htmlspecialchars((string) $param, ENT_QUOTES, sfConfig::get('sf_charset'));
         $query = join(var_export(is_scalar($param) ? $param : (string) $param, true), explode('?', $query, 2));
       }
 

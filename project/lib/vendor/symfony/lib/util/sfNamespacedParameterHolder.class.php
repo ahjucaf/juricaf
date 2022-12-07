@@ -4,7 +4,7 @@
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
  * (c) 2004-2006 Sean Kerr <sean@code-box.org>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -20,7 +20,7 @@
  * @subpackage util
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @author     Sean Kerr <sean@code-box.org>
- * @version    SVN: $Id: sfNamespacedParameterHolder.class.php 29521 2010-05-19 11:47:56Z fabien $
+ * @version    SVN: $Id$
  */
 class sfNamespacedParameterHolder extends sfParameterHolder
 {
@@ -36,6 +36,8 @@ class sfNamespacedParameterHolder extends sfParameterHolder
    * $mySpecialPH = new sfNamespacedParameterHolder('symfony/special');
    * ?>
    * </code>
+   *
+   * @param string $namespace
    */
   public function __construct($namespace = 'symfony/default')
   {
@@ -150,7 +152,7 @@ class sfNamespacedParameterHolder extends sfParameterHolder
    * Retrieve an array of parameters, within a namespace.
    *
    * This method is limited to a namespace.  Without any argument,
-   * it returns the parameters of the default namespace.  If a 
+   * it returns the parameters of the default namespace.  If a
    * namespace is passed as an argument, only the parameters of the
    * specified namespace are returned.
    *
@@ -235,7 +237,9 @@ class sfNamespacedParameterHolder extends sfParameterHolder
   /**
    * Remove A parameter namespace and all of its associated parameters.
    *
-   * @param string $ns  A parameter namespace.
+   * @param string $ns A parameter namespace.
+   *
+   * @return mixed|null
    */
   public function & removeNamespace($ns = null)
   {
@@ -362,11 +366,11 @@ class sfNamespacedParameterHolder extends sfParameterHolder
   /**
    * Serializes the current instance.
    *
-   * @return array Objects instance
+   * @return string Objects instance
    */
   public function serialize()
   {
-    return serialize(array($this->default_namespace, $this->parameters));
+    return serialize($this->__serialize());
   }
 
   /**
@@ -376,9 +380,28 @@ class sfNamespacedParameterHolder extends sfParameterHolder
    */
   public function unserialize($serialized)
   {
-    $data = unserialize($serialized);
+    $this->__unserialize(unserialize($serialized));
+  }
 
-    $this->default_namespace = $data[0];
-    $this->parameters = $data[1];
+
+  /**
+   * Serializes the current instance for PHP 7.4+
+   *
+   * @return array
+   */
+  public function __serialize()
+  {
+    return array($this->default_namespace, $this->parameters);
+  }
+
+  /**
+   * Unserializes a sfParameterHolder instance for PHP 7.4+
+   *
+   * @param array $data
+   */
+  public function __unserialize($data)
+  {
+      $this->default_namespace = $data[0];
+      $this->parameters = $data[1];
   }
 }

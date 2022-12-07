@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage test
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfTesterResponse.class.php 27061 2010-01-22 17:08:04Z FabianLange $
+ * @version    SVN: $Id$
  */
 class sfTesterResponse extends sfTester
 {
@@ -49,7 +49,10 @@ class sfTesterResponse extends sfTester
       }
       else
       {
-        @$this->dom->loadHTML($this->response->getContent());
+        if ($content = $this->response->getContent())
+        {
+          @$this->dom->loadHTML($content);
+        }
       }
       $this->domCssSelector = new sfDomCssSelector($this->dom);
     }
@@ -120,10 +123,10 @@ class sfTesterResponse extends sfTester
 
   /**
    * Checks that a form is rendered correctly.
-   * 
+   *
    * @param  sfForm|string $form     A form object or the name of a form class
    * @param  string        $selector CSS selector for the root form element for this form
-   * 
+   *
    * @return sfTestFunctionalBase|sfTester
    */
   public function checkForm($form, $selector = 'form')
@@ -204,7 +207,7 @@ class sfTesterResponse extends sfTester
           $filesystem = new sfFilesystem();
 
           $finder = sfFinder::type('any')->discard('.sf');
-          $filesystem->mirror(dirname(__FILE__).'/w3', $cache, $finder);
+          $filesystem->mirror(__DIR__.'/w3', $cache, $finder);
 
           $finder = sfFinder::type('file');
           $filesystem->replaceTokens($finder->in($cache), '##', '##', array('LOCAL_W3' => $local));
@@ -333,11 +336,11 @@ class sfTesterResponse extends sfTester
 
   /**
    * Tests if a cookie was set.
-   * 
+   *
    * @param  string $name
    * @param  string $value
    * @param  array  $attributes Other cookie attributes to check (expires, path, domain, etc)
-   * 
+   *
    * @return sfTestFunctionalBase|sfTester
    */
   public function setsCookie($name, $value = null, $attributes = array())

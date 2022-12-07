@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage log
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfFileLogger.class.php 10964 2008-08-19 18:33:50Z fabien $
+ * @version    SVN: $Id$
  */
 class sfFileLogger extends sfLogger
 {
@@ -39,7 +39,10 @@ class sfFileLogger extends sfLogger
    * @param  sfEventDispatcher $dispatcher  A sfEventDispatcher instance
    * @param  array             $options     An array of options.
    *
-   * @return Boolean      true, if initialization completes successfully, otherwise false.
+   * @return void
+   *
+   * @throws sfConfigurationException
+   * @throws sfFileException
    */
   public function initialize(sfEventDispatcher $dispatcher, $options = array())
   {
@@ -63,10 +66,11 @@ class sfFileLogger extends sfLogger
       $this->type = $options['type'];
     }
 
-    $dir = dirname($options['file']);
-    if (!is_dir($dir))
+    $dir     = dirname($options['file']);
+    $dirMode = isset($options['dir_mode']) ? $options['dir_mode'] : 0777;
+    if (!is_dir($dir) && !@mkdir($dir, $dirMode, true) && !is_dir($dir))
     {
-      mkdir($dir, isset($options['dir_mode']) ? $options['dir_mode'] : 0777, true);
+      throw new \RuntimeException(sprintf('Logger was not able to create a directory "%s"', $dir));
     }
 
     $fileExists = file_exists($options['file']);
@@ -81,14 +85,14 @@ class sfFileLogger extends sfLogger
       chmod($options['file'], isset($options['file_mode']) ? $options['file_mode'] : 0666);
     }
 
-    return parent::initialize($dispatcher, $options);
+    parent::initialize($dispatcher, $options);
   }
 
   /**
    * Logs a message.
    *
    * @param string $message   Message
-   * @param string $priority  Message priority
+   * @param int $priority  Message priority
    */
   protected function doLog($message, $priority)
   {
@@ -96,7 +100,7 @@ class sfFileLogger extends sfLogger
     fwrite($this->fp, strtr($this->format, array(
       '%type%'     => $this->type,
       '%message%'  => $message,
-      '%time%'     => strftime($this->timeFormat),
+      '%time%'     => self::strftime($this->timeFormat),
       '%priority%' => $this->getPriority($priority),
       '%EOL%'      => PHP_EOL,
     )));
@@ -124,5 +128,62 @@ class sfFileLogger extends sfLogger
     {
       fclose($this->fp);
     }
+  }
+
+  /**
+   * @param $format
+   * @return false|string
+   */
+  public static function strftime($format)
+  {
+    if (version_compare(PHP_VERSION, '8.1.0') < 0)
+    {
+      return strftime($format);
+    }
+    return date(self::_strftimeFormatToDateFormat($format));
+  }
+
+  /**
+   * Try to Convert a strftime to date format
+   *
+   * Unable to find a perfect implementation, based on those one (Each contains some errors)
+   * https://github.com/Fabrik/fabrik/blob/master/plugins/fabrik_element/date/date.php
+   * https://gist.github.com/mcaskill/02636e5970be1bb22270
+   * https://stackoverflow.com/questions/22665959/using-php-strftime-using-date-format-string
+   *
+   * Limitation:
+   * - Do not apply translation
+   * - Some few strftime format could be broken (low probability to be used on logs)
+   *
+   * Private: because it should not be used outside of this scope
+   *
+   * A better solution is to use : IntlDateFormatter, but it will require to load a new php extension, which could break some setup.
+   *
+   * @return array|string|string[]
+   */
+  private static function _strftimeFormatToDateFormat($strftimeFormat)
+  {
+    // Missing %V %C %g %G
+    $search = array(
+      '%a', '%A', '%d', '%e', '%u',
+      '%w', '%W', '%b', '%h', '%B',
+      '%m', '%y', '%Y', '%D', '%F',
+      '%x', '%n', '%t', '%H', '%k',
+      '%I', '%l', '%M', '%p', '%P',
+      '%r' /* %I:%M:%S %p */, '%R' /* %H:%M */, '%S', '%T' /* %H:%M:%S */, '%X', '%z', '%Z',
+      '%c', '%s', '%j',
+      '%%');
+
+    $replace = array(
+      'D', 'l', 'd', 'j', 'N',
+      'w', 'W', 'M', 'M', 'F',
+      'm', 'y', 'Y', 'm/d/y', 'Y-m-d',
+      'm/d/y', "\n", "\t", 'H', 'G',
+      'h', 'g', 'i', 'A', 'a',
+      'h:i:s A', 'H:i', 's', 'H:i:s', 'H:i:s', 'O', 'T',
+      'D M j H:i:s Y' /*Tue Feb 5 00:45:10 2009*/, 'U', 'z',
+      '%');
+
+    return str_replace($search, $replace, $strftimeFormat);
   }
 }

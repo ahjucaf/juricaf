@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-require_once(dirname(__FILE__).'/../../bootstrap/unit.php');
+require_once(__DIR__.'/../../bootstrap/unit.php');
 
 $plan = 73;
 $t = new lime_test($plan);
@@ -19,7 +19,7 @@ if (!class_exists('Memcache'))
   return;
 }
 
-require_once(dirname(__FILE__).'/sfCacheDriverTests.class.php');
+require_once(__DIR__.'/sfCacheDriverTests.class.php');
 
 // setup
 sfConfig::set('sf_logging_enabled', false);
@@ -28,7 +28,15 @@ sfConfig::set('sf_logging_enabled', false);
 $t->diag('->initialize()');
 try
 {
-  $cache = new sfMemcacheCache(array('storeCacheInfo' => true));
+  $memcachedHost = getenv('MEMCACHED_HOST');
+  if (!$memcachedHost) {
+    $memcachedHost = null;
+  }
+
+  $cache = new sfMemcacheCache(array(
+    'storeCacheInfo' => true,
+    'host' => $memcachedHost,
+  ));
 }
 catch (sfInitializationException $e)
 {

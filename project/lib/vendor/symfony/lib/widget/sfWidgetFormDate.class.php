@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage widget
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfWidgetFormDate.class.php 30762 2010-08-25 12:33:33Z fabien $
+ * @version    SVN: $Id$
  */
 class sfWidgetFormDate extends sfWidgetForm
 {
@@ -70,7 +70,7 @@ class sfWidgetFormDate extends sfWidgetForm
     }
     else
     {
-      $value = (string) $value == (string) (integer) $value ? (integer) $value : strtotime($value);
+      $value = (string) $value == (string) (integer) $value ? (integer) $value : strtotime((string) $value);
       if (false === $value)
       {
         $value = $default;

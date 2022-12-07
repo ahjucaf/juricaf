@@ -230,7 +230,7 @@ if(isset($document->references)) {
 }
 $contributors = '';
 
-if(isset($document->president) || isset($document->avocat_gl) || isset($document->rapporteur) || isset($document->commissaire_gvt) || isset($document->avocats)) {
+if(isset($document->president) || isset($document->avocat_gl) || isset($document->rapporteur) || isset($document->commissaire_gvt) || isset($document->avocats)  || isset($document->greffier) || isset($document->ministere_public) || isset($document->assesseurs)) {
     if (isset($document->president)) {
         $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Président</span> : <em itemprop="name">'.link_to($document->president, '@recherche_resultats?query=president:"'.replaceAccents($document->president).'"').'</div></em>'; // replace br par ' ; '
     }
@@ -246,6 +246,22 @@ if(isset($document->president) || isset($document->avocat_gl) || isset($document
     }
     if (isset($document->avocats)) {
         $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Avocat(s)</span> : <em itemprop="name">'.link_to($document->avocats, '@recherche_resultats?query=avocats:"'.replaceAccents($document->avocats).'"').'</em></div>';
+    }
+    if (isset($document->greffier)) {
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Greffier</span> : <em itemprop="name">'.link_to($document->greffier, '@recherche_resultats?query=greffier:"'.replaceAccents($document->greffier).'"').'</div></em>';
+    }
+    if (isset($document->ministere_public)) {
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Ministère public</span> : <em itemprop="name">'.link_to($document->ministere_public, '@recherche_resultats?query=ministere_public:"'.replaceAccents($document->ministere_public).'"').'</div></em>';
+    }
+    if (isset($document->assesseurs)) {
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Assesseurs</span> : <em itemprop="name">';
+        $contributors_array = [];
+        foreach(explode(",", $document->assesseurs) as $assesseur) {
+            $assesseur = trim($assesseur);
+            $contributors_array[] = link_to($assesseur, '@recherche_resultats?query=assesseurs:"'.replaceAccents($assesseur).'"');
+        }
+        $contributors .= implode(', ', $contributors_array);
+        $contributors .= '</div></em>';
     }
     $contrib = true;
 }

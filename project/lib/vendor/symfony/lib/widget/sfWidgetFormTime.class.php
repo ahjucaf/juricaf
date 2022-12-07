@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage widget
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfWidgetFormTime.class.php 30762 2010-08-25 12:33:33Z fabien $
+ * @version    SVN: $Id$
  */
 class sfWidgetFormTime extends sfWidgetForm
 {
@@ -72,7 +72,7 @@ class sfWidgetFormTime extends sfWidgetForm
     }
     else
     {
-      $value = ctype_digit($value) ? (integer) $value : strtotime($value);
+      $value = ctype_digit((string) $value) ? (integer) $value : strtotime((string) $value);
       if (false === $value)
       {
         $value = $default;

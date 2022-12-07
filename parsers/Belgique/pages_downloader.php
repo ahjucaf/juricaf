@@ -1,51 +1,50 @@
 <?php 
 
-$dossierArretsHTMl = "/tmp/pages";
-$allLinksFile = "/tmp/links_Belgique";
-
-$contentFile = "/tmp/contenu.html";
-
-shell_exec("mkdir -p $dossierArretsHTMl");
-shell_exec("rm -f $allLinksFile");
+$dossierArretsHTML = "./html";
 
 if(!$argv[1]){
-  echo "MISSING YEAR";
-  exit;
+  echo "MISSING YEAR\n";
+  exit(1);
 }
+$annee = intval( $argv[1] );
 
-$annee = $argv[1];
-
-$cmd = "curl -s 'https://e-justice.europa.eu/eclisearch/integrated/beta/search.html?year=$annee&text-language=FR&ascending=false&country-coded=BE&lang=fr&index=0' > $contentFile";
-shell_exec($cmd);
-preg_match('#var totalResults="([0-9]+)";#iU', file_get_contents($contentFile), $nbresultats);
 
 $index=0;
 
-while ($index <= $nbresultats[1]) {
-    $cmd = "curl -s 'https://e-justice.europa.eu/eclisearch/integrated/beta/search.html?year=2021&text-language=FR&ascending=false&country-coded=BE&lang=fr&index=$index' > $contentFile";
-    shell_exec($cmd);
-    
-    $c= file($contentFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+while (true) {
+  fwrite(STDERR, "Récupération du html de $annee ($index)\n");
 
-    $content='';
-    foreach($c as $num=>$ligne){
-      preg_match('#<a target="_blank" href="([^>]+)">https://juportal\.just\.fgov\.be#iU', $ligne, $link);
-      if($link){
-        $ligne=trim($link[1]);
-        shell_exec("echo '$ligne' >> $allLinksFile");
-      }
+  $html = file_get_contents("https://e-justice.europa.eu/eclisearch/integrated/beta/search.html?issued=01%2F01%2F".$annee."%2C31%2F12%2F".$annee."&text-language=FR&ascending=false&country-coded=BE&lang=fr&index=$index");
+
+  if (! preg_match_all('#<a target="_blank" href="([^>]+)">https://juportal\.just\.fgov\.be#iU', $html, $links)) {
+    break;
+  }
+
+  foreach ($links[1] as $link) {
+    if (! preg_match('#https:\/\/juportal\.just\.fgov\.be\/content\/ViewDecision\.php\?id=([^&]+)#i',$link, $jurimatch)) {
+      continue;
     }
-    $index +=25;
-}
+    if (empty($jurimatch[1])) {
+      continue;
+    }
+    $juriid = $jurimatch[1];
+    $output_url = "https://juportal.be/content/$juriid/FR";
+    $filename = $dossierArretsHTML."/".$juriid.".html";
+    if (file_exists($filename)) {
+      fwrite(STDERR, "arrêt $juriid déjà présent dans $dossierArretsHTML\n");
+      continue;
+    }
+    fwrite(STDERR, "Enregistre $output_url dans $filename\n");
+    $content = file_get_contents($output_url);
+    if (strpos($content, '<html lang="nl">')) {
+      fwrite(STDERR, "arrêt nl => ignore \n");
+      continue;
+    }
+    file_put_contents($filename, $content);
+    echo "$filename $output_url\n";
+  }
 
-shell_exec("rm -f $contentFile");
-
-foreach(file($allLinksFile) as $url){
-  $url = trim($url);
-  preg_match('#https:\/\/juportal\.just\.fgov\.be\/content\/ViewDecision\.php\?id=([^&]+)#i',$url, $name);
-  $name = $name[1];
-  shell_exec("curl -s 'https://juportal.be/content/$name' > $dossierArretsHTMl/$name.html");
+  $index +=25;
 }
 
 exit;
-
