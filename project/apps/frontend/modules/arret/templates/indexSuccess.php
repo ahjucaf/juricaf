@@ -213,30 +213,21 @@ function printDecisionAttaquee($ref_or_da, $is_text = 0) {
 }
 
 if(isset($document->references)) {
-  foreach ($document->getReferences() as $values) {
-    $i = 0;
-    if(is_array($values) || is_object($values)) {
-      foreach($values as $keys => $value) {
-        if(is_array($value) || is_object($value)) {
-          if(isset($value['type'])) {
-            foreach ($value as $key => $vals) {
-              if($vals !== $value['type']) {
-                $references[$value['type']][$i][$key] = $vals;
-              }
+    foreach ($document->getReferences() as $values) {
+        $i = [];
+        foreach($values as $keys => $value) {
+            if (!isset($value['type'])) {
+                continue;
             }
-          }
+            foreach ($value as $key => $vals) {
+                if ($key == 'type') {
+                    continue;
+                }
+                $references[$value['type']][$i[$value['type']]++][$key] = $vals;
+            }
         }
-        else {
-          if($value !== $values['type']) {
-            $references[$values['type']][0][$keys] = $value;
-          }
-        }
-      $i++;
-      }
     }
-  }
 }
-
 $contributors = '';
 
 if(isset($document->president) || isset($document->avocat_gl) || isset($document->rapporteur) || isset($document->commissaire_gvt) || isset($document->avocats)) {
