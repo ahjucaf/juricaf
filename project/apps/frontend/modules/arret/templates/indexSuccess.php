@@ -287,8 +287,8 @@ if (isset($document->analyses)) {
                 }
                 else {
                     $citations_analyses .= $titre.'<br />';
+                    $citations_analyses = preg_replace('#pourvoi[\x20-\x7E]n°[\x20-\x7E]([0-9]{2}[-][0-9]{2})[.]([0-9]{3})#', '<a href="https://juricaf.org/recherche/num_arret:$1$2$3">pourvoi n° $1$2$3</a>', $citations_analyses);
                 }
-                $citations_analyses = preg_replace('#pourvoi[\x20-\x7E]n°[\x20-\x7E]([0-9]{2}[-][0-9]{2})[.]([0-9]{3})#', '<a href="https://juricaf.org/recherche/num_arret:$1$2$3">pourvoi n° $1$2$3</a>', $titre);
             }
         }
     }
