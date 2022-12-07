@@ -308,7 +308,6 @@ $citations_arret = '';
 $sources = '';
 
 
-if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
     if(isset($references['CITATION_ARRET'])) {
         foreach($references['CITATION_ARRET'] as $value) {
             if(isset($value['nature'], $value['date'], $value['titre'], $value['numero'])) {
@@ -342,9 +341,6 @@ if(isset($references['CITATION_ARRET']) || isset($references['SOURCE'])) {
             else { $sources .= $titre.'<br />'; }
         }
     }
-}
-
-
 
 $decisions_attaquees = '';
 $is_text = 0;
