@@ -39,6 +39,7 @@ if (preg_match('#<p class="champ-entete-table">No Rôle:</p></td> *<td><p class=
   $numero = $m[1];
 }
 
+$arret_text = '';
 if (preg_match('#<div id="plaintext">\s*(\S.+\S)\s*</div> *<p><a href="/JUPORTA#s', $content, $m)){
   $arret_text = $m[1];
   $arret_text = preg_replace("/\s*<p>\s*/", "", $arret_text);
@@ -47,21 +48,22 @@ if (preg_match('#<div id="plaintext">\s*(\S.+\S)\s*</div> *<p><a href="/JUPORTA#
   $arret_text = strip_tags($arret_text);
 }
 
+$audience = ['formation' => false, 'president' => false, 'assesseurs' => false, 'ministere_public' => false, 'greffier' => false ];
 if (preg_match('#<p class="champ-entete-table">Audience:</p></td> *<td><p class="description-entete-table">\s*(\S.*?\S)\s*</p>#', $content, $m)) {
   $meta_audience = explode('<br>', $m[1]);
-  $formation = trim(array_shift($meta_audience));
+  $audience['formation'] = trim(array_shift($meta_audience));
   foreach($meta_audience as $meta) {
     if (preg_match('/ *(\S.*\S), Présidente?/', $meta, $m)) {
-      $president = $m[1];
+      $audience['president'] = $m[1];
     }
     if (preg_match('/ *(\S.*\S), Assesseurs?/', $meta, $m)) {
-      $assesseurs = $m[1];
+      $audience['assesseurs'] = $m[1];
     }
     if (preg_match('/ *(\S.*\S), Ministère public/', $meta, $m)) {
-      $ministere_public = $m[1];
+      $audience['ministere_public'] = $m[1];
     }
     if (preg_match('/ *(\S.*\S), Greffi[eè]re?/', $meta, $m)) {
-      $greffier = $m[1];
+      $audience['greffier'] = $m[1];
     }
   }
 }
@@ -100,19 +102,19 @@ echo("<TEXTE_ARRET>$arret_text</TEXTE_ARRET>\n");
 echo("<TITRE>Belgique, $juridiction, $datefr, $numero</TITRE>\n");
 echo("<SOURCE>$source</SOURCE>\n");
 echo("<TYPE>arret</TYPE>\n");
-if ($formation) {
+if ($formation = $audience['formation']) {
   echo("<FORMATION>$formation</FORMATION>\n");
 }
-if ($president) {
+if ($president = $audience['president']) {
   echo("<PRESIDENT>$president</PRESIDENT>\n");
 }
-if ($assesseurs) {
+if ($assesseurs = $audience['assesseurs']) {
   echo("<ASSESSEURS>$assesseurs</ASSESSEURS>\n");
 }
-if ($ministere_public) {
+if ($ministere_public = $audience['ministere_public']) {
   echo("<MINISTERE_PUBLIC>$ministere_public</MINISTERE_PUBLIC>\n");
 }
-if ($greffier) {
+if ($greffier = $audience['greffier']) {
   echo("<GREFFIER>$greffier</GREFFIER>\n");
 }
 if (count($analyses)) {
