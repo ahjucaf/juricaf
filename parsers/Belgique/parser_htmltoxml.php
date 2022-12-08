@@ -1,7 +1,7 @@
 <?php
 
 if( count($argv) != 3 || !file_exists($argv[1]) ){
-  echo "MISSING HTML FILE OR SOURCE\n";
+  fwrite(STDERR, "MISSING HTML FILE OR SOURCE");
   exit(1);
 }
 $inputfile = $argv[1];
@@ -39,7 +39,6 @@ if (preg_match('#<p class="champ-entete-table">No Rôle:</p></td> *<td><p class=
   $numero = $m[1];
 }
 
-$arret_text = '';
 if (preg_match('#<div id="plaintext">\s*(\S.+\S)\s*</div> *<p><a href="/JUPORTA#s', $content, $m)){
   $arret_text = $m[1];
   $arret_text = preg_replace("/\s*<p>\s*/", "", $arret_text);
@@ -92,6 +91,10 @@ if (preg_match_all('#<fieldset id="(notice\d+)" >.*?<div class="plaintext"> *<p>
   }
 }
 
+if (!isset($dateiso) || !isset($juridiction) || !isset($numero) || !issseet($arret_text)) {
+  fwrite(STDERR, "DONNEES MANQUANTE " . print_r($argv, true));
+  exit(2);
+}
 echo('<?xml version="1.0" encoding="UTF-8"?>'."\n");
 echo("<DOCUMENT>\n");
 echo("<DATE_ARRET>$dateiso</DATE_ARRET>\n");

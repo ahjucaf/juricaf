@@ -44,6 +44,10 @@ while (true) {
       fwrite(STDERR, "arrêt nl => ignore \n");
       continue;
     }
+    if (preg_match('#<h2>(ECLI number .*? NOT FOUND)\s*</h2>#', $content, $errmatch)) {
+      fwrite(STDERR, $errmatch[1]);
+      continue;
+    }
     file_put_contents($filename_html, $content);
     file_put_contents($filename_url, $output_url);
     echo "$filename_html $output_url\n";
