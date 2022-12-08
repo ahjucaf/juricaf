@@ -15,11 +15,11 @@
       <div class="form-inline input-group input-group-lg">
       <input id="recherche" class="form-control mx-auto" autocomplete="off" type="text"
       <?php if($sf_request && $sf_request->getParameter('query') && ($sf_request->getParameter('query') != " ")){
-          echo( "value = '".htmlspecialchars($sf_request->getParameter('query'))."'");
+          echo( "value = '".htmlspecialchars($sf_request->getParameter('query'), ENT_QUOTES)."'");
           $not_autofocus=true;
       }
       elseif($sf_user && $sf_user->getAttribute('query') && ($sf_user->getAttribute('query')!= " ") ){
-        echo( "value = '".htmlspecialchars($sf_user->getAttribute('query'))."'");
+        echo( "value = '".htmlspecialchars($sf_user->getAttribute('query'), ENT_QUOTES)."'");
         $not_autofocus=true;
       }
       ?>

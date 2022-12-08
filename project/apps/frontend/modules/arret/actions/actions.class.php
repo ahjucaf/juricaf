@@ -17,6 +17,7 @@ class arretActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->document = new JuricafArret($request->getParameter('id'));
+    $this->pays = str_replace(' ', '_', $this->document->pays);
     $this->forward404If($this->document->isNew());
     $this->forward404If($this->document->isError());
   }

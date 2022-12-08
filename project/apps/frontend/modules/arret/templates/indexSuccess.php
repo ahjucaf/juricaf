@@ -736,7 +736,7 @@ if(isset($references['PUBLICATION'])) {
             if (!empty($sources)) { $ref[] = $sources; }
             if (!empty($decisions_attaquees)) { $ref[] = $decisions_attaquees; }
             if (!empty($citations_analyses)) {
-                $r = str_replace(']', ']</p><p>', str_replace('. Cf', '.</p><p>Cf', str_replace(' ; ', ' ;</p><p>', preg_replace('/(.)\[/', '\1</p><p>[', str_replace(", et l'", '</p><p>', $citations_analyses)))));
+                $r = str_replace('. Rappr.', '.</p><p>Rappr.', str_replace(']', ']</p><p>', str_replace('. Cf', '.</p><p>Cf', str_replace(' ; ', ' ;</p><p>', preg_replace('/(.)\[/', '\1</p><p>[', str_replace(", et l'", '</p><p>', $citations_analyses))))));
                 $ref = array_merge($ref, explode('</p><p>', $r));
             }
         }

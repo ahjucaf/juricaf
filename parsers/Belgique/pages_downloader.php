@@ -32,6 +32,9 @@ while (true) {
     $filename = $dossierArretsHTML."/".$juriid.".html";
     if (file_exists($filename)) {
       fwrite(STDERR, "arrêt $juriid déjà présent dans $dossierArretsHTML\n");
+      if (!file_exists($filename)) {
+          file_put_contents($dossierArretsHTML."/".$juriid.".url", $output_url);
+      }
       continue;
     }
     fwrite(STDERR, "Enregistre $output_url dans $filename\n");
@@ -41,6 +44,7 @@ while (true) {
       continue;
     }
     file_put_contents($filename, $content);
+    file_put_contents($dossierArretsHTML."/".$juriid.".url", $output_url);
     echo "$filename $output_url\n";
   }
 
