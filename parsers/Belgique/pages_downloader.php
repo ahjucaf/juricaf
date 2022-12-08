@@ -14,8 +14,11 @@ $index=0;
 while (true) {
   fwrite(STDERR, "Récupération du html de $annee ($index)\n");
 
-  $html = file_get_contents("https://e-justice.europa.eu/eclisearch/integrated/beta/search.html?issued=01%2F01%2F".$annee."%2C31%2F12%2F".$annee."&text-language=FR&ascending=false&country-coded=BE&lang=fr&index=$index");
-
+  $html = '';
+  for($i = 0 ; strpos($html, '</html>') === null && $i < 3 ; $i++) {
+    if ($i) { sleep(1); }
+    $html = file_get_contents("https://e-justice.europa.eu/eclisearch/integrated/beta/search.html?issued=01%2F01%2F".$annee."%2C31%2F12%2F".$annee."&text-language=FR&ascending=false&country-coded=BE&lang=fr&index=$index");
+  }
   if (! preg_match_all('#<a target="_blank" href="([^>]+)">https://juportal\.just\.fgov\.be#iU', $html, $links)) {
     break;
   }
@@ -39,13 +42,21 @@ while (true) {
       continue;
     }
     fwrite(STDERR, "Enregistre $output_url dans $filename_html\n");
-    $content = file_get_contents($output_url);
+    $content = '';
+    for($i = 0 ; strpos($content, '</html>') === null && $i < 3 ; $i++) {
+      if ($i) { sleep(1); }
+      $content = file_get_contents($output_url);
+      if (preg_match('#<h2>(ECLI number .*? NOT FOUND)\s*</h2>#', $content, $errmatch)) {
+        fwrite(STDERR, $errmatch[1]);
+        continue 2;
+      }  
+    }
     if (strpos($content, '<html lang="nl">')) {
       fwrite(STDERR, "arrêt nl => ignore \n");
       continue;
     }
-    if (preg_match('#<h2>(ECLI number .*? NOT FOUND)\s*</h2>#', $content, $errmatch)) {
-      fwrite(STDERR, $errmatch[1]);
+    if (! strpos($content, '</html>')) {
+      fwrite(STDERR, "pas de fin de HTML\n");
       continue;
     }
     file_put_contents($filename_html, $content);
