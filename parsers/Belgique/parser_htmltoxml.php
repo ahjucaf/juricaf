@@ -44,6 +44,7 @@ if (preg_match('#<div id="plaintext">\s*(\S.+\S)\s*</div> *<p><a href="/JUPORTA#
   $arret_text = preg_replace("/\s*<p>\s*/", "", $arret_text);
   $arret_text = str_replace('&apos;', "'", $arret_text);
   $arret_text = str_replace("</p>", "\n", $arret_text);
+  $arret_text = str_replace("<br>", "\n", $arret_text);
   $arret_text = strip_tags($arret_text);
 }
 
@@ -91,7 +92,7 @@ if (preg_match_all('#<fieldset id="(notice\d+)" >.*?<div class="plaintext"> *<p>
   }
 }
 
-if (!isset($dateiso) || !isset($juridiction) || !isset($numero) || !issseet($arret_text)) {
+if (!isset($dateiso) || !isset($juridiction) || !isset($numero) || !isset($arret_text)) {
   fwrite(STDERR, "DONNEES MANQUANTE " . print_r($argv, true));
   exit(2);
 }
