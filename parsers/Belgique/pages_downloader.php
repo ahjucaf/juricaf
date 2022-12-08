@@ -34,7 +34,7 @@ while (true) {
     if (file_exists($filename_html)) {
       fwrite(STDERR, "arrêt $juriid déjà présent dans $dossierArretsHTML\n");
       if (!file_exists($filename_url)) {
-          file_put_contents($filename_url, $output_url);
+          file_put_contents($filename_url, $output_url."\n");
       }
       continue;
     }
