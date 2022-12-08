@@ -29,23 +29,24 @@ while (true) {
     }
     $juriid = $jurimatch[1];
     $output_url = "https://juportal.be/content/$juriid/FR";
-    $filename = $dossierArretsHTML."/".$juriid.".html";
-    if (file_exists($filename)) {
+    $filename_html = $dossierArretsHTML."/".$juriid.".html";
+    $filename_url = $dossierArretsHTML."/".$juriid.".url";
+    if (file_exists($filename_html)) {
       fwrite(STDERR, "arrêt $juriid déjà présent dans $dossierArretsHTML\n");
-      if (!file_exists($filename)) {
-          file_put_contents($dossierArretsHTML."/".$juriid.".url", $output_url);
+      if (!file_exists($filename_url)) {
+          file_put_contents($filename_url, $output_url);
       }
       continue;
     }
-    fwrite(STDERR, "Enregistre $output_url dans $filename\n");
+    fwrite(STDERR, "Enregistre $output_url dans $filename_html\n");
     $content = file_get_contents($output_url);
     if (strpos($content, '<html lang="nl">')) {
       fwrite(STDERR, "arrêt nl => ignore \n");
       continue;
     }
-    file_put_contents($filename, $content);
-    file_put_contents($dossierArretsHTML."/".$juriid.".url", $output_url);
-    echo "$filename $output_url\n";
+    file_put_contents($filename_html, $content);
+    file_put_contents($filename_url, $output_url);
+    echo "$filename_html $output_url\n";
   }
 
   $index +=25;
