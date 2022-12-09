@@ -15,7 +15,7 @@ while (true) {
   fwrite(STDERR, "Récupération du html de $annee ($index)\n");
 
   $html = '';
-  for($i = 0 ; strpos($html, '</html>') === null && $i < 3 ; $i++) {
+  for($i = 0 ; strpos($html, '</html>') === false && $i < 3 ; $i++) {
     if ($i) { sleep(1); }
     $html = file_get_contents("https://e-justice.europa.eu/eclisearch/integrated/beta/search.html?issued=01%2F01%2F".$annee."%2C31%2F12%2F".$annee."&text-language=FR&ascending=false&country-coded=BE&lang=fr&index=$index");
   }
