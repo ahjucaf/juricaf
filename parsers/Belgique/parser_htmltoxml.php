@@ -95,8 +95,8 @@ if (preg_match_all('#<fieldset id="(notice\d+)" >.*?<div class="plaintext"> *<p>
 }
 
 if (!isset($dateiso) || !isset($juridiction) || !isset($numero) || !isset($arret_text)) {
-  fwrite(STDERR, print_r($arret_text, true));
-  fwrite(STDERR, "DONNEES MANQUANTE " . print_r($argv, true));
+  fwrite(STDERR, "\n\nDONNEES MANQUANTE " . print_r($argv, true));
+  fwrite(STDERR, print_r([$arret_text,$dateiso,$juridiction,$numero], true));
   exit(2);
 }
 echo('<?xml version="1.0" encoding="UTF-8"?>'."\n");
