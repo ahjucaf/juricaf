@@ -71,6 +71,10 @@ if (preg_match('#<p class="champ-entete-table">Audience:</p></td> *<td><p class=
 if (preg_match('#<p class="champ-entete-table">Domaine juridique:</p></td> *<td><p class="description-entete-table">\s*(\S.*?\S)\s*</p>#', $content, $m)) {
   $type_affaire = $m[1];
 }
+
+// Est-ce qu'il y a une REFERENCE à mettre dans le XML(peut être dans analyse ou dans un fieldset "publications liées")
+$has_ref = false;
+
 $analyses = [];
 if (preg_match_all('#<fieldset id="(notice\d+)" >.*?<div class="plaintext"> *<p>\s*(\S.*?\S)\s*</p>.*?</fieldset>#', $content, $m, PREG_SET_ORDER)) { 
   foreach ($m as $fieldset_match) {
@@ -84,6 +88,7 @@ if (preg_match_all('#<fieldset id="(notice\d+)" >.*?<div class="plaintext"> *<p>
         $tr[2] = str_replace('Lien ELI ', '', $tr[2]);
         $tr[2] = strip_tags($tr[2]);
         if ($tr[1] == 'Bases légales') {
+          $has_ref = true;
           $analyses[$index]['reference'][$tr[2]] = $tr[2];
         } else{
           $analyses[$index]['sommaire'][$tr[2]] = $tr[2];
@@ -91,6 +96,11 @@ if (preg_match_all('#<fieldset id="(notice\d+)" >.*?<div class="plaintext"> *<p>
       }
     }
   }
+}
+
+if (preg_match('#<legend title="">(Publication\(s\) liée\(s\))\s*</legend>\s*<div class="show-lien">\s*<div class="champ-entete">\s*<p>\s*(Jugement/arrêt):\s*</p>\s*</div>\s*<div class="description-entete">\s*<p>\s*(\S.*?\S)\s*</p>\s*</div>#', $content, $m)) {
+  $has_ref = true;
+  $doc_lie = $m[1] . ': ' . $m[2] . ' ' . str_replace('href="/', 'href="https://juportal.be/', str_replace('target="_self"', 'target="_blank"', $m[3]));
 }
 
 if (!isset($dateiso) || !isset($juridiction) || !isset($numero) || !isset($arret_text)) {
@@ -124,7 +134,6 @@ if ($greffier = $audience['greffier']) {
   echo("<GREFFIER>$greffier</GREFFIER>\n");
 }
 if (count($analyses)) {
-  $has_ref = false;
   echo("<ANALYSES>\n");
   foreach($analyses as $notice_id => $analyse)  {
     echo("<ANALYSE>\n");
@@ -132,27 +141,34 @@ if (count($analyses)) {
     echo("<SOMMAIRE>");
     echo(implode(' - ', $analyse['sommaire']));
     if (!empty($analyse['reference'])) {
-      $has_ref = true;
       echo(" [$notice_id]");
     }
     echo("</SOMMAIRE>\n");
     echo("</ANALYSE>\n");
   }
   echo("</ANALYSES>\n");
-  if ($has_ref) {
-    echo("<REFERENCES>\n");
-    foreach($analyses as $notice_id => $analyse)  {
-      if (!empty($analyse['reference'])) {
-        echo("<REFERENCE>\n");
-        echo("<TYPE>CITATION_ANALYSE</TYPE>");
-        echo("<TITRE>");
-        echo("[$notice_id] " . implode(" ; ", $analyse['reference']));
-        echo("</TITRE>");
-        echo("</REFERENCE>\n");
-      }
-    }
-    echo("</REFERENCES>\n");
+}
+if ($has_ref) {
+  echo("<REFERENCES>\n");
+  if(isset($doc_lie)) {
+    echo("<REFERENCE id=\"doc-liee\">\n");
+    echo("<TYPE>PUBLICATIONS_LIEES</TYPE>");
+    echo("<TITRE>");
+    echo($doc_lie);
+    echo("</TITRE>");
+    echo("</REFERENCE>\n");
   }
+  foreach($analyses as $notice_id => $analyse)  {
+    if (!empty($analyse['reference'])) {
+      echo("<REFERENCE id=\"$notice_id\">\n");
+      echo("<TYPE>CITATION_ANALYSE</TYPE>");
+      echo("<TITRE>");
+      echo("[$notice_id] " . implode(" ; ", $analyse['reference']));
+      echo("</TITRE>");
+      echo("</REFERENCE>\n");
+    }
+  }
+  echo("</REFERENCES>\n");
 }
 if(isset($type_affaire)) {
   echo("<TYPE_AFFAIRE>$type_affaire</TYPE_AFFAIRE>\n");
