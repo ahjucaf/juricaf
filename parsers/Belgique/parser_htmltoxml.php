@@ -27,7 +27,8 @@ $juridictions = ["CASS" => "Cour de cassation",
 "CABRL" => "Cour d'appel du ressort de Liège",
 "CAMON" => "Cour d'appel du ressort de Mons",
 "CTBRL" => "Cour du travail de Bruxelles",
-"PIBRL" => "Tribunal de première instance francophone de Bruxelles"];
+"PIBRL" => "Tribunal de première instance francophone de Bruxelles",
+"TTBRW" => "Tribunal du travail du Brabant Wallon"];
 
 if (preg_match("#ECLI:BE:(.+?):#", $name, $j)) {
   $juridiction = $j[1];
