@@ -130,7 +130,7 @@ if (count($analyses)) {
     echo("<TITRE_PRINCIPAL>".$analyse['titre_principal']."</TITRE_PRINCIPAL>\n");
     echo("<SOMMAIRE>");
     echo(implode(' - ', $analyse['sommaire']));
-    if (isset($analyse['reference'])) {
+    if (!empty($analyse['reference'])) {
       $has_ref = true;
       echo(" [$notice_id]");
     }
@@ -141,7 +141,7 @@ if (count($analyses)) {
   if ($has_ref) {
     echo("<REFERENCES>\n");
     foreach($analyses as $notice_id => $analyse)  {
-      if (isset($analyse['reference'])) {
+      if (!empty($analyse['reference'])) {
         echo("<REFERENCE>\n");
         echo("<TYPE>CITATION_ANALYSE</TYPE>");
         echo("<TITRE>");
