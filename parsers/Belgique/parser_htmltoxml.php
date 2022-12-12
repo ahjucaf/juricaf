@@ -13,10 +13,11 @@ $content = preg_replace('/  +/', ' ', $content);
 
 $name = basename($inputfile, ".html");
 
-if (preg_match('#<p class="champ-entete-table">No ECLI:</p></td> *<td><p class="description-entete-table">[^<]*\.(\d{4})(\d{2})(\d{2})\.[^<]*</p>#', $content, $m)) {
-  $mois = ['01' => 'janvier', '02' => 'février', '03' => 'mars', '04' => 'avril', '05' => 'mai', '06' => 'juin', '07' => 'juillet', '08' => 'août', '09' => 'septembre', '10' => 'octobre', '11' => 'novembre', '12' => 'décembre'];
-  $dateiso = "$m[1]-$m[2]-$m[3]";
-  $datefr = $m[3]." ".$mois[$m[2]]." ".$m[1];
+if (preg_match('#<legend title="">.*?(\d{2}) ([^\s]+) (\d{4})\s*</legend>#', $content, $m)) {
+  $mois = ['janvier' => '01', 'février' => '02', 'mars' => '03', 'avril' => '04', 'mai' => '05', 'juin' => '06', 'juillet' => '07', 'août' => '08', 'septembre' => '09', 'octobre' => '10', 'novembre' => '11', 'décembre' => '12'];
+  $moisfr = html_entity_decode($m[2]);
+  $datefr = $m[1].' '.$moisfr.' '.$m[3];
+  $dateiso = $m[3].'-'.$mois[$moisfr].'-'.$m[1];
 }
 
 $juridictions = ["CASS" => "Cour de cassation",
@@ -26,7 +27,8 @@ $juridictions = ["CASS" => "Cour de cassation",
 "CABRL" => "Cour d'appel du ressort de Liège",
 "CAMON" => "Cour d'appel du ressort de Mons",
 "CTBRL" => "Cour du travail de Bruxelles",
-"PIBRL" => "Tribunal de première instance francophone de Bruxelles"];
+"PIBRL" => "Tribunal de première instance francophone de Bruxelles",
+"TTBRW" => "Tribunal du travail du Brabant Wallon"];
 
 if (preg_match("#ECLI:BE:(.+?):#", $name, $j)) {
   $juridiction = $j[1];
@@ -35,17 +37,17 @@ if (preg_match("#ECLI:BE:(.+?):#", $name, $j)) {
   }
 }
 
-if (preg_match('#<p class="champ-entete-table">No Rôle:</p></td> *<td><p class="description-entete-table">(.+?)</p>#', $content, $m)) {
+if (preg_match('#<p class="champ-entete-table">(?:No Arrêt/)?No Rôle:</p></td> *<td><p class="description-entete-table">(.+?)</p>#', $content, $m)) {
   $numero = $m[1];
 }
 
-if (preg_match('#<fieldset\s*id="text">.*?<div\s*id="plaintext">\s*(\S.+?\S)\s*</div>#', $content, $m)){
+if (preg_match('#<fieldset\s*id="text">.*?<div\s*id="plaintext">(.+?)</div>#', $content, $m)){
   $arret_text = $m[1];
   $arret_text = preg_replace("/\s*<p>\s*/", "", $arret_text);
   $arret_text = str_replace('&apos;', "'", $arret_text);
   $arret_text = str_replace("</p>", "\n", $arret_text);
   $arret_text = str_replace("<br>", "\n", $arret_text);
-  $arret_text = strip_tags($arret_text);
+  $arret_text = trim(strip_tags($arret_text));
 }
 
 $audience = ['formation' => false, 'president' => false, 'assesseurs' => false, 'ministere_public' => false, 'greffier' => false ];
@@ -70,6 +72,10 @@ if (preg_match('#<p class="champ-entete-table">Audience:</p></td> *<td><p class=
 if (preg_match('#<p class="champ-entete-table">Domaine juridique:</p></td> *<td><p class="description-entete-table">\s*(\S.*?\S)\s*</p>#', $content, $m)) {
   $type_affaire = $m[1];
 }
+
+// Est-ce qu'il y a une REFERENCE à mettre dans le XML(peut être dans analyse ou dans un fieldset "publications liées")
+$has_ref = false;
+
 $analyses = [];
 if (preg_match_all('#<fieldset id="(notice\d+)" >.*?<div class="plaintext"> *<p>\s*(\S.*?\S)\s*</p>.*?</fieldset>#', $content, $m, PREG_SET_ORDER)) { 
   foreach ($m as $fieldset_match) {
@@ -83,6 +89,7 @@ if (preg_match_all('#<fieldset id="(notice\d+)" >.*?<div class="plaintext"> *<p>
         $tr[2] = str_replace('Lien ELI ', '', $tr[2]);
         $tr[2] = strip_tags($tr[2]);
         if ($tr[1] == 'Bases légales') {
+          $has_ref = true;
           $analyses[$index]['reference'][$tr[2]] = $tr[2];
         } else{
           $analyses[$index]['sommaire'][$tr[2]] = $tr[2];
@@ -92,9 +99,14 @@ if (preg_match_all('#<fieldset id="(notice\d+)" >.*?<div class="plaintext"> *<p>
   }
 }
 
+if (preg_match('#<legend title="">(Publication\(s\) liée\(s\))\s*</legend>\s*<div class="show-lien">\s*<div class="champ-entete">\s*<p>\s*([^:]+):\s*</p>\s*</div>\s*<div class="description-entete">\s*<p>\s*(\S.*?\S)\s*</p>\s*</div>#', $content, $m)) {
+  $has_ref = true;
+  $doc_lie = $m[1] . ': ' . $m[2] . ' ' . str_replace('href="/', 'href="https://juportal.be/', str_replace('target="_self"', 'target="_blank"', $m[3]));
+}
+
 if (!isset($dateiso) || !isset($juridiction) || !isset($numero) || !isset($arret_text)) {
-  fwrite(STDERR, print_r($arret_text, true));
-  fwrite(STDERR, "DONNEES MANQUANTE " . print_r($argv, true));
+  fwrite(STDERR, "\n\nDONNEES MANQUANTE " . print_r($argv, true));
+  fwrite(STDERR, print_r([$arret_text,$dateiso,$juridiction,$numero], true));
   exit(2);
 }
 echo('<?xml version="1.0" encoding="UTF-8"?>'."\n");
@@ -123,7 +135,6 @@ if ($greffier = $audience['greffier']) {
   echo("<GREFFIER>$greffier</GREFFIER>\n");
 }
 if (count($analyses)) {
-  $has_ref = false;
   echo("<ANALYSES>\n");
   foreach($analyses as $notice_id => $analyse)  {
     echo("<ANALYSE>\n");
@@ -131,27 +142,34 @@ if (count($analyses)) {
     echo("<SOMMAIRE>");
     echo(implode(' - ', $analyse['sommaire']));
     if (!empty($analyse['reference'])) {
-      $has_ref = true;
       echo(" [$notice_id]");
     }
     echo("</SOMMAIRE>\n");
     echo("</ANALYSE>\n");
   }
   echo("</ANALYSES>\n");
-  if ($has_ref) {
-    echo("<REFERENCES>\n");
-    foreach($analyses as $notice_id => $analyse)  {
-      if (!empty($analyse['reference'])) {
-        echo("<REFERENCE>\n");
-        echo("<TYPE>CITATION_ANALYSE</TYPE>");
-        echo("<TITRE>");
-        echo("[$notice_id] " . implode(" ; ", $analyse['reference']));
-        echo("</TITRE>");
-        echo("</REFERENCE>\n");
-      }
-    }
-    echo("</REFERENCES>\n");
+}
+if ($has_ref) {
+  echo("<REFERENCES>\n");
+  if(isset($doc_lie)) {
+    echo("<REFERENCE id=\"doc-liee\">\n");
+    echo("<TYPE>PUBLICATIONS_LIEES</TYPE>");
+    echo("<TITRE>");
+    echo($doc_lie);
+    echo("</TITRE>");
+    echo("</REFERENCE>\n");
   }
+  foreach($analyses as $notice_id => $analyse)  {
+    if (!empty($analyse['reference'])) {
+      echo("<REFERENCE id=\"$notice_id\">\n");
+      echo("<TYPE>CITATION_ANALYSE</TYPE>");
+      echo("<TITRE>");
+      echo("[$notice_id] " . implode(" ; ", $analyse['reference']));
+      echo("</TITRE>");
+      echo("</REFERENCE>\n");
+    }
+  }
+  echo("</REFERENCES>\n");
 }
 if(isset($type_affaire)) {
   echo("<TYPE_AFFAIRE>$type_affaire</TYPE_AFFAIRE>\n");

@@ -794,9 +794,9 @@ if($res['pays'] == 'France' && !array_key_exists($res['juridiction'], $abbr_juri
       $ville = str_replace(array($key, " de ", " d'"), '', $res['juridiction']);
       $ville = preg_replace('/[^A-Z]/', '.', strtoupper(replaceAccents($ville)));
       $abbr_ville = $value.'.'.$ville;
+      $ecli = 'ECLI:FR:'.$abbr_ville.':'.substr($res['date_arret'], 0, 4).':'.$num_arret_ecli;
     }
   }
-  $ecli = 'ECLI:FR:'.$abbr_ville.':'.substr($res['date_arret'], 0, 4).':'.$num_arret_ecli;
 }
 
 // URN:LEX
