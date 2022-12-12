@@ -14,7 +14,6 @@ $content = preg_replace('/  +/', ' ', $content);
 $name = basename($inputfile, ".html");
 
 if (preg_match('#<legend title="">.*?(\d{2}) ([^\s]+) (\d{4})\s*</legend>#', $content, $m)) {
-  //if (preg_match('#<p class="champ-entete-table">No ECLI:</p></td> *<td><p class="description-entete-table">[^<]*\.(\d{4})(\d{2})(\d{2})\.[^<]*</p>#', $content, $m)) {
   $mois = ['janvier' => '01', 'février' => '02', 'mars' => '03', 'avril' => '04', 'mai' => '05', 'juin' => '06', 'juillet' => '07', 'août' => '08', 'septembre' => '09', 'octobre' => '10', 'novembre' => '11', 'décembre' => '12'];
   $moisfr = html_entity_decode($m[2]);
   $datefr = $m[1].' '.$moisfr.' '.$m[3];
