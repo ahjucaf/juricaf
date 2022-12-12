@@ -13,10 +13,12 @@ $content = preg_replace('/  +/', ' ', $content);
 
 $name = basename($inputfile, ".html");
 
-if (preg_match('#<p class="champ-entete-table">No ECLI:</p></td> *<td><p class="description-entete-table">[^<]*\.(\d{4})(\d{2})(\d{2})\.[^<]*</p>#', $content, $m)) {
-  $mois = ['01' => 'janvier', '02' => 'février', '03' => 'mars', '04' => 'avril', '05' => 'mai', '06' => 'juin', '07' => 'juillet', '08' => 'août', '09' => 'septembre', '10' => 'octobre', '11' => 'novembre', '12' => 'décembre'];
-  $dateiso = "$m[1]-$m[2]-$m[3]";
-  $datefr = $m[3]." ".$mois[$m[2]]." ".$m[1];
+if (preg_match('#<legend title="">.*?(\d{2}) ([^\s]+) (\d{4})\s*</legend>#', $content, $m)) {
+  //if (preg_match('#<p class="champ-entete-table">No ECLI:</p></td> *<td><p class="description-entete-table">[^<]*\.(\d{4})(\d{2})(\d{2})\.[^<]*</p>#', $content, $m)) {
+  $mois = ['janvier' => '01', 'février' => '02', 'mars' => '03', 'avril' => '04', 'mai' => '05', 'juin' => '06', 'juillet' => '07', 'août' => '08', 'septembre' => '09', 'octobre' => '10', 'novembre' => '11', 'décembre' => '12'];
+  $moisfr = html_entity_decode($m[2]);
+  $datefr = $m[1].' '.$moisfr.' '.$m[3];
+  $dateiso = $m[3].'-'.$mois[$moisfr].'-'.$m[1];
 }
 
 $juridictions = ["CASS" => "Cour de cassation",
