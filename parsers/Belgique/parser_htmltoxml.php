@@ -37,7 +37,7 @@ if (preg_match("#ECLI:BE:(.+?):#", $name, $j)) {
   }
 }
 
-if (preg_match('#<p class="champ-entete-table">No Rôle:</p></td> *<td><p class="description-entete-table">(.+?)</p>#', $content, $m)) {
+if (preg_match('#<p class="champ-entete-table">(?:No Arrêt/)?No Rôle:</p></td> *<td><p class="description-entete-table">(.+?)</p>#', $content, $m)) {
   $numero = $m[1];
 }
 
