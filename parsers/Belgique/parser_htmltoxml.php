@@ -41,13 +41,13 @@ if (preg_match('#<p class="champ-entete-table">No Rôle:</p></td> *<td><p class=
   $numero = $m[1];
 }
 
-if (preg_match('#<fieldset\s*id="text">.*?<div\s*id="plaintext">\s*(\S.+?\S)\s*</div>#', $content, $m)){
+if (preg_match('#<fieldset\s*id="text">.*?<div\s*id="plaintext">(.+?)</div>#', $content, $m)){
   $arret_text = $m[1];
   $arret_text = preg_replace("/\s*<p>\s*/", "", $arret_text);
   $arret_text = str_replace('&apos;', "'", $arret_text);
   $arret_text = str_replace("</p>", "\n", $arret_text);
   $arret_text = str_replace("<br>", "\n", $arret_text);
-  $arret_text = strip_tags($arret_text);
+  $arret_text = trim(strip_tags($arret_text));
 }
 
 $audience = ['formation' => false, 'president' => false, 'assesseurs' => false, 'ministere_public' => false, 'greffier' => false ];
