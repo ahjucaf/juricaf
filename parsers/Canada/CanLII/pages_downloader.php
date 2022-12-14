@@ -1,6 +1,5 @@
 <?php 
 
-$dossierArretsHTML = "./html";
 $dossierArretsJSON = "./json";
 
 $firstResult = 0;
@@ -32,25 +31,28 @@ while(true){
   }
 
   foreach($json_result->results as $arret){
-    
-    $json_name = str_replace(".html",".json",$dossierArretsJSON."/".$arret->raw->sysfilename);
-    file_put_contents($json_name, json_encode($arret, JSON_PRETTY_PRINT));
+    $name_json = str_replace(".html",".json",$arret->raw->sysfilename);
+    file_put_contents($dossierArretsJSON."/".$name_json.'-meta', json_encode($arret, JSON_PRETTY_PRINT));
     
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, str_replace("http","https",$arret->printableUri));
+    $uniqid = $arret->uniqueId;
+    $url = "https://unik.caij.qc.ca/rest/search/text?pipeline=unik&debug=0&uniqueId=".$uniqid."&errorsAsSuccess=1";
+    curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_PROXYTYPE, 7);
-    
+
     $result = curl_exec($ch);
     if (curl_errno($ch)) {
         echo 'Error:' . curl_error($ch);
     }
     curl_close($ch);
-    $html = $result;
-    file_put_contents($dossierArretsHTML."/".$arret->raw->sysfilename,$html);
+
+    file_put_contents($dossierArretsJSON."/".$name_json.'-content', $result);
+
+    $source = $arret->raw->sysuri;
+    echo "$name_json $source\n";
+
   }
   
   $firstResult = $numberOfResults;
   $numberOfResults += 100;
-  
 }
