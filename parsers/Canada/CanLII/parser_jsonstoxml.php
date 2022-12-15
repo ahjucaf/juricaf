@@ -6,13 +6,14 @@ if( count($argv) != 4 || !file_exists($argv[1]) || !file_exists($argv[2]) ){  //
 }
 
 $meta_json = $argv[1];
-$content_json = $argv[2];
+$content_html = $argv[2];
 $source = $argv[3];
 
 $meta_content = json_decode(file_get_contents($meta_json));
 $date = $meta_content->raw->datejurisprudence;
 $numero = $meta_content->raw->dossier;
-$juridiction = "Cour Suprème";
+
+$juridiction = $meta_content->raw->tribunal;
 $reference = $meta_content->raw->referenceneutre;
 
 $mois = ['01' => 'janvier', '02' => 'février', '03' => 'mars', '04' => 'avril', '05' => 'mai', '06' => 'juin', '07' => 'juillet', '08' => 'août', '09' => 'septembre', '10' => 'octobre', '11' => 'novembre', '12' => 'décembre'];
