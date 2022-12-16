@@ -4,7 +4,7 @@ $dossierArretsJSON = "./json";
 $dossierArretsHTML = "./json";
 
 $firstResult = 0;
-$numberOfResults = 100; //on fera une boucle sur ça pour tous les récupérer.
+$numberOfResults = 100;
 
 while(true){
   
@@ -30,7 +30,7 @@ while(true){
   }
 
   foreach($json_result->results as $arret){
-    $json_file = $dossierArretsJSON."/".str_replace(".html",".json",$arret->raw->sysfilename);
+    $json_file = $dossierArretsJSON."/".str_replace(".html","-meta.json",$arret->raw->sysfilename);
     file_put_contents($json_file, json_encode($arret, JSON_PRETTY_PRINT));
     
     $ch = curl_init();
@@ -46,12 +46,11 @@ while(true){
     }
     curl_close($ch);
 
-    $html_file = $dossierArretsHTML."/".str_replace(".html",".json",$arret->raw->sysfilename)."-content";
+    $html_file = $dossierArretsHTML."/".str_replace(".html","-content.json",$arret->raw->sysfilename);
     file_put_contents($html_file, $result);
 
     $source = $arret->raw->sysuri;
     echo "$json_file $html_file $source\n";
-    // echo($arret->raw->tribunal."\n");
 
   }
   
