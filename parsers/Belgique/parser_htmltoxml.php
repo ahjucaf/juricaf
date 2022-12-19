@@ -69,6 +69,7 @@ if (preg_match('#<p class="champ-entete-table">Audience:</p></td> *<td><p class=
     }
   }
 }
+
 if (preg_match('#<p class="champ-entete-table">Domaine juridique:</p></td> *<td><p class="description-entete-table">\s*(\S.*?\S)\s*</p>#', $content, $m)) {
   $type_affaire = $m[1];
 }
@@ -111,13 +112,13 @@ if (!isset($dateiso) || !isset($juridiction) || !isset($numero) || !isset($arret
 }
 echo('<?xml version="1.0" encoding="UTF-8"?>'."\n");
 echo("<DOCUMENT>\n");
-echo("<DATE_ARRET>$dateiso</DATE_ARRET>\n");
+echo("<PAYS>Belgique</PAYS>\n");
 echo("<JURIDICTION>$juridiction</JURIDICTION>\n");
 echo("<NUM_ARRET>$numero</NUM_ARRET>\n");
-echo("<PAYS>Belgique</PAYS>\n");
+echo("<DATE_ARRET>$dateiso</DATE_ARRET>\n");
+echo("<SOURCE>$source</SOURCE>\n");
 echo("<TEXTE_ARRET>$arret_text</TEXTE_ARRET>\n");
 echo("<TITRE>Belgique, $juridiction, $datefr, $numero</TITRE>\n");
-echo("<SOURCE>$source</SOURCE>\n");
 echo("<TYPE>arret</TYPE>\n");
 if ($formation = $audience['formation']) {
   echo("<FORMATION>$formation</FORMATION>\n");
