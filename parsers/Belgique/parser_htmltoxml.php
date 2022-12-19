@@ -106,9 +106,10 @@ if (preg_match('#<legend title="">(Publication\(s\) liée\(s\))\s*</legend>\s*<d
   $doc_lie = $m[1] . ': ' . $m[2] . ' ' . str_replace('href="/', 'href="https://juportal.be/', str_replace('target="_self"', 'target="_blank"', $m[3]));
 }
 
-if (!isset($dateiso) || !isset($juridiction) || !isset($numero) || !isset($arret_text)) {
-  fwrite(STDERR, "\n\nDONNEES MANQUANTE " . print_r($argv, true));
-  fwrite(STDERR, print_r([$arret_text,$dateiso,$juridiction,$numero], true));
+if (!isset($dateiso) || !isset($juridiction) || !isset($numero) || !$arret_text) {
+  fwrite(STDERR, "\nDONNEES MANQUANTE : " . implode(' ',$argv));
+  fwrite(STDERR, "[$arret_text,$dateiso,$juridiction,$numero]");
+  fwrite(STDERR, "\n");
   exit(2);
 }
 echo('<?xml version="1.0" encoding="UTF-8"?>'."\n");
