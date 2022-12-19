@@ -48,6 +48,7 @@ if (preg_match('#<fieldset\s*id="text">.*?<div\s*id="plaintext">(.+?)</div>#', $
   $arret_text = str_replace("</p>", "\n", $arret_text);
   $arret_text = str_replace("<br>", "\n", $arret_text);
   $arret_text = trim(strip_tags($arret_text));
+  $arret_text = htmlentities(html_entity_decode($arret_text), ENT_XML1);
 }
 
 $audience = ['formation' => false, 'president' => false, 'assesseurs' => false, 'ministere_public' => false, 'greffier' => false ];
