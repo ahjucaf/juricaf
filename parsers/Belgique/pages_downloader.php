@@ -35,11 +35,12 @@ while (true) {
     $filename_html = $dossierArretsHTML."/".$juriid.".html";
     $filename_url = $dossierArretsHTML."/".$juriid.".url";
     if (file_exists($filename_html)) {
-      fwrite(STDERR, "arrêt $juriid déjà présent dans $dossierArretsHTML\n");
-      if (!file_exists($filename_url)) {
-          file_put_contents($filename_url, $output_url."\n");
-      }
+      fwrite(STDERR, "Arrêt ! $juriid déjà présent dans $dossierArretsHTML\n");
+      echo "$filename_html $output_url\n";
       continue;
+    }
+    if (!file_exists($filename_url)) {
+        file_put_contents($filename_url, $output_url."\n");
     }
     fwrite(STDERR, "Enregistre $output_url dans $filename_html\n");
     $content = '';
@@ -47,16 +48,16 @@ while (true) {
       if ($i) { sleep(1); }
       $content = file_get_contents($output_url);
       if (preg_match('#<h2>(ECLI number .*? NOT FOUND)\s*</h2>#', $content, $errmatch)) {
-        fwrite(STDERR, $errmatch[1]);
+        fwrite(STDERR, "Arrêt ! " . $errmatch[1]);
         continue 2;
-      }  
+      }
     }
     if (strpos($content, '<html lang="nl">')) {
-      fwrite(STDERR, "arrêt nl => ignore \n");
+      fwrite(STDERR, "Arrêt ! NL => ignore \n");
       continue;
     }
     if (! strpos($content, '</html>')) {
-      fwrite(STDERR, "pas de fin de HTML\n");
+      fwrite(STDERR, "Arrêt ! Pas de fin de HTML.\n");
       continue;
     }
     file_put_contents($filename_html, $content);
