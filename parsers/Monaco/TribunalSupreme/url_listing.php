@@ -15,20 +15,12 @@ foreach ($fichiers as $k => $v) {
       $ligne=trim($ligne);
       $html=$html.$ligne;
     }
-
-
-
-
-    // $html=$html[0];
-    // print_r($html);
     preg_match('/<div class="content">(.+)/',$html,$res);
-    // print_r($res);
     $content=$res[1];
 
     preg_match_all('/<a href="([^"]+)"/',$content,$lien);
     $lien=$lien[1];
     foreach($lien as $k=>$v){
-          // echo($v);
           if ($v!='https://www.tribunal-supreme.mc/' && $v!="https://www.tribunal-supreme.mc/mentions-legales/" && $v!='#tarteaucitron' && stristr($v,'communique')!=True){
             if($k%2 == 0){
               if (count($lignes_all_urls)>0){
@@ -55,7 +47,6 @@ $lignes=file('tmp/urls.txt');
 foreach($lignes as $ligne){
       if (in_array($ligne,$lignes_all_urls)!=True){
         fwrite($all_urls,$ligne);
-        // echo($ligne);
       }
 }
 fclose($all_urls);
