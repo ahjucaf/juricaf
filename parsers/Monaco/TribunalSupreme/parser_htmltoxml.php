@@ -52,7 +52,6 @@ else{
 }
 preg_match('/c\/(.+)/',$titre,$defendeur);
 if(count($defendeur)>1){
-// print_r($defendeur);
   $defendeur=$defendeur[1];
 }
 else{
@@ -62,13 +61,10 @@ else{
 if($demandeur=='' && $defendeur==''){
 
     if(strpos($content,'Affaire')!=null && strpos($content,'Contre')!=null){
-        preg_match('/Affaire(.+?)Contre/',$content,$parties);   //regarde si c'est le cas avec l'arret Affaire et Contre
-        // print_r($parties);
+        preg_match('/Affaire(.+?)Contre/',$content,$parties);   
 
-        if (count($parties)>1){                    //si c'est le cas avec l'arret Affaire et Contre
+        if (count($parties)>1){
             preg_match('/<strong>(.+?)<\/strong><\/p>/',$parties[1],$demandeur);
-            // print_r($demandeur);
-            // echo($v);
             if (count($demandeur)>1){
                 $demandeur=$demandeur[0];
                 $demandeur=strip_tags($demandeur);
@@ -79,10 +75,8 @@ if($demandeur=='' && $defendeur==''){
       }
 
         preg_match('/Contre.+<p style="text-align: right;"><strong>(.+?)<h1/',$content,$def);
-        // print_r($def);
         if(count($def)>1){
           preg_match('/(.+?)<\/p>/',$def[1],$defendeur);
-          // print_r($defendeur);
           $defendeur=$defendeur[1];
           $defendeur=strip_tags($defendeur);
         }
@@ -94,17 +88,14 @@ if($demandeur=='' && $defendeur==''){
     elseif(strpos($content,'En la cause de')!=null && strpos($content,'Contre')!=null){
 
         preg_match('/<p><strong>En(.+?)<\/strong><\/p><p><strong>(.+?)<\/strong>/',$content,$demandeur);
-        // print_r($defendeur);
         if(count($demandeur)>1){
         $demandeur=$demandeur[2];
       }
         else{
           $demandeur='';
         }
-        // $defendeur='Honorine';
         preg_match('/Contre<\/strong> :<\/p><p><strong>(.+?)<\/strong>/',$content,$defendeur);
-        // print_r($defendeur);
-        // echo($content);
+
         if(count($defendeur)>1){
         $defendeur=$defendeur[1];
       }
@@ -126,8 +117,6 @@ $content=preg_replace('#<b>#',"\n",$content);
 $content=strip_tags($content);
 $content=preg_replace("/\n/","<br/>",$content);
 
-// $content=trim($content);
-// preg_match('/<strong>([^<]+)/',$content,$parties);
 
 $d=new DateTime($date);
 $date_min=new DateTime('2019-05-01');
