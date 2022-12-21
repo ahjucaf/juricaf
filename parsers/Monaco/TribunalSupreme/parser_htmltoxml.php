@@ -20,13 +20,18 @@ $date=$a.'-'.$m.'-'.$j;
 
 preg_match('/<p class="date">.+<\/p><h1>([^<]+)/',$content,$titre);
 $titre=$titre[1];
-preg_match('/[0-9]+[-]+.+[0-9]/',$titre,$numero);
+
+preg_match("#TS ([0-9][^ ]+[0-9])#",$titre,$numero);
 
 if ($numero==null){
   $numero=='';
 }
 else{
-  $numero=$numero[0];
+  $numero=$numero[1];
+}
+
+if ( strpos($titre,"Communiqué") !== false){
+  $numero = $numero."-Communiqué";
 }
 
 $juridiction1='Tribunal suprême';
