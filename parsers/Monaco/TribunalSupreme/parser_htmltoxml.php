@@ -31,7 +31,7 @@ else{
 }
 
 if ( strpos($titre,"Communiqué") !== false){
-  $numero = $numero."-Communiqué";
+  $numero = '';
 }
 
 $juridiction1='Tribunal suprême';
