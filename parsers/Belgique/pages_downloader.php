@@ -24,10 +24,14 @@ while (true) {
   }
 
   foreach ($links[1] as $link) {
+    fwrite(STDERR, $link);
+
     if (! preg_match('#https:\/\/juportal\.just\.fgov\.be\/content\/ViewDecision\.php\?id=([^&]+)#i',$link, $jurimatch)) {
+      fwrite(STDERR, "Arrêt ! Ce n'est pas une décision : on prend pas.\n");
       continue;
     }
     if (empty($jurimatch[1])) {
+      fwrite(STDERR, "Arrêt ! Pas d'id.\n");
       continue;
     }
     $juriid = $jurimatch[1];
@@ -43,7 +47,9 @@ while (true) {
         file_put_contents($filename_url, $output_url."\n");
     }
     fwrite(STDERR, "Enregistre $output_url dans $filename_html\n");
+
     $content = '';
+    // Le HTML n'a pas de balise de fin, probable erreur réseau, on retente 3 fois
     for($i = 0 ; strpos($content, '</html>') === null && $i < 3 ; $i++) {
       if ($i) { sleep(1); }
       $content = file_get_contents($output_url);
@@ -53,7 +59,7 @@ while (true) {
       }
     }
     if (strpos($content, '<html lang="nl">')) {
-      fwrite(STDERR, "Arrêt ! NL => ignore \n");
+      fwrite(STDERR, "Arrêt ! NL => ignoré \n");
       continue;
     }
     if (! strpos($content, '</html>')) {
