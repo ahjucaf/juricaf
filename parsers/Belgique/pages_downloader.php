@@ -15,11 +15,14 @@ while (true) {
   fwrite(STDERR, "Récupération du html de $annee ($index)\n");
 
   $html = '';
+  // Le HTML n'a pas de balise de fin, probable erreur réseau, on retente 3 fois
   for($i = 0 ; strpos($html, '</html>') === false && $i < 3 ; $i++) {
     if ($i) { sleep(1); }
+    fwrite(STDERR, "Chargement du html de la page\n");
     $html = file_get_contents("https://e-justice.europa.eu/eclisearch/integrated/beta/search.html?issued=01%2F01%2F".$annee."%2C31%2F12%2F".$annee."&text-language=FR&ascending=false&country-coded=BE&lang=fr&index=$index");
   }
   if (! preg_match_all('#<a target="_blank" href="([^>]+)">https://juportal\.just\.fgov\.be#iU', $html, $links)) {
+    fwrite(STDERR, "Arrêt ! Pas de juportal\.just\.fgov\.be\n");
     break;
   }
 
