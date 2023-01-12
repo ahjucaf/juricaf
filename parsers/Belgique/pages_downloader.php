@@ -3,23 +3,25 @@
 $dossierArretsHTML = "./html";
 
 if(!$argv[1]){
-  echo "MISSING YEAR\n";
+  echo "MISSING DATE\n";
   exit(1);
 }
-$annee = intval( $argv[1] );
-
+// arg 1 au format Y-m-d
+$date = explode('-', $argv[1]);
 
 $index=0;
 
 while (true) {
-  fwrite(STDERR, "Récupération du html de $annee ($index)\n");
+  fwrite(STDERR, "Récupération du html des arrêts jusqu'au ".$argv[1]." ($index)\n");
 
   $html = '';
   // Le HTML n'a pas de balise de fin, probable erreur réseau, on retente 3 fois
   for($i = 0 ; strpos($html, '</html>') === false && $i < 3 ; $i++) {
     if ($i) { sleep(1); }
     fwrite(STDERR, "Chargement du html de la page\n");
-    $html = file_get_contents("https://e-justice.europa.eu/eclisearch/integrated/beta/search.html?issued=01%2F01%2F".$annee."%2C31%2F12%2F".$annee."&text-language=FR&ascending=false&country-coded=BE&lang=fr&index=$index");
+    // Les arrêts de la cour de cassation et constitutionnelle sur un an glissant (cas des traductions en FR qui peuvent arriver quelques mois après la publi en lang NL)
+    $url = "https://e-justice.europa.eu/eclisearch/integrated/search.html?country-coded=BE&text-language=FR&lang=fr&issued=".$date[2]."%2F".$date[1]."%2F".(intval($date[0])-1)."%2C".$date[2]."%2F".$date[1]."%2F".$date[0]."&ascending=false&type-coded=02&court=BE-GHCC%2CBE-CASS&index=$index";
+    $html = file_get_contents($url);
   }
   if (! preg_match_all('#<a target="_blank" href="([^>]+)">https://juportal\.just\.fgov\.be#iU', $html, $links)) {
     fwrite(STDERR, "Arrêt ! Pas de juportal\.just\.fgov\.be\n");
@@ -29,10 +31,6 @@ while (true) {
   foreach ($links[1] as $link) {
     fwrite(STDERR, "$link\n");
 
-    if (! preg_match('#https:\/\/juportal\.just\.fgov\.be\/content\/ViewDecision\.php\?id=([^&]+)#i',$link, $jurimatch)) {
-      fwrite(STDERR, "Arrêt ! Ce n'est pas une décision : on prend pas.\n");
-      continue;
-    }
     if (empty($jurimatch[1])) {
       fwrite(STDERR, "Arrêt ! Pas d'id.\n");
       continue;
