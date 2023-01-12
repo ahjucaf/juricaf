@@ -27,7 +27,7 @@ while (true) {
   }
 
   foreach ($links[1] as $link) {
-    fwrite(STDERR, $link);
+    fwrite(STDERR, "$link\n");
 
     if (! preg_match('#https:\/\/juportal\.just\.fgov\.be\/content\/ViewDecision\.php\?id=([^&]+)#i',$link, $jurimatch)) {
       fwrite(STDERR, "Arrêt ! Ce n'est pas une décision : on prend pas.\n");
