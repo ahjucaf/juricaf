@@ -53,7 +53,7 @@ while (true) {
 
     $content = '';
     // Le HTML n'a pas de balise de fin, probable erreur réseau, on retente 3 fois
-    for($i = 0 ; strpos($content, '</html>') === null && $i < 3 ; $i++) {
+    for($i = 0 ; strpos($content, '</html>') === false && $i < 3 ; $i++) {
       if ($i) { sleep(1); }
       $content = file_get_contents($output_url);
       if (preg_match('#<h2>(ECLI number .*? NOT FOUND)\s*</h2>#', $content, $errmatch)) {
