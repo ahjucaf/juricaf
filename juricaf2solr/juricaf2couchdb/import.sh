@@ -113,7 +113,7 @@ do
       if grep not_found $JSONFILE.orig > /dev/null ; then
         rm $JSONFILE.orig
       fi
-      if test -n $JSONFILE.orig ; then
+      if test -f $JSONFILE.orig && test -n $JSONFILE.orig ; then
         php json_update.php $JSONFILE.orig $JSONFILE.tmp >> $JSONFILE
       else
         cat $JSONFILE.tmp >> $JSONFILE
