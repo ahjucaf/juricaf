@@ -100,19 +100,15 @@ do
     juridiction=$(echo $y | sed 's/.*juridiction_//' |  sed 's/\/.*//' | sed 's/_/ /g');
     fi;
 
-    while true ; do
-        php juricaf2json.php "$y" "$pays" "$juridiction" > $JSONFILE.tmp 2> $JSONFILE.err
-        RET=$?
-        cat $JSONFILE.err | grep 'id":"' >> $LOG
-        cat $JSONFILE.err | grep -v 'id":"'
-        if test $RET = 0; then
-          break;
-        fi
-        if test $RET = 33; then
-          rm $JSONFILE.tmp
-          break;
-        fi
-    done ;
+    php juricaf2json.php "$y" "$pays" "$juridiction" > $JSONFILE.tmp 2> $JSONFILE.err
+    RET=$?
+    cat $JSONFILE.err | grep 'id":"' >> $LOG
+    cat $JSONFILE.err | grep -v 'id":"'
+    if test $RET > 0; then
+      rm $JSONFILE.tmp
+      echo "ERROR $y:" >> $LOG
+      cat $JSONFILE.err >> $LOG
+    fi
     if test -e $JSONFILE.tmp; then
       DOCID=$(cat $JSONFILE.tmp | sed 's/.*_id":"//'  | sed 's/".*//')
       curl -s $COUCHDBURL"/"$DOCID > $JSONFILE.orig
