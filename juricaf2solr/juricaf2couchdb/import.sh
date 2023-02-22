@@ -110,6 +110,9 @@ do
     if test -e $JSONFILE.tmp; then
       DOCID=$(cat $JSONFILE.tmp | sed 's/.*_id":"//'  | sed 's/".*//')
       curl -s $COUCHDBURL"/"$DOCID > $JSONFILE.orig
+      if grep not_found $JSONFILE.orig > /dev/null ; then
+        rm $JSONFILE.orig
+      fi
       if test -n $JSONFILE.orig ; then
         php json_update.php $JSONFILE.orig $JSONFILE.tmp >> $JSONFILE
       else
