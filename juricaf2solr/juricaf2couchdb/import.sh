@@ -52,7 +52,7 @@ function add2couch {
   if ! test -s $JSONFILE ; then
   return;
   fi
-  sed 's/^/{"docs":[/' $JSONFILE | sed 's/,$/]}/' > $JSONFILE.tmp;
+  sed '1s/^/{"docs":[/' $JSONFILE | sed 's/,$/]}/' > $JSONFILE.tmp;
   mv $JSONFILE.tmp $JSONFILE ;
   curl -H"Content-Type: application/json" -s -d @$JSONFILE  -X POST "$COUCHDBURL/_bulk_docs" | sed 's/"},{"/\n/g' >> $LOG.tmp
   grep -v '"conflict"' $LOG.tmp >> $LOG
