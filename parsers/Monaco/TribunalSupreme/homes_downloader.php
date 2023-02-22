@@ -18,7 +18,8 @@ function url_exist($url){
   }
 }
 
-$headurl='https://www.tribunal-supreme.mc/decisions/page/';
+$headurl='https://www.tribunal-supreme.mc/catgorie/decisions/page/';
+
 $dossier='tmp/home_pages';
 
 

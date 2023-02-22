@@ -3,31 +3,36 @@
 $dossierArretsHTML = "./html";
 
 if(!$argv[1]){
-  echo "MISSING YEAR\n";
+  echo "MISSING DATE\n";
   exit(1);
 }
-$annee = intval( $argv[1] );
-
+// arg 1 au format Y-m-d
+$date = explode('-', $argv[1]);
 
 $index=0;
 
 while (true) {
-  fwrite(STDERR, "Récupération du html de $annee ($index)\n");
+  fwrite(STDERR, "Récupération du html des arrêts jusqu'au ".$argv[1]." ($index)\n");
 
   $html = '';
+  // Le HTML n'a pas de balise de fin, probable erreur réseau, on retente 3 fois
   for($i = 0 ; strpos($html, '</html>') === false && $i < 3 ; $i++) {
     if ($i) { sleep(1); }
-    $html = file_get_contents("https://e-justice.europa.eu/eclisearch/integrated/beta/search.html?issued=01%2F01%2F".$annee."%2C31%2F12%2F".$annee."&text-language=FR&ascending=false&country-coded=BE&lang=fr&index=$index");
+    fwrite(STDERR, "Chargement du html de la page\n");
+    // Les arrêts de la cour de cassation et constitutionnelle sur un an glissant (cas des traductions en FR qui peuvent arriver quelques mois après la publi en lang NL)
+    $url = "https://e-justice.europa.eu/eclisearch/integrated/search.html?country-coded=BE&text-language=FR&lang=fr&issued=".$date[2]."%2F".$date[1]."%2F".(intval($date[0])-1)."%2C".$date[2]."%2F".$date[1]."%2F".$date[0]."&ascending=false&type-coded=02&court=BE-GHCC%2CBE-CASS&index=$index";
+    $html = file_get_contents($url);
   }
   if (! preg_match_all('#<a target="_blank" href="([^>]+)">https://juportal\.just\.fgov\.be#iU', $html, $links)) {
+    fwrite(STDERR, "Arrêt ! Pas de juportal\.just\.fgov\.be\n");
     break;
   }
 
   foreach ($links[1] as $link) {
-    if (! preg_match('#https:\/\/juportal\.just\.fgov\.be\/content\/ViewDecision\.php\?id=([^&]+)#i',$link, $jurimatch)) {
-      continue;
-    }
+    fwrite(STDERR, "$link\n");
+
     if (empty($jurimatch[1])) {
+      fwrite(STDERR, "Arrêt ! Pas d'id.\n");
       continue;
     }
     $juriid = $jurimatch[1];
@@ -43,8 +48,10 @@ while (true) {
         file_put_contents($filename_url, $output_url."\n");
     }
     fwrite(STDERR, "Enregistre $output_url dans $filename_html\n");
+
     $content = '';
-    for($i = 0 ; strpos($content, '</html>') === null && $i < 3 ; $i++) {
+    // Le HTML n'a pas de balise de fin, probable erreur réseau, on retente 3 fois
+    for($i = 0 ; strpos($content, '</html>') === false && $i < 3 ; $i++) {
       if ($i) { sleep(1); }
       $content = file_get_contents($output_url);
       if (preg_match('#<h2>(ECLI number .*? NOT FOUND)\s*</h2>#', $content, $errmatch)) {
@@ -53,7 +60,7 @@ while (true) {
       }
     }
     if (strpos($content, '<html lang="nl">')) {
-      fwrite(STDERR, "Arrêt ! NL => ignore \n");
+      fwrite(STDERR, "Arrêt ! NL => ignoré \n");
       continue;
     }
     if (! strpos($content, '</html>')) {

@@ -1,8 +1,16 @@
 #!/bin/bash
 
+cd $(dirname $0)
+. config/config.inc
+
 mkdir -p json xml
 
-php pages_downloader.php | while read json_name source; do
-    xmlfile=$(echo $json_name | sed 's/json/xml/g')
-    php parser_jsonstoxml.php json/$json_name-meta json/$json_name-content $source > xml/$xmlfile;
+php pages_downloader.php | while read json_meta json_content ; do
+    xmlfile=$(echo $json_meta | sed 's/json/xml/g'| sed 's/-meta//g')
+    php parser_jsonstoxml.php $json_meta $json_content > $xmlfile
+    if ! test -s $xmlfile;then
+      rm $xmlfile;
+    else
+      cp $xmlfile $POOL_DIR/
+    fi
 done
