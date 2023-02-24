@@ -72,3 +72,5 @@ parsers/cedh/last_kpdate.txt
 parsers/cedh/last_kpdate.txt.new
 parsers/cedh/arrets/
 parsers/cedh/config.inc
+parsers/Canada/CanLII/json/
+parsers/Canada/CanLII/xml/

@@ -52,7 +52,7 @@ function add2couch {
   if ! test -s $JSONFILE ; then
   return;
   fi
-  sed 's/^/{"docs":[/' $JSONFILE | sed 's/,$/]}/' > $JSONFILE.tmp;
+  sed '1s/^/{"docs":[/' $JSONFILE | sed 's/,$/]}/' > $JSONFILE.tmp;
   mv $JSONFILE.tmp $JSONFILE ;
   curl -H"Content-Type: application/json" -s -d @$JSONFILE  -X POST "$COUCHDBURL/_bulk_docs" | sed 's/"},{"/\n/g' >> $LOG.tmp
   grep -v '"conflict"' $LOG.tmp >> $LOG
@@ -100,23 +100,20 @@ do
     juridiction=$(echo $y | sed 's/.*juridiction_//' |  sed 's/\/.*//' | sed 's/_/ /g');
     fi;
 
-    while true ; do
-        php juricaf2json.php "$y" "$pays" "$juridiction" > $JSONFILE.tmp 2> $JSONFILE.err
-        RET=$?
-        cat $JSONFILE.err | grep 'id":"' >> $LOG
-        cat $JSONFILE.err | grep -v 'id":"'
-        if test $RET = 0; then
-          break;
-        fi
-        if test $RET = 33; then
-          rm $JSONFILE.tmp
-          break;
-        fi
-    done ;
+    if ! php juricaf2json.php "$y" "$pays" "$juridiction" > $JSONFILE.tmp 2> $JSONFILE.err ; then
+      rm $JSONFILE.tmp
+      echo "ERROR $y:"
+      cat $JSONFILE.err | grep -v 'id":"'
+      echo
+    fi
+    cat $JSONFILE.err | grep 'id":"' >> $LOG
     if test -e $JSONFILE.tmp; then
       DOCID=$(cat $JSONFILE.tmp | sed 's/.*_id":"//'  | sed 's/".*//')
       curl -s $COUCHDBURL"/"$DOCID > $JSONFILE.orig
-      if test -n $JSONFILE.orig ; then
+      if grep not_found $JSONFILE.orig > /dev/null ; then
+        rm $JSONFILE.orig
+      fi
+      if test -f $JSONFILE.orig && test -n $JSONFILE.orig ; then
         php json_update.php $JSONFILE.orig $JSONFILE.tmp >> $JSONFILE
       else
         cat $JSONFILE.tmp >> $JSONFILE

@@ -48,6 +48,7 @@ if (preg_match('#<fieldset\s*id="text">.*?<div\s*id="plaintext">(.+?)</div>#', $
   $arret_text = str_replace("</p>", "\n", $arret_text);
   $arret_text = str_replace("<br>", "\n", $arret_text);
   $arret_text = trim(strip_tags($arret_text));
+  $arret_text = htmlentities(html_entity_decode($arret_text), ENT_XML1);
 }
 
 $audience = ['formation' => false, 'president' => false, 'assesseurs' => false, 'ministere_public' => false, 'greffier' => false ];
@@ -69,6 +70,7 @@ if (preg_match('#<p class="champ-entete-table">Audience:</p></td> *<td><p class=
     }
   }
 }
+
 if (preg_match('#<p class="champ-entete-table">Domaine juridique:</p></td> *<td><p class="description-entete-table">\s*(\S.*?\S)\s*</p>#', $content, $m)) {
   $type_affaire = $m[1];
 }
@@ -104,20 +106,21 @@ if (preg_match('#<legend title="">(Publication\(s\) liée\(s\))\s*</legend>\s*<d
   $doc_lie = $m[1] . ': ' . $m[2] . ' ' . str_replace('href="/', 'href="https://juportal.be/', str_replace('target="_self"', 'target="_blank"', $m[3]));
 }
 
-if (!isset($dateiso) || !isset($juridiction) || !isset($numero) || !isset($arret_text)) {
-  fwrite(STDERR, "\n\nDONNEES MANQUANTE " . print_r($argv, true));
-  fwrite(STDERR, print_r([$arret_text,$dateiso,$juridiction,$numero], true));
+if (!isset($dateiso) || !isset($juridiction) || !isset($numero) || !$arret_text) {
+  fwrite(STDERR, "\nDONNEES MANQUANTE : " . implode(' ',$argv));
+  fwrite(STDERR, "[$arret_text,$dateiso,$juridiction,$numero]");
+  fwrite(STDERR, "\n");
   exit(2);
 }
 echo('<?xml version="1.0" encoding="UTF-8"?>'."\n");
 echo("<DOCUMENT>\n");
-echo("<DATE_ARRET>$dateiso</DATE_ARRET>\n");
+echo("<PAYS>Belgique</PAYS>\n");
 echo("<JURIDICTION>$juridiction</JURIDICTION>\n");
 echo("<NUM_ARRET>$numero</NUM_ARRET>\n");
-echo("<PAYS>Belgique</PAYS>\n");
+echo("<DATE_ARRET>$dateiso</DATE_ARRET>\n");
+echo("<SOURCE>$source</SOURCE>\n");
 echo("<TEXTE_ARRET>$arret_text</TEXTE_ARRET>\n");
 echo("<TITRE>Belgique, $juridiction, $datefr, $numero</TITRE>\n");
-echo("<SOURCE>$source</SOURCE>\n");
 echo("<TYPE>arret</TYPE>\n");
 if ($formation = $audience['formation']) {
   echo("<FORMATION>$formation</FORMATION>\n");
