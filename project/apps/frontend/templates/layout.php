@@ -146,7 +146,7 @@
        <span class="d-lg-none">Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones. Il est soutenu par l'Organisation Internationale de la Francophonie.</span>
        <span class="d-none d-lg-block col-6 mx-auto">Juricaf est un projet de l'AHJUCAF, l'association des Cours suprêmes judiciaires francophones. Il est soutenu par l'Organisation Internationale de la Francophonie.</span>
        <div class="pt-3 p-2">
-           <img height="44" width="224" src="/images/iall.jpg" />
+           <a href="https://iall.org/iall-2012-website-award-winner/"><img height="44" width="224" src="/images/iall.jpg" alt="Logo iall 2012 website award" /></a>
        </div>
     </div>
 </div>
