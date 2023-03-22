@@ -3,7 +3,7 @@
 cd $(dirname $0)
 . config/config.inc
 
-mkdir -p json xml
+mkdir -p json xml $POOL_DIR
 
 php pages_downloader.php | while read json_meta json_content ; do
     xmlfile=$(echo $json_meta | sed 's/json/xml/g'| sed 's/-meta//g')
