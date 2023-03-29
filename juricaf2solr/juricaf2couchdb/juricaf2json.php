@@ -1,10 +1,10 @@
 <?php
 setlocale(LC_TIME, 'fr_FR.UTF8', 'fr.UTF8', 'fr_FR.UTF-8', 'fr.UTF-8');
 
-$xml_filename = $argv[1];
-$origin_filename = $argv[2];
-$arg_pays = $argv[3];
-$arg_juridiction = $argv[4];
+$xml_filename = isset($argv[1]) ? $argv[1] : '';
+$origin_filename = isset($argv[2]) ? $argv[2] : '';
+$arg_pays = isset($argv[3]) ? $argv[3] : '';
+$arg_juridiction = isset($argv[4]) ? $argv[4] : '';
 
 global $errors;
 $errors = array();
