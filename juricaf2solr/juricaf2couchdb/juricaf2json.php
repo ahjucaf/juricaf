@@ -1,6 +1,11 @@
 <?php
 setlocale(LC_TIME, 'fr_FR.UTF8', 'fr.UTF8', 'fr_FR.UTF-8', 'fr.UTF-8');
 
+$xml_filename = $argv[1];
+$origin_filename = $argv[2];
+$arg_pays = $argv[3];
+$arg_juridiction = $argv[4];
+
 global $errors;
 $errors = array();
 
@@ -166,25 +171,25 @@ function correctWrongSpelling($string) {
 }
 
 // Chargement du fichier xml
-$obj = simplexml_load_file("data.xml", 'SimpleXMLElement', LIBXML_COMPACT | LIBXML_NOCDATA | LIBXML_NOENT | LIBXML_NOBLANKS);
+$obj = simplexml_load_file($xml_filename, 'SimpleXMLElement', LIBXML_COMPACT | LIBXML_NOCDATA | LIBXML_NOENT | LIBXML_NOBLANKS);
 $res = (array)$obj;
 $res = cleanArray($res);
 
 if (!count($res)) {
-  fprintf(STDERR, 'id":"UNKNOWN","error":"XML parsing","reason":"Cannot parse '.$argv[1]."\"\n");
+  fprintf(STDERR, 'id":"UNKNOWN","error":"XML parsing","reason":"Cannot parse '.$xml_filename." ($origin_filename)\"\n");
   exit(33);
 }
 
 $res['type'] = 'arret';
 
-if(!isset($res['pays']) && isset($argv[2])) { $res['pays'] = $argv[2]; }
+if(!isset($res['pays']) && $arg_pays) { $res['pays'] = $arg_pays; }
 if(isset($res['pays'])) { $res['pays'] = toString($res['pays']); }
 if(empty($res['pays'])) { addError("pays manquant"); $res['pays'] = 'inconnu'; }
 if (!in_array($res['pays'], array('CEDH', 'CJUE'))) {
     $res['pays'] = ucfirst(strtolower($res['pays']));
 }
 
-if(!isset($res['juridiction']) && isset($argv[3])) { $res['juridiction'] = $argv[3]; }
+if(!isset($res['juridiction']) && $arg_juridiction) { $res['juridiction'] = $arg_juridiction; }
 if(isset($res['juridiction'])) { $res['juridiction'] = toString($res['juridiction']); }
 if(empty($res['juridiction'])) { addError("juridiction manquante"); $res['juridiction'] = 'inconnue'; }
 $res['juridiction'] = ucfirst(strtolower($res['juridiction']));

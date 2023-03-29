@@ -100,7 +100,7 @@ do
     juridiction=$(echo $y | sed 's/.*juridiction_//' |  sed 's/\/.*//' | sed 's/_/ /g');
     fi;
 
-    if ! php juricaf2json.php "$y" "$pays" "$juridiction" > $JSONFILE.tmp 2> $JSONFILE.err ; then
+    if ! php juricaf2json.php "data.xml" "$y" "$pays" "$juridiction" > $JSONFILE.tmp 2> $JSONFILE.err ; then
       rm $JSONFILE.tmp
       echo "ERROR $y:"
       cat $JSONFILE.err | grep -v 'id":"'
