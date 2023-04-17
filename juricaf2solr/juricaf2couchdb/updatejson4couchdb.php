@@ -5,7 +5,7 @@ $id  = $argv[2];
 $rev = $argv[3];
 $json = json_decode(file_get_contents($file));
 if (!$json || !isset($json->docs)) {
-    error_log('ERROR: '.$file.' has no "docs" entity');
+    error_log('ERROR: '.$file.' ($id / $rev) has no "docs" entity');
     exit(1);
 }
 foreach ($json->docs as $j) {
