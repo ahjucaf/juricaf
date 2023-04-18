@@ -78,4 +78,11 @@ class arretActions extends sfActions
         return ;
     }
   }
+
+  public function executeRedirect2Admin(sfWebRequest $request)
+  {
+      $id = $request->getParameter('id');
+      return $this->redirect(sfConfig::get('app_admin_baseurl').$id);
+  }
+
 }

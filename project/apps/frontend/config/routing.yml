@@ -47,6 +47,10 @@ arret_attachment:
   url: /arret/:id/attachment
   param: {module: arret, action: attachment}
 
+arret_admin:
+  url: /arret/:id/admin
+  param: {module: arret, action: redirect2Admin}
+
 arret:
   url: /arret/:id
   param: {module: arret, action: index}
