@@ -55,6 +55,10 @@ arret:
   url: /arret/:id
   param: {module: arret, action: index}
 
+admin_home:
+   url: /admin
+   param: {module: admin, action: list}
+
 admin_list:
    url: /admin/list
    param: {module: admin, action: list}

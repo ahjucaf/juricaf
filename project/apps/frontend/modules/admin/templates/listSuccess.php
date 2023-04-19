@@ -7,7 +7,7 @@ table {border-spacing: 0px;
  td {padding-left: 10px; padding-right: 10px;}
  .light {color: #888888;}
 </style>
-<form name='editor' id='editor'>
+<form action="<?php echo url_for('@admin_list'); ?>" name='editor' id='editor'>
 <p>
       Filtrer par mots cles : <input name="qa" value="<?php echo $qa; ?>" onChange="$('#modif_champ').val('');$('#changed').val(1);"/> <input type="submit" name="filter" value="Filtrer"/>
 </p>
