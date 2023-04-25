@@ -258,7 +258,7 @@ if ($pager['begin']) {
         Page <?php echo $pager['last'] + 1; ?> des
 <?php endif; ?>
         <?php echo $nbResultats;?> résultats trouvés :
-        <a onclick="navigator.clipboard.writeText(this.href); alert('Le lien RSS a été copié dans le presse-papier'); return false;" href="<?php echo $sf_request->getUri().'?format=rss'; ?>" class="text-muted float-end"><i class="bi bi-rss"></i></a>
+        <a onclick="navigator.clipboard.writeText(this.href); _paq.push(['trackEvent', 'RSS', 'Lien RSS copié', '<?php echo $sf_request->getUri().'?format=rss'; ?>']); alert('Le lien RSS a été copié dans le presse-papier'); return false;" href="<?php echo $sf_request->getUri().'?format=rss'; ?>" class="text-muted float-end"><i class="bi bi-rss"></i></a>
     </p>
     <?php else: ?>
     <p class="text-center">Aucun résultat trouvé</p>
