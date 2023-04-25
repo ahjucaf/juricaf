@@ -186,6 +186,8 @@ class rechercheActions extends sfActions
             $this->filtre_juridiction = $juridiction;
         }
     }
+
+    $this->rss_uri = explode('?', $request->getUri())[0] . '?format=rss';
   }
 
   private function convertDate($date) {

@@ -104,7 +104,7 @@ if ($pager['begin']) {
     $title .= " - page ".($pager['last'] + 1);
 }
 slot("metadata");
-include_partial("metadata", array('url_flux' => $sf_request->getUri().'?format=rss', 'titre_flux' => "S'abonner à cette recherche"));
+include_partial("metadata", array('url_flux' => $rss_uri, 'titre_flux' => "S'abonner à cette recherche"));
 end_slot();
 $sf_response->setTitle($title);
 $sf_response->addMeta('description', $description);
@@ -258,7 +258,7 @@ if ($pager['begin']) {
         Page <?php echo $pager['last'] + 1; ?> des
 <?php endif; ?>
         <?php echo $nbResultats;?> résultats trouvés :
-        <a onclick="navigator.clipboard.writeText(this.href); _paq.push(['trackEvent', 'RSS', 'Lien RSS copié', '<?php echo $sf_request->getUri().'?format=rss'; ?>']); alert('Le lien RSS a été copié dans le presse-papier'); return false;" href="<?php echo $sf_request->getUri().'?format=rss'; ?>" class="text-muted float-end"><i class="bi bi-rss"></i></a>
+        <a onclick="navigator.clipboard.writeText(this.href); _paq.push(['trackEvent', 'RSS', 'Lien RSS copié', '<?php echo $rss_uri; ?>']); alert('Le lien RSS a été copié dans le presse-papier'); return false;" href="<?php echo $rss_uri; ?>" class="text-muted float-end"><i class="bi bi-rss"></i></a>
     </p>
     <?php else: ?>
     <p class="text-center">Aucun résultat trouvé</p>
