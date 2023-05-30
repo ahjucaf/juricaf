@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd $(dirname $0)
-. ../config.inc
+. ../config/config.inc
 if [ -d "tmp" ];then
   rm -r tmp
 fi
@@ -28,5 +28,5 @@ fi
 nbr_xml=$(ls -A "xmls" | wc -l)
 
 if [ $nbr_xml != '0' ];then
-  cp xmls/* $POOL
+  cp xmls/* $POOL_DIR"/Monaco"
 fi

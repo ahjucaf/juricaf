@@ -1,8 +1,9 @@
 #!/bin/bash
 
 cd $(dirname $0)
-. config.inc
-mkdir -p $POOL_DIR
+. ../config/config.inc
+
+mkdir -p $POOL_DIR"/luxembourg/"
 
 bash pdf_downloader.sh | while read pdf ; do
     echo -n $pdf";";
@@ -10,6 +11,6 @@ bash pdf_downloader.sh | while read pdf ; do
     echo
 done | awk -F ';' '{print $8}' | grep 'xml$' | while read xml ; do
     if test -f $xml ; then
-        cp $xml $POOL_DIR
+        cp $xml $POOL_DIR"/luxembourg/"
     fi
 done

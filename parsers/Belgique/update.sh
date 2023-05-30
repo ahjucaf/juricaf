@@ -1,10 +1,10 @@
 #!/bin/bash
 
 cd $(dirname $0)
-. config/config.inc
+. ../config/config.inc
 
 mkdir -p html xml
-mkdir -p $POOL_DIR
+mkdir -p $POOL_DIR"/Belgique"
 
 if [ $# -eq 0 ]; then
     date=$(curl -s "https://juricaf.org/recherche/+/facet_pays_juridiction%3ABelgique_%7C_Cour_de_cassation%2Cfacet_pays%3ABelgique?format=json&tri=DESC" | jq .docs[0].date_arret | sed 's/"//g' | sed 's/T.*//')
@@ -25,8 +25,8 @@ php pages_downloader.php "$date" | while read htmlfile source; do
 
         # si le xml n'est pas vide (juportal.be peut renvoyer des html avec pas de données dedans => xml généré plus haut est vide)
         if [ $xmlsize -gt 0 ]; then
-            echo "xml -> pool"
-            cp $xmlfile $POOL_DIR/
+            echo "xml $xmlfile -> pool $POOL_DIR/Belgique"
+            cp $xmlfile $POOL_DIR"/Belgique"
         fi
     fi
 done

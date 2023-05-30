@@ -2,11 +2,11 @@
 
 cd $(dirname $0)
 
-. config.inc
+. ../config/config.inc
 
-mkdir -p $DOC_DIR"/justice.public.lu"
+mkdir -p "docs/justice.public.lu"
 
-DATEFILE=$DOC_DIR"/justice.public.lu/.update"
+DATEFILE="docs/justice.public.lu/.update"
 
 #repérage des arrêts en parcourrant la pagination
 for nexturl in https://justice.public.lu/fr/jurisprudence/cour-cassation.html https://justice.public.lu/fr/jurisprudence/juridictions-administratives.html; do
@@ -28,14 +28,14 @@ for nexturl in https://justice.public.lu/fr/jurisprudence/cour-cassation.html ht
 #réorganisation de linformtion pour avoir un CSV correctement organisé
 done | awk -F ';' '{gsub(/\//, ";", $17); print $10 ";" $1 ";" $17}' | grep '[0-9]' | sed 's|^/|https://justice.public.lu/|' | sed 's/\r//g' |
 #écriture des commandes wget qui télécharge les arrêts suivant le bon format
-awk -F ';' 'BEGIN{print "cd '$DOC_DIR'/justice.public.lu"} {url=$1 ; nom=url ; gsub(/.*\//, "", nom); gsub(/[()]/, "", nom); if ( url ~ /http/ ) print "wget -q -nc -O "$5 $4 $3 "_" $2 "_$(echo \""url"\" | sha256sum | cut -d \" \" -f 1)_"nom" \""url"\" && echo \""url"\" > "$5 $4 $3 "_" $2 "_$(echo \""url"\" | sha256sum | cut -d \" \" -f 1)_"nom".url"}' |
+awk -F ';' 'BEGIN{print "cd docs/justice.public.lu"} {url=$1 ; nom=url ; gsub(/.*\//, "", nom); gsub(/[()]/, "", nom); if ( url ~ /http/ ) print "wget -q -nc -O "$5 $4 $3 "_" $2 "_$(echo \""url"\" | sha256sum | cut -d \" \" -f 1)_"nom" \""url"\" && echo \""url"\" > "$5 $4 $3 "_" $2 "_$(echo \""url"\" | sha256sum | cut -d \" \" -f 1)_"nom".url"}' |
 #réalisation du téléchargement
 sh
 
 if ! test -f $DATEFILE ; then
        touch -t 7001010000 $DATEFILE
 fi
-find $DOC_DIR"/justice.public.lu/" -name '*pdf' -type f -newer $DATEFILE -exec ls -1 --full-time '{}' ';' | awk '{print $6"_"$7" "$9}' | sort  | grep '[a-z]' | awk '{print $2}' > /tmp/$$.list
+find "docs/justice.public.lu/" -name '*pdf' -type f -newer $DATEFILE -exec ls -1 --full-time '{}' ';' | awk '{print $6"_"$7" "$9}' | sort  | grep '[a-z]' | awk '{print $2}' > /tmp/$$.list
 if test -s /tmp/$$.list ; then
     touch -r $(tail -n 1 /tmp/$$.list) $DATEFILE
     cat /tmp/$$.list
