@@ -13,6 +13,8 @@ use IO::Socket::SSL;
 
 $parser = XML::LibXML->new();
 
+$verbose = ($ARGV[0]);
+
 my $matrix = {
   'fr'=>['droit','recours','contre'],
   'de'=>['recht','urteil','gegen'],
@@ -43,20 +45,20 @@ my %deja;
 while ($redate < time) {
   ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime($redate);
   $string = sprintf("%04d%02d%02d",$year+1900,$mon+1,$mday);
-warn($string);
+  warn($string) if ($verbose);
   $ru = $ua->get('http://relevancy.bger.ch/php/aza/http/index_aza.php?date='.$string.'&lang=fr&mode=news');
   $dhtml = $ru->content;
   $dhtml =~ s/[\n\r\t\s]+/ /g;
   (@as) = grep { /show_document$/ } $dhtml =~ /href="(\/php\/aza.*?)"/ig;
   foreach $a (@as) {
-$a =~ /aza\:\/\/(\d\d)\-(\d\d)\-(\d{4})\-/ and $candy = "$3$2$1";
-$oadate = str2time(substr($candy,0,4).'-'.substr($candy,4,2).'-'.substr($candy,6,2).'T01:01:01');
-next() unless($oadate >= $date);
-next() if($deja{$a});
-$deja{$a}++;
+    $a =~ /aza\:\/\/(\d\d)\-(\d\d)\-(\d{4})\-/ and $candy = "$3$2$1";
+    $oadate = str2time(substr($candy,0,4).'-'.substr($candy,4,2).'-'.substr($candy,6,2).'T01:01:01');
+    next() unless($oadate >= $date);
+    next() if($deja{$a});
+    $deja{$a}++;
     $a =~ s/&amp;/&/g;
     $url = 'http://relevancy.bger.ch'.$a;
-    print " = $url\n";
+    print " = $url\n" if ($verbose);
     $ra = $ua->get($url);
     $dchtml = encode('utf-8',decode_entities($ra->content));
 
