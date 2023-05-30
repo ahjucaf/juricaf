@@ -21,9 +21,9 @@ my $matrix = {
 
 $ua = LWP::UserAgent->new();
 my $ua = LWP::UserAgent->new(
-  ssl_opts => { 
-        verify_hostname => 0, 
-        SSL_verify_mode => IO::Socket::SSL::SSL_VERIFY_NONE 
+  ssl_opts => {
+        verify_hostname => 0,
+        SSL_verify_mode => IO::Socket::SSL::SSL_VERIFY_NONE
   },
 );
 $ua->agent('Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0');
@@ -127,12 +127,11 @@ $deja{$a}++;
       }
       $root->appendChild($texte);
       $reference =~ s/\//-/g;
-      $fille = 'SUISSE_'.$reference.'.xml';
-      $doc->toFile($fille);
-      $datenum =~ /(\d\d)\.(20\d\d)/ and `zip suisse$2-$1.zip $fille` or die("ici pas d'année");
-      unlink($fille);
+      $filename = 'SUISSE_'.$reference.'.xml';
+      $doc->toFile('tmp/'.$filename);
+      $datenum =~ /(\d\d)\.(20\d\d)/ or die("ici pas d'année");
+      rename('tmp/'.$filename, 'pool/'.$filename) or die('impossible de déplacer le fichier xml');
     }
   }
   $redate = $redate+(24*60*60);
 }
-
