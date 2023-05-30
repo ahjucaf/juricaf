@@ -168,6 +168,7 @@ class rechercheActions extends sfActions
             $this->json = true;
             $this->setLayout(false);
             $this->getResponse()->setContentType('application/json');
+            $this->setTemplate('json');
     } elseif ($request->getParameter('format') === 'rss') {
             $this->setLayout(false);
             $this->getResponse()->setContentType('application/rss+xml');
