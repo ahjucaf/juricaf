@@ -1,5 +1,0 @@
-<?php
-
-$mailserver = "mail.provider.com";
-$mailaddress = "contact@ahjucaf.org";
-$mailpassword = "MOT DE PASSE";
