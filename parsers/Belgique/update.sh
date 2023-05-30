@@ -7,7 +7,7 @@ mkdir -p html xml
 mkdir -p $POOL_DIR
 
 if [ $# -eq 0 ]; then
-    date=$(curl -s "https://juricaf.org/recherche/+/facet_pays%3ABelgique?format=json" | jq .docs[0].date_arret | sed 's/"//g' | sed 's/T.*//')
+    date=$(curl -s "https://juricaf.org/recherche/+/facet_pays_juridiction%3ABelgique_%7C_Cour_de_cassation%2Cfacet_pays%3ABelgique?format=json&tri=DESC" | jq .docs[0].date_arret | sed 's/"//g' | sed 's/T.*//')
 else
     date="${1}-12-31"
 fi
