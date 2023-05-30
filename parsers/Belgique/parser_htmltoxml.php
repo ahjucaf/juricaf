@@ -40,6 +40,9 @@ if (preg_match("#ECLI:BE:(.+?):#", $name, $j)) {
 if (preg_match('#<p class="champ-entete-table">(?:No Arrêt/)?No Rôle:</p></td> *<td><p class="description-entete-table">(.+?)</p>#', $content, $m)) {
   $numero = $m[1];
 }
+if (preg_match('/([CDFGNPS])([0-9][0-9])([0-9]{4})([FN]V?)/', $numero, $m)) {
+  $numero = $m[1].'.'.$m[2].'.'.$m[3].'.'.$m[4];
+}
 
 if (preg_match('#<fieldset\s*id="text">.*?<div\s*id="plaintext">(.+?)</div>#', $content, $m)){
   $arret_text = $m[1];
@@ -106,9 +109,9 @@ if (preg_match('#<legend title="">(Publication\(s\) liée\(s\))\s*</legend>\s*<d
   $doc_lie = $m[1] . ': ' . $m[2] . ' ' . str_replace('href="/', 'href="https://juportal.be/', str_replace('target="_self"', 'target="_blank"', $m[3]));
 }
 
-if (!isset($dateiso) || !isset($juridiction) || !isset($numero) || !$arret_text) {
+if (!$dateiso || !$juridiction || !$numero || !$arret_text) {
   fwrite(STDERR, "\nDONNEES MANQUANTE : " . implode(' ',$argv));
-  fwrite(STDERR, "[$arret_text,$dateiso,$juridiction,$numero]");
+  fwrite(STDERR, " [$arret_text,$dateiso,$juridiction,$numero]");
   fwrite(STDERR, "\n");
   exit(2);
 }

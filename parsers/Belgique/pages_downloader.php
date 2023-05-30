@@ -31,6 +31,10 @@ while (true) {
   foreach ($links[1] as $link) {
     fwrite(STDERR, "$link\n");
 
+    if (! preg_match('#https:\/\/juportal\.just\.fgov\.be\/content\/ViewDecision\.php\?id=([^&]+)#i',$link, $jurimatch)) {
+     fwrite(STDERR, "Arrêt ! Ce n'est pas une décision : on prend pas.\n");
+     continue;
+    }
     if (empty($jurimatch[1])) {
       fwrite(STDERR, "Arrêt ! Pas d'id.\n");
       continue;
@@ -67,6 +71,10 @@ while (true) {
       fwrite(STDERR, "Arrêt ! Pas de fin de HTML.\n");
       continue;
     }
+    if (strpos($content, 'Cette publication est en préparation ou a été supprimée')) {
+        fwrite(STDERR, "publication en préparation ou supprimée => ignore \n");
+        continue;
+    }
     file_put_contents($filename_html, $content);
     file_put_contents($filename_url, $output_url);
     echo "$filename_html $output_url\n";
@@ -74,5 +82,3 @@ while (true) {
 
   $index +=25;
 }
-
-exit;
