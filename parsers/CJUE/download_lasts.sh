@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl -s https://curia.europa.eu/jcms/jcms/P_106311/fr/ | grep 'FR/TXT' | grep "CELEX:" | sed 's/[&_]/\n/g' | grep CELEX | sed 's/.*CELEX://' | grep -v img | sort -u | while read celex ; do
+curl -s https://curia.europa.eu/jcms/jcms/P_106311/fr/ | grep 'FR/TXT' | grep "CELEX:" | sed "s/[&_']/\n/g" | grep CELEX | sed 's/.*CELEX://' | grep -v img | sort -u | while read celex ; do
     ISNEW=""
     if ! test -f data/$celex.xml ; then
         curl -s -L -H "Accept: application/xml;notice=branch" -H "Accept-language: fr" http://publications.europa.eu/resource/celex/$celex > data/$celex.xml
