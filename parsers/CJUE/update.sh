@@ -5,7 +5,7 @@ cd $(dirname $0)
 . ../config/config.inc
 
 mkdir -p xml data
-mkdir -p $POOL"/CJUE"
+mkdir -p $POOL_DIR"/CJUE"
 
 bash download_lasts.sh | while read id ; do
   if [ -e data/$id.xml -a -e data/$id.txt ]
@@ -14,7 +14,7 @@ bash download_lasts.sh | while read id ; do
     if ! test -s xml/$id.xml ; then
         rm xml/$id.xml
     else
-        cp xml/$id.xml $POOL"/CJUE/"
+        cp xml/$id.xml $POOL_DIR"/CJUE/"
     fi
   fi
 done
