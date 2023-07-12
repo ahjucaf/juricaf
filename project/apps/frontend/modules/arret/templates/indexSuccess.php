@@ -834,18 +834,18 @@ if(isset($references['PUBLICATION'])) {
                 echo 'Juridiction : <em><span itemprop="name">'.$document->juridiction.'</span></em></span></div>';
             }
         }
+        if (isset($document->tribunal)) {
+            if (isset($document->pays) && isset($document->juridiction)) {
+                echo 'Tribunal : <em><a href="'.url_for('recherche/search?query=tribunal:"'.$document->tribunal.'"&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->tribunal.'</a></em><br />';
+            }else{
+                echo 'Tribunal : <em>'.$document->tribunal.'</em><br />';
+            }
+        }
         if (isset($document->formation)) {
             if (isset($document->pays) && isset($document->juridiction)) {
                 echo 'Formation : <em><a href="'.url_for('recherche/search?query=formation:"'.$document->formation.'"&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->formation.'</a></em><br />';
             }else{
                 echo 'Formation : <em>'.$document->formation.'</em><br />';
-            }
-        }
-        if (isset($document->tribunal)) {
-            if (isset($document->pays) && isset($document->juridiction)) {
-                echo 'Formation : <em><a href="'.url_for('recherche/search?query=tribunal:"'.$document->tribunal.'"&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->tribunal.'</a></em><br />';
-            }else{
-                echo 'Formation : <em>'.$document->tribunal.'</em><br />';
             }
         }
 
