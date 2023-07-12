@@ -227,10 +227,10 @@ if (!file_exists($INPUT_FILE) || filesize($INPUT_FILE) == 0) {
     );
 
     $voyelles = array('a', 'e', 'i', 'o', 'u', 'y');
-
-    foreach ($tribunaux as $tribunal) {
-      if(strpos($juri, $tribunal) !== false) {
-        $ville = trim(str_replace($tribunal, '', $juri));
+    $tribunal = '';
+    foreach ($tribunaux as $t) {
+      if(strpos($juri, $t) !== false) {
+        $ville = trim(str_replace($t, '', $juri));
         if(!preg_match("/^de|d'/", $ville)) {
           if(in_array(substr($ville, 0, 1), $voyelles)) {
             $ville = " d'".$ville;
@@ -238,11 +238,13 @@ if (!file_exists($INPUT_FILE) || filesize($INPUT_FILE) == 0) {
           else {
             $ville = " de ".$ville;
           }
-          $juri = $tribunal.$ville;
+          $juri = $t;
+          $tribunal = $t.$ville;
+          break;
         }
       }
     }
-    return $juri;
+    return array($juri, $tribunal);
   }
 
   // Qualification : décision du conseil contitutionnel porte sur $
@@ -430,7 +432,12 @@ if (!file_exists($INPUT_FILE) || filesize($INPUT_FILE) == 0) {
   // Cas particuliers : Juridiction
   $juridiction = ucfirst(strtolower(toString($dila->META->META_SPEC->META_JURI->JURIDICTION)));
   $juridiction = str_replace("Caa", "Cour administrative d'appel", $juridiction);
-  $juridiction = normalizeJurid($juridiction); // ajoute "de" ou "d'" à la ville si manquant
+  $r = normalizeJurid($juridiction); // ajoute "de" ou "d'" à la ville si manquant
+  $juridiction = $r[0];
+  $tribunal = '';
+  if ($r[1]) {
+      $tribunal = $r[1]
+  }
 
   // Cas particuliers : Numero d'arrêt
   if(!preg_match('/\n/', toString($dila->META->META_SPEC->META_JURI->NUMERO))) {
@@ -468,6 +475,9 @@ if (!file_exists($INPUT_FILE) || filesize($INPUT_FILE) == 0) {
   'RESEAU' => '',
   'ID' => toString($dila->META->META_COMMUN->ID)
   );
+  if ($tribunal) {
+      $juricaf_array['TRIBUNAL'] = $tribunal;
+  }
 
   if(empty($texte_arret)) {
     $juricaf_array['NO_ERROR'] = 'empty_text';

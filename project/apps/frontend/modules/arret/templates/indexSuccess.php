@@ -841,7 +841,13 @@ if(isset($references['PUBLICATION'])) {
                 echo 'Formation : <em>'.$document->formation.'</em><br />';
             }
         }
-
+        if (isset($document->tribunal)) {
+            if (isset($document->pays) && isset($document->juridiction)) {
+                echo 'Formation : <em><a href="'.url_for('recherche/search?query=tribunal:"'.$document->tribunal.'"&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->tribunal.'</a></em><br />';
+            }else{
+                echo 'Formation : <em>'.$document->tribunal.'</em><br />';
+            }
+        }
 
         if (isset($document->date_arret)) {
             echo 'Date de la décision : <span itemprop="dateCreated">'.date('d/m/Y', strtotime($document->date_arret)).'</span><br/>' ;
