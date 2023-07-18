@@ -120,7 +120,6 @@ return strtr($string, $table);
 }
 
 function linkifyAnalyses($titrage, $pays) {
-    print "linkifyAnalyses($titrage, $pays);";
   if(is_array($titrage)) { $titrage = trim(str_replace('Array', '', implode(' ', $titrage))); }
   // identifiants
   if(preg_match('/(([0-9]{1,3}-)+([0-9]{1,3}){1})/', $titrage, $match)) {
@@ -279,7 +278,6 @@ if (isset($document->analyses)) {
             foreach($values as $key => $value) {
                 if ($value !== "null") {
                     $analyses .= '<blockquote>';
-                    print_r([$key, $value]);
                     if(strpos($key, 'titre') !== false) {
                         if($document->pays == 'France' or $document->pays == 'Canada' or $document->pays == 'Monaco') { $titrage = linkifyAnalyses($value, $document->pays); } else { $titrage = $value; }
                         $analyses .= '<p itemprop="keywords">'.$titrage.'</span></p>'; $keywords .= $value.' ';
