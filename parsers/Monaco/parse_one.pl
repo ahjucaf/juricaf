@@ -78,7 +78,7 @@ if ($data{'meta_number'} =~ /TS/) {
 open(FH, '>/tmp/monaco.html');
 print FH "$arret";
 close FH;
-open(LYNX, 'lynx -dump /tmp/monaco.html |');
+open(LYNX, 'links -dump /tmp/monaco.html |');
 @arret = <LYNX>;
 $arret = "@arret";
 close LYNX;

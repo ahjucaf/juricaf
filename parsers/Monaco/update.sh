@@ -6,5 +6,5 @@ cd $(dirname $0)
 mkdir -p $POOL_DIR"/Monaco" html
 
 bash download_new.sh | while read filename ; do
-	parse_one.pl "html/"$filename > $POOL_DIR"/Monaco/"$filename
+	perl parse_one.pl < "html/"$filename > $POOL_DIR"/Monaco/"$filename
 done
