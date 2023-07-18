@@ -44,7 +44,7 @@ find $DIRPOOL -type f  | grep -v .svn > $LISTPOOL
 
 function update2couch {
   REV=$(curl -H"Content-Type: application/json" -s "$COUCHDBURL/$CONFLICTID"  | sed 's/.*"_rev":"//' | sed 's/".*//')
-  php updatejson4couchdb.php $JSONFILE $CONFLICTID $REV | curl -H"Content-Type: application/json" -s -d @/dev/stdin  -X POST "$COUCHDBURL/_bulk_docs" | sed 's/$/"updated"/' >> $LOG
+  php updatejson4couchdb.php $JSONFILE'.tmp' $CONFLICTID $REV | curl -H"Content-Type: application/json" -s -d @/dev/stdin  -X POST "$COUCHDBURL/_bulk_docs" | sed 's/$/"updated"/' >> $LOG
 }
 
 #send json file to couchdb
