@@ -223,7 +223,10 @@ if (!file_exists($INPUT_FILE) || filesize($INPUT_FILE) == 0) {
     "Tribunal administratif",
     "Tribunal d'instance",
     "Tribunal de commerce",
-    "Tribunal de grande instance"
+    "Tribunal de grande instance",
+    "Tribunal des affaires de sécurité sociale",
+    "Juridiction de proximité",
+    "Conseil de prud'hommes"
     );
 
     $voyelles = array('a', 'e', 'i', 'o', 'u', 'y');
