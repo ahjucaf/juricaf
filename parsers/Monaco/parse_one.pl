@@ -91,6 +91,8 @@ $arret =~ s/ø/\n\n/g;
 $arret =~ s/  */ /g;
 $arret =~ s/\n */\n/g;
 $arret =~ s/&/&amp;/g;
+$arret =~ s/</&lt;/g;
+$arret =~ s/>/&gt;/g;
 
 $data{'Résumé'} =~ s/<[^>]*>//g;
 $data{'Abstract'} =~ s/<[^>]*>//g;
