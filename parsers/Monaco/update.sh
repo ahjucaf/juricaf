@@ -5,6 +5,6 @@ cd $(dirname $0)
 
 mkdir -p $POOL_DIR"/Monaco" html
 
-bash download_new.sh | while read filename ; do
+bash download_new.sh | grep -v cour-europeenne-droits-homme | while read filename ; do
 	perl parse_one.pl < "html/"$filename > $POOL_DIR"/Monaco/"$filename
 done
