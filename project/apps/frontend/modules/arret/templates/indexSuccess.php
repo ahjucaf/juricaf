@@ -120,24 +120,24 @@ return strtr($string, $table);
 }
 
 function linkifyAnalyses($titrage, $pays) {
+    print "linkifyAnalyses($titrage, $pays);";
   if(is_array($titrage)) { $titrage = trim(str_replace('Array', '', implode(' ', $titrage))); }
   // identifiants
   if(preg_match('/(([0-9]{1,3}-)+([0-9]{1,3}){1})/', $titrage, $match)) {
     $identifiants[0] = $match[1]; $specifiques = $identifiants;
   }
 
+  // Canada : séparateurs harmonisés
+  if($pays == 'Canada') {
+    $titrage = rtrim($titrage, '. ');
+    $values = explode(' — ', $titrage);
+  } else {
   // les séparateurs ne sont pas harmonisés en base
-  if($pays == 'France') {
     $separators = array(' -','- ',';','.',',');
     $titrage = str_replace($separators, ' - ', $titrage);
     $titrage = str_replace('  ', ' ', $titrage);
     $titrage = str_replace(' -  - ', ' - ', $titrage);
     $titrage = rtrim($titrage, '- ');
-    $values = explode(' - ', $titrage);
-  }
-  // Canada : séparateurs harmonisés
-  if($pays == 'Canada') {
-    $titrage = rtrim($titrage, '. ');
     $values = explode(' — ', $titrage);
   }
   $values = array_filter($values);
@@ -273,21 +273,17 @@ $citations_analyses = '';
 if (isset($document->analyses)) {
     if (isset($document->analyses['analyse'])) {
         foreach($document->analyses['analyse'] as $key => $values) {
-            if(is_array($values) || is_object($values)) {
-                foreach($values as $key => $value) {
-                    if($value !== "null") {
-                        $analyses .= '<blockquote>';
-                        if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($value, $document->pays); } else { $titrage = $value; } $analyses .= '<p itemprop="keywords">'.$titrage.'</span></p>'; $keywords .= $value.' '; }
-                        else { $analyses .= '<p><span itemprop="keywords">'.$value.'</span></p>'; }
-                        $analyses .= '</blockquote>';
-                    }
-                }
+            if(!is_array($values) && !is_object($values)) {
+                $values = array($values);
             }
-            else {
-                if($values !== "null") {
+            foreach($values as $key => $value) {
+                if ($value !== "null") {
                     $analyses .= '<blockquote>';
-                    if(strpos($key, 'titre') !== false) { if($document->pays == 'France' or $document->pays == 'Canada') { $titrage = linkifyAnalyses($values, $document->pays); } else { $titrage = $values; } $analyses .= '<p itemprop="keywords">'.$titrage.'</span></p>'; $keywords .= $values.' '; }
-                    else { $analyses .= '<p><span itemprop="keywords">'.$values.'</span></p>'; }
+                    print_r([$key, $value]);
+                    if(strpos($key, 'titre') !== false) {
+                        if($document->pays == 'France' or $document->pays == 'Canada' or $document->pays == 'Monaco') { $titrage = linkifyAnalyses($value, $document->pays); } else { $titrage = $value; }
+                        $analyses .= '<p itemprop="keywords">'.$titrage.'</span></p>'; $keywords .= $value.' ';
+                    } else { $analyses .= '<p><span itemprop="keywords">'.$value.'</span></p>'; }
                     $analyses .= '</blockquote>';
                 }
             }
@@ -813,11 +809,6 @@ if(isset($references['PUBLICATION'])) {
 #
 #            ';
         }
-        if (isset($document->source)) {
-            echo "<hr>";
-            echo "<h5>Source</h5>";
-            echo "<p><a href='".$document->source."'>Voir la source</a></p>";
-        }
         if(isset($contrib)) {
             echo '<hr /><h5>Composition du Tribunal</h5>'.$contributors;
         }
@@ -919,6 +910,13 @@ if(isset($references['PUBLICATION'])) {
         <h5>Décision originale</h5>
         <a href="<?php echo url_for('arret_attachment', array('id' => $document->_id)); ?>">Télécharger la décision originale</a>
 <?php endif; ?>
+<?php
+      if (isset($document->source)) {
+          echo "<hr>";
+          echo "<h5>Source</h5>";
+          echo "<p><a href='".$document->source."'>Voir la source</a></p>";
+      }
+?>
       </div>
     </div>
 </div>
