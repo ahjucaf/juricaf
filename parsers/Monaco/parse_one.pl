@@ -88,6 +88,7 @@ $arret =~ s/\n//g;
 $arret =~ s/ø/\n\n/g;
 $arret =~ s/  */ /g;
 $arret =~ s/\n */\n/g;
+$arret =~ s/&/&amp;/g;
 
 $data{'Résumé'} =~ s/<[^>]*>//g;
 $data{'Abstract'} =~ s/<[^>]*>//g;
@@ -103,7 +104,6 @@ print "<ANALYSES>\n";
 if ($data{'Résumé'}) {
     print "<ANALYSE><SOMMAIRE>".$data{'Résumé'}."</SOMMAIRE></ANALYSE>\n";
 }
-$data{'thematic'} =~ s// - /g;
 print "<ANALYSE><TITRE_PRINCIPAL>".$data{'thematic'}."</TITRE_PRINCIPAL></ANALYSE>\n";
 if ($data{'Abstract'}) {
     $data{'Abstract'} =~ s/ ; / - /g;
