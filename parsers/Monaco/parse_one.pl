@@ -37,6 +37,8 @@ while(<STDIN>) {
         $section_co = '';
     } elsif (!$is_arret && $section_type && /section_co/) {
         $section_co = $_;
+    } elsif (/casePart/) {
+        $is_arret = 1;
     } elsif (/<hr/i) {
         $is_arret = 1;
         $arret = $_;
