@@ -2,7 +2,8 @@
 class XmlParserCJUE {
 
   const PAYS = 'CJUE';
-  const JURIDICTION = 'Cour de justice de l\'Union européenne';
+  const JURIDICTION_COUR = 'Cour de justice de l\'Union européenne';
+  const JURIDICTION_TRIBUNAL = 'Tribunal de première instance de l\'Union européenne';
   const FONDS_DOCUMENTAIRE = 'http://publications.europa.eu';
   const TEMPLATE_URL_SOURCE = 'https://eur-lex.europa.eu/legal-content/fr/ALL/?uri=CELEX:__ID__';
 
@@ -43,7 +44,6 @@ class XmlParserCJUE {
       $this->setTxtDoc($txtDocContent);
       $this->setIdSource($celexId);
       $this->pays = self::PAYS;
-      $this->juridiction = self::JURIDICTION;
       $this->fondsDocumentaire = self::FONDS_DOCUMENTAIRE;
       $this->source = str_replace('__ID__', $this->idSource, self::TEMPLATE_URL_SOURCE);
       $this->processParsing();
@@ -159,6 +159,11 @@ class XmlParserCJUE {
       $this->type = trim(substr($firstPart, 0, strpos($firstPart, ' ')));
       $this->sousTitre = ($posDeb === false)? $firstPart : trim(substr($firstPart, 0, strpos($firstPart, ' (')));
       $this->formation = ($posDeb === false||$posFin === false)? null : ucfirst(trim(substr($firstPart, $posDeb+1, $posFin-$posDeb-1)));
+      if (strpos($firstPart, 'ribunal') !== false) {
+          $this->juridiction = self::JURIDICTION_TRIBUNAL;
+      }else{
+          $this->juridiction = self::JURIDICTION_COUR;
+      }
       if (isset($infos[1])) $this->parties = trim($infos[1]);
       $this->identifiant = $this->identifyIdentifiant($infos[count($infos)-1]);
       $index = 2;
