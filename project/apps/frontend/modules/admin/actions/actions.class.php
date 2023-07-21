@@ -45,27 +45,27 @@ class adminActions extends sfActions
 	if (! $this->createAndChangeToRelativeDir($today)) {
 	  return;
 	}
-	
+
 	if ($pays = $this->form->getValue('pays')) {
 	  if (! $this->createAndChangeToRelativeDir('pays_'.$pays))
 	    return;
 	}
-	
+
 	if ($juri = $this->form->getValue('juridiction')) {
 	  if (! $this->createAndChangeToRelativeDir('juridiction_'.$juri))
 	    return;
 	}
-	
+
 	$file = $this->form->getValue('file');
 	if (preg_match('/zip$/', $file->getType() ) ) {
 	  exec("unzip ".$file->getTempName());
 	  $this->getUser()->setFlash('notice', "L'archive ".$file->getOriginalName().' a été intégrée');
-	  return $this->redirect('@recherche');
+	  return;
 	}
 	if (preg_match('/xml/', $file->getType())) {
 	  $file->save($this->dir.DIRECTORY_SEPARATOR.$file->getOriginalName());
 	  $this->getUser()->setFlash('notice', "Le fichier xml ".$file->getOriginalName().' a été intégré');
-	  return $this->redirect('@recherche');
+	  return;
 	}
 	$this->getUser()->setFlash('error', "Désolé, ce type de fichier n'est pas supporté");
       }

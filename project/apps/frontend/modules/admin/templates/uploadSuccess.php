@@ -3,6 +3,7 @@
 <div class="card col-6">
     <div class="card-body">
 <?php if ($sf_user->hasFlash('error')):?><div class="alert alert-danger" role="alert"><?php echo $sf_user->getFlash('error'); ?></div><?php endif; ?>
+<?php if ($sf_user->hasFlash('notice')):?><div class="alert alert-success" role="alert"><?php echo $sf_user->getFlash('notice'); ?></div><?php endif; ?>
 <?php if ($form->hasGlobalErrors()):?><div class="alert alert-danger" role="alert"><?php echo $form->renderGlobalErrors(); ?></div><?php endif; ?>
 <form action="<?php echo url_for('admin/upload') ?>" method="POST" enctype="multipart/form-data">
 <?php echo $form->renderHiddenFields(); ?>
