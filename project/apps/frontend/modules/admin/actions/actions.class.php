@@ -28,12 +28,13 @@ class adminActions extends sfActions
   public function executeUpload(sfWebRequest $request)
   {
     $this->form = new UploadForm();
- 
+
     if ($request->isMethod('post'))
     {
       $this->form->bind($request->getParameter('upload'), $request->getFiles('upload'));
-      if ($this->form->isValid())
-      {
+      if (!$this->form->isValid()) {
+           return;
+      }
 	$cwd = getcwd();
 	if (!@chdir(sfConfig::get('app_juricaf_xmlwebdir'))) {
 	  $this->getUser()->setFlash('error', "Cannot access xmlwebdir ".sfConfig::get('app_juricaf_xmlwebdir')." directory");
@@ -68,7 +69,6 @@ class adminActions extends sfActions
 	}
 	$this->getUser()->setFlash('error', "Désolé, ce type de fichier n'est pas supporté");
       }
-    }
   }
 
   private function getIdDocs(sfWebRequest $request) {
