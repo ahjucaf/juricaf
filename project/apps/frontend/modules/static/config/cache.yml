@@ -1,0 +1,9 @@
+sitemapIndex:
+  enabled:     true
+  with_layout: false
+  lifetime: 86400
+
+sitemapSet:
+  enabled:     true
+  with_layout: false
+  lifetime: 86400
