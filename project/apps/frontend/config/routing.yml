@@ -87,15 +87,18 @@ static_pages:
   param: {module: static, action: page}
 
 sitemap_index:
-  url: /sitemap.xml
+  url: /sitemap
   param: {module: static, action: sitemapIndex, sf_format: xml}
 
+sitemap_set_pages:
+  url: /sitemap/pages
+  param: {module: static, action: sitemapSetPages, sf_format: xml}
+
 sitemap_set:
-  url: /sitemap/:numero.xml
+  url: /sitemap/:numero
   param: {module: static, action: sitemapSet, sf_format: xml}
   requirements:
     numero: \d+
-
 
 # generic rules
 # please, remove them by adding more specific rules

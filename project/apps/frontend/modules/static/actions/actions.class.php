@@ -105,4 +105,9 @@ class staticActions extends sfActions
 
         $this->setLayout(false);
     }
+
+    public function executeSitemapSetPages(sfWebRequest $request) {
+
+        $this->setLayout(false);
+    }
 }
