@@ -35,7 +35,7 @@ cat <<EOF > $TMPFILE
   "views":
   {
     "pays_juridiction_date": {
-      "map": "function(doc) { if (doc.type == 'arret') { date=doc.date_arret.substring(0,4); emit([doc.pays,doc.juridiction,date], 1);}}",
+      "map": "function(doc) { if (doc.type == 'arret') { date=doc.date_arret.substring(0,4); emit([doc.pays,doc.juridiction,date,doc.date_import], 1);}}",
       "reduce": "function(keys, values) { return sum(values) }"
     },
     "pays_juridiction_date_all": {

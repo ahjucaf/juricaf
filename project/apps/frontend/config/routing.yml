@@ -86,6 +86,17 @@ static_pages:
   url: /static/:template
   param: {module: static, action: page}
 
+sitemap_index:
+  url: /sitemap.xml
+  param: {module: static, action: sitemapIndex, sf_format: xml}
+
+sitemap_set:
+  url: /sitemap/:numero.xml
+  param: {module: static, action: sitemapSet, sf_format: xml}
+  requirements:
+    numero: \d+
+
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
