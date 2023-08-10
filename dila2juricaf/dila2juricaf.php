@@ -439,7 +439,7 @@ if (!file_exists($INPUT_FILE) || filesize($INPUT_FILE) == 0) {
   $juridiction = $r[0];
   $tribunal = '';
   if ($r[1]) {
-      $tribunal = $r[1]
+      $tribunal = $r[1];
   }
 
   // Cas particuliers : Numero d'arrêt
