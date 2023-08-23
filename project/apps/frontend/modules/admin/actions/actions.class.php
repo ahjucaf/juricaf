@@ -71,6 +71,73 @@ class adminActions extends sfActions
       }
   }
 
+    public function executeNewArret(sfWebRequest $request) {
+        $this->form = new NewArretForm();
+
+        if ($request->isMethod('post')) {
+            $this->form->bind($request->getParameter('upload'), $request->getFiles('upload'));
+            if (!$this->form->isValid()) {
+                return;
+            }
+            $cwd = getcwd();
+            if (!@chdir(sfConfig::get('app_juricaf_xmlwebdir'))) {
+                $this->getUser()->setFlash('error', "Cannot access xmlwebdir " . sfConfig::get('app_juricaf_xmlwebdir') . " directory");
+                return;
+            }
+
+            $today = date('Y-m-d');
+            if (!$this->createAndChangeToRelativeDir($today)) {
+                return;
+            }
+
+            if ($pays = $this->form->getValue('pays')) {
+                if (!$this->createAndChangeToRelativeDir('pays_' . $pays))
+                    return;
+            }
+
+            if ($juri = $this->form->getValue('juridiction')) {
+                if (!$this->createAndChangeToRelativeDir('juridiction_' . $juri))
+                    return;
+            }
+
+
+            if (!$this->createAndFillXmlFile($this->form)) {
+                return false;
+            }
+        }
+    }
+
+    private function createAndFillXmlFile($form) {
+        $pays = $form->getValue('pays');
+        $juri = $form->getValue('juridiction');
+
+        var_dump($pays);
+        var_dump($juri);
+
+        $xmlContent = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xmlContent .= '<data>' . "\n";
+        $xmlContent .= '<pays>' . $pays . '</pays>' . "\n";
+        $xmlContent .= '<juridiction>' . $juri . '</juridiction>' . "\n";
+        $xmlContent .= '</data>' . "\n";
+
+        $xmlFilePath = 'file.xml';
+
+        $fileHandle = fopen($xmlFilePath, 'w');
+        if ($fileHandle === false) {
+            return false;
+        }
+
+        $writeResult = fwrite($fileHandle, $xmlContent);
+
+        fclose($fileHandle);
+
+        if ($writeResult !== false) {
+            return true;
+        } else {
+            return false;
+        }
+  }
+
   private function getIdDocs(sfWebRequest $request) {
     $ids = array();
     $nblines = $request->getParameter('nb_resultats');
@@ -240,4 +307,5 @@ class adminActions extends sfActions
 	}
       }
   }
+
 }
