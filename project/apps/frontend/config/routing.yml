@@ -67,7 +67,12 @@ upload:
    url:  /admin/upload
    param: {module: admin, action: upload}
 
+new_arret:
+  url: /admin/new
+  param: {module: admin, action: newArret}
+
 #Stats
+
 stats:
   url: /stats
   param: {module: arret, action: stats}
@@ -99,9 +104,3 @@ sitemap_set:
   param: {module: static, action: sitemapSet, sf_format: xml}
   requirements:
     numero: \d+
-
-# generic rules
-# please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
