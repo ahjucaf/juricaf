@@ -79,27 +79,6 @@ class adminActions extends sfActions
             if (!$this->form->isValid()) {
                 return;
             }
-            $cwd = getcwd();
-            if (!@chdir(sfConfig::get('app_juricaf_xmlwebdir'))) {
-                $this->getUser()->setFlash('error', "Cannot access xmlwebdir " . sfConfig::get('app_juricaf_xmlwebdir') . " directory");
-                return;
-            }
-
-            $today = date('Y-m-d');
-            if (!$this->createAndChangeToRelativeDir($today)) {
-                return;
-            }
-
-            if ($pays = $this->form->getValue('pays')) {
-                if (!$this->createAndChangeToRelativeDir('pays_' . $pays))
-                    return;
-            }
-
-            if ($juri = $this->form->getValue('juridiction')) {
-                if (!$this->createAndChangeToRelativeDir('juridiction_' . $juri))
-                    return;
-            }
-
 
             if (!$this->createAndFillXmlFile($this->form)) {
                 return false;
@@ -110,17 +89,21 @@ class adminActions extends sfActions
     private function createAndFillXmlFile($form) {
         $pays = $form->getValue('pays');
         $juri = $form->getValue('juridiction');
-
-        var_dump($pays);
-        var_dump($juri);
+        $today = date('Y-m-d-His');
+        $random = uniqid(rand(), true);
 
         $xmlContent = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xmlContent .= '<data>' . "\n";
-        $xmlContent .= '<pays>' . $pays . '</pays>' . "\n";
-        $xmlContent .= '<juridiction>' . $juri . '</juridiction>' . "\n";
-        $xmlContent .= '</data>' . "\n";
+        $xmlContent .= '<DATA>' ."\n";
+        $xmlContent .= '<JURIDICTION>' . $juri . '</JURIDICTION>' ."\n";
+        $xmlContent .= '<PAYS>' . $pays . '</PAYS>' ."\n";
+        $xmlContent .= '</DATA>' . "\n";
 
-        $xmlFilePath = 'file.xml';
+
+        if (! $this->createAndChangeToRelativeDir('../data/dataXml')) {
+            return;
+        }
+
+        $xmlFilePath = $today . '_' . $pays . '_' . $juri . '_' . $random;
 
         $fileHandle = fopen($xmlFilePath, 'w');
         if ($fileHandle === false) {
