@@ -1,8 +1,9 @@
 #!/bin/bash
 
+cd $(dirname $0)
+
 . ../config/config.inc
 
-cd $(dirname $0)
 mkdir -p tmp
 
 if ! test -d pool ; then
