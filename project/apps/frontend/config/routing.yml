@@ -71,6 +71,10 @@ new_arret:
   url: /admin/new
   param: {module: admin, action: newArret}
 
+preview_arret:
+  url: /admin/new/preview
+  param: {module: admin, action: newArretPreview}
+
 #Stats
 
 stats:

@@ -71,55 +71,55 @@ class adminActions extends sfActions
       }
   }
 
-    public function executeNewArret(sfWebRequest $request) {
-        $this->form = new NewArretForm();
-
+    /**
+     * @throws Exception
+     */
+    public function executeNewArret(sfWebRequest $request)
+    {
+        if (($fileNameRequest = $request->getParameter('arret'))) {
+            $this->form = new NewArretForm($fileNameRequest);
+            $this->templateUrl = $this->generateUrl('new_arret', ['arret' => $this->form->getFileName()]);
+        } else {
+            $this->form = new NewArretForm();
+            $this->templateUrl = $this->generateUrl('new_arret');
+        }
         if ($request->isMethod('post')) {
-            $this->form->bind($request->getParameter('upload'), $request->getFiles('upload'));
-            if (!$this->form->isValid()) {
-                return;
+            $this->form->bind($request->getParameter('upload'));
+            if ($this->form->isValid()) {
+                $this->form->write($fileNameRequest);
             }
-
-            if (!$this->createAndFillXmlFile($this->form)) {
-                return false;
-            }
+            return $this->redirect('@preview_arret?arret=' . $this->form->getFileName());
         }
     }
 
-    private function createAndFillXmlFile($form) {
-        $pays = $form->getValue('pays');
-        $juri = $form->getValue('juridiction');
-        $today = date('Y-m-d-His');
-        $random = uniqid(rand(), true);
+    public function executeNewArretPreview(sfWebRequest $request) {
+        $this->fileNameRequest = $request->getParameter('arret');
+        $this->displayForm = new NewArretForm($this->fileNameRequest);
 
-        $xmlContent = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xmlContent .= '<DATA>' ."\n";
-        $xmlContent .= '<JURIDICTION>' . $juri . '</JURIDICTION>' ."\n";
-        $xmlContent .= '<PAYS>' . $pays . '</PAYS>' ."\n";
-        $xmlContent .= '</DATA>' . "\n";
+        $this->xmlFilePath = $this->displayForm->getPathValue();
 
+        $xmlFile = simplexml_load_file($this->xmlFilePath);
 
-        if (! $this->createAndChangeToRelativeDir('../data/dataXml')) {
-            return;
+        //Mise en forme pour le template
+        $tmpContent = file_get_contents($this->xmlFilePath);
+        $lines = explode("\n", $tmpContent);
+        array_shift($lines);
+        $this->xmlContent = implode("\n", $lines);
+
+        //valeur affichee dans le template
+        $this->juri = $xmlFile->JURIDICTION;
+        $this->pays = $xmlFile->PAYS;
+
+        //redirection vers newArret
+        if ($request->isMethod('post')) {
+            return $this->redirect('@new_arret?arret=' . $this->displayForm->getFileName());
         }
+    }
 
-        $xmlFilePath = $today . '_' . $pays . '_' . $juri . '_' . $random;
 
-        $fileHandle = fopen($xmlFilePath, 'w');
-        if ($fileHandle === false) {
-            return false;
-        }
 
-        $writeResult = fwrite($fileHandle, $xmlContent);
 
-        fclose($fileHandle);
 
-        if ($writeResult !== false) {
-            return true;
-        } else {
-            return false;
-        }
-  }
 
   private function getIdDocs(sfWebRequest $request) {
     $ids = array();
