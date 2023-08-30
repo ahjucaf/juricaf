@@ -7,14 +7,15 @@ class NewArretForm extends BaseForm
     private ?string $fileName = null;
     private bool $isNew = true;
 
+    private string $xmlTemplate = 'template.xml';
+
     public function __construct($fileName = null, $defaults = array(), $options = array(), $CSRFSecret = null)
     {
         parent::__construct($defaults, $options, $CSRFSecret);
-
-        if ($fileName !== null) {
+        if ($fileName != null) {
             $path = sfConfig::get('sf_data_dir') . '/dataXml/' . $fileName;
             if (!is_file($path) || !is_readable($path)) {
-                return ;
+                return;
             }
             $this->xmlData = simplexml_load_file($path);
             if ($this->xmlData === false) {
@@ -23,16 +24,36 @@ class NewArretForm extends BaseForm
             $this->path = $path;
             $this->fileName = $fileName;
             $this->isNew = false;
+            parent::__construct($defaults, $options, $CSRFSecret);
+        } else {
+            $this->xmlData = simplexml_load_file(sfConfig::get('sf_data_dir') . '/dataXmlTemplate/' . $this->xmlTemplate);
         }
     }
 
     public function configure(): void
     {
         $this->setWidgets(array(
-            'PAYS'    => new sfWidgetFormInputText(),
-            'JURIDICTION'    => new sfWidgetFormInputText(),
-            'DATE_ARRET'    => new sfWidgetFormInputText(),
-            'NUM_ARRET'     => new sfWidgetFormInputText(),
+            'PAYS' => new sfWidgetFormInputText(),
+            'JURIDICTION' => new sfWidgetFormInputText(),
+            'DATE_ARRET' => new sfWidgetFormInputText(),
+            'NUM_ARRET' => new sfWidgetFormInputText(),
+            'FONDS_DOCUMENTAIRE' => new sfWidgetFormInputText(),
+            'TYPE_AFFAIRE' => new sfWidgetFormInputText(),
+            'FORMATION' => new sfWidgetFormInputText(),
+            'IMPORTANCE' => new sfWidgetFormInputText(),
+            'TYPE_RECOURS' => new sfWidgetFormInputText(),
+            'CITATION_ARTICLE' => new sfWidgetFormInputText(),
+            'TITRE' => new sfWidgetFormInputText(),
+            'SOURCE' => new sfWidgetFormInputText(),
+            'DEMANDEUR' => new sfWidgetFormInputText(),
+            'DEFENDEUR' => new sfWidgetFormInputText(),
+            'TITRE_PRINCIPAL' => new sfWidgetFormInputText(),
+            'SOMMAIRE' => new sfWidgetFormInputText(),
+            'TYPE' => new sfWidgetFormInputText(),
+            'REFERENCE_TITRE' => new sfWidgetFormInputText(),
+            'URL' => new sfWidgetFormInputText(),
+            'PUBLICATION' => new sfWidgetFormInputText(),
+            'TEXTE_ARRET' => new sfWidgetFormTextarea(),
         ));
         $this->widgetSchema->setNameFormat('upload[%s]');
 
@@ -41,23 +62,52 @@ class NewArretForm extends BaseForm
             'JURIDICTION'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false)),
             'DATE_ARRET'    => new sfValidatorDate(array('date_format_error' => 'Format de date invalide')),
             'NUM_ARRET'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false)),
+            'FONDS_DOCUMENTAIRE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'TYPE_AFFAIRE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'FORMATION'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'IMPORTANCE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'TYPE_RECOURS'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'CITATION_ARTICLE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'TITRE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'SOURCE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'DEMANDEUR'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'DEFENDEUR'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'TITRE_PRINCIPAL'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'SOMMAIRE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'TYPE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'REFERENCE_TITRE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'URL'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'PUBLICATION'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'TEXTE_ARRET'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false)),
+
         ));
 
-        if ($this->xmlData === null) {
-            $this->xmlData = new SimpleXMLElement('<data></data>');
-            $this->xmlData->addChild('PAYS', '');
-            $this->xmlData->addChild('JURIDICTION', '');
-            $this->xmlData->addChild('DATE_ARRET', '');
-            $this->xmlData->addChild('NUM_ARRET', '');
-        }
-
-        if ($this->xmlData !== null) {
-            $this->setDefaults(array(
+        if ($this->xmlData !== false) {
+            $defaults = array(
                 'PAYS' => $this->xmlData->PAYS,
                 'JURIDICTION' => $this->xmlData->JURIDICTION,
                 'DATE_ARRET' => $this->xmlData->DATE_ARRET,
                 'NUM_ARRET' => $this->xmlData->NUM_ARRET,
-            ));
+                'FONDS_DOCUMENTAIRE' => $this->xmlData->FONDS_DOCUMENTAIRE,
+                'TYPE_AFFAIRE' => $this->xmlData->TYPE_AFFAIRE,
+                'FORMATION' => $this->xmlData->FORMATION,
+                'IMPORTANCE' => $this->xmlData->IMPORTANCE,
+                'TYPE_RECOURS' => $this->xmlData->TYPE_RECOURS,
+                'CITATION_ARTICLE' => $this->xmlData->CITATION_ARTICLE,
+                'TITRE' => $this->xmlData->TITRE,
+                'SOURCE' => $this->xmlData->SOURCE,
+                'DEMANDEUR' => $this->xmlData->PARTIES->DEMANDEURS->DEMANDEUR,
+                'DEFENDEUR' => $this->xmlData->PARTIES->DEFENDEURS->DEFENDEUR,
+                'TITRE_PRINCIPAL' => $this->xmlData->ANALYSES->ANALYSE->TITRE_PRINCIPAL,
+                'SOMMAIRE' => $this->xmlData->ANALYSES->ANALYSE->SOMMAIRE,
+                'TYPE' => $this->xmlData->REFERENCES->REFERENCE->TYPE,
+                'REFERENCE_TITRE' => $this->xmlData->REFERENCES->REFERENCE->TITRE,
+                'URL' => $this->xmlData->REFERENCES->REFERENCE->URL,
+                'PUBLICATION' => $this->xmlData->PUBLICATION,
+                'TEXTE_ARRET' => $this->xmlData->TEXTE_ARRET,
+            );
+
+            $this->setDefaults($defaults);
         }
     }
 
@@ -144,6 +194,10 @@ class NewArretForm extends BaseForm
         $dom->formatOutput = true;
         $dom->loadXML($xml);
         return $dom->saveXML();
+    }
+
+    public function getXmlData() {
+        return $this->xmlData;
     }
 
     public function getFileName() {

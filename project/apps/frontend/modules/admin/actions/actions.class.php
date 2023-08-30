@@ -78,6 +78,7 @@ class adminActions extends sfActions
     {
         $fileNameRequest = str_replace('/', '', $request->getParameter('arret'));
         $this->form = new NewArretForm($fileNameRequest);
+        $this->xmlData = $this->form->getXmlData();
         if ($request->isMethod('post')) {
             $this->form->bind($request->getParameter('upload'));
             if (!$this->form->isValid()) {
