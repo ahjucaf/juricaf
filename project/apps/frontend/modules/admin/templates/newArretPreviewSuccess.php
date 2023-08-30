@@ -7,13 +7,17 @@
             <div class="row g-3 align-items-center">
                 <h5>Format texte brut</h5>
                 <div class="col-3">PAYS</div>
-                <div class="col-8"><?php echo $pays ;?></div>
+                <div class="col-8"><?php echo $displayForm->getPaysValue() ;?></div>
                 <div class="col-3">JURIDICTION</div>
-                <div class="col-8"><?php echo $juri ;?></div>
+                <div class="col-8"><?php echo $displayForm->getJuriValue() ;?></div>
+                <div class="col-3">DATE_ARRET</div>
+                <div class="col-8"><?php echo $displayForm->getDateArretValue() ;?></div>
+                <div class="col-3">NUM_ARRET</div>
+                <div class="col-8"><?php echo $displayForm->getNumArretValue() ;?></div>
             </div>
             <div class="row g-3 align-items-center">
                 <h5>Format XML</h5>
-                <pre><?php echo htmlspecialchars($xmlContent); ?></pre>
+                <pre><?php echo htmlspecialchars($displayForm->getFormatXmlData()); ?></pre>
             </div>
             <div class="row">
                 <form method="POST" action="<?php echo $redirect_url_new; ?>" enctype="multipart/form-data">

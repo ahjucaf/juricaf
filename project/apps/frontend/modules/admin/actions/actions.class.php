@@ -76,49 +76,28 @@ class adminActions extends sfActions
      */
     public function executeNewArret(sfWebRequest $request)
     {
-        if (($fileNameRequest = $request->getParameter('arret'))) {
-            $this->form = new NewArretForm($fileNameRequest);
-            $this->templateUrl = $this->generateUrl('new_arret', ['arret' => $this->form->getFileName()]);
-        } else {
-            $this->form = new NewArretForm();
-            $this->templateUrl = $this->generateUrl('new_arret');
-        }
+        $fileNameRequest = str_replace('/', '', $request->getParameter('arret'));
+        $this->form = new NewArretForm($fileNameRequest);
         if ($request->isMethod('post')) {
             $this->form->bind($request->getParameter('upload'));
-            if ($this->form->isValid()) {
-                $this->form->write($fileNameRequest);
+            if (!$this->form->isValid()) {
+                return sfView::SUCCESS;
             }
+            $this->form->write();
             return $this->redirect('@preview_arret?arret=' . $this->form->getFileName());
         }
     }
 
     public function executeNewArretPreview(sfWebRequest $request) {
-        $this->fileNameRequest = $request->getParameter('arret');
-        $this->displayForm = new NewArretForm($this->fileNameRequest);
+        $fileNameRequest = str_replace('/', '', $request->getParameter('arret'));
+        $this->displayForm = new NewArretForm($fileNameRequest);
+        if ($this->displayForm->getPathValue() === null)
+            throw new Exception("Le nom de l'arret est incorrect");
 
-        $this->xmlFilePath = $this->displayForm->getPathValue();
-
-        $xmlFile = simplexml_load_file($this->xmlFilePath);
-
-        //Mise en forme pour le template
-        $tmpContent = file_get_contents($this->xmlFilePath);
-        $lines = explode("\n", $tmpContent);
-        array_shift($lines);
-        $this->xmlContent = implode("\n", $lines);
-
-        //valeur affichee dans le template
-        $this->juri = $xmlFile->JURIDICTION;
-        $this->pays = $xmlFile->PAYS;
-
-        //redirection vers newArret
         if ($request->isMethod('post')) {
             return $this->redirect('@new_arret?arret=' . $this->displayForm->getFileName());
         }
     }
-
-
-
-
 
 
   private function getIdDocs(sfWebRequest $request) {
