@@ -310,7 +310,7 @@
                 </div>
                 <div class="row g-3 align-items-center">
                     <div class="col-3">
-                        <?php echo $form['TEXTE_ARRET']->renderLabel(); ?>
+                        <?php echo $form['TEXTE_ARRET']->renderLabel(); ?><span class="text-danger"> *</span>
                     </div>
                     <div class="col-8">
                         <?php
