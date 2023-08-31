@@ -6,14 +6,10 @@
             <?php if ($sf_user->hasFlash('notice')):?><div class="alert alert-success" role="alert"><?php echo $sf_user->getFlash('notice'); ?></div><?php endif; ?>
             <div class="row g-3 align-items-center">
                 <h5>Format texte brut</h5>
-                <div class="col-3">PAYS</div>
-                <div class="col-8"><?php echo $displayForm->getPaysValue() ;?></div>
-                <div class="col-3">JURIDICTION</div>
-                <div class="col-8"><?php echo $displayForm->getJuriValue() ;?></div>
-                <div class="col-3">DATE_ARRET</div>
-                <div class="col-8"><?php echo $displayForm->getDateArretValue() ;?></div>
-                <div class="col-3">NUM_ARRET</div>
-                <div class="col-8"><?php echo $displayForm->getNumArretValue() ;?></div>
+                <?php foreach ($displayForm->getFlatArray() as $key => $value): ?>
+                    <div class="col-3"><?php echo $key; ?></div>
+                    <div class="col-8"><?php echo $value; ?></div>
+                <?php endforeach; ?>
             </div>
             <div class="row g-3 align-items-center">
                 <h5>Format XML</h5>

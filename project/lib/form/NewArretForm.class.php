@@ -65,7 +65,7 @@ class NewArretForm extends BaseForm
             'FONDS_DOCUMENTAIRE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
             'TYPE_AFFAIRE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
             'FORMATION'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'IMPORTANCE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
+            'IMPORTANCE'    => new sfValidatorRegex(array('pattern' => '/^[1-9]+$/', 'must_match' => true, 'required' => false), array('invalid' => 'Ce champ n\'accepte que des valeurs numeriques de 1 a 9.')),
             'TYPE_RECOURS'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
             'CITATION_ARTICLE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
             'TITRE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
@@ -194,6 +194,17 @@ class NewArretForm extends BaseForm
         $dom->formatOutput = true;
         $dom->loadXML($xml);
         return $dom->saveXML();
+    }
+
+    public function getFlatArray() {
+        $xmlArray = json_decode(json_encode((array) $this->xmlData), true);
+
+        $flatArray = array();
+        array_walk_recursive($xmlArray, function($value, $key) use (&$flatArray) {
+            $flatArray[$key] = $value;
+        });
+
+        return $flatArray;
     }
 
     public function getXmlData() {
