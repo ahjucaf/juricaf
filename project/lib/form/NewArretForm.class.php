@@ -11,7 +11,6 @@ class NewArretForm extends BaseForm
 
     public function __construct($fileName = null, $defaults = array(), $options = array(), $CSRFSecret = null)
     {
-        parent::__construct($defaults, $options, $CSRFSecret);
         if ($fileName != null) {
             $path = sfConfig::get('sf_data_dir') . '/dataXml/' . $fileName;
             if (!is_file($path) || !is_readable($path)) {
@@ -24,10 +23,10 @@ class NewArretForm extends BaseForm
             $this->path = $path;
             $this->fileName = $fileName;
             $this->isNew = false;
-            parent::__construct($defaults, $options, $CSRFSecret);
         } else {
             $this->xmlData = simplexml_load_file(sfConfig::get('sf_data_dir') . '/dataXmlTemplate/' . $this->xmlTemplate);
         }
+        parent::__construct($defaults, $options, $CSRFSecret);
     }
 
     public function configure(): void
@@ -61,24 +60,24 @@ class NewArretForm extends BaseForm
             'PAYS'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false)),
             'JURIDICTION'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false)),
             'DATE_ARRET'    => new sfValidatorDate(array('date_format_error' => 'Format de date invalide')),
-            'NUM_ARRET'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false)),
-            'FONDS_DOCUMENTAIRE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'TYPE_AFFAIRE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'FORMATION'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'IMPORTANCE'    => new sfValidatorRegex(array('pattern' => '/^[1-9]+$/', 'must_match' => true, 'required' => false), array('invalid' => 'Ce champ n\'accepte que des valeurs numeriques de 1 a 9.')),
-            'TYPE_RECOURS'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'CITATION_ARTICLE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'TITRE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'SOURCE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'DEMANDEUR'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'DEFENDEUR'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'TITRE_PRINCIPAL'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'SOMMAIRE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'TYPE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'REFERENCE_TITRE'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'URL'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'PUBLICATION'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false, 'required' => false)),
-            'TEXTE_ARRET'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false)),
+            'NUM_ARRET'    => new sfValidatorString(),
+            'FONDS_DOCUMENTAIRE'    => new sfValidatorString(array('required' => false)),
+            'TYPE_AFFAIRE'    => new sfValidatorString(array('required' => false)),
+            'FORMATION'    => new sfValidatorString(array('required' => false)),
+            'IMPORTANCE'    => new sfValidatorNumber(array('min' => 1, 'max' => 100, 'required' => false), array('invalid' => 'Ce champ n\'accepte que des valeurs numeriques de 1 a 9.')),
+            'TYPE_RECOURS'    => new sfValidatorString(array('required' => false)),
+            'CITATION_ARTICLE'    => new sfValidatorString(array('required' => false)),
+            'TITRE'    => new sfValidatorString(array('required' => false)),
+            'SOURCE'    => new sfValidatorString(array('required' => false)),
+            'DEMANDEUR'    => new sfValidatorString(array('required' => false)),
+            'DEFENDEUR'    => new sfValidatorString(array('required' => false)),
+            'TITRE_PRINCIPAL'    => new sfValidatorString(array('required' => false)),
+            'SOMMAIRE'    => new sfValidatorString(array('required' => false)),
+            'TYPE'    => new sfValidatorString(array('required' => false)),
+            'REFERENCE_TITRE'    => new sfValidatorString(array('required' => false)),
+            'URL'    => new sfValidatorString(array('required' => false)),
+            'PUBLICATION'    => new sfValidatorString(array('required' => false)),
+            'TEXTE_ARRET'    => new sfValidatorString(),
 
         ));
 
@@ -177,6 +176,8 @@ class NewArretForm extends BaseForm
     {
         $juri_tmp = str_replace(' ', '-', $this->xmlData->JURIDICTION);
         $pays_tmp = str_replace(' ', '-', $this->xmlData->PAYS);
+        $pays_tmp = str_replace(['&', '%', '*', '/', '.', ';'], '', $pays_tmp);
+        $juri_tmp = str_replace(['&', '%', '*', '/', '.', ';'], '', $juri_tmp);
         if ($this->getNewValue() === true) {
             $random = uniqid(rand(), true);
             $today = date('Y-m-d-His');

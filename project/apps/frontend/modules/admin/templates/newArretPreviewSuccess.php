@@ -16,12 +16,9 @@
                 <pre><?php echo htmlspecialchars($displayForm->getFormatXmlData()); ?></pre>
             </div>
             <div class="row">
-                <form method="POST" action="<?php echo $redirect_url_new; ?>" enctype="multipart/form-data">
-                    <?php echo $displayForm['_csrf_token']->render(); ?>
                     <div class="align-items-center col-6">
-                        <input type="submit" class="form-control btn btn-default" value="Modifier"/>
+                        <a href="<?php echo url_for('@new_arret?arret=' . $displayForm->getFileName()); ?>" type="submit" class="form-control btn btn-default">Modifier</a>
                     </div>
-                </form>
                 <div class="align-items-center col-6">
                     <input type="submit" class="form-control btn btn-primary" value="Valider"/>
                 </div>
