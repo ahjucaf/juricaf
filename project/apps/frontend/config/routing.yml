@@ -75,6 +75,10 @@ preview_arret:
   url: /admin/new/preview
   param: {module: admin, action: newArretPreview}
 
+validate_arret:
+  url: /admin/new/validate
+  param: {module: admin, action: newArretValidate}
+
 #Stats
 
 stats:

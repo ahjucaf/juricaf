@@ -59,7 +59,7 @@ class NewArretForm extends BaseForm
         $this->setValidators(array(
             'PAYS'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false)),
             'JURIDICTION'    => new sfValidatorRegex(array('pattern' => '/\//', 'must_match' => false)),
-            'DATE_ARRET'    => new sfValidatorDate(array('date_format_error' => 'Format de date invalide')),
+            'DATE_ARRET'    => new sfValidatorDate(array('date_format_error' => 'Format de date invalide', 'min' => '1901-01-01', 'max' => date('Y-m-d'))),
             'NUM_ARRET'    => new sfValidatorString(),
             'FONDS_DOCUMENTAIRE'    => new sfValidatorString(array('required' => false)),
             'TYPE_AFFAIRE'    => new sfValidatorString(array('required' => false)),
@@ -95,19 +95,19 @@ class NewArretForm extends BaseForm
                 'CITATION_ARTICLE' => $this->xmlData->CITATION_ARTICLE,
                 'TITRE' => $this->xmlData->TITRE,
                 'SOURCE' => $this->xmlData->SOURCE,
-                'DEMANDEUR' => $this->xmlData->PARTIES->DEMANDEURS->DEMANDEUR,
-                'DEFENDEUR' => $this->xmlData->PARTIES->DEFENDEURS->DEFENDEUR,
-                'TITRE_PRINCIPAL' => $this->xmlData->ANALYSES->ANALYSE->TITRE_PRINCIPAL,
-                'SOMMAIRE' => $this->xmlData->ANALYSES->ANALYSE->SOMMAIRE,
-                'TYPE' => $this->xmlData->REFERENCES->REFERENCE->TYPE,
-                'REFERENCE_TITRE' => $this->xmlData->REFERENCES->REFERENCE->TITRE,
-                'URL' => $this->xmlData->REFERENCES->REFERENCE->URL,
+                'DEMANDEUR' => $this->xmlData->PARTIES[0]->DEMANDEURS[0]->DEMANDEUR,
+                'DEFENDEUR' => $this->xmlData->PARTIES[0]->DEFENDEURS[0]->DEFENDEUR,
+                'TITRE_PRINCIPAL' => $this->xmlData->ANALYSES[0]->ANALYSE[0]->TITRE_PRINCIPAL,
+                'SOMMAIRE' => $this->xmlData->ANALYSES[0]->ANALYSE[0]->SOMMAIRE,
+                'TYPE' => $this->xmlData->REFERENCES[0]->REFERENCE[0]->TYPE,
+                'REFERENCE_TITRE' => $this->xmlData->REFERENCES[0]->REFERENCE[0]->REFERENCE_TITRE,
+                'URL' => $this->xmlData->REFERENCES[0]->REFERENCE[0]->URL,
                 'PUBLICATION' => $this->xmlData->PUBLICATION,
                 'TEXTE_ARRET' => $this->xmlData->TEXTE_ARRET,
             );
-
             $this->setDefaults($defaults);
         }
+
     }
 
     /**
@@ -144,7 +144,22 @@ class NewArretForm extends BaseForm
     public function write(): void
     {
         foreach ($this->getValues() as $key => $value) {
-            $this->xmlData->$key = $value;
+            if ($key === 'DEMANDEUR')
+                $this->xmlData->PARTIES->DEMANDEURS->$key = $value;
+            else if ($key === 'DEFENDEUR')
+                $this->xmlData->PARTIES->DEFENDEURS->$key = $value;
+            else if ($key === 'TITRE_PRINCIPAL')
+                $this->xmlData->ANALYSES->ANALYSE->$key = $value;
+            else if ($key === 'SOMMAIRE')
+                $this->xmlData->ANALYSES->ANALYSE->$key = $value;
+            else if ($key === 'TYPE')
+                $this->xmlData->REFERENCES->REFERENCE->$key = $value;
+            else if ($key === 'REFERENCE_TITRE')
+                $this->xmlData->REFERENCES->REFERENCE->$key = $value;
+            else if ($key === 'URL')
+                $this->xmlData->REFERENCES->REFERENCE->$key = $value;
+            else
+                $this->xmlData->$key = $value;
         }
 
         $this->loadAttributes();
@@ -153,7 +168,7 @@ class NewArretForm extends BaseForm
             throw new Exception("Le dossier de destination n'est pas accessible en écriture.");
         }
 
-        $formattedXml = $this->formatXml($this->xmlData->asXML());
+        $formattedXml = $this->xmlData->asXML();
 
         $fileHandle = fopen($this->path, 'w');
         if ($fileHandle === false) {
