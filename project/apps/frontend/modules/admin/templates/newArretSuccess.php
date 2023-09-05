@@ -140,19 +140,6 @@
                     </div>
                     <div class=" g-3  align-items-center mt-2">
                         <div class="col-3">
-                            <?php echo $form['TITRE']->renderLabel(); ?>
-                        </div>
-                        <div class="col-8">
-                            <?php
-                            echo $form['TITRE']->render(['class' => 'form-control', 'placeholder' => 'Ex. : Décision n°17-HCC/D3 (Empêchement) Empêchement du Président de la République Juridiction constitutionnelle : compétence (contentieux répressif) : procédure d\'empêchement Chef de l\'Etat : promulgation des lois - responsabilité juridique', 'tabindex' => '12']);
-                            ?>
-                        </div>
-                        <?php if ($form['TITRE']->hasError()): ?>
-                            <div class="text-danger col-9 offset-3" role="alert"><?php echo $form['TITRE']->renderError(); ?></div>
-                        <?php endif; ?>
-                    </div>
-                    <div class=" g-3  align-items-center mt-2">
-                        <div class="col-3">
                             <?php echo $form['SOURCE']->renderLabel(); ?>
                         </div>
                         <div class="col-8">
@@ -288,10 +275,10 @@
                                                         <?php endif; ?>
                                                     </div>
                                                     <div class=" g-3  align-items-center mt-2">
-                                                        <?php echo $form['REFERENCE_TITRE']->renderLabel(); ?>
-                                                        <?php echo $form['REFERENCE_TITRE']->render(['class' => 'form-control', 'placeholder' => 'Ex. : Fichier PDF', 'tabindex' => '19']); ?>
-                                                        <?php if ($form['REFERENCE_TITRE']->hasError()): ?>
-                                                            <div class="text-danger" role="alert"><?php echo $form['REFERENCE_TITRE']->renderError(); ?></div>
+                                                        <?php echo $form['TITRE']->renderLabel(); ?>
+                                                        <?php echo $form['TITRE']->render(['class' => 'form-control', 'placeholder' => 'Ex. : Fichier PDF', 'tabindex' => '19']); ?>
+                                                        <?php if ($form['TITRE']->hasError()): ?>
+                                                            <div class="text-danger" role="alert"><?php echo $form['TITRE']->renderError(); ?></div>
                                                         <?php endif; ?>
                                                     </div>
                                                     <div class=" g-3  align-items-center mt-2">

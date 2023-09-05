@@ -9,7 +9,6 @@
     <NUM_ARRET></NUM_ARRET>
     <TYPE_RECOURS></TYPE_RECOURS>
     <CITATION_ARTICLE></CITATION_ARTICLE>
-    <TITRE></TITRE>
     <SOURCE></SOURCE>
     <PARTIES>
         <DEMANDEURS>
@@ -28,7 +27,7 @@
     <REFERENCES>
         <REFERENCE>
             <TYPE></TYPE>
-            <REFERENCE_TITRE></REFERENCE_TITRE>
+            <TITRE></TITRE>
             <URL></URL>
         </REFERENCE>
     </REFERENCES>

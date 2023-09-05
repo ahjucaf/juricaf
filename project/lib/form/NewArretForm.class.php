@@ -42,14 +42,13 @@ class NewArretForm extends BaseForm
             'IMPORTANCE' => new sfWidgetFormInputText(),
             'TYPE_RECOURS' => new sfWidgetFormInputText(),
             'CITATION_ARTICLE' => new sfWidgetFormInputText(),
-            'TITRE' => new sfWidgetFormInputText(),
             'SOURCE' => new sfWidgetFormInputText(),
             'DEMANDEUR' => new sfWidgetFormInputText(),
             'DEFENDEUR' => new sfWidgetFormInputText(),
             'TITRE_PRINCIPAL' => new sfWidgetFormInputText(),
             'SOMMAIRE' => new sfWidgetFormInputText(),
             'TYPE' => new sfWidgetFormInputText(),
-            'REFERENCE_TITRE' => new sfWidgetFormInputText(),
+            'TITRE' => new sfWidgetFormInputText(),
             'URL' => new sfWidgetFormInputText(),
             'PUBLICATION' => new sfWidgetFormInputText(),
             'TEXTE_ARRET' => new sfWidgetFormTextarea(),
@@ -67,14 +66,13 @@ class NewArretForm extends BaseForm
             'IMPORTANCE'    => new sfValidatorNumber(array('min' => 1, 'max' => 100, 'required' => false), array('invalid' => 'Ce champ n\'accepte que des valeurs numeriques de 1 a 9.')),
             'TYPE_RECOURS'    => new sfValidatorString(array('required' => false)),
             'CITATION_ARTICLE'    => new sfValidatorString(array('required' => false)),
-            'TITRE'    => new sfValidatorString(array('required' => false)),
             'SOURCE'    => new sfValidatorString(array('required' => false)),
             'DEMANDEUR'    => new sfValidatorString(array('required' => false)),
             'DEFENDEUR'    => new sfValidatorString(array('required' => false)),
             'TITRE_PRINCIPAL'    => new sfValidatorString(array('required' => false)),
             'SOMMAIRE'    => new sfValidatorString(array('required' => false)),
             'TYPE'    => new sfValidatorString(array('required' => false)),
-            'REFERENCE_TITRE'    => new sfValidatorString(array('required' => false)),
+            'TITRE'    => new sfValidatorString(array('required' => false)),
             'URL'    => new sfValidatorString(array('required' => false)),
             'PUBLICATION'    => new sfValidatorString(array('required' => false)),
             'TEXTE_ARRET'    => new sfValidatorString(),
@@ -93,14 +91,13 @@ class NewArretForm extends BaseForm
                 'IMPORTANCE' => $this->xmlData->IMPORTANCE,
                 'TYPE_RECOURS' => $this->xmlData->TYPE_RECOURS,
                 'CITATION_ARTICLE' => $this->xmlData->CITATION_ARTICLE,
-                'TITRE' => $this->xmlData->TITRE,
                 'SOURCE' => $this->xmlData->SOURCE,
                 'DEMANDEUR' => $this->xmlData->PARTIES[0]->DEMANDEURS[0]->DEMANDEUR,
                 'DEFENDEUR' => $this->xmlData->PARTIES[0]->DEFENDEURS[0]->DEFENDEUR,
                 'TITRE_PRINCIPAL' => $this->xmlData->ANALYSES[0]->ANALYSE[0]->TITRE_PRINCIPAL,
                 'SOMMAIRE' => $this->xmlData->ANALYSES[0]->ANALYSE[0]->SOMMAIRE,
                 'TYPE' => $this->xmlData->REFERENCES[0]->REFERENCE[0]->TYPE,
-                'REFERENCE_TITRE' => $this->xmlData->REFERENCES[0]->REFERENCE[0]->REFERENCE_TITRE,
+                'TITRE' => $this->xmlData->REFERENCES[0]->REFERENCE[0]->TITRE,
                 'URL' => $this->xmlData->REFERENCES[0]->REFERENCE[0]->URL,
                 'PUBLICATION' => $this->xmlData->PUBLICATION,
                 'TEXTE_ARRET' => $this->xmlData->TEXTE_ARRET,
@@ -154,7 +151,7 @@ class NewArretForm extends BaseForm
                 $this->xmlData->ANALYSES->ANALYSE->$key = $value;
             else if ($key === 'TYPE')
                 $this->xmlData->REFERENCES->REFERENCE->$key = $value;
-            else if ($key === 'REFERENCE_TITRE')
+            else if ($key === 'TITRE')
                 $this->xmlData->REFERENCES->REFERENCE->$key = $value;
             else if ($key === 'URL')
                 $this->xmlData->REFERENCES->REFERENCE->$key = $value;
