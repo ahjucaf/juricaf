@@ -1,6 +1,7 @@
 all:
   juricaf:
     xmlwebdir: "/my/directory/to/data/pool/www"
+    xmldatadir: "/my/directory/to/temporary/store/xml"
   solr:
     host: "localhost"
     path: "/solr"

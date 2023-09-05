@@ -12,7 +12,7 @@ class NewArretForm extends BaseForm
     public function __construct($fileName = null, $defaults = array(), $options = array(), $CSRFSecret = null)
     {
         if ($fileName != null) {
-            $path = sfConfig::get('sf_data_dir') . '/dataXml/' . $fileName;
+            $path = sfConfig::get('app_juricaf_xmldatadir') . '/' . $fileName;
             if (!is_file($path) || !is_readable($path)) {
                 return;
             }
@@ -112,7 +112,7 @@ class NewArretForm extends BaseForm
      */
     public function replaceFile($pays, $juri): void
     {
-        $directory = sfConfig::get('sf_data_dir') . '/dataXml/';
+        $directory = sfConfig::get('app_juricaf_xmldatadir');
         $iterator = new DirectoryIterator($directory);
 
         $pattern = '/^(.*?)_(.*?)_(.*?)_(.*?)\.xml$/';
@@ -197,7 +197,7 @@ class NewArretForm extends BaseForm
         } else {
             $this->replaceFile($pays_tmp, $juri_tmp);
         }
-        $this->path = sfConfig::get('sf_data_dir') . '/dataXml/' . $this->fileName;
+        $this->path = sfConfig::get('app_juricaf_xmldatadir') . '/' . $this->fileName;
     }
 
     private function formatXml($xml)

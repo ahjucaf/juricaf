@@ -102,7 +102,7 @@ class adminActions extends sfActions
 
     public function executeNewArretValidate(sfWebRequest $request) {
         $fileNameRequest = str_replace('/', '', $request->getParameter('arret'));
-        $filePath = sfConfig::get('sf_data_dir') . '/dataXml/' . $fileNameRequest;
+        $filePath = sfConfig::get('app_juricaf_xmldatadir') . '/' . $fileNameRequest;
         $this->form = new NewArretForm($fileNameRequest);
 
         if (rename($filePath, sfConfig::get('app_juricaf_xmlwebdir') . '/' . $fileNameRequest)) {
