@@ -79,9 +79,9 @@ class adminActions extends sfActions
         $fileNameRequest = str_replace('/', '', $request->getParameter('arret'));
         $this->form = new NewArretForm($fileNameRequest);
         $this->xmlData = $this->form->getXmlData();
-        if ($request->getParameter('prevPays') !== null) {
-            $this->form->setDefaults(array('PAYS' => $request->getParameter('prevPays'),
-                'JURIDICTION' => $request->getParameter('prevJuri')));
+        if ($request->getParameter('PAYS') !== null) {
+            $this->form->setDefaults(array('PAYS' => $request->getParameter('PAYS'),
+                'JURIDICTION' => $request->getParameter('JURIDICTION')));
         }
         if ($request->isMethod('post')) {
             $this->form->bind($request->getParameter('upload'));
@@ -103,19 +103,15 @@ class adminActions extends sfActions
     public function executeNewArretValidate(sfWebRequest $request) {
         $fileNameRequest = str_replace('/', '', $request->getParameter('arret'));
         $filePath = sfConfig::get('sf_data_dir') . '/dataXml/' . $fileNameRequest;
+        $this->form = new NewArretForm($fileNameRequest);
 
         if (rename($filePath, sfConfig::get('app_juricaf_xmlwebdir') . '/' . $fileNameRequest)) {
-            $this->getUser()->setFlash('notice', 'Votre arret a été validé.');
+            $this->getUser()->setFlash('notice', 'Votre arret est en cours d\'intégration.');
         } else {
-            throw new Exception('La validation de l\'arret a échouée');
+            throw new Exception('Impossible de déplacer l\'arret a l\'adresse ' . $filePath);
         }
 
-        $pattern = '/^(.*?)_(.*?)_(.*?)_(.*?)\.xml$/';
-        preg_match($pattern, $fileNameRequest, $matches);
-        $pays = $matches[2];
-        $juri = $matches[3];
-
-        return $this->redirect('@new_arret?prevPays=' . $pays . '&prevJuri=' . $juri);
+        return $this->redirect('@new_arret?PAYS=' . $this->form->getPaysValue() . '&JURIDICTION=' . $this->form->getJuriValue());
     }
 
 
