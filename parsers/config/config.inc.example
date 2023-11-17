@@ -3,3 +3,6 @@ FRANCE_CC_API_TOKEN=4196zzzz-ffff-aaaa-bbbb-6e5d4dc0cccc
 POOL_DIR=real/path/to/data/pool/folder
 PYENV=../path/to/pythonvirtualenv/bin/activate
 JUDILIBRE_KEYID="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+LEXBASE_MIRRORDIR="/dir"
+LEXBASE_WGET_AUTH="---user=utilisateur --password=motdepasse"
+LEXBASE_SOURCEURL="lexbase://lexbase.com"
