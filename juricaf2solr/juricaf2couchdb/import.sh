@@ -40,7 +40,7 @@ echo $$ > $LOCK
 rm -f $JSONFILE 2> /dev/null
 rm -f $LOG 2> /dev/null
 
-find $DIRPOOL -type f  | grep -v .svn > $LISTPOOL
+find $DIRPOOL -type f -name '*xml' | grep -v .svn | grep -v .listing > $LISTPOOL
 
 function update2couch {
   REV=$(curl -H"Content-Type: application/json" -s "$COUCHDBURL/$CONFLICTID"  | sed 's/.*"_rev":"//' | sed 's/".*//')
