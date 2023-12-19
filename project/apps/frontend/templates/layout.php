@@ -119,7 +119,7 @@
           </a>
          </li>
          <li class="nav-item">
-          <a class="nav-link" href="https://www.linkedin.com/in/ahjucaf-cours-supr%C3%AAmes-judiciaires-francophones-0a7a72230" target="_blank">
+          <a class="nav-link" href="https://www.linkedin.com/company/ahjucaf-cours-supremes-judiciaires-francophones/" target="_blank">
             <i class="bi bi-linkedin"></i> <span class="d-lg-none"> Nous suivre sur LinkedIn</span>
           </a>
         </li>
