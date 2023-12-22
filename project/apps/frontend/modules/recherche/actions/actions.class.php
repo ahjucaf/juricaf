@@ -14,15 +14,7 @@ class rechercheActions extends sfActions
     {
         $this->getUser()->setAttribute('query', '');
         if($request->getParameter('q')) {
-            $search = strip_tags($request->getParameter('q'));
-            $search = preg_replace('/[\/\{\}\<\>]/', '', $search);
-            $search = preg_replace("/\'/", '’', $search);
-            $count = count_chars($search, 1);
-            
-            if (isset($count[ord('"')]) && $count[ord('"')] % 2) {
-                $search = preg_replace ('/"/', '', $search);
-            }
-            $this->redirect('@recherche_resultats?query='.$search);
+            $this->redirect('@recherche_resultats?query='.$this->protectQuery($request->getParameter('q')));
         }
         $this->db = sfCouchConnection::getInstance();
         try{
@@ -33,6 +25,18 @@ class rechercheActions extends sfActions
           $nb = array_values($nb[0]);
           $this->nb = array_pop($nb);
         }catch(Exception $e) {$this->nb = 0;}
+    }
+
+    protected function protectQuery($q) {
+      $q = strip_tags($q);
+      $q = preg_replace('/[\/\{\}\<\>]/', '', $q);
+      $q = preg_replace("/\'/", '’', $q);
+      $count = count_chars($q, 1);
+
+      if (isset($count[ord('"')]) && $count[ord('"')] % 2) {
+          $q = preg_replace ('/"/', '', $q);
+      }
+      return $q;
     }
 
   public function executeFiltres(sfWebRequest $request) {
@@ -55,8 +59,7 @@ class rechercheActions extends sfActions
   public function executeSearch(sfWebRequest $request)
   {
     $solr = new sfBasicSolr();
-    $this->query = $request->getParameter('query', '+');
-    $this->query = preg_replace('/’/', "'", preg_replace('/[<>]/', '', $this->query));
+    $this->query = $this->protectQuery($request->getParameter('query', '+'));
     $this->getUser()->setAttribute('query', $this->query);
     $this->getUser()->setAttribute('facets', $this->cleanValue($request->getParameter('facets')));
     $this->getUser()->setAttribute('filter', $this->cleanValue($request->getParameter('filter')));
