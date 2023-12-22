@@ -134,7 +134,7 @@ if(isset($output['NUM_ARRET'])) {
 
 $output['REFERENCES'] = [];
 if ($fond == 'CONSTIT') {
-    $saisine .= strval($xml->xpath('/TEXTE_JURI_CONSTIT/TEXTE/SAISINES/SAISINE/@AUTEUR'));
+    $saisine  = strval(implode(', ', $xml->xpath('/TEXTE_JURI_CONSTIT/TEXTE/SAISINES/SAISINE/@AUTEUR')));
     $saisine .= trim(implode("\n", $xml->xpath('/TEXTE_JURI_CONSTIT/TEXTE/SAISINES//*')));
     if(strlen($saisine) > 30) {
         $output['SAISINES'] = $saisine;
@@ -263,7 +263,7 @@ if ($fond == 'CONSTIT') {
         );
     }
 
-} elseif ($fond == 'JURI') {
+} elseif ($fond == 'JUDI') {
     foreach(array('civile','commerciale','criminelle','sociale', 'mixte', 'reunie', 'réunie') as $type) {
         if (isset($xml->META->META_COMMUN->URL) && strpos($xml->META->META_COMMUN->URL, $type) !== false) {
             $output['TYPE_AFFAIRE'] = $type;
@@ -282,12 +282,17 @@ if ($fond == 'CONSTIT') {
             array('DECISION_ATTAQUEE' =>
                 array('TYPE' => 'DECISION',
                     'FORMATION' => rtrim(str_replace(strval($xml->META->META_SPEC->META_JURI_JUDI->DATE_DEC_ATT), '', strval($xml->META->META_SPEC->META_JURI_JUDI->FORM_DEC_ATT))),
-                    'DATE' => toIsoDate(strval($xml->META->META_SPEC->META_JURI_JUDI->DATE_DEC_ATT)),
+                    'DATE' => strval($xml->META->META_SPEC->META_JURI_JUDI->DATE_DEC_ATT),
                     'SIEGE' => strval($xml->META->META_SPEC->META_JURI_JUDI->SIEGE_APPEL),
                     'JURI_PREM' => strval($xml->META->META_SPEC->META_JURI_JUDI->JURI_PREM),
                     'LIEU_PREM' => strval($xml->META->META_SPEC->META_JURI_JUDI->LIEU_PREM)
                 )
             );
+        foreach(['DATE', 'JURI_PREM', 'LIEU_PREM', 'SIEGE'] as $k) {
+            if (!$output['DECISIONS_ATTAQUEES']['DECISION_ATTAQUEE'][$k]) {
+                unset($output['DECISIONS_ATTAQUEES']['DECISION_ATTAQUEE'][$k]);
+            }
+        }
     }
     foreach ($xml->xpath('/TEXTE_JURI_JUDI/TEXTE/CITATION_JP/*') as $value) {
         $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
@@ -325,7 +330,9 @@ if ($fond == 'CONSTIT') {
     }
 }
 
-$meta_xpath = 'TEXTE_JURI_'.$fond;
+if (!isset($meta_xpath)) {
+    $meta_xpath = 'TEXTE_JURI_'.$fond;
+}
 if($xml->xpath('/'.$meta_xpath.'/TEXTE/SOMMAIRE/*/@ID')) {
     $analyses_ids = array_unique($xml->xpath('/'.$meta_xpath.'/TEXTE/SOMMAIRE/*/@ID'));
     foreach ($analyses_ids as $value) {
@@ -365,6 +372,11 @@ if (empty($output['TEXTE_ARRET'])) {
     $output['TEXTE_ARRET'] = rtrim(implode("\n", $xml->xpath('/'.$meta_xpath.'/TEXTE/BLOC_TEXTUEL/CONTENU')));
 }
 
+if (isset($output['ID'])) {
+    $output['ID_SOURCE'] = $output['ID'];
+    unset($output['ID']);
+}
+
 foreach(array_keys($output) as $k) {
     if (!$output[$k]) {
         unset($output[$k]);
@@ -384,6 +396,7 @@ function printXML($data) {
         echo "</$balise>\n";
     }
 }
-echo '<?xml version="1.0" encoding="utf8"?>';
+echo '<?xml version="1.0" encoding="UTF-8"?>';
 echo "\n<DOCUMENT>\n";
 printXML($output);
+echo "</DOCUMENT>\n";
