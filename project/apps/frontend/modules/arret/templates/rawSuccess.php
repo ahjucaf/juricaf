@@ -67,9 +67,17 @@ function printBalise($field, $balise)
   }
   if (array_keys($field))
     foreach ($field as $k => $v) {
-      if (!is_int($k)) echo '<'.strtoupper($k).'>';
-      printBalise($v, $k);
-      if (!is_int($k)) echo '</'.strtoupper($k).'>';
+      if (is_array($v) && isset($v[0])) {
+          foreach($v as $ssfield) {
+              echo '<'.strtoupper($k).'>';
+              printBalise($ssfield, $k);
+              echo '</'.strtoupper($k).'>';
+          }
+      }else{
+          if (!is_int($k)) echo '<'.strtoupper($k).'>';
+          printBalise($v, $k);
+          if (!is_int($k)) echo '</'.strtoupper($k).'>';
+      }
     }
   else
     foreach($field as $v)
