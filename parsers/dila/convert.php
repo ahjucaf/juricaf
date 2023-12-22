@@ -78,7 +78,8 @@ if (isset($xml->META)) {
             $output['FORMATION'] = str_replace("_", " ", $xml->META->META_SPEC->{"META_JURI_".$fond}->FORMATION);
         }
         if (!isset($output['NOR'])) {
-            $output['NOR'] = strval($xml->META->META_SPEC->{"META_JURI_".$fond}->NOR);
+            $nor = strval($xml->META->META_SPEC->{"META_JURI_".$fond}->NOR);
+            $output['NOR'] = ($nor != 'SUPPRIME') ? $nor : null;
         }
         if (!isset($output['TYPE_RECOURS'])) {
             $output['TYPE_RECOURS'] = ucfirst(strval($xml->META->META_SPEC->{"META_JURI_".$fond}->TYPE_REC));
@@ -303,8 +304,8 @@ if ($fond == 'CONSTIT') {
                 'NATURE' => strval($value['naturetexte']),
                 'DATE' => strval($value['datesignatexte']),
                 'NUMERO' => strval($value['numtexte']),
-                'NOR' => $nor,
-                'URL' => ($nor) ? 'http://www.legifrance.gouv.fr/WAspad/UnTexteDeJorf?numjo='.$nor : ''
+                'NOR' => ($nor != 'SUPPRIME') ? $nor : null,
+                'URL' => ($nor && $nor != 'SUPPRIME') ? 'http://www.legifrance.gouv.fr/WAspad/UnTexteDeJorf?numjo='.$nor : ''
             );
         }
     }
