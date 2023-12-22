@@ -43,6 +43,9 @@ if (isset($xml->META)) {
         if ($fond == 'JURI') {
             $fond = 'JUDI';
         }
+        if ($fond == 'CETAT') {
+            $fond = 'ADMIN';
+        }
     }
     if (isset($xml->META->META_SPEC->META_JURI)) {
         if (!isset($output['SENS_ARRET'])) {
@@ -101,7 +104,7 @@ if (isset($xml->META)) {
     }
 }
 
-$output['JURIDICTION'] = str_replace("Caa", "Cour administrative d'appel", $output['JURIDICTION']);
+$output['JURIDICTION'] = str_replace(["Caa", 'CAA', 'caa'], "Cour administrative d'appel", $output['JURIDICTION']);
 $tribunaux = array(
     "Cour administrative d'appel",
     "Cour d'appel",
@@ -158,67 +161,77 @@ if ($fond == 'CONSTIT') {
     "AUTR" => "Autres textes et décisions");
 
     if (strval($xml->META->META_SPEC->META_JURI_CONSTIT->LOI_DEF)) {
-        $nor = strval($xml->xpath('/TEXTE_JURI_CONSTIT/META/META_SPEC/META_JURI_CONSTIT/LOI_DEF/@nor'));
-        $output['DECISIONS_ATTAQUEES'] = array('DECISION_ATTAQUEE' =>
-        array('TITRE' => strval($xml->META->META_SPEC->META_JURI_CONSTIT->LOI_DEF),
-        'TYPE' => $natureConstit[$output['TYPE_AFFAIRE']],
-        'FORMATION' => '',
-        'DATE' => toIsoDate(strval($xml->xpath('/TEXTE_JURI_CONSTIT/META/META_SPEC/META_JURI_CONSTIT/LOI_DEF/@date'))),
-        'NUMERO' => strval($xml->xpath('/TEXTE_JURI_CONSTIT/META/META_SPEC/META_JURI_CONSTIT/LOI_DEF/@num')),
-        'NOR' => $nor
-    )
-);
-$output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
-    'TITRE' => strval($xml->META->META_SPEC->META_JURI_CONSTIT->LOI_DEF),
-    'TYPE' => 'DECISION_ATTAQUEE',
-    'NATURE' => $natureConstit[$output['TYPE_AFFAIRE']],
-    'DATE' => strval($xml->xpath('/TEXTE_JURI_CONSTIT/META/META_SPEC/META_JURI_CONSTIT/LOI_DEF/@date')),
-    'NUMERO' => strval($xml->xpath('/TEXTE_JURI_CONSTIT/META/META_SPEC/META_JURI_CONSTIT/LOI_DEF/@num')),
-    'NOR' => $nor,
-    'URL' => ($nor) ? 'http://www.legifrance.gouv.fr/WAspad/UnTexteDeJorf?numjo='.$nor : ''
-);
-} else {
-    $output['DECISIONS_ATTAQUEES'] = array('DECISION_ATTAQUEE' => array('TYPE' => $natureConstit[$output['TYPE_AFFAIRE']]));
-}
+        $nor = implode(' ', $xml->xpath('/TEXTE_JURI_CONSTIT/META/META_SPEC/META_JURI_CONSTIT/LOI_DEF/@nor'));
+        $output['DECISIONS_ATTAQUEES'] = array('DECISION_ATTAQUEE' => array(
+                    'TYPE' => $natureConstit[$output['TYPE_AFFAIRE']],
+                    'TITRE' => strval($xml->META->META_SPEC->META_JURI_CONSTIT->LOI_DEF),
+                    'FORMATION' => '',
+                    'DATE' => toIsoDate(implode(' ', $xml->xpath('/TEXTE_JURI_CONSTIT/META/META_SPEC/META_JURI_CONSTIT/LOI_DEF/@date'))),
+                    'NUMERO' => implode(' ', $xml->xpath('/TEXTE_JURI_CONSTIT/META/META_SPEC/META_JURI_CONSTIT/LOI_DEF/@num')),
+                    'NOR' => ($nor != 'SUPPRIME') ? $nor : null,
+            )    );
+        $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
+                'TITRE' => strval($xml->META->META_SPEC->META_JURI_CONSTIT->LOI_DEF),
+                'TYPE' => 'DECISION_ATTAQUEE',
+                'NATURE' => $natureConstit[$output['TYPE_AFFAIRE']],
+                'DATE' => implode(' ', $xml->xpath('/TEXTE_JURI_CONSTIT/META/META_SPEC/META_JURI_CONSTIT/LOI_DEF/@date')),
+                'NUMERO' => implode(' ', $xml->xpath('/TEXTE_JURI_CONSTIT/META/META_SPEC/META_JURI_CONSTIT/LOI_DEF/@num')),
+                'NOR' => ($nor != 'SUPPRIME') ? $nor : null,
+                'URL' => ($nor && $nor != "SUPPRIME") ? 'http://www.legifrance.gouv.fr/WAspad/UnTexteDeJorf?numjo='.$nor : ''
+        );
+    } else {
+            $output['DECISIONS_ATTAQUEES'] = array('DECISION_ATTAQUEE' => array('TYPE' => $natureConstit[$output['TYPE_AFFAIRE']]));
+    }
 
-$analyses = multiple('SOMMAIRE', $xml->xpath('/TEXTE_JURI_CONSTIT/TEXTE/OBSERVATIONS/*'));
-if (isset($xml->META->META_SPEC->META_JURI_CONSTIT->URL_CC)) {
-    $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
-        'TITRE' => 'site internet du Conseil constitutionnel',
-        'TYPE' => 'SOURCE',
-        'NATURE' => $output['TYPE_AFFAIRE'],
-        'DATE' => strval($xml->META->META_SPEC->META_JURI->DATE_DEC),
-        'NUMERO' => strval($xml->META->META_SPEC->META_JURI->NUMERO),
-        'NOR' => strval($xml->META->META_SPEC->META_JURI_CONSTIT->NOR),
-        'URL' => strval($xml->META->META_SPEC->META_JURI_CONSTIT->URL_CC)
-    );
-}
-if (strval($xml->META->META_SPEC->META_JURI_CONSTIT->NOR)) {
-    $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
-        'TITRE' => 'site internet Légifrance',
-        'TYPE' => 'SOURCE',
-        'NATURE' => $output['TYPE_AFFAIRE'],
-        'DATE' => strval($xml->META->META_SPEC->META_JURI->DATE_DEC),
-        'NUMERO' => strval($xml->META->META_SPEC->META_JURI->NUMERO),
-        'NOR' => strval($xml->META->META_SPEC->META_JURI_CONSTIT->NOR),
-        'URL' => 'http://www.legifrance.gouv.fr/WAspad/UnTexteDeJorf?numjo='.strval($xml->META->META_SPEC->META_JURI_CONSTIT->NOR)
-    );
-}
-if(isset($xml->META->META_SPEC->META_JURI_CONSTIT->TITRE_JO)) {
-    $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
-        'TITRE' => $xml->META->META_SPEC->META_JURI_CONSTIT->TITRE_JO,
-        'TYPE' => 'PUBLICATION',
-    );
-}
+    $i = 1;
+    $analyses = [];
+    foreach ($xml->xpath('/TEXTE_JURI_CONSTIT/TEXTE/OBSERVATIONS/*') as $value) {
+        if(trim($value) !== '') {
+            $multiples['SOMMAIRE id="'.$i.'"'] = cdata($value); $i++;
+        }
+    }
+    if (isset($xml->META->META_SPEC->META_JURI_CONSTIT->URL_CC)) {
+        $nor = $xml->META->META_SPEC->META_JURI_CONSTIT->NOR;
+        $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
+            'TITRE' => 'site internet du Conseil constitutionnel',
+            'TYPE' => 'SOURCE',
+            'NATURE' => $output['TYPE_AFFAIRE'],
+            'DATE' => strval($xml->META->META_SPEC->META_JURI->DATE_DEC),
+            'NUMERO' => strval($xml->META->META_SPEC->META_JURI->NUMERO),
+            'NOR' => ($nor != 'SUPPRIMER') ? $nor : null,
+            'URL' => strval($xml->META->META_SPEC->META_JURI_CONSTIT->URL_CC)
+        );
+    }
+    $nor = strval($xml->META->META_SPEC->META_JURI_CONSTIT->NOR);
+    if ($nor) {
+        $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
+            'TITRE' => 'site internet Légifrance',
+            'TYPE' => 'SOURCE',
+            'NATURE' => $output['TYPE_AFFAIRE'],
+            'DATE' => strval($xml->META->META_SPEC->META_JURI->DATE_DEC),
+            'NUMERO' => strval($xml->META->META_SPEC->META_JURI->NUMERO),
+            'NOR' => ($nor != 'SUPPRIME') ? $nor : null,
+            'URL' => ($nor && $nor != "SUPPRIME") ? 'http://www.legifrance.gouv.fr/WAspad/UnTexteDeJorf?numjo='.$nor : ''
+        );
+    }
+    if(isset($xml->META->META_SPEC->META_JURI_CONSTIT->TITRE_JO)) {
+        $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
+            'TITRE' => $xml->META->META_SPEC->META_JURI_CONSTIT->TITRE_JO,
+            'TYPE' => 'PUBLICATION',
+        );
+    }
 
 } elseif ($fond == 'CETAT') {
+    $meta_xpath = 'TEXTE_JURI_ADMIN';
     $output['TYPE_AFFAIRE'] = 'Administrative';
     foreach ($xml->xpath('/TEXTE_JURI_ADMIN/TEXTE/CITATION_JP/*') as $value) {
-        $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
-            'TITRE' => strval($value),
-            'TYPE' => 'CITATION_ANALYSE',
-        );
-
+        $value = rtrim(strval($value));
+        if ($value) {
+            $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
+                'TITRE' => $value,
+                'TYPE' => 'CITATION_ANALYSE',
+            );
+        }
     }
     foreach ($xml->xpath('/TEXTE_JURI_ADMIN/LIENS/*') as $key => $value) {
         if($value) {
@@ -229,16 +242,18 @@ if(isset($xml->META->META_SPEC->META_JURI_CONSTIT->TITRE_JO)) {
                 'NATURE' => strval($value['naturetexte']),
                 'DATE' => strval($value['datesignatexte']),
                 'NUMERO' => strval($value['numtexte']),
-                'NOR' => $nor,
-                'URL' => ($nor) ? 'http://www.legifrance.gouv.fr/WAspad/UnTexteDeJorf?numjo='.$nor : ''
+                'NOR' => ($nor != 'SUPPRIME') ? $nor : null,
+                'URL' => ($nor && $nor != 'SUPPRIME') ? 'http://www.legifrance.gouv.fr/WAspad/UnTexteDeJorf?numjo='.$nor : ''
             );
 
         }
     }
+
     $lettre2lebon = array(
         'A' => 'Publié au recueil Lebon',
         'B' => 'Mentionné aux tables du recueil Lebon',
         'C' => 'Inédit au recueil Lebon',
+        'C+' => 'Inédit au recueil Lebon',
     );
     if(isset($xml->META->META_SPEC->META_JURI_ADMIN->PUBLI_RECUEIL) && $lettre2lebon[strval($xml->META->META_SPEC->META_JURI_ADMIN->PUBLI_RECUEIL)]) {
         $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
