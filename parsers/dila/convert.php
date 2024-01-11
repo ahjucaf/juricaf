@@ -1,6 +1,9 @@
 <?php
-
-$xml = simplexml_load_file($argv[1]) or die("Error: Cannot read XML ".$argv[1]);
+$xml = simplexml_load_file($argv[1]);
+if ( ! $xml ) {
+    fwrite(STDERR, "Error: Cannot read XML ".$argv[1] . PHP_EOL);
+    exit(1);
+ }
 
 $fond = '';
 foreach(['JURI','CETAT','CONSTIT'] as $o) {
@@ -367,9 +370,10 @@ if($xml->xpath('/'.$meta_xpath.'/TEXTE/SOMMAIRE/*/@ID')) {
     }
 }
 
-$output['TEXTE_ARRET'] = rtrim(implode("\n", $xml->xpath('/'.$meta_xpath.'/TEXTE/BLOC_TEXTUEL/CONTENU//*')));
-if (empty($output['TEXTE_ARRET'])) {
-    $output['TEXTE_ARRET'] = rtrim(implode("\n", $xml->xpath('/'.$meta_xpath.'/TEXTE/BLOC_TEXTUEL/CONTENU')));
+$text = $xml->xpath('/'.$meta_xpath.'/TEXTE/BLOC_TEXTUEL/CONTENU');
+$output['TEXTE_ARRET'] = '';
+foreach($text as $t) {
+    $output['TEXTE_ARRET'] .= str_replace(['<CONTENU>', '</CONTENU>', '<p>', '</p>'], "\n", htmlspecialchars_decode(preg_replace('|<br/?>|i', "\n", $t->asXML())));
 }
 
 if (isset($output['ID'])) {
@@ -390,8 +394,9 @@ function printXML($data) {
             echo "\n";
             printXML($value);
         }else{
-            echo $value;
+            echo preg_replace('/&amp;([a-z]*);/', '&$1;', preg_replace(['/([^ ;]+)(&[^ ;]+;)/', '/([^ ;]*)&([^ ]*)/'], ['$1$2', '$1&amp;$2'], $value));
         }
+        //retire les attributs de l'ouverture de la balise
         $balise = preg_replace('/ .*/', '', $balise);
         echo "</$balise>\n";
     }
