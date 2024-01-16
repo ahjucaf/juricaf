@@ -25,8 +25,9 @@ class JuricafArret extends sfCouchDocument
   private static $hidden_fields = ['error', 'reason', 'date_import'];
   public function getFields($choose_anon = false) {
     $fields = array();
+    $has_anon = ($this->storage->texte_arret_anon);
     foreach ($this->storage as $key => $v) {
-        if (in_array($key, self::$hidden_fields) || ($choose_anon && $key == 'texte_arret') ) {
+        if (in_array($key, self::$hidden_fields) || ($choose_anon && $has_anon && $key == 'texte_arret') ) {
             continue;
         }
         $fields[] = $key;
