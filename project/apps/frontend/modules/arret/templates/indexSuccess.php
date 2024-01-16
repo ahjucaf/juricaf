@@ -319,11 +319,11 @@ $sources = '';
                 }
             }
             if(isset($value['url'])) {
-                $citations_arret .= '<a href="'.$value['url'].'">'.$titre.'</a><br />';
+                $citations_arret .= 'aa <a href="'.$value['url'].'">'.$titre.'</a><br />';
             } else {
-                $citations_arret = preg_replace('#(?<!href=")(?<!>)https?://[a-z0-9._/-]+#i', '<a href="$0" target="_blank">$0</a>', $citations_arret);
-                $citations_arret = preg_replace('#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#', '<a href="https://juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>', $citations_arret);
-                $citations_arret .=  $titre.'<br />';
+                if ($titre) {
+                    $citations_arret .= preg_replace('#([0-9]{4})[\x20-\x7E]CSC[\x20-\x7E]([0-9]{1,2})#', '<a href="https://juricaf.org/recherche/num_arret:$1CSC$2">$1 CSC $2</a>', $titre).'<br/>';
+                }
             }
         }
     }
