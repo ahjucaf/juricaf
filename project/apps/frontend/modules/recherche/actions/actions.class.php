@@ -138,7 +138,7 @@ class rechercheActions extends sfActions
     $res = $solr->search($solr_query, $start, $pas, $param);
 
     // Un seul résultat = renvoi à l'arrêt en question
-    if ($res->response->numFound == 1 && $request->getParameter('format') !== 'rss') {
+    if ($res->response->numFound == 1 && !$request->getParameter('format')) {
       return $this->redirect('@arret?id='.$res->response->docs[0]->id);
     }
 
