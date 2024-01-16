@@ -317,8 +317,9 @@ if (!file_exists($INPUT_FILE) || filesize($INPUT_FILE) == 0) {
         }
       }
       $i = 0;
+      $liens = array();
       foreach ($dila->xpath('/'.$meta_xpath.'/LIENS/*') as $key => $value) {
-        $liens[$i] = $value; $i++;
+        $liens[] = $value;
       }
       if(isset($liens)) {
         foreach ($liens as $value) {
@@ -348,9 +349,8 @@ if (!file_exists($INPUT_FILE) || filesize($INPUT_FILE) == 0) {
       foreach ($dila->xpath('/'.$meta_xpath.'/TEXTE/CITATION_JP/*') as $value) {
         $references = addRef($references, $value, 'CITATION_ANALYSE', '', '', '', '', '');
       }
-      $i = 0;
       foreach ($dila->xpath('/'.$meta_xpath.'/LIENS/*') as $key => $value) {
-        $liens[$i] = $value; $i++;
+        $liens[] = $value;
       }
       if(isset($liens)) {
         foreach ($liens as $value) {
