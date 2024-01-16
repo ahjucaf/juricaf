@@ -180,7 +180,7 @@ function printDecisionAttaquee($ref_or_da, $is_text = 0) {
         $temp[$i] .= ', '.dateFr($decision_attaquee['date']);
       }
       if(empty($decision_attaquee['url'])) {
-        $temp[$i] = link_to($temp[$i], '@recherche_resultats?query=formation:"'.$decision_attaquee['formation'].'" date_arret:'.$decision_attaquee['date']);
+        $temp[$i] = link_to($temp[$i], '@recherche_resultats?query=(formation:"'.$decision_attaquee['formation'].'" OR tribunal:"'.$decision_attaquee['formation'].'") date_arret:'.$decision_attaquee['date']);
       }
     }
     if(!empty($decision_attaquee['url']) && !empty($temp[$i])) {
