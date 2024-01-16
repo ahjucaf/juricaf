@@ -448,15 +448,7 @@ $sf_response->addMeta('g:type', 'article', false, false, false);
 $sf_response->addMeta('og:url', $url, false, false, false);
 $sf_response->addMeta('sog:image', 'https://juricaf.org/images/juricaf.png', false, false, false);
 $sf_response->addMeta('og:site_name', 'Juricaf', false, false, false);
-$sf_response->addMeta('fb:app_id', '199894740035999', false, false, false);
 
-
-if(isset($contrib)) {
-    $sf_response->addMeta('DC.contributor', htmlspecialchars(strip_tags(str_replace('<br />', " ;\n", $contributors)), ENT_QUOTES), false, false, false);
-}
-if (!empty($citations)) {
-    $sf_response->addMeta('DC.references', htmlspecialchars(strip_tags(str_replace('<br />', " ;\n", $citations)), ENT_QUOTES), false, false, false);
-}
 
 if(isset($references['PUBLICATION'])) {
     foreach($references['PUBLICATION'] as $value) {
