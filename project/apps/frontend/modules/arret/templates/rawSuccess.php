@@ -38,23 +38,23 @@ if ($json == true) {
         }
         return $ret;
     }
-    
+
     $json = array();
     foreach ($document->getFields(true) as $field) {
         $json[$field] = printJson($document->{$field}, $field);
     }
-    
+
     echo json_encode($json, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
-    
+
     return ;
 
-} 
+}
 
 //////////////////
 ///  Export XML
 //////////////////
 
-echo '<?xml version="1.0" encoding="utf8"?>'; ?>
+echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 
 <DOCUMENT>
 <?php
