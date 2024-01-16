@@ -214,16 +214,14 @@ function printDecisionAttaquee($ref_or_da, $is_text = 0) {
 if(isset($document->references)) {
     foreach ($document->getReferences() as $values) {
         $i = [];
+        if (isset($values['type'])) {
+            $values = [$values];
+        }
         foreach($values as $keys => $value) {
             if (!isset($value['type'])) {
                 continue;
             }
-            foreach ($value as $key => $vals) {
-                if ($key == 'type') {
-                    continue;
-                }
-                $references[$value['type']][$i[$value['type']]++][$key] = $vals;
-            }
+            $references[$value['type']][] = $value;
         }
     }
 }

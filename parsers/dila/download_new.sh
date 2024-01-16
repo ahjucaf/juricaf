@@ -41,12 +41,13 @@ find $LOCALCOPY -name "*.tar.gz"  -exec stat -c '%Y#%n' '{}' ';' > /tmp/"dila_fi
 diff /tmp/"dila_files_"$$.old /tmp/"dila_files_"$$.new | grep '^> ' | awk -F '#' '{print $2}'  > "/tmp/dila_toupdate_"$$.files
 find $LOCALCOPY -name "*.tar.gz" -newer /tmp/"dila_time_"$$.time >> "/tmp/dila_toupdate_"$$.files
 
-rm -rf $DETAR_DIR
-mkdir -p $DETAR_DIR"/"$$
+DETARD_DATE_DIR=$DETAR_DIR"/"$(date --iso=s)
+mkdir -p $DETARD_DATE_DIR $DETAR_DIR/../archive
+mv $DETAR_DIR/* $DETAR_DIR/../archive
 sort -u "/tmp/dila_toupdate_"$$.files | while read tarfile ; do
-	tar -zxf $tarfile -C $DETAR_DIR"/"$$ 
+	tar -zxf $tarfile -C $DETARD_DATE_DIR
 done
 
-find $DETAR_DIR"/"$$ -type f
+find $DETARD_DATE_DIR -type f
 
 rm /tmp/"dila_files_"$$.old /tmp/"dila_files_"$$.new /tmp/"dila_time_"$$".time" "/tmp/dila_toupdate_"$$.files
