@@ -188,10 +188,10 @@ if ($fond == 'CONSTIT') {
     }
 
     $i = 1;
-    $analyses = [];
+    $output['ANALYSES'] = [];
     foreach ($xml->xpath('/TEXTE_JURI_CONSTIT/TEXTE/OBSERVATIONS/*') as $value) {
+        $output['ANALYSES']['SOMMAIRE id="'.$i.'"'] = cdata($value); $i++;
         if(trim($value) !== '') {
-            $multiples['SOMMAIRE id="'.$i.'"'] = cdata($value); $i++;
         }
     }
     if (isset($xml->META->META_SPEC->META_JURI_CONSTIT->URL_CC)) {
@@ -225,6 +225,9 @@ if ($fond == 'CONSTIT') {
         );
     }
 
+    if (!count($output['ANALYSES'])) {
+        unset($output['ANALYSES']);
+    }
 } elseif ($fond == 'CETAT') {
     $meta_xpath = 'TEXTE_JURI_ADMIN';
     $output['TYPE_AFFAIRE'] = 'Administrative';
@@ -339,7 +342,6 @@ if (!isset($meta_xpath)) {
 if($xml->xpath('/'.$meta_xpath.'/TEXTE/SOMMAIRE/*/@ID')) {
     $analyses_ids = array_unique($xml->xpath('/'.$meta_xpath.'/TEXTE/SOMMAIRE/*/@ID'));
     foreach ($analyses_ids as $value) {
-        $output['ANALYSES'] = [];
         $p = 1;
         $titre_principal = $xml->xpath('/'.$meta_xpath.'/TEXTE/SOMMAIRE/SCT[contains(@ID,"'.$value.'") and contains(@TYPE,"PRINCIPAL")]');
         foreach ($titre_principal as $values) {
