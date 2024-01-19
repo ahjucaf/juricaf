@@ -42,8 +42,9 @@ diff /tmp/"dila_files_"$$.old /tmp/"dila_files_"$$.new | grep '^> ' | awk -F '#'
 find $LOCALCOPY -name "*.tar.gz" -newer /tmp/"dila_time_"$$.time >> "/tmp/dila_toupdate_"$$.files
 
 DETARD_DATE_DIR=$DETAR_DIR"/"$(date --iso=s)
-mkdir -p $DETARD_DATE_DIR $DETAR_DIR/../archive
+mkdir -p $DETAR_DIR/../archive
 mv $DETAR_DIR/* $DETAR_DIR/../archive
+mkdir -p $DETARD_DATE_DIR
 sort -u "/tmp/dila_toupdate_"$$.files | while read tarfile ; do
 	tar -zxf $tarfile -C $DETARD_DATE_DIR
 done
