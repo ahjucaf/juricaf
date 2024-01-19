@@ -630,7 +630,11 @@ else {
 $date = date_id($res['date_arret']);
 $num_arret_id = preg_replace('/[^a-z0-9;à]/i', '', $num_arret_id);
 $num_arret_id = str_replace(';', '-', $num_arret_id);
-$res['_id'] = ids($res['pays'].'-'.str_replace('-', '', $res['juridiction']).'-'.$date.'-'.$num_arret_id);
+$juridiction4id = $res['juridiction'];
+if (isset($res['tribunal'])) {
+    $juridiction4id = $res['tribunal'];
+}
+$res['_id'] = ids($res['pays'].'-'.str_replace('-', '', $juridiction4id).'-'.$date.'-'.$num_arret_id);
 
 if (isset($res['id'])) {
   $res['id_source'] = $res['id'];
