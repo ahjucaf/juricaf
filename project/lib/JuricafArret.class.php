@@ -78,7 +78,7 @@ class JuricafArret extends sfCouchDocument
       return $this->texte_arret;
   }
 
-  public function getDescription() {
+  public function getDescription($limit = 250) {
       if (isset($this->analyses) && isset($this->analyses['analyse']) && count($this->analyses['analyse'])) {
         $description = 'Arrêt '.$this->juridiction;
         foreach($this->analyses['analyse'] as $a) {
@@ -88,9 +88,9 @@ class JuricafArret extends sfCouchDocument
                 $description .= ' '.$a;
             }
         }
-        return preg_replace('/  +/' , ' ', preg_replace('/\n/', ' ', truncate_text($description, 250, "...", true)));
+        return preg_replace('/  +/' , ' ', preg_replace('/\n/', ' ', truncate_text($description, $limit, "...", true)));
       }
-      return preg_replace('/  +/' , ' ', preg_replace('/\n/', ' ', truncate_text($this->getTexteArret(), 250, "...", true)));
+      return preg_replace('/  +/' , ' ', preg_replace('/\n/', ' ', truncate_text($this->getTexteArret(), $limit, "...", true)));
   }
 
   public function getKeywords() {

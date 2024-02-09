@@ -418,9 +418,9 @@ if (!empty($sources)) { $citations .= $sources; }
 if (!empty($decisions_attaquees)) { $citations .= $decisions_attaquees; }
 
 $keywords = $document->getKeywords();
-$description = $document->getDescription();
+$description = $document->getDescription(150);
 if ($citation) {
-    $description = $citation." : ".$description;
+    $description = $citation." : ".$document->getDescription(100);
     $keywords = $citation." - ".$keywords;
 }
 
@@ -432,7 +432,7 @@ $sf_response->addMeta('DC.accessRights', 'public', false, false, false);
 $sf_response->addMeta('DC.creator', $creator, false, false, false);
 $sf_response->addMeta('DC.coverage', htmlspecialchars($document->pays, ENT_QUOTES), false, false, false);
 $sf_response->addMeta('DC.date', $document->date_arret, false, false, false);
-$sf_response->addMeta('DC.description', $document->getDescription(), false, false, false);
+$sf_response->addMeta('DC.description', $document->getDescription(150), false, false, false);
 
 $sf_response->addMeta('DC.format', 'text/html; charset=utf-8', false, false, false);
 $sf_response->addMeta('DC.language', 'FR', false, false, false);
