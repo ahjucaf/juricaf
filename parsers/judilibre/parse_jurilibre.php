@@ -39,9 +39,6 @@ if (isset($json->formation) && strlen($json->formation) < 5) {
 	}
 }
 
-
-print_r($json);
-
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 echo "\n<DOCUMENT>\n";
 echo "<PAYS>FRANCE</PAYS>\n";
@@ -97,14 +94,35 @@ echo "<REFERENCES>\n";
 	foreach ($json->rapprochements as $rappro) {
 		echo "<REFERENCE>\n";
 		echo "<TYPE>SIMILAIRE</TYPE>\n";
-		echo "<TITRE>".$rappro."</TITRE>\n";
+		echo "<TITRE>".$rappro->title."</TITRE>\n";
 		echo "</REFERENCE>\n";
 	}
 	foreach ($json->visa as $v) {
 		echo "<REFERENCE>\n";
 		echo "<TYPE>VISA</TYPE>\n";
-		echo "<TITRE>".$v->titile."</TITRE>\n";
+		echo "<TITRE>".$v->title."</TITRE>\n";
 		echo "</REFERENCE>\n";
+	}
+	if (isset($json->timeline)) {
+		foreach($json->timeline as $t) {
+			if ($t->number != $json->number) {
+				continue;
+			}
+			echo "<REFERENCE>\n";
+			echo "<TYPE>CITATION_ARRET</TYPE>\n";
+			echo "<NATURE>".$t->jurisdiction."</NATURE>\n";
+			echo "<DATE>".$t->date."</DATE>\n";
+			echo "<TITRE>";
+			echo str_replace('\\n', ' ', $t->title);
+			if (isset($t->number)) {
+				echo ", arrêt n°".$t->number;
+			}
+			if (isset($t->solution)) {
+				echo " : ".$t->solution;
+			}
+			echo "</TITRE>\n";
+			echo "</REFERENCE>\n";
+		}
 	}
 echo "</REFERENCES>\n";
 }
@@ -117,7 +135,7 @@ if (isset($json->contested)) {
 	echo "<DECISION_ATTAQUEE>\n";
 	echo "<TYPE>DECISION</TYPE>\n";
 	echo "<DATE>".$json->contested->date."</DATE>\n";
-	echo "<TITRE>".str_replace("\n", " ", $json->contested->titre)."</TITRE>\n";
+	echo "<TITRE>".str_replace("\n", " ", $json->contested->title)."</TITRE>\n";
 	echo "<FORMATION>".str_replace("\n", " ", $json->contested->jurisdiction)."</FORMATION>\n";
 	echo "</DECISION_ATTAQUEE>\n";
 	echo "</DECISIONS_ATTAQUEES>\n";
@@ -125,9 +143,14 @@ if (isset($json->contested)) {
 if (isset($json->summary)) {
 	echo "<ANALYSES>\n";
 	if (isset($json->summary)) {
-		echo "<ANALYSE>";
-		
-		echo "</ANALYSE>";
+		echo "<ANALYSE><SOMMAIRE>";
+		echo $json->summary;
+		echo "</SOMMAIRE></ANALYSE>";
+	}
+	if (isset($json->themes)) {
+		echo "<ANALYSE><TITRE_PRINCIPAL>";
+		echo implode(' - ', $json->themes);
+		echo "</TITRE_PRINCIPAL></ANALYSE>";
 	}
 	echo "</ANALYSES>\n";
 }
