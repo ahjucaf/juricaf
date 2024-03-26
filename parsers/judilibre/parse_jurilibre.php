@@ -154,5 +154,7 @@ if (isset($json->summary)) {
 	}
 	echo "</ANALYSES>\n";
 }
+if ($json->solution != 'Autre') {
 echo "<SENS_ARRET>".$json->solution."</SENS_ARRET>\n";
+}
 echo "</DOCUMENT>\n";
