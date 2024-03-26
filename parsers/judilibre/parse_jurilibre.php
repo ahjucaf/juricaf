@@ -48,20 +48,20 @@ echo "<JURIDICTION>".$json->jurisdiction."</JURIDICTION>\n";
 if (isset($json->location)) {
 	echo "<TRIBUNAL>".$json->location."</TRIBUNAL>\n";
 }
-if (isset($json->formation) || isset($json->chamber)) {
+if (isset($json->formation) && $json->formation || isset($json->chamber) && $json->chamber) {
 	echo "<FORMATION>";
-	if (isset($json->chamber)) {
+	if (isset($json->chamber) && $json->chamber) {
 		echo $json->chamber;
 	}
-	if (isset($json->formation) && isset($json->chamber)) {
+	if (isset($json->formation) && $json->formation && isset($json->chamber) && $json->chamber) {
 		echo " - ";
 	}
-	if (isset($json->formation)) {
+	if (isset($json->formation) && $json->formation) {
 		echo $json->formation;
 	}
-	"</FORMATION>\n";
+	echo "</FORMATION>\n";
 }
-echo "<TYPE>".strtolower(transliterator_transliterate('NFKC; [:Nonspacing Mark:] Remove; NFKC; Any-Latin; Latin-ASCII', $json->type))."</TYPE>\n";
+echo "<TYPE>arret</TYPE>\n";
 echo "<DATE_ARRET>".$json->decision_date."</DATE_ARRET>\n";
 echo "<NUM_ARRET>".$json->number."</NUM_ARRET>\n";
 if (count($json->numbers) > 1) {
@@ -88,19 +88,19 @@ echo "<REFERENCES>\n";
 		}
 		echo "<REFERENCE>\n";
 		echo "<TYPE>PUBLICATION</TYPE>\n";
-		echo "<TITRE>".$pub."</TITRE>\n";
+		echo "<TITRE>".preg_replace('/<[^>]*>/', '', $pub)."</TITRE>\n";
 		echo "</REFERENCE>\n";
 	}
 	foreach ($json->rapprochements as $rappro) {
 		echo "<REFERENCE>\n";
 		echo "<TYPE>SIMILAIRE</TYPE>\n";
-		echo "<TITRE>".$rappro->title."</TITRE>\n";
+		echo "<TITRE>".preg_replace('/<[^>]*>/', '', $rappro->title)."</TITRE>\n";
 		echo "</REFERENCE>\n";
 	}
 	foreach ($json->visa as $v) {
 		echo "<REFERENCE>\n";
 		echo "<TYPE>VISA</TYPE>\n";
-		echo "<TITRE>".$v->title."</TITRE>\n";
+		echo "<TITRE>".preg_replace('/<[^>]*>/', '', $v->title)."</TITRE>\n";
 		echo "</REFERENCE>\n";
 	}
 	if (isset($json->timeline)) {
@@ -113,7 +113,7 @@ echo "<REFERENCES>\n";
 			echo "<NATURE>".$t->jurisdiction."</NATURE>\n";
 			echo "<DATE>".$t->date."</DATE>\n";
 			echo "<TITRE>";
-			echo str_replace('\\n', ' ', $t->title);
+			echo str_replace('\\n', ' ', preg_replace('/<[^>]*>/', '', $t->title));
 			if (isset($t->number)) {
 				echo ", arrêt n°".$t->number;
 			}
@@ -126,7 +126,7 @@ echo "<REFERENCES>\n";
 	}
 echo "</REFERENCES>\n";
 }
-echo "<TEXTE_ARRET>\n".$json->text."\n</TEXTE_ARRET>\n";
+echo "<TEXTE_ARRET>\n".str_replace(['&', '<', '>'], ['&amp;', '&lt;', '$gt;'], $json->text)."\n</TEXTE_ARRET>\n";
 if (isset($json->ecli)) {
 	echo "<ECLI>".$json->ecli."</ECLI>\n";
 }
@@ -135,7 +135,7 @@ if (isset($json->contested)) {
 	echo "<DECISION_ATTAQUEE>\n";
 	echo "<TYPE>DECISION</TYPE>\n";
 	echo "<DATE>".$json->contested->date."</DATE>\n";
-	echo "<TITRE>".str_replace("\n", " ", $json->contested->title)."</TITRE>\n";
+	echo "<TITRE>".str_replace("\n", " ", preg_replace('/<[^>]*>/', '', $json->contested->title))."</TITRE>\n";
 	echo "<FORMATION>".str_replace("\n", " ", $json->contested->jurisdiction)."</FORMATION>\n";
 	echo "</DECISION_ATTAQUEE>\n";
 	echo "</DECISIONS_ATTAQUEES>\n";
