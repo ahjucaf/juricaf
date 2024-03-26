@@ -117,6 +117,7 @@ $tribunaux = array(
     "Tribunal de commerce",
     "Tribunal de grande instance",
     "Tribunal des affaires de sécurité sociale",
+    "Tribunal judiciaire",
     "Juridiction de proximité",
     "Conseil de prud'hommes"
 );
