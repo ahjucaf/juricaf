@@ -621,8 +621,11 @@ if (!isset($res['titre']))
   else { $human_num_arret = $res['num_arret']; $num_arret_id = $res['num_arret']; }
 
   $human_num_arret = str_replace(array('_', 'à'), array(' ', ' à '), $human_num_arret);
-
-  $res['titre'] = $res['pays'].', '.$res['juridiction'].$formation.', '.$date->format('d').' '.$mois[$date->format('m')].' '.$date->format('Y').', '.$human_num_arret;
+  if (isset($res['tribunal']) && $res['tribunal']) {
+      $res['titre'] = $res['pays'].', '.$res['tribunal'].$formation.', '.$date->format('d').' '.$mois[$date->format('m')].' '.$date->format('Y').', '.$human_num_arret;
+  }else{
+      $res['titre'] = $res['pays'].', '.$res['juridiction'].$formation.', '.$date->format('d').' '.$mois[$date->format('m')].' '.$date->format('Y').', '.$human_num_arret;
+  }
 }
 else {
   $num_arret_id = $res['num_arret'];
