@@ -94,13 +94,13 @@ echo "<REFERENCES>\n";
 	foreach ($json->rapprochements as $rappro) {
 		echo "<REFERENCE>\n";
 		echo "<TYPE>SIMILAIRE</TYPE>\n";
-		echo "<TITRE>".preg_replace('/<[^>]*>/', '', $rappro->title)."</TITRE>\n";
+		echo "<TITRE>".preg_replace('/<[^>]*>/', '', str_replace('\n', ' ', $rappro->title))."</TITRE>\n";
 		echo "</REFERENCE>\n";
 	}
 	foreach ($json->visa as $v) {
 		echo "<REFERENCE>\n";
 		echo "<TYPE>VISA</TYPE>\n";
-		echo "<TITRE>".preg_replace('/<[^>]*>/', '', $v->title)."</TITRE>\n";
+		echo "<TITRE>".preg_replace('/<[^>]*>/', '', str_replace('\n', ' ', $v->title))."</TITRE>\n";
 		echo "</REFERENCE>\n";
 	}
 	if (isset($json->timeline)) {
@@ -113,7 +113,7 @@ echo "<REFERENCES>\n";
 			echo "<NATURE>".$t->jurisdiction."</NATURE>\n";
 			echo "<DATE>".$t->date."</DATE>\n";
 			echo "<TITRE>";
-			echo str_replace('\\n', ' ', preg_replace('/<[^>]*>/', '', $t->title));
+			echo str_replace('\n', ' ', preg_replace('/<[^>]*>/', '', $t->title));
 			if (isset($t->number)) {
 				echo ", arrêt n°".$t->number;
 			}
