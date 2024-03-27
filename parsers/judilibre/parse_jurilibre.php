@@ -105,7 +105,7 @@ echo "<REFERENCES>\n";
 	}
 	if (isset($json->timeline)) {
 		foreach($json->timeline as $t) {
-			if ($t->number != $json->number) {
+			if (isset($t->number) && $t->number != $json->number) {
 				continue;
 			}
 			echo "<REFERENCE>\n";
@@ -136,7 +136,9 @@ if (isset($json->contested)) {
 	echo "<TYPE>DECISION</TYPE>\n";
 	echo "<DATE>".$json->contested->date."</DATE>\n";
 	echo "<TITRE>".str_replace("\n", " ", preg_replace('/<[^>]*>/', '', $json->contested->title))."</TITRE>\n";
-	echo "<FORMATION>".str_replace("\n", " ", $json->contested->jurisdiction)."</FORMATION>\n";
+	if (isset($json->contested->jurisdiction)) {
+		echo "<FORMATION>".str_replace("\n", " ", $json->contested->jurisdiction)."</FORMATION>\n";
+	}
 	echo "</DECISION_ATTAQUEE>\n";
 	echo "</DECISIONS_ATTAQUEES>\n";
 }
