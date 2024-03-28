@@ -581,6 +581,19 @@ if ($res['juridiction'] == 'Cour d-arbitrage') {
   $res['juridiction'] = "Cour d'arbitrage";
 }
 
+if (strpos($res['juridiction'], array(' instance d', 'instance hors classe d')) && !(isset($res['tribunal']) && $res['tribunal'])) {
+    $res['tribunal'] = $res['juridiction'];
+    $res['juridiction'] = preg_replace('/ instance .*/', ' instance', $res['juridiction']);
+}
+if ((strpos($res['juridiction'], ' appel d')) && !(isset($res['tribunal']) && $res['tribunal'])) {
+    $res['tribunal'] = $res['juridiction'];
+    $res['juridiction'] = preg_replace('/ appel d.*/', ' appel', $res['juridiction']);
+}
+if ((strpos($res['juridiction'], ' commerce d')) && !(isset($res['tribunal']) && $res['tribunal'])) {
+    $res['tribunal'] = $res['juridiction'];
+    $res['juridiction'] = preg_replace('/ commerce d.*/', ' commerce', $res['juridiction']);
+}
+
 if (!isset($res['section']) || $res['section'] == '-') {
   unset($res['section']);
 }
