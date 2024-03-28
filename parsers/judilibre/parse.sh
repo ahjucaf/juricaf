@@ -16,7 +16,7 @@ if test "$juridiction" == "Courdecassation" ; then
 	elif test "$numres" -ge 2; then
 		echo "WARNING: duplicates cour de cass $num " 1>&2
 	fi
-elif test "$juridiction" == "Courdappel" ; then
+elif test "$juridiction" == "Courdappel" || test "$juridiction" == "Tribunaljudiciaire"; then
 	tribunal=$(jq '.location' < $file | sed 's/ /+/g')
 	numres=$(curl -s 'https://juricaf.org/recherche/num_arret:%22'$num'%22+tribunal%3A%22'$(echo $tribunal | sed "s/'/%27/g")'%22/facet_pays%3AFrance%2Cfacet_pays_juridiction%3AFrance_%7C_Cour_d%27appel?format=json' | jq .nb_resultat)
 	if test "$numres" -eq 0; then
