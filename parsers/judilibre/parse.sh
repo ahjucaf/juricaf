@@ -18,7 +18,11 @@ if test "$juridiction" == "Courdecassation" ; then
 	fi
 elif test "$juridiction" == "Courdappel" || test "$juridiction" == "Tribunaljudiciaire"; then
 	tribunal=$(jq '.location' < $file | sed 's/ /+/g')
-	numres=$(curl -s 'https://juricaf.org/recherche/num_arret:%22'$num'%22+tribunal%3A%22'$(echo $tribunal | sed "s/'/%27/g")'%22/facet_pays%3AFrance%2Cfacet_pays_juridiction%3AFrance_%7C_Cour_d%27appel?format=json' | jq .nb_resultat)
+	if test "$juridiction" == "Tribunaljudiciaire" ; then
+		numres=$(curl -s 'https://juricaf.org/recherche/num_arret:%22'$num'%22+tribunal%3A%22'$(echo $tribunal | sed "s/'/%27/g")'%22/facet_pays%3AFrance%2Cfacet_pays_juridiction%3AFrance_%7C_Tribunal_judiciaire?format=json' | jq .nb_resultat)
+	else
+		numres=$(curl -s 'https://juricaf.org/recherche/num_arret:%22'$num'%22+tribunal%3A%22'$(echo $tribunal | sed "s/'/%27/g")'%22/facet_pays%3AFrance%2Cfacet_pays_juridiction%3AFrance_%7C_Cour_d%27appel?format=json' | jq .nb_resultat)
+	fi
 	if test "$numres" -eq 0; then
 		php parse_jurilibre.php $file > $POOL_DIR/ca/$id".xml"
 	elif test "$numres" -ge 2; then
