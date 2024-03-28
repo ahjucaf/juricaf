@@ -12,6 +12,7 @@ curl -s 'https://www.courdecassation.fr/recherche-judilibre?sort=date-desc&items
 	if ! test -s raw/$decision".json" ; then
 		rm -f raw/$decision".json"
 	fi
+	sed -i 's/query=<a[^>]*>[^<]*<\/a>//' raw/$decision".json"
 	ls raw/$decision".json"
 	fi
 done
