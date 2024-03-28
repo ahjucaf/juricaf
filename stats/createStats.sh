@@ -13,5 +13,5 @@ echo "=====================================================";
 echo -e "\n* Statuts et licences des collections :";
 php statsBase.php
 
-echo -e "\n\n* Statistiques avancées des champs :";
-php statsChamps.php
+#echo -e "\n\n* Statistiques avancées des champs :";
+#php statsChamps.php
