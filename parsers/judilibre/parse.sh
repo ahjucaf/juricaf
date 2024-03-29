@@ -29,5 +29,6 @@ elif test "$juridiction" == "Courdappel" || test "$juridiction" == "Tribunaljudi
 		echo "WARNING: duplicates $tribunal $num" 1>&2
 	fi
 else
-	echo ERROR: $file : juridiction $juridiction non gérée 1>&2
+	echo ERROR: $file : juridiction $juridiction non gérée : 1>&2
+	head -c 50 $file 1>&2
 fi
