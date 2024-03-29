@@ -110,6 +110,7 @@ if (($handle = fopen($ORIGINALCSV, "r")) !== FALSE) while (($donnees = fgetcsv($
 }
 
 $tableau .= '</tbody></table></div>';
+$tableau .= '<p class="text-muted">généré le '.date("d/m/Y à H:i:s").'</p>';
 $tableau .= '<script type="text/javascript" src="/js/jquery-3.6.0.slim.min.js?5ff8755abb8669f8185a89437b34389870241c92"></script>';
 $tableau .= '<script type="text/javascript" src="/js/dataTables.js"></script>';
 $tableau .= '<script>$("#statsbase").DataTable( {paging: false, searching: false, info: false} );</script>';
