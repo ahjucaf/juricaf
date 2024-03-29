@@ -119,8 +119,10 @@ try {
   fputs($handler,$csv);
   $handler = fopen("static/base.html","w");
   fputs($handler,$tableau);
-  echo "Page mise à jour : https://juricaf.org/documentation/stats/statuts.php\n";
-  echo "Tableur généré : https://juricaf.org/documentation/stats/base.csv\n";
+  if (isset($_ENV['VERBOSE'])) {
+      echo "Page mise à jour : https://juricaf.org/documentation/stats/statuts.php\n";
+      echo "Tableur généré : https://juricaf.org/documentation/stats/base.csv\n";
+  }
 } catch (Exception $e) {
   echo "Erreur d'enregistrement\n";
   echo $e->getMessage()."\n";
