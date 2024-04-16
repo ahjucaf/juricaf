@@ -197,7 +197,8 @@ function printDecisionAttaquee($ref_or_da, $is_text = 0) {
   if(count($temp) > 0) {
     if(count($temp) > 1) {
       if($is_text > 0) { $type_da = 'Textes attaqués'; } else { $type_da = 'Décisions attaquées'; }
-      $html_da = '<ul style="list-style-type: none;">'.$type_da.' : ';
+      $html_da = $type_da.' : <br/>';
+      $html_da .= '<ul>';
       foreach ($temp as $value) {
         $html_da .= '<li>'.$value.'</li>';
       }
@@ -603,8 +604,8 @@ if(isset($references['PUBLICATION'])) {
   <hr class="d-lg-none">
 
     <div class="col-lg-4 bloc-droit text-left">
+        <h5>Synthèse</h5>
         <?php
-
         if (isset($document->pays)) {
             echo '<div itemprop="author" itemscope itemtype="http://schema.org/Organization"> <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Pays : <a href="'.url_for('recherche/search?query=+&facets=facet_pays:'.str_replace(' ', '_', $document->pays)).'">'.$document->pays.'</a></span><br>';
         }
@@ -774,8 +775,7 @@ if(isset($references['PUBLICATION'])) {
                 }
             }
         }
-        echo '<hr />';
-        echo '<h5>Références :</h5>';
+        $references = '';
         foreach($ref as $r) {
             $arret_num = '';
             if (preg_match('/n°s? *([0-9]+)[^0-9]/', $r, $m)) {
@@ -784,45 +784,42 @@ if(isset($references['PUBLICATION'])) {
             if (preg_match('/, ([0-9]{1,2}) ([a-zéüû]+) ([0-9]{4}) ?,/i', $r, $m)) {
                 $arret_date = sprintf("%d-%02d-%02d", $m[3], array_search(strtolower($m[2]), $list_mois_nom) + 1, $m[1]);
             }
-            echo '<p>';
+            $references .= '<p>';
             if ($arret_num && $arret_date) {
-                echo '<a href="'.url_for('@recherche?q=num_arret:'.$arret_num.' date_arret:'.$arret_date).'">';
+                $references .= '<a href="'.url_for('@recherche?q=num_arret:'.$arret_num.' date_arret:'.$arret_date).'">';
             }
-            echo $r;
+            $references .= $r;
             if ($arret_num && $arret_date) {
-                echo '</a>';
+                $references .= '</a>';
             }
-            echo "</p>";
+            $references .= "</p>";
+        }
+        if ($references) {
+            echo '<hr />';
+            echo '<h5>Références :</h5>';
+            echo $references;
         }
 
         // Lien télécharger le document
-        if($document->pays == 'France') {
-            if(strpos($document->id_source, "CONSTEXT") !== false || strpos($document->id_source, "JURITEXT") !== false || strpos($document->id_source, "CETATEXT") !== false) {
-                { echo '<hr /><h5>Publications</h5>'; }
-
-                if (isset($document->num_arret) AND($document->juridiction == 'Cour de cassation')) {
-                    echo 'Proposition de citation: <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
-                    echo '<br>'.$civcrimlong.' '.citation($bulletins).'<br><div id="feed"></div>';
+        if($document->pays == 'France' && isset($document->num_arret)) {
+            $publications = '';
+            if ($document->juridiction == 'Cour de cassation') {
+                $publications .= 'Proposition de citation : <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
+                $publications .= '<br>'.$civcrimlong.' '.citation($bulletins).'<br>';
+            }elseif ($document->juridiction == 'Conseil d\'État') {
+                $publications .= 'Proposition de citation : <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
+                if ($lebon) {
+                    $publications .= '<br>'.$lebon.'<br>';
                 }
-
-                if (isset($document->num_arret)AND($document->juridiction == 'Conseil d\'État')) {
-                    echo 'Proposition de citation: <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
-                    echo '<br>'.$lebon.'<br><div id="feed"></div>';
+            }elseif ($document->juridiction == 'Conseil constitutionnel') {
+                $publications .= 'Proposition de citation : <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
+                if ($lebon) {
+                    $publications .= '<br>'.$lebon.'<br>';
                 }
-
-                if (isset($document->num_arret)AND($document->juridiction == 'Conseil constitutionnel')) {
-                    echo 'Proposition de citation: <a href="'.url_for('@arret?id='.$document->_id).'">'.$citation.'</a>';
-                    echo '<br>'.$lebon.'<br><div id="feed"></div>';
-                }
-                if(strpos($document->id_source, "CONSTEXT") !== false) {
-                    echo '<a href="https://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriConstit" target="_blank" title="Télécharger au format RTF"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" width="16" height="16"/>Télécharger au format RTF</a>';
-                }
-                if(strpos($document->id_source, "JURITEXT") !== false) {
-                    echo '<a href="https://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriJudi" title="Télécharger au format RTF" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" width="16" height="16"/>Télécharger au format RTF</a>';
-                }
-                if(strpos($document->id_source, "CETATEXT") !== false) {
-                    echo '<a href="https://www.legifrance.gouv.fr/telecharger_rtf.do?idTexte='.$document->id_source.'&amp;origine=juriAdmin" title="Télécharger au format RTF" target="_blank"><img src="/images/rtf.png" alt="RTF" title="Télécharger au format RTF" />Télécharger au format RTF</a>';
-                }
+            }
+            if($publications) {
+                echo '<hr /><h5>Publications</h5>';
+                echo $publications;
             }
         }
 
@@ -846,52 +843,21 @@ if(isset($references['PUBLICATION'])) {
             echo "Date de l'import : <span itemprop=\"dateImported\">".date('d/m/Y', strtotime($document->date_import)).'</span><br/>' ;
         }
 
-        if (isset($document->fonds_documentaire))
-
-        {
-            echo '<p>Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?" width="14" height="14"/></a>: '.replaceAccents($document->fonds_documentaire).' </p>';
+        if (isset($document->fonds_documentaire)) {
+            echo 'Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?" width="14" height="14"/></a>: '.replaceAccents($document->fonds_documentaire).' <br/>';
+        }elseif (isset($documents->source) && strpos($documents->source, 'http') === false) {
+            echo 'Fonds documentaire : '.$document->source.' <br/>';
         }
-        echo '<hr><h5>Numérotation</h5>';
-        if (isset($document->id_source)) {
-            echo 'Numéro NOR : '.$document->id_source.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?" width="14" height="14"/></a><br />';
-        }
-
-        if(isset($document->nor) || isset($document->numeros_affaires)) {
-            if (isset($document->nor)) {
-                echo 'Numéro NOR : '.$document->nor.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?" width="14" height="14"/><br /></a>';
-            }
-
-            if (isset($document->numeros_affaires)) {
-                $numeros = '';
-                foreach($document->numeros_affaires as $values) {
-                    if(is_array($values) || is_object($values)) {
-                        $nb_num_affaires = count($values);
-                        foreach($values as $value) {
-                            $sep = '';
-                            if (!empty($numeros)) { $sep = ', '; }
-                            $numeros .= $sep.$value;
-                        }
-                    }
-                    else {
-                        $nb_num_affaires = count($document->numeros_affaires);
-                        $sep = '';
-                        if (!empty($numeros)) { $sep = ', '; }
-                        $numeros .= $sep.$values;
-                    }
-                }
-
-                if($nb_num_affaires > 1) { $s = 's'; } else { $s = ''; }
-                echo 'Numéro d\'affaire'.$s.' : '.$numeros.'<br />';
-            }
-
-            if (isset($document->num_decision)) {
-                echo 'Numéro de décision : '.$document->num_decision.'<br />';
-            }
-        }
-
-        if (isset($document->urnlex)) {
+        if (isset($document->ecli)) {
+            echo 'Identifiant ECLI : '.$document->ecli."<br/>";
+        } elseif (isset($document->urnlex)) {
             echo 'Identifiant URN:LEX : '.$document->urnlex.' <a href="#" title="<h1>URN-LEX </h1><p>L\'objectif du projet URN LEX est d’assigner de façon non équivoque, dans un format standard, tout document qui sont reconnus comme des sources du droit."><img src="/images/aide.png" alt="?" width="14" height="14"/></a><br />';
+        } elseif ($document->pays == 'FRANCE' && isset($document->id_source)) {
+            echo 'Numéro NOR : '.$document->id_source.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?" width="14" height="14"/></a><br />';
+        } elseif (isset($document->nor)) {
+            echo 'Numéro NOR : '.$document->nor.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?" width="14" height="14"/><br /></a>';
         }
+
         ?>
 <?php if (isset($document->_attachments) && $document->_attachments ): ?>
         <hr/>
@@ -899,7 +865,7 @@ if(isset($references['PUBLICATION'])) {
         <a href="<?php echo url_for('arret_attachment', array('id' => $document->_id)); ?>">Télécharger la décision originale</a>
 <?php endif; ?>
 <?php
-      if (isset($document->source)) {
+      if (isset($document->source) && strpos($document->source, 'http') === 0) {
           echo "<hr>";
           echo "<h5>Source</h5>";
           echo "<p><a href='".$document->source."'>Voir la source</a></p>";
