@@ -199,13 +199,13 @@ function printDecisionAttaquee($ref_or_da, $is_text = 0) {
       if($is_text > 0) { $type_da = 'Textes attaqués'; } else { $type_da = 'Décisions attaquées'; }
       $html_da = '<ul style="list-style-type: none;">'.$type_da.' : ';
       foreach ($temp as $value) {
-        $html_da .= '<li><em>'.$value.'</em></li>';
+        $html_da .= '<li>'.$value.'</li>';
       }
       $html_da .= '</ul>';
     }
     else {
       if($is_text > 0) { $type_da = 'Texte attaqué'; } else { $type_da = 'Décision attaquée'; }
-      $html_da = $type_da.' : <em>'.$temp[0].'</em><br />';
+      $html_da = $type_da.' : '.$temp[0].'<br />';
     }
     return $html_da;
   }
@@ -229,36 +229,36 @@ $contributors = '';
 
 if(isset($document->president) || isset($document->avocat_gl) || isset($document->rapporteur) || isset($document->commissaire_gvt) || isset($document->avocats)  || isset($document->greffier) || isset($document->ministere_public) || isset($document->assesseurs)) {
     if (isset($document->president)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Président</span> : <em itemprop="name">'.link_to($document->president, '@recherche_resultats?query=president:"'.replaceAccents($document->president).'"').'</div></em>'; // replace br par ' ; '
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Président</span> : '.link_to($document->president, '@recherche_resultats?query=president:"'.replaceAccents($document->president).'"').'</div>'; // replace br par ' ; '
     }
     if (isset($document->avocat_gl)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Avocat général</span> : <em itemprop="name">'.link_to($document->avocat_gl, '@recherche_resultats?query=avocat_gl:"'.replaceAccents($document->avocat_gl).'"').'</div></em>';
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Avocat général</span> : '.link_to($document->avocat_gl, '@recherche_resultats?query=avocat_gl:"'.replaceAccents($document->avocat_gl).'"').'</div>';
     }
     if (isset($document->rapporteur)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Rapporteur</span> <a href="#" title="<h1>Rapporteur</h1><p>Magistrat chargé de l’instruction du dossier ; il lui appartient de rédiger un projet de jugement ou d’arrêt et une note explicative. Lors du jugement, il siège avec voix délibérative pour les affaires qu’il a rapportées.<p>Source : Conseil d\'Etat"><img src="/images/aide.png" width="14" height="14" alt="?"/></a>: <em itemprop="name">'.link_to($document->rapporteur, '@recherche_resultats?query=rapporteur:"'.replaceAccents($document->rapporteur).'"').'</div></em>';
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Rapporteur</span> <a href="#" title="<h1>Rapporteur</h1><p>Magistrat chargé de l’instruction du dossier ; il lui appartient de rédiger un projet de jugement ou d’arrêt et une note explicative. Lors du jugement, il siège avec voix délibérative pour les affaires qu’il a rapportées.<p>Source : Conseil d\'Etat"><img src="/images/aide.png" width="14" height="14" alt="?"/></a>: '.link_to($document->rapporteur, '@recherche_resultats?query=rapporteur:"'.replaceAccents($document->rapporteur).'"').'</div>';
     }
     if (isset($document->commissaire_gvt)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Rapporteur public</span> <a href="#" title="<h1>Rapporteur public</h1><p>Pour chacune des formations de jugement, l’affaire est exposée en public par un rapporteur public - anciennement appelé “commissaire du gouvernement” - qui est un membre de la juridiction. <p>Il est chargé de faire connaître, en toute indépendance, son appréciation, qui doit être impartiale, sur les  circonstances de fait de l’espèce et les règles de droit applicables, ainsi que son opinion sur les solutions qu’appelle, suivant sa conscience, le litige soumis à la juridiction à laquelle il appartient. <p>Ayant pris publiquement position, le rapporteur public ne prend ensuite pas part à la délibération.<p>Source : Conseil d\'Etat"><img src="/images/aide.png" alt="?" width="14" height="14"/></a>: <em itemprop="name">'.
-            link_to($document->commissaire_gvt, '@recherche_resultats?query=commissaire_gvt:"'.replaceAccents($document->commissaire_gvt).'"').'</div></em>';
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Rapporteur public</span> <a href="#" title="<h1>Rapporteur public</h1><p>Pour chacune des formations de jugement, l’affaire est exposée en public par un rapporteur public - anciennement appelé “commissaire du gouvernement” - qui est un membre de la juridiction. <p>Il est chargé de faire connaître, en toute indépendance, son appréciation, qui doit être impartiale, sur les  circonstances de fait de l’espèce et les règles de droit applicables, ainsi que son opinion sur les solutions qu’appelle, suivant sa conscience, le litige soumis à la juridiction à laquelle il appartient. <p>Ayant pris publiquement position, le rapporteur public ne prend ensuite pas part à la délibération.<p>Source : Conseil d\'Etat"><img src="/images/aide.png" alt="?" width="14" height="14"/></a>: '.
+            link_to($document->commissaire_gvt, '@recherche_resultats?query=commissaire_gvt:"'.replaceAccents($document->commissaire_gvt).'"').'</div>';
     }
     if (isset($document->avocats)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Avocat(s)</span> : <em itemprop="name">'.link_to($document->avocats, '@recherche_resultats?query=avocats:"'.replaceAccents($document->avocats).'"').'</em></div>';
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Avocat(s)</span> : '.link_to($document->avocats, '@recherche_resultats?query=avocats:"'.replaceAccents($document->avocats).'"').'</div>';
     }
     if (isset($document->greffier)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Greffier</span> : <em itemprop="name">'.link_to($document->greffier, '@recherche_resultats?query=greffier:"'.replaceAccents($document->greffier).'"').'</div></em>';
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Greffier</span> : '.link_to($document->greffier, '@recherche_resultats?query=greffier:"'.replaceAccents($document->greffier).'"').'</div>';
     }
     if (isset($document->ministere_public)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Ministère public</span> : <em itemprop="name">'.link_to($document->ministere_public, '@recherche_resultats?query=ministere_public:"'.replaceAccents($document->ministere_public).'"').'</div></em>';
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Ministère public</span> : '.link_to($document->ministere_public, '@recherche_resultats?query=ministere_public:"'.replaceAccents($document->ministere_public).'"').'</div>';
     }
     if (isset($document->assesseurs)) {
-        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Assesseurs</span> : <em itemprop="name">';
+        $contributors .= '<div itemprop="contributor" itemscope itemtype="http://schema.org/Person"><span itemprop="jobTitle">Assesseurs</span> : ';
         $contributors_array = [];
         foreach(explode(",", $document->assesseurs) as $assesseur) {
             $assesseur = trim($assesseur);
             $contributors_array[] = link_to($assesseur, '@recherche_resultats?query=assesseurs:"'.replaceAccents($assesseur).'"');
         }
         $contributors .= implode(', ', $contributors_array);
-        $contributors .= '</div></em>';
+        $contributors .= '</div>';
     }
     $contrib = true;
 }
@@ -605,6 +605,46 @@ if(isset($references['PUBLICATION'])) {
     <div class="col-lg-4 bloc-droit text-left">
         <?php
 
+        if (isset($document->pays)) {
+            echo '<div itemprop="author" itemscope itemtype="http://schema.org/Organization"> <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Pays : <a href="'.url_for('recherche/search?query=+&facets=facet_pays:'.str_replace(' ', '_', $document->pays)).'">'.$document->pays.'</a></span><br>';
+        }
+
+        if (isset($document->juridiction)) {
+            if (isset($document->pays)) {
+                echo 'Juridiction : <span itemprop="name"><a href="'.url_for('recherche/search?query=+&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->juridiction.'</a></span></span></div>';
+            }else{
+                echo 'Juridiction : <span itemprop="name">'.$document->juridiction.'</span></span></div>';
+            }
+        }
+        if (isset($document->tribunal)) {
+            if (isset($document->pays) && isset($document->juridiction)) {
+                echo 'Tribunal : <a href="'.url_for('recherche/search?query=tribunal:"'.$document->tribunal.'"&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->tribunal.'</a><br />';
+            }else{
+                echo 'Tribunal : '.$document->tribunal.'<br />';
+            }
+        }
+        if (isset($document->formation)) {
+            if (isset($document->pays) && isset($document->juridiction)) {
+                echo 'Formation : <a href="'.url_for('recherche/search?query=formation:"'.$document->formation.'"&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->formation.'</a><br />';
+            }else{
+                echo 'Formation : '.$document->formation.'<br />';
+            }
+        }
+
+        if (isset($document->num_arret)) {
+            if ($document->juridiction == 'Conseil constitutionnel' && $document->pays == 'France') {
+                echo 'Numéro de décision : '.$document->num_arret.'<br />';
+            }elseif ($document->pays == 'Canada') {
+                echo 'Référence neutre : '.replaceAccents($document->num_arret).'  <a href="#" title="<h1>Référence neutre</h1><p>Au Canada, depuis 2000, la référence neutre est le numéro unique, pérenne et indépendant servant à la citation de la jurisprudence"><img src="/images/aide.png" alt="?" width="14" height="14"/></a><br />';
+            }else{
+                echo 'Numéro d\'arrêt : '.$document->num_arret.'<br/>';
+            }
+        }
+
+        if (isset($document->date_arret)) {
+            echo 'Date de la décision : <span itemprop="dateCreated">'.date('d/m/Y', strtotime($document->date_arret)).'</span><br/>' ;
+        }
+
         if (isset($document->titre_supplementaire)) {
             echo '<h5 itemprop="alternativeHeadline">'.$document->titre_supplementaire.'</span></h5>';
         }
@@ -612,19 +652,19 @@ if(isset($references['PUBLICATION'])) {
             echo '<h5>'.$document->section.'</h5>';
         }
         if (isset($document->sens_arret)) {
-            echo 'Sens de l\'arrêt : <em>'.link_to($document->sens_arret, '@recherche_resultats?query=sens_arret:"'.replaceAccents($document->sens_arret).'"').'</em><br />';
+            echo 'Sens de l\'arrêt : '.link_to($document->sens_arret, '@recherche_resultats?query=sens_arret:"'.replaceAccents($document->sens_arret).'"').'<br />';
         }
         if (isset($document->type_affaire)) {
 
             if(isset($natureConstit[$document->type_affaire])) {
-                echo 'Type d\'affaire : <em><span itemprop="about">'.link_to($natureConstit[$document->type_affaire], '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</span></em><br />';
+                echo 'Type d\'affaire : <span itemprop="about">'.link_to($natureConstit[$document->type_affaire], '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</span><br />';
             }
             else {
-                echo 'Type d\'affaire : <em><span itemprop="about">'.link_to($document->type_affaire, '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</span></em><br />';
+                echo 'Type d\'affaire : <span itemprop="about">'.link_to($document->type_affaire, '@recherche_resultats?query=type_affaire:"'.replaceAccents($document->type_affaire).'"').'</span><br />';
             }
         }
         if (isset($document->type_recours)) {
-            echo 'Type de recours : <em>'.link_to($document->type_recours, '@recherche_resultats?query=type_recours:"'.replaceAccents($document->type_recours).'"').'</em><br />';
+            echo 'Type de recours : '.link_to($document->type_recours, '@recherche_resultats?query=type_recours:"'.replaceAccents($document->type_recours).'"').'<br />';
         }
 
         if (!empty($analyses)) {
@@ -700,7 +740,7 @@ if(isset($references['PUBLICATION'])) {
                 $sep = ''; $i = 1;
                 foreach($document->parties['demandeurs'] as $value) {
                     if($i > 1) { $sep = ', '; }
-                    echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:"'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'"').'</em>'; $i++;
+                    echo ''.$sep.link_to($value, '@recherche_resultats?query=parties:"'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'"').''; $i++;
                 }
                 echo '<br />';
             }
@@ -709,7 +749,7 @@ if(isset($references['PUBLICATION'])) {
                 $sep = ''; $i = 1;
                 foreach($document->parties['defendeurs'] as $value) {
                     if($i > 1) { $sep = ', '; }
-                    echo '<em>'.$sep.link_to($value, '@recherche_resultats?query=parties:"'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'"').'</em>'; $i++;
+                    echo ''.$sep.link_to($value, '@recherche_resultats?query=parties:"'.str_replace(array("\n", "\r"), ' ', replaceAccents($value)).'"').''; $i++;
                 }
                 echo '<br />';
             }
@@ -802,35 +842,6 @@ if(isset($references['PUBLICATION'])) {
         }
         echo '<hr /><h5>Origine de la décision</h5>';
 
-        if (isset($document->pays)) {
-            echo '<div itemprop="author" itemscope itemtype="http://schema.org/Organization"> <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Pays : <em itemprop="addressCountry"><a href="'.url_for('recherche/search?query=+&facets=facet_pays:'.str_replace(' ', '_', $document->pays)).'">'.$document->pays.'</a></span></em><br>';
-        }
-
-        if (isset($document->juridiction)) {
-            if (isset($document->pays)) {
-                echo 'Juridiction : <em><span itemprop="name"><a href="'.url_for('recherche/search?query=+&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->juridiction.'</a></span></em></span></div>';
-            }else{
-                echo 'Juridiction : <em><span itemprop="name">'.$document->juridiction.'</span></em></span></div>';
-            }
-        }
-        if (isset($document->tribunal)) {
-            if (isset($document->pays) && isset($document->juridiction)) {
-                echo 'Tribunal : <em><a href="'.url_for('recherche/search?query=tribunal:"'.$document->tribunal.'"&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->tribunal.'</a></em><br />';
-            }else{
-                echo 'Tribunal : <em>'.$document->tribunal.'</em><br />';
-            }
-        }
-        if (isset($document->formation)) {
-            if (isset($document->pays) && isset($document->juridiction)) {
-                echo 'Formation : <em><a href="'.url_for('recherche/search?query=formation:"'.$document->formation.'"&facets=facet_pays:'.str_replace(' ', '_', $document->pays).',facet_pays_juridiction:'.str_replace(' ', '_', $document->pays.' | '.$document->juridiction)).'">'.$document->formation.'</a></em><br />';
-            }else{
-                echo 'Formation : <em>'.$document->formation.'</em><br />';
-            }
-        }
-
-        if (isset($document->date_arret)) {
-            echo 'Date de la décision : <span itemprop="dateCreated">'.date('d/m/Y', strtotime($document->date_arret)).'</span><br/>' ;
-        }
         if (isset($document->date_import)) {
             echo "Date de l'import : <span itemprop=\"dateImported\">".date('d/m/Y', strtotime($document->date_import)).'</span><br/>' ;
         }
@@ -838,20 +849,9 @@ if(isset($references['PUBLICATION'])) {
         if (isset($document->fonds_documentaire))
 
         {
-            echo '<p>Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?" width="14" height="14"/></a>: <em itemprop="publisher">'.replaceAccents($document->fonds_documentaire).'</em> </p>';
+            echo '<p>Fonds documentaire <a href="#" title="<h1>Fonds documentaire</h1><p>Origine de la jurisprudence publiée sur Juricaf"><img src="/images/aide.png" alt="?" width="14" height="14"/></a>: '.replaceAccents($document->fonds_documentaire).' </p>';
         }
         echo '<hr><h5>Numérotation</h5>';
-        if (isset($document->num_arret)and ($document->pays !== 'Canada')and ($document->juridiction !== 'Conseil constitutionnel')){
-            echo 'Numéro d\'arrêt : '.$document->num_arret.'<br/>';
-        }
-
-        if (isset($document->num_arret)and ($document->juridiction == 'Conseil constitutionnel')) {
-            echo 'Numéro de décision : '.$document->num_arret.'<br />';
-        }
-
-        if (isset($document->num_arret) and ($document->pays == 'Canada')) {
-            echo 'Référence neutre : '.replaceAccents($document->num_arret).'  <a href="#" title="<h1>Référence neutre</h1><p>Au Canada, depuis 2000, la référence neutre est le numéro unique, pérenne et indépendant servant à la citation de la jurisprudence"><img src="/images/aide.png" alt="?" width="14" height="14"/></a><br />';
-        }
         if (isset($document->id_source)) {
             echo 'Numéro NOR : '.$document->id_source.' <a href="#" title="<h1>NOR</h1><p>Depuis le 1er janvier 1987, ce numéro est attribué à tout texte officiel français"><img src="/images/aide.png" alt="?" width="14" height="14"/></a><br />';
         }
@@ -881,11 +881,11 @@ if(isset($references['PUBLICATION'])) {
                 }
 
                 if($nb_num_affaires > 1) { $s = 's'; } else { $s = ''; }
-                echo 'Numéro d\'affaire'.$s.' : <em>'.$numeros.'</em><br />';
+                echo 'Numéro d\'affaire'.$s.' : '.$numeros.'<br />';
             }
 
             if (isset($document->num_decision)) {
-                echo 'Numéro de décision : <em>'.$document->num_decision.'</em><br />';
+                echo 'Numéro de décision : '.$document->num_decision.'<br />';
             }
         }
 
