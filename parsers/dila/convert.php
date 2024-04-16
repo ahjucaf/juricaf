@@ -407,4 +407,5 @@ function printXML($data) {
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 echo "\n<DOCUMENT>\n";
 printXML($output);
+echo("<ALIMENTATION_TYPE>parsers/dila</ALIMENTATION_TYPE>\n");
 echo "</DOCUMENT>\n";

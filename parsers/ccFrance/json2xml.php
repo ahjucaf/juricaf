@@ -56,6 +56,7 @@ $xml->addChild('NUM_ARRET', $number);
 $date_fr = substr($doc->decision_date, -2).' '.$mois[substr($doc->decision_date, -5, 2)].' '.strstr($doc->decision_date, '-', true);
 
 $xml->addChild('TITRE', "France, $doc->jurisdiction, $doc->chamber, $date_fr, $number");
+$xml->addChild('ALIMENTATION_TYPE', 'parsers/ccFrance');
 
 echo $xml->asXML();
 ?>

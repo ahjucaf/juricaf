@@ -172,5 +172,6 @@ if ($formation) {
     fwrite($output, "<FORMATION>$formation</FORMATION>\n");
 }
 fwrite($output, "<TEXTE_ARRET>$content</TEXTE_ARRET>\n");
+fwrite($output, "<ALIMENTATION_TYPE>parsers/luxembourg</ALIMENTATION_TYPE>\n");
 fwrite($output, "</DOCUMENT>\n");
 fclose($output);

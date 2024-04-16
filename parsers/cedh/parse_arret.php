@@ -89,4 +89,5 @@ $text = preg_replace('/\\\./', '.', $text);
 <TYPE_AFFAIRE><?php echo $typedescription2typeaffaire[$meta->typedescription]; ?></TYPE_AFFAIRE>
 <TYPE_RECOURS><?php echo $meta->conclusion; ?></TYPE_RECOURS>
 <SOURCE>http://hudoc.echr.coe.int/fre?i=<?php echo $arret_id; ?></SOURCE>
+<ALIMENTATION_TYPE>parsers/cedh</ALIMENTATION_TYPE>
 </DOCUMENT>

@@ -159,4 +159,5 @@ if (isset($json->summary)) {
 if ($json->solution != 'Autre') {
 echo "<SENS_ARRET>".$json->solution."</SENS_ARRET>\n";
 }
+echo("<ALIMENTATION_TYPE>parsers/judilibre</ALIMENTATION_TYPE>\n");
 echo "</DOCUMENT>\n";

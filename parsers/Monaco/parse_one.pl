@@ -136,4 +136,5 @@ if ($has_ref) {
 print "<TITRE>".$data{'titre'}."</TITRE>\n";
 print "<SOURCE>https://legimonaco.mc".$data{'meta_path'}."/</SOURCE>\n";
 print "<TYPE>arret</TYPE>\n";
+print "<ALIMENTATION_TYPE>parsers/Monaco</ALIMENTATION_TYPE>\n";
 print "</DOCUMENT>\n";

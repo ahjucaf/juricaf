@@ -109,6 +109,7 @@ echo("<TITRE>Canada, $juridiction, $datefr, $titre</TITRE>\n");
 echo("<SOURCE>$source</SOURCE>\n");
 echo("<TYPE>arret</TYPE>\n");
 echo("<FONDS_DOCUMENTAIRE>CAIJ</FONDS_DOCUMENTAIRE>\n");
+echo("<ALIMENTATION_TYPE>parsers/Canada/CanLII</ALIMENTATION_TYPE>\n");
 echo("</DOCUMENT>\n");
 
 fwrite(STDERR, str_replace("-meta.json",".xml",basename($meta_json))." crée\n");

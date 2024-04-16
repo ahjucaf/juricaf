@@ -128,6 +128,9 @@ while ($redate < time) {
         $texte->appendChild($doc->createElement('br'));
       }
       $root->appendChild($texte);
+      $f = $doc->createElement('ALIMENTATION_TYPE');
+      $f->appendChild($doc->createTextNode('parsers/Suisse'));
+      $root->appendChild($f);
       $reference =~ s/\//-/g;
       $filename = 'SUISSE_'.$reference.'.xml';
       $doc->toFile('tmp/'.$filename);

@@ -67,4 +67,5 @@ if ($parser->hasErrors()) {
 <ECLI><?php echo $parser->ecli ?></ECLI>
 <?php endif; ?>
 <ID_SOURCE><?php echo $parser->idSource ?></ID_SOURCE>
+<ALIMENTATION_TYPE>parsers/CJUE</ALIMENTATION_TYPE>
 </DOCUMENT>

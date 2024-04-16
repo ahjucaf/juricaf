@@ -181,4 +181,5 @@ if(isset($type_affaire)) {
   echo("<TYPE_AFFAIRE>$type_affaire</TYPE_AFFAIRE>\n");
 }
 echo("<FONDS_DOCUMENTAIRE>juportal.be</FONDS_DOCUMENTAIRE>\n");
+echo("<ALIMENTATION_TYPE>parsers/Belgique</ALIMENTATION_TYPE>\n");
 echo("</DOCUMENT>\n");
