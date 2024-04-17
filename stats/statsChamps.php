@@ -16,6 +16,11 @@ $stream = fopen('static/luke.xml', 'r');
 $xml = trim(stream_get_contents($stream));
 $response = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_COMPACT);
 foreach($response->lst[2]->lst as $lst) {
+    foreach ($lst->int as $int) {
+        if ($int['name'] == 'docs' && intval($int) == 0) {
+            continue 2;
+        }
+    }
     $criteres[] = strval($lst['name']);
 }
 
