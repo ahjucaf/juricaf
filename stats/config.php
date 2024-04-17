@@ -8,14 +8,3 @@ foreach ($juricaf_config_file as $vars) {
 }
 
 $SOLRHOST = $var['SOLRHOST'];
-$ORIGINALCSV = "originalbase.csv";
-
-$HEADER2CSVID = array (
-    'pays' => 0,
-    'juridiction' => 1,
-    'etat' => 3,
-    'maj' => 4,
-    'selection' => 5,
-    'traduction' => 6,
-    'licence' => 9
-);

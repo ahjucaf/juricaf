@@ -43,21 +43,29 @@ $tableau .= "</tr>\n";
 $classe = 'color2';
 
 $line = -1;
-if (($handle = fopen($ORIGINALCSV, "r")) !== FALSE) while (($donnees = fgetcsv($handle, 1000, ";")) !== FALSE) {
-  $line++;
-  if (!$line) {
+$stream = fopen('http://'.$SOLRHOST.':8080/solr/select?indent=on&version=2.2&q=type:arret&rows=0&facet=true&facet.field=facet_pays_juridiction&facet.limit=-1', 'r');
+$xml = trim(stream_get_contents($stream));
+$response = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_COMPACT);
+fclose($stream);
+foreach($response->lst[1]->lst[1]->lst->int as $int) {
+  $name = (string) $int['name'];
+  $nb = $int[0];
+  if (isset($pays_juridictions[$name]) || $nb == 0) {
       continue;
   }
-  $nb = getSolrResults($donnees[$HEADER2CSVID['pays']], $donnees[$HEADER2CSVID['juridiction']]);
+  $pays_juridictions[$name] = explode(' | ', $name);
+  $pays = $pays_juridictions[$name][0];
+  $juridiction = $pays_juridictions[$name][1];
+  $nb = getSolrResults($pays, $juridiction);
   foreach ($criteres as $critere) {
-    $collection[$critere] = getSolrResults($donnees[$HEADER2CSVID['pays']], $donnees[$HEADER2CSVID['juridiction']], $critere);
+    $collection[$critere] = getSolrResults($pays, $juridiction, $critere);
   }
 
-  $csv .= '"'.$donnees[$HEADER2CSVID['pays']].'";"'.$donnees[$HEADER2CSVID['juridiction']].'";'.$nb;
+  $csv .= '"'.$pays.'";"'.$juridiction.'";'.$nb;
 
-  $fpjlink = str_replace(' ', '_', 'http://www.juricaf.org/recherche/+/facet_pays:'.$donnees[$HEADER2CSVID['pays']].',facet_juridiction:'.$donnees[$HEADER2CSVID['juridiction']]);
+  $fpjlink = str_replace(' ', '_', 'http://www.juricaf.org/recherche/+/facet_pays:'.$pays.',facet_juridiction:'.$juridiction);
   if($classe == "color1") { $classe = "color2"; } else { $classe = "color1"; }
-  $tableau .= '<tr class="'.$classe.'"><td><a href="http://www.juricaf.org/recherche/recherche/+/facet_pays:'.$donnees[$HEADER2CSVID['pays']].'">'.$donnees[$HEADER2CSVID['pays']].'</a></td><td><a href="'.$fpjlink.'">'.$donnees[$HEADER2CSVID['juridiction']].'</a></td><td class="num">'.$nb.'</td>';
+  $tableau .= '<tr class="'.$classe.'"><td><a href="http://www.juricaf.org/recherche/recherche/+/facet_pays:'.$pays.'">'.$pays.'</a></td><td><a href="'.$fpjlink.'">'.$juridiction.'</a></td><td class="num">'.$nb.'</td>';
 
   foreach ($criteres as $critere) {
     $csv .= ';'.$collection[$critere];

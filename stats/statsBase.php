@@ -1,112 +1,87 @@
 <?php
 require("config.php");
 
-function getSolrResults($pays, $juridiction, $sort, $champ_date = 'date_arret') {
+function getSolrResults(&$results, $pays, $juridiction, $sort, $champ_date = 'date_arret') {
   global $SOLRHOST;
-  $stream = fopen('http://'.$SOLRHOST.':8080/solr/select/?q=facet_pays:%22'.urlencode($pays).'%22+facet_juridiction:%22'.urlencode($juridiction).'%22&fq=type:arret&indent=on&sort='.$champ_date.'+'.$sort, 'r');
-  $xml = trim(stream_get_contents($stream));
-  $response = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_COMPACT);
+  $stream = fopen('http://'.$SOLRHOST.':8080/solr/select/?indent=on&q=facet_pays:%22'.urlencode($pays).'%22+facet_juridiction:%22'.urlencode($juridiction).'%22&fq=type:arret&indent=on&sort='.$champ_date.'+'.$sort.'&rows=1&fl=alimentation_type,facet_pays_juridiction,id,'.$champ_date, 'r');
+  $xml = stream_get_contents($stream);
   fclose($stream);
-
-  $results['nb'] = $response->result["numFound"];
-
   $lines = explode("\n", $xml);
   $i = 0;
+  if($sort == 'asc') {
+      $champs_date_name = $champ_date.'_debut';
+  }else{
+      $champs_date_name = $champ_date.'_fin';
+  }
   foreach ($lines as $value) {
-    if(strpos($value, 'date name="'.$champ_date.'"') !== false) {
-      $date = explode('T', trim(str_replace(array('<date name="'.$champ_date.'">', '</date>'), '', $value))); // date name="date_arret" 1995-11-07T12:00:00Z
-      $date = explode('-', $date[0]);
-      if($sort == 'asc') {
-        $results[$champ_date.'_debut'][$i] = $date[0].'-'.$date[1].'-'.$date[2];
+      if (!isset($results[$champs_date_name]) && strpos($value, 'date name="'.$champ_date.'"') !== false) {
+          $date = explode('T', trim(str_replace(array('<date name="'.$champ_date.'">', '</date>'), '', $value))); // date name="date_arret" 1995-11-07T12:00:00Z
+          if ($date[0]) {
+              $date = explode('-', $date[0]);
+              $results[$champs_date_name] = $date[0].'-'.$date[1].'-'.$date[2];
+          }
       }
-      else {
-        $results[$champ_date.'_fin'][$i] = $date[0].'-'.$date[1].'-'.$date[2];
+      if (!isset($results['alimentation_type']) && strpos($value, 'name="alimentation_type') !== false) {
+          $s = str_replace('  <str name="alimentation_type">', '', str_replace('</str>', '', $value));
+          if ($s) {
+              $results['alimentation_type'] = $s;
+          }
       }
-      $i++;
-    }
+      if (!isset($results['nb']) && strpos($value, 'numFound') !== false) {
+          $s = str_replace('<result name="response" numFound="', '', str_replace('" start="0">', '', $value));
+          if ($s) {
+              $results['nb'] = $s;
+          }
+      }
+      if (isset($results['alimentation_type']) && isset($results[$champs_date_name]) && isset($results['nb'])) {
+          break;
+      }
   }
-  if(isset($results[$champ_date.'_debut'][0])) { $results[$champ_date.'_debut'] = $results[$champ_date.'_debut'][0]; }
-  if(isset($results[$champ_date.'_fin'][0])) { $results[$champ_date.'_fin'] = $results[$champ_date.'_fin'][0]; }
-  return $results;
 }
 
-function returnLicenceLink($value) {
-  if(strpos($value, 'ODBL') !== false) {
-    $value = str_replace('ODBL', '<a href="/documentation/mentions-legales/article/licence-odbl">ODBL</a>', $value);
-  }
-  if(strpos($value, 'AHJUCAF') !== false) {
-    $value = str_replace('AHJUCAF', '<a href="/documentation/mentions-legales/article/contact">AHJUCAF</a>', $value);
-  }
-  if(strpos($value, 'Légifrance') !== false) {
-    $value = str_replace('Légifrance', '<a href="http://rip.journal-officiel.gouv.fr/">Légifrance</a>', $value);
-  }
-  return $value;
-}
-
-function addLegend($value, $type) {
-  $legend['etat'] = array(
-    'E' => 'En cours',
-    'T' => 'Terminé'
-  );
-  $legend['maj'] = array(
-    'Q' => 'Quotidienne',
-    'M' => 'Mensuelle',
-    'S' => 'Semestrielle',
-    'A' => 'Annuelle',
-    'I' => 'Interrompue',
-    'P' => 'Plus de mise à jour'
-  );
-  $legend['selection'] = array(
-    'R' => 'Recueil d\'arrêts essentiellement',
-    'I' => 'Inédits',
-    'P' => 'Pas de sélection'
-  );
-
-  foreach($legend[$type] as $key => $status) {
-    if(strpos($value, $key) !== false) {
-      $value = str_replace($key, '<span class="stat_legend" title="'.$status.'">'.$key.'</span>', $value);
-    }
-  }
-  return $value;
-}
-
-$csv = '"Pays";"Institution";Nombre;"Etat";"Mise à jour";"Selection";"Traduction";"Plus ancien";"Plus récent";"Licence"';
+$csv = '"Pays";"Institution";Nombre;"Mode d\'intégration";"Mise à jour";"Plus ancien";"Plus récent"';
 $csv .= "\n";
 $tableau = "<div class='table-responsive'><table class=\"table statsbase table-striped table-bordered\" id=\"statsbase\">\n";
-$tableau .= "<thead><tr><th>Pays</th><th>Institution</th><th>Nombre</th><th>Etat</th><th>Mise à jour</th><th>Selection</th><th>Traduction</th><th>Plus ancien</th><th>Plus récent</th><th>Licence</th></tr><thead>\n<tbody>\n";
-$classe = "color2";
-$line = -1;
-if (($handle = fopen($ORIGINALCSV, "r")) !== FALSE) while (($donnees = fgetcsv($handle, 1000, ";")) !== FALSE) {
-  $line++;
-  if (!$line) {
+$tableau .= "<thead><tr><th>Pays</th><th>Institution</th><th>Nombre</th><th>Mode d'intégration</th><th>Mise à jour</th><th>Plus ancien</th><th>Plus récent</th></tr><thead>\n<tbody>\n";
+
+$stream = fopen('http://'.$SOLRHOST.':8080/solr/select?indent=on&version=2.2&q=type:arret&rows=0&facet=true&facet.field=facet_pays_juridiction&facet.limit=-1', 'r');
+$xml = trim(stream_get_contents($stream));
+$response = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_COMPACT);
+fclose($stream);
+foreach($response->lst[1]->lst[1]->lst->int as $int) {
+  $name = (string) $int['name'];
+  $nb = $int[0];
+  if (isset($pays_juridictions[$name]) || $nb == 0) {
       continue;
   }
-  if (strpos($donnees[$HEADER2CSVID['pays']], 'Pays') !== false) {
-      continue;
-  }
+  $pays_juridictions[$name] = explode(' | ', $name);
+  $pays = $pays_juridictions[$name][0];
+  $juridiction = $pays_juridictions[$name][1];
   $results = array();
-  $results = getSolrResults($donnees[$HEADER2CSVID['pays']], $donnees[$HEADER2CSVID['juridiction']], 'desc'); // Premier
-  $results = array_merge($results, getSolrResults($donnees[$HEADER2CSVID['pays']], $donnees[$HEADER2CSVID['juridiction']], 'asc')); // Dernier
-  $results = array_merge($results, getSolrResults($donnees[$HEADER2CSVID['pays']], $donnees[$HEADER2CSVID['juridiction']], 'desc', 'date_import')); // Dernier
+  getSolrResults($results, $pays, $juridiction, 'desc', 'date_import'); // Dernier
+  getSolrResults($results, $pays, $juridiction, 'desc'); // Premier
+  getSolrResults($results, $pays, $juridiction, 'asc'); // Dernier
 
   if (!isset($results['date_arret_debut'])) $results['date_arret_debut'] = '1900-01-01';
   if (!isset($results['date_arret_fin'])) $results['date_arret_fin'] = '2999-01-01';
+  if(!isset($results['alimentation_type'])) {$results['alimentation_type'] = '';}
+  if(!isset($results['date_import_fin'])) {$results['date_import_fin'] = '';}
 
+  $csv .= '"'.$pays.'";"'.$juridiction.'";'.$results['nb'].';"'.$results['alimentation_type'].'";"'.$results['date_import_fin'].'";"';
+  $csv .= $results['date_arret_fin'].'";"'.$results['date_arret_debut'].'";'."\n";
 
-  $csv .= '"'.$donnees[$HEADER2CSVID['pays']].'";"'.$donnees[$HEADER2CSVID['juridiction']].'";'.$results['nb'].';"'.$donnees[$HEADER2CSVID['etat']].'";"'.$results['date_import_fin'].'";"'.$donnees[$HEADER2CSVID['selection']];
-  $csv .= '";"'.$donnees[$HEADER2CSVID['traduction']].'";"'.$results['date_arret_fin'].'";"'.$results['date_arret_debut'].'";"'.$donnees[$HEADER2CSVID['licence']]."\"\n";
-
-  if($classe == "color1") { $classe = "color2"; } else { $classe = "color1"; }
-  $fpjlink = str_replace(' ', '_', '/recherche/+/facet_pays:'.$donnees[$HEADER2CSVID['pays']].',facet_juridiction:'.$donnees[$HEADER2CSVID['juridiction']]);
-  $tableau .= '<tr class="'.$classe.'">
-  <td><a href="/recherche/+/facet_pays:'.$donnees[$HEADER2CSVID['pays']].'">'.$donnees[$HEADER2CSVID['pays']].'</a></td>
-  <td><a href="'.$fpjlink.'">'.$donnees[$HEADER2CSVID['juridiction']].'</a></td>
-  <td style="text-align: right;" class="num">'.$results['nb'].'</td><td style="text-align: center;">'.addLegend($donnees[$HEADER2CSVID['etat']], 'etat').'</td>
-  <td style="text-align: center;" data-order="'.$results['date_import_fin'].'">'.addLegend(preg_replace('/(....)-(..)-(..)/', '\3/\2/\1', $results['date_import_fin']), 'maj').'</td>
-  <td style="text-align: center;">'.addLegend($donnees[$HEADER2CSVID['selection']], 'selection').'</td>
-  <td>'.$donnees[$HEADER2CSVID['traduction']].'</td><td style="text-align: center;" data-order="'.$results['date_arret_debut'].'">'.preg_replace('/(....)-(..)-(..)/', '\3/\2/\1', $results['date_arret_debut']).'</td>
-  <td style="text-align: center;" data-order="'.$results['date_arret_fin'].'">'.preg_replace('/(....)-(..)-(..)/', '\3/\2/\1', $results['date_arret_fin']).'</td><td>'.returnLicenceLink($donnees[$HEADER2CSVID['licence']]).'</td>
-  </tr>'."\n";
+  $fpjlink = str_replace(' ', '_', '/recherche/+/facet_pays:'.$pays.',facet_juridiction:'.$juridiction);
+  $tableau .= '<tr>';
+  $tableau .= '<td><a href="https://juricaf.org/recherche/+/facet_pays:'.$pays.'">'.$pays.'</a></td>';
+  $tableau .= '<td><a href="https://juricaf.org'.$fpjlink.'">'.$juridiction.'</a></td>';
+  $tableau .= '<td style="text-align: right;" class="num">'.$results['nb'].'</td>';
+  $tableau .= '<td style="text-align: center;">';
+  $tableau .= ($results['alimentation_type']) ? 'Quotidienne <a href="https://github.com/ahjucaf/juricaf/tree/master/'.$results['alimentation_type'].'">+</a>' : 'Ponctuelle';
+  $tableau .= '</td>';
+  $tableau .= '<td style="text-align: center;" data-order="'.$results['date_import_fin'].'">'.preg_replace('/(....)-(..)-(..)/', '\3/\2/\1', $results['date_import_fin']).'</td>';
+  $tableau .= '<td style="text-align: center;" data-order="'.$results['date_arret_debut'].'">'.preg_replace('/(....)-(..)-(..)/', '\3/\2/\1', $results['date_arret_debut']).'</td>';
+  $tableau .= '<td style="text-align: center;" data-order="'.$results['date_arret_fin'].'">'.preg_replace('/(....)-(..)-(..)/', '\3/\2/\1', $results['date_arret_fin']).'</td>';
+  $tableau .= "</tr>\n";
 }
 
 $tableau .= '</tbody></table></div>';

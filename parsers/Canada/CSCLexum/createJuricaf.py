@@ -168,6 +168,7 @@ document = '<?xml version="1.0" encoding="UTF-8"?>\
 </REFERENCE>\
 </REFERENCES>\
 <SENS_ARRET>'+sens.encode('utf8')+'</SENS_ARRET>\
+<ALIMENTATION_TYPE>parsers/Canada/CSCLexum</ALIMENTATION_TYPE>\
 </DOCUMENT>'
 
 document = document.replace('&', '&amp;')
