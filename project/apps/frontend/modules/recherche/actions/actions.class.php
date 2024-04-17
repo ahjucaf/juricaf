@@ -219,6 +219,48 @@ class rechercheActions extends sfActions
 
   public function executeFullsearch(sfWebRequest $request)
   {
+
+    $this->champs = array(
+        'text_arret' => "Contenu de l'arrêt",
+        'num_arret' => "Numéro d’affaire",
+        'sens_arret' => "Sens",
+        'nor' => "NOR",
+        'urnlex' => "URN:LEX",
+        'ecli' => "ECLI",
+        'type_affaire' => "Type affaire",
+        'type_recours' => "Type recours",
+        'president' => "Président",
+        'avocat_gl' => "Avocat général",
+        'rapporteur' => "Rapporteur",
+        'commissaire_gvt' => "Commissaire du gouvernement",
+        'avocats' => "Avocat",
+        'parties' => "Parties",
+        'analyses' => "Analyses",
+        'saisines' => "Saisine",
+        'fonds_documentaire' => "Fonds documentaire",
+    );
+    $exclude = array('id', 'avocat_general', 'pays', 'id_source', 'type', 'error', 'on_error');
+    $xml = trim(file_get_contents(__DIR__.'/../../../../../../stats/static/luke.xml'));
+    $response = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_COMPACT);
+    foreach($response->lst[2]->lst as $lst) {
+        foreach ($lst->int as $int) {
+            if ($int['name'] == 'docs' && intval($int) == 0) {
+                continue 2;
+            }
+        }
+        if ($lst->lst)
+        $c = strval($lst['name']);
+        if (strpos($c, 'facet') !== false) {
+            continue;
+        }
+        if (in_array($c, $exclude)) {
+            continue;
+        }
+        if (isset($this->champs[$c])) {
+            continue;
+        }
+        $this->champs[$c] = ucfirst(str_replace('_', ' ', $c));
+    }
     $this->getUser()->setAttribute('query', '');
 
     if($request->getParameter('cr')) {

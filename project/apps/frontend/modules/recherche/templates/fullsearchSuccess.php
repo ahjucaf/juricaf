@@ -13,22 +13,9 @@ if(!empty($filter)) { echo 'Filter : '.$filter; }
   <div class="col-lg-3">
     <select class="form-select" name="cr[1]">
       <option value="content">Plein texte</option>
-      <option value="num_arret">Numéro d’affaire</option>
-      <option value="sens_arret">Sens</option>
-      <option value="nor">NOR</option>
-      <option value="urnlex">URN:LEX</option>
-      <option value="ecli">ECLI</option>
-      <option value="type_affaire">Type affaire</option>
-      <option value="type_recours">Type recours</option>
-      <option value="president">Président</option>
-      <option value="avocat_gl">Avocat général</option>
-      <option value="rapporteur">Rapporteur</option>
-      <option value="commissaire_gvt">Commissaire du gouvernement</option>
-      <option value="avocats">Avocat</option>
-      <option value="parties">Parties</option>
-      <option value="analyses">Analyses</option>
-      <option value="saisines">Saisine</option>
-      <option value="fonds_documentaire">Fonds documentaire</option>
+      <?php foreach($champs as $id => $libelle): ?>
+      <option value="<?php echo $id; ?>"><?php echo $libelle; ?></option>
+      <?php endforeach; ?>
     </select>
   </div>
   <div class="col-lg-9">
