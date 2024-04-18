@@ -42,7 +42,7 @@ function getSolrResults(&$results, $pays, $juridiction, $sort, $champ_date = 'da
 $csv = '"Pays";"Institution";Nombre;"Mode d\'intégration";"Mise à jour";"Plus ancien";"Plus récent"';
 $csv .= "\n";
 $tableau = "<div class='table-responsive'><table class=\"table statsbase table-striped table-bordered\" id=\"statsbase\">\n";
-$tableau .= "<thead><tr><th>Pays</th><th>Institution</th><th>Nombre</th><th>Mode&nbsp;d'intégration</th><th>Mise à jour</th><th>Date&nbsp;arrêt le&nbsp;plus&nbsp;ancien</th><th>Date&nbsp;arrêt le&nbsp;plus&nbsp;récent</th></tr><thead>\n<tbody>\n";
+$tableau .= "<thead><tr><th>Pays</th><th>Institution</th><th>Nombre</th><th>Mode&nbsp;d'intégration</th><th class='text-center'>Mise à jour</th><th class='text-center'>Date&nbsp;arrêt le&nbsp;plus&nbsp;ancien</th><th class='text-center'>Date&nbsp;arrêt le&nbsp;plus&nbsp;récent</th></tr><thead>\n<tbody>\n";
 
 $stream = fopen('http://'.$SOLRHOST.':8080/solr/select?indent=on&version=2.2&q=type:arret&rows=0&facet=true&facet.field=facet_pays_juridiction&facet.limit=-1', 'r');
 $xml = trim(stream_get_contents($stream));
@@ -78,9 +78,9 @@ foreach($response->lst[1]->lst[1]->lst->int as $int) {
   $tableau .= '<td style="text-align: center;">';
   $tableau .= ($results['alimentation_type']) ? 'Quotidienne <a href="https://github.com/ahjucaf/juricaf/tree/master/'.$results['alimentation_type'].'">+</a>' : 'Ponctuelle';
   $tableau .= '</td>';
-  $tableau .= '<td style="text-align: center;" data-order="'.$results['date_import_fin'].'">'.preg_replace('/(....)-(..)-(..)/', '\3/\2/\1', $results['date_import_fin']).'</td>';
-  $tableau .= '<td style="text-align: center;" data-order="'.$results['date_arret_debut'].'">'.preg_replace('/(....)-(..)-(..)/', '\3/\2/\1', $results['date_arret_debut']).'</td>';
-  $tableau .= '<td style="text-align: center;" data-order="'.$results['date_arret_fin'].'">'.preg_replace('/(....)-(..)-(..)/', '\3/\2/\1', $results['date_arret_fin']).'</td>';
+  $tableau .= '<td class="text-center" data-order="'.$results['date_import_fin'].'">'.preg_replace('/(....)-(..)-(..)/', '\3/\2/\1', $results['date_import_fin']).'</td>';
+  $tableau .= '<td class="text-center" data-order="'.$results['date_arret_debut'].'">'.preg_replace('/(....)-(..)-(..)/', '\3/\2/\1', $results['date_arret_debut']).'</td>';
+  $tableau .= '<td class="text-center" data-order="'.$results['date_arret_fin'].'">'.preg_replace('/(....)-(..)-(..)/', '\3/\2/\1', $results['date_arret_fin']).'</td>';
   $tableau .= "</tr>\n";
 }
 
