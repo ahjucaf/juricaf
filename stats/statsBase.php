@@ -42,7 +42,7 @@ function getSolrResults(&$results, $pays, $juridiction, $sort, $champ_date = 'da
 $csv = '"Pays";"Institution";Nombre;"Mode d\'intégration";"Mise à jour";"Plus ancien";"Plus récent"';
 $csv .= "\n";
 $tableau = "<div class='table-responsive'><table class=\"table statsbase table-striped table-bordered\" id=\"statsbase\">\n";
-$tableau .= "<thead><tr><th>Pays</th><th>Institution</th><th>Nombre</th><th>Mode&nbsp;d'intégration</th><th>Mise à jour</th><th>Plus ancien</th><th>Plus récent</th></tr><thead>\n<tbody>\n";
+$tableau .= "<thead><tr><th>Pays</th><th>Institution</th><th>Nombre</th><th>Mode&nbsp;d'intégration</th><th>Mise à jour</th><th>Date&nbsp;arrêt le&nbsp;plus&nbsp;ancien</th><th>Date&nbsp;arrêt le&nbsp;plus&nbsp;récent</th></tr><thead>\n<tbody>\n";
 
 $stream = fopen('http://'.$SOLRHOST.':8080/solr/select?indent=on&version=2.2&q=type:arret&rows=0&facet=true&facet.field=facet_pays_juridiction&facet.limit=-1', 'r');
 $xml = trim(stream_get_contents($stream));
