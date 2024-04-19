@@ -191,8 +191,9 @@ if ($fond == 'CONSTIT') {
     $i = 1;
     $output['ANALYSES'] = [];
     foreach ($xml->xpath('/TEXTE_JURI_CONSTIT/TEXTE/OBSERVATIONS/*') as $value) {
-        $output['ANALYSES']['SOMMAIRE id="'.$i.'"'] = cdata($value); $i++;
-        if(trim($value) !== '') {
+        $value = trim(strval($value));
+        if ($value) {
+            $output['ANALYSES']['SOMMAIRE id="'.$i.'"'] = $value; $i++;
         }
     }
     if (isset($xml->META->META_SPEC->META_JURI_CONSTIT->URL_CC)) {
