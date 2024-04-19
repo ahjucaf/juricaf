@@ -131,8 +131,12 @@ class rechercheActions extends sfActions
       $pas = 30;
       $param['sort'] = 'date_arret desc, id asc';
       $start = 0;
+    } elseif($request->getParameter('format') === 'json') {
+      $pas = 500;
     }
-    else { $start = ($pagenum - 1) * $pas; }
+    if($request->getParameter('format') != 'rss') {
+      $start = ($pagenum - 1) * $pas;
+    }
 
     // Interroge Solr
     $res = $solr->search($solr_query, $start, $pas, $param);
