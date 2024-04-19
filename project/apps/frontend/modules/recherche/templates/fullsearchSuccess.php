@@ -9,6 +9,7 @@ if(!empty($filter)) { echo 'Filter : '.$filter; }
 
 <h5><b>Critères</b></h5>
 <p>
+<div id="active_criteria">
 <div class="row">
   <div class="col-lg-3">
     <select class="form-select" name="cr[1]">
@@ -19,13 +20,15 @@ if(!empty($filter)) { echo 'Filter : '.$filter; }
     </select>
   </div>
   <div class="col-lg-9">
-    <input type="text" name="val[1]" class="text_input form-control" />
+    <input type="text" name="val[1]" class="text_input form-control input_search" />
   </div>
 </div>
+</div>
+<div id="hidden_criteria" style="display:none;">
 <p></p>
 <div class="row">
 <div class="col-lg-3">
-<select class="form-select" name="cond[1]">
+<select class="form-select" name="cond[x]">
   <option value="AND">ET</option>
   <option value="OR">OU</option>
   <option value="NOT">SAUF</option>
@@ -35,106 +38,24 @@ if(!empty($filter)) { echo 'Filter : '.$filter; }
 <p></p>
 <div class="row">
 <div class="col-lg-3">
-<select class="form-select" name="cr[2]">
-  <option value="content">Plein texte</option>
-  <option value="num_arret">Numéro d’affaire</option>
-  <option value="sens_arret">Sens</option>
-  <option value="nor">NOR</option>
-  <option value="urnlex">URN:LEX</option>
-  <option value="ecli" selected="selected">ECLI</option>
-  <option value="type_affaire">Type affaire</option>
-  <option value="type_recours">Type recours</option>
-  <option value="president">Président</option>
-  <option value="avocat_gl">Avocat général</option>
-  <option value="rapporteur">Rapporteur</option>
-  <option value="commissaire_gvt">Commissaire du gouvernement</option>
-  <option value="avocats">Avocat</option>
-  <option value="parties">Parties</option>
-  <option value="analyses">Analyses</option>
-  <option value="saisines">Saisine</option>
-  <option value="fonds_documentaire">Fonds documentaire</option>
-</select>
+    <select class="form-select" name="cr[xp1]">
+      <option value="content">Plein texte</option>
+      <?php foreach($champs as $id => $libelle): ?>
+      <option value="<?php echo $id; ?>"><?php echo $libelle; ?></option>
+      <?php endforeach; ?>
+    </select>
 </div>
 <div class="col-lg-9">
-<input type="text" name="val[2]" class="text_input form-control" />
+  <input type="text" name="val[xp1]" class="text_input form-control input_search" />
 </div>
-</div>
-<p></p>
-<div class="row">
-<div class="col-lg-3">
-<select class="form-select" name="cond[2]">
-  <option value="AND">ET</option>
-  <option value="OR">OU</option>
-  <option value="NOT">SAUF</option>
-</select>
 </div>
 </div>
 <p></p>
 <div class="row">
-  <div class="col-lg-3">
-<select class="form-select" name="cr[3]">
-  <option value="content">Plein texte</option>
-  <option value="num_arret">Numéro d’affaire</option>
-  <option value="sens_arret">Sens</option>
-  <option value="nor">NOR</option>
-  <option value="urnlex">URN:LEX</option>
-  <option value="ecli">ECLI</option>
-  <option value="type_affaire">Type affaire</option>
-  <option value="type_recours">Type recours</option>
-  <option value="president">Président</option>
-  <option value="avocat_gl">Avocat général</option>
-  <option value="rapporteur">Rapporteur</option>
-  <option value="commissaire_gvt">Commissaire du gouvernement</option>
-  <option value="avocats">Avocat</option>
-  <option value="parties" selected="selected">Parties</option>
-  <option value="analyses">Analyses</option>
-  <option value="saisines">Saisine</option>
-  <option value="fonds_documentaire">Fonds documentaire</option>
-</select>
+    <div class="offset-lg-9 col-lg-3 text-end">
+        <a href="#" id="more_criteria" class="btn btn-secondary" onClick="return addCriteria();">Ajouter un critère</a>
+    </div>
 </div>
-<div class="col-lg-9">
-<input type="text" name="val[3]" class="text_input form-control" />
-</div>
-</div>
-<p></p>
-<div class="row">
-<div class="col-lg-3">
-<select class="form-select" name="cond[3]">
-  <option value="AND">ET</option>
-  <option value="OR">OU</option>
-  <option value="NOT">SAUF</option>
-</select>
-</div>
-</div>
-<p></p>
-<div class="row">
-<div class="col-lg-3">
-<select class="form-select" name="cr[4]">
-  <option value="content">Plein texte</option>
-  <option value="num_arret">Numéro d’affaire</option>
-  <option value="sens_arret">Sens</option>
-  <option value="nor">NOR</option>
-  <option value="urnlex">URN:LEX</option>
-  <option value="ecli">ECLI</option>
-  <option value="type_affaire">Type affaire</option>
-  <option value="type_recours">Type recours</option>
-  <option value="president">Président</option>
-  <option value="avocat_gl">Avocat général</option>
-  <option value="rapporteur">Rapporteur</option>
-  <option value="commissaire_gvt">Commissaire du gouvernement</option>
-  <option value="avocats">Avocat</option>
-  <option value="parties">Parties</option>
-  <option value="analyses" selected="selected">Analyses</option>
-  <option value="saisines">Saisine</option>
-  <option value="fonds_documentaire">Fonds documentaire</option>
-</select>
-</div>
-<div class="col-lg-9">
-<input type="text" name="val[4]" class="text_input form-control"/>
-</div>
-</div>
-<p></p>
-
 <hr style="clear: both;"/>
 
 <div class="row g-3">
@@ -160,15 +81,6 @@ if(!empty($filter)) { echo 'Filter : '.$filter; }
 
 <hr />
 
-<div class="row">
-  <div class="col-lg-3">
-    <label class="col-form-label"><h5><b>Références :</b></h5></label>
-  </div>
-  <div class="col-lg-9">
-    <input class="form-control" type="text" name="references" />
-  </div>
-</div>
-<hr />
 <?php include_component('arret', 'searchPays'); ?>
 <hr />
 <div class="float-end mb-3">
@@ -177,5 +89,14 @@ if(!empty($filter)) { echo 'Filter : '.$filter; }
 </div>
 <hr style="clear: both;" />
 </form>
-
+<script>
+    function addCriteria() {
+        html = document.getElementById('hidden_criteria');
+        actual_index = document.getElementsByClassName('input_search').length - 1;
+        let div = document.createElement("div");
+        div.innerHTML += html.innerHTML.replace('[x]', '['+actual_index+']').replaceAll('[xp1]', '['+ (actual_index + 1) +']');
+        document.getElementById('active_criteria').append(div)
+        return false;
+    }
+</script>
 </div>
