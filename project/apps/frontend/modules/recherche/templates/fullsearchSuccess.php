@@ -13,7 +13,7 @@ if(!empty($filter)) { echo 'Filter : '.$filter; }
 <div class="row">
   <div class="col-lg-3">
     <select class="form-select" name="cr[1]">
-      <option value="content">Plein texte</option>
+      <option value="content">Recherche globale</option>
       <?php foreach($champs as $id => $libelle): ?>
       <option value="<?php echo $id; ?>"><?php echo $libelle; ?></option>
       <?php endforeach; ?>
@@ -39,7 +39,7 @@ if(!empty($filter)) { echo 'Filter : '.$filter; }
 <div class="row">
 <div class="col-lg-3">
     <select class="form-select" name="cr[xp1]">
-      <option value="content">Plein texte</option>
+        <option value="content">Recherche globale</option>
       <?php foreach($champs as $id => $libelle): ?>
       <option value="<?php echo $id; ?>"><?php echo $libelle; ?></option>
       <?php endforeach; ?>
