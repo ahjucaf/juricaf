@@ -63,19 +63,13 @@ if(!empty($filter)) { echo 'Filter : '.$filter; }
     <label class="col-form-label" for="date_debut"><h5><b>Période du :</b></h5></label>
   </div>
   <div class="col-auto">
-    <div class="input-group">
-        <input class="form-control col-auto" type="date" name="date[debut]" id="date_debut" />
-        <label class="input-group-text" for="date_debut"><i class="bi bi-calendar"></i></label>
-    </div>
+    <input class="form-control col-auto" type="date" name="date[debut]" id="date_debut" />
   </div>
   <div class="col-auto">
     <label class="col-form-label" for="date_fin"><h5><b>au :</b></h5></label>
   </div>
   <div class="col-auto">
-    <div class="input-group">
-        <input class="form-control col-auto" type="date" name="date[fin]" id="date_fin" />
-        <label class="input-group-text" for="date_fin"><i class="bi bi-calendar"></i></label>
-    </div>
+    <input class="form-control col-auto" type="date" name="date[fin]" id="date_fin" />
   </div>
 </div>
 
