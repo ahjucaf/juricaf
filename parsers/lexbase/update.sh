@@ -26,5 +26,5 @@ cd $LEXBASE_MIRRORDIR
 wget -q -m $LEXBASE_WGET_AUTH $LEXBASE_SOURCEURL/$mirror_subdir
 mkdir -p $POOL_DIR/$mirror_subdir
 cd $POOL_DIR/$mirror_subdir
-lftp $LEXBASE_WGET_AUTH $LEXBASE_SOURCEURL -e "cd $mirror_subdir ; mirror -r . . ; exit;"
+lftp $LEXBASE_WGET_AUTH $LEXBASE_SOURCEURL -e "cd $mirror_subdir ; mirror . . ; exit;"
 cd - > /dev/null
