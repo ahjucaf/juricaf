@@ -4,8 +4,8 @@ cd $(dirname $0)
 source ../config/config.inc
 
 mkdir -p raw
-if ! test "$1"; then
-date=$(date '+%Y-%m-%d')
+if test "$1"; then
+date=$1
 fi
 
 for (( i = 0 ; i < 20 ; i++ )) ; do
