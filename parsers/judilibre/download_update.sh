@@ -19,4 +19,5 @@ curl -s 'https://www.courdecassation.fr/recherche-judilibre?sort=update_date-des
 	ls raw/$decision".json"
 	fi
 done
+sleep 30
 done
