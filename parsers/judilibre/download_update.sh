@@ -3,21 +3,52 @@
 cd $(dirname $0)
 source ../config/config.inc
 
+LOCK=/tmp/jurilibre.lock
+
+if test -f $LOCK ; then
+	exit 2
+fi
+touch $LOCK
+
+
 mkdir -p raw
-if test "$1"; then
-date=$1
+if ! test "$1"; then
+datestart=$(date -d "-3 month" +%Y-%m-%d)
+dateend=$(date +%Y-%m-%d)
+else
+datestart=$1
+dateend=$2
 fi
 
-for (( i = 0 ; i < 20 ; i++ )) ; do
-curl -s 'https://www.courdecassation.fr/recherche-judilibre?sort=update_date-desc&items_per_page=500&search_api_fulltext=&expression_exacte=&date_du=&date_au='$date'&judilibre_chambre=&judilibre_type=&judilibre_publication=&judilibre_solution=&judilibre_juridiction=all&judilibre_formation=&judilibre_zonage=&judilibre_doctype=&judilibre_siege_ca=&judilibre_nature_du_contentieux=&judilibre_type_ca=&op=Trier&page='$i | grep /decision | awk -F '"' '{print $2}' | sed 's/.decision.//'  | while read decision ; do
-	if ! test -s raw/$decision".json" ; then
+if ! test "$dateend"; then
+	echo Usage: download_update.sh DATE_START DATE_END
+	exit 1
+fi
+
+for mots in "pourvoi+OR+president+OR+cour+OR+tribunal" "peuple+OR+juge" ; do
+for (( i = 0 ; i < 200 ; i++ )) ; do
+	curl -s -H "accept: application/json" -H "KeyId: "$JUDILIBRE_KEYID -X GET 'https://api.piste.gouv.fr/cassation/judilibre/v1.0/search?date_start='$datestart'&date_end='$dateend'&sort=date&order=desc&page_size=50&page='$i'&query='$mots > /tmp/jurilibre.$$.json
+	cat /tmp/jurilibre.$$.json | jq '.results[].id'  | sed 's/"//g' | while read decision ; do
+		if ! test -s raw/$decision".json" ; then
+			echo $decision;
+		fi
+	done
+	if test $( cat /tmp/jurilibre.$$.json | jq '.results|length' ) -eq 0 ; then
+		i=999
+	fi
+done
+sleep 30
+done > /tmp/jurilibre.$$.decisions
+rm /tmp/jurilibre.$$.json
+
+sort -u /tmp/jurilibre.$$.decisions | while read decision ; do
 	curl -s -H "accept: application/json" -H "KeyId: "$JUDILIBRE_KEYID -X GET 'https://api.piste.gouv.fr/cassation/judilibre/v1.0/decision?resolve_references=true&id='$decision > raw/$decision".json";
 	sed -i 's/query=<a[^>]*>[^<]*<\/a>//' raw/$decision".json"
 	if ! test -s raw/$decision".json" ; then
 		rm -f raw/$decision".json"
-	fi
-	ls raw/$decision".json"
+	else
+		ls raw/$decision".json"
 	fi
 done
-sleep 30
-done
+
+rm /tmp/jurilibre.$$.decisions $LOCK
