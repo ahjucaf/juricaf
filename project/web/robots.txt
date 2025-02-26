@@ -14,5 +14,8 @@ Disallow: /recherche/saisines
 Disallow: /recherche/parties
 Disallow: /juricaf/
 Disallow: /*?page=
+Disallow: /*&page=*
+Disallow: /*?tri=*
+Disallow: /*&tri=*
 Disallow: /*.jpg$
 Sitemap: http://www.juricaf.org/sitemap.xml
