@@ -33,7 +33,7 @@ for (( i = 0 ; i < 200 ; i++ )) ; do
 			echo $decision;
 		fi
 	done
-	if test $( cat /tmp/jurilibre.$$.json | jq '.results|length' ) -eq 0 ; then
+	if test "0"$( cat /tmp/jurilibre.$$.json | jq '.results|length' ) -eq 0 ; then
 		i=999
 	fi
 done
