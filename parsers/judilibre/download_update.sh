@@ -33,7 +33,11 @@ for (( i = 0 ; i < 200 ; i++ )) ; do
 			echo $decision;
 		fi
 	done
-	if test "0"$( cat /tmp/jurilibre.$$.json | jq '.results|length' ) -eq 0 ; then
+	if ! grep results /tmp/jurilibre.$$.json > /dev/null ; then
+		echo "WARNING: no results in API $datestart -> $dateend / page $i / mots $mots"
+		cat /tmp/jurilibre.$$.json
+		i=999
+	elif test "0"$( cat /tmp/jurilibre.$$.json | jq '.results|length' ) -eq 0 ; then
 		i=999
 	fi
 done
