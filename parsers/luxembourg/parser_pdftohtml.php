@@ -15,7 +15,8 @@ $lesnombres = array (
   "deux mille cinq" => "2005", "deux mille six" => "2006", "deux mille sept" => "2007", "deux mille huit" => "2008", "deux mille neuf" => "2009",
   "deux mille dix" => "2010", "deux mille onze" => "2011", "deux mille douze" => "2012", "deux mille treize" => "2013", "deux mille quatorze" => "2014",
   "deux mille quinze" => "2015", "deux mille seize" => "2016", "deux mille dix-sept" => "2017", "deux mille dix-huit" => "2018", "deux mille dix-neuf" => "2019",
-  "deux mille vingt" => "2020", "deux mille vingt-et-un" => "2021", "deux mille vingt-deux" => "2022", "deux mille vingt-trois" => "2023", "deux mille vingt-quatre" => "2024"
+  "deux mille vingt" => "2020", "deux mille vingt-et-un" => "2021", "deux mille vingt-deux" => "2022", "deux mille vingt-trois" => "2023", "deux mille vingt-quatre" => "2024",
+  "deux mille vingt-cinq" => "2025", "deux mille vingt-six" => "2026", "deux mille vingt-sept" => "2027", "deux mille vingt-huit" => "2028", "deux mille vingt-neuf" => "2029",
 );
 $lesmois_reverse = array();
 foreach ($lesmois as $key => $value) {
