@@ -13,6 +13,14 @@
 <div class="alert alert-warning" role="alert">
 <?php echo $resultat; ?>
 </div>
+<div id="noscript">
+<p class="alert alert-danger" role="alert">
+    Cette page nécessite l'activation du javascript. Si ne souhaitez pas le faire, vous pouvez vous <a href="https://www.ahjucaf.org/page/contactez-nous">contacter l'ahjucaf ici<a/>.
+</p>
+</div>
+<script>
+    document.getElementById('noscript').innerHTML = "";
+</script>
 <?php endif; ?>
        <div class="container">
             <form method="post">
@@ -26,10 +34,11 @@
               </div>
               <div class="mb-3">
                 <label class="form-label">Captcha</label><br>
-                <?php echo $_SESSION['cap1']; ?> + <?php echo $_SESSION['cap2']; ?> = <input type="text" name="captcha" size=4 />
+                <span id="captcha"><?php echo $cap1; ?> + <?php echo $cap2; ?> = </span>
+                <span id="captcha_input"><input type="text" name="captcha" size=4 /></span>
               </div>
               <div class="mb-3 form-check">
-                <input name="token" type="hidden" value="<?php echo $token; ?>" />
+                <input name="token" id="tocken" type="hidden" value="<?php echo $token; ?>" />
                 <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" id="check_rgpd_ahjucaf" required=required/>
                     L’AHJUCAF traite les données recueillies pour la gestion des commentaires, avis et questions déposés par les usagers par le biais de ce formulaire
@@ -42,3 +51,4 @@
         </div>
       </div>
       </div>
+<script src="/scripts/contact.js" type="text/javascript"></script>

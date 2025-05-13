@@ -10,18 +10,34 @@
 */
 class staticActions extends sfActions
 {
-    private function setCaptchaData() {
+    private function setCaptchaData($in_session = false) {
         $this->token = sha1(mt_rand());
-        $_SESSION['token'] = $this->token;
-        $_SESSION['cap1'] = intval(rand(0, 10) + 1);
-        $_SESSION['cap2'] = intval(rand(0, 10) + 1);
+        $min = 0;
+        $max = 9;
+        if (!$in_session) {
+            $min = 10;
+            $max = 99;
+        }
+        $this->cap1 = intval(rand($min, $max) + 1);
+        $this->cap2 = intval(rand($min, $max) + 1);
+        if ($in_session) {
+            $_SESSION['token'] = $this->token;
+            $_SESSION['cap1'] = $this->cap1;
+            $_SESSION['cap2'] = $this->cap2;
+        }
         $_SESSION['captime'] = time();
+    }
+
+    public function executeContactJS(sfWebRequest $request) {
+        $this->setLayout(false);
+        $this->setCaptchaData(true);
+        return sfView::SUCCESS;
     }
 
     public function executeContact(sfWebRequest $request) {
 
         @session_start();
-        
+
         if (!isset($_POST['email'])) {
             $this->setCaptchaData();
             return sfView::SUCCESS;
@@ -59,8 +75,8 @@ class staticActions extends sfActions
             return sfView::SUCCESS;
         }
 
-        if (!$_SESSION['captime'] || ((time() - $_SESSION['captime']) < 5) || !$_SESSION['cap1']) {
-            
+        if (!$_SESSION['captime'] || ((time() - $_SESSION['captime']) < 5)) {
+
             //Visiblement c'est un robot, donc on ne raconte pas la vérité
             $this->resultat = "Envoi OK";
 

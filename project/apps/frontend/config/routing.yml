@@ -90,6 +90,10 @@ actualites:
   url: /actualites
   param: {module: recherche, action: actualites}
 
+contactjs:
+  url: /scripts/contact.js
+  param: {module: static, action: contactJS}
+
 contact:
   url: /static/contact
   param: {module: static, action: contact}
