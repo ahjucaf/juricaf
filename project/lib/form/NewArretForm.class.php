@@ -124,7 +124,7 @@ class NewArretForm extends BaseForm
             if (!$fileInfo->isDot() && $fileInfo->isFile()) {
                 $fileName = $fileInfo->getFilename();
 
-                if (str_contains($fileName, $today) && str_contains($fileName, $random)) {
+                if (strpos($fileName, $today) !== false && strpos($fileName, $random) !== false) {
                     $filePath = $fileInfo->getPathname();
                     if (!unlink($filePath)) {
                         throw new Exception("Impossible de supprimer le fichier $fileName.");
