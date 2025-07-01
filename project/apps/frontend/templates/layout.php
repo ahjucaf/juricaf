@@ -21,6 +21,7 @@
       font-display: swap;
     }
     </style>
+<?php if (strpos($_SERVER['REQUEST_URI'], 'admin') === false): ?>
     <!-- Matomo -->
     <script>
     <!--
@@ -49,6 +50,7 @@
     -->
     </script>
     <!-- End Matomo Code -->
+<?php endif; ?>
     </head>
   <body class="container full-width">
   <span id="is_mobile" class="d-lg-none"></span>
