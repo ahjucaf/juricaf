@@ -394,7 +394,7 @@ if($xml->xpath('/'.$meta_xpath.'/TEXTE/SOMMAIRE/*/@ID')) {
 $text = $xml->xpath('/'.$meta_xpath.'/TEXTE/BLOC_TEXTUEL/CONTENU');
 $output['TEXTE_ARRET'] = '';
 foreach($text as $t) {
-    $output['TEXTE_ARRET'] .= str_replace(['<CONTENU>', '</CONTENU>', '<p>', '</p>'], "\n", preg_replace('/<HSP[^>]*>/', "\n [ GRAPHIQUE ] \n", htmlspecialchars_decode(preg_replace('|<br[^>]*>|i', "\n", $t->asXML()))));
+    $output['TEXTE_ARRET'] .= str_replace(['<CONTENU>', '</CONTENU>', '<p>', '</p>'], "\n", preg_replace('/<HSP[^>]*>/', "\n [ GRAPHIQUE ] \n", htmlspecialchars_decode(preg_replace('|<(br|p)[^>]*>|i', "\n", $t->asXML()))));
 }
 
 if (isset($output['ID'])) {
