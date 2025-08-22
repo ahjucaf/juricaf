@@ -12,7 +12,10 @@ else
     date="${1}-12-31"
 fi
 
-php pages_downloader.php "$date" | while read htmlfile source; do
+bash pages_downloader_europa.sh "$date" > /tmp/juportal.$$.args
+bash pages_downloader_juportal_rss.sh >> /tmp/juportal.$$.args
+
+sort -u /tmp/juportal.$$.args | while read htmlfile source; do
     xmlfile=$(echo $htmlfile | sed 's/html/xml/g')
 
     # Si le xml a déja été généré on passe
@@ -30,3 +33,5 @@ php pages_downloader.php "$date" | while read htmlfile source; do
         fi
     fi
 done
+
+rm /tmp/juportal.$$.args

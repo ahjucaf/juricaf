@@ -8,7 +8,7 @@ $inputfile = $argv[1];
 $source = $argv[2];
 
 $content = file_get_contents($inputfile);
-$content = str_replace("\n", '', $content); 
+$content = str_replace("\n", '', $content);
 $content = preg_replace('/  +/', ' ', $content);
 
 $name = basename($inputfile, ".html");
@@ -20,42 +20,84 @@ if (preg_match('#<legend title="">.*?(\d{2}) ([^\s]+) (\d{4})\s*</legend>#', $co
   $dateiso = $m[3].'-'.$mois[$moisfr].'-'.$m[1];
 }
 
-$juridictions = ["CASS" => "Cour de cassation",
-"GHCC" => "Cour constitutionnel",
-"CALIE" => "Cour d'appel du ressort de Liège",
-"CTLIE" => "Cour du travail de Liège et divisions Namur - Neufchâteau",
-"CABRL" => "Cour d'appel du ressort de Liège",
-"CAMON" => "Cour d'appel du ressort de Mons",
-"CTBRL" => "Cour du travail de Bruxelles",
-"PIBRL" => "Tribunal de première instance francophone de Bruxelles",
-"TTBRW" => "Tribunal du travail du Brabant Wallon"];
+$juridictions = [
+    "CASS" => "Cour de cassation",
+    "GHCC" => "Cour constitutionnel",
+    "CALIE" => "Cour d'appel",
+    "CTLIE" => "Cour du travail",
+    "CABRL" => "Cour d'appel",
+    "CAMON" => "Cour d'appel",
+    "CTBRL" => "Cour du travail",
+    "PIBRL" => "Tribunal de première instance",
+    "TTBRW" => "Tribunal du travail",
+    "ARGNT" => "Tribunal du travail",
+    "COHSAV" => "Commission pour l'aide financière aux victimes d'actes intentionnels de violence et aux sauveteurs occasionnels",
+    "GBAPD" => "Autorité de protection des données",
+    "RVSCE" => "Conseil d'État",
+    "TTBRL" => "Tribunal du travail",
+];
 
-if (preg_match("#ECLI:BE:(.+?):#", $name, $j)) {
-  $juridiction = $j[1];
+$tribunaux = [
+    "CALIE" => "Cour d'appel du ressort de Liège",
+    "CTLIE" => "Cour du travail de Liège et divisions Namur - Neufchâteau",
+    "CABRL" => "Cour d'appel du ressort de Liège",
+    "CAMON" => "Cour d'appel du ressort de Mons",
+    "CTBRL" => "Cour du travail de Bruxelles",
+    "PIBRL" => "Tribunal de première instance francophone de Bruxelles",
+    "TTBRW" => "Tribunal du travail du Brabant Wallon",
+    "ARGNT" => "Tribunal du travail de Gand",
+    "TTBRL" => "Tribunal du travail francophone de Bruxelles",
+];
+
+$types = [
+    "ARR" => "arret",
+    "AVIS" => "avis",
+    "CONC" => "conclusion",
+    "DEC" => "decision",
+    "JUG" => "jugement",
+    "ORD" => "ordonnance",
+];
+
+$tribunal = '';
+$arret_type = '';
+if (preg_match("#ECLI:BE:(.+):[0-9]*:?([A-Z])\.#", $name, $j)) {
   if (array_key_exists($j[1], $juridictions)){
     $juridiction = $juridictions[$j[1]];
+    if (isset($tribunaux[$j[1]])) {
+        $trinal = $tribunaux[$j[1]]);
+    }
+  }else{
+      fwrite(STDERR, "$inputfile: ERR: Juridiction ".$j[1]." non reconnue\n");
+      exit(2);
+  }
+  if (isset($types[$j[2]])) {
+      $arret_type = $types[$j[2]]
+      if (in_array($j[2], ['CONC', 'AVIS']))  {
+          exit(0);
+      }
   }
 }
 
-if (preg_match('#<p class="champ-entete-table">(?:No Arrêt/)?No Rôle:</p></td> *<td><p class="description-entete-table">(.+?)</p>#', $content, $m)) {
+if (preg_match('#<p class="[^"]*">(?:No Arrêt/)?No Rôle:</p></td> *<td><p class="[^"]*">([^<]+)</p>#', $content, $m)) {
   $numero = $m[1];
 }
 if (preg_match('/([CDFGNPS])([0-9][0-9])([0-9]{4})([FN]V?)/', $numero, $m)) {
   $numero = $m[1].'.'.$m[2].'.'.$m[3].'.'.$m[4];
 }
 
-if (preg_match('#<fieldset\s*id="text">.*?<div\s*id="plaintext">(.+?)</div>#', $content, $m)){
-  $arret_text = $m[1];
+if (preg_match('#<legend[^>]*>Texte (de la décision|des conclusions)[^<]*</legend> *<div[^>]*>(.+)</div>#', $content, $m)){
+  $arret_text = $m[2];
   $arret_text = preg_replace("/\s*<p>\s*/", "", $arret_text);
   $arret_text = str_replace('&apos;', "'", $arret_text);
-  $arret_text = str_replace("</p>", "\n", $arret_text);
-  $arret_text = str_replace("<br>", "\n", $arret_text);
+  $arret_text = str_replace("</p>", "\n\n", $arret_text);
+  $arret_text = str_replace("<br>", "\n\n", $arret_text);
   $arret_text = trim(strip_tags($arret_text));
   $arret_text = htmlentities(html_entity_decode($arret_text), ENT_XML1);
+  $arret_text = preg_replace('/(Imprimer cette page|Server Software|== Fluctuat nec|Document PDF ECLI).*/', '', $arret_text);
 }
 
 $audience = ['formation' => false, 'president' => false, 'assesseurs' => false, 'ministere_public' => false, 'greffier' => false ];
-if (preg_match('#<p class="champ-entete-table">Audience:</p></td> *<td><p class="description-entete-table">\s*(\S.*?\S)\s*</p>#', $content, $m)) {
+if (preg_match('#<p class="[^"]*">Audience:</p></td> *<td><p class="[^"]*">\s*(\S[^<]*\S)\s*</p>#', $content, $m)) {
   $meta_audience = explode('<br>', $m[1]);
   $audience['formation'] = trim(array_shift($meta_audience));
   foreach($meta_audience as $meta) {
@@ -74,7 +116,7 @@ if (preg_match('#<p class="champ-entete-table">Audience:</p></td> *<td><p class=
   }
 }
 
-if (preg_match('#<p class="champ-entete-table">Domaine juridique:</p></td> *<td><p class="description-entete-table">\s*(\S.*?\S)\s*</p>#', $content, $m)) {
+if (preg_match('#<p class="[^"]*">Domaine juridique:</p></td> *<td><p class="[^"]*">\s*(\S[^<]*?\S)\s*</p>#', $content, $m)) {
   $type_affaire = $m[1];
 }
 
@@ -82,12 +124,12 @@ if (preg_match('#<p class="champ-entete-table">Domaine juridique:</p></td> *<td>
 $has_ref = false;
 
 $analyses = [];
-if (preg_match_all('#<fieldset id="(notice\d+)" >.*?<div class="plaintext"> *<p>\s*(\S.*?\S)\s*</p>.*?</fieldset>#', $content, $m, PREG_SET_ORDER)) { 
+if (preg_match_all('#<fieldset id="[^"]*" >.*?<div class="plaintext"> *<p>\s*(\S[^<]*?\S)\s*</p>.*?</fieldset>#', $content, $m, PREG_SET_ORDER)) {
   foreach ($m as $fieldset_match) {
     $index = $fieldset_match[1];
     $analyses[$index] = ['titre_principal' => '', 'reference' => [], 'sommaire' => []];
     $analyses[$index]['titre_principal'] = $fieldset_match[2];
-    if (preg_match_all('#<p class="champ-notice-table">(Thésaurus[^:]*|Mots libres|Bases légales):</p></td> *<td> *<p class="description-notice-table">\s*(\S.*?\S)\s*</p>#', $fieldset_match[0], $m3, PREG_SET_ORDER)) {
+    if (preg_match_all('#<p class="[^"]*">(Thésaurus[^:]*|Mots libres|Bases légales):</p></td> *<td> *<p class="[^"]*">\s*(\S[^<]*?\S)\s*</p>#', $fieldset_match[0], $m3, PREG_SET_ORDER)) {
       foreach ($m3 as $tr) {
         $tr[2] = str_replace('<br>', ' ; ', $tr[2]);
         $tr[2] = str_replace('<a ', ' / <a ', $tr[2]);
@@ -104,6 +146,18 @@ if (preg_match_all('#<fieldset id="(notice\d+)" >.*?<div class="plaintext"> *<p>
   }
 }
 
+$extra = '';
+if (preg_match('/<fieldset> *<legend title="">([^<]*)<\/legend/', $content, $m)) {
+    $extra = ', '.$m[1];
+    if (preg_match('/arrêt/', $extra)) {
+        $extra = '';
+        $arret_type = 'arret';
+    }else{
+        $t = explode(' ', $m[1]);
+        $arret_type = strtolower($t[0]);
+    }
+}
+
 if (preg_match('#<legend title="">(Publication\(s\) liée\(s\))\s*</legend>\s*<div class="show-lien">\s*<div class="champ-entete">\s*<p>\s*([^:]+):\s*</p>\s*</div>\s*<div class="description-entete">\s*<p>\s*(\S.*?\S)\s*</p>\s*</div>#', $content, $m)) {
   $has_ref = true;
   $doc_lie = $m[1] . ': ' . $m[2] . ' ' . str_replace('href="/', 'href="https://juportal.be/', str_replace('target="_self"', 'target="_blank"', $m[3]));
@@ -115,16 +169,23 @@ if (!$dateiso || !$juridiction || !$numero || !$arret_text) {
   fwrite(STDERR, "\n");
   exit(2);
 }
+
+$titre = "Belgique, $juridiction, $datefr, $type $numero$extra";
+
 echo('<?xml version="1.0" encoding="UTF-8"?>'."\n");
 echo("<DOCUMENT>\n");
 echo("<PAYS>Belgique</PAYS>\n");
 echo("<JURIDICTION>$juridiction</JURIDICTION>\n");
+if ($tribunal) {
+    echo("<TRIBUNAL>$tribunal</TRIBUNAL>\n");
+    $titre = "Belgique, $tribunal, $datefr, $type $numero$extra";
+}
 echo("<NUM_ARRET>$numero</NUM_ARRET>\n");
 echo("<DATE_ARRET>$dateiso</DATE_ARRET>\n");
 echo("<SOURCE>$source</SOURCE>\n");
 echo("<TEXTE_ARRET>$arret_text</TEXTE_ARRET>\n");
-echo("<TITRE>Belgique, $juridiction, $datefr, $numero</TITRE>\n");
-echo("<TYPE>arret</TYPE>\n");
+echo("<TITRE>$titre</TITRE>\n");
+echo("<TYPE>$arret_type</TYPE>\n");
 if ($formation = $audience['formation']) {
   echo("<FORMATION>$formation</FORMATION>\n");
 }
