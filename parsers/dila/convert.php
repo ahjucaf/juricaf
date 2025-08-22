@@ -225,10 +225,23 @@ if ($fond == 'CONSTIT') {
         );
     }
     if(isset($xml->META->META_SPEC->META_JURI_CONSTIT->TITRE_JO)) {
-        $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
+        if (strpos($xml->META->META_SPEC->META_JURI_CONSTIT->TITRE_JO, 'https') === 0) {
+            $url = $xml->META->META_SPEC->META_JURI_CONSTIT->TITRE_JO;
+            if (preg_match('/(JORFTEXT[0-9A-Z]+)/', $url, $m)) {
+                $url = "https://www.legifrance.gouv.fr/jorf/id/".$m[1];
+            }
+            $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
+                'TITRE' => 'Publication au JO',
+                'TYPE' => 'SOURCE',
+                'NOR' => ($nor != 'SUPPRIME') ? $nor : null,
+                'URL' => $url,
+            );
+        }else {
+          $output['REFERENCES']['REFERENCE id="'.count($output['REFERENCES']).'"'] = array(
             'TITRE' => $xml->META->META_SPEC->META_JURI_CONSTIT->TITRE_JO,
             'TYPE' => 'PUBLICATION',
-        );
+          );
+        }
     }
 
     if (!count($output['ANALYSES'])) {
