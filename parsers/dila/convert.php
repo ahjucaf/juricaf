@@ -163,7 +163,10 @@ if ($fond == 'CONSTIT') {
     "NOM" => "Nomination des membres du Conseil Constitutionnel",
     "RAPP" => "Nomination des rapporteurs-adjoints et des délégués auprès du Conseil constitutionnel",
     "ORGA" => "Décision intéressant le fonctionnement du Conseil constitutionnel",
-    "AUTR" => "Autres textes et décisions");
+    "AUTR" => "Autres textes et décisions",
+    "RIP" =>"Référendum d'initiative parlementaire",
+    "OF" => "Pbligations fiscales",
+    );
 
     if (strval($xml->META->META_SPEC->META_JURI_CONSTIT->LOI_DEF)) {
         $nor = implode(' ', $xml->xpath('/TEXTE_JURI_CONSTIT/META/META_SPEC/META_JURI_CONSTIT/LOI_DEF/@nor'));
