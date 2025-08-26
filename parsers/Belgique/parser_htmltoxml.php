@@ -62,22 +62,27 @@ $types = [
 
 $tribunal = '';
 $arret_type = '';
-if (preg_match("#ECLI:BE:(.+):[0-9]*:?([A-Z])\.#", $name, $j)) {
+if (preg_match("#ECLI:BE:([^:]+):[0-9]+:([A-Z]*)\.#", $name, $j)) {
   if (array_key_exists($j[1], $juridictions)){
     $juridiction = $juridictions[$j[1]];
     if (isset($tribunaux[$j[1]])) {
-        $trinal = $tribunaux[$j[1]]);
+        $tribunal = $tribunaux[$j[1]];
     }
   }else{
       fwrite(STDERR, "$inputfile: ERR: Juridiction ".$j[1]." non reconnue\n");
       exit(2);
   }
   if (isset($types[$j[2]])) {
-      $arret_type = $types[$j[2]]
+      $arret_type = $types[$j[2]];
       if (in_array($j[2], ['CONC', 'AVIS']))  {
           exit(0);
       }
   }
+}
+
+if (!$juridiction) {
+    echo "ERR: $inputfile $source: pas de juridiction trouvée\n";
+    exit(1);
 }
 
 if (preg_match('#<p class="[^"]*">(?:No Arrêt/)?No Rôle:</p></td> *<td><p class="[^"]*">([^<]+)</p>#', $content, $m)) {
@@ -126,11 +131,12 @@ if (preg_match('#<p class="[^"]*">Domaine juridique:</p></td> *<td><p class="[^"
 $has_ref = false;
 
 $analyses = [];
-if (preg_match_all('#<fieldset id="[^"]*" >.*?<div class="plaintext"> *<p>\s*(\S[^<]*?\S)\s*</p>.*?</fieldset>#', $content, $m, PREG_SET_ORDER)) {
+$i = 1;
+if (preg_match_all('#<fieldset id="[^"]*" >.*?<div class="[^"]+"> *<p>\s*(\S[^<]*?\S)\s*</p>.*?</fieldset>#', $content, $m, PREG_SET_ORDER)) {
   foreach ($m as $fieldset_match) {
-    $index = $fieldset_match[1];
+    $index = "notice_".$i++;
     $analyses[$index] = ['titre_principal' => '', 'reference' => [], 'sommaire' => []];
-    $analyses[$index]['titre_principal'] = $fieldset_match[2];
+    $analyses[$index]['titre_principal'] = $fieldset_match[1];
     if (preg_match_all('#<p class="[^"]*">(Thésaurus[^:]*|Mots libres|Bases légales):</p></td> *<td> *<p class="[^"]*">\s*(\S[^<]*?\S)\s*</p>#', $fieldset_match[0], $m3, PREG_SET_ORDER)) {
       foreach ($m3 as $tr) {
         $tr[2] = str_replace('<br>', ' ; ', $tr[2]);
@@ -149,17 +155,6 @@ if (preg_match_all('#<fieldset id="[^"]*" >.*?<div class="plaintext"> *<p>\s*(\S
 }
 
 $extra = '';
-if (preg_match('/<fieldset> *<legend title="">([^<]*)<\/legend/', $content, $m)) {
-    $extra = ', '.$m[1];
-    if (preg_match('/arrêt/', $extra)) {
-        $extra = '';
-        $arret_type = 'arret';
-    }else{
-        $t = explode(' ', $m[1]);
-        $arret_type = strtolower($t[0]);
-    }
-}
-
 if (preg_match('#<legend title="">(Publication\(s\) liée\(s\))\s*</legend>\s*<div class="show-lien">\s*<div class="champ-entete">\s*<p>\s*([^:]+):\s*</p>\s*</div>\s*<div class="description-entete">\s*<p>\s*(\S.*?\S)\s*</p>\s*</div>#', $content, $m)) {
   $has_ref = true;
   $doc_lie = $m[1] . ': ' . $m[2] . ' ' . str_replace('href="/', 'href="https://juportal.be/', str_replace('target="_self"', 'target="_blank"', $m[3]));
@@ -172,15 +167,14 @@ if (!$dateiso || !$juridiction || !$numero || !$arret_text) {
   exit(2);
 }
 
-$titre = "Belgique, $juridiction, $datefr, $type $numero$extra";
-
+$titre = "Belgique, $juridiction, $datefr, $numero$extra";
 echo('<?xml version="1.0" encoding="UTF-8"?>'."\n");
 echo("<DOCUMENT>\n");
 echo("<PAYS>Belgique</PAYS>\n");
 echo("<JURIDICTION>$juridiction</JURIDICTION>\n");
 if ($tribunal) {
     echo("<TRIBUNAL>$tribunal</TRIBUNAL>\n");
-    $titre = "Belgique, $tribunal, $datefr, $type $numero$extra";
+    $titre = "Belgique, $tribunal, $datefr, $numero$extra";
 }
 echo("<NUM_ARRET>$numero</NUM_ARRET>\n");
 echo("<DATE_ARRET>$dateiso</DATE_ARRET>\n");

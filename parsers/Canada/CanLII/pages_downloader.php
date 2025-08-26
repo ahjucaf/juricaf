@@ -28,7 +28,10 @@ while($getdata){
 
   $json_result = json_decode($result);
   $array = json_decode($result,true);
-
+  if (!$json_result) {
+	echo "ERROR: unik.caij.qc.ca returned nothing\n";
+        exit(1);
+  }
   foreach($json_result->results as $arret){
     $xmlfile = "$dossierArretsXML/".str_replace("html","xml",$arret->raw->sysfilename);
 
