@@ -15,7 +15,7 @@ fi
 bash pages_downloader_europa.sh "$date" > /tmp/juportal.$$.args
 bash pages_downloader_juportal_rss.sh >> /tmp/juportal.$$.args
 
-sort -u /tmp/juportal.$$.args | while read htmlfile source; do
+sort -u /tmp/juportal.$$.args | grep 'ARR\|JUG'| while read htmlfile source; do
     xmlfile=$(echo $htmlfile | sed 's/html/xml/g')
 
     # Si le xml a déja été généré on passe
