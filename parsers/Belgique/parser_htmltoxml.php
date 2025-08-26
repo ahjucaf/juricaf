@@ -35,6 +35,7 @@ $juridictions = [
     "GBAPD" => "Autorité de protection des données",
     "RVSCE" => "Conseil d'État",
     "TTBRL" => "Tribunal du travail",
+    "CTMON" => "Cour du travail",
 ];
 
 $tribunaux = [
@@ -47,6 +48,7 @@ $tribunaux = [
     "TTBRW" => "Tribunal du travail du Brabant Wallon",
     "ARGNT" => "Tribunal du travail de Gand",
     "TTBRL" => "Tribunal du travail francophone de Bruxelles",
+    "CTMON" => "Cour du travail de Mons",
 ];
 
 $types = [
