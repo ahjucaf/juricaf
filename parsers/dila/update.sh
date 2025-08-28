@@ -16,7 +16,7 @@ bash download_new.sh | while read file ; do
 			rm xml/$date/$(basename $file)
 		fi
 	elif echo $file | grep 'dat$' > /dev/null ; then
-		php delete_arrret.sh $file
+		php delete_arrets.sh $file
 	fi
 done
 
