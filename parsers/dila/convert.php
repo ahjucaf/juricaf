@@ -126,7 +126,7 @@ $tribunaux = array(
     "Juge de proximité",
 );
 foreach($tribunaux as $trib) {
-    if (strpos($output['JURIDICTION'], $trib) !== false) {
+    if (strpos(strtolower($output['JURIDICTION']), strtolower($trib)) !== false) {
         $output['TRIBUNAL'] = $output['JURIDICTION'];
         $output['JURIDICTION'] = $trib;
         break;
