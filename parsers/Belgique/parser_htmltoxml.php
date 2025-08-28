@@ -22,7 +22,7 @@ if (preg_match('#<legend title="">.*?(\d{2}) ([^\s]+) (\d{4})\s*</legend>#', $co
 
 $juridictions = [
     "CASS" => "Cour de cassation",
-    "GHCC" => "Cour constitutionnel",
+    "GHCC" => "Cour constitutionnelle",
     "CALIE" => "Cour d'appel",
     "CTLIE" => "Cour du travail",
     "CABRL" => "Cour d'appel",
