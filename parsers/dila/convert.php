@@ -119,7 +119,11 @@ $tribunaux = array(
     "Tribunal des affaires de sécurité sociale",
     "Tribunal judiciaire",
     "Juridiction de proximité",
-    "Conseil de prud'hommes"
+    "Conseil de prud'hommes",
+    "Tribunal de première instance",
+    "Tribunal paritaire des baux ruraux",
+    "Tribunal correctionnel",
+    "Juge de proximité",
 );
 foreach($tribunaux as $trib) {
     if (strpos($output['JURIDICTION'], $trib) !== false) {
