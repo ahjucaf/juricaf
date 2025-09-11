@@ -57,7 +57,7 @@
         <div class="container">
         <strong>L’AHJUCAF présente ses remerciements aux acteurs qui ont contribué à la création et à la refonte du site de la base de données JURICAF :</strong>
 
-        <p> - Cour de cassation : M. le Président Jean-Louis Gillet, M. Edouard Rottier, M. Guillaume Adréani, M. Mehdi Ben Mimoun</p>
+        <p> - Cour de cassation : M. le Président Jean-Louis Gillet, M. Edouard Rottier, M. Guillaume Adréani, M. Mehdi Ben Mimoun, M. Thomas Frinchaboy</p>
         <p> - Partenaires publics : Université de Paris 1 CAVEJ, M. Bruno Dondéro, M. Jean Gasnault, M. Stéphane Cottin</p>
         <p> - Partenaires privés : M. Tangui Morlier, M. Brice Person</p>
         </div>

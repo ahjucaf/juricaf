@@ -35,7 +35,7 @@ $sf_response->setTitle("Juricaf - Mentions légales");
 
             <h5 class="mt-3 mb-3"><u>Coordinateur technique</u></h5>
 
-        <p>M. Thomas FRINCHABOY, chargé de mission auprès du Secrétaire général de l’AHJUCAF<br/>
+        <p>Mme Lesly LONOH, chargée de mission auprès du Secrétaire général de l’AHJUCAF<br/>
         AHJUCAF, 5 quai de l’Horloge, 75001 PARIS</p>
 
             <h5 class="mt-3 mb-3"><u>Hébergeur</u></h5>
