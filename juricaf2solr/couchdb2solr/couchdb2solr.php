@@ -175,7 +175,8 @@ function commitIndexer() {
   return true;
 }
 
-while(1) {
+$limit = 60;
+while( $limit-- > 0 ) {
 
   $url = $couchdb_url_db.'/_changes?feed=continuous';
   if ($last_seq)
