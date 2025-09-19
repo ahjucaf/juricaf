@@ -7,8 +7,9 @@ $firstResult = 0;
 $numberOfResults = 20;
 
 $getdata = true;
+$limit = 100;
 
-while($getdata){
+while($getdata && ( $limit-- > 100 ) ) {
   
   $ch = curl_init();
 
