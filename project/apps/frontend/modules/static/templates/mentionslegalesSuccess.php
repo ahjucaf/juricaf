@@ -28,9 +28,9 @@ $sf_response->setTitle("Juricaf - Mentions légales");
             5 quai de l’Horloge 75001 PARIS<br/>
             Tel. : +33 1 46 34 67 40</p>
 
-            <h5 class="mt-3 mb-3"><u>Directeur de Publication</u></h5>
+            <h5 class="mt-3 mb-3"><u>Directrice de Publication</u></h5>
 
-            <p>M. Jean-Paul JEAN, Secrétaire général de l’AHJUCAF<br/>
+            <p>Mme Élisabeth de la Lance, Secrétaire général de l’AHJUCAF<br/>
             AHJUCAF, 5 quai de l’Horloge, 75001 PARIS</p>
 
             <h5 class="mt-3 mb-3"><u>Coordinateur technique</u></h5>
