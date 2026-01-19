@@ -1,4 +1,4 @@
-<h1 style="text-align: center; margin-top:10px;">Les imports des 30 derniers jours de la base Juricaf</h1>
+<h1 style="text-align: center; margin-top:10px;">Imports sous 30 jours de la base Juricaf</h1>
 <div>
   <div class="imports_pays_juridiction">
     <p>Imports de décisions de cours suprême des 30 jours précédents le <span style="font-weight:800;"><?php echo $selectedDate; ?></span>.</p>
