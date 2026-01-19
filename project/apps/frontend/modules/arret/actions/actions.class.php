@@ -85,4 +85,26 @@ class arretActions extends sfActions
       return $this->redirect(sfConfig::get('app_admin_baseurl').$id);
   }
 
+  public function executeImports(sfWebRequest $request)
+  {
+    $this->db  = sfCouchConnection::getInstance();
+    if ($request->getParameter('selectedDate')) {
+      $selectedDate = new DateTime($request->getParameter('selectedDate'));
+    } else {
+      $selectedDate = new DateTime();
+    }
+
+    $thirtyDaysAgo = clone $selectedDate;
+    $thirtyDaysAgo->modify('-30 days');
+
+    $startDate = $thirtyDaysAgo->format('Y-m-d');
+    $endDate = $selectedDate->format('Y-m-d');
+
+    $startKey = json_encode([substr($startDate, 0, 4), $startDate]);
+    $endKey = json_encode([substr($endDate, 0, 4), $endDate]);
+
+    $this->imports = $this->db->get('_design/stats/_view/import_pays_juridiction?group_level=3&startkey=' . $endKey  . '&endkey=' . $startKey . '&descending=true&reduce=true')->rows;
+    $this->selectedDate = $selectedDate->format('d-m-Y');
+  }
+
 }

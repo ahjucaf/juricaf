@@ -80,10 +80,14 @@ validate_arret:
   param: {module: admin, action: newArretValidate}
 
 #Stats
-
 stats:
   url: /stats
   param: {module: arret, action: stats}
+
+#Stats imports arrêts
+imports:
+  url: /stats/imports/:selectedDate
+  param: {module: arret, action: imports}
 
 #Actualités
 actualites:
