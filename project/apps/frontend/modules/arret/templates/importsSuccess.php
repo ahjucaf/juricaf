@@ -1,7 +1,8 @@
 <h1 style="text-align: center; margin-top:10px;">Imports sous 30 jours de la base Juricaf</h1>
 <div>
   <div class="imports_pays_juridiction">
-    <p>Imports de décisions de cours suprême des 30 jours précédents le <span style="font-weight:800;"><?php echo $selectedDate; ?></span>.</p>
+    <?php setlocale(LC_TIME, 'fr_FR.UTF-8'); $selectedDate = new DateTime($selectedDate); $formattedDateFR = strftime('%A %d %B %Y', $selectedDate->getTimestamp()); ?>
+    <p>Imports de décisions de cours suprême des 30 jours précédents le <span style="font-weight:800;"><?php echo $formattedDateFR; ?></span>.</p>
 
      <table class="table table-striped table-bordered">
        <thead>
