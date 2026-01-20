@@ -85,13 +85,17 @@ class arretActions extends sfActions
       return $this->redirect(sfConfig::get('app_admin_baseurl').$id);
   }
 
+  public function executeRedirect2Imports (sfWebRequest $request) {
+    $selectedDate = new DateTime()->format('Y-m-d');
+    return $this->redirect('/stats/imports/' . $selectedDate);
+  }
+
   public function executeImports(sfWebRequest $request)
   {
     $this->db  = sfCouchConnection::getInstance();
+
     if ($request->getParameter('selectedDate')) {
       $selectedDate = new DateTime($request->getParameter('selectedDate'));
-    } else {
-      $selectedDate = new DateTime();
     }
 
     $thirtyDaysAgo = clone $selectedDate;

@@ -85,6 +85,10 @@ stats:
   param: {module: arret, action: stats}
 
 #Stats imports arrêts
+imports_redirect:
+  url: /stats/imports
+  param: {module: arret, action: redirect2Imports}
+
 imports:
   url: /stats/imports/:selectedDate
   param: {module: arret, action: imports}
