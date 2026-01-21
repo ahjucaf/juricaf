@@ -40,10 +40,33 @@
                     <?php  echo link_to($nb_import,'recherche/search?query=date_import:' . $date_import . '&facets=facet_pays:'.$nom_pays); ?>
                   </td>
                 </tr>
+                <?php endforeach; ?>
           </tr>
-        <?php endforeach; ?>
+          <?php
+          $previous_dateImport_more = null;
+          foreach ($importsMore as $i):
+          $date_import_more = $i['key'][1];
+          $need_th_more = ($date_import_more != $previous_dateImport_more );
+          $previous_dateImport_more = $date_import_more;
+
+          $nom_pays = $i['key'][2];
+          $nb_import = $i['value'];
+          ?>
+          <tr class="collapse more-imports">
+            <?php if ($need_th_more): ?> <th class="import-date" style="background-color:#4d7eac !important; color:white;" colspan="2"> <?php echo link_to($date_import_more, '@imports?selectedDate=' . $date_import_more); endif; ?></th>
+              <?php $no_blank_p = replaceBlank($nom_pays); ?>
+                <tr style="font-weight:300;" class="collapse more-imports">
+                  <td>
+                    <?php echo '<li style="list-style-position:inside; list-style-image: url(/images/drapeaux/'. pathToFlag(ucfirst($no_blank_p)).'.png)"><strong>'. link_to($nom_pays,'recherche/search?query=date_import:' . $date_import_more . '&facets=facet_pays:'.$nom_pays) . '</li>' ?>
+                  </td>
+                  <td>
+                    <?php  echo link_to($nb_import,'recherche/search?query=date_import:' . $date_import_more . '&facets=facet_pays:'.$nom_pays); ?>
+                  </td>
+                </tr>
+          </tr>
+     <?php endforeach; ?>
        </tbody>
      </table>
-
+     <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target=".more-imports" aria-expanded="false" aria-controls="more-imports"> Voir plus</button>
   </div>
 </div>

@@ -108,6 +108,16 @@ class arretActions extends sfActions
 
     $this->imports = $this->db->get('_design/stats/_view/import_pays_juridiction?group_level=3&startkey=' . $endKey  . '&endkey=' . $startKey . '&descending=true&reduce=true')->rows;
     $this->selectedDate = $selectedDate->format('d-m-Y');
+    $startDateMore = $thirtyDaysAgo->modify('-1 day')->format('Y-m-d');
+
+    $endDateMore = new DateTime($startDateMore);
+    $endDateMore->modify('-10 days');
+    $endDateMore = $endDateMore->format('Y-m-d');
+
+    $endKeyMore = json_encode([substr($endDateMore, 0, 4), $endDateMore]);
+    $startKeyMore = json_encode([substr($startDateMore, 0, 4), $startDateMore]);
+
+    $this->importsMore = $this->db->get('_design/stats/_view/import_pays_juridiction?group_level=3&startkey=' . $startKeyMore  . '&endkey=' . $endKeyMore . '&descending=true&reduce=true')->rows;
   }
 
 }

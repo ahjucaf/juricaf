@@ -304,3 +304,17 @@ a{
   color:white;
   text-decoration: underline white;
 }
+
+.collapse.more-imports {
+  transition: opacity 0.5 linear;
+}
+
+.collapsing.more-imports {
+  opacity: 0;
+  height: auto;
+  transition: opacity 0.5 linear;
+}
+
+.collapse.more-imports.show {
+  transition: all 0.8s linear;
+}
