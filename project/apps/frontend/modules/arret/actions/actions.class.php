@@ -86,8 +86,8 @@ class arretActions extends sfActions
   }
 
   public function executeRedirect2Imports (sfWebRequest $request) {
-    $selectedDate = new DateTime()->format('Y-m-d');
-    return $this->redirect('/stats/imports/' . $selectedDate);
+    $selectedDate = new DateTime();
+    return $this->redirect('/stats/imports/' . $selectedDate->format('Y-m-d'));
   }
 
   public function executeImports(sfWebRequest $request)
