@@ -95,7 +95,6 @@ class arretActions extends sfActions
 
     if ($request->getParameter('selectedDate')) {
       $selectedDate = new DateTime($request->getParameter('selectedDate'));
-      // var_dump($selectedDate);exit;
     }
 
     $thirtyDaysAgo = clone $selectedDate;
