@@ -30,7 +30,7 @@
          $nb_import = $i['value'];
          ?>
           <tr>
-            <?php if ($need_th): ?> <th style="background-color:#4d7eac !important; color:white;" colspan="2"> <?php echo $date_import; endif; ?></th>
+            <?php if ($need_th): ?> <th class="import-date" style="background-color:#4d7eac !important; color:white;" colspan="2"> <?php echo link_to($date_import, '@imports?selectedDate=' . $date_import); endif; ?></th>
               <?php $no_blank_p = replaceBlank($nom_pays); ?>
                 <tr style="font-weight:300;">
                   <td>

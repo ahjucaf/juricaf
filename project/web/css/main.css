@@ -298,3 +298,9 @@ a{
     padding: 5px;
   }
 }
+
+.import-date > a {
+  text-decoration: none;
+  color:white;
+  text-decoration: underline white;
+}
