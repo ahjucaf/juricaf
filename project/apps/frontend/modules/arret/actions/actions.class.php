@@ -95,19 +95,21 @@ class arretActions extends sfActions
 
     if ($request->getParameter('selectedDate')) {
       $selectedDate = new DateTime($request->getParameter('selectedDate'));
+      // var_dump($selectedDate);exit;
     }
 
     $thirtyDaysAgo = clone $selectedDate;
     $thirtyDaysAgo->modify('-30 days');
 
-    $startDate = $thirtyDaysAgo->format('Y-m-d');
-    $endDate = $selectedDate->format('Y-m-d');
+    $endDate = $thirtyDaysAgo->format('Y-m-d');
+    $startDate = $selectedDate->format('Y-m-d');
 
-    $startKey = json_encode([substr($startDate, 0, 4), $startDate]);
     $endKey = json_encode([substr($endDate, 0, 4), $endDate]);
+    $startKey = json_encode([substr($startDate, 0, 4), $startDate]);
 
-    $this->imports = $this->db->get('_design/stats/_view/import_pays_juridiction?group_level=3&startkey=' . $endKey  . '&endkey=' . $startKey . '&descending=true&reduce=true')->rows;
+    $this->imports = $this->db->get('_design/stats/_view/import_pays_juridiction?group_level=3&startkey=' . $startKey  . '&endkey=' . $endKey . '&descending=true&reduce=true')->rows;
     $this->selectedDate = $selectedDate->format('d-m-Y');
+
     $startDateMore = $thirtyDaysAgo->modify('-1 day')->format('Y-m-d');
 
     $endDateMore = new DateTime($startDateMore);
