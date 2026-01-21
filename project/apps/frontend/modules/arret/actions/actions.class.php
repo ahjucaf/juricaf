@@ -104,7 +104,7 @@ class arretActions extends sfActions
     $startDate = $selectedDate->format('Y-m-d');
 
     $endKey = json_encode([substr($endDate, 0, 4), $endDate]);
-    $startKey = json_encode([substr($startDate, 0, 4), $startDate]);
+    $startKey = json_encode([substr($startDate, 0, 4), $startDate, []]);
 
     $this->imports = $this->db->get('_design/stats/_view/import_pays_juridiction?group_level=3&startkey=' . $startKey  . '&endkey=' . $endKey . '&descending=true&reduce=true')->rows;
     $this->selectedDate = $selectedDate->format('d-m-Y');
