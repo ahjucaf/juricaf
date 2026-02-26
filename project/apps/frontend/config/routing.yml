@@ -112,15 +112,15 @@ static_pages:
   param: {module: static, action: page}
 
 sitemap_index:
-  url: /sitemap
+  url: /plandusite
   param: {module: static, action: sitemapIndex, sf_format: xml}
 
 sitemap_set_pages:
-  url: /sitemap/pages
+  url: /plandusite/pages
   param: {module: static, action: sitemapSetPages, sf_format: xml}
 
 sitemap_set:
-  url: /sitemap/:numero
+  url: /plandusite/:numero
   param: {module: static, action: sitemapSet, sf_format: xml}
   requirements:
     numero: \d+
