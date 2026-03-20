@@ -20,6 +20,8 @@
 
           <p>Sous la responsabilité de la Secrétaire générale de l’AHJUCAF, le fonctionnement et l’alimentation du site sont assurés par une équipe animée par une greffière de la Cour de cassation française qui veille à son alimentation régulière. Un webmestre assure l’hébergement sécurisé des sites JURICAF et AHJUCAF.</p>
 
+          <p> Le Conseil scientifique, nouvel organe de l’association créé lors de l’assemblée générale de Rabat du 3  juillet 2025 et présidé par M. Jean-Paul Jean, est un organe consultatif chargé notamment de veiller à l’intégrité et au respect du cadre juridique, de la qualité et de la gratuité de l’accès à la base de jurisprudence JURICAF, afin d’assurer la plus large diffusion au public des décisions de justice rédigées ou traduites en français.</p>
+          
           <p>Depuis novembre 2025, Mme Élisabeth de la Lance, Doyen de chambre honoraire à la Cour de cassation de France assure les fonctions de Secrétaire général de l’AHJUCAF. Une réorganisation des processus de récupération et de traitement des décisions a été conduite avec le concours de partenaires attachés depuis l’origine au projet JURICAF, les animateurs des sociétés 24ème et La Loi des Ours, ainsi que l’éditeur Lexbase. La reprise de l’alimentation régulière et la stratégie de développement ont permis à JURICAF de dépasser au cours de l’année 2020 le million d’arrêts intégrés. </p>
 
           <p>Dans le même temps JURICAF a été mis aux normes RGPD. La quasi-totalité de ses fonds sont désormais pseudonymisés, sauf pour quelques situations très particulières de Cours suprêmes non soumises à cette exigence (voir la page <a href="mentionslegales">Mentions légales</a>)</p>
