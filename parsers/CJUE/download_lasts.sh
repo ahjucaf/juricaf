@@ -1,6 +1,9 @@
 #!/bin/bash
-for curia in https://curia.europa.eu/jcms/jcms/P_106311/fr/ https://curia.europa.eu/jcms/jcms/P_106312/fr/ ; do
-  curl -s "$curia" | grep 'FR/TXT' | grep "CELEX:" | sed "s/[&_']/\n/g" | grep CELEX | sed 's/.*CELEX://' | grep -v img | sort -u | while read celex ; do
+
+mkdir -p xml data
+
+bash download_lasts_json.sh | while read jsonfile; do
+  jq . < $jsonfile | grep celex | grep CJ | awk -F '"' '{print $4}' | while read celex ; do
     ISNEW=""
     if ! test -f data/$celex.xml ; then
         curl -s -L -H "Accept: application/xml;notice=branch" -H "Accept-language: fr" http://publications.europa.eu/resource/celex/$celex > data/$celex.xml

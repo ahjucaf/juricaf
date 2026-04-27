@@ -4,7 +4,7 @@ cd $(dirname $0)
 
 . ../config/config.inc
 
-mkdir -p xml data
+mkdir -p xml data json
 mkdir -p $POOL_DIR"/CJUE"
 
 bash download_lasts.sh | while read id ; do
