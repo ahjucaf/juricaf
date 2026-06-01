@@ -34,10 +34,10 @@
               <?php $no_blank_p = replaceBlank($nom_pays); ?>
                 <tr style="font-weight:300;">
                   <td>
-                    <?php echo '<li style="list-style-position:inside; list-style-image: url(/images/drapeaux/'. pathToFlag(ucfirst($no_blank_p)).'.png)"><strong>'. link_to($nom_pays,'recherche/search?query=date_import:' . $date_import . '&facets=facet_pays:'.$nom_pays) . '</li>' ?>
+                    <?php echo '<li style="list-style-position:inside; list-style-image: url(/images/drapeaux/'. pathToFlag(ucfirst($no_blank_p)).'.png)"><strong>'. link_to($nom_pays,'recherche/search?query=date_import:' . $date_import . '&facets=facet_pays:'.str_replace(' ', '_', $nom_pays)) . '</li>' ?>
                   </td>
                   <td>
-                    <?php  echo link_to($nb_import,'recherche/search?query=date_import:' . $date_import . '&facets=facet_pays:'.$nom_pays); ?>
+                    <?php  echo link_to($nb_import,'recherche/search?query=date_import:' . $date_import . '&facets=facet_pays:'.str_replace(' ', '_', $nom_pays)); ?>
                   </td>
                 </tr>
           </tr>
