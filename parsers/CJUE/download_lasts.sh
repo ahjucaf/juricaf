@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir -p xml data
+mkdir -p xml data json
 
 bash download_lasts_json.sh | while read jsonfile; do
   jq . < $jsonfile | grep celex | grep CJ | awk -F '"' '{print $4}' | while read celex ; do
