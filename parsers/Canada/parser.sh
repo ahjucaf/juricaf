@@ -30,8 +30,8 @@ echo "<PAYS>Canada</PAYS>"
 echo "<TEXTE_ARRET>"
 cat $basefile".txt"
 echo "</TEXTE_ARRET>"
-DEMANDEUR=$(jq .title $basefile".canlii" | sed 's/"//g' | sed 's/ c\. .*//')
-DEFENSEUR=$(jq .title $basefile".canlii" | sed 's/"//g' | sed 's/.* c\. //')
+DEMANDEUR=$(jq .title $basefile".canlii" | sed 's/"//g' | sed 's/ c\. .*//' | grep -v null)
+DEFENSEUR=$(jq .title $basefile".canlii" | sed 's/"//g' | sed 's/.* c\. //' | grep -v null)
 if test "$DEMANDEUR" || test "$DEFENSEUR"; then
     echo "<PARTIES>"
     if test "$DEMANDEUR"; then
@@ -43,7 +43,7 @@ if test "$DEMANDEUR" || test "$DEFENSEUR"; then
     echo "</PARTIES>"
 fi
 SUJETS=$(grep 'Sujets;'  $basefile".meta" | sed 's/^[^;]*;//' | sed 's/|/ — /g';)
-CANLII=$(jq .topics $basefile".canlii" | sed 's/"//g')
+CANLII=$(jq .topics $basefile".canlii" | sed 's/"//g' | grep -v null)
 if test "$CANLII"; then
     if test "$SUJETS"; then
         SUJETS=$SUJETS" — "$CANLII
@@ -56,7 +56,7 @@ echo "<ANALYSE>"
 if test "$SUJETS"; then
   echo "<TITRE_PRINCIPAL>"$SUJETS"</TITRE_PRINCIPAL>"
 fi
-KEYWORDS=$(jq .keywords  $basefile".canlii" | sed 's/"//g')
+KEYWORDS=$(jq .keywords  $basefile".canlii" | sed 's/"//g' | grep -v null)
 if test "$KEYWORDS"; then
   echo "<KEYWORDS>"$KEYWORDS"</KEYWORDS>"
 fi
