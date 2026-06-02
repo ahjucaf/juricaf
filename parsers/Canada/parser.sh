@@ -74,5 +74,5 @@ cat $basefile".url" | tr -d '\n'
 echo "</SOURCE>";
 echo "<TYPE>arret</TYPE>"
 echo "<FONDS_DOCUMENTAIRE>CSCLexum</FONDS_DOCUMENTAIRE>"
-echo "<ALIMENTATION_TYPE>parsers/Canada/CSCLexum</ALIMENTATION_TYPE>"
+echo "<ALIMENTATION_TYPE>parsers/Canada</ALIMENTATION_TYPE>"
 echo "</DOCUMENT>"
