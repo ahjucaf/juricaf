@@ -13,7 +13,6 @@ grep -B 10000 'Contenu de la décision'  $basefile".html"  | tr -d '\n'  | sed '
 NUMARRETBRUT=$(grep 'Référence neutre;'  $basefile".meta" | sed 's/^[^;]*;//')
 NUMARRET=$(echo $NUMARRETBRUT | sed 's/ //g')
 if ! test -s $basefile".canlii" && test "$CANLII_APIKEY" ; then
-        ls $basefile".canlii"
 	sleep 15;
 	curl -s "https://api.canlii.org/v1/caseBrowse/fr/csc-scc/"$(echo $NUMARRET | tr '[:upper:]' '[:lower:]')"/?api_key="$CANLII_APIKEY > $basefile".canlii"
 	if grep "error" $basefile".canlii" > /dev/null ; then
