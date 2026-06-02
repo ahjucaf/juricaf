@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../../config/config.inc
+source ../config/config.inc
 
 basefile=$(echo $1 | sed 's/\.html//')
 if ! grep scc-csc/scc-csc/fr $basefile".url" > /dev/null ; then

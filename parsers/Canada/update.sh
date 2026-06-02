@@ -2,7 +2,7 @@
 
 cd $(dirname $0)
 
-source ../../config/config.inc
+source ../config/config.inc
 
 bash download_new.sh | while read html ; do
 	IDDEC=$(echo $html | sed 's/html.//' | sed 's/\.html//')
