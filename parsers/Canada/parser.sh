@@ -65,7 +65,7 @@ echo "</ANALYSES>"
 echo "<JUGES>"
 grep 'Juges;'  $basefile".meta" | sed 's/^[^;]*;//' | sed 's/|/\n/g' | awk -F ',' '{print "<JUGE>"$2" "$1"</JUGE>"}' | sed 's/> */>/'
 echo "</JUGES>"
-DATEFR=$(LC_ALL=fr_FR date --date=$DECISIONDATE "+%d %B %Y" | iconv -f iso88591)
+DATEFR=$(LANG=fr_FR.utf8 date --date=$DECISIONDATE "+%d %B %Y")
 TITRE=$(grep 'Titre;'  $basefile".meta" | sed 's/^[^;]*;//')
 echo "<TITRE>Canada, Cour suprême, $DATEFR, $TITRE, $NUMARRETBRUT</TITRE>"
 echo -n "<SOURCE>"
