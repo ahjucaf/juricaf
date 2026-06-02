@@ -10,10 +10,10 @@ fi
 lynx -width=100000 -dump $basefile".html" | grep -A 10000 'Contenu de la décision' | tail -n +4 | grep -B 10000 'BUTTON) Continuer' | head -n -2  > $basefile".txt"
 grep -B 10000 'Contenu de la décision'  $basefile".html"  | tr -d '\n'  | sed 's/<tr/\n<tr/g' | sed 's/<h3/\n<h3/g' | grep '^<[th]'  | sed 's|</td> *<td class="metadata">  *|@|'  | sed 's/.*<td class="label">//' | sed 's|<h3 class="title">|Titre@|'  | sed 's/ *<br.> */;/g' | sed 's|</[th].*||'  | grep '@' | sed 's/ *; */|/g' | sed 's/@/;/' | sed 's/  *$//'  | sed 's/|$//g' > $basefile".meta"
 
-NUMARRET=$(grep 'Référence neutre;'  $basefile".meta" | sed 's/^[^;]*;//' | sed 's/ //g')
-
+NUMARRETBRUT=$(grep 'Référence neutre;'  $basefile".meta" | sed 's/^[^;]*;//')
+NUMARRET=$(echo $NUMARRETBRUT | sed 's/ //g')
 if ! test -s $basefile".canlii" && test "$CANLII_APIKEY" ; then
-        ls $basefile".canlii" 
+        ls $basefile".canlii"
 	sleep 15;
 	curl -s "https://api.canlii.org/v1/caseBrowse/fr/csc-scc/"$(echo $NUMARRET | tr '[:upper:]' '[:lower:]')"/?api_key="$CANLII_APIKEY > $basefile".canlii"
 	if grep "error" $basefile".canlii" > /dev/null ; then
@@ -68,7 +68,7 @@ grep 'Juges;'  $basefile".meta" | sed 's/^[^;]*;//' | sed 's/|/\n/g' | awk -F ',
 echo "</JUGES>"
 DATEFR=$(LC_ALL=fr_FR date --date=$DECISIONDATE "+%d %B %Y" | iconv -f iso88591)
 TITRE=$(grep 'Titre;'  $basefile".meta" | sed 's/^[^;]*;//')
-echo "<TITRE>Canada, Cour suprême, $DATEFR, $TITRE</TITRE>"
+echo "<TITRE>Canada, Cour suprême, $DATEFR, $TITRE, $NUMARRETBRUT</TITRE>"
 echo -n "<SOURCE>"
 cat $basefile".url" | tr -d '\n'
 echo "</SOURCE>";
