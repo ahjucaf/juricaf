@@ -3,6 +3,7 @@
 mkdir -p xml data json
 
 bash download_lasts_json.sh | while read jsonfile; do
+  if file -i $jsonfile | grep text/plain > /dev/null ; then
   jq . < $jsonfile | grep celex | grep CJ | awk -F '"' '{print $4}' | while read celex ; do
     ISNEW=""
     if ! test -f data/$celex.xml ; then
@@ -25,4 +26,5 @@ bash download_lasts_json.sh | while read jsonfile; do
         echo $celex;
     fi
   done
+  fi
 done
