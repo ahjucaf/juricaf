@@ -13,46 +13,53 @@ touch $LOCK
 
 mkdir -p raw
 if ! test "$1"; then
-datestart=$(date -d "-3 month" +%Y-%m-%d)
-dateend=$(date +%Y-%m-%d)
+datestart=$(date -d "-1 day" +%Y-%m-%d)
 else
 datestart=$1
-dateend=$2
 fi
 
-if ! test "$dateend"; then
+if ! test "$datestart"; then
 	echo Usage: download_update.sh DATE_START DATE_END
 	exit 1
 fi
 
-for mots in "pourvoi+OR+president+OR+cour+OR+tribunal" "peuple+OR+juge" ; do
-for (( i = 0 ; i < 200 ; i++ )) ; do
-	curl -s -H "accept: application/json" -H "KeyId: "$JUDILIBRE_KEYID -X GET 'https://api.piste.gouv.fr/cassation/judilibre/v1.0/search?date_start='$datestart'&date_end='$dateend'&sort=date&order=desc&page_size=50&page='$i'&query='$mots > /tmp/jurilibre.$$.json
-	cat /tmp/jurilibre.$$.json | jq '.results[].id'  | sed 's/"//g' | while read decision ; do
-		if ! test -s raw/$decision".json" ; then
-			echo $decision;
+mkdir -p raw/transactional/$datestart
+query="page_size=500&date="$datestart
+i=0
+d=0
+while test "$query"; do
+	let i++
+	queryfile="raw/transactional/"$datestart"/"$(printf %06d $i)".json"
+	if ! test -s "$queryfile" ; then
+		curl -s -H "accept: application/json" -H "KeyId: "$JUDILIBRE_KEYID -X GET 'https://api.piste.gouv.fr/cassation/judilibre/v1.0/transactionalhistory?'"$query" > $queryfile
+		if (( i % 5 == 0 )) ; then
+			sleep 20 ;
 		fi
-	done
-	if ! grep results /tmp/jurilibre.$$.json > /dev/null ; then
-		echo "WARNING: no results in API $datestart -> $dateend / page $i / mots $mots"
-		cat /tmp/jurilibre.$$.json
-		i=999
-	elif test "0"$( cat /tmp/jurilibre.$$.json | jq '.results|length' ) -eq 0 ; then
-		i=999
 	fi
-done
-sleep 30
-done > /tmp/jurilibre.$$.decisions
-rm /tmp/jurilibre.$$.json
-
-sort -u /tmp/jurilibre.$$.decisions | while read decision ; do
-	curl -s -H "accept: application/json" -H "KeyId: "$JUDILIBRE_KEYID -X GET 'https://api.piste.gouv.fr/cassation/judilibre/v1.0/decision?resolve_references=true&id='$decision > raw/$decision".json";
-	sed -i 's/query=<a[^>]*>[^<]*<\/a>//' raw/$decision".json"
-	if ! test -s raw/$decision".json" ; then
-		rm -f raw/$decision".json"
+	query=$(jq .next_page < "$queryfile" | sed 's/"//g' | sed 's/null//' )
+	jq -c .transactions[] < "$queryfile" | awk -F '"' '{print $4" "$8" "$12}'
+done | while read decision action date; do
+	let d++
+	decisiondir="raw/decisions/"${date:0:10}/${decision:0:4}
+	mkdir -p "$decisiondir"
+	decisionpath=$decisiondir"/"$decision"_"$action"_"$date".json"
+	if test -f $decisionpath; then
+		continue;
+	fi
+	if test $action = "delete"; then
+		touch $decisionpath
+		continue;
+	fi
+	curl -s -H "accept: application/json" -H "KeyId: "$JUDILIBRE_KEYID -X GET 'https://api.piste.gouv.fr/cassation/judilibre/v1.0/decision?resolve_references=true&id='$decision > "$decisionpath";
+	sed -i 's/query=<a[^>]*>[^<]*<\/a>//' $decisionpath;
+	if ! test -s $decisionpath; then
+		rm -f $decisionpath;
 	else
-		ls raw/$decision".json"
+		ls $decisionpath;
+	fi
+	if (( d % 20 == 0 )) ; then
+		sleep 30 ;
 	fi
 done
 
-rm /tmp/jurilibre.$$.decisions $LOCK
+rm $LOCK
