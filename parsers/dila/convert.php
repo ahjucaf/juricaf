@@ -421,7 +421,7 @@ function printXML($data) {
             echo "\n";
             printXML($value);
         }else{
-            echo preg_replace('/&amp;([a-z]*);/', '&$1;', preg_replace(['/([^ ;]+)(&[^ ;]+;)/', '/([^ ;]*)&([^ ]*)/'], ['$1$2', '$1&amp;$2'], $value));
+            echo str_replace('&nbsp;', ' ', preg_replace('/&amp;([a-z]*);/', '&$1;', preg_replace(['/([^ ;]+)(&[^ ;]+;)/', '/([^ ;]*)&([^ ]*)/'], ['$1$2', '$1&amp;$2'], $value)));
         }
         //retire les attributs de l'ouverture de la balise
         $balise = preg_replace('/ .*/', '', $balise);
