@@ -27,11 +27,12 @@ then
   cd $(echo $0 | sed 's|[^/]*$||');
 fi
 
-if [ -e $LOCK ]
+if test -s $LOCK
 then
-  if ! ps --pid $(cat $LOCK) > /dev/null ; then
-    echo $(cat $LOCK) not running, destroy the lock
-    rm lock
+  pid=$(cat $LOCK)
+  if test "$pid" && ! ps --pid "$pid" > /dev/null ; then
+    echo $pid not running, destroy the lock
+    rm $LOCK
   fi
   exit 1;
 fi
