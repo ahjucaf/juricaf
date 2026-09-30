@@ -581,7 +581,10 @@ if ($res['juridiction'] == 'Cour d-arbitrage') {
   $res['juridiction'] = "Cour d'arbitrage";
 }
 
-if (strpos($res['juridiction'], array(' instance d', 'instance hors classe d')) && !(isset($res['tribunal']) && $res['tribunal'])) {
+if (
+    (strpos($res['juridiction'], ' instance d') !== false || strpos($res['juridiction'], 'instance hors classe d') !== false)
+    && !(isset($res['tribunal']) && $res['tribunal'])
+) {
     $res['tribunal'] = $res['juridiction'];
     $res['juridiction'] = preg_replace('/ instance .*/', ' instance', $res['juridiction']);
 }
